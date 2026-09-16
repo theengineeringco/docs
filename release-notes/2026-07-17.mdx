@@ -1,0 +1,51 @@
+---
+title: "July 17, 2026"
+sidebarTitle: "July 17, 2026"
+description: "Searchable settings, a clearer review workspace, default formulas, multi-column table controls, more dependable diagrams, and faster APIs."
+---
+
+## Contents
+
+- [Find any setting](#find-any-setting)
+- [Review changes in one place](#review-changes-in-one-place)
+- [Set default formulas by field](#set-default-formulas-by-field)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+- [API changes](#api-changes)
+
+## Find any setting
+
+Settings can now be searched from one place, making organization, project, integration, and personal controls easier to find.
+
+## Review changes in one place
+
+The review page is organized into **Overview**, **AI Agents**, and **Changes**. Reviewers can inspect the overall state, follow automated findings, preview proposed outcomes, and revert an individual change without leaving the review.
+
+## Set default formulas by field
+
+A field can define a default formula that is applied when a new item is created. Formula search also prioritizes relevant results and shows the values used by referenced inputs.
+
+## Fixes
+
+- **Busy branches.** Pages recover after a reconnect and continue showing incoming changes instead of freezing the browser tab.
+- **Deep hierarchies.** Large, deeply nested projects load without timing out.
+- **Shared views.** Shared pages remain responsive while access permissions are updated.
+- **Reader comments.** Draft comments remain available while moving between fields.
+- **ReqIF exports.** Exported files validate against the ReqIF schema.
+- **AI gateways.** Multi-step agent actions complete through OpenAI-compatible model gateways.
+- **AI chat titles.** Conversations receive titles on Bedrock-backed deployments.
+
+## Improvements
+
+- **Table organization.** Tables support multi-column sorting and drag-to-reorder rows.
+- **Diagram exploration.** A card can expand its connected items directly on the canvas, and XML exports preserve labels, positions, and arrow branches.
+- **View continuity.** The selected view state remains in place when switching branches.
+- **Saved views.** A saved view can define how many hierarchy levels open by default.
+- **User lists.** Large member lists remain searchable and scrollable.
+- **SSO groups.** One provider-level rule can map all users from an identity provider.
+- **Review automations.** Branch review agents run once and provide an explicit rerun action.
+
+## API changes
+
+- **Entity pagination.** `GET /entities` supports cursor pagination, keeping response time bounded on large datasets.
+- **API keys.** Keys are scoped to the user who created them, and expired session tokens renew correctly.

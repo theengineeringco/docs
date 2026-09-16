@@ -1,0 +1,7 @@
+a[href*="utm_campaign=poweredBy"] {
+  display: none !important;
+}
+
+img[alt="Pulsar Orbiting Earth 2 1 2"] {
+  border-radius: 8px;
+}

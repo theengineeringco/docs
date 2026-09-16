@@ -1,0 +1,169 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "maple",
+  "name": "Flow",
+  "colors": {
+    "primary": "#161513",
+    "light": "#FDFDFB",
+    "dark": "#161513"
+  },
+  "favicon": {
+    "light": "/images/flow-logomark-black.svg",
+    "dark": "/images/flow-logomark-white.svg"
+  },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Release Notes",
+        "pages": [
+          "release-notes",
+          "release-notes/2026-09-15",
+          "release-notes/2026-09-11",
+          "release-notes/2026-09-04",
+          "release-notes/2026-08-28",
+          "release-notes/2026-08-21",
+          "release-notes/2026-08-14",
+          "release-notes/2026-08-07",
+          "release-notes/2026-07-31",
+          "release-notes/2026-07-24",
+          "release-notes/2026-07-17"
+        ]
+      }
+    ]
+  },
+  "contextual": {
+    "options": [
+      "copy"
+    ]
+  },
+  "description": "Product releases, improvements, and API updates from Flow.",
+  "appearance": {
+    "default": "system",
+    "strict": false
+  },
+  "background": {
+    "color": {
+      "light": "#FDFDFB",
+      "dark": "#161513"
+    }
+  },
+  "fonts": {
+    "family": "Inter"
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "logo": {
+    "light": "/images/flow-brandmark-black.svg",
+    "dark": "/images/flow-brandmark-white.svg",
+    "href": "https://docs.flowengineering.com/release-notes"
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/changelog/2026-08-31",
+      "permanent": false
+    },
+    {
+      "source": "/changelog/2026-08-31",
+      "destination": "/changelog/2026-09-01",
+      "permanent": true
+    },
+    {
+      "source": "/changelog",
+      "destination": "/release-notes",
+      "permanent": true
+    },
+    {
+      "source": "/changelog/2026-09-01",
+      "destination": "/release-notes/2026-09-01",
+      "permanent": true
+    },
+    {
+      "source": "/changelog/2026-08-28",
+      "destination": "/release-notes/2026-08-28",
+      "permanent": true
+    },
+    {
+      "source": "/changelog/2026-08-27",
+      "destination": "/release-notes/2026-08-27",
+      "permanent": true
+    },
+    {
+      "source": "/changelog/2026-08-26",
+      "destination": "/release-notes/2026-08-26",
+      "permanent": true
+    },
+    {
+      "source": "/changelog/2026-08-25",
+      "destination": "/release-notes/2026-08-25",
+      "permanent": true
+    },
+    {
+      "source": "/changelog/2026-08-24",
+      "destination": "/release-notes/2026-08-24",
+      "permanent": true
+    },
+    {
+      "source": "/Release-Notes/2026-09-03",
+      "destination": "/release-notes/2026-09-03",
+      "permanent": true
+    },
+    {
+      "source": "/Release-Notes/2026-09-02",
+      "destination": "/release-notes/2026-09-02",
+      "permanent": true
+    },
+    {
+      "source": "/Release-Notes/2026-09-01",
+      "destination": "/release-notes/2026-09-01",
+      "permanent": true
+    },
+    {
+      "source": "/Release-Notes/2026-08-28",
+      "destination": "/release-notes/2026-08-28",
+      "permanent": true
+    },
+    {
+      "source": "/Release-Notes/2026-08-27",
+      "destination": "/release-notes/2026-08-27",
+      "permanent": true
+    },
+    {
+      "source": "/Release-Notes/2026-08-24",
+      "destination": "/release-notes/2026-08-24",
+      "permanent": true
+    },
+    {
+      "source": "/Release-Notes/2026-08-26",
+      "destination": "/release-notes/2026-08-26",
+      "permanent": true
+    },
+    {
+      "source": "/Release-Notes/2026-08-25",
+      "destination": "/release-notes/2026-08-25",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-09-07",
+      "destination": "/release-notes/2026-09-11",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-09-08",
+      "destination": "/release-notes/2026-09-11",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-09-10",
+      "destination": "/release-notes/2026-09-11",
+      "permanent": true
+    }
+  ],
+  "search": {
+    "prompt": "Search..."
+  },
+  "thumbnails": {
+    "appearance": "light"
+  }
+}

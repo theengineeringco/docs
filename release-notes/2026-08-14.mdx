@@ -1,0 +1,68 @@
+---
+title: "August 14, 2026"
+sidebarTitle: "August 14, 2026"
+description: "Shared saved views, net-change reviews, project-wide filtering, expanded dashboards, richer editing, and new customer API controls."
+---
+
+## Contents
+
+- [Share saved views with your team](#share-saved-views-with-your-team)
+- [Review the net change](#review-the-net-change)
+- [Filter across an entire project](#filter-across-an-entire-project)
+- [Build clearer dashboards](#build-clearer-dashboards)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+- [API changes](#api-changes)
+
+## Share saved views with your team
+
+Saved views can now be shared with named people or user groups. Recipients find them under **Shared with me** and open them read-only, without gaining access to anything outside their existing permissions.
+
+Membership is resolved when the view opens, so group access stays current as teams change. Personal views are managed from **Settings → Views**.
+
+## Review the net change
+
+Reviews and merges now show the net result of a branch instead of every intermediate edit. Repeated changes to the same field collapse into the state that will actually land.
+
+Reviewers can also compare branches and merge points on one page, revert a filtered set of changes together, and rebase a branch onto a different parent while preserving the original branch.
+
+## Filter across an entire project
+
+Project-wide filters can now evaluate the full project instead of only the items already loaded in a view. Large hierarchies remain searchable and responsive, including nested branches.
+
+## Build clearer dashboards
+
+Dashboards now support row-based layouts, drag-and-drop organization, project-wide scoping, history milestones, and histogram widgets. Target lines can mark a goal value and deadline on the same history chart.
+
+## Fixes
+
+- **Reader view.** Descriptions render at their final height, so long documents no longer jump while loading or scrolling.
+- **Document exports.** Word exports complete with images and embedded diagrams.
+- **Shared views.** Shared content can extend beyond ten hierarchy levels and remains responsive while access changes.
+- **Review links.** Older links open the completed merge they refer to.
+- **Agent changes.** Accepting a large set of changes completes without leaving accepted work marked as pending.
+- **Undo.** Undoing an agent change restores the previous value without overwriting a later manual edit.
+- **Tables.** Wrapped rows no longer overlap during loading, and filters include file, CAD, integration, and mixed-value fields.
+- **Password recovery.** An existing verification code can be used to finish a password reset.
+- **Invitations.** Signup uses the email address that received the invitation.
+- **API keys.** Viewers can create and revoke their own API keys again.
+
+## Improvements
+
+- **Rich-text tables.** Inline controls can add, move, merge, style, and remove rows, columns, and cells.
+- **Branch lists.** Large projects load branches in pages as you scroll while keeping the current branch's ancestry expanded.
+- **Relationships.** Item relationships have their own tab with counts and one place to add a relationship.
+- **Import and export.** Import and export formats are organized into dedicated menus, including Reader document exports.
+- **External discussions.** Read-only workspace viewers and external share recipients can participate in comments where they have access.
+- **Protected branches.** Creating an item from a protected branch can create a writable branch and resume the original action.
+- **Inbox.** Notifications and review requests now live together in one Inbox.
+- **New projects.** Base starts protected, and the organization template is applied by default when one exists.
+- **Branch names.** Default branch names use a clear project sequence such as **Branch 42** instead of a timestamp.
+- **Details panel.** The tab bar remains available while scrolling through long item descriptions.
+
+## API changes
+
+- **Entity history.** A batch endpoint returns history for multiple entities in one request.
+- **File replacement.** A file's contents can be replaced without changing its ID, preserving existing links and embeds.
+- **Entity pagination.** Lists beyond 1,000 items require the bounded `starting_after` cursor instead of numeric offsets.
+- **Comments.** Comment responses include comments without an impact-analysis finding.

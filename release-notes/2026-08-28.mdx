@@ -1,0 +1,97 @@
+---
+title: "August 28, 2026"
+sidebarTitle: "August 28, 2026"
+description: "SCIM provisioning, semantic search, AI-built dashboards, in-app Python, connected formulas, and safer reviews."
+---
+
+## Contents
+
+- [SCIM provisioning](#scim-provisioning)
+- [Semantic search](#semantic-search)
+- [AI-built dashboards](#ai-built-dashboards)
+- [In-app Python](#in-app-python)
+- [File previews and citations](#file-previews-and-citations)
+- [Connected formula tools](#connected-formula-tools)
+- [Merge duplicate entities](#merge-duplicate-entities)
+- [Agent workflows](#agent-workflows)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+- [API changes](#api-changes)
+
+## SCIM provisioning
+
+Enterprise teams can now provision users and groups from an identity provider through SCIM 2.0. New team members can receive access before their first day, and identity updates flow into Flow without separate administration.
+
+Deactivating a user removes access while preserving their work and history for audits or later reactivation. Directory groups can manage access for editors, reviewers, and shared views, keeping permissions aligned with the source directory.
+
+## Semantic search
+
+Search now finds related project data even when it uses different words from your query. A search for how to keep servers from overheating, for example, can surface items about cooling and thermal management alongside exact name matches.
+
+Results respect the current project and branch, as well as the filters already applied to the view. Exact matches still appear first, with related results available in the same search flow.
+
+## AI-built dashboards
+
+Ask an agent to create, edit, or remove a dashboard from chat. Agents can reuse existing widgets in a conversation, create charts and counts from current project data, and return a direct link to the finished dashboard.
+
+Imported data can be checked with an inline chart before you create a permanent dashboard. Dashboard widgets also support datasets larger than 5,000 items, so analysis no longer stops at the former project-size limit.
+
+## In-app Python
+
+Run Python directly from code blocks in Flow. Scripts can read and update data in the current project and branch, giving teams a fast way to apply structured changes without exporting work to another tool.
+
+This is especially useful for one-off transformations and large, consistent edits. An agent can help write the script, and you can review the code before running it against workspace data.
+
+## File previews and citations
+
+Open PDFs, images, text files, and spreadsheets without leaving Flow. Previews are available from item details, tables, and reviews, while citations can open the relevant page or highlighted region directly.
+
+## Connected formula tools
+
+Formulas can now read a value directly from an attached Excel workbook. Choose the file, sheet, and cell in the formula builder, and dependent values recalculate when the workbook changes.
+
+Default formulas and presets now use the full formula builder, including field browsing, autocomplete, AI assistance, and previews against representative project data. Missing sheets, invalid cells, and unsupported files return a clear error instead of an empty result.
+
+## Merge duplicate entities
+
+Agents can merge two items that describe the same thing without rebuilding their relationships by hand. Children, incoming relationships, crosslinks, and supported source citations move to the surviving item together, while existing duplicates are skipped.
+
+The merge follows the project’s normal permissions and branch protections. If the items cannot be safely combined, the agent explains why instead of leaving a partial merge.
+
+## Agent workflows
+
+Agents now keep a visible checklist while working through longer tasks, and that plan remains available when a conversation is compacted or resumed. You can also describe a repeatable workflow in chat and save it as a project automation for the team to run again.
+
+## Fixes
+
+- **Branch reviews.** Conflict previews are accurate on new and long-running branches, selected resolutions apply consistently, and unchanged content is no longer reported as a conflict.
+- **Review pages.** Review Overview pages with hundreds of discussion threads now load consistently.
+- **Review reverts.** Reverting reviewed work stays fast and restores the final branch state without replaying intermediate edits.
+- **Interrupted runs.** Long agent and automation runs resume after deployments instead of remaining stuck.
+- **PDF exports.** Paragraphs, images, and table rows stay intact across page breaks, and printing from Reader includes the visible document.
+- **Protected PDFs.** Agents can read PDFs that restrict copying or editing; files that require a password remain protected.
+- **Large documents.** Rich-text pages remain responsive while saving, switching editors, or opening documents in agent conversations.
+- **Active chats.** Opening a chat mid-answer shows the reply so far and continues updating live.
+- **Branch saves.** When a branch is busy, Flow immediately tells you that the change was not saved and to try again.
+- **Diagram access.** Diagrams on protected or read-only branches remain viewable, while edit controls stay unavailable.
+- **Project search.** The project switcher accepts typing and filters long lists again.
+- **GitHub Enterprise.** App installation links open the correct GitHub Enterprise page.
+
+## Improvements
+
+- **Find in view.** Search includes item descriptions, highlights matches, and supports keyboard navigation in tables, trees, and Reader.
+- **Organization AI controls.** Admins can choose which AI models are available across every workspace.
+- **Chat management.** Rename and archive conversations from the agent sidebar, with clear working and waiting states.
+- **Large pickers.** Long selection lists load in pages and search on the server.
+- **Linked-item layouts.** Column and item order persist between sessions and through merges.
+- **Agent editing.** Agents can reorder sibling items, manage subscribers, and reuse an existing item when a match is found.
+- **Flow ID search.** Find any item by its exact Flow ID.
+- **Exported references.** Data mentions export with the same label shown in Flow.
+- **Dashboard results.** More widget types link directly to their source data.
+
+## API changes
+
+- **SCIM 2.0.** Bearer-token discovery, user lifecycle management, and group membership synchronization are now available.
+- **Automation triggers.** Trigger requests return as soon as the run starts. Clients that need the result must track the run separately.
+- **Deleted relationships.** Customer API responses no longer return relationships whose parent was deleted.
+- **Calculated values.** Bulk calculated-value responses now follow the documented result contract.

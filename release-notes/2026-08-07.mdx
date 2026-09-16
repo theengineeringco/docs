@@ -1,0 +1,42 @@
+---
+title: "August 7, 2026"
+sidebarTitle: "August 7, 2026"
+description: "Review activity tied to individual changes, Google Sheets write-back, editable SSO, faster large views, and safer external sharing."
+---
+
+## Contents
+
+- [Review decisions where the change happened](#review-decisions-where-the-change-happened)
+- [Write changes back to Google Sheets](#write-changes-back-to-google-sheets)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+
+## Review decisions where the change happened
+
+Reviews now have an activity timeline, and comments can be attached to the exact property that changed. Each comment keeps the before-and-after value it was written against, so the discussion remains understandable as the branch evolves.
+
+Reviewers can suggest an edit directly from a property comment. Impact-analysis findings also remain in the review as comments instead of disappearing when the run ends.
+
+## Write changes back to Google Sheets
+
+The AI agent can write to a connected Google Sheet when write access is enabled. Teams can use the same connection to read source data, update rows, and keep spreadsheet workflows aligned with changes made in Flow.
+
+## Fixes
+
+- **Reader view.** Large documents open without freezing, and scrolling remains responsive while content finishes loading.
+- **Create-item drafts.** Typed content is preserved while the item is being created.
+- **External shares.** Recipients can open only the files included in the shared view.
+- **Review diffs.** Ordered lists keep their numbering in before-and-after comparisons.
+- **Agent runs.** Stopping a run keeps the chat draft, and pressing Space no longer starts a plan.
+- **SSO setup.** Domain verification errors explain what needs to be corrected.
+- **Job errors.** Failed background work shows a readable message instead of an internal error.
+
+## Improvements
+
+- **Large filtered views.** Results load incrementally, keeping large project views responsive.
+- **SSO connections.** Existing connections can be edited, and issuer problems are caught before the next login.
+- **External directory access.** Organization admins can decide whether external recipients can see the workspace roster.
+- **Create-item dialog.** New items can include relationships and keep custom fields without a second editing step.
+- **Jira links.** Pasting a Jira URL into the issue picker selects the matching issue.
+- **Item navigation.** Pickers show item IDs and support opening a result in a new tab.
+- **AI context.** Conversations retain more of their earlier context after reading large project results.

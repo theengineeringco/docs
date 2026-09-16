@@ -1,0 +1,100 @@
+---
+title: "September 11, 2026"
+sidebarTitle: "September 11, 2026"
+description: "Multiple GitHub organizations, traceable integration activity, branch-to-branch comparisons, flexible view hierarchies, and clearer automation and review workflows."
+---
+
+## Contents
+
+- [Connect multiple GitHub organizations](#connect-multiple-github-organizations)
+- [Trace integration and automation outcomes](#trace-integration-and-automation-outcomes)
+- [Compare items across branches and baselines](#compare-items-across-branches-and-baselines)
+- [Build flexible view hierarchies](#build-flexible-view-hierarchies)
+- [Edit branch data like a spreadsheet](#edit-branch-data-like-a-spreadsheet)
+- [Bring live analysis models into V2 migrations](#bring-live-analysis-models-into-v2-migrations)
+- [Put the work first in reviews](#put-the-work-first-in-reviews)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+- [API changes](#api-changes)
+
+## Connect multiple GitHub organizations
+
+Connect multiple organizations on the same GitHub server without replacing an existing connection. Repositories from every connected organization are available across projects, while workspace access remains separate from project-specific pull request automation.
+
+Each connection can be reviewed and managed independently. The setup flow resumes after GitHub authorization, repository search handles abbreviations and minor typos, and organization filters make large repository lists easier to navigate. Existing review rules remain editable if one organization is temporarily unavailable.
+
+## Trace integration and automation outcomes
+
+The Agents → Activity page now shows events received from GitHub, GitLab, Slack, and Onshape, including events Flow ignored. Each event appears alongside the run it started and the actions Flow performed in response.
+
+Automation runs now show what they checked and what each step found. Completed branch automations place their conclusion, counts, summary, and run link in review activity, while Review Overview shows the latest status for every branch automation. The result stays with the work it evaluated.
+
+## Compare items across branches and baselines
+
+Compare an item with its version on another branch or baseline directly from the item's context menu or details panel. The read-only comparison places values, links, and descriptions side by side, marking items that exist on only one side as created or deleted.
+
+Each side can point to a different branch and an optional baseline. That makes it possible to inspect a specific item's history without opening a full branch review.
+
+## Build flexible view hierarchies
+
+Create supported item types at the top of a view, then drag them under any folder or item the view allows. A parent is no longer required at creation time.
+
+Deleting a folder now leaves its contents orphaned instead of moving them unexpectedly to the top of the view. The **Orphaned items** filter lists those items in table, tree, Reader, and review views so they can be inspected or restored without appearing in normal search results.
+
+## Edit branch data like a spreadsheet
+
+Copy a branch-table cell or selected range into a spreadsheet, paste values back, and drag the fill handle to repeat values across nearby rows or columns. Editing respects branch permissions and applies to editable branch details such as branch names, review readiness, and tags; protected or unowned branches are skipped.
+
+## Bring live analysis models into V2 migrations
+
+V2 migrations now bring every Excel analysis model into Flow with its workbook and outputs intact. Model outputs become Design Values connected to their source spreadsheet cells, so re-uploading the workbook updates dependent values instead of leaving them as static numbers.
+
+## Put the work first in reviews
+
+Review pages now use a clear, single-column layout for the change summary, reviewers, workflow actions, filters, and sorting. Draft branches present **Ready for review** as the primary action, and administrators who can bypass a blocked review see that action in place of an unavailable merge button.
+
+## Fixes
+
+- **Update from parent.** Large branch trees now update successfully, and unresolved **Keep incoming** choices stop with clear recovery guidance instead of being silently dropped.
+- **ReqIF imports.** Concurrent imports and API updates reuse an item when they match the same external identifier, preventing duplicate records.
+- **Rich-text pasting.** Text, tables, and inline images copied from another application paste together without rejecting the document.
+- **Live collaboration.** Changes continue to appear when Flow is visible on another monitor or in a window without keyboard focus. Live updates also work when a workspace URL contains uppercase letters.
+- **Comments.** Failed edits keep their text, duplicate actions are prevented, and busy comments explain when to retry.
+- **Rich-text fields.** Dismissed item-mention searches save as typed text, and pressing Enter selects a result without closing a table-cell edit.
+- **Find in view.** Search filters every table in the view and marks matches consistently.
+- **Branch automations.** Reviews of large branches start successfully while preserving complete context for smaller reviews.
+- **GitHub and GitLab automations.** Redelivered events no longer start duplicate runs, and a connection problem in one workspace no longer blocks events for other workspaces.
+- **Undo and redo.** Editing history stays with the project and branch where each change was made, and Redo uses the expected platform shortcut.
+- **Relationships.** Missing or inaccessible linked items remain visible under **Other items**, where the link can be reviewed or removed.
+- **Reader and document exports.** Item descriptions appear once, reference icons and names render correctly, and embedded diagrams retain current item names.
+- **Diagram editing.** Failed expansions leave the canvas unchanged, and unfinished work stops if the diagram becomes read-only or you leave the page.
+- **Table views.** Rich-text tables remain behind the frozen Name column, and wrapped rows keep every cell aligned at the top.
+- **Branch creation.** Child items retain their creation order, reserved branch names are rejected before submission, and failed branch creation keeps the entered name available for correction.
+- **SCIM provisioning.** Microsoft Entra ID can provision users on GovCloud and self-hosted deployments that use the ALB web application firewall.
+
+## Improvements
+
+- **Requirements overview.** New template-based workspaces and projects start with an editable dashboard covering requirement count, stage, verification, and system-to-requirement and requirement-to-test coverage.
+- **Project access.** Admins can grant access to all current and future projects from the Users settings table.
+- **Sharing settings.** Large share registries scroll smoothly, support sorting and column resizing, and allow multiple grants to be revoked at once.
+- **Reader navigation.** Use the arrow keys to move through item names, descriptions, and fields. Clearer spacing, visible item IDs, and an independent field-label width make documents easier to scan.
+- **Images and diagrams.** Open rich-text images and diagrams full screen from table cells, including expanded and wrapped cells. The image preview also supports clearer keyboard, zoom, and pan controls.
+- **Filters and counts.** Choose Type and Changed by values while adding a filter. Match totals remain exact on large projects and follow focused subtrees and **Within items** filters.
+- **Saved views.** Saved filters stay visible and can be changed for the current session without changing the shared defaults.
+- **View creation.** Choose what the second create button adds from a view's settings.
+- **Branch actions.** Undo and redo now include changing branch tags, branch protection, and review readiness.
+- **Branch creation.** The standard dialog keeps the branch name and parent branch as separate fields, including when opened from the branch selector.
+- **Resizable panels.** Widening one side panel makes neighboring panels yield space and restores their original widths when dragged back.
+- **Navigator.** The sidebar keeps the full view structure visible and preserves expansion and focus across compatible view changes.
+- **Filtered empty states.** Empty Table and Reader views explain when filters hide every item and provide a **Clear filters** action.
+- **Spreadsheet imports.** Large imports and tables open faster in workspaces with many members.
+- **Undo.** The view actions menu includes Undo and shows the matching keyboard shortcut.
+
+## API changes
+
+- **Automation results.** `GET /ai/trigger/runs` returns each run's overall conclusion and the steps behind it.
+- **GitHub connections.** Settings responses return an installation collection, repository listings return `repositories` and `errors`, and clients can disconnect a specific installation.
+- **Branch lists.** `GET /project/:projectId/branch` excludes branches hidden from the web app's branch lists.
+- **MCP clients.** Clients using protocol `2026-07-28` can discover and call Flow tools through the existing MCP URL and credentials.
+- **Authentication.** API-key requests for an unknown or mistyped workspace return an invalid-key response.
+- **Project lookup.** API and MCP requests with malformed project IDs return a useful bad-request response with project-slug guidance.

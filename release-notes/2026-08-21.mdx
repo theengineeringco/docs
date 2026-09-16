@@ -1,0 +1,53 @@
+---
+title: "August 21, 2026"
+sidebarTitle: "August 21, 2026"
+description: "Page-by-page PDF work, group reviewers, faster branch updates and search, clearer review diffs, and safer API migrations."
+---
+
+## Contents
+
+- [Work through long PDFs page by page](#work-through-long-pdfs-page-by-page)
+- [Use groups as reviewers](#use-groups-as-reviewers)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+- [API changes](#api-changes)
+
+## Work through long PDFs page by page
+
+The AI agent can work through an attached PDF one page at a time, using the document's printed page numbers for its citations. Long documents no longer need to fit into one reading pass, and completed page work remains available if a run is interrupted.
+
+PDFs with eight or more pages are processed page by page and checked for missed content after the first pass. If a document cannot be split, Flow continues with a single pass and explains the limitation instead of failing silently.
+
+## Use groups as reviewers
+
+A user group can now be assigned as a reviewer. One available member can approve on behalf of the group, so a review does not stall because a specific person is away.
+
+Group membership is evaluated when the review is opened, and reviewer lists show the group as one requirement with one status. Individually assigned reviewers keep their own approval requirements.
+
+## Fixes
+
+- **Branch updates.** Large updates from a parent branch complete without timing out or reporting failure while work is still finishing.
+- **Review reverts.** Reverting a change restores the exact value shown in the review, even when the parent branch has moved on.
+- **Merge conflicts.** Reviews now catch conflicts when a deleted item was changed only through its position, formula, or relationships.
+- **Review progress.** Items marked as viewed stay collapsed after a reload.
+- **Table summaries.** Number and date summaries no longer cause the table to close during rapid updates.
+- **Rich-text tables.** Editing a wrapped cell keeps the row in place and starts the cursor at the end of the existing value.
+- **Long operations.** Merges, rebases, imports, and other background work can run without blocking everyday edits.
+
+## Improvements
+
+- **Review diffs.** Before and after values align in consistent, full-width change bands, making field, name, and relationship changes easier to scan.
+- **Entity search.** Search opens on recent items, keeps its search methods in one filter, and responds faster in large workspaces.
+- **Branch navigation.** The branch selector can be sorted by name, owner, creation date, or latest change.
+- **Item ownership.** New items start with the creator selected as Owner.
+- **Protected branches.** Protected branches can be updated from their parent without allowing direct edits.
+- **Create-item dialog.** Names and descriptions have more room in a two-column layout while attributes and relationships remain visible.
+- **Chat attachments.** Files added to a chat can be attached to item file fields.
+- **AI conversations.** Finished messages can be copied, and a completed response can be repeated from the same prompt.
+- **Error reporting.** Error messages remain visible longer and copy a complete diagnostic for support.
+- **History.** Stage changes appear as stage labels instead of internal identifiers.
+- **Menus.** Long submenus stay within the window, and bulk field lists can be searched.
+
+## API changes
+
+- **Project settings.** The legacy `/project/:id/global-storage` endpoints were removed. Integrations must use the dedicated endpoints for saved views, templates, skills, automations, and ReqIF presets before upgrading.

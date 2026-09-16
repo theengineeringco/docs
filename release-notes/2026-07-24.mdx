@@ -1,0 +1,46 @@
+---
+title: "July 24, 2026"
+sidebarTitle: "July 24, 2026"
+description: "Self-serve SSO, an in-app notification feed, background exports, branch comparisons, safer reviews, and private saved views."
+---
+
+## Contents
+
+- [Configure SSO in Flow](#configure-sso-in-flow)
+- [Follow work from the notification feed](#follow-work-from-the-notification-feed)
+- [Export large datasets in the background](#export-large-datasets-in-the-background)
+- [Compare and update branches before merging](#compare-and-update-branches-before-merging)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+
+## Configure SSO in Flow
+
+Organization admins can configure an OIDC identity provider directly in Flow. The setup verifies the organization's email domain and provides the redirect URI required by the identity provider, removing the need for a support-led setup.
+
+## Follow work from the notification feed
+
+Flow now has an in-app notification feed. Reviewers are notified when they are added, and people following an item receive updates when a discussion is resolved.
+
+## Export large datasets in the background
+
+CSV and JSON exports now run as background jobs with live progress and a download link when complete. Large exports stream on the server instead of tying their completion to the browser tab.
+
+## Compare and update branches before merging
+
+Branches can be compared directly, and **Update from parent** shows the incoming changes before applying them. Completed merges can also be reverted from their recorded merge state.
+
+## Fixes
+
+- **AI replies.** Responses stream smoothly, and a message sent while the assistant is working is no longer lost.
+- **Rich text.** Reader content remains intact after saving and reopening.
+- **Review status.** Items disappear from a review once all of their changes have been reverted.
+- **Reviewers.** A removed reviewer can no longer satisfy an approval requirement.
+- **Field editing.** Editing one field no longer restores a removed tag or review-stage option.
+- **ReqIF exports.** Large exports complete with attachments without exhausting browser or server memory.
+
+## Improvements
+
+- **Private saved views.** A saved view can be kept private to its creator.
+- **Deep links.** View state can be preserved in a URL and shared without recreating the same selection.
+- **Audit logs.** Events can be searched by text, and supported changes can be reverted from the audit record.
+- **Project setup.** New projects can start from the Example Project with selected content copied into place.

@@ -1,0 +1,82 @@
+---
+title: "September 4, 2026"
+sidebarTitle: "September 4, 2026"
+description: "Webhook-triggered automations, faster large-branch merges, comment-driven reviews, contextual tables, and broader Customer API controls."
+---
+
+## Contents
+
+- [Trigger automations from a webhook](#trigger-automations-from-a-webhook)
+- [Faster, more dependable merges](#faster-more-dependable-merges)
+- [Review feedback without editing](#review-feedback-without-editing)
+- [Continue work when an import finishes](#continue-work-when-an-import-finishes)
+- [Create from contextual table rows](#create-from-contextual-table-rows)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+- [API changes](#api-changes)
+
+## Trigger automations from a webhook
+
+Automations can now start from any system that can send a webhook. An event in a test platform, internal service, or existing integration can immediately start work in Flow without waiting for a dedicated connector.
+
+Choose **When a custom webhook is called**, name the source, and Flow provides the request URL, required headers, and an example request. Send any JSON payload in `context`; the automation receives that data and can use it in the steps that follow. This gives existing systems a direct, configurable entry point into Flow automations.
+
+## Faster, more dependable merges
+
+Merges on branches touching tens of thousands of items now complete substantially faster, without changing what the merge writes.
+
+Merges also wait for another merge or import in the same project to finish instead of timing out. If a comparison is temporarily unavailable, Flow can still complete an exact conflict check before writing changes.
+
+## Review feedback without editing
+
+Read-only viewers can now select text in Reader and start an inline comment without gaining permission to edit the document. Reviewers can point to the exact sentence that needs discussion while the underlying content remains protected.
+
+Views can also filter items by whether they have comments, who commented, keywords in a discussion, and the field a comment belongs to. Filters can target unresolved threads, resolved threads, or both across Table, Tree, Reader, reviews, search, exports, and saved-view defaults.
+
+## Continue work when an import finishes
+
+Automations can now start as soon as a document import completes successfully. Choose **When a document import finishes in Flow** to review the imported results, continue a workflow, or notify another system.
+
+The automation starts after the import completes, removing the need for someone to return and manually begin the next step.
+
+## Create from contextual table rows
+
+Saved views can show collapsible, read-only tables below the main table while an item is focused. Each table can stay pinned to one item or follow the focused item to show a matching ancestor, keeping surrounding system context in view.
+
+Rows in these tables now offer **Create derived entity**. The create dialog opens with the new item's name, type, description reference, relationship, and parent already filled in.
+
+## Fixes
+
+- **External sharing.** Recipients only see the views explicitly shared with them.
+- **Branch operations.** Older projects can rebase, merge, and revert branches that previously failed during those actions.
+- **Review comparisons.** Large branch and baseline comparisons now load without timing out after heavy project activity.
+- **Reader images.** Images pasted from web pages or documents remain available after a refresh.
+- **Diagram copies.** Duplicating a diagram now includes the original shapes and connections.
+- **Excel exports.** Failed exports show an error, and views over 100,000 items offer CSV instead.
+- **Explorer history.** Browser Back and Forward restore the table, filters, focused item, selection, and details panel together.
+- **Imported tables.** ReqIF tables with irregular structure display and save with the surrounding text.
+- **Reviews.** Review pages remain open if reviewer details temporarily fail to load, and approvals wait for valid membership data.
+- **Reader.** Documents open when referenced comments or files are no longer available, with a clear placeholder in their place.
+- **SSO invitations.** People invited to SSO-only workspaces go directly to the correct identity provider.
+- **Comment notifications.** Email and in-app notifications identify the item where a comment was added.
+- **Formula removal.** Removing a formula refreshes the table immediately, so the cell can be edited without reloading the page.
+
+## Improvements
+
+- **External sharing.** Shared links open in Reader, and administrators can revoke access to one shared view without affecting a recipient's other grants.
+- **SSO sign-in.** Flow remembers the last email used in each workspace for 60 days in that browser and routes returning users directly to their identity provider.
+- **Reader timestamps.** Documents can show each item's created and updated dates and include them in exports.
+- **Larger attachments.** File fields and rich-text documents now accept files up to 512 MB, increased from 100 MB.
+- **Typed filters.** Number, date, toggle, and tag filters return consistent results across tables, dashboards, and project-wide filtering. Exact filters also load faster on large projects.
+- **Relationships.** Select and create several upstream, downstream, or cross-links in one pass from an item's Relationships tab.
+- **Table selections.** Collapsed parents show when they contain selected items, and the selected-item count opens a searchable list of the full selection.
+- **Hierarchy order.** Newly created children appear first beneath their parent immediately and remain there after saving.
+- **Details panels.** Panels remain open while you work elsewhere on the page; use **Close** or **Back** when you are finished.
+
+## API changes
+
+- **Large file uploads.** Direct uploads through `POST /files/upload` remain capped at 100 MB. API clients can request an upload URL for files up to 512 MB.
+- **Branch ownership.** `POST /project/:projectId/branch/:id/set-owner` lets editors take ownership of a branch and lets administrators assign it to another user.
+- **Entity history.** Read-only Customer API and MCP credentials can retrieve batch entity history.
+- **Branch tags.** The Customer API can assign tags when creating a branch, add or remove individual tags, and rename or remove a tag across a project. Project-wide changes require administrator access.
+- **Relationship updates.** Upserts no longer restore relationships whose parent item was deleted.

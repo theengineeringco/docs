@@ -1,0 +1,54 @@
+---
+title: "July 31, 2026"
+sidebarTitle: "July 31, 2026"
+description: "Dashboards for every project, spreadsheet-style table editing, a complete review workflow, recoverable settings, and expanded customer APIs."
+---
+
+## Contents
+
+- [Dashboards for every project](#dashboards-for-every-project)
+- [Edit tables like a spreadsheet](#edit-tables-like-a-spreadsheet)
+- [Review and manage branches with more context](#review-and-manage-branches-with-more-context)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+- [API changes](#api-changes)
+
+## Dashboards for every project
+
+Dashboards are now enabled by default. Teams can combine value cards, AI summaries, and historical line, bar, or area charts, then open the underlying items from a widget.
+
+Widgets can be reordered and connected to saved views, so each dashboard reflects a defined slice of project data rather than a separate reporting copy.
+
+## Edit tables like a spreadsheet
+
+Tables now support range selection, copy and paste, fill handles, and Excel export. Repeated values and formulas can be extended across a range without editing cells one at a time.
+
+## Review and manage branches with more context
+
+The review page now brings review stages, conflict resolution, merge history, and lifecycle status into one workflow. Administrators can bypass a review requirement with an auditable reason when the rest of the branch protections are satisfied.
+
+Branch management also has a full-screen view, and teams can create a baseline without merging. Deleted fields and tag options can be restored from the recovery page.
+
+## Fixes
+
+- **SSO login.** A temporarily unavailable identity-provider list no longer blocks sign-in.
+- **Review comments.** Viewers can leave comments during a review.
+- **AI actions.** Work started in one browser tab no longer appears in another tab.
+- **Skills.** Skill reads remain within the current workspace.
+- **Large workspaces.** Login diagnostics and filtered search remain responsive as workspace data grows.
+- **Tag values.** Merging branches with removed tag options completes without timing out.
+
+## Improvements
+
+- **Name templates.** Branches and items can use consistent names generated from templates.
+- **Baselines.** A baseline can be created without merging a branch.
+- **Formulas.** Default formulas can be applied to existing items, with an option to replace existing values.
+- **Reader and tree views.** **Expand all** opens the complete visible hierarchy.
+- **SSO diagnostics.** Admins can see the claims supplied by each user's identity provider at their last login.
+- **Branch history.** Item history is shown in the context of the branch where each change occurred.
+- **Private views.** Personal saved views are enforced by the server and can open in a floating window.
+
+## API changes
+
+- **Relationships.** Customer API clients can create, update, and delete cross-links.
+- **Changed items.** Customer API responses can return the entity IDs changed on a branch.
