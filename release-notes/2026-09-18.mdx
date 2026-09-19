@@ -1,0 +1,176 @@
+---
+title: "September 18, 2026"
+sidebarTitle: "September 18, 2026"
+description: "Weekly release: Google Sheets in formulas, cross-branch search, personal skills, MCP sign-in through Flow, Qase TestOps, deleted-item recovery, unified field editing, redesigned reviews and tree cards, and a broader audit log."
+---
+
+## Contents
+
+- [Read Google Sheets cells from formulas](#read-google-sheets-cells-from-formulas)
+- [Cross-branch search](#cross-branch-search)
+- [Personal skills and a personal FLOW.md](#personal-skills-and-a-personal-flow-md)
+- [Connect MCP clients through Flow sign-in](#connect-mcp-clients-through-flow-sign-in)
+- [Qase TestOps integration](#qase-testops-integration)
+- [List and restore items deleted on a branch](#list-and-restore-items-deleted-on-a-branch)
+- [One field editor everywhere](#one-field-editor-everywhere)
+- [Choose how far a shared view reaches across branches](#choose-how-far-a-shared-view-reaches-across-branches)
+- [Compare any two branches or baselines](#compare-any-two-branches-or-baselines)
+- [Trace automation work from trigger to result](#trace-automation-work-from-trigger-to-result)
+- [Bulk grant and revoke project access](#bulk-grant-and-revoke-project-access)
+- [Audit log for role and project access changes](#audit-log-for-role-and-project-access-changes)
+- [GPT-6 Astra and Terra for Auto](#gpt-6-astra-and-terra-for-auto)
+- [Redesigned tree cards](#redesigned-tree-cards)
+- [Email notifications for comment replies](#email-notifications-for-comment-replies)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+- [API changes](#api-changes)
+
+## Read Google Sheets cells from formulas
+
+The `get_cell` formula helper now reads a single cell from a Google Sheet as well as from an attached Excel workbook: point it at a Google Sheet field or paste the sheet's URL, optionally name a tab, and use the same call shape as a workbook read — `get_cell(self.Budget, "Mass budget", "B2")`. The reference decides where the value comes from.
+
+Google reads go out under the workspace's Google connection, stay inside the admin's Drive restriction list, and arrive unformatted so numbers compute as numbers. Cells refresh automatically on a configurable interval (5 minutes by default): a changed cell flows into dependent formulas, verdicts, and change history exactly as if a field had changed. A temporary Google outage keeps serving the last good value instead of an error.
+
+## Cross-branch search
+
+Global search and the AI assistant can now find items across every active branch of a project and open a result on its branch. Turn on **Search across branches** in global search, or ask the assistant to search across branches.
+
+## Personal skills and a personal FLOW.md
+
+Each project's Skills page now has a Personal section for skills, skill folders, and a **My FLOW.md** document that only you see. Personal content layers on top of the project's shared skills and FLOW.md and only applies when you yourself chat with the agent.
+
+The agent can edit your personal skills and My FLOW.md when you ask it in your own chat, and it writes to your personal configuration instead of the project's. Automations, scheduled runs, and inline **Edit with AI** continue to use project configuration only, so they can neither see nor change anyone's personal rows.
+
+## Connect MCP clients through Flow sign-in
+
+Connecting claude.ai or ChatGPT to Flow now opens the Flow app for an ordinary sign-in with your password or single sign-on, then asks you to approve the connection for your organization. Approval creates an API key named `MCP connection (<client>)` that the client uses from then on; revoke it under **Settings → API access** to disconnect.
+
+Cognito's hosted sign-in pages have been closed at the same time, so no MCP flow reveals the identity providers a workspace supports. Existing MCP URLs and credentials keep working.
+
+## Qase TestOps integration
+
+Admins can connect Qase from Integration settings. Once connected, the AI agent can search Qase test data and read verification results mapped into Flow's **Pass**, **Fail**, and **Inconclusive** values, so Qase runs contribute to requirement verification alongside other test sources.
+
+## List and restore items deleted on a branch
+
+The branch menu has a new **Deleted items…** entry that lists what was deleted on the current branch, including items created on the same branch, each with a **Restore** button. Restoring brings the item back with the fields and links it had when it was deleted, so a deletion remains recoverable after the immediate undo is gone.
+
+## One field editor everywhere
+
+Text, tag, stage, people, date, number, and verification fields now edit the same way in the table, details panel, tree, and Reader: one dropdown that lists the field's values with the ones already set first and ticked, and narrows as you type.
+
+In the table, double-click a cell and the cell itself becomes the text box, with the dropdown beneath it. Formula shortcuts appear in the same dropdown — press `=` to write a formula with a live preview, or `/` to describe one in plain English and have AI write it. Rich text, checkboxes, and fields that link out to Jira, Linear, Google, and AoDocs keep their existing editors.
+
+## Choose how far a shared view reaches across branches
+
+The Share view dialog now asks whether a recipient gets this branch only, this branch and every branch created off it, or every branch in the project. Single-branch sharing remains the default, and shares issued before this update keep exactly the reach they were given. **Who has access** shows the wider reach beside each share so it is clear what the recipient can open.
+
+## Compare any two branches or baselines
+
+The comparison workspace uses the same structure as a review, with **Compare changes** and **Overview** tabs. Branch and baseline selectors sit above their respective columns, remain visible while scrolling, and allow any two baselines to be compared in either order. **Swap sides** reverses the comparison.
+
+Sort changed items by latest change, name, or type, then filter by author or any item field. Overview brings the baseline description, reviewers, approvals, and activity into one reading column. Each merge or snapshot baseline also keeps its own discussion, so comments remain attached to the record they describe. Items absent from one side are labeled **Not present** instead of deleted.
+
+## Trace automation work from trigger to result
+
+Agents → Activity now includes branch, scheduled, API, import, and manual automation runs alongside events received from connected services. Each trigger groups the runs, branches, replies, and outbound actions it produced into a single thread with a rolled-up status.
+
+Open a thread as a left-to-right graph to see the complete chain from trigger to result. Run cards open their conversations, graph links can be shared, and returning to Activity restores the filters, search, and source selection you left behind.
+
+## Bulk grant and revoke project access
+
+The Users settings page has a new **Project access** action beside **Set role**. Pick people with the checkboxes, then grant or revoke specific projects, or give them access to all projects. Each choice applies to that person's own current access, so granting a project to a mixed selection adds it without disturbing the other projects anyone already has.
+
+Revoking from someone who has access to all projects changes them to a fixed list; the dialog says how many people that affects before you confirm, because they will stop receiving new projects automatically.
+
+## Audit log for role and project access changes
+
+The audit log now records who changed someone's workspace role or project access, when, and what it went from and to, along with people joining and leaving the workspace. Re-inviting an existing member overwrites their role and project access, and that now leaves a record like any other change. Pick **Workspace users** in the audit log's scope selector to read it; the scope is available to admins with access to all projects.
+
+The audit log also records who changed a project's default AI model, when the change happened, and the previous and new selections.
+
+## GPT-6 Astra and Terra for Auto
+
+**GPT-6 Astra** is available for the most demanding agent work in commercial production, subject to organization model and residency settings. **GPT-5.6 Terra** now backs the Auto model choice in commercial production.
+
+## Redesigned tree cards
+
+Item cards on tree, live preview, impact, and AI overview canvases carry the type, branch change marker, comments, and owner in a header band across the top, with the name, description, and field chips beneath. The floating type tab is gone, and the owner avatar now lives in the header corner on both item cards and folder headers.
+
+Items flagged by impact analysis or changed by the agent in Live preview show that state through a coloured card outline and a chip beside their field values instead of filling the entire card with colour, so a canvas full of flagged items stays readable. Saved views and personal footer selections keep working; a stored Owner entry in **Node footer fields** is dropped on read since the owner is now always in the corner.
+
+Tree group boxes also open with their items showing rather than behind an item count, and expand depth now counts inside a box so a depth of 2 shows two levels of items inside every folder. Trees with items nested under items open deeper than before at the same setting; lower the depth in **Settings → Organization → Views** to match.
+
+## Email notifications for comment replies
+
+Replies in a thread you are part of, and comments on items you subscribe to, now trigger an email in addition to the in-app notification. Emails are on by default and have their own switch under **Settings → Preferences → Notifications**, so you can mute thread traffic while keeping emails for direct mentions.
+
+## Fixes
+
+- **Rebase onto another branch.** Removing a relationship to an item absent from the new parent no longer causes the rebase to fail.
+- **Update from parent.** Large branch updates complete on the first attempt, and keeping an archived item no longer causes the update to reject a valid conflict choice.
+- **Default formulas.** Saving a default formula preserves the draft when it conflicts with another save, and every save-failure path leaves the editor open with a clear reason.
+- **Formulas.** Reading a field from an empty `latest`, `max`, `min`, or `coalesce` result now returns an empty value instead of an error.
+- **Formula builder.** A rollup that names a missing data type or field keeps the builder open with the server's reason next to the editor, and long preview errors remain readable without displacing the editor.
+- **Verification rollups.** Verification formulas include directly linked items of the chosen type in addition to descendants, so linked test results contribute to requirement verification.
+- **Review stage order.** Migrations preserve the original workflow order, and admins can reorder existing stages without recreating them or changing saved stage values.
+- **Session renewal.** The hourly sign-in refresh no longer resets the active page, so requirement drafts and other in-progress edits stay open.
+- **Rich-text editing.** Selecting text in a description or rich-text field brings back the floating formatting toolbar alongside the toolbar attached below the field. Editing a rich-text cell no longer grows its row when **Wrap columns** is off.
+- **Large rich-text descriptions.** Large tables load faster in Reader and wrapped table columns, avoiding prolonged page freezes when opening them.
+- **Bulk-created child order.** Items created through the API across multiple batches stay in submission order, including test steps in new test runs.
+- **History imports.** Importing past changes no longer sends subscribed-item notifications for those historical edits.
+- **Jira connections.** Admins can pick the correct Jira site when the Atlassian account has access to multiple sites, and reconnecting preserves the workspace's selected site.
+- **Disconnected Jira lookups.** Jira lookups no longer fail loudly when a project's Jira connection has been removed.
+- **AI tools.** Optional arguments are no longer treated as mandatory, which could prevent project-wide searches and cause the assistant to fill in settings you did not ask to change.
+- **AI chat.** A chat no longer stops with a "conversation is too large" error when a tool returns more than the agent can read at once; the agent reads what fits, learns what was left out, and the turn continues.
+- **AI assistant data-type names.** The assistant now reads and writes items using each data type's current display name, so renamed types no longer leak obsolete internal names into replies or tool calls.
+- **AI document imports.** Reading progress keeps updating while the agent waits, showing pages read and elapsed time. Imports with failed pages show a completion warning.
+- **Automation script assistant.** Describing a script in the Assistant tab and clicking Generate now returns a suggestion instead of reloading the automation editor and discarding the draft.
+- **Notion rate limits.** Listing and reading Notion pages, and testing a Notion connection, wait out Notion's rate-limit guidance and retry before reporting an error.
+- **Data model creation.** Duplicate type names are flagged before submission instead of closing the dialog without creating anything.
+- **Comparison results.** Items absent from one side are labeled **Not present** instead of deleted, and older merge baselines show their available reviewers, approvals, descriptions, and history.
+- **Review filters.** Filtering changed items by comments applies to the complete review, including items that have not yet scrolled into view.
+- **Wrapped table rows.** Content stays aligned and visible while scrolling through rows taller than the table viewport.
+- **Table of contents.** Table of contents nodes remain registered so navigation stays in sync as documents load.
+- **Bulk editing owner or reviewers.** The people picker opens with everyone already assigned to the selection at the top, and clicking a reviewer brings the whole selection to the same state instead of flipping each item independently.
+- **Navigator address bar.** Clicking a navigation entry updates the address bar once, so the link is shareable immediately and browser Back returns to the previous item in one step.
+- **Drag hint.** Holding Cmd or Ctrl while dragging an item no longer changes the drop; a Cmd/Ctrl drop now behaves like an ordinary move. Alt still links the item under the target without moving it.
+- **Impact analysis.** Opening the review tab no longer starts AI processing. Choose **Run impact analysis** to begin.
+- **Review automations.** Past runs clearly show when an automation is no longer configured as a branch review, and explain why it is excluded from **Re-run all**.
+- **Agent chat opening.** Sending the first message from the new chat screen opens the conversation directly, and revisiting a past conversation no longer briefly shows the previous one.
+- **AI chat items across branches.** A chat renders its item pills from the branch the agent is working on, so items the agent created no longer show as missing when read from another branch. The changed-items drawer opens, lists, and undoes on that branch too.
+- **AI plan execution.** Accepting a plan with **Execute** is now standing authorization for every step it names, so the agent continues on its own instead of stopping to re-ask.
+- **AI conversation memory.** Condensed conversation history includes action results and errors, so the assistant can tell completed work apart from failed attempts.
+- **Python script recovery.** Timed-out scripts finish recording in-flight operations before reporting completion, and the AI assistant gets clearer progress and guidance to check existing changes before retrying.
+
+## Improvements
+
+- **Cross-branch shared views.** Opening a large shared view on another branch is more responsive, and updates continue to reach external viewers during continuous editing.
+- **Python traversal.** Scripts and formulas load linked items more efficiently when counting or traversing children, parents, and descendants.
+- **AI bulk edits.** The assistant favors manageable batches when creating items, updating fields, deleting items, or changing links.
+- **AI billing.** Concurrent AI requests and balance checks spend less time waiting on credit-balance lookups.
+- **Search.** Faster results in large projects, including searches with few or no exact matches, while keeping name matches ahead of descriptions and other fields.
+- **Formula recalculation.** Calculated values update faster after bulk edits and default-formula changes, and matching formulas reuse their result across branches with identical inputs.
+- **Branch updates.** Merges, rebases, and update-from-parent runs on large branches complete faster and block other edits for less time.
+- **Notifications.** Unread indicators load faster when many notifications are unread.
+- **Canvas rendering.** The tree, live preview, impact, and AI overview canvases render on shared canvas primitives, so panning and zooming stay smooth on large views. Arrow keys pan (Shift for larger steps), and `+`, `-`, and `0` zoom or fit the view. Zoomed far out, cards keep only their names so structure reads cleanly.
+- **Tree loading.** The tree canvas shows the Flow loading animation while a view is still resolving, and hierarchy-level bands hug the cards inside them at the default zoom.
+- **Dependency graph and activity thread graph.** Both render on the same canvas as the tree, framing themselves as soon as they load and responding to the same keyboard shortcuts and Recenter button. Cross-links in the dependency graph draw as dashed lines.
+- **Large Tree views.** Item actions are prepared when their menu opens instead of while the view loads.
+- **Activity performance.** The Activity feed stays responsive with thousands of rows and restores the previous results immediately while refreshing in the background.
+- **Rich-text editing.** Focusing a description reveals formatting and attachment controls above the field while preserving the text cursor.
+- **Reader navigation.** Use the arrow keys to move through item names, descriptions, and fields. Clearer spacing, visible item IDs, and an independent field-label width make documents easier to scan.
+- **Review navigation.** Reviews open on Overview, and each branch name links directly to its row on the Branches page.
+- **Branch ownership.** A branch with an owner can only be reassigned by an administrator, with every handoff recorded in activity.
+- **Data model setup.** Creating a new item type or folder opens its settings page immediately.
+- **Faster profile pictures.** Uploaded profile pictures are scaled so the shorter side is at most 256 pixels and stored as JPEG, so avatars across tables, comments, and the sidebar load faster.
+- **Personal preferences shortcut.** The settings cog in the sidebar footer opens **Settings → Personal → Preferences** directly, and personal settings sit at the top of the settings sidebar.
+- **Drag overlay.** A drag now names what the drop will do. Over another item, the card reads **Moving here** with **Press Alt to keep original link** beneath; holding Alt switches it to **Keeping original link**. Between two rows it reads **Reordering**.
+- **Diagram layout.** Auto-arrange places cards into left-to-right layers, sizes containers around their contents, and routes connections from clearer edges.
+- **Select all across the whole view.** The table's select-all checkbox selects every item in the view rather than only the rows on screen.
+
+## API changes
+
+- **Python scripts.** Mutation-enabled scripts can call `create_item("Type", name=..., parent=...)` and `delete_item(item)` to make ordinary, reviewable branch changes.
+- **Branch checks.** Deterministic Python checks and their editor previews can use `changed_items()` to iterate the branch's complete Changed Items set, then read each item's fields and links through the usual script API.
+- **Customer API branch lists.** `GET /project/:projectId/branch` no longer returns branches with `is_iteration: false`.
