@@ -44,16 +44,23 @@
             "pages": [
               "api/quickstart",
               "api/authentication",
-              "api/environments"
+              "api/environments",
+              "api/conventions"
             ]
           },
           {
             "group": "Integration examples",
-            "pages": []
+            "pages": [
+              "api/examples/read-entities",
+              "api/examples/batch-writes",
+              "api/examples/automations"
+            ]
           },
           {
             "group": "API reference",
-            "pages": []
+            "pages": [
+              "api/reference"
+            ]
           }
         ]
       }

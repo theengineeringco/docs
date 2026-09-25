@@ -1,0 +1,74 @@
+---
+title: "Batch writes"
+description: "Create entities and set values in atomic batches scoped to one project and branch."
+---
+
+A batch applies multiple writes in one transaction. Every write in that batch succeeds together, or a transaction failure rolls them all back.
+
+These examples use `jq`, the authentication variables from the quickstart, and a `PROJECT_ID`. First [discover the project's data model](/api/examples/read-entities) and select a category ID. Set `BRANCH_ID` to a branch where you intend to make changes; the alias `master` writes directly to Base.
+
+```bash
+export CATEGORY_ID="your-category-id"
+export BRANCH_ID="your-branch-id"
+```
+
+## Create entities
+
+Each entry requires `entityType` and `name`. The server generates an entity ID when `id` is omitted. `branchId` applies to the entire batch.
+
+```bash
+set -euo pipefail
+
+jq -n \
+  --arg category "$CATEGORY_ID" \
+  --arg branch "$BRANCH_ID" \
+  '{
+    branchId: $branch,
+    entities: [
+      {entityType: $category, name: "API example: operating temperature"},
+      {entityType: $category, name: "API example: storage temperature"}
+    ]
+  }' > create-entities.json
+
+curl --fail-with-body --silent --show-error \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities/batch" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  -H "Content-Type: application/json" \
+  --data-binary @create-entities.json \
+  -o created-entities.json
+```
+
+The response is an array of entity states in the same order as the request. Save each returned `id` for later updates. Newly created entities are assigned to the authenticated user as owner.
+
+## Set values
+
+Each update identifies an entity, a field key, and a value. The example updates the built-in `name` field on the entities just created.
+
+```bash
+jq --arg branch "$BRANCH_ID" '{
+  branchId: $branch,
+  updates: [
+    {entityId: .[0].id, key: "name", value: "API example: operating range"},
+    {entityId: .[1].id, key: "name", value: "API example: storage range"}
+  ]
+}' created-entities.json > set-values.json
+
+curl --fail-with-body --silent --show-error \
+  --request PUT \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities/values/batch" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  -H "Content-Type: application/json" \
+  --data-binary @set-values.json
+```
+
+The response contains the current state of each touched entity once, in first-touched order. To update custom fields, use their `fields[].key` and a value matching the field type returned by the data model. Tag options expose names; stage options also expose stable IDs.
+
+## Handle a failed batch
+
+The create batch and the value batch above are separate transactions. If the second transaction fails, the entities created by the first request still exist. Correct the failed value request and retry that step after confirming current state.
+
+Both `entities` and `updates` must contain at least one entry. Send only writes for one project and one branch in each request.
+
+A transaction failure rolls back that transaction's writes. A network timeout or an error while returning the response does not prove rollback: the write could already have committed. Read the affected entities on the same branch before retrying. Do not automatically repeat a create request with server-generated IDs.

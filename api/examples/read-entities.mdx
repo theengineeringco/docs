@@ -1,0 +1,78 @@
+---
+title: "Read entities"
+description: "Find a project, discover its data model, and read entities with cursor pagination."
+---
+
+Use the `FLOW_API_URL`, `FLOW_CUSTOMER`, and `FLOW_API_KEY` variables from the quickstart. The examples below also use `jq` to inspect JSON responses.
+
+## Find your project
+
+```bash
+curl --fail-with-body --silent --show-error \
+  "$FLOW_API_URL/project" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  | jq '.[] | {id, name, slug}'
+```
+
+Set `PROJECT_ID` to the `id` of the project you want to read. The project list returns an array; project-scoped endpoints take the ID in the URL.
+
+```bash
+export PROJECT_ID="your-project-id"
+```
+
+## Discover categories and fields
+
+```bash
+curl --fail-with-body --silent --show-error \
+  "$FLOW_API_URL/project/$PROJECT_ID/data-model" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  | jq '.[] | {id, name, fields}'
+```
+
+Each category contains `fields` with a `key`, `name`, and `type`. Use the category's `id` as `entity_type` when filtering entities, and use field keys to interpret their `values` map. Discover these values in the selected project instead of assuming another tenant's custom fields exist.
+
+## Read a page
+
+```bash
+curl --fail-with-body --silent --show-error --get \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  --data-urlencode "branch_id=master" \
+  --data-urlencode "starting_after=0" \
+  --data-urlencode "limit=100"
+```
+
+The response contains `items`, `nextPageStart`, and `moreAvailable`. Each item includes an entity `id` and a `values` object. For example, read its name from `values.name`.
+
+To filter by category, add `--data-urlencode "entity_type=$CATEGORY_ID"`, where `CATEGORY_ID` is a category ID from the data model. To read another branch, replace `master` with its branch ID.
+
+The entity list supports `entity_type` and `branch_id` selection. It does not expose a general field-filter expression; apply additional predicates to the returned entities in your integration.
+
+## Read all pages
+
+This Bash example prints one JSON object per entity. It uses a page size of 100 and reads Base. Add the same `entity_type` parameter to every request if you need a category filter.
+
+```bash
+set -euo pipefail
+cursor=0
+
+while true; do
+  page=$(curl --fail-with-body --silent --show-error --get \
+    "$FLOW_API_URL/project/$PROJECT_ID/entities" \
+    -H "X-API-Key: $FLOW_API_KEY" \
+    -H "customer: $FLOW_CUSTOMER" \
+    --data-urlencode "branch_id=master" \
+    --data-urlencode "starting_after=$cursor" \
+    --data-urlencode "limit=100")
+
+  jq -c '.items[]' <<< "$page"
+  more=$(jq -r '.moreAvailable' <<< "$page")
+  [[ "$more" == "true" ]] || break
+  cursor=$(jq -er '.nextPageStart' <<< "$page")
+done
+```
+
+Continue based on `moreAvailable`, even when `items` is empty. Pass `nextPageStart` unchanged; do not increment it or infer it from an entity ID.

@@ -1,0 +1,67 @@
+---
+title: "API conventions"
+description: "Use the correct identifiers, branch parameters, pagination, and retry behavior."
+---
+
+Flow's customer API uses HTTPS and JSON. Send `X-API-Key` and `customer` on every request, and `Content-Type: application/json` when sending a JSON body.
+
+## Scope each request
+
+Most resource endpoints start with `/project/{projectId}`. Use the project's `id` from `GET /project`, rather than its name or slug. If you have a slug, resolve it with `GET /project/slug/{slug}` first.
+
+Keep identifiers within the environment and tenant that returned them. A hostname selects the environment; the `customer` header selects the tenant.
+
+| Identifier | Where to find it | Where to use it |
+| --- | --- | --- |
+| Project ID | `GET /project` → `id` | `/project/{projectId}/...` |
+| Category ID | `GET /project/{projectId}/data-model` → `id` | Entity list `entity_type`; create body `entityType` |
+| Field key | Data model category → `fields[].key` | Value update `key`; entity `values` keys |
+| Entity ID | Entity response → `id` | Entity paths and update body `entityId` |
+| Branch ID | `GET /project/{projectId}/branch` | Branch parameter documented for the endpoint |
+| Automation run ID | Trigger response → `results[].agent_id` | Poll query `agent_ids` |
+
+An entity's `uniqueEntityNumber` is not a substitute for its `id`. Display names and custom field definitions can differ across projects even when the API contract is the same.
+
+## Select a branch
+
+Entity reads and writes accept the Base alias `master`. Omitting the branch on these endpoints also selects Base. To work on a branch, pass its ID explicitly.
+
+Parameter names differ by endpoint:
+
+| Request | Branch field |
+| --- | --- |
+| `GET /project/{projectId}/entities` | Query `branch_id` |
+| `GET /project/{projectId}/entities/{entity_ids}` | Query `branch_id` |
+| `POST /project/{projectId}/entities/batch` | JSON `branchId` |
+| `PUT /project/{projectId}/entities/values/batch` | JSON `branchId` |
+| `POST /project/{projectId}/entities/history` | JSON `branch_id` |
+
+Keep the same project, branch, and filters throughout a paginated read. Follow each endpoint's schema for exact spelling.
+
+## Read every page
+
+Pagination is specific to the endpoint.
+
+| Endpoint | Request | Response and stopping condition |
+| --- | --- | --- |
+| List entities | Start with `starting_after=0`; then pass `nextPageStart` as `starting_after`. Default `limit` is 50; maximum is 1000. | Read `items`; continue while `moreAvailable` is `true`, including after an empty page. |
+| Search branches | Use `offset` and `limit`. | Read `branches`; continue while `has_more` is `true`. |
+| Entity history | Send JSON `cursor` from the previous `next_cursor`. `limit` is 1–100. | Read `items`; stop when `next_cursor` is `null`. |
+| List projects | Optional `limit`. | Returns an array without a continuation cursor. Omit `limit` to list all accessible projects. |
+
+Treat cursors as opaque strings. For entity lists, prefer `starting_after` to legacy `offset`; `offset` must stay below 1000 and is ignored when `starting_after` is set. See [Read entities](/api/examples/read-entities) for a complete cursor loop.
+
+## Handle errors and retries
+
+Check the HTTP status before consuming a success response. Keep the error response body for troubleshooting, while excluding API keys from logs.
+
+| Status | Next action |
+| --- | --- |
+| `400` | Correct the request's identifiers, field names, types, or limits before retrying. |
+| `401` | Check the API key and selected environment. |
+| `403` | Check tenant selection and the key owner's access to the requested resource or action. |
+| `404` | Verify the resource ID in the selected project, tenant, and environment. |
+| `409` | Follow the endpoint's conflict guidance. For an expired entity-history cursor after a rebase, restart pagination without the cursor. |
+| `429` or transient `5xx` | For reads, retry with bounded exponential backoff and jitter. Honor `Retry-After` when present. |
+
+A timeout does not establish whether a write committed. Read back the affected resources before repeating a create, batch write, or automation trigger. Repeated triggers can start additional runs. See [Batch writes](/api/examples/batch-writes) for transaction boundaries.
