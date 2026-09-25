@@ -1,4 +1,74 @@
 ---
 title: "Trigger and poll automations"
-description: "Start configured automations and retrieve their results asynchronously."
+description: "Start configured automations and poll their results asynchronously."
 ---
+
+Use `POST /ai/trigger` to run automations that match a trigger source. This example assumes the project already has an automation configured with the `endpoint` source.
+
+Use the authentication variables from the quickstart and set `PROJECT_ID` to the target project. Trigger endpoints are under `/ai`, with `project_id` in the request body.
+
+## Start the runs
+
+Send `wait: false` so the API returns run IDs while execution continues. `context` carries the JSON input your configured automations expect; the example provides a message.
+
+```bash
+set -euo pipefail
+
+jq -n --arg project "$PROJECT_ID" '{
+  project_id: $project,
+  source: "endpoint",
+  context: {
+    message: "Run the configured integration check"
+  },
+  wait: false
+}' > trigger.json
+
+curl --fail-with-body --silent --show-error \
+  "$FLOW_API_URL/ai/trigger" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  -H "Content-Type: application/json" \
+  --data-binary @trigger.json \
+  -o trigger-response.json
+
+jq '.results[] | {agent_id, automation_id, automation_name, status}' \
+  trigger-response.json
+```
+
+An asynchronous request returns HTTP `202`. `results` contains one entry per matched automation, with its `agent_id` and current status. An empty `results` array means there are no matched runs to poll. Check the project's configured source before sending another trigger.
+
+A trigger can match multiple automations. Always include `project_id` to scope the request to the intended project.
+
+## Poll by run ID
+
+Copy an `agent_id` from the trigger response. Polling accepts up to 50 comma-separated run IDs per request.
+
+```bash
+export AGENT_IDS="run-id-from-trigger-response"
+
+curl --fail-with-body --silent --show-error --get \
+  "$FLOW_API_URL/ai/trigger/runs" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  --data-urlencode "agent_ids=$AGENT_IDS" \
+  | jq '.items[] | {
+      agent_id, status, integration_response,
+      integration_grade, branches, error
+    }'
+```
+
+The poll response uses `items`, rather than the trigger response's `results`.
+
+| Status | Action |
+| --- | --- |
+| `running` | Poll again after a delay. |
+| `completed` | Read `integration_response`, `integration_grade`, and `branches`. |
+| `failed` | Read `error` and handle the failure. |
+
+Start with a few seconds between polls, increase the interval for long runs, and set a maximum waiting time for your integration. Match returned items to the requested `agent_id` values; an absent result is not evidence of completion. Output fields can be `null` when the automation does not provide that output.
+
+## Preserve run IDs
+
+Persist returned run IDs before processing results. If a poll fails, retry the poll with the same IDs.
+
+Avoid automatically resending the trigger after a timeout: the original runs can still be executing, and another trigger can start additional runs. Prefer polling over `wait: true`, which holds the trigger connection open and can lose its response to a network timeout while execution continues.
