@@ -1,0 +1,68 @@
+---
+title: "Make your first request"
+description: "Authenticate with an API key and read data from a Flow project."
+---
+
+Flow's customer API lets you read and update project data over HTTPS. Start with a read request, then use the endpoint reference to explore the operations available to your account.
+
+## Before you start
+
+You need a Flow account, your environment's API URL, a tenant identifier, and a personal API key. Follow [Authentication](/api/authentication) to create a key and [Environments and tenants](/api/environments) to find the correct URL and tenant.
+
+Set these variables in your terminal. Load the key from your secret manager or enter it without echoing it:
+
+```bash
+export FLOW_API_URL="https://backend.branch.flowengineering.com"
+export FLOW_CUSTOMER="your-tenant"
+read -r -s -p "Flow API key: " FLOW_API_KEY
+export FLOW_API_KEY
+printf '\n'
+```
+
+The key-entry command above uses Bash. In zsh, use `read -r -s 'FLOW_API_KEY?Flow API key: '` instead.
+
+<Note>
+The API URL shown in Flow settings ends in `/customer-api`. That path opens Swagger. Use the URL's origin, without `/customer-api`, as `FLOW_API_URL`.
+</Note>
+
+## Identify your user
+
+```bash
+curl --fail-with-body "$FLOW_API_URL/users/me" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER"
+```
+
+A successful response returns the authenticated user's profile. The key acts as its creator, so requests use that person's permissions.
+
+## Find a project
+
+```bash
+curl --fail-with-body "$FLOW_API_URL/project" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER"
+```
+
+Choose an accessible project's `id` from the response:
+
+```bash
+export PROJECT_ID="your-project-id"
+```
+
+## Read entities
+
+```bash
+curl --fail-with-body --get \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  --data-urlencode "limit=20"
+```
+
+The response contains an `items` array and pagination metadata. Omit `branch_id` to read Base. See [Read entities](/api/examples/read-entities) to select fields, filter results, and fetch the next page.
+
+## Try the playground
+
+Open an endpoint under **API reference**, select your environment, and enter your API key and `customer` header. Start with a GET request. The playground sends requests to the selected environment using your permissions; write requests change that environment's data.
+
+Use a test project and branch for write examples. See [API conventions](/api/conventions) for branch identifiers and error handling.
