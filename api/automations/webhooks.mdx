@@ -17,16 +17,12 @@ Use an [API key and workspace identifier](/api/authentication), and identify the
 2. Set **Trigger** to **When a custom webhook is called**.
 3. Set **Webhook name** to `test-results-ready`.
 
-![Name an automation and select its custom webhook trigger](/images/api-webhook-trigger-annotated.png "human-intervention: configure a custom webhook trigger")
-
 Use the exact webhook name in API requests, including capitalization. Choose a distinct name for each event type. Avoid built-in source names such as `endpoint`, `github`, or `schedule`. If multiple automations in the project share the same source, one request can start them all.
 
 **Requires you to act:** Define the work and save the automation:
 
 4. In **Agent → Instructions**, describe the expected input and the actions to take. For example: “Read the test report URL from context.report_url. Summarize failed tests and identify affected requirements. Return a concise summary without changing project data.”
 5. Select **Create**.
-
-![Write automation instructions and create the automation](/images/api-webhook-instructions-annotated.png "human-intervention: write instructions and create the automation")
 
 Webhook runs execute without an interactive approval step. Make the instructions explicit about what the automation should read, change, and return.
 
