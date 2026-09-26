@@ -9,3 +9,4 @@ drafts/
 # API documentation tooling
 scripts/
 __pycache__/
+AGENTS.md
