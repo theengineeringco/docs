@@ -21,15 +21,20 @@ img[alt="Abstract sunset in warm orange and purple"] {
    Mobile keeps Mintlify's built-in tab/menu navigation. */
 @media (min-width: 1024px) {
   #sidebar {
-    bottom: 7rem;
+    bottom: 9rem;
+  }
+
+  /* Remove Maple's empty footer above the section links. */
+  #sidebar > ul:not(:has(a, button)) {
+    display: none;
   }
 
   #navbar-transition-maple {
     inset: auto auto 0 0 !important;
     width: 19rem;
-    height: 7rem;
+    height: 9rem;
     margin-top: 0 !important;
-    padding: 0.75rem 1rem;
+    padding: 1.75rem 1rem;
     border-top: 1px solid #e5e5e3;
     border-right: 1px solid #e5e5e3;
     border-bottom: 0;
@@ -46,12 +51,14 @@ img[alt="Abstract sunset in warm orange and purple"] {
   #navbar-transition-maple .nav-tabs-item {
     min-height: 2.5rem;
     padding: 0 0.75rem;
-    border-radius: 0.5rem;
+    color: #737373;
+    background: transparent;
+    text-shadow: none;
   }
 
   #navbar-transition-maple .nav-tabs-item:hover,
   #navbar-transition-maple .nav-tabs-item[data-active="true"] {
-    background: #efefed;
+    color: #161513;
   }
 
   #navbar-transition-maple .nav-tabs-item > div.absolute {
@@ -63,8 +70,12 @@ img[alt="Abstract sunset in warm orange and purple"] {
     background: #161513 !important;
   }
 
+  .dark #navbar-transition-maple .nav-tabs-item {
+    color: #a3a3a3;
+  }
+
   .dark #navbar-transition-maple .nav-tabs-item:hover,
   .dark #navbar-transition-maple .nav-tabs-item[data-active="true"] {
-    background: #ffffff0d;
+    color: #fdfdfb;
   }
 }
