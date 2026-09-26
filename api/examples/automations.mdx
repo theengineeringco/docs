@@ -1,4 +1,4 @@
-Call `POST /ai/trigger` to run automations that match a trigger source. This example assumes the project already has an automation configured with the `endpoint` source.
+Call `POST /ai/trigger` to run automations that match a trigger source. This example assumes the project already has an automation configured with the `endpoint` source. For a named webhook, [configure a webhook automation](/api/automations/webhooks) first and replace `endpoint` below with its exact webhook name.
 
 Use the authentication variables from the [quickstart](/api/quickstart) and set `PROJECT_ID` to the target project. cURL uses Bash and `jq`; Python uses `requests`; JavaScript uses Node.js 22 or later with `.mjs` files. Trigger endpoints are under `/ai`, with `project_id` in the request body.
 
@@ -15,7 +15,7 @@ jq -n --arg project "$PROJECT_ID" '{
   project_id: $project,
   source: "endpoint",
   context: {
-    message: "Run the configured integration check"
+    message: "Run the configured automation check"
   },
   wait: false
 }' > trigger.json
@@ -43,7 +43,7 @@ headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW
 payload = {
     "project_id": os.environ["PROJECT_ID"],
     "source": "endpoint",
-    "context": {"message": "Run the configured integration check"},
+    "context": {"message": "Run the configured automation check"},
     "wait": False,
 }
 
@@ -70,7 +70,7 @@ import { writeFile } from "node:fs/promises";
 const payload = {
   project_id: process.env.PROJECT_ID,
   source: "endpoint",
-  context: { message: "Run the configured integration check" },
+  context: { message: "Run the configured automation check" },
   wait: false,
 };
 
@@ -166,7 +166,7 @@ The poll response uses `items`, rather than the trigger response's `results`.
 | `completed` | Read `integration_response`, `integration_grade`, and `branches`. |
 | `failed` | Read `error` and handle the failure. |
 
-Start with a few seconds between polls, increase the interval for long runs, and set a maximum waiting time for your integration. Match returned items to the requested `agent_id` values; an absent result is not evidence of completion. Output fields can be `null` when the automation does not provide that output.
+Start with a few seconds between polls, increase the interval for long runs, and set a maximum waiting time for your application. Match returned items to the requested `agent_id` values; an absent result is not evidence of completion. Output fields can be `null` when the automation does not provide that output.
 
 ## Preserve run IDs
 
