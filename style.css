@@ -80,45 +80,47 @@ img[alt="Abstract sunset in warm orange and purple"] {
   }
 }
 
-/* Keep the sidebar controls visible while the native navigation scrolls. */
+/* A solid header sits outside the navigation's scrollable region. */
 @media (min-width: 1024px) {
   #sidebar-content {
     --sidebar-surface: #fdfdfb;
-  }
-
-  #sidebar-content [data-component-part="scroll-area-viewport"] {
-    scroll-padding-top: 144px;
-    scroll-padding-bottom: 24px;
+    --sidebar-divider: #e5e5e3;
+    --sidebar-header-height: 136px;
+    background: var(--sidebar-surface);
   }
 
   .dark #sidebar-content {
     --sidebar-surface: #161513;
+    --sidebar-divider: #ffffff12;
+  }
+
+  #sidebar-content [data-component-part="scroll-area-viewport"] {
+    margin-top: var(--sidebar-header-height);
+    height: calc(100% - var(--sidebar-header-height));
+    padding-top: 0;
+    scroll-padding-block: 24px;
   }
 
   #sidebar-content [data-component-part="scroll-area-content"] > :first-child,
   #sidebar-content [data-component-part="scroll-area-content"] > :has(#search-bar-entry) {
-    position: sticky;
+    position: absolute;
+    left: 28px;
+    right: 28px;
     z-index: 20;
+    margin-top: 0;
     background: var(--sidebar-surface);
   }
 
   #sidebar-content [data-component-part="scroll-area-content"] > :first-child {
-    top: 0;
+    top: 24px;
   }
 
   #sidebar-content [data-component-part="scroll-area-content"] > :has(#search-bar-entry) {
-    top: 52px;
-    z-index: 21;
+    top: 76px;
   }
 
-  #sidebar-content [data-component-part="scroll-area-content"] > :first-child::before,
-  #sidebar-content [data-component-part="scroll-area-content"] > :has(#search-bar-entry)::before {
-    content: "";
-    position: absolute;
-    inset: -24px -28px 0;
-    z-index: -1;
-    background: var(--sidebar-surface);
-    pointer-events: none;
+  #sidebar-content > [data-component-part="scroll-area-scrollbar"] {
+    top: var(--sidebar-header-height) !important;
   }
 
   #sidebar-content::before,
@@ -127,19 +129,19 @@ img[alt="Abstract sunset in warm orange and purple"] {
     position: absolute;
     left: 0;
     right: 0;
+    height: 24px;
     z-index: 22;
     pointer-events: none;
   }
 
   #sidebar-content::before {
-    top: 112px;
-    height: 32px;
+    top: var(--sidebar-header-height);
+    border-top: 1px solid var(--sidebar-divider);
     background: linear-gradient(to bottom, var(--sidebar-surface), transparent);
   }
 
   #sidebar-content::after {
     bottom: 0;
-    height: 24px;
     background: linear-gradient(to top, var(--sidebar-surface), transparent);
   }
 }
