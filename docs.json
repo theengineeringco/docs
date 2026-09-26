@@ -42,6 +42,7 @@
           {
             "group": "Start here",
             "pages": [
+              "api",
               "api/quickstart",
               "api/authentication",
               "api/environments",
