@@ -43,6 +43,39 @@ PAGE_TITLES = {
     "get /users/with-permissions": "List users with permissions",
 }
 EDITORIAL_KEYS = {"description", "summary", "example", "examples", "externalDocs", "x-mint"}
+# These containers use user-defined keys rather than OpenAPI keywords.
+NAMED_MAPS = {"properties", "schemas", "paths", "responses", "headers", "content", "securitySchemes", "parameters", "requestBodies", "links", "callbacks", "encoding", "patternProperties", "$defs", "definitions", "mapping"}
+PRIVATE_TERMS = re.compile(r"\b(?:tenants?|environments?|rivian|rvt)\b|backend\.rvtech", re.IGNORECASE)
+
+
+def public_wording(value, context="object"):
+    """Normalize editorial wording without changing wire names or example data."""
+    if isinstance(value, list):
+        return [public_wording(child) for child in value]
+    if not isinstance(value, dict):
+        return value
+    result = {}
+    for key, child in value.items():
+        if context != "map" and key in {"description", "summary", "title"} and isinstance(child, str):
+            child = re.sub(r"\bcustomer/tenant\b", "Workspace", child, flags=re.IGNORECASE)
+            child = re.sub(r"\btenant(s?)\b", lambda match: "workspace" + match[1], child, flags=re.IGNORECASE)
+        # Examples and vendor extensions are arbitrary payloads. Leave them intact.
+        elif context != "map" and (key in {"example", "examples", "default", "enum", "const"} or key.startswith("x-")):
+            result[key] = child
+            continue
+        result[key] = public_wording(child, "map" if context != "map" and key in NAMED_MAPS and isinstance(child, dict) else "object")
+    return result
+
+
+def validate_public_spec(spec):
+    # A new term in wire names, examples, or unhandled prose needs human review,
+    # never a silent rewrite of the API contract or an automatic publication.
+    if PRIVATE_TERMS.search(canonical(spec)):
+        raise ValueError("Public API wording policy failed; retain the published reference and review the source text")
+    for obj in walk(spec):
+        for key in ("description", "summary"):
+            if isinstance(obj.get(key), str) and re.search(r"```[^\n]*\n(?:(?!```).)*\bcurl\b", obj[key], re.DOTALL):
+                raise ValueError("Inline cURL examples need reviewed Python and JavaScript alternatives")
 
 
 def canonical(value):
@@ -145,7 +178,7 @@ def prepare(spec):
     for path in EXCLUDED_PATHS:
         spec["paths"].pop(path, None)
     validate(spec)
-    spec = prune_components(spec)
+    spec = public_wording(prune_components(spec))
     used_tags = set()
     for path, item in spec["paths"].items():
         for method in METHODS.intersection(item):
@@ -165,13 +198,14 @@ def prepare(spec):
             tags[tag["name"]] = tag
     spec["tags"] = [tags.get(name, {"name": name}) for name in sorted(used_tags)]
     # Compare every deployment, but expose only the standard production host.
-    spec["servers"] = [{"url": SOURCES["Production"], "description": "Production"}]
+    spec["servers"] = [{"url": SOURCES["Production"], "description": "Flow API"}]
     # Replace Swagger's shorthand routes and embedded changelog with the
     # maintained API-only guides. Endpoint and schema descriptions are retained.
     spec["info"]["description"] = (
         "Flow customer API reference. Start with the [quickstart](/api/quickstart) "
         "and [authentication guide](/api/authentication)."
     )
+    validate_public_spec(spec)
     return spec
 
 
@@ -183,11 +217,10 @@ def contract(value, context="object"):
         return value
     result = {}
     # Keys in these objects are user-defined identifiers, not OpenAPI keywords.
-    maps = {"properties", "schemas", "paths", "responses", "headers", "content", "securitySchemes", "parameters", "requestBodies", "links", "callbacks", "encoding", "patternProperties", "$defs", "definitions", "mapping"}
     for key, child in value.items():
         if context != "map" and key in EDITORIAL_KEYS:
             continue
-        result[key] = contract(child, "map" if context != "map" and key in maps and isinstance(child, dict) else "object")
+        result[key] = contract(child, "map" if context != "map" and key in NAMED_MAPS and isinstance(child, dict) else "object")
     return result
 
 

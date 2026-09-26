@@ -33,7 +33,7 @@ class SyncTests(unittest.TestCase):
         source["paths"]["/entities"]["servers"] = [{"url": sync.SOURCES["RVT"]}]
         source["paths"]["/entities"]["get"]["servers"] = [{"url": sync.SOURCES["Rivian"]}]
         doc = sync.prepare(source)
-        self.assertEqual(doc["servers"], [{"url": sync.SOURCES["Production"], "description": "Production"}])
+        self.assertEqual(doc["servers"], [{"url": sync.SOURCES["Production"], "description": "Flow API"}])
         self.assertNotIn("servers", doc["paths"]["/entities"])
         self.assertNotIn("servers", doc["paths"]["/entities"]["get"])
 
@@ -41,6 +41,45 @@ class SyncTests(unittest.TestCase):
         doc = fixture()
         doc["components"]["schemas"]["Entity"]["discriminator"] = {"propertyName": "type", "mapping": {"unused": "#/components/schemas/Unused"}}
         self.assertIn("Unused", sync.prepare(doc)["components"]["schemas"])
+
+    def test_public_wording_preserves_request_contract(self):
+        source = fixture()
+        source["paths"]["/entities"]["get"]["parameters"] = [
+            {"in": "header", "name": "customer", "required": True,
+             "description": "Customer/tenant identifier", "schema": {"type": "string"}}
+        ]
+        source["paths"]["/entities"]["get"]["summary"] = "List entities for the current tenant"
+        source["components"]["schemas"]["Entity"]["properties"]["name"]["description"] = "The tenant's name"
+        public = sync.public_wording(source)
+        self.assertEqual(sync.contract(source), sync.contract(public))
+        self.assertEqual(public["paths"]["/entities"]["get"]["parameters"][0]["description"], "Workspace identifier")
+        sync.validate_public_spec(sync.prepare(source))
+
+    def test_policy_failure_retains_snapshot_and_never_rewrites_payload_values(self):
+        for location in ["description", "example", "enum", "property"]:
+            with self.subTest(location=location), tempfile.TemporaryDirectory() as tmp:
+                source = fixture()
+                schema = source["components"]["schemas"]["Entity"]
+                if location == "property":
+                    schema["properties"]["tenant"] = {"type": "string"}
+                elif location == "example":
+                    schema["example"] = {"description": "tenant"}
+                    self.assertEqual(sync.public_wording(schema)["example"], schema["example"])
+                elif location == "enum":
+                    schema["properties"]["name"]["enum"] = ["tenant"]
+                else:
+                    schema["description"] = "Select a Rivian environment"
+                target = Path(tmp) / "api.json"
+                target.write_text("unchanged sentinel")
+                with self.assertRaises(ValueError):
+                    sync.sync({name: source for name in sync.SOURCES}, target)
+                self.assertEqual(target.read_text(), "unchanged sentinel")
+
+    def test_upstream_curl_only_examples_require_review(self):
+        source = fixture()
+        source["paths"]["/entities"]["get"]["description"] = "```bash\ncurl https://example.test\n```"
+        with self.assertRaises(ValueError):
+            sync.prepare(source)
 
     def test_missing_empty_invalid_and_unresolved_fail_closed(self):
         invalid = [None, {}, {**fixture(), "paths": {}}, {**fixture(), "paths": {"/empty": {}}}]

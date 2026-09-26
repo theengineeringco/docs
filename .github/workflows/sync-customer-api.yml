@@ -9,9 +9,11 @@ on:
     paths:
       - 'scripts/sync-customer-api.py'
       - 'scripts/test_sync_customer_api.py'
+      - 'scripts/test_api_docs.py'
       - '.github/workflows/sync-customer-api.yml'
       - 'openapi/customer-api.json'
       - 'api/**'
+      - 'api.mdx'
       - 'docs.json'
 
 permissions:
@@ -45,6 +47,7 @@ jobs:
           doc = json.load(open('openapi/customer-api.json'))
           module.validate(doc)
           module.prune_components(doc)
+          module.validate_public_spec(doc)
           PY
 
   sync:

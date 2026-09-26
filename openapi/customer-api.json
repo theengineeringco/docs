@@ -1613,7 +1613,7 @@
             "type": "string"
           },
           "seedFromTemplate": {
-            "description": "Seed the new project from the tenant default-template project (data model, saved views, and dashboards). Ignored when copyFromProjectId is set. Defaults to false — an omitted flag yields a blank project.",
+            "description": "Seed the new project from the workspace default-template project (data model, saved views, and dashboards). Ignored when copyFromProjectId is set. Defaults to false — an omitted flag yields a blank project.",
             "type": "boolean"
           }
         },
@@ -5525,7 +5525,7 @@
         "operationId": "AutomationTriggerController_triggerGeneric",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -5592,7 +5592,7 @@
         "operationId": "AutomationTriggerController_triggerBranch",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -5665,7 +5665,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -5712,7 +5712,7 @@
         "operationId": "AutomationTriggerController_triggerBranchRerun",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -5785,7 +5785,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -5832,7 +5832,7 @@
         "operationId": "AutomationTriggerController_triggerGitHub",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -5908,7 +5908,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -5956,7 +5956,7 @@
         "operationId": "ConvertController_convertDrawioToTldraw",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6028,7 +6028,7 @@
         "operationId": "ConvertController_markdownToRichText",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6091,7 +6091,7 @@
         "operationId": "ConvertController_batchMarkdownToRichText",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6157,7 +6157,7 @@
         "operationId": "ConvertController_richTextToMarkdown",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6220,7 +6220,7 @@
         "operationId": "ConvertController_tldrawToXml",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6336,7 +6336,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6390,7 +6390,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6446,7 +6446,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6500,7 +6500,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6547,7 +6547,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6586,7 +6586,7 @@
         "operationId": "NotificationsController_getPreferences",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6633,7 +6633,7 @@
         "operationId": "NotificationsController_updatePreferences",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6724,7 +6724,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6802,7 +6802,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6839,7 +6839,7 @@
         "operationId": "NotificationsController_subscribe",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6920,7 +6920,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -6974,7 +6974,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7006,15 +7006,15 @@
             "bearer": []
           }
         ],
-        "summary": "List all projects for the current tenant",
+        "summary": "List all projects for the current workspace",
         "tags": [
           "Projects"
         ],
         "x-mint": {
           "href": "/api/endpoints/get-project",
           "metadata": {
-            "sidebarTitle": "List all projects for the current tenant",
-            "title": "List all projects for the current tenant"
+            "sidebarTitle": "List all projects for the current workspace",
+            "title": "List all projects for the current workspace"
           }
         }
       },
@@ -7022,7 +7022,7 @@
         "operationId": "ProjectController_create",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7087,7 +7087,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7142,7 +7142,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7188,7 +7188,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7241,7 +7241,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7302,12 +7302,12 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7359,12 +7359,12 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7426,7 +7426,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -7466,7 +7466,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7520,12 +7520,12 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7580,7 +7580,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -7593,7 +7593,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7654,7 +7654,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -7687,7 +7687,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7741,7 +7741,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -7754,7 +7754,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7805,7 +7805,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -7856,7 +7856,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7907,12 +7907,12 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -7963,12 +7963,12 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8022,7 +8022,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -8052,7 +8052,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8103,7 +8103,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -8117,7 +8117,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8166,12 +8166,12 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8223,12 +8223,12 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8302,7 +8302,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8392,7 +8392,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8461,7 +8461,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8548,7 +8548,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8622,7 +8622,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8679,7 +8679,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -8692,7 +8692,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8747,7 +8747,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -8760,7 +8760,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8814,7 +8814,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -8827,7 +8827,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8889,7 +8889,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -8902,7 +8902,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -8957,7 +8957,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -8970,7 +8970,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9021,7 +9021,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9034,7 +9034,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9089,7 +9089,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9102,7 +9102,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9163,7 +9163,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9176,7 +9176,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9227,7 +9227,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9240,7 +9240,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9284,7 +9284,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9297,7 +9297,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9358,7 +9358,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9371,7 +9371,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9422,7 +9422,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9435,7 +9435,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9489,7 +9489,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9510,7 +9510,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9554,7 +9554,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9567,7 +9567,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9621,7 +9621,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9642,7 +9642,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9687,7 +9687,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9700,7 +9700,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9762,7 +9762,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9775,7 +9775,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9826,7 +9826,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9847,7 +9847,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9891,7 +9891,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9912,7 +9912,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -9956,7 +9956,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -9969,7 +9969,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10031,7 +10031,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -10044,7 +10044,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10098,7 +10098,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -10111,7 +10111,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10172,7 +10172,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -10185,7 +10185,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10238,7 +10238,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -10251,7 +10251,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10306,7 +10306,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -10319,7 +10319,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10370,7 +10370,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -10392,7 +10392,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10441,7 +10441,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -10454,7 +10454,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10515,7 +10515,7 @@
             "name": "projectId",
             "required": true,
             "schema": {
-              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same tenant and credentials, then pass the returned id.",
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
               "type": "string"
             }
           },
@@ -10528,7 +10528,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10575,7 +10575,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10631,7 +10631,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10704,7 +10704,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10758,7 +10758,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10820,7 +10820,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -10942,7 +10942,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11023,7 +11023,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11131,7 +11131,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11193,7 +11193,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11258,7 +11258,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11326,7 +11326,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11387,7 +11387,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11455,7 +11455,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11523,7 +11523,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11591,7 +11591,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11674,7 +11674,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11745,7 +11745,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11829,7 +11829,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11904,7 +11904,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -11968,7 +11968,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12049,7 +12049,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12111,7 +12111,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12180,7 +12180,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12264,7 +12264,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12328,7 +12328,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12408,7 +12408,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12506,7 +12506,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12565,7 +12565,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12638,7 +12638,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12711,7 +12711,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12784,7 +12784,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12868,7 +12868,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12934,7 +12934,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -12999,7 +12999,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13085,7 +13085,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13178,7 +13178,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13271,7 +13271,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13374,7 +13374,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13448,7 +13448,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13532,7 +13532,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13633,7 +13633,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13701,7 +13701,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13767,7 +13767,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13833,7 +13833,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13898,7 +13898,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -13952,7 +13952,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14026,7 +14026,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14090,7 +14090,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14154,7 +14154,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14210,7 +14210,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14283,7 +14283,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14347,7 +14347,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14421,7 +14421,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14476,7 +14476,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14531,7 +14531,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14560,15 +14560,15 @@
             "bearer": []
           }
         ],
-        "summary": "Get the tenant's updated variant-view toggle",
+        "summary": "Get the workspace's updated variant-view toggle",
         "tags": [
           "Projects"
         ],
         "x-mint": {
           "href": "/api/endpoints/get-project-projectid-updated-variant-view-enabled",
           "metadata": {
-            "sidebarTitle": "Get the tenant's updated variant-view toggle",
-            "title": "Get the tenant's updated variant-view toggle"
+            "sidebarTitle": "Get the workspace's updated variant-view toggle",
+            "title": "Get the workspace's updated variant-view toggle"
           }
         }
       }
@@ -14586,7 +14586,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14639,7 +14639,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14697,7 +14697,7 @@
         "operationId": "ReqifController_parse",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14785,7 +14785,7 @@
         "operationId": "SharedGrantsController_create",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14850,7 +14850,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14908,7 +14908,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -14993,7 +14993,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15075,7 +15075,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15141,7 +15141,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15181,7 +15181,7 @@
         "operationId": "SharedGrantsController_shareView",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15238,7 +15238,7 @@
         "operationId": "UserGroupsController_findAll",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15286,7 +15286,7 @@
         "operationId": "UserGroupsController_create",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15352,7 +15352,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15398,7 +15398,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15479,7 +15479,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15537,7 +15537,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15587,7 +15587,7 @@
         "operationId": "UsersController_inviteUsersBulk",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15644,7 +15644,7 @@
         "operationId": "UsersController_inviteUsersBulkDetailed",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15701,7 +15701,7 @@
         "operationId": "UsersController_me",
         "parameters": [
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15788,7 +15788,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15857,7 +15857,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15914,7 +15914,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -15969,7 +15969,7 @@
             }
           },
           {
-            "description": "Customer/tenant identifier",
+            "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
             "required": true,
@@ -16014,7 +16014,7 @@
   },
   "servers": [
     {
-      "description": "Production",
+      "description": "Flow API",
       "url": "https://backend.branch.flowengineering.com"
     }
   ],
