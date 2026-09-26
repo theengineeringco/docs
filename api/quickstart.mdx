@@ -56,6 +56,7 @@ curl --fail-with-body --get \
   "$FLOW_API_URL/project/$PROJECT_ID/entities" \
   -H "X-API-Key: $FLOW_API_KEY" \
   -H "customer: $FLOW_CUSTOMER" \
+  --data-urlencode "starting_after=0" \
   --data-urlencode "limit=20"
 ```
 
