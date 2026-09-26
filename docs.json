@@ -12,23 +12,58 @@
     "dark": "/images/flow-logomark-white.svg"
   },
   "navigation": {
-    "groups": [
+    "tabs": [
       {
-        "group": "Release Notes",
-        "pages": [
-          "release-notes",
-          "release-notes/2026-09-22",
-          "release-notes/2026-09-21",
-          "release-notes/2026-09-18",
-          "release-notes/2026-09-11",
-          "release-notes/2026-09-04",
-          "release-notes/2026-08-28",
-          "release-notes/2026-08-21",
-          "release-notes/2026-08-14",
-          "release-notes/2026-08-07",
-          "release-notes/2026-07-31",
-          "release-notes/2026-07-24",
-          "release-notes/2026-07-17"
+        "tab": "Release notes",
+        "groups": [
+          {
+            "group": "Release Notes",
+            "pages": [
+              "release-notes",
+              "release-notes/2026-09-22",
+              "release-notes/2026-09-21",
+              "release-notes/2026-09-18",
+              "release-notes/2026-09-11",
+              "release-notes/2026-09-04",
+              "release-notes/2026-08-28",
+              "release-notes/2026-08-21",
+              "release-notes/2026-08-14",
+              "release-notes/2026-08-07",
+              "release-notes/2026-07-31",
+              "release-notes/2026-07-24",
+              "release-notes/2026-07-17"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API",
+        "groups": [
+          {
+            "group": "Quickstart",
+            "pages": [
+              "api",
+              "api/quickstart",
+              "api/authentication",
+              "api/conventions",
+              "api/reference"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "api/examples/read-entities",
+              "api/examples/batch-writes",
+              "api/examples/automations"
+            ]
+          },
+          {
+            "group": "Endpoints",
+            "openapi": {
+              "source": "/openapi/customer-api.json",
+              "directory": "api/endpoints"
+            }
+          }
         ]
       }
     ]
@@ -38,7 +73,7 @@
       "copy"
     ]
   },
-  "description": "Product releases, improvements, and API updates from Flow.",
+  "description": "Customer API documentation, authentication, and release notes from Flow.",
   "appearance": {
     "default": "system",
     "strict": false
@@ -182,5 +217,19 @@
   },
   "thumbnails": {
     "appearance": "light"
+  },
+  "api": {
+    "playground": {
+      "display": "interactive",
+      "proxy": false
+    },
+    "examples": {
+      "languages": [
+        "curl",
+        "python",
+        "javascript"
+      ],
+      "prefill": false
+    }
   }
 }

@@ -1,0 +1,108 @@
+---
+title: "Authentication"
+description: "Create a personal API key, authenticate requests, and manage access."
+---
+
+Use a personal API key for scripts and integrations. Send it in the `X-API-Key` header alongside the `customer` header containing your workspace identifier.
+
+## Create a key
+
+**Requires you to act:** Sign in to Flow and open **Settings → API & MCP**. Create the key under your own account:
+
+1. Select **Generate Key** under **Your API Keys**.
+2. Enter a name that identifies the integration, such as `requirements-sync`.
+3. Select **Generate**, then copy the key into your secret manager. Flow displays the raw key once.
+
+<div style={{border: "1px solid #d4d4d4", borderRadius: "8px", overflow: "hidden"}}>
+  <div style={{padding: "8px 12px", fontWeight: 600, fontSize: "14px"}}>Requires human intervention · Create your personal API key</div>
+  <div style={{position: "relative"}}>
+    <img src="/images/api-key-form.png" alt="Demo API settings with callouts for Generate Key, Key name, and Generate" title="human-intervention: create a personal Flow API key" style={{display: "block", width: "100%", margin: 0}} />
+    <span style={{position: "absolute", left: "68%", top: "63%", background: "#4f46e5", color: "white", borderRadius: "50%", padding: "2px 8px", fontWeight: 700}}>1</span>
+    <span style={{position: "absolute", left: "40%", top: "71%", background: "#4f46e5", color: "white", borderRadius: "50%", padding: "2px 8px", fontWeight: 700}}>2</span>
+    <span style={{position: "absolute", left: "70%", top: "77%", background: "#4f46e5", color: "white", borderRadius: "50%", padding: "2px 8px", fontWeight: 700}}>3</span>
+  </div>
+</div>
+
+The screenshot shows example settings. Use the values shown in your own account.
+
+## Workspace identifier
+
+Find the **MCP URL** in **Settings → API & MCP**. Its final path segment is your workspace identifier: for `https://backend.branch.flowengineering.com/mcp/your-workspace`, send `your-workspace` in the `customer` header. Use the identifier, not a full URL or display name.
+
+The header identifies your workspace; your API key grants access according to your account's permissions.
+
+## Authenticate requests
+
+Set the variables in the [quickstart](/api/quickstart#before-you-start) before running these examples. Python uses `requests`; JavaScript uses Node.js 22 or later with `.mjs` files.
+
+<CodeGroup>
+
+```bash cURL
+curl --fail-with-body "$FLOW_API_URL/users/me" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER"
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/users/me", headers=headers, timeout=30
+)
+response.raise_for_status()
+data = response.json()
+print(json.dumps(data, indent=2))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/users/me`);
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+console.log(JSON.stringify(data, null, 2));
+```
+
+</CodeGroup>
+
+Send the raw key, including its `brd_` prefix, in `X-API-Key`. Do not prepend `Bearer` to an API key. Send both headers on every request.
+
+The reference also shows bearer authentication for Flow access tokens. A personal API key is the supported starting point for the integrations in these guides.
+
+## Understand permissions
+
+A key uses its creator's identity and current access. It does not add permissions or bypass project access, read-only roles, or branch restrictions.
+
+Keys are long-lived. Store them as secrets, use a separate key per integration, and revoke keys that are no longer needed. External share recipients cannot create personal API keys.
+
+## Rotate or revoke a key
+
+Create a replacement key, update the integration's secret, and verify a read request with the new key. Then revoke the old key in **Your API Keys**. A workspace administrator can also revoke keys owned by other users.
+
+Revocation prevents subsequent requests using that key. A key only grants access to resources its creator can use.
+
+## Troubleshoot authentication
+
+| Response | What to check |
+| --- | --- |
+| `400` with `no customer specified` | Add the `customer` header. |
+| `400` with `invalid customer` | Use the workspace identifier rather than a full URL or display name. |
+| `401` with `Invalid API key` | Check the key, its revocation state, and the workspace identifier. |
+| `401` mentioning login setup | Sign in to Flow as the key's creator to complete account setup. |
+| `403` | Check the creator's access to the requested project and operation. |
+
+Keep keys out of source control, URLs, screenshots, and error reports. The playground sends requests directly from your browser to `https://backend.branch.flowengineering.com`.

@@ -5,3 +5,8 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# API documentation tooling
+scripts/
+__pycache__/
+AGENTS.md
