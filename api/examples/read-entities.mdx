@@ -1,0 +1,249 @@
+---
+title: "Read entities"
+description: "Find a project, discover its data model, and read entities with cursor pagination."
+---
+
+Use the `FLOW_API_URL`, `FLOW_CUSTOMER`, and `FLOW_API_KEY` variables from the quickstart. cURL examples use Bash and `jq`. Python uses `requests`; JavaScript uses Node.js 22 or later with `.mjs` files.
+
+## Find your project
+
+<CodeGroup>
+
+```bash cURL
+curl --fail-with-body --silent --show-error \
+  "$FLOW_API_URL/project" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  | jq '.[] | {id, name, slug}'
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/project", headers=headers, timeout=30
+)
+response.raise_for_status()
+data = response.json()
+for project in data:
+    print(json.dumps({key: project[key] for key in ("id", "name", "slug")}))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/project`);
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+for (const { id, name, slug } of data) console.log({ id, name, slug });
+```
+
+</CodeGroup>
+
+Set `PROJECT_ID` to the `id` of the project you want to read. The project list returns an array; project-scoped endpoints take the ID in the URL.
+
+```bash
+export PROJECT_ID="your-project-id"
+```
+
+## Discover categories and fields
+
+<CodeGroup>
+
+```bash cURL
+curl --fail-with-body --silent --show-error \
+  "$FLOW_API_URL/project/$PROJECT_ID/data-model" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  | jq '.[] | {id, name, fields}'
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/data-model", headers=headers, timeout=30
+)
+response.raise_for_status()
+data = response.json()
+for category in data:
+    print(json.dumps({key: category[key] for key in ("id", "name", "fields")}))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/data-model`);
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+for (const { id, name, fields } of data) console.log({ id, name, fields });
+```
+
+</CodeGroup>
+
+Each category contains `fields` with a `key`, `name`, and `type`. Use the category's `id` as `entity_type` when filtering entities, and use field keys to interpret their `values` map. Discover these values in the selected project before reading or writing custom fields.
+
+## Read a page
+
+<CodeGroup>
+
+```bash cURL
+curl --fail-with-body --silent --show-error --get \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  --data-urlencode "branch_id=master" \
+  --data-urlencode "starting_after=0" \
+  --data-urlencode "limit=100"
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/entities", headers=headers, timeout=30,
+    params={"branch_id": "master", "starting_after": "0", "limit": 100}
+)
+response.raise_for_status()
+data = response.json()
+print(json.dumps(data, indent=2))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities`);
+url.search = new URLSearchParams({ branch_id: "master", starting_after: "0", limit: "100" }).toString();
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+console.log(JSON.stringify(data, null, 2));
+```
+
+</CodeGroup>
+
+The response contains `items`, `nextPageStart`, and `moreAvailable`. Each item includes an entity `id` and a `values` object. For example, read its name from `values.name`.
+
+To filter by category, add the `entity_type` query parameter with a category ID from the data model. To read another branch, replace `master` with its branch ID.
+
+The entity list supports `entity_type` and `branch_id` selection. It does not expose a general field-filter expression; apply additional predicates to the returned entities in your integration.
+
+## Read all pages
+
+Each example prints one JSON object per entity. It uses a page size of 100 and reads Base. Add the same `entity_type` parameter to every request if you need a category filter.
+
+<CodeGroup>
+
+```bash cURL
+set -euo pipefail
+cursor=0
+
+while true; do
+  page=$(curl --fail-with-body --silent --show-error --get \
+    "$FLOW_API_URL/project/$PROJECT_ID/entities" \
+    -H "X-API-Key: $FLOW_API_KEY" \
+    -H "customer: $FLOW_CUSTOMER" \
+    --data-urlencode "branch_id=master" \
+    --data-urlencode "starting_after=$cursor" \
+    --data-urlencode "limit=100")
+
+  jq -c '.items[]' <<< "$page"
+  more=$(jq -r '.moreAvailable' <<< "$page")
+  [[ "$more" == "true" ]] || break
+  cursor=$(jq -er '.nextPageStart' <<< "$page")
+done
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+cursor = "0"
+while True:
+    response = requests.get(
+        f"{base_url}/project/{os.environ['PROJECT_ID']}/entities",
+        headers=headers, timeout=30,
+        params={"branch_id": "master", "starting_after": cursor, "limit": 100}
+    )
+    response.raise_for_status()
+    page = response.json()
+    for entity in page["items"]:
+        print(json.dumps(entity))
+    if not page["moreAvailable"]:
+        break
+    cursor = page["nextPageStart"]
+    if cursor is None:
+        raise ValueError("Missing nextPageStart on an incomplete page")
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+let cursor = "0";
+while (true) {
+  const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities`);
+  url.search = new URLSearchParams({
+    branch_id: "master", starting_after: cursor, limit: "100",
+  }).toString();
+  const response = await fetch(url, { headers, signal: AbortSignal.timeout(30_000) });
+  if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+  const page = await response.json();
+  for (const entity of page.items) console.log(JSON.stringify(entity));
+  if (!page.moreAvailable) break;
+  cursor = page.nextPageStart;
+  if (cursor == null) throw new Error("Missing nextPageStart on an incomplete page");
+}
+```
+
+</CodeGroup>
+
+Continue based on `moreAvailable`, even when `items` is empty. Pass `nextPageStart` unchanged; do not increment it or infer it from an entity ID.

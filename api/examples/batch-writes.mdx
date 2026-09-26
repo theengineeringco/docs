@@ -1,0 +1,192 @@
+---
+title: "Batch writes"
+description: "Create entities and set values in atomic batches scoped to one project and branch."
+---
+
+A batch applies multiple writes in one transaction. Every write in that batch succeeds together, or a transaction failure rolls them all back.
+
+These examples use the authentication variables from the [quickstart](/api/quickstart) and a `PROJECT_ID`. cURL uses Bash and `jq`; Python uses `requests`; JavaScript uses Node.js 22 or later with `.mjs` files. First [discover the project's data model](/api/examples/read-entities) and select a category ID. Set `BRANCH_ID` to a branch where you intend to make changes; the alias `master` writes directly to Base.
+
+```bash
+export CATEGORY_ID="your-category-id"
+export BRANCH_ID="your-branch-id"
+```
+
+## Create entities
+
+Each entry requires `entityType` and `name`. The server generates an entity ID when `id` is omitted. `branchId` applies to the entire batch.
+
+<CodeGroup>
+
+```bash cURL
+set -euo pipefail
+
+jq -n \
+  --arg category "$CATEGORY_ID" \
+  --arg branch "$BRANCH_ID" \
+  '{
+    branchId: $branch,
+    entities: [
+      {entityType: $category, name: "API example: operating temperature"},
+      {entityType: $category, name: "API example: storage temperature"}
+    ]
+  }' > create-entities.json
+
+curl --fail-with-body --silent --show-error \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities/batch" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  -H "Content-Type: application/json" \
+  --data-binary @create-entities.json \
+  -o created-entities.json
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+payload = {
+    "branchId": os.environ["BRANCH_ID"],
+    "entities": [
+        {"entityType": os.environ["CATEGORY_ID"], "name": "API example: operating temperature"},
+        {"entityType": os.environ["CATEGORY_ID"], "name": "API example: storage temperature"},
+    ],
+}
+
+response = requests.post(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/entities/batch", headers=headers, timeout=30,
+    json=payload
+)
+response.raise_for_status()
+data = response.json()
+with open("created-entities.json", "w") as output:
+    json.dump(data, output, indent=2)
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+import { writeFile } from "node:fs/promises";
+const payload = {
+  branchId: process.env.BRANCH_ID,
+  entities: [
+    { entityType: process.env.CATEGORY_ID, name: "API example: operating temperature" },
+    { entityType: process.env.CATEGORY_ID, name: "API example: storage temperature" },
+  ],
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities/batch`);
+const response = await fetch(url, {
+  method: "POST",
+  headers: { ...headers, "Content-Type": "application/json" },
+  body: JSON.stringify(payload),
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+await writeFile("created-entities.json", JSON.stringify(data, null, 2));
+```
+
+</CodeGroup>
+
+The response is an array of entity states in the same order as the request. Save each returned `id` for later updates. Newly created entities are assigned to the authenticated user as owner.
+
+## Set values
+
+Each update identifies an entity, a field key, and a value. The example updates the built-in `name` field on the entities just created.
+
+<CodeGroup>
+
+```bash cURL
+jq --arg branch "$BRANCH_ID" '{
+  branchId: $branch,
+  updates: [
+    {entityId: .[0].id, key: "name", value: "API example: operating range"},
+    {entityId: .[1].id, key: "name", value: "API example: storage range"}
+  ]
+}' created-entities.json > set-values.json
+
+curl --fail-with-body --silent --show-error \
+  --request PUT \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities/values/batch" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  -H "Content-Type: application/json" \
+  --data-binary @set-values.json
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+with open("created-entities.json") as source:
+    entities = json.load(source)
+payload = {
+    "branchId": os.environ["BRANCH_ID"],
+    "updates": [
+        {"entityId": entities[0]["id"], "key": "name", "value": "API example: operating range"},
+        {"entityId": entities[1]["id"], "key": "name", "value": "API example: storage range"},
+    ],
+}
+
+response = requests.put(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/entities/values/batch", headers=headers, timeout=30,
+    json=payload
+)
+response.raise_for_status()
+data = response.json()
+print(json.dumps(data, indent=2))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+import { readFile } from "node:fs/promises";
+const entities = JSON.parse(await readFile("created-entities.json", "utf8"));
+const payload = {
+  branchId: process.env.BRANCH_ID,
+  updates: [
+    { entityId: entities[0].id, key: "name", value: "API example: operating range" },
+    { entityId: entities[1].id, key: "name", value: "API example: storage range" },
+  ],
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities/values/batch`);
+const response = await fetch(url, {
+  method: "PUT",
+  headers: { ...headers, "Content-Type": "application/json" },
+  body: JSON.stringify(payload),
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+console.log(JSON.stringify(data, null, 2));
+```
+
+</CodeGroup>
+
+The response contains the current state of each touched entity once, in first-touched order. To update custom fields, use their `fields[].key` and a value matching the field type returned by the data model. Tag options expose names; stage options also expose stable IDs.
+
+## Handle a failed batch
+
+The create batch and the value batch above are separate transactions. If the second transaction fails, the entities created by the first request still exist. Correct the failed value request and retry that step after confirming current state.
+
+Both `entities` and `updates` must contain at least one entry. Send only writes for one project and one branch in each request.
+
+A transaction failure rolls back that transaction's writes. A network timeout or an error while returning the response does not prove rollback: the write could already have committed. Read the affected entities on the same branch before retrying. Do not automatically repeat a create request with server-generated IDs.

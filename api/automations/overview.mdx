@@ -1,0 +1,38 @@
+---
+title: "Automation overview"
+sidebarTitle: "Overview"
+description: "Connect events to automation runs and choose the right trigger."
+---
+
+An automation combines instructions with a trigger. Configure it in Flow, send an event, and use the API to track the resulting runs.
+
+## Choose a trigger
+
+| Trigger | Use it for |
+| --- | --- |
+| Custom webhook | Events from your own tools, identified by a webhook name. |
+| API endpoint | Automations configured with the `endpoint` source. |
+| Connected app | Events from an app connected to Flow, such as GitHub or Slack. |
+| Branch review | Checks and actions associated with a Flow branch review. |
+
+Integrations connect external apps to Flow. Automations define the work Flow runs when an event arrives.
+
+## Set up and run
+
+1. [Set up a webhook automation](/api/automations/webhooks): configure its instructions and name, then send a JSON event.
+2. [Trigger and poll automations](/api/examples/automations): start runs asynchronously, store their IDs, and read the results.
+3. Use the [endpoint reference](/api/reference) for complete request and response schemas.
+
+A trigger request matches automations by source. One request can start multiple runs. Include `project_id` to target the intended project, and track each returned `agent_id` separately.
+
+## Automation endpoints
+
+All automation endpoints remain in **Endpoints**. These guides explain how to use them together.
+
+- [Trigger from any source](/api/endpoints/post-ai-trigger)
+- [Trigger from GitHub](/api/endpoints/post-ai-trigger-github)
+- [Poll automation runs](/api/endpoints/get-ai-trigger-runs)
+- [Trigger branch-review automations](/api/endpoints/post-ai-trigger-branch)
+- [Re-run branch-review automations](/api/endpoints/post-ai-trigger-branch-rerun)
+- [Get branch checks](/api/endpoints/get-ai-trigger-branch-checks)
+- [Get branch automation status](/api/endpoints/get-ai-trigger-branch-status)

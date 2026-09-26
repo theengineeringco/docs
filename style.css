@@ -5,3 +5,143 @@ a[href*="utm_campaign=poweredBy"] {
 img[alt="Pulsar Orbiting Earth 2 1 2"] {
   border-radius: 8px;
 }
+
+img[alt="Abstract sunset in warm orange and purple"] {
+  border-radius: 8px;
+}
+
+/* Give guides and request examples more room while retaining mobile sizing. */
+@media (min-width: 1024px) {
+  #content-area {
+    max-width: 55rem;
+  }
+}
+
+/* Dock the native section tabs below Maple's desktop sidebar.
+   Mobile keeps Mintlify's built-in tab/menu navigation. */
+@media (min-width: 1024px) {
+  #sidebar {
+    bottom: 7.5rem;
+  }
+
+  /* Remove Maple's empty footer above the section links. */
+  #sidebar > ul:not(:has(a, button)) {
+    display: none;
+  }
+
+  #navbar-transition-maple {
+    inset: auto auto 0 0 !important;
+    width: 19rem;
+    height: 7.5rem;
+    margin-top: 0 !important;
+    padding: 1rem;
+    border-top: 1px solid #e5e5e3;
+    border-right: 1px solid #e5e5e3;
+    border-bottom: 0;
+    background: #fdfdfb !important;
+    backdrop-filter: none;
+  }
+
+  #navbar-transition-maple .nav-tabs {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  #navbar-transition-maple .nav-tabs-item {
+    min-height: 2.5rem;
+    padding: 0 0.75rem;
+    color: #737373;
+    background: transparent;
+    text-shadow: none;
+  }
+
+  #navbar-transition-maple .nav-tabs-item:hover,
+  #navbar-transition-maple .nav-tabs-item[data-active="true"] {
+    color: #161513;
+  }
+
+  #navbar-transition-maple .nav-tabs-item > div.absolute {
+    display: none;
+  }
+
+  .dark #navbar-transition-maple {
+    border-color: #ffffff12;
+    background: #161513 !important;
+  }
+
+  .dark #navbar-transition-maple .nav-tabs-item {
+    color: #a3a3a3;
+  }
+
+  .dark #navbar-transition-maple .nav-tabs-item:hover,
+  .dark #navbar-transition-maple .nav-tabs-item[data-active="true"] {
+    color: #fdfdfb;
+  }
+}
+
+/* A solid header sits outside the navigation's scrollable region. */
+@media (min-width: 1024px) {
+  #sidebar-content {
+    --sidebar-surface: #fdfdfb;
+    --sidebar-divider: #e5e5e3;
+    --sidebar-header-height: 136px;
+    background: var(--sidebar-surface);
+  }
+
+  .dark #sidebar-content {
+    --sidebar-surface: #161513;
+    --sidebar-divider: #ffffff12;
+  }
+
+  #sidebar-content [data-component-part="scroll-area-viewport"] {
+    margin-top: var(--sidebar-header-height);
+    height: calc(100% - var(--sidebar-header-height));
+    padding-top: 0;
+    scroll-padding-block: 24px;
+  }
+
+  #sidebar-content [data-component-part="scroll-area-content"] > :first-child,
+  #sidebar-content [data-component-part="scroll-area-content"] > :has(#search-bar-entry) {
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    z-index: 20;
+    margin-top: 0;
+    background: var(--sidebar-surface);
+  }
+
+  #sidebar-content [data-component-part="scroll-area-content"] > :first-child {
+    top: 24px;
+  }
+
+  #sidebar-content [data-component-part="scroll-area-content"] > :has(#search-bar-entry) {
+    top: 76px;
+  }
+
+  #sidebar-content > [data-component-part="scroll-area-scrollbar"] {
+    top: var(--sidebar-header-height) !important;
+  }
+
+  #sidebar-content::before,
+  #sidebar-content::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 24px;
+    z-index: 22;
+    pointer-events: none;
+  }
+
+  #sidebar-content::before {
+    top: var(--sidebar-header-height);
+    border-top: 1px solid var(--sidebar-divider);
+    background: linear-gradient(to bottom, var(--sidebar-surface), transparent);
+  }
+
+  #sidebar-content::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--sidebar-surface), transparent);
+  }
+}
