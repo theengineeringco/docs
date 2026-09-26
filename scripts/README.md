@@ -11,7 +11,7 @@ python3 scripts/sync-customer-api.py
 
 The sync requires Python 3.10+ and uses only the standard library. It writes `openapi/customer-api.json` when a candidate differs and writes a machine-readable report to `/tmp/customer-api-sync-report.json`. `--report` and `--output` override those locations. Only use `--initialize` when deliberately creating the first snapshot.
 
-The checked-in snapshot includes customer endpoints, removes `/pylon-identity/token` (support-widget identity), prunes unreachable components, merges Branch/Branches, renames the ai reference group Automations, and supplies production/RVT/Rivian servers for the playground. The authored quickstart and authentication pages replace the Swagger overview's shorthand routes and embedded changelog. Endpoint and schema descriptions are preserved.
+The checked-in snapshot includes customer endpoints, removes `/pylon-identity/token` (support-widget identity), prunes unreachable components, merges Branch/Branches, renames the ai reference group Automations, and supplies only the standard Production server for the playground. All three deployments remain comparison sources; their server overrides are removed so nightly updates cannot reintroduce the selector. The authored quickstart and authentication pages replace the Swagger overview's shorthand routes and embedded changelog. Endpoint and schema descriptions are preserved.
 
 ## Nightly behavior
 

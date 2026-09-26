@@ -5,3 +5,14 @@ a[href*="utm_campaign=poweredBy"] {
 img[alt="Pulsar Orbiting Earth 2 1 2"] {
   border-radius: 8px;
 }
+
+img[src="/images/api-aviation.png"] {
+  border-radius: 8px;
+}
+
+/* Give guides and request examples more room while retaining mobile sizing. */
+@media (min-width: 1024px) {
+  #content-area {
+    max-width: 55rem;
+  }
+}

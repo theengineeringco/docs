@@ -16016,14 +16016,6 @@
     {
       "description": "Production",
       "url": "https://backend.branch.flowengineering.com"
-    },
-    {
-      "description": "RVT",
-      "url": "https://backend.rvtech.branch.flowengineering.com"
-    },
-    {
-      "description": "Rivian",
-      "url": "https://backend.rivian.branch.flowengineering.com"
     }
   ],
   "tags": [

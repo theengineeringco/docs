@@ -164,7 +164,8 @@ def prepare(spec):
         if tag["name"] in used_tags:
             tags[tag["name"]] = tag
     spec["tags"] = [tags.get(name, {"name": name}) for name in sorted(used_tags)]
-    spec["servers"] = [{"url": url, "description": name} for name, url in SOURCES.items()]
+    # Compare every deployment, but expose only the standard production host.
+    spec["servers"] = [{"url": SOURCES["Production"], "description": "Production"}]
     # Replace Swagger's shorthand routes and embedded changelog with the
     # maintained API-only guides. Endpoint and schema descriptions are retained.
     spec["info"]["description"] = (
