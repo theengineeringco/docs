@@ -42,6 +42,14 @@
             ]
           },
           {
+            "group": "Flow MCP",
+            "pages": [
+              "api/mcp/overview",
+              "api/mcp/connect",
+              "api/mcp/tools"
+            ]
+          },
+          {
             "group": "Endpoints",
             "openapi": {
               "source": "/openapi/customer-api.json",

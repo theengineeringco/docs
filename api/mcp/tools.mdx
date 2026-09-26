@@ -1,0 +1,62 @@
+---
+title: "Use Flow tools"
+description: "Discover tools, make your first read, and control writes to Flow."
+---
+
+## Start with a read
+
+After [connecting your client](/api/mcp/connect), ask it to list your projects and inspect one before making changes:
+
+```text
+Use the Flow MCP tools to list my projects. Ask me to choose a project,
+then show its entity categories and fields. Do not change any data.
+```
+
+The connected user must have access to the project. Use the returned project ID for subsequent calls.
+
+## Give the client a clear scope
+
+Name the project, branch, and requested outcome. For example:
+
+```text
+In the project I selected, read the first 20 requirements on Base.
+Show their IDs and names. Do not modify them.
+```
+
+For writes, specify the target branch and ask for a proposed change first:
+
+```text
+In the project and working branch I selected, find requirements without
+an owner. Propose the updates and wait for my approval before writing.
+```
+
+Client approval settings determine when you are prompted. A prompt asking for approval does not enforce a read-only connection; Flow permissions remain the access boundary.
+
+Use a test project and working branch when trying write tools. Branch identifiers and aliases follow the [API conventions](/api/conventions).
+
+## Discover tools and inputs
+
+Ask your client to list available Flow tools. Tool names begin with `flow_`; their input schemas describe the required arguments.
+
+Tools group request inputs into `path`, `query`, and `body` where the operation needs them. Use the schema returned by the server. Authentication and the workspace are supplied by the connection, not by your prompt.
+
+The [endpoint reference](/api/reference) explains the underlying operation. For common workflows, see [Read entities](/api/examples/read-entities), [Batch writes](/api/examples/batch-writes), and [Trigger and poll automations](/api/examples/automations).
+
+## Inspect reference resources
+
+Clients that support MCP resources can read:
+
+| Resource | Contents |
+| --- | --- |
+| `flow://customer-api/openapi` | The customer API's OpenAPI specification. |
+| `flow://customer-api/tool-index` | Tool names mapped to HTTP methods, paths, and summaries. |
+
+Refresh the client's tools after an API update. Avoid hard-coding a tool name without checking the current tool list.
+
+## Handle results and errors
+
+Tool results include the API response body and HTTP status. A failed API request is reported as a tool error.
+
+Correct invalid inputs before retrying. For a permission error, check the connected user's access. If a write times out, read the affected data before repeating it: a timeout does not prove the write failed.
+
+Long-running automations require a separate call to retrieve their result. Follow [Trigger and poll automations](/api/examples/automations) for run identifiers and polling behavior.
