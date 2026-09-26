@@ -1,0 +1,172 @@
+name: Sync deployed customer API docs
+
+on:
+  schedule:
+    # Daily at 10:00 UTC (03:00 PDT / 02:00 PST).
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/sync-customer-api.py'
+      - 'scripts/test_sync_customer_api.py'
+      - '.github/workflows/sync-customer-api.yml'
+      - 'openapi/customer-api.json'
+      - 'api/**'
+      - 'docs.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: customer-api-docs-${{ github.event_name == 'pull_request' && github.ref || 'nightly' }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate Mintlify pages and OpenAPI rendering
+        run: npx --yes mint@4.2.939 validate
+      - run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
+      - name: Validate committed snapshot references
+        run: |
+          python3 - <<'PY'
+          import importlib.util, json
+          spec = importlib.util.spec_from_file_location('sync_api', 'scripts/sync-customer-api.py')
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          doc = json.load(open('openapi/customer-api.json'))
+          module.validate(doc)
+          module.prune_components(doc)
+          PY
+
+  sync:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+      REVIEW_BRANCH: automation/customer-api-review
+      REPORT_PATH: /tmp/customer-api-sync-report.json
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch and compare all deployed Swagger documents
+        id: snapshot
+        run: python3 scripts/sync-customer-api.py --report "$REPORT_PATH"
+      - name: Validate candidate reference with Mintlify
+        if: steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'review'
+        run: npx --yes mint@4.2.939 validate
+      - name: Summarize deployed changes
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          path = Path(os.environ['REPORT_PATH'])
+          report = json.loads(path.read_text()) if path.exists() else {'status': 'failed', 'changes': ['The sync did not produce a report.']}
+          body = ['<!-- customer-api-docs-sync -->', '# Deployed customer API documentation', '', 'Status: **' + report['status'] + '**', '', '[Workflow run](' + os.environ['RUN_URL'] + ')', '', 'Only public customer OpenAPI documents were fetched. No customer application data was accessed.', '']
+          body += ['- ' + change for change in report.get('changes', [])]
+          body += ['', '## Source contract hashes', '']
+          body += ['- ' + name + ': `' + value + '`' for name, value in report.get('hashes', {}).items()]
+          body += ['', 'Structural changes require review of authentication, examples, and migration guidance before merging. Compatible reference changes can publish automatically.']
+          text = '\n'.join(body) + '\n'
+          Path('/tmp/customer-api-sync-body.md').write_text(text)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as output:
+              output.write(text)
+          PY
+      - name: Publish compatible reference updates
+        if: steps.snapshot.outputs.status == 'compatible'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- openapi/customer-api.json
+          git commit -m 'docs(api): sync deployed customer API reference'
+          # A concurrent default-branch edit or branch protection fails closed.
+          git push origin "HEAD:$DEFAULT_BRANCH"
+      - name: Open or update a structural-change review
+        if: steps.snapshot.outputs.status == 'review'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          remote_sha=$(git ls-remote --heads origin "refs/heads/$REVIEW_BRANCH" | cut -f1)
+          number=$(gh pr list --head "$REVIEW_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$remote_sha" ]; then
+            git fetch origin "$REVIEW_BRANCH"
+            if git log "origin/$DEFAULT_BRANCH..$remote_sha" --format=%ae | grep -v '^41898282+github-actions\[bot\]@users\.noreply\.github\.com$' > /dev/null; then
+              echo 'The review branch contains human amendments. Retaining them and requiring manual attention.' >&2
+              exit 1
+            fi
+          fi
+          if [ -n "$remote_sha" ] && [ -n "$number" ]; then
+            if git show "$remote_sha:openapi/customer-api.json" | cmp -s - openapi/customer-api.json; then
+              echo "The open review already contains this deployed contract."
+              exit 0
+            fi
+          fi
+          git checkout -b "$REVIEW_BRANCH"
+          git add -- openapi/customer-api.json
+          git commit -m 'docs(api): review deployed customer API changes'
+          # This is a dedicated automation branch. Lease protects concurrent edits.
+          git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$remote_sha" origin "HEAD:$REVIEW_BRANCH"
+          number=$(gh pr list --head "$REVIEW_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number // empty')
+          if ! gh label list --limit 1000 --json name --jq '.[].name' | grep -x preview > /dev/null; then
+            gh label create preview --description 'Deploy a documentation preview' --color 0E8A16
+          fi
+          if [ -n "$number" ]; then
+            gh pr edit "$number" --title 'docs(api): review deployed customer API changes' --body-file /tmp/customer-api-sync-body.md --add-label preview
+          else
+            gh pr create --base "$DEFAULT_BRANCH" --head "$REVIEW_BRANCH" --title 'docs(api): review deployed customer API changes' --body-file /tmp/customer-api-sync-body.md --label preview
+          fi
+      - name: Close an outdated structural-change proposal
+        if: steps.snapshot.outputs.status == 'unchanged' || steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'divergent'
+        run: |
+          number=$(gh pr list --head "$REVIEW_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$number" ]; then
+            gh pr close "$number" --comment "The latest nightly check supersedes this candidate. See $RUN_URL for the current deployed contract state."
+          fi
+      - name: Report divergence or failure without changing the published reference
+        if: always() && (failure() || steps.snapshot.outputs.status == 'divergent')
+        run: |
+          # Update one issue, so unchanged failures do not produce nightly duplicates.
+          title='Customer API documentation sync needs attention'
+          number=$(gh issue list --state open --search '"Customer API documentation sync needs attention" in:title' --json number,title --jq '.[] | select(.title == "Customer API documentation sync needs attention") | .number' | head -n 1)
+          if [ ! -f /tmp/customer-api-sync-body.md ]; then
+            printf 'The API documentation sync failed. Review %s.\n' "$RUN_URL" > /tmp/customer-api-sync-body.md
+          else
+            printf '\nA workflow step failed or environments diverged. Review %s for details.\n' "$RUN_URL" >> /tmp/customer-api-sync-body.md
+          fi
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --body-file /tmp/customer-api-sync-body.md
+          else
+            gh issue create --title "$title" --body-file /tmp/customer-api-sync-body.md
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: customer-api-sync-report
+          path: /tmp/customer-api-sync-report.json
+          retention-days: 30

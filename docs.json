@@ -61,6 +61,13 @@
             "pages": [
               "api/reference"
             ]
+          },
+          {
+            "group": "Endpoints",
+            "openapi": {
+              "source": "/openapi/customer-api.json",
+              "directory": "api/endpoints"
+            }
           }
         ]
       }
