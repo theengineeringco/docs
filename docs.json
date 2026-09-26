@@ -34,7 +34,11 @@
               "release-notes/2026-07-17"
             ]
           }
-        ]
+        ],
+        "icon": {
+          "name": "notebook-text",
+          "library": "lucide"
+        }
       },
       {
         "tab": "API",
@@ -71,7 +75,11 @@
               "directory": "api/endpoints"
             }
           }
-        ]
+        ],
+        "icon": {
+          "name": "square-terminal",
+          "library": "lucide"
+        }
       }
     ]
   },
