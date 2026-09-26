@@ -91,8 +91,8 @@ A short Release Notes edition is acceptable when little shipped. Significance ma
 ## Customer API documentation
 
 - The API tab is separate from Release Notes. Keep the existing release-note URLs and content intact; link to that changelog from API pages.
-- API pages cover authentication, request conventions, endpoint reference, and integration examples only. Product tutorials belong in the product documentation.
-- Keep the API sidebar sections exactly **Quickstart**, **Integrations**, and **Endpoints**.
+- API pages cover authentication, request conventions, endpoint reference, API examples, and automation setup and trigger guides. Product tutorials belong in the product documentation.
+- Keep the API sidebar sections exactly **Quickstart**, **Examples**, **Automations**, and **Endpoints**. Reserve Integrations for external apps connected to Flow. Keep every generated automation endpoint under Endpoints; Automations contains guides only.
 - Customer API pages, navigation, metadata, and generated reference must not introduce tenant/environment terminology or deployment names. Describe the required `customer` header as a workspace identifier; preserve its wire name, required status, and authentication behavior. Remove deployment-selection instructions from public API guides. Apply this rule to every future edit and sync.
 - Every authored cURL code block must have equivalent **Python** and **JavaScript** options in a `CodeGroup`, with matching parameters, headers, payloads, and pagination. Keep all three languages enabled for generated endpoint examples. Validate these requirements with `scripts/test_api_docs.py`.
 - Use the customer Swagger documents from the three explicitly supported commercial environments. Never fetch application data or GovCloud data for documentation synchronization.
