@@ -50,10 +50,16 @@
             ]
           },
           {
-            "group": "Integrations",
+            "group": "Examples",
             "pages": [
               "api/examples/read-entities",
-              "api/examples/batch-writes",
+              "api/examples/batch-writes"
+            ]
+          },
+          {
+            "group": "Automations",
+            "pages": [
+              "api/automations/overview",
               "api/examples/automations"
             ]
           },
