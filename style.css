@@ -16,3 +16,55 @@ img[alt="Abstract sunset in warm orange and purple"] {
     max-width: 55rem;
   }
 }
+
+/* Dock the native section tabs below Maple's desktop sidebar.
+   Mobile keeps Mintlify's built-in tab/menu navigation. */
+@media (min-width: 1024px) {
+  #sidebar {
+    bottom: 7rem;
+  }
+
+  #navbar-transition-maple {
+    inset: auto auto 0 0 !important;
+    width: 19rem;
+    height: 7rem;
+    margin-top: 0 !important;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #e5e5e3;
+    border-right: 1px solid #e5e5e3;
+    border-bottom: 0;
+    background: #fdfdfb !important;
+    backdrop-filter: none;
+  }
+
+  #navbar-transition-maple .nav-tabs {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  #navbar-transition-maple .nav-tabs-item {
+    min-height: 2.5rem;
+    padding: 0 0.75rem;
+    border-radius: 0.5rem;
+  }
+
+  #navbar-transition-maple .nav-tabs-item:hover,
+  #navbar-transition-maple .nav-tabs-item[data-active="true"] {
+    background: #efefed;
+  }
+
+  #navbar-transition-maple .nav-tabs-item > div.absolute {
+    display: none;
+  }
+
+  .dark #navbar-transition-maple {
+    border-color: #ffffff12;
+    background: #161513 !important;
+  }
+
+  .dark #navbar-transition-maple .nav-tabs-item:hover,
+  .dark #navbar-transition-maple .nav-tabs-item[data-active="true"] {
+    background: #ffffff0d;
+  }
+}
