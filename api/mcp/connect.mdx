@@ -1,0 +1,104 @@
+---
+title: "Connect a client"
+description: "Set up Flow MCP with an API key or Flow sign-in."
+---
+
+## Get your connection details
+
+**Requires you to act:** Open **Settings → API & MCP** in Flow and copy the **MCP URL**. For API-key setup, [create a personal API key](/api/authentication#create-a-key) from the same workspace.
+
+The URL has this shape:
+
+```text
+https://backend.branch.flowengineering.com/mcp/your-workspace
+```
+
+Use the complete URL copied from Flow. Keep the key out of prompts, source control, and shared configuration files.
+
+For the terminal examples, set the copied URL and enter the key without echoing it. Run these commands in Bash:
+
+```bash
+export FLOW_MCP_URL="https://backend.branch.flowengineering.com/mcp/your-workspace"
+read -r -s -p "Flow API key: " FLOW_API_KEY
+export FLOW_API_KEY
+printf '\n'
+```
+
+In zsh, replace the `read` line with `read -r -s 'FLOW_API_KEY?Flow API key: '`.
+
+## Claude Code
+
+Add Flow to your user-level configuration:
+
+```bash
+claude mcp add --transport http --scope user flow "$FLOW_MCP_URL" \
+  --header "X-API-Key: $FLOW_API_KEY" \
+  --header "User-Agent: claude-code"
+```
+
+This command stores the expanded URL and headers locally for your user. Update the stored key when you rotate it.
+
+Start Claude Code and open `/mcp` to check the connection. See the [Claude Code MCP documentation](https://code.claude.com/docs/en/mcp) for client configuration options.
+
+## Codex
+
+Add this block to your user-level `~/.codex/config.toml`, replacing the URL with the one copied from Flow. If a `flow` block already exists, update it:
+
+```toml
+[mcp_servers.flow]
+url = "https://backend.branch.flowengineering.com/mcp/your-workspace"
+env_http_headers = { "X-API-Key" = "FLOW_API_KEY" }
+http_headers = { "User-Agent" = "codex" }
+```
+
+Launch `codex` from the terminal where you exported `FLOW_API_KEY`. The process must have access to that variable each time it starts. After rotating the key, load the replacement value and restart Codex.
+
+See the [Codex MCP documentation](https://developers.openai.com/codex/mcp) for configuration options.
+
+## Flow sign-in
+
+Supported clients such as Claude and ChatGPT can connect through OAuth instead of a manually configured API key.
+
+1. Add a remote MCP server or custom connector in your client.
+2. Paste the **MCP URL** copied from Flow and select **OAuth** when prompted.
+3. Leave optional client ID and client secret fields blank.
+4. **Requires you to act:** Sign in on the Flow page that opens, then approve the connection for your workspace.
+
+Approval creates a key named `MCP connection (<client>)`. To disconnect, revoke that key in **Settings → API & MCP → Your API Keys**.
+
+If your client does not offer a custom MCP connection, check its account and administrator settings. Clients that support custom HTTP headers can use API-key authentication.
+
+## Other MCP clients
+
+Choose **Streamable HTTP** and use the copied MCP URL. Configure these headers, substituting your key:
+
+```http
+X-API-Key: brd_your_api_key
+User-Agent: flow-mcp-client
+```
+
+For clients that only accept a bearer token, Flow MCP also accepts `Authorization: Bearer brd_your_api_key`. Configure one authentication method. This bearer-key option applies to MCP; direct REST requests use the [API authentication headers](/api/authentication#authenticate-requests).
+
+Your MCP client handles protocol initialization and message exchange. The workspace is included in the MCP URL, so you do not add a separate `customer` header.
+
+## Verify access
+
+Ask your client:
+
+```text
+List my Flow projects using the Flow MCP tools. Do not change any data.
+```
+
+The response should list projects accessible to the connected Flow user. Continue with [Use Flow tools](/api/mcp/tools).
+
+## Troubleshoot a connection
+
+| Symptom | What to check |
+| --- | --- |
+| Flow tools do not appear | Confirm the server is enabled in your client, then restart the session or refresh its tools. |
+| `401` or authentication required | Check the full API key, its revocation state, and the configured header. For Codex, confirm the process receives `FLOW_API_KEY`. |
+| `403` while connecting | Confirm your client sends both authentication and a `User-Agent` header. Check your account's workspace access. |
+| `403` on a tool call | Check the connected user's project access, role, and branch permissions. |
+| Projects are missing | Copy the MCP URL from the intended workspace and authenticate with a user who can access those projects. |
+| `Invalid OAuth authorization request` | Remove manually entered client credentials, recreate the connection, and retry Flow sign-in. |
+| Sign-in still fails | Use API-key setup in a compatible client, or contact Flow support with the error and client name. Omit keys and tokens. |

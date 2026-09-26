@@ -1,0 +1,32 @@
+---
+title: "Flow MCP"
+sidebarTitle: "Overview"
+description: "Connect AI clients to your systems graph through the Model Context Protocol."
+---
+
+Flow MCP lets an AI client read and update your Flow workspace through the Model Context Protocol (MCP). Use it to explore projects, inspect requirements and relationships, or make changes through a conversation.
+
+Your client connects to Flow's hosted MCP server over Streamable HTTP. You do not need to run a server locally.
+
+## What you can do
+
+- Find accessible projects and read their data models.
+- Read entities, field values, relationships, and comments.
+- Create or update project data using the available write tools.
+- Start automations and retrieve their results.
+
+Flow MCP exposes customer API operations as tools. The [endpoint reference](/api/reference) describes the underlying requests and responses; the connected client's tool list supplies the current tool names and inputs.
+
+## Connect your client
+
+Copy the **MCP URL** from **Settings → API & MCP** in Flow. This URL already identifies your workspace.
+
+[Connect a client](/api/mcp/connect) covers API-key setup for Claude Code and Codex, Flow sign-in for supported clients, and connection troubleshooting. Then [use Flow tools](/api/mcp/tools) to verify access and work with project data.
+
+## Permissions and changes
+
+Every tool call uses the connected Flow user's permissions. An API key acts as its creator; a connection approved through Flow sign-in acts as the person who approved it. Project access, read-only roles, and branch restrictions still apply.
+
+Write tools change live data. Start with a read request, name the project and branch explicitly, and review proposed changes before approving a write in your client.
+
+Manage or revoke connection keys in **Settings → API & MCP → Your API Keys**. See [Authentication](/api/authentication#rotate-or-revoke-a-key) for key rotation and revocation.
