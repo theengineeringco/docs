@@ -1,0 +1,127 @@
+---
+title: "September 25, 2026"
+sidebarTitle: "September 25, 2026"
+description: "Weekly release: a redesigned app shell, complete long-document imports, Boltline reads and write-back, pages for restoring deleted items and branches, reviews and comparisons for external recipients, email MFA, Onshape Enterprise, and multi-branch scheduled automations."
+---
+
+## Contents
+
+- [Redesigned app shell and dark mode](#redesigned-app-shell-and-dark-mode)
+- [The assistant imports every page of a long document](#the-assistant-imports-every-page-of-a-long-document)
+- [Boltline BOM reads and work plan write-back](#boltline-bom-reads-and-work-plan-write-back)
+- [Restore deleted items and branches from a page](#restore-deleted-items-and-branches-from-a-page)
+- [Viewers and external recipients can submit reviews](#viewers-and-external-recipients-can-submit-reviews)
+- [External collaborators can compare shared branches](#external-collaborators-can-compare-shared-branches)
+- [Email MFA for password sign-in](#email-mfa-for-password-sign-in)
+- [Onshape Enterprise connections](#onshape-enterprise-connections)
+- [Reviewer removal for every organization](#reviewer-removal-for-every-organization)
+- [Scheduled automations on several branches](#scheduled-automations-on-several-branches)
+- [External recipients can filter shared views](#external-recipients-can-filter-shared-views)
+- [Share a view from anywhere](#share-a-view-from-anywhere)
+- [Find in view matches the search bar](#find-in-view-matches-the-search-bar)
+- [The agent knows which entity you were looking at](#the-agent-knows-which-entity-you-were-looking-at)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+
+## Redesigned app shell and dark mode
+
+The page, the AI chat, and the item details panel are now separate rounded panels on a shared background, with the navigation sidebar on that same background. Settings uses the same layout. The details panel floats over the page instead of narrowing it, so tables, trees, and the Reader keep their full width.
+
+Drag handles sit in the gap between panels, so they are easier to grab. Dark mode has a cooler, clearer hierarchy with a coordinated indigo cast, and light mode picks up a slightly quieter neutral shell.
+
+## The assistant imports every page of a long document
+
+Large PDFs no longer lose most of their requirements, tests, and links when imported with the assistant. The assistant receives the document in page-by-page batches, starts writing while later pages are still being read, and continues until every page is imported.
+
+A document being read shows why it is waiting when another import is ahead of it, and has a **Stop reading** button. Long tasks like these also no longer stop with "This conversation is too large."
+
+## Boltline BOM reads and work plan write-back
+
+Ask the agent for the engineering BOM below a part revision, the as-built tree below a serial number, or the operations and steps of a work plan, and it reads them from Boltline. Tree results say when a depth or size limit stopped the read.
+
+Turn on **Boltline write-back** on the integration page (an API key with write permission is required) and the agent can create work plan templates or add operations to a new draft version of a published template. New plans stay drafts unless you ask the agent to publish. Writes go to Boltline immediately and aren't undone by discarding a branch.
+
+## Restore deleted items and branches from a page
+
+The branch menu's **Deleted items** now opens a full page listing each item's name, ID, description, owner, and who deleted it and when. Select several items to restore them together, or restore one from its row. A deleted item's details panel is read-only, with a banner and a **Restore** button. You can also ask the AI assistant what was deleted on a branch.
+
+A new **Deleted branches** page lists branches deleted after this update, merged or discarded, with search and bulk restore. Restoring brings a branch back with its changes, along with any deleted parent branches it depends on. Long-term retention of deleted branches is not guaranteed.
+
+## Viewers and external recipients can submit reviews
+
+Read-only workspace members can approve or request changes, and later update or clear their decision. Recipients of a share grant can open a review for a branch the grant covers, discuss it, and approve or request changes. Changed items and diffs stay limited to what the grant reaches.
+
+## External collaborators can compare shared branches
+
+External collaborators can compare the current states of shared branches and compare individual items from Details. Only items and fields they can access on both sides appear. Baseline comparisons remain unavailable to external collaborators.
+
+## Email MFA for password sign-in
+
+Organization administrators can require an emailed verification code after email and password sign-in. SSO sign-in is unchanged. Email delivery must be configured before you enable the setting.
+
+## Onshape Enterprise connections
+
+Workspace administrators can connect Flow to their organization's Onshape Enterprise host as well as standard Onshape. All CAD, automation, and AI activity for the workspace uses the saved host.
+
+## Reviewer removal for every organization
+
+**Organization → Reviews** now always shows **Allow reviewer removal**. When on, admins and parent branch owners can remove field, stage, and required reviewers, including reviewer groups, from a review. It is off by default, and organizations that already turned it on keep it on.
+
+## Scheduled automations on several branches
+
+A schedule's branch picker now lets you pick more than one branch, and each scheduled run starts once on every selected branch. A schedule with no branch selected runs on Base.
+
+Routines are now part of the Automations page, and old Routines links open it. Each automation has a **Run** button, and **View runs** opens its Activity. On a review, the Overview's Automations section offers **Run automation** and **Re-run all**.
+
+## External recipients can filter shared views
+
+Anyone a view is shared with can add, change, and keep filters on it, with the match count shown beside the filter. Filters only read rows the recipient can already see.
+
+## Share a view from anywhere
+
+The Share dialog puts invitees first and lets you pick the exact item, branch, and saved view destination. Share is also available from table-row and details-panel item menus.
+
+## Find in view matches the search bar
+
+Find in view now matches rows by any value global search would find, including text fields, numbers, dates, URLs, and IDs. Results arrive sooner, including inside large focused folders.
+
+## The agent knows which entity you were looking at
+
+When you send a chat message with an entity open in the details panel, that entity travels with the message. Questions like "why is this stuck?" resolve to the open entity instead of the agent asking which one you mean.
+
+## Fixes
+
+- **Assistant questions.** During a multi-step task, a question the assistant can't answer on its own ends its turn and waits for your reply, instead of repeated "still waiting" messages.
+- **Assistant follows your branch.** Switching to or creating a branch moves the open chat onto it, and the next message runs there.
+- **Assistant tool reuse.** A tool the assistant already used earlier in a chat now works the first time on later turns.
+- **Stopping an AI reply.** **Stop** keeps the half-written reply and tool results in the chat with a **Stopped** marker, and the conversation continues from there.
+- **Stopping a document read.** Stopping the assistant while it reads a document stops the read itself. Pages already read are kept.
+- **AI chat names.** A new conversation's name stays put when the reply finishes, instead of reverting to "Chat."
+- **Assistant entity counts.** Counting items shows the per-type and per-value breakdown again.
+- **AI conversation summaries.** Long conversations retain more detail when compacted, and existing context is preserved if summarization can't finish.
+- **Notion rate limits.** Reading Notion pages, including from scheduled automations, retries only a few times before reporting a rate limit, so one busy run no longer keeps the workspace rate limited.
+- **New workspaces.** Deleted sample branches and their history no longer appear when a workspace is provisioned from a template.
+- **Viewer access.** Read-only members can open Onshape and PDF previews, export CSV, JSON, and ReqIF files, connect their own Google, AoDocs, and Jira accounts, and use server-side filtering instead of seeing access errors.
+- **Inline field editing.** **Start a formula** and **Describe a formula in natural language** stay visible below a long option list.
+- **Item creation in filtered views.** Creating from a selected folder fills its upstream link, and new items refresh filtered results immediately.
+- **Table row reordering.** Dragging a row through a long expanded table no longer leaves Flow stuck in drag mode.
+- **Diagram swimlanes.** Dragging a title bar on a large swimlane stops at its maximum size instead of interrupting the diagram.
+- **Hover actions on touch computers.** Row actions appear when using a mouse on touch-enabled devices.
+- **Reviewing someone else's change.** The merge action in the Changed Items status popover is no longer pushed off the edge for reviewers who aren't the branch author.
+- **Side panels in a narrow window.** Shrinking the window narrows the AI panel to its minimum width instead of pushing its controls off screen.
+- **CSV and JSON export requests.** Invalid column or filter plans return a clear request error before a download or job starts.
+
+## Improvements
+
+- **Faster AI responses.** Chats start answering sooner, and turns that inspect several parts of a project finish reading faster.
+- **Faster item loading and rendering.** Tables, Reader, trees, and details panels load faster, especially in projects with long edit histories. Rich text, item references, imported lists, and ReqIF descriptions render faster in tables, trees, and the Reader.
+- **Shared views and reviews in large workspaces.** Shared views load faster for external collaborators whose share reaches beyond one branch.
+- **Filtering.** Filtered item counts finish faster in deeply nested views, and single-user, single-select tag, and combined text filters respond faster.
+- **SSO settings.** SSO Setup, SSO Roles, and SCIM Provisioning now share one **SSO and Provisioning** entry. Existing settings links still work.
+- **Branch editor groups.** Changes to a branch's editor groups are recorded in the review's Activity feed. A new **Editor groups** column on the branch listing shows and edits the assignment.
+- **Admins can add reviewers to any branch.** Project admins can add reviewers to a branch someone else owns.
+- **Linear teams show by name.** The Linear integration page lists teams as "Name (KEY)," and the assistant can create an issue in the team you name.
+- **Export link columns.** The Export dialog offers one link field per data model, with Up+Downstream, Upstream, Downstream, or Cross-links in its dropdown.
+- **Orphaned items in search.** Orphaned items are hidden from a view's rows but remain findable through global search and Find in view.
+- **Agent chat tool output.** Python script calls start collapsed with syntax highlighting, and Boltline lookups show readable names and results.
+- **Copying an item's ID.** A copy button beside the ID in the details panel header copies the whole ID.
