@@ -60,6 +60,7 @@
             "group": "Automations",
             "pages": [
               "api/automations/overview",
+              "api/automations/webhooks",
               "api/examples/automations"
             ]
           },

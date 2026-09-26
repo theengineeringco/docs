@@ -1,0 +1,140 @@
+---
+title: "Set up webhook automations"
+description: "Configure a named webhook trigger and send events to Flow."
+---
+
+Send events from your tools to a named Flow automation. The webhook name becomes the request's `source`; the `context` object carries the event data.
+
+## Before you start
+
+Use an [API key and workspace identifier](/api/authentication), and identify the project that owns the automation. Use the variables and language setup from the [quickstart](/api/quickstart), with `PROJECT_ID` set to that project's ID.
+
+## Configure the automation
+
+**Requires you to act:** In your project, open **Agent → Automations → New automation** and configure the trigger:
+
+1. Give the automation a descriptive **Name**, such as **Review test results**.
+2. Set **Trigger** to **When a custom webhook is called**.
+3. Set **Webhook name** to `test-results-ready`.
+
+![Name an automation and select its custom webhook trigger](/images/api-webhook-trigger-annotated.png "human-intervention: configure a custom webhook trigger")
+
+Use the exact webhook name in API requests, including capitalization. Choose a distinct name for each event type. Avoid built-in source names such as `endpoint`, `github`, or `schedule`. If multiple automations in the project share the same source, one request can start them all.
+
+**Requires you to act:** Define the work and save the automation:
+
+4. In **Agent → Instructions**, describe the expected input and the actions to take. For example: “Read the test report URL from context.report_url. Summarize failed tests and identify affected requirements. Return a concise summary without changing project data.”
+5. Select **Create**.
+
+![Write automation instructions and create the automation](/images/api-webhook-instructions-annotated.png "human-intervention: write instructions and create the automation")
+
+Webhook runs execute without an interactive approval step. Make the instructions explicit about what the automation should read, change, and return.
+
+## Send an event
+
+Send an authenticated `POST /ai/trigger` request with the webhook name, project ID, and JSON context. Replace the sample report URL with one the automation can access. The `event_id` below is your correlation value; including it does not make repeated requests idempotent.
+
+<CodeGroup>
+
+```bash cURL
+set -euo pipefail
+
+jq -n --arg project "$PROJECT_ID" '{
+  project_id: $project,
+  source: "test-results-ready",
+  context: {
+    event_id: "test-run-123",
+    report_url: "https://example.com/test-results/123"
+  },
+  wait: false
+}' > webhook-event.json
+
+curl --fail-with-body --silent --show-error \
+  "$FLOW_API_URL/ai/trigger" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  -H "Content-Type: application/json" \
+  --data-binary @webhook-event.json \
+  -o trigger-response.json
+
+jq '.results[] | {agent_id, automation_id, status}' trigger-response.json
+```
+
+```python Python
+import json
+import os
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+response = requests.post(
+    f"{base_url}/ai/trigger",
+    headers={
+        "X-API-Key": os.environ["FLOW_API_KEY"],
+        "customer": os.environ["FLOW_CUSTOMER"],
+    },
+    json={
+        "project_id": os.environ["PROJECT_ID"],
+        "source": "test-results-ready",
+        "context": {
+            "event_id": "test-run-123",
+            "report_url": "https://example.com/test-results/123",
+        },
+        "wait": False,
+    },
+    timeout=30,
+)
+response.raise_for_status()
+data = response.json()
+with open("trigger-response.json", "w") as output:
+    json.dump(data, output, indent=2)
+for run in data["results"]:
+    print({key: run[key] for key in ("agent_id", "automation_id", "status")})
+```
+
+```javascript JavaScript
+import { writeFile } from "node:fs/promises";
+
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const response = await fetch(`${baseUrl}/ai/trigger`, {
+  method: "POST",
+  headers: {
+    "X-API-Key": process.env.FLOW_API_KEY,
+    customer: process.env.FLOW_CUSTOMER,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    project_id: process.env.PROJECT_ID,
+    source: "test-results-ready",
+    context: {
+      event_id: "test-run-123",
+      report_url: "https://example.com/test-results/123",
+    },
+    wait: false,
+  }),
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+await writeFile("trigger-response.json", JSON.stringify(data, null, 2));
+for (const { agent_id, automation_id, status } of data.results) {
+  console.log({ agent_id, automation_id, status });
+}
+```
+
+</CodeGroup>
+
+HTTP `202` means the request was accepted, not that the work has finished. Store each `agent_id` from `results` and [poll for completion](/api/examples/automations#poll-by-run-id). An empty `results` array means no runs matched; check the saved webhook name and project ID.
+
+## Connect your event sender
+
+Your sender must authenticate to Flow and produce the request body above. If an external service cannot set the required headers or transform its event into `source` and `context`, use a server-side handler that validates the incoming event and calls Flow with your API key.
+
+Keep credentials in the sender's secret storage. Record the sender's event ID alongside the returned run IDs so you can trace deliveries and suppress duplicates before triggering Flow. After a network timeout, check for an existing run before resending: the first request can still be executing.
+
+For apps already connected through Flow's **Integrations**, use the corresponding app trigger. This custom webhook guide covers events you send through the customer API.
+
+## Next steps
+
+- [Trigger and poll automations](/api/examples/automations) for run statuses and retry behavior.
+- [Trigger from any source](/api/endpoints/post-ai-trigger) for the complete request schema.
+- [Poll automation runs](/api/endpoints/get-ai-trigger-runs) for the result schema.
