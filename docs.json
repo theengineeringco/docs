@@ -40,27 +40,21 @@
         "tab": "API",
         "groups": [
           {
-            "group": "Start here",
+            "group": "Quickstart",
             "pages": [
               "api",
               "api/quickstart",
               "api/authentication",
-              "api/environments",
-              "api/conventions"
+              "api/conventions",
+              "api/reference"
             ]
           },
           {
-            "group": "Integration examples",
+            "group": "Integrations",
             "pages": [
               "api/examples/read-entities",
               "api/examples/batch-writes",
               "api/examples/automations"
-            ]
-          },
-          {
-            "group": "API reference",
-            "pages": [
-              "api/reference"
             ]
           },
           {

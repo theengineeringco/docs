@@ -9,7 +9,7 @@ Flow's customer API uses HTTPS and JSON. Send `X-API-Key` and `customer` on ever
 
 Most resource endpoints start with `/project/{projectId}`. Use the project's `id` from `GET /project`, rather than its name or slug. If you have a slug, resolve it with `GET /project/slug/{slug}` first.
 
-Keep identifiers within the environment and tenant that returned them. A hostname selects the environment; the `customer` header selects the tenant.
+Keep resource identifiers within the workspace and project that returned them. Send the workspace identifier in the `customer` header.
 
 | Identifier | Where to find it | Where to use it |
 | --- | --- | --- |
@@ -58,9 +58,9 @@ Check the HTTP status before consuming a success response. Keep the error respon
 | Status | Next action |
 | --- | --- |
 | `400` | Correct the request's identifiers, field names, types, or limits before retrying. |
-| `401` | Check the API key and selected environment. |
-| `403` | Check tenant selection and the key owner's access to the requested resource or action. |
-| `404` | Verify the resource ID in the selected project, tenant, and environment. |
+| `401` | Check the API key and its revocation state. |
+| `403` | Check the workspace identifier and the key owner's access to the requested resource or action. |
+| `404` | Verify the resource ID in the selected project and workspace. |
 | `409` | Follow the endpoint's conflict guidance. For an expired entity-history cursor after a rebase, restart pagination without the cursor. |
 | `429` or transient `5xx` | For reads, retry with bounded exponential backoff and jitter. Honor `Retry-After` when present. |
 

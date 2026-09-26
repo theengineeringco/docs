@@ -5,13 +5,15 @@ description: "Start configured automations and poll their results asynchronously
 
 Call `POST /ai/trigger` to run automations that match a trigger source. This example assumes the project already has an automation configured with the `endpoint` source.
 
-Use the authentication variables from the quickstart and set `PROJECT_ID` to the target project. Trigger endpoints are under `/ai`, with `project_id` in the request body.
+Use the authentication variables from the [quickstart](/api/quickstart) and set `PROJECT_ID` to the target project. cURL uses Bash and `jq`; Python uses `requests`; JavaScript uses Node.js 22 or later with `.mjs` files. Trigger endpoints are under `/ai`, with `project_id` in the request body.
 
 ## Start the runs
 
 Send `wait: false` so the API returns run IDs while execution continues. `context` carries the JSON input your configured automations expect; the example provides a message.
 
-```bash
+<CodeGroup>
+
+```bash cURL
 set -euo pipefail
 
 jq -n --arg project "$PROJECT_ID" '{
@@ -35,6 +37,65 @@ jq '.results[] | {agent_id, automation_id, automation_name, status}' \
   trigger-response.json
 ```
 
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+payload = {
+    "project_id": os.environ["PROJECT_ID"],
+    "source": "endpoint",
+    "context": {"message": "Run the configured integration check"},
+    "wait": False,
+}
+
+response = requests.post(
+    f"{base_url}/ai/trigger", headers=headers, timeout=30,
+    json=payload
+)
+response.raise_for_status()
+data = response.json()
+with open("trigger-response.json", "w") as output:
+    json.dump(data, output, indent=2)
+for run in data["results"]:
+    print(json.dumps({key: run[key] for key in ("agent_id", "automation_id", "automation_name", "status")}))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+import { writeFile } from "node:fs/promises";
+const payload = {
+  project_id: process.env.PROJECT_ID,
+  source: "endpoint",
+  context: { message: "Run the configured integration check" },
+  wait: false,
+};
+
+const url = new URL(`${baseUrl}/ai/trigger`);
+const response = await fetch(url, {
+  method: "POST",
+  headers: { ...headers, "Content-Type": "application/json" },
+  body: JSON.stringify(payload),
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+await writeFile("trigger-response.json", JSON.stringify(data, null, 2));
+for (const { agent_id, automation_id, automation_name, status } of data.results) {
+  console.log({ agent_id, automation_id, automation_name, status });
+}
+```
+
+</CodeGroup>
+
 An asynchronous request returns HTTP `202`. `results` contains one entry per matched automation, with its `agent_id` and current status. An empty `results` array means there are no matched runs to poll. Check the project's configured source before sending another trigger.
 
 A trigger can match multiple automations. Always include `project_id` to scope the request to the intended project.
@@ -45,7 +106,11 @@ Copy an `agent_id` from the trigger response. Polling accepts up to 50 comma-sep
 
 ```bash
 export AGENT_IDS="run-id-from-trigger-response"
+```
 
+<CodeGroup>
+
+```bash cURL
 curl --fail-with-body --silent --show-error --get \
   "$FLOW_API_URL/ai/trigger/runs" \
   -H "X-API-Key: $FLOW_API_KEY" \
@@ -56,6 +121,47 @@ curl --fail-with-body --silent --show-error --get \
       integration_grade, branches, error
     }'
 ```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/ai/trigger/runs", headers=headers, timeout=30,
+    params={"agent_ids": os.environ["AGENT_IDS"]}
+)
+response.raise_for_status()
+data = response.json()
+for run in data["items"]:
+    print(json.dumps({key: run.get(key) for key in ("agent_id", "status", "integration_response", "integration_grade", "branches", "error")}))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/ai/trigger/runs`);
+url.search = new URLSearchParams({ agent_ids: process.env.AGENT_IDS }).toString();
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+for (const { agent_id, status, integration_response, integration_grade, branches, error } of data.items) {
+  console.log({ agent_id, status, integration_response, integration_grade, branches, error });
+}
+```
+
+</CodeGroup>
 
 The poll response uses `items`, rather than the trigger response's `results`.
 

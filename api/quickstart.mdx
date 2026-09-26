@@ -7,13 +7,13 @@ Flow's customer API lets you read and update project data over HTTPS. Start with
 
 ## Before you start
 
-You need a Flow account, your environment's API URL, a tenant identifier, and a personal API key. Follow [Authentication](/api/authentication) to create a key and [Environments and tenants](/api/environments) to find the correct URL and tenant.
+You need a Flow account, a workspace identifier, and a personal API key. Follow [Authentication](/api/authentication) to create a key and find your [workspace identifier](/api/authentication#workspace-identifier).
 
 Set these variables in your terminal. Load the key from your secret manager or enter it without echoing it:
 
 ```bash
 export FLOW_API_URL="https://backend.branch.flowengineering.com"
-export FLOW_CUSTOMER="your-tenant"
+export FLOW_CUSTOMER="your-workspace"
 read -r -s -p "Flow API key: " FLOW_API_KEY
 export FLOW_API_KEY
 printf '\n'
@@ -25,23 +25,101 @@ The key-entry command above uses Bash. In zsh, use `read -r -s 'FLOW_API_KEY?Flo
 The API URL shown in Flow settings ends in `/customer-api`. That path opens Swagger. Use the URL's origin, without `/customer-api`, as `FLOW_API_URL`.
 </Note>
 
+The cURL examples run in Bash. Python examples use `requests` (`python3 -m pip install requests`). JavaScript examples use Node.js 22 or later; save them as `.mjs` files and run them with `node`. Each example reads the variables configured above.
+
 ## Identify your user
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl --fail-with-body "$FLOW_API_URL/users/me" \
   -H "X-API-Key: $FLOW_API_KEY" \
   -H "customer: $FLOW_CUSTOMER"
 ```
 
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/users/me", headers=headers, timeout=30
+)
+response.raise_for_status()
+data = response.json()
+print(json.dumps(data, indent=2))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/users/me`);
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+console.log(JSON.stringify(data, null, 2));
+```
+
+</CodeGroup>
+
 A successful response returns the authenticated user's profile. The key acts as its creator, so requests use that person's permissions.
 
 ## Find a project
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl --fail-with-body "$FLOW_API_URL/project" \
   -H "X-API-Key: $FLOW_API_KEY" \
   -H "customer: $FLOW_CUSTOMER"
 ```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/project", headers=headers, timeout=30
+)
+response.raise_for_status()
+data = response.json()
+print(json.dumps(data, indent=2))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/project`);
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+console.log(JSON.stringify(data, null, 2));
+```
+
+</CodeGroup>
 
 Choose an accessible project's `id` from the response:
 
@@ -51,7 +129,9 @@ export PROJECT_ID="your-project-id"
 
 ## Read entities
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl --fail-with-body --get \
   "$FLOW_API_URL/project/$PROJECT_ID/entities" \
   -H "X-API-Key: $FLOW_API_KEY" \
@@ -60,10 +140,48 @@ curl --fail-with-body --get \
   --data-urlencode "limit=20"
 ```
 
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/entities", headers=headers, timeout=30,
+    params={"starting_after": "0", "limit": 20}
+)
+response.raise_for_status()
+data = response.json()
+print(json.dumps(data, indent=2))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities`);
+url.search = new URLSearchParams({ starting_after: "0", limit: "20" }).toString();
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const data = await response.json();
+console.log(JSON.stringify(data, null, 2));
+```
+
+</CodeGroup>
+
 The response contains an `items` array and pagination metadata. Omit `branch_id` to read Base. See [Read entities](/api/examples/read-entities) to filter by entity type and fetch the next page.
 
 ## Try the playground
 
-Open an endpoint under **API reference** and enter your API key and `customer` header. The playground uses `https://backend.branch.flowengineering.com`. Start with a GET request. Requests use your permissions; write requests change live data.
+Open an endpoint under **Endpoints** and enter your API key and `customer` header. The playground uses `https://backend.branch.flowengineering.com`. Start with a GET request. Requests use your permissions; write requests change live data.
 
 Use a test project and branch for write examples. See [API conventions](/api/conventions) for branch identifiers and error handling.
