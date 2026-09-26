@@ -1,3 +1,8 @@
+---
+title: "Trigger and poll automations"
+description: "Start configured automations and poll their results asynchronously."
+---
+
 Call `POST /ai/trigger` to run automations that match a trigger source. This example assumes the project already has an automation configured with the `endpoint` source. For a named webhook, [configure a webhook automation](/api/automations/webhooks) first and replace `endpoint` below with its exact webhook name.
 
 Use the authentication variables from the [quickstart](/api/quickstart) and set `PROJECT_ID` to the target project. cURL uses Bash and `jq`; Python uses `requests`; JavaScript uses Node.js 22 or later with `.mjs` files. Trigger endpoints are under `/ai`, with `project_id` in the request body.
