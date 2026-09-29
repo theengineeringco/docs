@@ -1,0 +1,30 @@
+---
+title: "September 28, 2026"
+sidebarTitle: "September 28, 2026"
+description: "Automations run as the person who saved them, with admin tools off by default, plus local time zones for schedules, easier review filters, and sharper people search."
+---
+
+## Contents
+
+- [Automations run as the person who saved them](#automations-run-as-the-person-who-saved-them)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+
+## Automations run as the person who saved them
+
+Branch, scheduled, and webhook-triggered runs of an automation or script now execute as the person who last saved it. Manual, API, and import runs execute as the person who triggers them. Each automation's page shows who its runs execute as.
+
+Automations saved before this release run as their last recorded editor. Where no editor is recorded, branch automations keep running as the reviewer and webhook-triggered ones as the person who connected the integration. Scheduled automations with no recorded editor pause with a notice until someone saves them. Admin tools are off by default. An admin can allow an automation to use them from its settings, and a copied project starts with that setting off for every automation. See [Automations](/api/automations/overview).
+
+## Fixes
+
+- **Scheduled automation time zones.** Schedules created in the editor default to your local time zone and keep their clock time across daylight saving changes. Existing schedules keep their UTC timing until you change their time zone.
+- **AI questions.** Agents finish explaining what they need before waiting for your reply, instead of stopping at an unexplained waiting message.
+- **Assistant branch follow.** A chat you pointed at another branch, or that the assistant moved onto a branch it created, stays there when you switch branches. Only a chat working on the branch you leave comes with you.
+- **Comment filters.** Items with UUID identifiers now appear when their comments match, including items with several discussion threads.
+- **People pickers.** People whose name or email matches your search appear first, ahead of people who only share the email domain.
+
+## Improvements
+
+- **Review filters.** Change type, change author, and branch-change filters sit together near the top of the Changed Items filter menu, with comment filters in their own section below. Field filters on this page can also match fields that changed from the branch base.
+- **Branch lists.** Previously hidden parent branches of active branches now appear in branch lists. Other obsolete hidden branches are discarded, including protected ones.
