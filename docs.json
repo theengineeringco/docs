@@ -23,12 +23,7 @@
               "api/quickstart",
               "api/authentication",
               "api/conventions",
-              "api/reference"
-            ]
-          },
-          {
-            "group": "Examples",
-            "pages": [
+              "api/reference",
               "api/examples/read-entities",
               "api/examples/batch-writes"
             ]
