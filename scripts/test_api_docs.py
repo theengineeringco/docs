@@ -28,7 +28,10 @@ class ApiDocsTests(unittest.TestCase):
             with self.subTest(path=path.relative_to(ROOT)):
                 self.assertIsNone(sync.PRIVATE_TERMS.search(content))
         self.assertIsNone(sync.PRIVATE_TERMS.search(json.dumps(self.api_nav)))
-        self.assertEqual([group["group"] for group in self.api_nav["groups"]], ["Quickstart", "Examples", "Automations", "Flow MCP", "Endpoints"])
+        self.assertEqual([group["group"] for group in self.api_nav["groups"]], ["Quickstart", "Automations", "Flow MCP", "Endpoints"])
+        quickstart_pages = self.api_nav["groups"][0]["pages"]
+        self.assertIn("api/examples/read-entities", quickstart_pages)
+        self.assertIn("api/examples/batch-writes", quickstart_pages)
         sync.validate_public_spec(json.loads((ROOT / "openapi/customer-api.json").read_text()))
 
     def test_every_curl_block_has_python_and_javascript_options(self):
