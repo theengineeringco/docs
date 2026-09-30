@@ -1,0 +1,62 @@
+---
+title: "September 29, 2026"
+sidebarTitle: "September 29, 2026"
+description: "Items and interfaces on diagram connections, automations that run as the person who saved them, AI reading of archives and large XML files, bulk user actions, full-width review diffs, and navigator type filters."
+---
+
+## Contents
+
+- [Items and interfaces ride diagram connections](#items-and-interfaces-ride-diagram-connections)
+- [Automations run as the person who saved them](#automations-run-as-the-person-who-saved-them)
+- [AI reads archives and large XML files](#ai-reads-archives-and-large-xml-files)
+- [Users page actions menu](#users-page-actions-menu)
+- [Full-width review diffs](#full-width-review-diffs)
+- [Choose which types a view shows in the navigator](#choose-which-types-a-view-shows-in-the-navigator)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+
+## Items and interfaces ride diagram connections
+
+Hover a wire on a diagram and select `+` to place an item on the line as a pill, showing what realizes that connection. A wire can carry an item and its own text label at once. Right-click the wire to swap or remove the item. Placing an item on a wire changes the drawing only, never the item's links.
+
+In the Architecture view and in "Visualize by" diagrams, an interface between exactly two systems is now drawn on the connection between them. Shared interfaces in "Visualize by" diagrams appear on a wire from each feeding system to each reading system. Drawing a wire between two systems creates the interface that connects them. Diagrams the AI assistant draws, and diagrams created through the [Customer API](/api/reference), use the same on-wire interfaces. Where two connectors cross, the one on top hops over the other, and **Auto arrange** routes connections around cards instead of across them.
+
+## Automations run as the person who saved them
+
+Branch, scheduled, and webhook-triggered runs of an automation or script now execute as the person who last saved it. Manual, API, and import runs execute as the person who triggers them. Each automation's page shows who its runs execute as.
+
+Automations saved earlier run as their last recorded editor. Scheduled automations with no recorded editor pause with a notice until someone saves them. Admin tools are off unless an admin allows them in the automation's settings. See [Automations](/api/automations/overview).
+
+## AI reads archives and large XML files
+
+The AI assistant and Python scripts can browse the folders of a zip archive or a PowerPoint or Word file, read the files inside it, and page through the elements of a large XML file.
+
+## Users page actions menu
+
+Select users on the **Users** settings page to open an **Actions** menu. You can resend invites, change project access, set roles, or remove several users at once. Right-clicking a user row opens the same menu.
+
+## Full-width review diffs
+
+Turn on **Full-width diffs** from Changed Items' **Display options** to show an edge-to-edge, continuous diff list.
+
+## Choose which types a view shows in the navigator
+
+A view's settings now have a **Navigator** section for hiding some of the view's types from the sidebar, such as showing only Systems in a System → Requirement view. The table, tree, and Reader still show every type. This works for shared and personal views.
+
+## Fixes
+
+- **Deleting items at a gated stage.** Deleting an item no longer requires the stage's exit approval. The stage's entry approval still protects reviewed content.
+- **Stage gate blockers for deletions.** A merge blocker for a deleted item now says the item was deleted from the stage, instead of suggesting it is still at that stage.
+- **Scheduled automations.** New schedules default to your local time zone and keep their clock time across daylight saving changes. Existing schedules keep their UTC timing until you change their time zone.
+- **Shared chats in history.** The assistant's recent chats and past conversations show workspace-shared chats alongside your private chats.
+- **AI questions.** The assistant finishes explaining what it needs before waiting for your reply.
+- **Comment filters.** Items with UUID identifiers now appear when their comments match, including items with several discussion threads.
+- **Undo in the Architecture view.** Undoing the deletion of an interface or system card brings back one card instead of two.
+- **Mouse-wheel zoom on graph canvases.** Ctrl+scroll zooms in small, even steps instead of jumping to extreme zoom levels.
+
+## Improvements
+
+- **Review stages for non-admins.** Editors and read-only users can view each stage's approval rules, reviewer sources, allowed moves, and lock state in the **Review stages** dialog.
+- **Review filters.** Change type, author, and branch-change filters sit together at the top of the Changed Items filter menu. Field filters can also match fields that changed from the branch base.
+- **People pickers.** People whose name or email matches your search appear ahead of people who only share the email domain.
+- **Diagram wire labels.** Double-clicking a connection places its label where you clicked instead of at the midpoint.
