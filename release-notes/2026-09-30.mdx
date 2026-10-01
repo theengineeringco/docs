@@ -1,0 +1,29 @@
+---
+title: "September 30, 2026"
+sidebarTitle: "September 30, 2026"
+description: "Revert an item's changes from a review, sharper image and PDF imports, large AI chat attachments, and on-premise user limits."
+---
+
+## Contents
+
+- [Revert an item's changes from a review](#revert-an-items-changes-from-a-review)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+
+## Revert an item's changes from a review
+
+Every changed item card on a comparison now has **Revert shown changes** in its menu. It writes one new change on the branch that puts back exactly what the card shows changing between the two compared points, whether those are baselines, the project start, or the current state. Everything else stays as it is, and history is kept. The confirmation lists what will be put back and says when a field has changed again since the later point.
+
+In the details panel, the history section holding the current branch's own changes can now be reverted like merge sections. Direct edits made between two merges appear in their chronological position instead of above every merge.
+
+## Fixes
+
+- **Review approval progress.** A reviewer group whose approval still stands now counts as approved even when one member has requested changes.
+- **Stopping document reading.** The assistant respects **Stop reading** without automatically starting a replacement extraction. Completed results remain available.
+- **Long image inspections.** Long inspection conversations keep working as earlier images leave the active context, without reducing image resolution.
+
+## Improvements
+
+- **Image and PDF imports.** Image and scan imports preserve fine detail across the full source, including diagrams, photographs, and text. The AI reader can zoom into vector PDF regions and inspect a selected region without rereading the page. Extraction reports where it can't read a detail so you can check it.
+- **Large AI chat attachments.** You can attach text, CSV, and other text files larger than 256 KB to an AI chat message. The agent reads the parts it needs.
+- **On-premise user limits** _(self-hosted)_. Licenses can now limit the number of unique users across workspaces, and Flow rejects new users once all seats are allocated. Existing expiration-only licenses remain supported.
