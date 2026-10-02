@@ -964,6 +964,9 @@
             },
             "type": "array"
           },
+          "restore_eligible": {
+            "type": "boolean"
+          },
           "reviews": {
             "items": {
               "$ref": "#/components/schemas/BranchReviewResponseDto"
@@ -2597,6 +2600,9 @@
       },
       "DeletedBranchListRowDto": {
         "properties": {
+          "created_at": {
+            "type": "string"
+          },
           "cursor": {
             "description": "Pass as `before` to fetch the page after this row. Opaque; valid only as handed out.",
             "type": "string"
@@ -2613,6 +2619,12 @@
           "id": {
             "type": "string"
           },
+          "labels": {
+            "items": {
+              "$ref": "#/components/schemas/BranchLabelDto"
+            },
+            "type": "array"
+          },
           "merged_at": {
             "description": "Set when a merge archived the branch; null when it was discarded through the delete endpoint.",
             "nullable": true,
@@ -2624,6 +2636,10 @@
           "number": {
             "description": "Project-scoped branch number.",
             "type": "number"
+          },
+          "owner_id": {
+            "nullable": true,
+            "type": "string"
           },
           "parent_id": {
             "nullable": true,
@@ -2644,6 +2660,9 @@
           "merged_at",
           "deleted_at",
           "deleted_by_id",
+          "owner_id",
+          "created_at",
+          "labels",
           "cursor"
         ],
         "type": "object"
@@ -2687,6 +2706,28 @@
         ],
         "type": "object"
       },
+      "DiagramConnectionInterfaceDto": {
+        "properties": {
+          "id": {
+            "description": "Platform entity ID of the interface",
+            "type": "string"
+          },
+          "name": {
+            "description": "Display name shown in the pill on the wire",
+            "type": "string"
+          },
+          "type": {
+            "description": "Entity type label (e.g. \"Interface\")",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
+        "type": "object"
+      },
       "DiagramConnectionItemDto": {
         "properties": {
           "color": {
@@ -2706,6 +2747,14 @@
           "from": {
             "description": "Source entity or node ID",
             "type": "string"
+          },
+          "interface": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DiagramConnectionInterfaceDto"
+              }
+            ],
+            "description": "Flow entity carried ON this wire, drawn as a pill on the line between `from` and `to` instead of a node of its own. It must not also appear in `entities`/`nodes` or on another connection."
           },
           "kind": {
             "description": "Arrow routing style: \"elbow\" (default) uses right-angle corners, \"arc\" a smooth curve",
@@ -3512,6 +3561,10 @@
           "outputTokens": {
             "type": "number"
           },
+          "paused": {
+            "description": "Reading stopped a few pages past what its agent chat has taken, until that chat runs a turn again.",
+            "type": "boolean"
+          },
           "relationshipCount": {
             "type": "number"
           },
@@ -3538,6 +3591,7 @@
           "chunksDone",
           "chunksRunning",
           "chunksFailed",
+          "paused",
           "entityCount",
           "relationshipCount",
           "noteCount",
@@ -4345,6 +4399,48 @@
         },
         "type": "object"
       },
+      "RevertEntityToPointDto": {
+        "properties": {
+          "change_from_seq_id": {
+            "description": "Revert only the change between this sequence id (exclusive) and seq_id, keeping later edits to anything that change did not touch. Omit to revert the item to its state at seq_id.",
+            "type": "string"
+          },
+          "entity_id": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "in_place": {
+            "description": "Write the revert straight onto this branch instead of proposing a new branch to review.",
+            "type": "boolean"
+          },
+          "seq_id": {
+            "description": "Sequence id of one of the item's history entries on this branch. The item is reverted to its state right after that change. 0 reverts it to before it existed.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "entity_id",
+          "seq_id"
+        ],
+        "type": "object"
+      },
+      "RevertEntityToPointResponseDto": {
+        "properties": {
+          "branch_id": {
+            "description": "The branch now carrying the revert: the new branch, or this branch's id ('master' for Base) when reverted in place.",
+            "type": "string"
+          },
+          "created": {
+            "description": "True when a new branch was created.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "branch_id",
+          "created"
+        ],
+        "type": "object"
+      },
       "RichTextToMarkdownDto": {
         "properties": {
           "richText": {
@@ -4753,6 +4849,9 @@
         "properties": {
           "approvals_needed": {
             "type": "number"
+          },
+          "deletes_entity": {
+            "type": "boolean"
           },
           "entity_id": {
             "type": "string"
@@ -5451,6 +5550,9 @@
           "has_profile_picture": {
             "type": "boolean"
           },
+          "has_signed_in": {
+            "type": "boolean"
+          },
           "id": {
             "type": "string"
           },
@@ -5483,6 +5585,7 @@
           "provisioned_via_provider",
           "provisioned_at",
           "deactivated_at",
+          "has_signed_in",
           "project_access"
         ],
         "type": "object"
@@ -9817,6 +9920,81 @@
         }
       }
     },
+    "/project/{projectId}/branch/{id}/revert-entity-to-point": {
+      "post": {
+        "description": "Returns the item to its state right after the given history entry. By default creates a new branch off this branch carrying the revert, to review and merge; with in_place the revert is written straight onto this branch, subject to the same checks as any edit. The original history is untouched either way.",
+        "operationId": "BranchController_revertEntityToPoint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevertEntityToPointDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevertEntityToPointResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Revert one item to an earlier point in its history",
+        "tags": [
+          "Branches"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-branch-id-revert-entity-to-point",
+          "metadata": {
+            "sidebarTitle": "Revert one item to an earlier point in its history",
+            "title": "Revert one item to an earlier point in its history"
+          }
+        }
+      }
+    },
     "/project/{projectId}/branch/{id}/reviewer-groups/{groupId}/remove": {
       "post": {
         "operationId": "BranchController_removeReviewerGroup",
@@ -14064,6 +14242,70 @@
           "metadata": {
             "sidebarTitle": "Poll an import run",
             "title": "Poll an import run"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/import/runs/{runId}/cancel": {
+      "post": {
+        "description": "Nothing further is read, and the chunks already read stay readable. A run that settled before the request arrived keeps its outcome; the returned progress says which happened.",
+        "operationId": "ImportController_cancelRun",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportRunProgressDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Stop an import run",
+        "tags": [
+          "Import"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-import-runs-runid-cancel",
+          "metadata": {
+            "sidebarTitle": "Stop an import run",
+            "title": "Stop an import run"
           }
         }
       }
