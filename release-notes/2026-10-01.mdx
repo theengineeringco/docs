@@ -1,0 +1,48 @@
+---
+title: "October 1, 2026"
+sidebarTitle: "October 1, 2026"
+description: "Revert an item or a single change from its History, double-click to add nodes on diagrams, faster merges into Base, and clearer formula values."
+---
+
+## Contents
+
+- [Revert an item from its History](#revert-an-item-from-its-history)
+- [Double-click to add nodes on diagrams](#double-click-to-add-nodes-on-diagrams)
+- [Fixes](#fixes)
+- [Improvements](#improvements)
+
+## Revert an item from its History
+
+Each row in an item's **History** tab now has a menu to revert just that change, keeping later edits, or to revert the item to how that change left it, undoing every later one. Both preview the result first. You can apply the revert on the current branch, or on a new branch to review and merge first.
+
+Branch and merge sections in History offer the same choices: **Revert changes from this branch only** and **Revert this item to this point**. Reverting to a point leaves formulas as they are. Reverting a formula change restores the earlier formula.
+
+## Double-click to add nodes on diagrams
+
+Double-click empty canvas on a diagram to open the node search at that spot. The item you pick or create, or a shape, is placed there.
+
+On the Architecture view (beta), double-clicking inside the focused system creates a subsystem. Picking an existing system asks whether to add it as a subsystem or connect it through a new interface. Outside the focused system, the new system is placed alongside it and connected through a new interface.
+
+## Fixes
+
+- **Merges into Base.** Merges no longer time out at their final step in projects with many archived or merged branches. Edits to Base also finish faster in those projects.
+- **Large branch updates.** Editing and merging stay responsive after a large **Update from parent**.
+- **Workspace permissions.** Project-limited admins can no longer add themselves to branch editor groups. Managing groups and viewing SSO login diagnostics require an admin with access to all projects.
+- **PDF reading.** A page that is too expensive to render fails on its own while the rest of the document continues. PDF previews and extraction status explain failures and automatic retries.
+- **Formula referenced values.** Hovering a formula's badge right after saving it lists the values it reads instead of showing nothing.
+- **Architecture view for read-only users** (beta). Read-only users see the system breakdown when they open a system nobody has opened in the Architecture tab yet, instead of an empty canvas.
+- **Flow MCP connections.** Agent gateways that request the prompt list while registering can now [connect](/api/mcp/connect) and use Flow tools.
+- **AI chat branch references.** Branch references in new replies show the branch name and open that branch. References to Base open the Base table.
+- **Assistant chat list.** Restoring an archived chat brings it back into Recent chats right away.
+
+## Improvements
+
+- **Formula referenced values.** The formula builder and formula hover card list referenced values in a table with Referenced item, Field name, and Field Value columns. Tags and people show by name instead of raw IDs.
+- **Formula builder preview.** Tag, user, and other reference fields preview their result as tags and people instead of raw IDs.
+- **Formula changes in reviews.** A changed formula field in a review diff sits in a collapsible card that says whether the formula was added, updated, or removed, with the formula editor's highlighting.
+- **Import to diagram.** Items imported from the sidebar land arranged the way **Auto-arrange** would place them, including cards inside folders.
+- **See Details on read-only diagrams.** Read-only viewers can select a card on a diagram or the Architecture view and choose **See Details** to open the item's details panel.
+- **Granting external access.** Choosing **External** on the Users page shows the same options as Share, including destination, access level, branch reach, and expiry. Email addresses you already entered are kept.
+- **Range selection in more tables.** The Users and Shares settings tables and the Deleted branches and Deleted items pages support Shift+click to select a range of rows and Escape to clear the selection.
+- **Explorer sidebars show every item.** The **Show only folders in Explorer** setting is gone. Organizations that enabled it now see the full selected view, and revealing an item highlights it in the sidebar.
+- **Default formula audit history.** Default-formula edits record whether updating existing items and overwriting custom formulas were requested.
