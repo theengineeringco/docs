@@ -1,0 +1,166 @@
+---
+title: "October 2, 2026"
+sidebarTitle: "October 2, 2026"
+description: "Weekly release: revert an item or a single change, items and interfaces on diagram connections, automations that run as the person who saved them, dependable spreadsheet round trips, and AI reading of archives and large XML files."
+---
+
+## In this release
+
+- [Revert an item or a single change](#revert-an-item-or-a-single-change)
+- [Items and interfaces on diagram connections](#items-and-interfaces-on-diagram-connections)
+- [Automations run as the person who saved them](#automations-run-as-the-person-who-saved-them)
+- [Spreadsheet round trips keep item identity](#spreadsheet-round-trips-keep-item-identity)
+- [AI reads archives and large XML files](#ai-reads-archives-and-large-xml-files)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Revert an item or a single change
+
+Each row in an item's **History** tab has a menu to revert just that change, keeping later edits, or to revert the item to how that change left it, undoing every later one. Branch and merge sections offer **Revert changes from this branch only** and **Revert this item to this point**. Both preview the result, and you can apply it on the current branch or on a new branch to review and merge first. Reverting to a point leaves formulas as they are. Reverting a formula change restores the earlier formula.
+
+On a review, every changed item card now has **Revert shown changes** in its menu. It writes one new change that puts back exactly what the card shows changing between the two compared points, and leaves everything else as it is. The confirmation lists what will be put back and flags fields that changed again since the later point. History is kept.
+
+## Items and interfaces on diagram connections
+
+Hover a wire on a diagram and select `+` to place an item on the line as a pill, showing what realizes that connection. A wire can carry an item and its own text label at once. Right-click the wire to swap or remove the item. Placing an item on a wire changes the drawing only, never the item's links.
+
+In the Architecture view and in "Visualize by" diagrams, interfaces are drawn on the connections between systems. Diagrams the AI assistant draws use the same on-wire interfaces. Where two connectors cross, the one on top hops over the other, and **Auto arrange** routes connections around cards instead of across them.
+
+## Automations run as the person who saved them
+
+Branch, scheduled, and webhook-triggered runs of an automation or script now execute as the person who last saved it. Manual, API, and import runs execute as the person who triggers them. Each automation's page shows who its runs execute as.
+
+Automations saved earlier run as their last recorded editor. Scheduled automations with no recorded editor pause with a notice until someone saves them. Admin tools are off unless an admin allows them in the automation's settings. See [Automations](/api/automations/overview).
+
+## Spreadsheet round trips keep item identity
+
+Choose Entity ID, Entity Numeric ID, Source ID, or a text, number, date, or toggle field as the identity for exported rows and links, then match by that field on import. Ambiguous matches and conflicting values block the import instead of creating the wrong items. Entity Numeric ID matches existing items without changing their IDs.
+
+Imports now suggest upstream, downstream, and parent/child ID columns, and select a Type column automatically. Export defaults to Entity ID. Select Source ID as the identity or an extra column if your downstream workflow needs it.
+
+## AI reads archives and large XML files
+
+The AI assistant and Python scripts can browse the folders of a zip archive or a PowerPoint or Word file, read the files inside it, and page through the elements of a large XML file.
+
+## Improvements & Fixes
+
+### Agent
+
+- **AI edits to rich text.** When the agent edits a description or rich-text field, the details panel shows the diff block by block, with changed words highlighted.
+- **Image and PDF imports.** Image and scan imports preserve fine detail across the full source. The AI reader can zoom into vector PDF regions and reports details it can't read so you can check them.
+- **Large chat attachments.** You can attach text, CSV, and other text files larger than 256 KB to an AI chat message.
+- **Follow-up messages.** While a reply is running, typing a follow-up swaps **Stop** for **Send**, so your message queues instead of cancelling the reply.
+- **Chat history.** Recent chats show workspace-shared chats alongside your private chats.
+- **Branch follow.** A chat you directed to another branch stays there when you switch branches.
+- **AI questions.** The assistant finishes explaining what it needs before waiting for your reply.
+- **Stopping document reading.** **Stop reading** no longer starts a replacement extraction. Completed results remain available.
+- **Long image inspections.** Long inspection conversations keep working without reducing image resolution.
+- **Branch references.** Branch references in replies show the branch name and open that branch.
+- **Restored chats.** Restoring an archived chat brings it back into Recent chats right away.
+
+### Architecture
+
+- **Double-click to add a system** (beta). Double-clicking the Architecture view canvas opens the node search at that spot. Inside the focused system it creates a subsystem. Outside it, the new system is placed alongside and connected through a new interface.
+- **Undo.** Undoing the deletion of an interface or system card brings back one card instead of two.
+- **Read-only users** (beta). Read-only users see the system breakdown for a system nobody has opened yet, instead of an empty canvas.
+
+### Audit
+
+- **Default formula history.** Default-formula edits record whether updating existing items and overwriting custom formulas were requested.
+
+### Automations
+
+- **Schedule time zones.** New schedules default to your local time zone and keep their clock time across daylight saving changes.
+
+### Branching
+
+- **Merges into Base.** Merges no longer time out in projects with many archived or merged branches.
+- **Large branch updates.** Editing and merging stay responsive after a large **Update from parent**.
+- **Branch lists.** Hidden parent branches of active branches now appear.
+
+### Data Model
+
+- **Reusing type names.** A name freed by renaming a data type can be used for a new type.
+- **Type names.** Assistant messages, formula help, item ID prefixes, and exports show a data type's current name instead of its identifier.
+
+### Diagrams
+
+- **Double-click to add a node.** Double-click empty canvas to open the node search at that spot and place the item or shape there.
+- **Wire labels.** Double-clicking a connection places its label where you clicked.
+- **Import to diagram.** Items imported from the sidebar land arranged the way **Auto-arrange** would place them.
+- **See Details for viewers.** Read-only viewers can select a card on a diagram or the Architecture view and open its details panel.
+- **Swimlanes.** An out-of-range title bar size in a saved or imported frame no longer blocks the diagram.
+- **"Visualize by" menu.** An entity's existing diagrams no longer include its Architecture tab diagram.
+
+### Files
+
+- **PDF reading.** A page that is too expensive to render fails on its own while the rest of the document continues. Previews and extraction status explain failures.
+
+### Formulas
+
+- **Referenced values.** The formula builder and hover card list referenced values in a table, showing tags and people by name instead of raw IDs.
+- **Referenced values after saving.** Hovering a formula's badge right after saving lists the values it reads.
+- **Builder preview.** Tag, user, and other reference fields preview as tags and people instead of raw IDs.
+
+### Import and Export
+
+- **Exported ranges.** Ranges and bounds in CSV, JSON, ReqIF, Markdown, and Word exports read `1–5`, `≥20`, and `≤20`, as on screen. Scripts that parse exported range text need updating.
+- **Imported value references.** Value references imported from the previous version of Flow export the item's current value.
+- **Export columns.** Export starts with the columns shown in your view, and dialog changes apply only to that export.
+- **Numeric IDs.** Selecting Entity Numeric ID as a column and the export identity produces one prefixed column.
+- **Special characters.** UTF-8 CSV imports preserve symbols such as °C, ±, and µ.
+
+### Permissions and Sharing
+
+- **Shared views open sooner.** New recipients can open an already-prepared, actively shared view immediately.
+- **Granting external access.** Choosing **External** on the Users page shows the same options as Share, including destination, access level, branch reach, and expiry.
+- **Admin scope.** Project-limited admins can no longer add themselves to branch editor groups. Managing groups and viewing SSO login diagnostics require an admin with access to all projects.
+
+### Reader
+
+- **Reader exports.** PDF, HTML, and image exports print people with their avatar, tags and stages as colored chips, and verification results as their pass, fail, or inconclusive mark.
+- **Document exports.** Fields appear in the order the Reader lists them, and dates no longer print as raw timestamps.
+
+### Review
+
+- **Merges can change locked items.** A new organization setting lets a branch merge even when it changes items at a locked stage. It is off by default, and locked items still can't be edited directly.
+- **Full-width diffs.** Turn on **Full-width diffs** from Changed Items' **Display options** for an edge-to-edge diff list.
+- **Review stages for non-admins.** Editors and read-only users can view each stage's approval rules, reviewer sources, allowed moves, and lock state.
+- **Resizable field labels.** Field names on diff cards stay on one line, and you can drag the label column wider or narrower.
+- **Formula changes.** A changed formula in a review diff sits in a collapsible card that says whether it was added, updated, or removed.
+- **Deleting gated items.** Deleting an item no longer requires the stage's exit approval. The entry approval still protects reviewed content.
+- **Deletion blockers.** A merge blocker for a deleted item says it was deleted from the stage.
+- **Approval progress.** A reviewer group whose approval still stands counts as approved even when one member requested changes.
+
+### Search
+
+- **Branch search keeps the hierarchy.** Turn on **Preserve hierarchy on text search** in the full-screen branch view's **Display options** to keep matching branches' parents and descendants visible.
+- **Review filters.** Change type, author, and branch-change filters sit together at the top of the Changed Items filter menu. Field filters can also match fields changed from the branch base.
+- **People pickers.** People whose name or email matches your search appear first.
+- **Comment filters.** Items with UUID identifiers appear when their comments match.
+
+### Settings
+
+- **Users page actions.** Select users on the **Users** page to resend invites, change project access, set roles, or remove several users at once. Right-clicking a row opens the same menu.
+
+### Table
+
+- **Range selection in more tables.** The Users and Shares settings tables and the Deleted branches and Deleted items pages support Shift+click range selection and Escape to clear.
+
+### Tree
+
+- **Mouse-wheel zoom.** Ctrl+scroll in the tree view and other graph canvases zooms in small, even steps.
+
+### Views
+
+- **Navigator types.** A view's **Navigator** settings can hide some of its types from the sidebar. The table, tree, and Reader still show every type.
+- **Explorer shows every item.** The **Show only folders in Explorer** setting is gone. Revealing an item highlights it in the sidebar.
+
+## API Changes
+
+- **Diagram interfaces.** Diagrams created through the [Customer API](/api/reference) use the same on-wire interfaces as the Architecture view and “Visualize by” diagrams.
+- **Item search.** The [Customer API](/api/reference) can find live items by name, supported field values, or exact ID within a project and branch, with optional category filtering.
+- **Reserved entity ID.** Creating an entity with the ID `root` is now refused. Integrations that supplied it must use a different ID.
+- **Data type identifiers.** New data types get an identifier that is independent of their name. Integrations, script automations, and spreadsheets that treat a type's identifier as its name should look the type up by name instead. Script calls to `createDataType` no longer accept an `id`.
+- **Item references.** Rich-text fields returned by the REST API and MCP tools carry each item reference's current label, as shown on screen.
+- **Flow MCP connections.** Agent gateways that request the prompt list while registering can now [connect](/api/mcp/connect) and use Flow tools.
