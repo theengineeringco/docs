@@ -27,13 +27,16 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(set(doc["components"]["securitySchemes"]), {"api-key"})
         self.assertEqual(doc["paths"]["/entities"]["get"]["tags"], ["Branches"])
 
-    def test_playground_exposes_only_production_despite_source_overrides(self):
+    def test_playground_defaults_to_production_despite_source_overrides(self):
         source = fixture()
         source["servers"] = [{"url": url} for url in sync.SOURCES.values()]
         source["paths"]["/entities"]["servers"] = [{"url": sync.SOURCES["RVT"]}]
         source["paths"]["/entities"]["get"]["servers"] = [{"url": sync.SOURCES["Rivian"]}]
         doc = sync.prepare(source)
-        self.assertEqual(doc["servers"], [{"url": sync.SOURCES["Production"], "description": "Flow API"}])
+        self.assertEqual(doc["servers"], [{
+            "url": "{baseUrl}", "description": "Flow API",
+            "variables": {"baseUrl": {"default": sync.SOURCES["Production"]}},
+        }])
         self.assertNotIn("servers", doc["paths"]["/entities"])
         self.assertNotIn("servers", doc["paths"]["/entities"]["get"])
 

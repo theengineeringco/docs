@@ -10,6 +10,8 @@ on:
       - 'scripts/sync-customer-api.py'
       - 'scripts/test_sync_customer_api.py'
       - 'scripts/test_api_docs.py'
+      - 'scripts/test_api_deployment.mjs'
+      - 'api-deployment.js'
       - '.github/workflows/sync-customer-api.yml'
       - 'openapi/customer-api.json'
       - 'api/**'
@@ -37,6 +39,7 @@ jobs:
       - name: Validate Mintlify pages and OpenAPI rendering
         run: npx --yes mint@4.2.939 validate
       - run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
+      - run: node --test scripts/test_api_deployment.mjs
       - name: Validate committed snapshot references
         run: |
           python3 - <<'PY'

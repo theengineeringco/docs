@@ -16015,7 +16015,12 @@
   "servers": [
     {
       "description": "Flow API",
-      "url": "https://backend.branch.flowengineering.com"
+      "url": "{baseUrl}",
+      "variables": {
+        "baseUrl": {
+          "default": "https://backend.branch.flowengineering.com"
+        }
+      }
     }
   ],
   "tags": [
