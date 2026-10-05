@@ -36,22 +36,22 @@ Write with a confident, declarative, and precise voice.
 
 - Prepare one edition nightly at 7:00 PM Pacific when eligible changes shipped since the latest published edition. Publication requires explicit approval.
 - Title each Release Notes page with its full publication date in `Month D, YYYY` format.
-- Put a `## Contents` section immediately after the frontmatter and before the first feature section. List every subsequent `##` section once, in the same order as the page, and omit links to sections that do not appear.
+- Put a short `## In this release` list immediately after the frontmatter. Link only to the individual highlights, `Improvements & Fixes`, and `API Changes`, in page order. Do not include feature-category subheadings or nested lists; omit links to absent sections.
 - Use this exact Markdown shape, replacing the example labels and anchors with the page's real sections:
   ```md
-  ## Contents
+  ## In this release
+
   - [Primary feature](#primary-feature)
-  - [Fixes](#fixes)
-  - [Improvements](#improvements)
-  - [API changes](#api-changes)
+  - [Improvements & Fixes](#improvements--fixes)
+  - [API Changes](#api-changes)
   ```
 - Keep the feature links first, ordered by customer impact, followed by any shared sections in their page order.
 - Omit empty sections and placeholder text such as “No customer-facing changes.”
-- Give each major customer-facing capability its own section before Fixes, Improvements, and API changes.
-- Order feature sections from highest to lowest customer impact. Make the amount of detail proportional to that impact: a major feature can use two short paragraphs, while a smaller feature stays at one or two sentences. A narrow limit increase, control, or workflow refinement normally belongs under Improvements instead of receiving its own feature section.
-- Use a Fixes section for consequential customer-facing corrections and reliability issues where behavior was wrong, unavailable, or misleading.
-- Use an Improvements section for consequential customer-facing refinements, performance gains, and workflow changes where existing behavior is enhanced rather than corrected.
-- Order shared sections as Fixes, Improvements, then API changes. Omit any section with no eligible content.
+- Give each major non-API customer-facing capability its own section before Improvements & Fixes and API Changes. Weekly editions target 5–6 major highlights, with fewer when fewer qualify; never pad the count with minor changes.
+- Order feature sections from highest to lowest customer impact. Make the amount of detail proportional to that impact: a major feature can use two short paragraphs, while a smaller feature stays at one or two sentences. A narrow limit increase, control, or workflow refinement normally belongs under Improvements & Fixes instead of receiving its own feature section.
+- Combine consequential improvements and fixes in one `## Improvements & Fixes` section. Group by the exact display names and boundaries in `theengineeringco/branch-demo/docs/feature-categories.md`, using one `###` per populated non-API category in registry order. Mix each feature’s corrections and enhancements in one list; do not split them by change type.
+- Put all API, SDK, and MCP changes in a separate final `## API Changes` section, including fixes, improvements, new contracts, deprecations, and required client actions. Do not duplicate them under an API feature category or as API-only highlights. A mixed product/API change can keep the product outcome in its feature section and distinct API details at the bottom.
+- Order shared sections as Improvements & Fixes, then API Changes. Omit any section with no eligible content.
 - Include only consequential customer-facing fixes and improvements. Omit cosmetic polish and minor UI behavior unless it blocks or misleads the customer.
 - Write each page description and index summary from the release's distinct outcomes. Avoid generic catch-alls such as “stronger reliability,” “reliability improvements,” and “more reliable workflows,” and do not repeat the same closing phrase across adjacent editions.
 - Use a short label and one sentence when the outcome is clear. Add another sentence when the behavior or impact would otherwise be ambiguous.
