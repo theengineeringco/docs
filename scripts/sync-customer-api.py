@@ -197,8 +197,12 @@ def prepare(spec):
         if tag["name"] in used_tags:
             tags[tag["name"]] = tag
     spec["tags"] = [tags.get(name, {"name": name}) for name in sorted(used_tags)]
-    # Compare every deployment, but expose only the standard production host.
-    spec["servers"] = [{"url": SOURCES["Production"], "description": "Flow API"}]
+    # The app link selects a hosted API at runtime without listing deployments.
+    spec["servers"] = [{
+        "url": "{baseUrl}",
+        "description": "Flow API",
+        "variables": {"baseUrl": {"default": SOURCES["Production"]}},
+    }]
     # Replace Swagger's shorthand routes and embedded changelog with the
     # maintained API-only guides. Endpoint and schema descriptions are retained.
     spec["info"]["description"] = (

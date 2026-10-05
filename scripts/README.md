@@ -6,12 +6,15 @@ Run from the docs repository:
 
 ```sh
 python3 -m unittest discover -s scripts -p 'test_*.py' -v
+node --test scripts/test_api_deployment.mjs
 python3 scripts/sync-customer-api.py
 ```
 
 The sync requires Python 3.10+ and uses only the standard library. It writes `openapi/customer-api.json` when a candidate differs and writes a machine-readable report to `/tmp/customer-api-sync-report.json`. `--report` and `--output` override those locations. Only use `--initialize` when deliberately creating the first snapshot.
 
-The checked-in snapshot includes customer endpoints, removes `/pylon-identity/token` (support-widget identity), prunes unreachable components, merges Branch/Branches, renames the ai reference group Automations, and supplies only the standard Production server for the playground. All three deployments remain comparison sources; their server overrides are removed so nightly updates cannot reintroduce the selector. The authored quickstart and authentication pages replace the Swagger overview's shorthand routes and embedded changelog. Known tenant wording in editorial descriptions and titles becomes workspace wording. Wire names, required headers, enum values, and example payloads remain unchanged.
+The checked-in snapshot includes customer endpoints, removes `/pylon-identity/token` (support-widget identity), prunes unreachable components, merges Branch/Branches, renames the ai reference group Automations, and supplies a `baseUrl` server variable defaulting to the standard Production server. All three deployments remain comparison sources; their server overrides are removed so nightly updates cannot reintroduce the selector. The authored quickstart and authentication pages replace the Swagger overview's shorthand routes and embedded changelog. Known tenant wording in editorial descriptions and titles becomes workspace wording. Wire names, required headers, enum values, and example payloads remain unchanged.
+
+App links supply `apiBaseUrl` to `api-deployment.js`, which validates the HTTPS hosted backend root and applies it through Mintlify's [server-variable API](https://www.mintlify.com/docs/customize/custom-scripts#set-api-playground-server-variables). The selected URL stays in session storage for navigation and reloads in that tab; a new app link replaces it. Invalid links clear the previous selection and restore Production. Direct visits without a stored selection also use Production. API keys are never passed in the URL or copied by this script. On-premises, local, staging, and GovCloud apps use their own Swagger documentation.
 
 The publication policy is permanent: API guides, navigation, and generated reference cannot contain tenant/environment terminology or deployment names. Unhandled references and incoming cURL-only descriptions fail synchronization before the snapshot is written, retaining the published reference for review. `test_api_docs.py` also enforces the three sidebar sections, cURL/Python/JavaScript options for authored requests, all three generated example languages, and syntax checks without making API calls. These checks require Node.js and Bash alongside Python; the sync itself remains standard-library-only.
 
