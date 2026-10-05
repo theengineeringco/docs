@@ -42,7 +42,7 @@ Write with a confident, declarative, and precise voice.
   ## In this release
 
   - [Primary feature](#primary-feature)
-  - [Improvements & Fixes](#improvements--fixes)
+  - [Improvements & Fixes](#improvements-&-fixes)
   - [API Changes](#api-changes)
   ```
 - Keep the feature links first, ordered by customer impact, followed by any shared sections in their page order.
