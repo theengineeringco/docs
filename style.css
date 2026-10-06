@@ -145,3 +145,60 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
     background: linear-gradient(to top, var(--sidebar-surface), transparent);
   }
 }
+
+/* Top-level Mintlify groups have no native collapse control. Keep their
+   rendered links in place so client-side navigation retains ownership. */
+.flow-sidebar-header {
+  position: relative;
+  min-height: 2rem;
+  padding-right: 2rem;
+}
+
+.flow-sidebar-toggle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border-radius: 4px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.flow-sidebar-toggle::after {
+  content: "";
+  position: absolute;
+  right: 0.75rem;
+  top: calc(50% - 0.2rem);
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 220ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.flow-sidebar-toggle[aria-expanded="true"]::after {
+  transform: rotate(45deg);
+}
+
+.flow-sidebar-toggle:hover {
+  background: color-mix(in srgb, currentColor 5%, transparent);
+}
+
+.flow-sidebar-toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.flow-sidebar-links[hidden] {
+  display: none !important;
+}
+
+.flow-sidebar-animating {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-sidebar-toggle::after {
+    transition: none;
+  }
+}
