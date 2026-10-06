@@ -29,6 +29,7 @@
     }
   }
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const animationOptions = { duration: 220, easing: "cubic-bezier(0.2, 0, 0, 1)" };
   let nextId = 0;
   let pending = false;
 
@@ -65,7 +66,7 @@
       links.classList.add("flow-sidebar-animating");
       animation = links.animate(
         [{ height: `${height}px` }, { height: `${expanded ? links.scrollHeight : 0}px` }],
-        { duration: 220, easing: "cubic-bezier(0.2, 0, 0, 1)" },
+        animationOptions,
       );
       animation.onfinish = () => {
         links.hidden = !expanded;
@@ -129,6 +130,69 @@
       }
     }
   }
+
+  const submenuAnimations = new WeakMap();
+  const nativeClicks = new WeakSet();
+
+  function animateSubmenu(button, links, expanded, height) {
+    submenuAnimations.get(button)?.animation.cancel();
+    links.inert = !expanded;
+    links.classList.add("flow-sidebar-animating");
+    button.toggleAttribute("data-flow-closing", !expanded);
+    const animation = links.animate(
+      [{ height: `${height}px` }, { height: `${expanded ? links.scrollHeight : 0}px` }],
+      animationOptions,
+    );
+    submenuAnimations.set(button, { animation, closing: !expanded });
+    animation.onfinish = () => {
+      submenuAnimations.delete(button);
+      links.classList.remove("flow-sidebar-animating");
+      links.inert = false;
+      button.removeAttribute("data-flow-closing");
+      if (!expanded && button.isConnected && button.nextElementSibling === links &&
+          button.getAttribute("aria-expanded") === "true") {
+        nativeClicks.add(button);
+        button.click();
+      }
+    };
+  }
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest(".flow-sidebar-links button[aria-expanded]");
+    if (!button) return;
+    if (nativeClicks.has(button)) {
+      nativeClicks.delete(button);
+      return;
+    }
+
+    const links = button.nextElementSibling;
+    const running = submenuAnimations.get(button);
+    if (running?.closing && links?.matches("ul")) {
+      event.preventDefault();
+      event.stopPropagation();
+      animateSubmenu(button, links, true, links.getBoundingClientRect().height);
+      return;
+    }
+    if (reducedMotion.matches) return;
+
+    if (button.getAttribute("aria-expanded") === "true" && links?.matches("ul")) {
+      // Mintlify unmounts closed submenus. Let the exit finish before handing
+      // the click back to its own handler, retaining its navigation state.
+      event.preventDefault();
+      event.stopPropagation();
+      animateSubmenu(button, links, false, links.getBoundingClientRect().height);
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      const openedLinks = button.nextElementSibling;
+      if (button.isConnected && !submenuAnimations.has(button) &&
+          button.getAttribute("aria-expanded") === "true" && openedLinks?.matches("ul")) {
+        animateSubmenu(button, openedLinks, true, 0);
+      }
+    });
+  }, true);
 
   refresh();
   new MutationObserver(() => {
