@@ -1,6 +1,33 @@
 (() => {
   const titles = new Set(["Quickstart", "Automations", "Flow MCP", "Endpoints"]);
   const sections = new Map();
+  const storageKey = "flow-api-sidebar-open";
+  const openTitles = new Set();
+  const revealedTitles = new Set();
+  let pathname;
+  try {
+    const saved = JSON.parse(window.sessionStorage.getItem(storageKey));
+    if (Array.isArray(saved)) {
+      for (const title of saved) {
+        if (titles.has(title)) openTitles.add(title);
+      }
+    }
+  } catch {
+    // Blocked storage or an invalid saved value must not prevent navigation.
+  }
+
+  function setOpen(title, expanded, animate) {
+    if (expanded) openTitles.add(title);
+    else openTitles.delete(title);
+    try {
+      window.sessionStorage.setItem(storageKey, JSON.stringify([...openTitles]));
+    } catch {
+      // In-memory state still survives Mintlify's client-side navigation.
+    }
+    for (const section of sections.values()) {
+      if (section.title === title) section.setExpanded(expanded, animate);
+    }
+  }
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let nextId = 0;
   let pending = false;
@@ -10,18 +37,19 @@
     button.type = "button";
     button.className = "flow-sidebar-toggle";
     button.setAttribute("aria-label", title);
-    button.setAttribute("aria-expanded", "false");
+    const initiallyExpanded = openTitles.has(title);
+    button.setAttribute("aria-expanded", String(initiallyExpanded));
     if (!links.id) links.id = `flow-sidebar-links-${++nextId}`;
     button.setAttribute("aria-controls", links.id);
     header.classList.add("flow-sidebar-header");
     header.append(button);
     links.classList.add("flow-sidebar-links");
-    links.hidden = true;
-    links.inert = true;
+    links.hidden = !initiallyExpanded;
+    links.inert = !initiallyExpanded;
     let animation;
 
-    button.addEventListener("click", () => {
-      const expanded = button.getAttribute("aria-expanded") !== "true";
+    function setExpanded(expanded, animate) {
+      if ((button.getAttribute("aria-expanded") === "true") === expanded) return;
       const height = links.getBoundingClientRect().height;
       animation?.cancel();
       button.setAttribute("aria-expanded", String(expanded));
@@ -29,7 +57,7 @@
       links.inert = !expanded;
       links.classList.remove("flow-sidebar-animating");
 
-      if (reducedMotion.matches) {
+      if (!animate || reducedMotion.matches) {
         links.hidden = !expanded;
         return;
       }
@@ -44,12 +72,17 @@
         links.classList.remove("flow-sidebar-animating");
         animation = undefined;
       };
+    }
+
+    button.addEventListener("click", () => {
+      setOpen(title, button.getAttribute("aria-expanded") !== "true", true);
     });
 
     sections.set(header, {
       title,
       links,
       button,
+      setExpanded,
       remove() {
         animation?.cancel();
         button.remove();
@@ -63,6 +96,10 @@
 
   function refresh() {
     pending = false;
+    if (pathname !== window.location.pathname) {
+      pathname = window.location.pathname;
+      revealedTitles.clear();
+    }
     // Mintlify can reuse or replace sidebar nodes during client-side navigation.
     for (const [header, section] of sections) {
       if (!header.isConnected ||
@@ -81,6 +118,16 @@
         enhance(header, title, links);
       }
     }
+
+    for (const section of sections.values()) {
+      const activeLink = section.links.querySelector('a[aria-current="page"]');
+      // Reveal a destination once per navigation, so an explicit collapse on
+      // the current page survives rerenders and reopening the mobile menu.
+      if (activeLink?.pathname === pathname && !revealedTitles.has(section.title)) {
+        revealedTitles.add(section.title);
+        setOpen(section.title, true, false);
+      }
+    }
   }
 
   refresh();
@@ -89,5 +136,10 @@
       pending = true;
       requestAnimationFrame(refresh);
     }
-  }).observe(document.body, { childList: true, subtree: true });
+  }).observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["aria-current"],
+  });
 })();
