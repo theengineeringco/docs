@@ -88,7 +88,8 @@
   },
   "contextual": {
     "options": [
-      "copy"
+      "copy",
+      "download-spec"
     ]
   },
   "description": "Customer API documentation, authentication, and release notes from Flow.",
