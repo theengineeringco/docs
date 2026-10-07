@@ -20,9 +20,9 @@ Integrations connect external apps to Flow. Automations define the work Flow run
 ## Set up and run
 
 1. List or create the project's automations with `GET` or `POST /project/{projectId}/automations`.
-1. [Set up a webhook automation](/api/automations/webhooks): configure its instructions and name, then send a JSON event.
-2. [Trigger and poll automations](/api/examples/automations): start runs asynchronously, store their IDs, and read the results.
-3. Use the [endpoint reference](/api/reference) for complete request and response schemas.
+2. [Set up a webhook automation](/api/automations/webhooks): configure its instructions and name, then send a JSON event.
+3. [Trigger and poll automations](/api/examples/automations): start runs asynchronously, store their IDs, and read the results.
+4. Use the [endpoint reference](/api/reference) for complete request and response schemas.
 
 A trigger request matches automations by source. One request can start multiple runs. Include `project_id` to target the intended project, and track each returned `agent_id` separately.
 
