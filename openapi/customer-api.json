@@ -54,6 +54,349 @@
         "properties": {},
         "type": "object"
       },
+      "AgentChatListDto": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AgentChatSummaryDto"
+            },
+            "type": "array"
+          },
+          "moreAvailable": {
+            "type": "boolean"
+          },
+          "nextCursor": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "type": "object"
+      },
+      "AgentChatResponseDto": {
+        "properties": {
+          "ai_model": {
+            "nullable": true,
+            "type": "string"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "branch_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "branches": {
+            "default": [],
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "config_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "context_usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AiContextUsageDto"
+              }
+            ],
+            "nullable": true,
+            "type": "object"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true,
+            "type": "string"
+          },
+          "error_details": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "integration_grade": {
+            "nullable": true,
+            "type": "string"
+          },
+          "integration_response": {
+            "nullable": true,
+            "type": "string"
+          },
+          "last_user_message_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "messages": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "parent_agent_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "plan_headline": {
+            "nullable": true,
+            "type": "string"
+          },
+          "plan_items": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentPlanItemDto"
+            },
+            "type": "array"
+          },
+          "project_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "root_agent_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "shared_with": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "spawn_depth": {
+            "type": "number"
+          },
+          "spawn_tool_call_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "title": {
+            "nullable": true,
+            "type": "string"
+          },
+          "trigger_info": {
+            "nullable": true,
+            "type": "object"
+          },
+          "trigger_type": {
+            "enum": [
+              "branch",
+              "endpoint",
+              "import",
+              "schedule",
+              "slack",
+              "github",
+              "gitlab",
+              "onshape",
+              "webhook",
+              "assistant",
+              "entity_edit",
+              "manual",
+              "impact_analysis",
+              "what_if_analysis",
+              "subagent"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "messages",
+          "status",
+          "title",
+          "error",
+          "error_details",
+          "branch_id",
+          "project_id",
+          "config_id",
+          "parent_agent_id",
+          "root_agent_id",
+          "spawn_depth",
+          "spawn_tool_call_id",
+          "visibility",
+          "created_by",
+          "shared_with",
+          "created_at",
+          "updated_at",
+          "trigger_type",
+          "trigger_info",
+          "plan_items",
+          "plan_headline",
+          "ai_model",
+          "context_usage",
+          "archived",
+          "last_user_message_at"
+        ],
+        "type": "object"
+      },
+      "AgentChatSummaryDto": {
+        "properties": {
+          "ai_model": {
+            "nullable": true,
+            "type": "string"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "branch_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "config_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "error": {
+            "nullable": true,
+            "type": "string"
+          },
+          "error_details": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "last_user_message_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "parent_agent_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "plan_headline": {
+            "nullable": true,
+            "type": "string"
+          },
+          "plan_items": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentPlanItemDto"
+            },
+            "type": "array"
+          },
+          "project_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "root_agent_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "shared_with": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "spawn_depth": {
+            "type": "number"
+          },
+          "spawn_tool_call_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "title": {
+            "nullable": true,
+            "type": "string"
+          },
+          "trigger_info": {
+            "nullable": true,
+            "type": "object"
+          },
+          "trigger_type": {
+            "enum": [
+              "branch",
+              "endpoint",
+              "import",
+              "schedule",
+              "slack",
+              "github",
+              "gitlab",
+              "onshape",
+              "webhook",
+              "assistant",
+              "entity_edit",
+              "manual",
+              "impact_analysis",
+              "what_if_analysis",
+              "subagent"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "title",
+          "error",
+          "error_details",
+          "branch_id",
+          "project_id",
+          "config_id",
+          "visibility",
+          "created_by",
+          "shared_with",
+          "created_at",
+          "updated_at",
+          "trigger_type",
+          "trigger_info",
+          "plan_items",
+          "plan_headline",
+          "ai_model",
+          "parent_agent_id",
+          "root_agent_id",
+          "spawn_depth",
+          "spawn_tool_call_id",
+          "archived",
+          "last_user_message_at"
+        ],
+        "type": "object"
+      },
       "AgentPlanItemDto": {
         "properties": {
           "conclusion": {
@@ -83,6 +426,78 @@
         "required": [
           "title",
           "status"
+        ],
+        "type": "object"
+      },
+      "AiContextUsageDto": {
+        "properties": {
+          "budgetTokens": {
+            "description": "Effective input budget for this deployment.",
+            "type": "number"
+          },
+          "droppedCount": {
+            "description": "History turns being withheld from the model (0 = none).",
+            "type": "number"
+          },
+          "usedTokens": {
+            "description": "Estimated tokens the conversation occupies. Approximate, and may exceed budgetTokens.",
+            "type": "number"
+          }
+        },
+        "required": [
+          "usedTokens",
+          "budgetTokens",
+          "droppedCount"
+        ],
+        "type": "object"
+      },
+      "AutomationDto": {
+        "properties": {
+          "allowAdminTools": {
+            "type": "boolean"
+          },
+          "confirmBeforeExecute": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "description": "Whether script automation runs are enabled. Defaults to true; ignored in agent mode.",
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "agent",
+              "script"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "runsAs": {
+            "$ref": "#/components/schemas/AutomationRunsAsDto"
+          },
+          "script": {
+            "type": "string"
+          },
+          "trigger": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutomationTriggerDto"
+              }
+            ],
+            "nullable": true,
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "name"
         ],
         "type": "object"
       },
@@ -182,6 +597,101 @@
         },
         "required": [
           "items"
+        ],
+        "type": "object"
+      },
+      "AutomationRunsAsDto": {
+        "properties": {
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "kind": {
+            "enum": [
+              "user",
+              "author_unknown",
+              "author_unavailable"
+            ],
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "type": "object"
+      },
+      "AutomationTriggerDto": {
+        "properties": {
+          "authors": {
+            "description": "GitHub/GitLab triggers: only fire for these authors. Empty or absent fires for everyone.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "branch": {
+            "description": "Manual triggers: whether the automation can be run from a branch.",
+            "type": "boolean"
+          },
+          "branchId": {
+            "description": "Schedule triggers: the branch each run starts from.",
+            "type": "string"
+          },
+          "branchIds": {
+            "description": "Schedule triggers: run once per listed branch on every occurrence. Takes precedence over `branchId`.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "cronExpression": {
+            "description": "Schedule triggers: a five-field cron expression.",
+            "example": "0 9 * * 1-5",
+            "type": "string"
+          },
+          "paths": {
+            "description": "GitHub/GitLab triggers: only fire for changes under these paths. Empty or absent fires for every change.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "source": {
+            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, gitlab, onshape), 'manual', or the name of a custom webhook trigger.",
+            "example": "schedule",
+            "type": "string"
+          },
+          "timeZone": {
+            "description": "Schedule triggers: the IANA timezone the cron expression is read in. Defaults to UTC.",
+            "example": "America/Los_Angeles",
+            "type": "string"
+          },
+          "types": {
+            "description": "Manual triggers: the category ids of the items it can be run from.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "source"
+        ],
+        "type": "object"
+      },
+      "AutomationsResponseDto": {
+        "properties": {
+          "automations": {
+            "items": {
+              "$ref": "#/components/schemas/AutomationDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "automations"
         ],
         "type": "object"
       },
@@ -425,6 +935,24 @@
         },
         "required": [
           "files"
+        ],
+        "type": "object"
+      },
+      "BatchRestoreEntitiesDto": {
+        "properties": {
+          "branchId": {
+            "description": "Branch ID; applies to the entire batch",
+            "type": "string"
+          },
+          "entityIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "entityIds"
         ],
         "type": "object"
       },
@@ -964,6 +1492,9 @@
             },
             "type": "array"
           },
+          "restore_eligible": {
+            "type": "boolean"
+          },
           "reviews": {
             "items": {
               "$ref": "#/components/schemas/BranchReviewResponseDto"
@@ -1428,6 +1959,103 @@
         ],
         "type": "object"
       },
+      "CreateAgentChatDto": {
+        "properties": {
+          "ai_model": {
+            "description": "Model to answer this chat with, instead of the project's.",
+            "nullable": true,
+            "type": "string"
+          },
+          "branch_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "messages": {
+            "description": "The opening turn. Each message is `{ \"role\": \"user\", \"content\": \"…\" }`; given, the agent starts answering as soon as the chat exists. Omitted, the chat is created idle and POST /ai/agents/{id}/messages starts it.",
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "project_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "trigger_info": {
+            "description": "The caller's own labels for the chat, kept on it as sent. `api_key_id` is always the calling key, whatever the body says.",
+            "type": "object"
+          },
+          "visibility": {
+            "default": "private",
+            "enum": [
+              "private",
+              "shared"
+            ],
+            "type": "string"
+          },
+          "wait": {
+            "default": false,
+            "description": "Hold the request open until the opening turn has finished and return the complete transcript. Off, the response comes back as soon as the chat exists with `status: \"streaming\"`; poll GET /ai/trigger/runs or GET /ai/agents/{id} for the outcome, exactly as for an automation run.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "project_id"
+        ],
+        "type": "object"
+      },
+      "CreateAutomationDto": {
+        "properties": {
+          "allowAdminTools": {
+            "description": "Let runs keep the admin-only data-model, saved-view and template tools, honored only while the user it runs as is a project admin. Can't be turned on with an API key; turn it on in Flow.",
+            "type": "boolean"
+          },
+          "confirmBeforeExecute": {
+            "description": "Branch-review triggers: whether the agent presents a plan for approval before writing. Defaults to true.",
+            "type": "boolean"
+          },
+          "enabled": {
+            "description": "Whether script automation runs are enabled. Defaults to true; ignored in agent mode.",
+            "type": "boolean"
+          },
+          "mode": {
+            "description": "What runs: `agent` (the default) follows `prompt`; `script` runs `script` and needs the automation scripts beta.",
+            "enum": [
+              "agent",
+              "script"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "example": "Nightly orphan check",
+            "type": "string"
+          },
+          "prompt": {
+            "description": "The instructions an agent automation follows. Required in agent mode.",
+            "type": "string"
+          },
+          "script": {
+            "description": "The python a script automation runs. Required in script mode.",
+            "type": "string"
+          },
+          "trigger": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutomationTriggerDto"
+              }
+            ],
+            "description": "When the automation runs. Omit or send null for an automation that is only run by hand.",
+            "nullable": true,
+            "type": "object"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
       "CreateBranchDto": {
         "properties": {
           "branch_number": {
@@ -1680,6 +2308,13 @@
           "starting_entity_id": {
             "description": "Entity the view should anchor to for the recipient",
             "type": "string"
+          },
+          "upstream_context_path": {
+            "description": "Entity ids on the path above starting_entity_id in the shared view, top first. Each is shared individually (the item alone, nothing it links to) together with this grant.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "user_group_id": {
             "description": "User group receiving the grant",
@@ -2063,6 +2698,201 @@
         ],
         "type": "object"
       },
+      "CustomerEntityFieldFilterDto": {
+        "properties": {
+          "category_id": {
+            "description": "Category ID. This condition only matches entities of this category, including empty-field conditions.",
+            "type": "string"
+          },
+          "field_key": {
+            "description": "Stored field key from the data model, or a built-in key such as name, description, owner, or reviewers.",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "field"
+            ],
+            "type": "string"
+          },
+          "operation": {
+            "description": "Must be valid for the field type. Text uses case-insensitive comparisons; tag/stage values are exact option names; user values are IDs. Boolean fields accept isTrue/isFalse. Presence conditions have no operands.",
+            "enum": [
+              "equals",
+              "notEquals",
+              "contains",
+              "notContains",
+              "startsWith",
+              "endsWith",
+              "greaterThan",
+              "greaterThanOrEqual",
+              "lessThan",
+              "lessThanOrEqual",
+              "between",
+              "on",
+              "before",
+              "after",
+              "overlaps",
+              "excludes",
+              "isTrue",
+              "isFalse",
+              "isEmpty",
+              "isPopulated"
+            ],
+            "type": "string"
+          },
+          "value": {
+            "description": "Text, finite number, or ISO calendar date (YYYY-MM-DD). Required for scalar comparisons.",
+            "oneOf": [
+              {
+                "maxLength": 2000,
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "value_to": {
+            "description": "Inclusive upper bound. Required only for between.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "values": {
+            "description": "Required for overlaps/excludes on tags, stages, verification results, or users.",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kind",
+          "category_id",
+          "field_key",
+          "operation"
+        ],
+        "type": "object"
+      },
+      "CustomerEntityFilterGroupDto": {
+        "properties": {
+          "conditions": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerEntityTypeFilterDto"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomerEntityFieldFilterDto"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomerEntityFilterGroupDto"
+                }
+              ]
+            },
+            "maxItems": 50,
+            "minItems": 1,
+            "type": "array"
+          },
+          "kind": {
+            "enum": [
+              "group"
+            ],
+            "type": "string"
+          },
+          "operator": {
+            "enum": [
+              "and",
+              "or"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "operator",
+          "conditions"
+        ],
+        "type": "object"
+      },
+      "CustomerEntityFilterPageDto": {
+        "properties": {
+          "entity_ids": {
+            "description": "Matching live entity IDs. Fetch entity records using the batch entity read endpoint.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "next_cursor": {
+            "description": "Continue until null, even when entity_ids is empty. Each request examines at most the server scan budget before returning progress.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "entity_ids",
+          "next_cursor"
+        ],
+        "type": "object"
+      },
+      "CustomerEntityFilterQueryDto": {
+        "properties": {
+          "branch_id": {
+            "description": "Branch to read; omit or use master for Base.",
+            "minLength": 1,
+            "type": "string"
+          },
+          "cursor": {
+            "description": "Opaque next_cursor from the same query. These are live pages, not a frozen snapshot; restart if the filter or data model changes.",
+            "type": "string"
+          },
+          "filter": {
+            "description": "At most 50 total nodes and 5 group levels. Unknown properties, categories, fields, options, or invalid operands receive 400; no condition is silently dropped.",
+            "discriminator": {
+              "mapping": {
+                "field": "#/components/schemas/CustomerEntityFieldFilterDto",
+                "group": "#/components/schemas/CustomerEntityFilterGroupDto",
+                "type": "#/components/schemas/CustomerEntityTypeFilterDto"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomerEntityTypeFilterDto"
+              },
+              {
+                "$ref": "#/components/schemas/CustomerEntityFieldFilterDto"
+              },
+              {
+                "$ref": "#/components/schemas/CustomerEntityFilterGroupDto"
+              }
+            ]
+          },
+          "limit": {
+            "default": 50,
+            "maximum": 100,
+            "minimum": 1,
+            "type": "number"
+          },
+          "timezone": {
+            "default": "UTC",
+            "description": "IANA timezone for calendar-date boundaries. Date-only stored values retain their calendar dates.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "filter"
+        ],
+        "type": "object"
+      },
       "CustomerEntityFormulaChangedChangeDto": {
         "properties": {
           "entity_id": {
@@ -2354,6 +3184,38 @@
         ],
         "type": "object"
       },
+      "CustomerEntityTypeFilterDto": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "type"
+            ],
+            "type": "string"
+          },
+          "operation": {
+            "enum": [
+              "overlaps",
+              "excludes"
+            ],
+            "type": "string"
+          },
+          "values": {
+            "description": "Category IDs from the project data model.",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kind",
+          "operation",
+          "values"
+        ],
+        "type": "object"
+      },
       "CustomerEntityValueChangedChangeDto": {
         "properties": {
           "entity_id": {
@@ -2597,6 +3459,9 @@
       },
       "DeletedBranchListRowDto": {
         "properties": {
+          "created_at": {
+            "type": "string"
+          },
           "cursor": {
             "description": "Pass as `before` to fetch the page after this row. Opaque; valid only as handed out.",
             "type": "string"
@@ -2613,6 +3478,12 @@
           "id": {
             "type": "string"
           },
+          "labels": {
+            "items": {
+              "$ref": "#/components/schemas/BranchLabelDto"
+            },
+            "type": "array"
+          },
           "merged_at": {
             "description": "Set when a merge archived the branch; null when it was discarded through the delete endpoint.",
             "nullable": true,
@@ -2624,6 +3495,10 @@
           "number": {
             "description": "Project-scoped branch number.",
             "type": "number"
+          },
+          "owner_id": {
+            "nullable": true,
+            "type": "string"
           },
           "parent_id": {
             "nullable": true,
@@ -2644,6 +3519,69 @@
           "merged_at",
           "deleted_at",
           "deleted_by_id",
+          "owner_id",
+          "created_at",
+          "labels",
+          "cursor"
+        ],
+        "type": "object"
+      },
+      "DeletedEntitiesPageDto": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DeletedEntityDto"
+            },
+            "type": "array"
+          },
+          "next_cursor": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "type": "object"
+      },
+      "DeletedEntityDto": {
+        "properties": {
+          "ai_agent_id": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "cursor": {
+            "type": "string"
+          },
+          "deleted_at": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "owner_id": {
+            "type": "string"
+          },
+          "unique_entity_number": {
+            "type": "number"
+          },
+          "user_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "deleted_at",
           "cursor"
         ],
         "type": "object"
@@ -2687,6 +3625,28 @@
         ],
         "type": "object"
       },
+      "DiagramConnectionInterfaceDto": {
+        "properties": {
+          "id": {
+            "description": "Platform entity ID of the interface",
+            "type": "string"
+          },
+          "name": {
+            "description": "Display name shown in the pill on the wire",
+            "type": "string"
+          },
+          "type": {
+            "description": "Entity type label (e.g. \"Interface\")",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
+        "type": "object"
+      },
       "DiagramConnectionItemDto": {
         "properties": {
           "color": {
@@ -2706,6 +3666,14 @@
           "from": {
             "description": "Source entity or node ID",
             "type": "string"
+          },
+          "interface": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DiagramConnectionInterfaceDto"
+              }
+            ],
+            "description": "Flow entity carried ON this wire, drawn as a pill on the line between `from` and `to` instead of a node of its own. It must not also appear in `entities`/`nodes` or on another connection."
           },
           "kind": {
             "description": "Arrow routing style: \"elbow\" (default) uses right-angle corners, \"arc\" a smooth curve",
@@ -3512,6 +4480,10 @@
           "outputTokens": {
             "type": "number"
           },
+          "paused": {
+            "description": "Reading stopped a few pages past what its agent chat has taken, until that chat runs a turn again.",
+            "type": "boolean"
+          },
           "relationshipCount": {
             "type": "number"
           },
@@ -3538,6 +4510,7 @@
           "chunksDone",
           "chunksRunning",
           "chunksFailed",
+          "paused",
           "entityCount",
           "relationshipCount",
           "noteCount",
@@ -3749,12 +4722,16 @@
           },
           "in_app_enabled": {
             "type": "boolean"
+          },
+          "slack_enabled": {
+            "type": "boolean"
           }
         },
         "required": [
           "event_type",
           "email_enabled",
-          "in_app_enabled"
+          "in_app_enabled",
+          "slack_enabled"
         ],
         "type": "object"
       },
@@ -4345,6 +5322,48 @@
         },
         "type": "object"
       },
+      "RevertEntityToPointDto": {
+        "properties": {
+          "change_from_seq_id": {
+            "description": "Revert only the change between this sequence id (exclusive) and seq_id, keeping later edits to anything that change did not touch. Omit to revert the item to its state at seq_id.",
+            "type": "string"
+          },
+          "entity_id": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "in_place": {
+            "description": "Write the revert straight onto this branch instead of proposing a new branch to review.",
+            "type": "boolean"
+          },
+          "seq_id": {
+            "description": "Sequence id of one of the item's history entries on this branch. The item is reverted to its state right after that change. 0 reverts it to before it existed.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "entity_id",
+          "seq_id"
+        ],
+        "type": "object"
+      },
+      "RevertEntityToPointResponseDto": {
+        "properties": {
+          "branch_id": {
+            "description": "The branch now carrying the revert: the new branch, or this branch's id ('master' for Base) when reverted in place.",
+            "type": "string"
+          },
+          "created": {
+            "description": "True when a new branch was created.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "branch_id",
+          "created"
+        ],
+        "type": "object"
+      },
       "RichTextToMarkdownDto": {
         "properties": {
           "richText": {
@@ -4368,6 +5387,80 @@
           "external"
         ],
         "type": "string"
+      },
+      "SearchResultDto": {
+        "properties": {
+          "entity_id": {
+            "type": "string"
+          },
+          "entity_type": {
+            "type": "string"
+          },
+          "human_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "legacy_human_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "match": {
+            "enum": [
+              "semantic"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "same_text_count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entity_id",
+          "name",
+          "entity_type",
+          "human_id",
+          "legacy_human_id"
+        ],
+        "type": "object"
+      },
+      "SendMessageDto": {
+        "properties": {
+          "branch_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "messages": {
+            "description": "The next turn: one or more `{ \"role\": \"user\", \"content\": \"…\" }` messages. The agent answers in the background; poll the chat for the reply.",
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "messages"
+        ],
+        "type": "object"
+      },
+      "SendMessageResponseDto": {
+        "properties": {
+          "job_id": {
+            "description": "Identifies this send within the chat.",
+            "type": "string"
+          },
+          "queued": {
+            "description": "False: the chat was idle and this message became a turn at once. True: a turn was already running and this message runs after it finishes.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "job_id",
+          "queued"
+        ],
+        "type": "object"
       },
       "SetBranchOwnerDto": {
         "properties": {
@@ -4489,6 +5582,13 @@
             "default": false,
             "type": "boolean"
           },
+          "upstream_context_path": {
+            "description": "Entity ids on the path above starting_entity_id in the shared view, top first. Each is shared individually (the item alone, nothing it links to) together with this grant.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "view_id": {
             "description": "CustomView.id from the project-scoped custom-views-2 registry",
             "type": "string"
@@ -4569,6 +5669,12 @@
               }
             ]
           },
+          "context_of_grant_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "created_at": {
             "type": "string"
           },
@@ -4603,6 +5709,12 @@
           "starting_entity_id": {
             "type": "string"
           },
+          "upstream_context_path_entity_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "user_email": {
             "nullable": true,
             "type": "string"
@@ -4620,6 +5732,7 @@
             "type": "string"
           },
           "view_id": {
+            "nullable": true,
             "type": "string"
           }
         },
@@ -4753,6 +5866,9 @@
         "properties": {
           "approvals_needed": {
             "type": "number"
+          },
+          "deletes_entity": {
+            "type": "boolean"
           },
           "entity_id": {
             "type": "string"
@@ -5175,6 +6291,57 @@
         ],
         "type": "object"
       },
+      "UpdateAutomationDto": {
+        "properties": {
+          "allowAdminTools": {
+            "description": "Let runs keep the admin-only data-model, saved-view and template tools, honored only while the user it runs as is a project admin. Can't be turned on with an API key; turn it on in Flow.",
+            "type": "boolean"
+          },
+          "confirmBeforeExecute": {
+            "description": "Branch-review triggers: whether the agent presents a plan for approval before writing. Defaults to true.",
+            "type": "boolean"
+          },
+          "enabled": {
+            "description": "Whether script automation runs are enabled. Defaults to true; ignored in agent mode.",
+            "type": "boolean"
+          },
+          "mode": {
+            "description": "What runs: `agent` (the default) follows `prompt`; `script` runs `script` and needs the automation scripts beta.",
+            "enum": [
+              "agent",
+              "script"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "example": "Nightly orphan check",
+            "type": "string"
+          },
+          "prompt": {
+            "description": "The instructions an agent automation follows. Required in agent mode.",
+            "type": "string"
+          },
+          "runAsMe": {
+            "description": "Confirms that this automation should run as you from now on. Required when you are not its current writer and the edit changes what it runs, or how and when it runs. Renaming it, disabling it or turning off admin tools never changes whom it runs as. Sent with no other change, it only makes you the writer.",
+            "type": "boolean"
+          },
+          "script": {
+            "description": "The python a script automation runs. Required in script mode.",
+            "type": "string"
+          },
+          "trigger": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutomationTriggerDto"
+              }
+            ],
+            "description": "When the automation runs. Omit or send null for an automation that is only run by hand.",
+            "nullable": true,
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "UpdateBranchDescriptionDto": {
         "properties": {
           "content": {
@@ -5226,6 +6393,9 @@
           },
           "in_app_enabled": {
             "type": "boolean"
+          },
+          "slack_enabled": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -5259,6 +6429,21 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "UpdateUpstreamContextDto": {
+        "properties": {
+          "upstream_context_path": {
+            "description": "The path above the shared item as the sharer sees it now, top first. Individual item shares are added and removed so the share shows exactly this path; an empty list removes the path.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "upstream_context_path"
+        ],
         "type": "object"
       },
       "UpdateUserGroupDto": {
@@ -5451,6 +6636,9 @@
           "has_profile_picture": {
             "type": "boolean"
           },
+          "has_signed_in": {
+            "type": "boolean"
+          },
           "id": {
             "type": "string"
           },
@@ -5483,6 +6671,7 @@
           "provisioned_via_provider",
           "provisioned_at",
           "deactivated_at",
+          "has_signed_in",
           "project_access"
         ],
         "type": "object"
@@ -5520,6 +6709,320 @@
   },
   "openapi": "3.0.0",
   "paths": {
+    "/ai/agents": {
+      "get": {
+        "description": "Every chat the caller created or may see, as summaries without their transcripts. Filter by `projectId`, `branchId` or `visibility`; page with `cursor` and `nextCursor`.",
+        "operationId": "AgentChatController_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "visibility",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Opaque keyset cursor for chat history. Use 0 for the first page, then pass nextCursor while moreAvailable is true.",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Legacy offset pagination. New clients should use cursor so deep pages do not require scanning every preceding row.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "configId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "triggerType",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "projectId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "branchId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Pass true to list archived chats instead of active ones. Omitted, only active chats are returned.",
+            "in": "query",
+            "name": "archived",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Ordering. 'updated' (default) walks the row's last write; 'lastUserMessage' walks when its owner last sent a message, which does not reshuffle while a run streams.",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "enum": [
+                "updated",
+                "lastUserMessage"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChatListDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the agent chats visible to the caller, newest first",
+        "tags": [
+          "Automations"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-ai-agents",
+          "metadata": {
+            "sidebarTitle": "List the agent chats visible to the caller, newest first",
+            "title": "List the agent chats visible to the caller, newest first"
+          }
+        }
+      },
+      "post": {
+        "description": "Creates the chat and, when `messages` is given, starts the agent on it. Answers as soon as the chat exists — its `status` is `streaming` while the agent works and `ready` once it has answered — unless `wait: true` holds the request until the opening turn has finished. Poll GET /ai/trigger/runs?agent_ids={id} (the same poll as for an automation run) or GET /ai/agents/{id} for the transcript.",
+        "operationId": "AgentChatController_create",
+        "parameters": [
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentChatDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChatResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start an agent chat on a project (and optionally a branch) with an opening message",
+        "tags": [
+          "Automations"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-ai-agents",
+          "metadata": {
+            "sidebarTitle": "Start an agent chat on a project (and optionally a branch) with an opening message",
+            "title": "Start an agent chat on a project (and optionally a branch) with an opening message"
+          }
+        }
+      }
+    },
+    "/ai/agents/{id}": {
+      "get": {
+        "description": "`messages` is the whole transcript so far, `status` is `streaming` while a turn runs, `ready` when the agent has answered, or `error` (with `error` set) when the last turn failed.",
+        "operationId": "AgentChatController_findById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChatResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Read an agent chat: its transcript, status and outcome",
+        "tags": [
+          "Automations"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-ai-agents-id",
+          "metadata": {
+            "sidebarTitle": "Read an agent chat: its transcript, status and outcome",
+            "title": "Read an agent chat: its transcript, status and outcome"
+          }
+        }
+      }
+    },
+    "/ai/agents/{id}/messages": {
+      "post": {
+        "description": "Queues the message and starts the agent on it as soon as the chat is idle. With `queued: false` the turn has started: poll GET /ai/trigger/runs?agent_ids={id} until the run is not `running`, then GET /ai/agents/{id}. With `queued: true` an earlier turn is still running and the run status finishes for that turn first, so poll GET /ai/agents/{id} until the reply to this message is in the transcript.",
+        "operationId": "AgentChatController_sendMessage",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendMessageResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Send a follow-up message to an agent chat",
+        "tags": [
+          "Automations"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-ai-agents-id-messages",
+          "metadata": {
+            "sidebarTitle": "Send a follow-up message to an agent chat",
+            "title": "Send a follow-up message to an agent chat"
+          }
+        }
+      }
+    },
     "/ai/trigger": {
       "post": {
         "operationId": "AutomationTriggerController_triggerGeneric",
@@ -7293,6 +8796,320 @@
         }
       }
     },
+    "/project/{projectId}/automations": {
+      "get": {
+        "operationId": "AutomationsController_list",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationsResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a project's automations",
+        "tags": [
+          "Automations"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-automations",
+          "metadata": {
+            "sidebarTitle": "Get a project's automations",
+            "title": "Get a project's automations"
+          }
+        }
+      },
+      "post": {
+        "description": "Creates one automation at the end of the project's list. It runs as you: its scheduled and webhook runs use your access to the project for as long as you can edit it, and pause when you no longer can. Check `runsAs` on the response. Script automations need the automation scripts beta, and `allowAdminTools` cannot be turned on with an API key.",
+        "operationId": "AutomationsController_create",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAutomationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create an automation",
+        "tags": [
+          "Automations"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-automations",
+          "metadata": {
+            "sidebarTitle": "Create an automation",
+            "title": "Create an automation"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/automations/{automationId}": {
+      "delete": {
+        "operationId": "AutomationsController_remove",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "automationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete an automation",
+        "tags": [
+          "Automations"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/delete-project-projectid-automations-automationid",
+          "metadata": {
+            "sidebarTitle": "Delete an automation",
+            "title": "Delete an automation"
+          }
+        }
+      },
+      "get": {
+        "operationId": "AutomationsController_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "automationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get an automation",
+        "tags": [
+          "Automations"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-automations-automationid",
+          "metadata": {
+            "sidebarTitle": "Get an automation",
+            "title": "Get an automation"
+          }
+        }
+      },
+      "patch": {
+        "description": "Changes only the fields you send; `trigger` replaces the whole trigger, and null makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer.",
+        "operationId": "AutomationsController_update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "automationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAutomationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationDto"
+                }
+              }
+            },
+            "description": ""
+          },
+          "409": {
+            "description": "The edit would make the automation run as you instead of its current writer, and `runAsMe` was not sent."
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update an automation",
+        "tags": [
+          "Automations"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/patch-project-projectid-automations-automationid",
+          "metadata": {
+            "sidebarTitle": "Update an automation",
+            "title": "Update an automation"
+          }
+        }
+      }
+    },
     "/project/{projectId}/branch": {
       "get": {
         "operationId": "BranchController_findAll",
@@ -9012,6 +10829,88 @@
         }
       }
     },
+    "/project/{projectId}/branch/{id}/deleted-entities": {
+      "get": {
+        "description": "Pass \"master\" for Base. Deletions inherited from a parent branch are listed on the branch that made them. Restore a row with the entity restore endpoints.",
+        "operationId": "BranchController_getDeletedEntities",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "The `cursor` of the last row already shown; returns the page after it. Omit for the first page.",
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntitiesPageDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Entities deleted on this branch (its tombstones), newest first",
+        "tags": [
+          "Branches"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-branch-id-deleted-entities",
+          "metadata": {
+            "sidebarTitle": "Entities deleted on this branch (its tombstones), newest first",
+            "title": "Entities deleted on this branch (its tombstones), newest first"
+          }
+        }
+      }
+    },
     "/project/{projectId}/branch/{id}/description": {
       "post": {
         "operationId": "BranchController_setDescription",
@@ -9813,6 +11712,81 @@
           "metadata": {
             "sidebarTitle": "Preview a branch restore",
             "title": "Preview a branch restore"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/branch/{id}/revert-entity-to-point": {
+      "post": {
+        "description": "Returns the item to its state right after the given history entry. By default creates a new branch off this branch carrying the revert, to review and merge; with in_place the revert is written straight onto this branch, subject to the same checks as any edit. The original history is untouched either way.",
+        "operationId": "BranchController_revertEntityToPoint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevertEntityToPointDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevertEntityToPointResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Revert one item to an earlier point in its history",
+        "tags": [
+          "Branches"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-branch-id-revert-entity-to-point",
+          "metadata": {
+            "sidebarTitle": "Revert one item to an earlier point in its history",
+            "title": "Revert one item to an earlier point in its history"
           }
         }
       }
@@ -11193,6 +13167,15 @@
             }
           },
           {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -11255,6 +13238,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -11326,6 +13318,15 @@
             }
           },
           {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -11370,6 +13371,78 @@
           "metadata": {
             "sidebarTitle": "Delete multiple entities in one transaction",
             "title": "Delete multiple entities in one transaction"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/entities/filter/query": {
+      "post": {
+        "description": "Evaluate typed field conditions and AND/OR groups with a bounded flat scan. Returns IDs, without hierarchy, sorting, or a total count. Each page reads current state; concurrent edits can change later results. Continue until next_cursor is null, including after an empty page. Relationship, subtree, comment, and history filters are not supported.",
+        "operationId": "CustomerEntityFilterController_query",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerEntityFilterQueryDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerEntityFilterPageDto"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "description": "Invalid filter, incompatible field operation, or cursor for a different query/data model."
+          },
+          "503": {
+            "description": "The materialized read model is not ready. No scan result was produced; retry later."
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Filter live entities across a project",
+        "tags": [
+          "Entities"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-entities-filter-query",
+          "metadata": {
+            "sidebarTitle": "Filter live entities across a project",
+            "title": "Filter live entities across a project"
           }
         }
       }
@@ -11455,6 +13528,15 @@
             }
           },
           {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -11520,6 +13602,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -11591,6 +13682,15 @@
             }
           },
           {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -11642,6 +13742,186 @@
         }
       }
     },
+    "/project/{projectId}/entities/restore/batch": {
+      "post": {
+        "description": "Each entity comes back on the branch with the fields, links and position it had when it was deleted. Restoring an entity does not restore its parent; an entity whose parent is still deleted stays out of hierarchy views until the parent is restored too.",
+        "operationId": "EntitiesController_batchRestoreEntities",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRestoreEntitiesDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Entities restored"
+          },
+          "404": {
+            "description": "One or more entities not found"
+          },
+          "409": {
+            "description": "One or more entities are not deleted"
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Restore multiple deleted entities in one transaction",
+        "tags": [
+          "Entities"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-entities-restore-batch",
+          "metadata": {
+            "sidebarTitle": "Restore multiple deleted entities in one transaction",
+            "title": "Restore multiple deleted entities in one transaction"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/entities/search": {
+      "get": {
+        "description": "Search names and supported field values, or resolve exact Flow and Human IDs. Returns compact matches; use the entity-by-ID endpoint for full values and links. Matches reflect branch-visible state and exclude deleted entities. Indexed text results may be unavailable while the search index warms; exact IDs and empty-query listings remain available. Semantic suggestions, when enabled, follow ordinary matches within the total result limit.",
+        "operationId": "EntitiesController_searchEntities",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text or an exact Flow/Human ID. An empty string lists live entities. Text searches require an indexable trigram; exact identifiers still resolve for shorter queries.",
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "maxLength": 1024,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Branch to search. Omit or pass \"master\" for Base.",
+            "in": "query",
+            "name": "branch_id",
+            "required": false,
+            "schema": {
+              "maxLength": 256,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Restrict matches to this entity category ID.",
+            "in": "query",
+            "name": "entity_type",
+            "required": false,
+            "schema": {
+              "maxLength": 256,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum total results, including semantic suggestions when enabled. Exact identifiers and field matches precede semantic suggestions. This is a bounded search, not a paginated export.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SearchResultDto"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "X-Flow-Name-Search-Source": {
+                "description": "Search-index serving outcome for this request.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Flow-Semantic-Search": {
+                "description": "Semantic search outcome; off when not attempted.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Search live entities in a project and branch",
+        "tags": [
+          "Entities"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-entities-search",
+          "metadata": {
+            "sidebarTitle": "Search live entities in a project and branch",
+            "title": "Search live entities in a project and branch"
+          }
+        }
+      }
+    },
     "/project/{projectId}/entities/upsert": {
       "post": {
         "description": "Accepts an array of entities. For each: creates it if it does not exist, then writes ValueDiffs only for keys whose values have changed. Optionally links each entity as a downstream child of a parent. New children append in input order, including across successive requests. All diffs are written in a single DB round-trip for efficiency. Concurrent upserts matching the same external identifier (`idField`) are serialized server-side, so they converge on one entity instead of creating duplicates. Parents and children may be created atomically in one batch when `parentIds` contains Flow entity UUIDs, including UUIDs assigned to parent rows in that batch. `parentIds` does not resolve `idField` aliases; resolve or create such a parent first if its Flow UUID is unknown. The operation is atomic and safe to retry with the same stable IDs. If Claude Desktop reports \"No result received ... after waiting 4 minutes\", first read those IDs because the approval/dispatch may have been lost before Flow received the call; never replace the IDs merely because the result was lost. Field definition validation is intentionally skipped — callers may write arbitrary key names without pre-defining them in the schema.",
@@ -11671,6 +13951,15 @@
             "required": false,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -11742,6 +14031,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -11826,6 +14124,15 @@
             "required": false,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -12328,6 +14635,15 @@
             }
           },
           {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -12405,6 +14721,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -12506,6 +14831,15 @@
             }
           },
           {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -12562,6 +14896,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -12638,6 +14981,15 @@
             }
           },
           {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -12711,6 +15063,15 @@
             }
           },
           {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -12763,6 +15124,77 @@
         }
       }
     },
+    "/project/{projectId}/entities/{entityId}/restore": {
+      "post": {
+        "description": "Each entity comes back on the branch with the fields, links and position it had when it was deleted. Restoring an entity does not restore its parent; an entity whose parent is still deleted stays out of hierarchy views until the parent is restored too.",
+        "operationId": "EntitiesController_restoreEntity",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "entityId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "branch_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity restored"
+          },
+          "404": {
+            "description": "Entity not found"
+          },
+          "409": {
+            "description": "Entity is not deleted"
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Restore a deleted entity",
+        "tags": [
+          "Entities"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-entities-entityid-restore",
+          "metadata": {
+            "sidebarTitle": "Restore a deleted entity",
+            "title": "Restore a deleted entity"
+          }
+        }
+      }
+    },
     "/project/{projectId}/entities/{entityId}/values": {
       "put": {
         "operationId": "EntitiesController_setValue",
@@ -12781,6 +15213,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -12931,6 +15372,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Explicitly bypass branch protection (including Base) and branch editor groups. Requires an API key owned by an admin for this project. Defaults to false. Item locks, stage policies, field validation and branch lifecycle checks still apply.",
+            "in": "query",
+            "name": "bypass_branch_protection",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -14068,6 +16518,70 @@
         }
       }
     },
+    "/project/{projectId}/import/runs/{runId}/cancel": {
+      "post": {
+        "description": "Nothing further is read, and the chunks already read stay readable. A run that settled before the request arrived keeps its outcome; the returned progress says which happened.",
+        "operationId": "ImportController_cancelRun",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportRunProgressDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Stop an import run",
+        "tags": [
+          "Import"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-import-runs-runid-cancel",
+          "metadata": {
+            "sidebarTitle": "Stop an import run",
+            "title": "Stop an import run"
+          }
+        }
+      }
+    },
     "/project/{projectId}/import/runs/{runId}/chunks": {
       "get": {
         "description": "Every chunk with the analysis it produced, provenance intact. This is the debug view; the rolled-up output is what an agent reads.",
@@ -15172,6 +17686,79 @@
           "metadata": {
             "sidebarTitle": "Revoke a shared-access grant",
             "title": "Revoke a shared-access grant"
+          }
+        }
+      }
+    },
+    "/shared-grants/project/{projectId}/{id}/upstream-context": {
+      "put": {
+        "operationId": "SharedGrantsController_updateUpstreamContext",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUpstreamContextDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedAccessGrantResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Replace the path above a shared item: individual item shares are added and removed to match",
+        "tags": [
+          "Shared Access Grants"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/put-shared-grants-project-projectid-id-upstream-context",
+          "metadata": {
+            "sidebarTitle": "Replace the path above a shared item: individual item shares are added and removed to match",
+            "title": "Replace the path above a shared item: individual item shares are added and removed to match"
           }
         }
       }
