@@ -33,4 +33,8 @@ Use `POST /ai/agents` with `project_id` and an optional opening `messages` array
 
 Learn how [automations and triggers](/api/automations/overview) work together. [Set up a webhook automation](/api/automations/webhooks), then [start runs and poll their results](/api/examples/automations).
 
+## Shared item paths
+
+Shared access grants can include `upstream_context_path_entity_ids` when a share shows the path above its item. Individual context grants have `view_id: null` and `context_of_grant_ids`; clients reading grants must handle a nullable `view_id`. Use `PUT /shared-grants/project/{projectId}/{id}/upstream-context` to replace the path. See the [endpoint reference](/api/reference) for its request schema.
+
 API updates are included in the [release notes](/release-notes).
