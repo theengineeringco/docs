@@ -25,6 +25,10 @@ The endpoint reference also covers starting and continuing agent chats and manag
 
 Use [Flow MCP](/api/mcp/overview) to connect an AI client to your systems graph. Follow [Connect a client](/api/mcp/connect), then [use Flow tools](/api/mcp/tools) to read and update project data.
 
+## Start agent chats
+
+Use `POST /ai/agents` with `project_id` and an optional opening `messages` array to create a chat. Chats are private to the key owner by default; set `visibility` to `shared` only when the workspace should see them. With the default `wait: false`, the request returns while the agent works. Read `GET /ai/agents/{id}` for its transcript and status, then use `POST /ai/agents/{id}/messages` for a follow-up. The [endpoint reference](/api/reference) describes the full request bodies.
+
 ## Run automations
 
 Learn how [automations and triggers](/api/automations/overview) work together. [Set up a webhook automation](/api/automations/webhooks), then [start runs and poll their results](/api/examples/automations).

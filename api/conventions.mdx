@@ -35,8 +35,14 @@ Parameter names differ by endpoint:
 | `POST /project/{projectId}/entities/batch` | JSON `branchId` |
 | `PUT /project/{projectId}/entities/values/batch` | JSON `branchId` |
 | `POST /project/{projectId}/entities/history` | JSON `branch_id` |
+| `POST /project/{projectId}/entities/filter/query` | JSON `branch_id` |
+| `GET /project/{projectId}/entities/search` | Query `branch_id` |
 
 Keep the same project, branch, and filters throughout a paginated read. Follow each endpoint's schema for exact spelling.
+
+## Protected branches
+
+Entity writes honor branch protection and editor groups by default. On supported entity write endpoints, a personal API key owned by a project admin can pass the query parameter `bypass_branch_protection=true` to bypass those two restrictions, including on Base. The parameter defaults to `false`. Item locks, stage policies, field validation, and branch lifecycle checks still apply. Review the endpoint's parameters before using this override.
 
 ## Read every page
 
@@ -47,6 +53,8 @@ Pagination is specific to the endpoint.
 | List entities | Start with `starting_after=0`; then pass `nextPageStart` as `starting_after`. Default `limit` is 50; maximum is 1000. | Read `items`; continue while `moreAvailable` is `true`, including after an empty page. |
 | Search branches | Use `offset` and `limit`. | Read `branches`; continue while `has_more` is `true`. |
 | Entity history | Send JSON `cursor` from the previous `next_cursor`. `limit` is 1–100. | Read `items`; stop when `next_cursor` is `null`. |
+| Filter entities | Send JSON `cursor` from the previous `next_cursor`, keeping the same filter and branch. `limit` is 1–100. | Read `entity_ids`; stop when `next_cursor` is `null`, including after an empty page. |
+| Deleted entities on a branch | Send query `before` with the last row's `cursor`. | Read `items`; stop when `next_cursor` is `null`. |
 | List projects | Optional `limit`. | Returns an array without a continuation cursor. Omit `limit` to list all accessible projects. |
 
 Treat cursors as opaque strings. For entity lists, prefer `starting_after` to legacy `offset`; `offset` must stay below 1000 and is ignored when `starting_after` is set. See [Read entities](/api/examples/read-entities) for a complete cursor loop.

@@ -73,7 +73,7 @@ The reference also shows bearer authentication for Flow access tokens. A persona
 
 ## Understand permissions
 
-A key uses its creator's identity and current access. It does not add permissions or bypass project access, read-only roles, or branch restrictions.
+A key uses its creator's identity and current access. It does not add permissions or bypass project access or read-only roles. Entity writes follow branch protection by default. A key owned by a project admin can explicitly set `bypass_branch_protection=true` on supported entity write endpoints; see [API conventions](/api/conventions#protected-branches).
 
 Keys are long-lived. Store them as secrets, use a separate key per integration, and revoke keys that are no longer needed. External share recipients cannot create personal API keys.
 
