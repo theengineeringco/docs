@@ -190,3 +190,9 @@ The create batch and the value batch above are separate transactions. If the sec
 Both `entities` and `updates` must contain at least one entry. Send only writes for one project and one branch in each request.
 
 A transaction failure rolls back that transaction's writes. A network timeout or an error while returning the response does not prove rollback: the write could already have committed. Read the affected entities on the same branch before retrying. Do not automatically repeat a create request with server-generated IDs.
+
+## Restore deleted entities
+
+Use `GET /project/{projectId}/branch/{id}/deleted-entities` to list a branch's deleted items, newest first. Continue with the last row's `cursor` as the `before` query parameter until `next_cursor` is null. Restore one item with `POST /project/{projectId}/entities/{entityId}/restore`, passing `branch_id` when needed, or restore several in one transaction with `POST /project/{projectId}/entities/restore/batch` and JSON `entityIds` and an optional `branchId`.
+
+Restored items return with the fields, links, and position they had when deleted. Restoring a child does not restore its parent; restore the parent too if the child should appear in hierarchy views. These restore endpoints return `204` on success. Read the branch again before retrying after a timeout.

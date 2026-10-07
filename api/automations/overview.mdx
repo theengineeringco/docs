@@ -4,7 +4,7 @@ sidebarTitle: "Overview"
 description: "Connect events to automation runs and choose the right trigger."
 ---
 
-An automation combines instructions with a trigger. Configure it in Flow, send an event, and use the API to track the resulting runs.
+An automation contains instructions and can have a trigger. Create and manage it in Flow or through the Customer API, send an event, and use the API to track the resulting runs.
 
 ## Choose a trigger
 
@@ -19,11 +19,18 @@ Integrations connect external apps to Flow. Automations define the work Flow run
 
 ## Set up and run
 
-1. [Set up a webhook automation](/api/automations/webhooks): configure its instructions and name, then send a JSON event.
-2. [Trigger and poll automations](/api/examples/automations): start runs asynchronously, store their IDs, and read the results.
-3. Use the [endpoint reference](/api/reference) for complete request and response schemas.
+1. List or create the project's automations with `GET` or `POST /project/{projectId}/automations`.
+2. [Set up a webhook automation](/api/automations/webhooks): configure its instructions and name, then send a JSON event.
+3. [Trigger and poll automations](/api/examples/automations): start runs asynchronously, store their IDs, and read the results.
+4. Use the [endpoint reference](/api/reference) for complete request and response schemas.
 
 A trigger request matches automations by source. One request can start multiple runs. Include `project_id` to target the intended project, and track each returned `agent_id` separately.
+
+## Manage project automations
+
+Use `GET /project/{projectId}/automations` to list automations, or add an automation ID to read, update, or delete one. `POST /project/{projectId}/automations` creates an automation; `PATCH /project/{projectId}/automations/{automationId}` changes only the fields you send. A supplied `trigger` replaces the whole trigger, and `null` makes the automation manual.
+
+An automation runs with the permissions of the person who last saved what it runs. When changing another person's automation in a way that affects its work or trigger, send `runAsMe: true` to confirm that it will run as you; otherwise the update returns `409`. Renaming, disabling, or turning off admin tools keeps the current writer. An API key cannot enable `allowAdminTools`. Script mode requires the automation scripts beta.
 
 ## Automation endpoints
 

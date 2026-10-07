@@ -167,7 +167,9 @@ The response contains `items`, `nextPageStart`, and `moreAvailable`. Each item i
 
 To filter by category, add the `entity_type` query parameter with a category ID from the data model. To read another branch, replace `master` with its branch ID.
 
-The entity list supports `entity_type` and `branch_id` selection. It does not expose a general field-filter expression; apply additional predicates to the returned entities in your integration.
+The entity list supports `entity_type` and `branch_id` selection. For bounded name, field-value, or exact-ID lookup, use `GET /project/{projectId}/entities/search` with `query`, optional `branch_id` and `entity_type`, and a `limit` of at most 100. Search returns compact matches; fetch an entity by ID when you need full values and links. Search is not a paginated export.
+
+For structured conditions, use `POST /project/{projectId}/entities/filter/query`. Its JSON `filter` supports category and typed field conditions combined in AND/OR groups. Send `branch_id` in the body to select a branch. The response contains matching IDs, without hierarchy or a total count; continue with its opaque `next_cursor` until it is null, even after an empty page. The pages reflect current state rather than a frozen snapshot, so restart if the filter or data model changes. See the [endpoint reference](/api/reference) for supported operators and response schemas.
 
 ## Read all pages
 
