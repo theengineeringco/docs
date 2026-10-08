@@ -466,6 +466,18 @@
           "id": {
             "type": "string"
           },
+          "invalidateOn": {
+            "description": "Branch events after which a branch check must rerun, beyond a data change: comment_set_changed, comment_resolution_changed, comment_text_changed. Absent declares none.",
+            "items": {
+              "enum": [
+                "comment_set_changed",
+                "comment_resolution_changed",
+                "comment_text_changed"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
           "mode": {
             "enum": [
               "agent",
@@ -2019,6 +2031,18 @@
           "enabled": {
             "description": "Whether script automation runs are enabled. Defaults to true; ignored in agent mode.",
             "type": "boolean"
+          },
+          "invalidateOn": {
+            "description": "Branch checks: the branch events after which the check must rerun, beyond a data change: comment_set_changed, comment_resolution_changed, comment_text_changed. Omit to declare none on create; on update, omit to keep the current declaration and send [] to clear it.",
+            "items": {
+              "enum": [
+                "comment_set_changed",
+                "comment_resolution_changed",
+                "comment_text_changed"
+              ],
+              "type": "string"
+            },
+            "type": "array"
           },
           "mode": {
             "description": "What runs: `agent` (the default) follows `prompt`; `script` runs `script` and needs the automation scripts beta.",
@@ -4654,7 +4678,8 @@
               "BranchReadyForReview",
               "BranchMerged",
               "BranchOwnerChanged",
-              "ShareViewOpened"
+              "ShareViewOpened",
+              "AutomationRunFinished"
             ],
             "type": "string"
           },
@@ -4716,7 +4741,8 @@
               "BranchReadyForReview",
               "BranchMerged",
               "BranchOwnerChanged",
-              "ShareViewOpened"
+              "ShareViewOpened",
+              "AutomationRunFinished"
             ],
             "type": "string"
           },
@@ -5364,6 +5390,75 @@
         ],
         "type": "object"
       },
+      "ReviewPolicyBlockerDto": {
+        "properties": {
+          "entity_id": {
+            "type": "string"
+          },
+          "entity_name": {
+            "type": "string"
+          },
+          "occurrence_count": {
+            "type": "number"
+          },
+          "pending_reviewer_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "entity_id",
+          "entity_name",
+          "pending_reviewer_ids",
+          "occurrence_count"
+        ],
+        "type": "object"
+      },
+      "ReviewPolicyResponseDto": {
+        "properties": {
+          "allow_merge_override": {
+            "description": "Whether anyone may force a merge past the review requirements with an audited reason.",
+            "type": "boolean"
+          },
+          "changed_item_review_enabled": {
+            "description": "Whether \"Every changed item has been reviewed by its <fields>\" is switched on.",
+            "type": "boolean"
+          },
+          "changed_item_review_fields": {
+            "description": "Display names of user fields, matched on every item type. A changed item is satisfied once one person those fields name on it has approved.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "merge_override_role": {
+            "enum": [
+              "admins",
+              "admins_and_parent_branch_owners"
+            ],
+            "type": "string"
+          },
+          "min_approvals": {
+            "description": "Distinct approvals a branch needs before it can merge, the author included. Kept while the rule is off.",
+            "type": "number"
+          },
+          "min_approvals_enabled": {
+            "description": "Whether \"Require approval from at least n people\" is switched on.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "min_approvals_enabled",
+          "min_approvals",
+          "changed_item_review_enabled",
+          "changed_item_review_fields",
+          "allow_merge_override",
+          "merge_override_role"
+        ],
+        "type": "object"
+      },
       "RichTextToMarkdownDto": {
         "properties": {
           "richText": {
@@ -5823,6 +5918,18 @@
           "progress_percent": {
             "type": "number"
           },
+          "review_policy_blocker_count": {
+            "type": "number"
+          },
+          "review_policy_blockers": {
+            "items": {
+              "$ref": "#/components/schemas/ReviewPolicyBlockerDto"
+            },
+            "type": "array"
+          },
+          "review_policy_blockers_truncated": {
+            "type": "boolean"
+          },
           "reviewer_groups": {
             "items": {
               "$ref": "#/components/schemas/StageReviewerGroupDto"
@@ -5856,6 +5963,9 @@
           "reviewer_groups",
           "item_reviewer_groups",
           "evaluation_complete",
+          "review_policy_blockers",
+          "review_policy_blocker_count",
+          "review_policy_blockers_truncated",
           "progress_percent",
           "evaluated_entity_count",
           "total_entity_count"
@@ -6305,6 +6415,18 @@
             "description": "Whether script automation runs are enabled. Defaults to true; ignored in agent mode.",
             "type": "boolean"
           },
+          "invalidateOn": {
+            "description": "Branch checks: the branch events after which the check must rerun, beyond a data change: comment_set_changed, comment_resolution_changed, comment_text_changed. Omit to declare none on create; on update, omit to keep the current declaration and send [] to clear it.",
+            "items": {
+              "enum": [
+                "comment_set_changed",
+                "comment_resolution_changed",
+                "comment_text_changed"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
           "mode": {
             "description": "What runs: `agent` (the default) follows `prompt`; `script` runs `script` and needs the automation scripts beta.",
             "enum": [
@@ -6387,7 +6509,8 @@
               "BranchReadyForReview",
               "BranchMerged",
               "BranchOwnerChanged",
-              "ShareViewOpened"
+              "ShareViewOpened",
+              "AutomationRunFinished"
             ],
             "type": "string"
           },
@@ -6427,6 +6550,38 @@
           "name": {
             "description": "New display name for the project",
             "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateReviewPolicyDto": {
+        "properties": {
+          "allow_merge_override": {
+            "type": "boolean"
+          },
+          "changed_item_review_enabled": {
+            "type": "boolean"
+          },
+          "changed_item_review_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "merge_override_role": {
+            "enum": [
+              "admins",
+              "admins_and_parent_branch_owners"
+            ],
+            "type": "string"
+          },
+          "min_approvals": {
+            "maximum": 20,
+            "minimum": 1,
+            "type": "number"
+          },
+          "min_approvals_enabled": {
+            "type": "boolean"
           }
         },
         "type": "object"
@@ -6799,6 +6954,15 @@
                 "updated",
                 "lastUserMessage"
               ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Pass true to list only the saved-automation runs the caller launched by hand, in place of triggerType. Runs started by other people, schedules or integrations are never listed.",
+            "in": "query",
+            "name": "ownAutomationRuns",
+            "required": false,
+            "schema": {
               "type": "string"
             }
           },
@@ -7830,7 +7994,7 @@
             }
           },
           {
-            "description": "Type filter category: 'item' (entity updates), 'comments', 'reviews' (branch review lifecycle), or omit/'all' for every type",
+            "description": "Type filter category: 'item' (entity updates), 'comments', 'reviews' (branch review lifecycle), 'automations' (automation runs), or omit/'all' for every type",
             "in": "query",
             "name": "type",
             "required": false,
@@ -10980,7 +11144,7 @@
     },
     "/project/{projectId}/branch/{id}/merge": {
       "post": {
-        "description": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Project admins may set bypass_review with a review_bypass_reason to force past known policy blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-check protections remain enforced. Poll the returned job until it succeeds or fails.",
+        "description": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Depending on the organization review policy, project admins (and optionally the parent branch owner) may set bypass_review with a review_bypass_reason to force past known review-policy blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-check protections remain enforced. Poll the returned job until it succeeds or fails.",
         "operationId": "BranchController_merge",
         "parameters": [
           {
@@ -17294,6 +17458,110 @@
         }
       }
     },
+    "/review-policy": {
+      "get": {
+        "description": "The conditions a branch in any project must meet to merge (minimum approvals, changed-item review) and who may override them.",
+        "operationId": "ReviewPolicyController_get",
+        "parameters": [
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewPolicyResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Read the review policy",
+        "tags": [
+          "Review policy"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-review-policy",
+          "metadata": {
+            "sidebarTitle": "Read the review policy",
+            "title": "Read the review policy"
+          }
+        }
+      },
+      "patch": {
+        "description": "Admins only. Omitted fields keep their stored value; the changed-item review fields are replaced as a whole list.",
+        "operationId": "ReviewPolicyController_update",
+        "parameters": [
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReviewPolicyDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewPolicyResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update the review policy",
+        "tags": [
+          "Review policy"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/patch-review-policy",
+          "metadata": {
+            "sidebarTitle": "Update the review policy",
+            "title": "Update the review policy"
+          }
+        }
+      }
+    },
     "/shared-grants": {
       "post": {
         "operationId": "SharedGrantsController_create",
@@ -18649,6 +18917,9 @@
     },
     {
       "name": "ReqIF Import"
+    },
+    {
+      "name": "Review policy"
     },
     {
       "name": "Shared Access Grants"
