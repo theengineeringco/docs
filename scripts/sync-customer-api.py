@@ -231,8 +231,8 @@ def contract(value, context="object"):
 def classify(old, new):
     if canonical(old) == canonical(new):
         return "unchanged", []
-    # Treat uncertain structural changes as review-required. Only wholly new
-    # endpoints/components and editorial improvements may publish automatically.
+    # Report existing contract changes separately from additions and editorial
+    # changes. Both categories publish automatically after validation.
     before, after = contract(old), contract(new)
     changes = []
     for key in set(before) | set(after):
@@ -254,7 +254,7 @@ def classify(old, new):
         for name, value in entries.items():
             if after.get("components", {}).get(group, {}).get(name) != value:
                 changes.append(f"Changed or removed component: {group}/{name}")
-    return ("review" if changes else "compatible"), changes
+    return ("structural" if changes else "compatible"), changes
 
 
 def environment_changes(documents):
@@ -317,8 +317,6 @@ def sync(documents, target, initialize=False):
         raise ValueError("Committed API snapshot missing; initialize it explicitly after review")
     report = {"status": status, "hashes": hashes, "changes": changes, "paths": len(new["paths"]), "operations": sum(len(METHODS.intersection(item)) for item in new["paths"].values()), "schemas": len(new["components"].get("schemas", {}))}
     if status != "unchanged":
-        # A review candidate is written locally, but the workflow only publishes
-        # it on the dedicated review branch. The default branch stays intact.
         target.parent.mkdir(parents=True, exist_ok=True)
         temp = target.with_suffix(".json.tmp")
         temp.write_text(json.dumps(new, indent=2, sort_keys=True, ensure_ascii=False) + "\n")

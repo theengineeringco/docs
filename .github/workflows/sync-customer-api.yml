@@ -84,7 +84,7 @@ jobs:
         id: snapshot
         run: python3 scripts/sync-customer-api.py --report "$REPORT_PATH"
       - name: Validate candidate reference with Mintlify
-        if: steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'review'
+        if: steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'structural'
         run: npx --yes mint@4.2.939 validate
       - name: Summarize deployed changes
         if: always()
@@ -98,14 +98,14 @@ jobs:
           body += ['- ' + change for change in report.get('changes', [])]
           body += ['', '## Source contract hashes', '']
           body += ['- ' + name + ': `' + value + '`' for name, value in report.get('hashes', {}).items()]
-          body += ['', 'Structural changes require review of authentication, examples, and migration guidance before merging. Compatible reference changes can publish automatically.']
+          body += ['', 'All validated reference changes publish automatically, including changes to existing contracts. Authored guides remain separately maintained.']
           text = '\n'.join(body) + '\n'
           Path('/tmp/customer-api-sync-body.md').write_text(text)
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as output:
               output.write(text)
           PY
-      - name: Publish compatible reference updates
-        if: steps.snapshot.outputs.status == 'compatible'
+      - name: Publish validated reference updates
+        if: steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'structural'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -113,46 +113,12 @@ jobs:
           git commit -m 'docs(api): sync deployed customer API reference'
           # A concurrent default-branch edit or branch protection fails closed.
           git push origin "HEAD:$DEFAULT_BRANCH"
-      - name: Open or update a structural-change review
-        if: steps.snapshot.outputs.status == 'review'
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          remote_sha=$(git ls-remote --heads origin "refs/heads/$REVIEW_BRANCH" | cut -f1)
-          number=$(gh pr list --head "$REVIEW_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number // empty')
-          if [ -n "$remote_sha" ]; then
-            git fetch origin "$REVIEW_BRANCH"
-            if git log "origin/$DEFAULT_BRANCH..$remote_sha" --format=%ae | grep -v '^41898282+github-actions\[bot\]@users\.noreply\.github\.com$' > /dev/null; then
-              echo 'The review branch contains human amendments. Retaining them and requiring manual attention.' >&2
-              exit 1
-            fi
-          fi
-          if [ -n "$remote_sha" ] && [ -n "$number" ]; then
-            if git show "$remote_sha:openapi/customer-api.json" | cmp -s - openapi/customer-api.json; then
-              echo "The open review already contains this deployed contract."
-              exit 0
-            fi
-          fi
-          git checkout -b "$REVIEW_BRANCH"
-          git add -- openapi/customer-api.json
-          git commit -m 'docs(api): review deployed customer API changes'
-          # This is a dedicated automation branch. Lease protects concurrent edits.
-          git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$remote_sha" origin "HEAD:$REVIEW_BRANCH"
-          number=$(gh pr list --head "$REVIEW_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number // empty')
-          if ! gh label list --limit 1000 --json name --jq '.[].name' | grep -x preview > /dev/null; then
-            gh label create preview --description 'Deploy a documentation preview' --color 0E8A16
-          fi
-          if [ -n "$number" ]; then
-            gh pr edit "$number" --title 'docs(api): review deployed customer API changes' --body-file /tmp/customer-api-sync-body.md --add-label preview
-          else
-            gh pr create --base "$DEFAULT_BRANCH" --head "$REVIEW_BRANCH" --title 'docs(api): review deployed customer API changes' --body-file /tmp/customer-api-sync-body.md --label preview
-          fi
       - name: Close an outdated structural-change proposal
-        if: steps.snapshot.outputs.status == 'unchanged' || steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'divergent'
+        if: steps.snapshot.outputs.status == 'unchanged' || steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'structural'
         run: |
           number=$(gh pr list --head "$REVIEW_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number // empty')
           if [ -n "$number" ]; then
-            gh pr close "$number" --comment "The latest nightly check supersedes this candidate. See $RUN_URL for the current deployed contract state."
+            gh pr close "$number" --comment "The deployed API reference is synchronized automatically. This review proposal is superseded. See $RUN_URL for the current deployed contract state."
           fi
       - name: Report divergence or failure without changing the published reference
         if: always() && (failure() || steps.snapshot.outputs.status == 'divergent')

@@ -1,5 +1,6 @@
 import copy
 import importlib.util
+import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -93,28 +94,46 @@ class SyncTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 sync.prepare(value)
 
-    def test_annotation_change_is_compatible_but_schema_change_is_review(self):
+    def test_annotation_and_structural_changes_are_classified(self):
         old = sync.prepare(fixture())
         new = copy.deepcopy(old)
         new["paths"]["/entities"]["get"]["description"] = "A clearer explanation"
         self.assertEqual(sync.classify(old, new)[0], "compatible")
         new["components"]["schemas"]["Entity"]["properties"]["name"]["type"] = "number"
-        self.assertEqual(sync.classify(old, new)[0], "review")
+        self.assertEqual(sync.classify(old, new)[0], "structural")
 
     def test_property_names_that_match_annotation_keywords_remain_contract(self):
         old = sync.prepare(fixture())
         for name in ["description", "summary", "example", "examples", "servers"]:
             new = copy.deepcopy(old)
             new["components"]["schemas"]["Entity"]["properties"][name] = {"type": "string"}
-            self.assertEqual(sync.classify(old, new)[0], "review", name)
+            self.assertEqual(sync.classify(old, new)[0], "structural", name)
 
-    def test_added_operation_compatible_removed_operation_requires_review(self):
+    def test_added_and_removed_operations_are_classified(self):
         old = sync.prepare(fixture())
         new = copy.deepcopy(old)
         new["paths"]["/entities"]["post"] = {"responses": {"201": {"description": "Created"}}}
         self.assertEqual(sync.classify(old, new)[0], "compatible")
         del new["paths"]["/entities"]["get"]
-        self.assertEqual(sync.classify(old, new)[0], "review")
+        self.assertEqual(sync.classify(old, new)[0], "structural")
+
+    def test_structural_changes_write_the_candidate_and_then_become_unchanged(self):
+        for change in ["schema", "removal"]:
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as tmp:
+                target = Path(tmp) / "api.json"
+                source = fixture()
+                source["paths"]["/entities"]["post"] = {"responses": {"201": {"description": "Created"}}}
+                sync.sync({name: source for name in sync.SOURCES}, target, True)
+                if change == "schema":
+                    source["components"]["schemas"]["Entity"]["properties"]["name"]["type"] = "number"
+                else:
+                    del source["paths"]["/entities"]["post"]
+                documents = {name: source for name in sync.SOURCES}
+                report = sync.sync(documents, target)
+                self.assertEqual(report["status"], "structural")
+                self.assertTrue(report["changes"])
+                self.assertEqual(json.loads(target.read_text()), sync.prepare(source))
+                self.assertEqual(sync.sync(documents, target)["status"], "unchanged")
 
     def test_server_noise_and_object_order_do_not_change_hash(self):
         old = fixture()
