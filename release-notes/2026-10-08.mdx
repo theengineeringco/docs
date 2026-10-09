@@ -1,0 +1,66 @@
+---
+title: "October 8, 2026"
+sidebarTitle: "October 8, 2026"
+description: "Agent chat pop-ups, automation runs that collect their changes on one branch, and @flow mentions on GitLab merge requests."
+---
+
+## In this release
+
+- [Agent chat pop-ups](#agent-chat-pop-ups)
+- [Automation runs collect their changes on one branch](#automation-runs-collect-their-changes-on-one-branch)
+- [Rerun GitLab automations from merge request comments](#rerun-gitlab-automations-from-merge-request-comments)
+- [Improvements & Fixes](#improvements-&-fixes)
+
+## Agent chat pop-ups
+
+When an agent chat you started finishes, asks you a question, or waits for your approval, a pop-up appears at the bottom left of every tab you have open, with an **Open chat** button. Pop-ups stay until you dismiss or open them. Several stack under a count and expand when you hover, and **Clear all** dismisses them in every tab.
+
+A question still unanswered after about a minute also lands in your inbox, and that row is marked done once you reply. Mute pop-ups for the rest of a tab's session or turn them off from the pop-up's menu. Turn them back on with **Show pop-ups** under **Settings → Preferences → Notifications**.
+
+## Automation runs collect their changes on one branch
+
+Scheduled and event-triggered runs of an automation now add their changes to a single branch named after it, such as **Automation: Run test**, instead of opening a new branch every run. A new branch starts once that one is merged or closed. A script run that changes nothing opens no branch, and each run still appears in Activity. To keep a branch per run, turn on **New branch for every run** in the automation's settings.
+
+Each run works only on its one branch, so an agent run can no longer open or switch to other branches.
+
+**Upgrade note.** Python scripts can no longer create branches. A script that calls `tools.createBranches`, including in a triggered run, now fails with an error. Remove the call, because the run's writes already land on its branch.
+
+## Rerun GitLab automations from merge request comments
+
+Mention @flow in a merge request comment to rerun your GitLab automations on that merge request, as @flow pull request comments already do on GitHub. Flow posts its result as a merge request comment and ignores comments it wrote itself.
+
+**Upgrade note.** Enable **Comments** on each GitLab project webhook alongside **Merge request events**.
+
+## Improvements & Fixes
+
+### Agent
+
+- **AI provider incident notice.** When an AI vendor has an incident, the chat panel shows a dismissible banner before you send a message. It names the affected model family and suggests another family where your organization offers one. Failed messages during an incident now say the provider is at fault.
+
+### Automations
+
+- **Simpler activity threads.** A thread opens on the automation run itself, showing the merge request or pull request, its author, and the triggering action. The branch a run created or wrote to appears beneath it, with the run's changes underneath.
+- **Large runs open quickly.** A run's field updates on a branch collapse into one "Updated N items" card, with a count per item type.
+- **Clearer run status.** Run chips in Activity read "Completed · Fail" or "Completed · Pass". "Run failed" now means only that the run stopped with an error.
+- **Sharing a run's chat.** The Share button on an automation run's conversation is removed while the feature is reworked.
+
+### Branching
+
+- **Update from parent.** Updating a branch with many baselines, comments, or Activity entries is faster. Updates of large branch trees no longer slow down as they work through sub-branches.
+- **Moving changed items to a new branch.** Moves can be prepared from a restored project before its first new edit, without rejecting existing changes.
+
+### Import and Export
+
+- **Import location.** Selecting an item in the navigation pane links spreadsheet imports under it by default and preselects it as the parent for ReqIF imports. Use **Import here** from the item's menu to start a spreadsheet import there, or turn off the location link when the file defines its own relationships.
+
+### Integrations
+
+- **GitLab base URL.** **Settings → Integrations → GitLab** shows the host Flow connects to as read-only text, with a **Change** button for self-hosted servers. Entering your deployment's default host is no longer refused as an unapproved server.
+
+### Search
+
+- **Search deleted items.** Find deleted items by name across the full list, including later pages, then restore them from the results.
+
+### Settings
+
+- **Settings shortcut.** Press Command+, to open the current project's Preferences, and press it again to return to your previous view. The shortcut also works while typing in a text field.
