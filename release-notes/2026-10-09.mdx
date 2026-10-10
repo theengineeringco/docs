@@ -1,0 +1,184 @@
+---
+title: "October 9, 2026"
+sidebarTitle: "October 9, 2026"
+description: "Weekly release: review branch changes where you edit, units on number fields, personal automations, AI spreadsheet editing, merge rules in Reviews settings, and notifications on every channel."
+---
+
+## In this release
+
+- [Review branch changes where you edit](#review-branch-changes-where-you-edit)
+- [Units on number fields](#units-on-number-fields)
+- [Personal automations](#personal-automations)
+- [Ask the AI to edit a spreadsheet](#ask-the-ai-to-edit-a-spreadsheet)
+- [Merge rules in Reviews settings](#merge-rules-in-reviews-settings)
+- [Notifications on every channel](#notifications-on-every-channel)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Review branch changes where you edit
+
+Use **Show changed in branch** to compare current and previous values in tables while you keep editing. Created, updated, and reordered items are tagged, and Tree and Reader show change markers.
+
+On a branch, an item's details panel marks it **Changed in branch** or **Created in branch** beside its ID. Click the marker on a changed item to see each changed field and relationship as before and after, compared with the version the branch started from. Revert any single field, relationship, or rich-text paragraph from its **Revert** button, and keep editing while you review.
+
+## Units on number fields
+
+A number can now carry its unit, so a mass reads "12 kg" wherever the item appears. The details panel and the Reader give the unit its own box beside the value, with a dropdown that suggests common engineering units such as kg, mm, N, Pa, and °C. In the table, type the unit straight after the number in the same cell. A unit outside the list is kept exactly as entered.
+
+Filters, sorting, and roll-ups keep working on the number itself, so a unit never changes what a total or a comparison means. Units travel with the value across the table, tree nodes, the Reader and its exports, review diff cards, item history, and copy and paste between cells.
+
+## Personal automations
+
+The Automations page now has a **Personal Automations** section, the counterpart of Personal Skills. Only you can see, edit, or run a personal automation. It fires only for your own actions and its own schedules or webhook deliveries, and every run executes as you with exactly your permissions.
+
+Its runs are your private chats. It writes nothing to the project's shared audit log or activity feed, never gates a merge, and stops running if you can no longer edit the project.
+
+## Ask the AI to edit a spreadsheet
+
+Attach an .xlsx and ask the assistant for changes, or to refresh its values from the project. The assistant returns a new workbook you can download from the chat and leaves the original untouched. Edits keep formatting, formulas, and charts.
+
+The chat shows the edited sheet with each changed cell's old value in red beside its new value in green. When the assistant edits the same workbook several times in one chat, the latest card sums up every edit and offers the latest file.
+
+## Merge rules in Reviews settings
+
+Admins can define, in one place under **Settings → Reviews**, the rules a branch in any project must meet before it can be merged. Each rule has its own switch: require a minimum number of approvals, and require every changed item to be reviewed by someone named in its chosen user fields. Every approval counts, including the branch author's. The page also decides whether the normal procedure can be overridden with a recorded reason, and by whom.
+
+The review page explains which rule is still unmet. **Require reviews on all branches**, **Dismiss approvals when new changes are pushed**, **Allow reviewer removal**, and **Let merges change locked items** move here from Organization settings and work as before. Existing organizations keep their current merge behavior, with every new rule off.
+
+## Notifications on every channel
+
+Notification settings have their own **Settings → Notifications** section, with one row per notification type grouped by AI chats, automations, reviews and branches, comments, and items. Every type can be delivered in-app, as a pop-up, by email, and by Slack where it's connected, in any combination. With Slack connected, review assignments, review submissions, ready-for-review updates, and comment mentions arrive as Flow bot DMs.
+
+When an agent chat you started finishes, asks a question, or waits for your approval, a pop-up appears in every tab you have open, with an **Open chat** button. Agent chat and automation notifications group into one inbox row per chat or activity thread, showing the latest update and how many there have been. Triggered automations that run as you, and runs of someone else's automation that change items you own, each get one row per run instead of a notification per item.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Auto-accept mode.** A chip beside the chat input switches between **Ask first**, the default, which presents a plan for your approval before changing anything, and **Auto-accept**. Press Shift+Tab in the input to switch. Each chat keeps its own mode, and permissions and branch restrictions still apply.
+- **Run automations and apply templates.** Ask the agent to run an existing automation on the items you name, or to apply a template. It works on a new branch, so nothing reaches your branch until you merge it, unless you ask it to stay on your branch.
+- **AI imports from Word documents and figures.** The assistant can read the text of a .docx file and create items from it. When it creates an item from a figure, diagram, or table in a PDF or image, it can place a picture of that region in the item's description.
+- **Live step results.** Each step of an AI reply shows what it found as soon as it finishes, instead of a placeholder until the whole reply is done.
+- **More places to open the AI agent.** Open the AI agent panel alongside the Automations and Skills libraries and the Activity feed.
+- **Automation suggestions.** The assistant can suggest turning repeatable workflows into automations.
+- **AI provider incident notice.** During an AI vendor incident, the chat panel shows a dismissible banner naming the affected model family and suggesting another where your organization offers one.
+
+### Architecture
+
+- **Architecture view loading** (beta). A large architecture opened for the first time appears fully laid out in one step, sooner.
+
+### Automations
+
+- **Runs collect their changes on one branch.** Scheduled and event-triggered runs add their changes to a single branch named after the automation, such as **Automation: Run test**, instead of a new branch every run. Turn on **New branch for every run** in the automation's settings to keep a branch per run. **Upgrade note.** Python scripts can no longer create branches. Remove calls to `tools.createBranches`, because a run's writes already land on its branch.
+- **Longer script timeouts** (beta). Give a script automation more time to finish large workloads, up to an administrator-set cap, in its settings. The default timeout stays the same.
+- **Batch parent and child reads in scripts.** `parents_of(items)` and `children_of(items)` read the parents or children of a whole list of items at once, so a check over hundreds of changed items finishes within the time limit.
+- **Re-run failing checks** (beta). A branch review's Automations section can rerun only the checks that have not passed, without restarting its agent automations.
+- **Rerun checks after comments** (beta). A branch check's **Rerun after** setting declares which comment events make its last result stale. Every check starts with nothing ticked, including checks saved before this release. Tick the events a check reads.
+- **Run statuses.** Run chips in Activity and Automations show state and verdict together, such as **Completed · Failed**. A run that broke reads **Crashed**, and a skipped run reads **Completed · Skipped**.
+- **Activity thread cards.** Each card in an activity thread says what it is, with its status, who acted, when, and a link to the run, branch, review, item, or external page. Everything a run changed on a branch sits in one "Changed N items" card.
+- **Automation runs in past conversations.** The AI window's past conversations add an **Automations** list beside **Chats**, holding automations you ran yourself.
+- **Review automations.** **Re-run all** is available even when automations are up to date.
+
+### Branching
+
+- **Creating branches.** Creating a branch in a large project with many formulas is faster and no longer fails after 30 seconds.
+- **Update from parent.** Formula values and review lists settle much sooner after an update, and updating branches with many baselines, comments, or Activity entries is faster.
+- **Merging large branches.** Merges of branches with thousands of changed items no longer fail with "Timed out and was canceled".
+- **Rebase onto another branch.** Rebasing onto a parent that lacks items the branch links to or edits no longer fails with "Source or destination entity not found". The new branch leaves out those changes, and the confirmation names the affected items.
+- **Moving changed items to a new branch.** Moves can be prepared from a restored project before its first new edit.
+
+### Dashboards
+
+- **Shared layouts.** Placing widgets side by side or in their own rows is saved with the dashboard, so everyone sees the same arrangement.
+- **Drill-down.** Opening a segment in a table keeps the dashboard view's own filters, so the table lists only the items the chart counted.
+
+### Data Model
+
+- **Requirement target suggestions.** Typing a target such as "at least 5 kg" suggests setting any of the item's number fields, and saves the typed unit as the number's unit.
+- **Pickers.** Multi-select tag, user, linked-item, and integration pickers list selected options first when they open.
+- **Item picker in the create dialog.** Expanding a nested item while picking upstream or downstream links no longer closes the picker.
+
+### Files
+
+- **PDF imports and previews.** Detailed drawings use less memory when opened or zoomed, and scanned tables keep their embedded images.
+- **PDFs with a complex final page.** These documents open, and their other pages can be read without processing that page's graphics first.
+
+### Import and Export
+
+- **Large PDFs import whole.** PDFs over 500 pages or 32 MB import as one run, with every page keeping its own number. PDFs attached to Flow AI chat are no longer refused for size.
+- **Export preview.** The export dialog shows the first 30 rows beside its settings. Drag a column header to reorder exported columns.
+- **Import location.** Selecting an item in the navigation pane links spreadsheet imports under it by default and preselects it as the parent for ReqIF imports. Use **Import here** from the item's menu to start there.
+- **Spreadsheet import.** New items can be created with supplied Entity Numeric IDs while existing matches update.
+
+### Integrations
+
+- **@flow on GitLab merge requests.** Mention @flow in a merge request comment to rerun your GitLab automations on it, as on GitHub pull requests. **Upgrade note.** Enable **Comments** on each GitLab project webhook alongside **Merge request events**.
+- **Jira issue search.** Find issues by complete key, or by key prefix on Jira Cloud. Exact matches appear first.
+- **Jira issue details.** Previews and AI reads include the resolution and linked issues, which open directly in Jira.
+- **Linear.** Issue cards list priority, assignee, team, and project. The assistant and script automations can file issues into a named Linear project.
+- **GitLab base URL.** **Settings → Integrations → GitLab** shows the connected host as read-only text, with a **Change** button for self-hosted servers.
+- **Onshape automations.** Model reads recover from temporary connection and service failures. Reads that still fail stop the affected automations and appear in the project's Activity feed.
+
+### Notifications
+
+- **Threaded review notifications.** Review updates and their comments share a Slack thread and an email conversation.
+- **More Slack and email updates.** Comment replies arrive as Slack DMs, and branch merges can notify you by email and Slack.
+
+### Permissions and Sharing
+
+- **Share the path above an item.** Turn on **Show path above** in the share dialog's Link options so recipients see the parents of the shared item, as a path only. **Settings → Shares** can add or remove it on existing shares.
+- **Share emails.** Sharing an item with someone already in your workspace emails them a link to it. Pressing **Invite** again re-sends the email.
+- **Shared automations.** Only Admins can create, edit, disable, or delete shared project automations. Members can still run them and manage their own personal automations.
+- **Scope SCIM-provisioned users.** **Projects for provisioned users** lets new accounts start in specific projects. **Groups that grant Member** promotes Viewers in chosen identity provider groups to Members.
+- **Shares across branches.** Links, mentions, reviews, comments, and edits respond faster on other branches a share covers.
+
+### Reader
+
+- **Pin an item reference to a version.** Hover an item reference in a description and pick a point under **Version** to show the item as it was then. You can also open a past version from an item's **History** tab with **View this version**.
+- **Item references while editing.** Clicking an item reference in rich text selects it and keeps its preview card open.
+- **Exports.** Documents with embedded views no longer print a blank page, and uploaded images and diagrams finish loading before PDF and image exports.
+- **Embedded views.** Clicking **Select View** before choosing an item no longer removes the view block.
+- **Less-than-or-equal shortcut.** Typing `<=` in rich text produces `≤`.
+
+### Review
+
+- **Reviewer removal.** With **Allow reviewer removal** on, people can remove reviewers and groups they added.
+- **Optional reviewers.** When review requirements use only Owner, people and groups in the Reviewers field stay visible as optional reviewers.
+- **Force merge can override branch checks** (beta). An admin force merge goes past failing, never-run, or stale checks, and the merge history lists the checks it overrode.
+- **Stage gate status on large branches.** Reviews of branches with very many changes load their stage gate status instead of failing.
+- **Large comparisons.** Changed items are no longer dropped between pages of results.
+- **Relationship changes.** Unchanged links no longer appear as removed and re-added.
+
+### Search
+
+- **Search deleted items.** Find deleted items by name across the full list, then restore them from the results.
+- **Changed-item filters.** Filtering for items changed on a branch is faster. In a branch review, the match count reflects the branch's real total.
+- **Search and Find in view.** Short ranges such as `0-15`, decimal values, and formula-backed dates can be found and highlighted.
+- **Text filters.** Typing in a view's text filter no longer stutters.
+
+### Settings
+
+- **Settings shortcut.** Press Command+, to open the current project's Preferences, and again to return.
+- **Settings search.** Page-name matches appear first.
+- **Self-hosted email.** Self-hosted deployments can send notification and email MFA messages through their own SMTP relay, such as Exchange, Postfix, or Microsoft 365.
+
+### Table
+
+- **Bulk tag edits.** A tag held by only some selected items appears as a partial choice. Selecting it adds it to all.
+
+### Views
+
+- **Scoped views can show subsystems** (beta). Turn on **Show subsystems** in a scoped view to include nested subsystems and their contents. Filters, counts, exports, dashboards, and shares follow the saved option.
+- **View controls beside the details panel.** Share, Find in view, Display options, Sort, and Filter sit beside an open details panel instead of under it.
+
+## API Changes
+
+- **Auto-accept.** The [Customer API](/api/reference) accepts `auto_accept` when starting a chat or sending a message.
+- **Personal automations.** [Automation](/api/automations/overview) routes reach your personal list with `scope=personal`. Every automation record includes `scope`, and a record written with `scope=personal` must also include `"scope": "personal"` in its body.
+- **Shared automation permissions.** API integrations that create or change shared automations now require an Admin credential.
+- **Script timeouts** (beta). Set a script automation's timeout, up to the administrator-set cap, through the API.
+- **Automations.** The [Customer API](/api/automations/overview) can list, read, create, edit, and delete a project's automations. Editing someone else's automation in a way that changes what it runs requires your explicit confirmation. Hosted MCP can list and read automations but not change them.
+- **Entity filtering.** The [Customer API](/api/reference) can find items by type, field values, tags, owners, dates, or missing values, combine conditions with AND/OR, and page through results on a selected branch.
+- **Restore deleted items.** The [Customer API](/api/reference) lists items deleted on a branch, newest first, and restores one or a batch with their fields, links, and position.
+- **Admin edits on restricted branches.** Project admins can explicitly bypass branch protection and editor groups for entity API writes. Item locks and other write validation still apply.
+- **Custom MCP connections.** Saved OAuth credentials are bound to their original authorization server. Remove and recreate an existing OAuth connection if its saved authorization-server information is missing.
