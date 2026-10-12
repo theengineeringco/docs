@@ -68,10 +68,7 @@
             "group": "Release Notes",
             "pages": [
               "release-notes",
-              "release-notes/2026-10-08",
-              "release-notes/2026-10-07",
-              "release-notes/2026-10-06",
-              "release-notes/2026-10-05",
+              "release-notes/2026-10-09",
               "release-notes/2026-10-02",
               "release-notes/2026-09-25",
               "release-notes/2026-09-18",
@@ -262,6 +259,26 @@
     {
       "source": "/release-notes/2026-10-01",
       "destination": "/release-notes/2026-10-02",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-10-05",
+      "destination": "/release-notes/2026-10-09",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-10-06",
+      "destination": "/release-notes/2026-10-09",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-10-07",
+      "destination": "/release-notes/2026-10-09",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-10-08",
+      "destination": "/release-notes/2026-10-09",
       "permanent": true
     }
   ],
