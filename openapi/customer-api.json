@@ -86,6 +86,9 @@
           "archived": {
             "type": "boolean"
           },
+          "auto_accept": {
+            "type": "boolean"
+          },
           "branch_id": {
             "nullable": true,
             "type": "string"
@@ -247,6 +250,7 @@
           "plan_items",
           "plan_headline",
           "ai_model",
+          "auto_accept",
           "context_usage",
           "archived",
           "last_user_message_at"
@@ -498,8 +502,19 @@
           "runsAs": {
             "$ref": "#/components/schemas/AutomationRunsAsDto"
           },
+          "scope": {
+            "description": "Which list the record is in: the project's or your personal one. Always answered. A record written with `scope=personal` must say `\"personal\"` here too.",
+            "enum": [
+              "project",
+              "personal"
+            ],
+            "type": "string"
+          },
           "script": {
             "type": "string"
+          },
+          "scriptTimeoutSeconds": {
+            "type": "number"
           },
           "trigger": {
             "allOf": [
@@ -1982,7 +1997,12 @@
             "nullable": true,
             "type": "string"
           },
+          "auto_accept": {
+            "description": "Auto-accept mode: the agent makes changes without first presenting a plan for approval. Otherwise (the default) it proposes a plan and waits. Kept on the chat and applies to every later turn.",
+            "type": "boolean"
+          },
           "branch_id": {
+            "description": "The branch the agent works on; omitted means Base. Where the updated variant view is on for the caller, Base and variant branches take no direct edits: the agent's first change opens a change request off the branch and the chat moves onto it.",
             "nullable": true,
             "type": "string"
           },
@@ -2068,9 +2088,21 @@
             "description": "The instructions an agent automation follows. Required in agent mode.",
             "type": "string"
           },
+          "scope": {
+            "description": "Which list this write is to. Required, as `\"personal\"`, when the request has `scope=personal`; optional for the project's list. Must agree with the `scope` query.",
+            "enum": [
+              "project",
+              "personal"
+            ],
+            "type": "string"
+          },
           "script": {
             "description": "The python a script automation runs. Required in script mode.",
             "type": "string"
+          },
+          "scriptTimeoutSeconds": {
+            "description": "Script automations: how many seconds one run may take before it is stopped. Omit for the workspace default; the workspace cap bounds it (the error names the cap). A run always holds one executor slot within its project's share, however long it may run.",
+            "type": "number"
           },
           "trigger": {
             "allOf": [
@@ -4656,7 +4688,7 @@
         "properties": {
           "bypass_review": {
             "default": false,
-            "description": "Admin-only force merge. Overrides known review, stage-policy, editor-group, and merge-conflict blockers once, while preserving structural, branch-check, and incomplete-check protections. Requires review_bypass_reason.",
+            "description": "Admin-only force merge. Overrides known review, branch-check, stage-policy, editor-group, and merge-conflict blockers once, while preserving structural and incomplete-scan protections. Requires review_bypass_reason.",
             "type": "boolean"
           },
           "review_bypass_reason": {
@@ -4687,9 +4719,12 @@
               "BranchMerged",
               "BranchOwnerChanged",
               "ShareViewOpened",
+              "ViewShared",
               "AutomationRunFinished",
               "AgentChatFinished",
-              "AgentChatNeedsInput"
+              "AgentChatNeedsInput",
+              "AutomationActivity",
+              "AutomationItemsChanged"
             ],
             "type": "string"
           },
@@ -4701,7 +4736,12 @@
             "type": "object"
           },
           "read": {
+            "description": "False when any row of the thread is unread",
             "type": "boolean"
+          },
+          "update_count": {
+            "description": "Rows in the thread this row heads; 1 for a notification of its own",
+            "type": "number"
           }
         },
         "required": [
@@ -4709,7 +4749,8 @@
           "event_type",
           "payload",
           "created_at",
-          "read"
+          "read",
+          "update_count"
         ],
         "type": "object"
       },
@@ -4722,7 +4763,7 @@
             "type": "array"
           },
           "total": {
-            "description": "Total matching rows across all pages",
+            "description": "Total matching threads across all pages",
             "type": "number"
           }
         },
@@ -4752,9 +4793,12 @@
               "BranchMerged",
               "BranchOwnerChanged",
               "ShareViewOpened",
+              "ViewShared",
               "AutomationRunFinished",
               "AgentChatFinished",
-              "AgentChatNeedsInput"
+              "AgentChatNeedsInput",
+              "AutomationActivity",
+              "AutomationItemsChanged"
             ],
             "type": "string"
           },
@@ -4774,6 +4818,20 @@
           "in_app_enabled",
           "slack_enabled",
           "toast_enabled"
+        ],
+        "type": "object"
+      },
+      "NotificationThreadDto": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotificationFeedItemDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
         ],
         "type": "object"
       },
@@ -5584,6 +5642,10 @@
       },
       "SendMessageDto": {
         "properties": {
+          "auto_accept": {
+            "description": "Auto-accept mode: the agent makes changes without first presenting a plan for approval. Otherwise (the default) it proposes a plan and waits. Kept on the chat for this and every later turn; omit to keep the current mode.",
+            "type": "boolean"
+          },
           "branch_id": {
             "nullable": true,
             "type": "string"
@@ -6299,6 +6361,9 @@
           "branch_id": {
             "type": "string"
           },
+          "failing_checks_only": {
+            "type": "boolean"
+          },
           "project_id": {
             "type": "string"
           }
@@ -6512,9 +6577,21 @@
             "description": "Confirms that this automation should run as you from now on. Required when you are not its current writer and the edit changes what it runs, or how and when it runs. Renaming it, disabling it or turning off admin tools never changes whom it runs as. Sent with no other change, it only makes you the writer.",
             "type": "boolean"
           },
+          "scope": {
+            "description": "Which list this write is to. Required, as `\"personal\"`, when the request has `scope=personal`; optional for the project's list. Must agree with the `scope` query.",
+            "enum": [
+              "project",
+              "personal"
+            ],
+            "type": "string"
+          },
           "script": {
             "description": "The python a script automation runs. Required in script mode.",
             "type": "string"
+          },
+          "scriptTimeoutSeconds": {
+            "description": "Script automations: how many seconds one run may take before it is stopped. Omit for the workspace default; the workspace cap bounds it (the error names the cap). A run always holds one executor slot within its project's share, however long it may run.",
+            "type": "number"
           },
           "trigger": {
             "allOf": [
@@ -6575,9 +6652,12 @@
               "BranchMerged",
               "BranchOwnerChanged",
               "ShareViewOpened",
+              "ViewShared",
               "AutomationRunFinished",
               "AgentChatFinished",
-              "AgentChatNeedsInput"
+              "AgentChatNeedsInput",
+              "AutomationActivity",
+              "AutomationItemsChanged"
             ],
             "type": "string"
           },
@@ -7488,15 +7568,15 @@
             "bearer": []
           }
         ],
-        "summary": "Re-run branch-review automations (a single one, or all) on demand",
+        "summary": "Re-run branch-review automations (a single one, all, or only the checks not passing) on demand",
         "tags": [
           "Automations"
         ],
         "x-mint": {
           "href": "/api/endpoints/post-ai-trigger-branch-rerun",
           "metadata": {
-            "sidebarTitle": "Re-run branch-review automations (a single one, or all) on demand",
-            "title": "Re-run branch-review automations (a single one, or all) on demand"
+            "sidebarTitle": "Re-run branch-review automations (a single one, all, or only the checks not passing) on demand",
+            "title": "Re-run branch-review automations (a single one, all, or only the checks not passing) on demand"
           }
         }
       }
@@ -8064,7 +8144,7 @@
             }
           },
           {
-            "description": "Type filter category: 'item' (entity updates), 'comments', 'reviews' (branch review lifecycle), 'automations' (automation runs), 'agents' (agent chats waiting on you), or omit/'all' for every type",
+            "description": "Type filter category: 'item' (entity updates), 'comments', 'reviews' (branch review lifecycle), 'automations' (automation runs, their progress and the items they changed), 'agents' (agent chats waiting on you or finished), or omit/'all' for every type",
             "in": "query",
             "name": "type",
             "required": false,
@@ -8267,6 +8347,60 @@
           "metadata": {
             "sidebarTitle": "Mark a notification read",
             "title": "Mark a notification read"
+          }
+        }
+      }
+    },
+    "/notifications/feed/{id}/thread": {
+      "get": {
+        "operationId": "NotificationsController_getThread",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationThreadDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Notifications"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-notifications-feed-id-thread",
+          "metadata": {
+            "sidebarTitle": "GET /notifications/feed/{id}/thread",
+            "title": "GET /notifications/feed/{id}/thread"
           }
         }
       }
@@ -9043,6 +9177,19 @@
             }
           },
           {
+            "description": "Whose list: the project's shared one (default) or the requester's personal one. A personal write answers 409 until personal automations have turned on for this deployment, which happens by itself once every running backend has been upgraded.",
+            "in": "query",
+            "name": "scope",
+            "required": false,
+            "schema": {
+              "enum": [
+                "project",
+                "personal"
+              ],
+              "type": "string"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -9085,7 +9232,7 @@
         }
       },
       "post": {
-        "description": "Creates one automation at the end of the project's list. It runs as you: its scheduled and webhook runs use your access to the project for as long as you can edit it, and pause when you no longer can. Check `runsAs` on the response. Script automations need the automation scripts beta, and `allowAdminTools` cannot be turned on with an API key.",
+        "description": "Creates one automation at the end of the project's list, or of your personal list with `scope=personal`. Creating shared automations requires Admin access. It runs as you: its scheduled and webhook runs use your access to the project for as long as you can edit it, and pause when you no longer can. Check `runsAs` on the response. Script automations need the automation scripts beta, and `allowAdminTools` cannot be turned on with an API key.",
         "operationId": "AutomationsController_create",
         "parameters": [
           {
@@ -9093,6 +9240,19 @@
             "name": "projectId",
             "required": true,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whose list: the project's shared one (default) or the requester's personal one. A personal write answers 409 until personal automations have turned on for this deployment, which happens by itself once every running backend has been upgraded.",
+            "in": "query",
+            "name": "scope",
+            "required": false,
+            "schema": {
+              "enum": [
+                "project",
+                "personal"
+              ],
               "type": "string"
             }
           },
@@ -9171,6 +9331,19 @@
             }
           },
           {
+            "description": "Whose list: the project's shared one (default) or the requester's personal one. A personal write answers 409 until personal automations have turned on for this deployment, which happens by itself once every running backend has been upgraded.",
+            "in": "query",
+            "name": "scope",
+            "required": false,
+            "schema": {
+              "enum": [
+                "project",
+                "personal"
+              ],
+              "type": "string"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -9226,6 +9399,19 @@
             }
           },
           {
+            "description": "Whose list: the project's shared one (default) or the requester's personal one. A personal write answers 409 until personal automations have turned on for this deployment, which happens by itself once every running backend has been upgraded.",
+            "in": "query",
+            "name": "scope",
+            "required": false,
+            "schema": {
+              "enum": [
+                "project",
+                "personal"
+              ],
+              "type": "string"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -9268,7 +9454,7 @@
         }
       },
       "patch": {
-        "description": "Changes only the fields you send; `trigger` replaces the whole trigger, and null makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer.",
+        "description": "Updating shared automations requires Admin access. Changes only the fields you send; `trigger` replaces the whole trigger, and null makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer.",
         "operationId": "AutomationsController_update",
         "parameters": [
           {
@@ -9284,6 +9470,19 @@
             "name": "automationId",
             "required": true,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whose list: the project's shared one (default) or the requester's personal one. A personal write answers 409 until personal automations have turned on for this deployment, which happens by itself once every running backend has been upgraded.",
+            "in": "query",
+            "name": "scope",
+            "required": false,
+            "schema": {
+              "enum": [
+                "project",
+                "personal"
+              ],
               "type": "string"
             }
           },
@@ -11223,7 +11422,7 @@
     },
     "/project/{projectId}/branch/{id}/merge": {
       "post": {
-        "description": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Depending on the organization review policy, project admins (and optionally the parent branch owner) may set bypass_review with a review_bypass_reason to force past known review-policy blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-check protections remain enforced. Poll the returned job until it succeeds or fails.",
+        "description": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Depending on the organization review policy, project admins (and optionally the parent branch owner) may set bypass_review with a review_bypass_reason to force past known review-policy, branch-check, stage-policy, editor-group, and merge-conflict blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-scan protections remain enforced. Poll the returned job until it succeeds or fails.",
         "operationId": "BranchController_merge",
         "parameters": [
           {
