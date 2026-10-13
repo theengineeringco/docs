@@ -206,6 +206,7 @@
               "slack",
               "github",
               "gitlab",
+              "bitbucket",
               "onshape",
               "webhook",
               "assistant",
@@ -353,6 +354,7 @@
               "slack",
               "github",
               "gitlab",
+              "bitbucket",
               "onshape",
               "webhook",
               "assistant",
@@ -690,7 +692,7 @@
             "type": "array"
           },
           "source": {
-            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, gitlab, onshape), 'manual', or the name of a custom webhook trigger.",
+            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape), 'manual', or the name of a custom webhook trigger.",
             "example": "schedule",
             "type": "string"
           },
@@ -6382,7 +6384,7 @@
             "type": "string"
           },
           "source": {
-            "description": "The automation trigger source to fire. One of the built-in sources (branch, endpoint, import, schedule, slack, github, gitlab, onshape), or the name given to an automation's custom webhook trigger.",
+            "description": "The automation trigger source to fire. One of the built-in sources (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape), or the name given to an automation's custom webhook trigger.",
             "type": "string"
           },
           "wait": {
