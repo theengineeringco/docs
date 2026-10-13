@@ -1,0 +1,91 @@
+---
+title: "October 12, 2026"
+sidebarTitle: "October 12, 2026"
+description: "AI PDF editing, Bitbucket Cloud, AI branch comparisons, and link identity keys for spreadsheet import and export."
+---
+
+## In this release
+
+- [Ask the AI to edit a PDF](#ask-the-ai-to-edit-a-pdf)
+- [Connect Bitbucket Cloud](#connect-bitbucket-cloud)
+- [Ask the AI what differs between two branches](#ask-the-ai-what-differs-between-two-branches)
+- [Choose how spreadsheet links resolve](#choose-how-spreadsheet-links-resolve)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Ask the AI to edit a PDF
+
+Attach a PDF and ask the assistant to change values, dates, or single lines. It returns a new PDF you can download from the chat and leaves the original untouched. Click the file or its preview to compare original and edited pages side by side, with removed text in red and added text in green. Hover a mark to see the change, and use the page label to jump between edited pages.
+
+Edits keep the page's own font, size, color, and position. If that font lacks a character or the new text is wider, the assistant uses the closest standard font and the chat says so. Scanned or outlined text can only be covered over. Large jobs run to the end, and the card lists any edit that could not be made, with the reason.
+
+## Connect Bitbucket Cloud
+
+Admins can connect Bitbucket Cloud from **Settings → Integrations**. The AI agent can then browse repositories, open draft pull requests through write-back, and run pull-request automations from Bitbucket webhooks. Admins connect in one step with **Connect Bitbucket**, which adds webhooks to the repositories they select. Where that option isn't available, admins connect with an API token.
+
+Each person connects their own Bitbucket account. The agent reads repositories and opens pull requests as that person, so Flow never shows anyone a repository their Bitbucket account cannot open. An automation runs only on repositories its writer's Bitbucket account can read.
+
+## Ask the AI what differs between two branches
+
+The assistant can compare any two branches, or a branch with Base, and report each changed item with its old and new values. It uses the same comparison as the Compare page, reads both branches without switching the chat's branch, and never writes.
+
+## Choose how spreadsheet links resolve
+
+Pick the field a link value uses to name its target, for the whole import or per link column. For example, match rows by Source ID while resolving links by Entity Numeric ID. Links can target existing items or rows in the same file. A missing or ambiguous target now blocks the import and names the column, the key, and where Flow looked, instead of being skipped.
+
+Export has the same choice. **Write links by** sets one key for every link column, with a per-column override, so an exported file re-imports with matching settings.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Require plan approval in every chat.** Admins can turn off **Allow Auto-accept in chats** under **Organization settings → AI Settings**. Every chat then asks for plan approval before changing data, and the mode chip and Shift+Tab are hidden. Automations keep their own setting.
+- **Switching to Auto-accept mid-chat.** The switch applies from the assistant's next step, including a reply already in progress. Switching back to **Ask first** restores the plan step the same way.
+- **Edited workbooks.** The chat card shows only changed rows and their neighbors, with real row numbers, a **Show all rows** switch, and each sheet's change count on its tab.
+- **Agent imports.** Agent scripts use the same data-type names as the chat and reject unknown types, so items can't be created with a type missing from views.
+
+### Automations
+
+- **Scheduled agent automations.** Scheduled runs that open a branch for their changes no longer fail to start.
+
+### Branching
+
+- **Update from parent in large projects.** Updates no longer time out partway through, and branch trees with many sub-branches update faster.
+
+### Data Model
+
+- **Requirement values when creating an item.** Typing a target such as "should be 500 m/s" into a new item's description offers to fill a number field, as in the details panel.
+
+### Diagrams
+
+- **Auto arrange direction.** The chevron next to **Auto arrange** lays a diagram out left to right or top to bottom. The button repeats your last choice.
+- **Auto arrange on non-rectangular shapes.** Connections end on the outline of diamonds, triangles, and ellipses instead of their bounding box.
+- **Bending a selected wire.** The **+** for placing an entity on a wire no longer covers its bend handle.
+
+### Files
+
+- **Spreadsheet and CSV previews.** .xlsx, .xls, .ods, CSV, and TSV attachments open in a spreadsheet grid with column letters, row numbers, and a tab per sheet. A reference to rows of a sheet opens there with the rows highlighted.
+
+### Import and Export
+
+- **Re-importing a Flow export.** The **Identity column** defaults to the file's first identity column, so re-importing an unchanged export updates its items instead of creating duplicates.
+- **Clearer identity conflicts.** When a row's identity matches no single item, the import explains why, such as a repeated value, several matches, or a deleted item.
+
+### Integrations
+
+- **GitLab code search in Flow AI.** With GitLab Repo Browsing on, the assistant can find code by terms inside files on a connected GitLab project and read the matching file.
+- **Connect Jira from issue pickers.** The connection prompt has a button that opens Jira settings in a new tab.
+
+### Review
+
+- **Reviewer changes.** Reviewers and approval progress update as soon as you add or remove a reviewer or group.
+- **Impact analysis severity filter.** Hiding Severe or Moderate findings no longer hides findings of the other severity nested beneath them.
+- **Fixing impact analysis findings.** The **Fix inconsistencies** button is removed. Ask the agent in the analysis conversation to fix flagged items.
+
+### Search
+
+- **Search, filter, and group relationships.** The details panel's Relationships tab can search links by name, filter them like the main page, and list them as single Upstream, Downstream, and Cross-links lists sorted by type.
+
+## API Changes
+
+- **Plan approval for API chats.** When an admin turns off **Allow Auto-accept in chats**, chats started through the [Customer API](/api/reference) also ask for plan approval before changing data.
