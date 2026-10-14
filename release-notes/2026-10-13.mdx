@@ -1,0 +1,93 @@
+---
+title: "October 13, 2026"
+sidebarTitle: "October 13, 2026"
+description: "AI editing for any diagram, a pop-out AI chat, Bitbucket Data Center, and reworked file fields and previews."
+---
+
+## In this release
+
+- [Ask the AI to edit any diagram](#ask-the-ai-to-edit-any-diagram)
+- [Pop out the AI chat](#pop-out-the-ai-chat)
+- [Bitbucket Data Center](#bitbucket-data-center)
+- [Reworked file fields and previews](#reworked-file-fields-and-previews)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Ask the AI to edit any diagram
+
+Ask the assistant to add, connect, relabel, recolor, move, or remove things on an existing diagram, including one you drew yourself. It changes only what you asked for, and your own shapes, notes, layout, and routes stay as they were. Ask it to arrange or tidy a diagram, and it lays the diagram out the way **Auto arrange** does without redrawing it.
+
+Diagrams the assistant creates or updates open already laid out along their connections. The assistant picks the direction from the kind of diagram it draws. Activity diagrams, flowcharts, and hierarchies run downward, and architecture and data-flow diagrams run across. Ask for a direction to override its choice. Shapes it adds now have a light fill and a solid outline unless you ask for another style.
+
+## Pop out the AI chat
+
+Choose **Pop out** in the chat's three-dots menu to move the conversation, composer included, into an always-on-top window. Keep chatting while you work elsewhere in Flow or in other apps. Close that window or choose **Return to tab** to put the chat back with the same conversation and draft. Available in Chrome and Edge.
+
+## Bitbucket Data Center
+
+Workspaces can connect a self-hosted Bitbucket Data Center server instead of Bitbucket Cloud, with repository browsing, write-back, and pull-request automations. Admins enter the server URL and an HTTP access token, and each person connects with their own HTTP access token. The server must be approved for your workspace.
+
+## Reworked file fields and previews
+
+In the details panel, each attachment has its own row with a file-type icon, or a thumbnail for images, and a remove button on hover. Click an empty field to open the file picker straight away, or drop files onto the field. In tables, a file cell shows the first file and a count of the rest. Click a file to preview it, or double-click the cell or press Enter to add, remove, or preview files.
+
+Images fit the preview window and can be zoomed and panned. Code and data files such as JSON, XML, YAML, and Markdown are syntax-highlighted. Large spreadsheets scroll smoothly, with row numbers in view and sheet tabs at the bottom.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Chat mode picker.** Choose **Ask first** or **Auto-accept** from a dropdown in the chat composer, with a description of each mode. Shift+Tab still switches modes.
+- **Chat drafts.** Text you type in an existing chat stays in its composer when you close and reopen the chat.
+- **Speed setting for document imports.** When the assistant imports a PDF or image, it reads the pages with the chat's speed setting, such as **Fastest**, instead of the project default.
+- **Detailed PDF drawings.** AI reads can process more detailed vector drawings while preserving source text and readable close-up views.
+
+### Architecture
+
+- **Interface colors** (beta). On **Settings → Architecture**, choose one of a node type's interface tag fields as its **Interface color**. Connections carrying an interface take the color of its option, recolor as the value changes, and keep those colors in SVG and PNG exports.
+
+### Automations
+
+- **Merge target in scripts** (beta). Every script, including branch checks and triggered automations, can read `parent_branch_id`: the branch its branch merges into, or `None` for Base.
+- **Runs tally.** In an automation's Runs tally, only a crashed run counts as Failed. A run that completed with a fail or warning verdict counts as Completed.
+
+### Branching
+
+- **Merging moved items back.** A branch that returns items to the branch they were moved out of with **Move to new branch** now merges instead of failing with "Conflicts with data that already exists."
+
+### Diagrams
+
+- **Diagram previews.** Item cards in a diagram preview, such as one the assistant draws in chat, show their item type's color and icon and reflect renames.
+
+### Import and Export
+
+- **Spreadsheet import summary.** The completion summary and import log count only items the import actually changed, so created, updated, unchanged, and skipped add up to the rows imported.
+- **V2 Google Sheets models stay live.** V2 migrations turn each Google Sheets analysis model into an Analysis Model item linked to its sheet, with outputs that read their cells from the live sheet. Requires the Google Drive integration with access to the sheets.
+- **V2 outputs without a tab.** A V2 Excel or Google Sheets output mapped without a tab now migrates as a live formula reading the first tab, instead of a static number.
+
+### Notifications
+
+- **Branch names.** Slack, email, and in-app notifications use the same branch display names as the app.
+- **Automation runs on Base.** Automation runs that finish on Base now send their completion notification.
+
+### Review
+
+- **Remove unavailable reviewers.** With reviewer removal enabled, members with edit access, including branch owners and admins, can remove unavailable reviewers to clear their blocking assignments.
+
+### Search
+
+- **Item picker tabs and filters.** Before you type, the item picker offers **Recents & favorites** and **Browse** tabs and reopens on the one you used last. Add the same filter chips as the main page, and pick suggested item types from a name search. Searching and filtering cover the whole project, and a table's link column opens the picker filtered to its item type.
+
+### Settings
+
+- **Variants are always on.** Promoting a branch to a variant, extracting changes from one, and making values variant-specific no longer need the **Variants** beta switch.
+
+### Table
+
+- **Item link column.** Select the Item link column to include a direct URL to each item in tables and CSV, Excel, or JSON exports.
+- **Rich-text branch changes.** With **Show changed in branch** and **Wrap columns** on, rich-text cells mark only the paragraphs that changed, new above old.
+
+## API Changes
+
+- **Diagram layout.** Diagrams the [Customer API](/api/reference) creates or updates open auto-arranged. The diagram endpoint accepts a `direction` option.
+- **Variants endpoints deprecated.** `GET /project/{projectId}/variants-enabled` always returns `true`. `PUT` on the same path is accepted but no longer changes anything. Remove calls to both.
