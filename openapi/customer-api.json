@@ -1420,6 +1420,14 @@
       },
       "BranchResponseDto": {
         "properties": {
+          "auto_merge_requested_at": {
+            "nullable": true,
+            "type": "string"
+          },
+          "auto_merge_requested_by_id": {
+            "nullable": true,
+            "type": "string"
+          },
           "baseline_id": {
             "nullable": true,
             "type": "string"
@@ -2196,6 +2204,14 @@
               "$ref": "#/components/schemas/DiagramConnectionItemDto"
             },
             "type": "array"
+          },
+          "direction": {
+            "description": "Which way the structured input is auto-arranged: \"horizontal\" (left to right, the default) or \"vertical\" (top to bottom). Ignored for a raw `snapshot`.",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ],
+            "type": "string"
           },
           "entities": {
             "description": "Flow platform entities to render as data-shape cards (entity relationship diagrams). For generic shapes use `nodes` instead.",
@@ -3767,7 +3783,7 @@
       "DiagramEntityItemDto": {
         "properties": {
           "childColumns": {
-            "description": "When this entity is a container (other items name it as their parentId), the fixed number of columns to arrange its children into (≥ 1). Omit for an automatic ≈√n grid.",
+            "description": "When this entity is a container (other items name it as their parentId), the fixed number of columns to arrange its children into (≥ 1). Omit to have its children auto-arranged by their connections.",
             "type": "number"
           },
           "geo": {
@@ -3787,7 +3803,7 @@
             "type": "string"
           },
           "parentId": {
-            "description": "Id of another entity/node in this payload that should contain this card. When set, the card is nested inside that container and auto-placed in its grid. Omit for a top-level card.",
+            "description": "Id of another entity/node in this payload that should contain this card. When set, the card is nested inside that container and auto-arranged inside it. Omit for a top-level card.",
             "type": "string"
           },
           "type": {
@@ -3805,7 +3821,7 @@
       "DiagramNodeItemDto": {
         "properties": {
           "childColumns": {
-            "description": "When this node is a container, the fixed number of columns to arrange its children into (≥ 1). Omit for an automatic ≈√n grid.",
+            "description": "When this node is a container, the fixed number of columns to arrange its children into (≥ 1). Omit to have its children auto-arranged by their connections.",
             "type": "number"
           },
           "color": {
@@ -3845,7 +3861,7 @@
             "type": "string"
           },
           "parentId": {
-            "description": "Id of another node/entity in this payload that should contain this node. When set, x/y are ignored and the node is auto-placed inside the container.",
+            "description": "Id of another node/entity in this payload that should contain this node. When set, x/y are ignored and the node is auto-arranged inside the container.",
             "type": "string"
           },
           "shape": {
@@ -3875,11 +3891,11 @@
             "type": "number"
           },
           "x": {
-            "description": "Canvas x position — auto-placed in a grid when omitted",
+            "description": "Canvas x position. Omit to auto-arrange the node along its connections; a node given x and y is pinned there instead.",
             "type": "number"
           },
           "y": {
-            "description": "Canvas y position — auto-placed in a grid when omitted",
+            "description": "Canvas y position. Omit to auto-arrange the node; see x.",
             "type": "number"
           }
         },
@@ -5539,6 +5555,10 @@
       },
       "ReviewPolicyResponseDto": {
         "properties": {
+          "allow_auto_merge": {
+            "description": "Whether a branch can be set to merge automatically, as the person who set it, once every merge requirement passes.",
+            "type": "boolean"
+          },
           "allow_merge_override": {
             "description": "Whether anyone may force a merge past the review requirements with an audited reason.",
             "type": "boolean"
@@ -5576,7 +5596,8 @@
           "changed_item_review_enabled",
           "changed_item_review_fields",
           "allow_merge_override",
-          "merge_override_role"
+          "merge_override_role",
+          "allow_auto_merge"
         ],
         "type": "object"
       },
@@ -5679,6 +5700,18 @@
         "required": [
           "job_id",
           "queued"
+        ],
+        "type": "object"
+      },
+      "SetAutoMergeDto": {
+        "properties": {
+          "enabled": {
+            "description": "True to merge the branch automatically, as the caller, once every merge requirement passes; false to cancel a waiting automatic merge.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "enabled"
         ],
         "type": "object"
       },
@@ -6708,6 +6741,9 @@
       },
       "UpdateReviewPolicyDto": {
         "properties": {
+          "allow_auto_merge": {
+            "type": "boolean"
+          },
           "allow_merge_override": {
             "type": "boolean"
           },
@@ -10985,6 +11021,81 @@
           "metadata": {
             "sidebarTitle": "List a branch’s ancestors, root-first",
             "title": "List a branch’s ancestors, root-first"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/branch/{id}/auto-merge": {
+      "post": {
+        "description": "With the organization review policy's allow_auto_merge on, enabled=true has the branch merge itself, as the caller, as soon as every merge requirement passes (the ordinary merge job is then queued and can be polled through merge-status); enabled=false cancels a waiting request. The merge re-checks every requirement as the caller when it runs.",
+        "operationId": "BranchController_setAutoMerge",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAutoMergeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BranchResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Merge a branch automatically once it is ready",
+        "tags": [
+          "Branches"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-branch-id-auto-merge",
+          "metadata": {
+            "sidebarTitle": "Merge a branch automatically once it is ready",
+            "title": "Merge a branch automatically once it is ready"
           }
         }
       }
@@ -17533,6 +17644,7 @@
     },
     "/project/{projectId}/variants-enabled": {
       "get": {
+        "deprecated": true,
         "operationId": "ProjectController_getVariantsEnabled",
         "parameters": [
           {
@@ -17573,19 +17685,20 @@
             "bearer": []
           }
         ],
-        "summary": "Get the project's variants-prototype toggle",
+        "summary": "Always true (false for external recipients)",
         "tags": [
           "Projects"
         ],
         "x-mint": {
           "href": "/api/endpoints/get-project-projectid-variants-enabled",
           "metadata": {
-            "sidebarTitle": "Get the project's variants-prototype toggle",
-            "title": "Get the project's variants-prototype toggle"
+            "sidebarTitle": "Always true (false for external recipients)",
+            "title": "Always true (false for external recipients)"
           }
         }
       },
       "put": {
+        "deprecated": true,
         "operationId": "ProjectController_updateVariantsEnabled",
         "parameters": [
           {
@@ -17636,15 +17749,15 @@
             "bearer": []
           }
         ],
-        "summary": "Set the project's variants-prototype toggle",
+        "summary": "No-op: variants can no longer be turned off",
         "tags": [
           "Projects"
         ],
         "x-mint": {
           "href": "/api/endpoints/put-project-projectid-variants-enabled",
           "metadata": {
-            "sidebarTitle": "Set the project's variants-prototype toggle",
-            "title": "Set the project's variants-prototype toggle"
+            "sidebarTitle": "No-op: variants can no longer be turned off",
+            "title": "No-op: variants can no longer be turned off"
           }
         }
       }
