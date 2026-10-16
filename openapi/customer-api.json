@@ -459,6 +459,10 @@
       },
       "AutomationDto": {
         "properties": {
+          "advisory": {
+            "description": "Branch checks: report the verdict without blocking the merge. Defaults to false.",
+            "type": "boolean"
+          },
           "allowAdminTools": {
             "type": "boolean"
           },
@@ -1028,6 +1032,9 @@
       },
       "BranchCheckItemDto": {
         "properties": {
+          "advisory": {
+            "type": "boolean"
+          },
           "automation_id": {
             "type": "string"
           },
@@ -1067,7 +1074,8 @@
           "output",
           "error",
           "run_id",
-          "ran_at"
+          "ran_at",
+          "advisory"
         ],
         "type": "object"
       },
@@ -2105,6 +2113,10 @@
       },
       "CreateAutomationDto": {
         "properties": {
+          "advisory": {
+            "description": "Branch checks: report the verdict without blocking the merge. Defaults to false.",
+            "type": "boolean"
+          },
           "allowAdminTools": {
             "description": "Let runs keep the admin-only data-model, saved-view and template tools, honored only while the user it runs as is a project admin. Can't be turned on with an API key; turn it on in Flow.",
             "type": "boolean"
@@ -6625,6 +6637,10 @@
       },
       "UpdateAutomationDto": {
         "properties": {
+          "advisory": {
+            "description": "Branch checks: report the verdict without blocking the merge. Defaults to false.",
+            "type": "boolean"
+          },
           "allowAdminTools": {
             "description": "Let runs keep the admin-only data-model, saved-view and template tools, honored only while the user it runs as is a project admin. Can't be turned on with an API key; turn it on in Flow.",
             "type": "boolean"
@@ -8237,6 +8253,15 @@
             "description": "Branch filter: 'master' for Base, a branch UUID, or omit for all",
             "in": "query",
             "name": "branch_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Variant scope, including its change requests",
+            "in": "query",
+            "name": "variant_id",
             "required": false,
             "schema": {
               "type": "string"
