@@ -1,0 +1,88 @@
+---
+title: "October 15, 2026"
+sidebarTitle: "October 15, 2026"
+description: "AI-suggested spreadsheet import settings, item checks on changed items in reviews, choices for children when deleting items, and advisory branch checks."
+---
+
+## In this release
+
+- [Let the AI suggest a spreadsheet import's settings](#let-the-ai-suggest-a-spreadsheet-import's-settings)
+- [Item checks on changed items](#item-checks-on-changed-items)
+- [Choose what happens to children when deleting an item](#choose-what-happens-to-children-when-deleting-an-item)
+- [Advisory branch checks](#advisory-branch-checks)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Let the AI suggest a spreadsheet import's settings
+
+Once the import wizard has read your file, **Suggest settings** on the item type step asks the AI to propose the whole import from the first 20 rows and the project's data model. It suggests which item types the rows belong to and, for a mixed file, the column and values that tell them apart. For each item type it proposes the settings you would otherwise choose by hand, such as the identity column, field mappings, and link columns.
+
+The proposal fills every step of the wizard as an editable draft. The AI never invents item types, fields, or keys, and lists anything it dropped or left unmapped with a reason. Each item type's mapping step has its own **Suggest settings** to redo that type. Nothing is imported until you review and import as usual.
+
+## Item checks on changed items
+
+On a branch review's **Changed Items**, an item failing its checks shows the same chip as its details panel. Hover it to see each check and its reason, and pick a failing check to jump to that field. The field's row in the diff carries the same mark.
+
+The cards judge only items the branch created or edited. Items failing elsewhere in the project, or ones the branch only links to, never appear or count. Checks stay warnings and never block merging.
+
+## Choose what happens to children when deleting an item
+
+When an item you delete has children, the confirmation shows how many there are. Click the count to see them. You then choose what happens to them: leave them orphaned, remove them from every view (the default, as before), move them one level up, or delete everything below the item in the current view too. After deleting, a confirmation offers **Undo**.
+
+## Advisory branch checks
+
+A script branch check can now have **Required to merge** turned off. It still runs on every review and shows its result, marked **Not required**, but a failing, stale, or not-yet-run check no longer blocks the merge. Existing checks stay required.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Focused impact analysis.** Findings focus on downstream items that need someone's attention because of a change. Comments that only describe the change, or offer nothing to act on, are no longer posted.
+
+### Automations
+
+- **Branch checks can read approvals.** Branch check scripts get `approvals()`, matching the approvals Merge counts, and `reviewers()`, matching the reviewers on the review page. A check can require a named approver before merging. Not available on Base.
+
+### Data Model
+
+- **Show unit on number fields.** Turn off the new **Show unit** setting to show a number field's values as plain numbers in tables, the details panel, Reader, mentions, and exports. Spreadsheet imports then ignore units in the file. It is on by default, and stored units return when you turn it back on.
+
+### Diagrams
+
+- **Top to bottom Auto arrange.** Wires route at right angles instead of crossing a system's boundary diagonally, and no longer run through interfaces on other wires.
+- **Double-click picker.** Enter activates the highlighted row, including **Create …** when nothing matches, and the picker stays on screen.
+- **Accessibility.** Screen readers announce an entity card's name and type, canvas tool buttons and the details panel's close button have names, and Escape closes the details panel.
+- **Canvas panning on macOS.** A two-finger horizontal pan no longer triggers the browser's back or forward navigation in Chrome and Safari.
+
+### Formulas
+
+- **Reset formula to default.** When a field has a default formula and an item's formula was changed, the Formula Builder and inline formula editor offer **Reset to default**.
+
+### Login
+
+- **SSO sign-in.** Links to a different organization now explain when your saved SSO session is not valid there, instead of saying it expired.
+
+### Notifications
+
+- **Update banner.** When a new version of Flow is released while you have it open, a notice at the top of the page offers **Refresh**.
+
+### Review
+
+- **Re-adding a removed reviewer.** With **Allow reviewer removal** on, re-adding a required reviewer or group you just removed no longer fails with a permission error.
+
+### Search
+
+- **More forgiving item search.** Global search and entity pickers find close matches, including punctuation differences and small typos, after literal matches. For example, "Heavy Landing Legs" finds "Heavy: Landing Legs". This also works across branches.
+
+### Settings
+
+- **Turning off Flow AI.** Turning off Flow AI in **Settings → Organization** now stops every AI feature, including the formula builder's AI assistant, the field editor's `/` shortcut, and dashboard AI summaries. Agent automations (scheduled, webhook, and branch review) no longer run while Flow AI is off. Script automations and branch checks keep running.
+
+### Views
+
+- **Links to an item.** Opening or reloading a link to a focused item, on any view, expands the sidebar to show and highlight that item.
+
+## API Changes
+
+- **Choose your MCP tools.** **Settings → API & MCP** lets you select the tools your agent client loads and copy a connection URL for that selection. See [MCP tools](/api/mcp/tools).
+- **Flow AI turned off.** While Flow AI is off, AI requests and agent chats started through the [Customer API](/api/reference) or MCP are refused with "AI is turned off for this organization". Turn Flow AI back on in **Settings → Organization** if you still need those runs.
