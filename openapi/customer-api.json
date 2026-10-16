@@ -1917,6 +1917,57 @@
         ],
         "type": "object"
       },
+      "BulkRemoveUserFailureDto": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "user_id",
+          "message"
+        ],
+        "type": "object"
+      },
+      "BulkRemoveUsersDto": {
+        "properties": {
+          "user_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 200,
+            "type": "array"
+          }
+        },
+        "required": [
+          "user_ids"
+        ],
+        "type": "object"
+      },
+      "BulkRemoveUsersResultDto": {
+        "properties": {
+          "failed": {
+            "items": {
+              "$ref": "#/components/schemas/BulkRemoveUserFailureDto"
+            },
+            "type": "array"
+          },
+          "removed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "removed",
+          "failed"
+        ],
+        "type": "object"
+      },
       "ChangeRequestDiffSummaryDto": {
         "properties": {
           "added": {
@@ -4709,6 +4760,13 @@
             "description": "Admin-only force merge. Overrides known review, branch-check, stage-policy, editor-group, and merge-conflict blockers once, while preserving structural and incomplete-scan protections. Requires review_bypass_reason.",
             "type": "boolean"
           },
+          "expected_rebase_ids": {
+            "description": "The ids of the live sub-branches the merge-rebase preview said this merge would rebase onto the merge target. When present, the merge refuses with 409 if the set of live sub-branches differs at merge time, so a sub-branch is never rebased unseen. Omit to rebase whatever live sub-branches exist then.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "review_bypass_reason": {
             "description": "Required when bypass_review is true. The justification and execution-time blocker snapshot are preserved as an immutable review event on the merge baseline.",
             "maxLength": 1000,
@@ -6049,6 +6107,9 @@
       },
       "StageGateStatusResponseDto": {
         "properties": {
+          "can_block_merge": {
+            "type": "boolean"
+          },
           "evaluated_entity_count": {
             "type": "number"
           },
@@ -7149,6 +7210,15 @@
             "description": "Pass true to list only the saved-automation runs the caller launched by hand, in place of triggerType. Runs started by other people, schedules or integrations are never listed.",
             "in": "query",
             "name": "ownAutomationRuns",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only chats started to address this comment (`trigger_info.comment_id`).",
+            "in": "query",
+            "name": "commentId",
             "required": false,
             "schema": {
               "type": "string"
@@ -11535,7 +11605,7 @@
     },
     "/project/{projectId}/branch/{id}/merge": {
       "post": {
-        "description": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Depending on the organization review policy, project admins (and optionally the parent branch owner) may set bypass_review with a review_bypass_reason to force past known review-policy, branch-check, stage-policy, editor-group, and merge-conflict blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-scan protections remain enforced. Poll the returned job until it succeeds or fails.",
+        "description": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Live sub-branches of the merged branch are rebased onto the merge target in the same merge, keeping their own changes (GET :id/merge-rebase-preview lists them, with the fields where their change and the newly inherited history differ; pass its ids as expected_rebase_ids to refuse the merge with 409 if that set has changed). Depending on the organization review policy, project admins (and optionally the parent branch owner) may set bypass_review with a review_bypass_reason to force past known review-policy, branch-check, stage-policy, editor-group, and merge-conflict blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-scan protections remain enforced. Poll the returned job until it succeeds or fails.",
         "operationId": "BranchController_merge",
         "parameters": [
           {
@@ -19078,6 +19148,64 @@
         }
       }
     },
+    "/users/remove/bulk": {
+      "post": {
+        "operationId": "UsersController_bulkRemoveUsers",
+        "parameters": [
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkRemoveUsersDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkRemoveUsersResultDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove the selected users from the workspace in one request. Users the caller cannot administer (or that no longer exist) are reported back as failed rather than removed.",
+        "tags": [
+          "Users"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/post-users-remove-bulk",
+          "metadata": {
+            "sidebarTitle": "Remove the selected users from the workspace in one request. Users the caller cannot administer (or that no longer exist) are reported back as failed rather than removed.",
+            "title": "Remove the selected users from the workspace in one request. Users the caller cannot administer (or that no longer exist) are reported back as failed rather than removed."
+          }
+        }
+      }
+    },
     "/users/with-permissions": {
       "get": {
         "operationId": "UsersController_findAllWithPermissions",
@@ -19150,6 +19278,60 @@
       }
     },
     "/users/{id}": {
+      "delete": {
+        "operationId": "UsersController_removeUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove a user from the workspace. Their account and authored content remain; they lose access until invited again.",
+        "tags": [
+          "Users"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/delete-users-id",
+          "metadata": {
+            "sidebarTitle": "Remove a user from the workspace. Their account and authored content remain; they lose access until invited again.",
+            "title": "Remove a user from the workspace. Their account and authored content remain; they lose access until invited again."
+          }
+        }
+      },
       "get": {
         "operationId": "UsersController_findOne",
         "parameters": [
