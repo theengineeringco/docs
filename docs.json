@@ -15,13 +15,10 @@
     "tabs": [
       {
         "tab": "Docs",
-        "icon": {
-          "name": "house",
-          "library": "lucide"
-        },
         "pages": [
           "index"
-        ]
+        ],
+        "hidden": true
       },
       {
         "tab": "API",

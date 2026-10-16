@@ -21,7 +21,7 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
    Mobile keeps Mintlify's built-in tab/menu navigation. */
 @media (min-width: 1024px) {
   #sidebar {
-    bottom: 10.25rem;
+    bottom: 7.5rem;
   }
 
   /* Remove Maple's empty footer above the section links. */
@@ -32,7 +32,7 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
   #navbar-transition-maple {
     inset: auto auto 0 0 !important;
     width: 19rem;
-    height: 10.25rem;
+    height: 7.5rem;
     margin-top: 0 !important;
     padding: 1rem;
     border-top: 1px solid #e5e5e3;
@@ -80,36 +80,37 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
   }
 }
 
-/* Keep homepage cards quiet and consistent with the documentation shell. */
+/* Homepage imagery and compact cards stay scoped to the landing page. */
+body:has(.docs-home) #navigation-items .sidebar-group {
+  display: none;
+}
+
+.docs-home img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2.6;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .docs-home .card {
-  background: #f5f5f2;
+  background: #16151303;
   box-shadow: none;
   border-radius: 8px;
 }
 
 .docs-home [data-component-part="card-content-container"] {
-  padding: 0 20px 20px;
-}
-
-.docs-home [data-component-part="card-icon"] {
-  width: calc(100% + 40px);
-  height: 112px;
-  margin-inline: -20px;
-  padding: 24px 20px;
-  border-bottom: 1px solid #1615130d;
+  padding: 18px;
 }
 
 .docs-home [data-component-part="card-content"] {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .dark .docs-home .card {
-  background: #201f1d;
-}
-
-.dark .docs-home [data-component-part="card-icon"] {
-  border-color: #ffffff0d;
+  background: #ffffff03;
 }
 
 .docs-home .card:focus-visible {
