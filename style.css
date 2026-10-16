@@ -89,7 +89,8 @@ body:has(.docs-home) #navigation-items .sidebar-group {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 2.6;
+  /* Hosted image optimization adds an inline aspect ratio. */
+  aspect-ratio: 2.6 !important;
   object-fit: cover;
   border-radius: 8px;
 }
