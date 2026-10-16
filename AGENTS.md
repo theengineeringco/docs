@@ -11,7 +11,7 @@
 
 ## TL;DR
 
-- Serve the docs homepage from `index.mdx` at `/`; keep its navigation tab and page hidden so the homepage sidebar stays empty, and keep the logo linked to `/`.
+- Redirect `/` to the API overview at `/api`, and keep the logo linked to `/api`.
 - Use `/release-notes` as the only Release Notes index URL.
 - Store every dated page at lowercase `release-notes/YYYY-MM-DD`.
 - Use ISO dates in paths and filenames: `YYYY-MM-DD`.

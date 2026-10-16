@@ -14,13 +14,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Docs",
-        "pages": [
-          "index"
-        ],
-        "hidden": true
-      },
-      {
         "tab": "API",
         "groups": [
           {
@@ -101,7 +94,7 @@
       "download-spec"
     ]
   },
-  "description": "Guides to the Flow API, AI clients, and automations, plus the latest product release notes.",
+  "description": "Customer API documentation, authentication, and release notes from Flow.",
   "appearance": {
     "default": "system",
     "strict": false
@@ -121,9 +114,14 @@
   "logo": {
     "light": "/images/flow-brandmark-black.svg",
     "dark": "/images/flow-brandmark-white.svg",
-    "href": "/"
+    "href": "/api"
   },
   "redirects": [
+    {
+      "source": "/",
+      "destination": "/api",
+      "permanent": false
+    },
     {
       "source": "/changelog/2026-08-31",
       "destination": "/release-notes/2026-09-04",

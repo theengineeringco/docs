@@ -80,45 +80,6 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
   }
 }
 
-/* Homepage imagery and compact cards stay scoped to the landing page. */
-body:has(.docs-home) #navigation-items .sidebar-group {
-  display: none;
-}
-
-.docs-home img {
-  display: block;
-  width: 100%;
-  height: auto;
-  /* Hosted image optimization adds an inline aspect ratio. */
-  aspect-ratio: 2.6 !important;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.docs-home .card {
-  background: #16151303;
-  box-shadow: none;
-  border-radius: 8px;
-}
-
-.docs-home [data-component-part="card-content-container"] {
-  padding: 18px;
-}
-
-.docs-home [data-component-part="card-content"] {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.dark .docs-home .card {
-  background: #ffffff03;
-}
-
-.docs-home .card:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 4px;
-}
-
 /* A solid header sits outside the navigation's scrollable region. */
 @media (min-width: 1024px) {
   #sidebar-content {
