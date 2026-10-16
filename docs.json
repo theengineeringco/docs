@@ -14,6 +14,16 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Docs",
+        "icon": {
+          "name": "house",
+          "library": "lucide"
+        },
+        "pages": [
+          "index"
+        ]
+      },
+      {
         "tab": "API",
         "groups": [
           {
@@ -94,7 +104,7 @@
       "download-spec"
     ]
   },
-  "description": "Customer API documentation, authentication, and release notes from Flow.",
+  "description": "Guides to the Flow API, AI clients, and automations, plus the latest product release notes.",
   "appearance": {
     "default": "system",
     "strict": false
@@ -114,17 +124,12 @@
   "logo": {
     "light": "/images/flow-brandmark-black.svg",
     "dark": "/images/flow-brandmark-white.svg",
-    "href": "https://docs.flowengineering.com/release-notes"
+    "href": "/"
   },
   "redirects": [
     {
-      "source": "/",
-      "destination": "/changelog/2026-08-31",
-      "permanent": false
-    },
-    {
       "source": "/changelog/2026-08-31",
-      "destination": "/changelog/2026-09-01",
+      "destination": "/release-notes/2026-09-04",
       "permanent": true
     },
     {
@@ -134,7 +139,7 @@
     },
     {
       "source": "/changelog/2026-09-01",
-      "destination": "/release-notes/2026-09-01",
+      "destination": "/release-notes/2026-09-04",
       "permanent": true
     },
     {
@@ -144,37 +149,37 @@
     },
     {
       "source": "/changelog/2026-08-27",
-      "destination": "/release-notes/2026-08-27",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     },
     {
       "source": "/changelog/2026-08-26",
-      "destination": "/release-notes/2026-08-26",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     },
     {
       "source": "/changelog/2026-08-25",
-      "destination": "/release-notes/2026-08-25",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     },
     {
       "source": "/changelog/2026-08-24",
-      "destination": "/release-notes/2026-08-24",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     },
     {
       "source": "/Release-Notes/2026-09-03",
-      "destination": "/release-notes/2026-09-03",
+      "destination": "/release-notes/2026-09-04",
       "permanent": true
     },
     {
       "source": "/Release-Notes/2026-09-02",
-      "destination": "/release-notes/2026-09-02",
+      "destination": "/release-notes/2026-09-04",
       "permanent": true
     },
     {
       "source": "/Release-Notes/2026-09-01",
-      "destination": "/release-notes/2026-09-01",
+      "destination": "/release-notes/2026-09-04",
       "permanent": true
     },
     {
@@ -184,22 +189,22 @@
     },
     {
       "source": "/Release-Notes/2026-08-27",
-      "destination": "/release-notes/2026-08-27",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     },
     {
       "source": "/Release-Notes/2026-08-24",
-      "destination": "/release-notes/2026-08-24",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     },
     {
       "source": "/Release-Notes/2026-08-26",
-      "destination": "/release-notes/2026-08-26",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     },
     {
       "source": "/Release-Notes/2026-08-25",
-      "destination": "/release-notes/2026-08-25",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     },
     {
@@ -280,6 +285,41 @@
     {
       "source": "/release-notes/2026-10-08",
       "destination": "/release-notes/2026-10-09",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-09-01",
+      "destination": "/release-notes/2026-09-04",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-09-02",
+      "destination": "/release-notes/2026-09-04",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-09-03",
+      "destination": "/release-notes/2026-09-04",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-08-24",
+      "destination": "/release-notes/2026-08-28",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-08-25",
+      "destination": "/release-notes/2026-08-28",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-08-26",
+      "destination": "/release-notes/2026-08-28",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-08-27",
+      "destination": "/release-notes/2026-08-28",
       "permanent": true
     }
   ],
