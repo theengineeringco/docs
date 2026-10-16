@@ -2,21 +2,22 @@
 
 ## About this project
 
-- This is Flow's public Release Notes site, built on Mintlify.
+- This is Flow's public documentation site, built on Mintlify.
 - Pages are MDX files with YAML frontmatter.
 - Global configuration lives in `docs.json`.
-- Use the Mintlify MCP server at `https://mcp.mintlify.com` for content, navigation, and configuration changes.
+- Use the Mintlify MCP server at `https://mcp.mintlify.com` for content, navigation, and configuration changes. When a tool cannot target the intended branch or deployment, use a Git worktree and reviewed PR for the complete change.
 - Use `branch-demo/CHANGELOG.md` as the customer-facing release record. GitHub and production deployment state establish what shipped.
 - Treat Eddy digests and `#changelog-charlie` as editorial evidence, not as the system of record.
 
 ## TL;DR
 
+- Redirect `/` to the API overview at `/api`, and keep the logo linked to `/api`.
 - Use `/release-notes` as the only Release Notes index URL.
 - Store every dated page at lowercase `release-notes/YYYY-MM-DD`.
 - Use ISO dates in paths and filenames: `YYYY-MM-DD`.
 - Use the full written date in page titles, sidebar labels, and update labels: `Month D, YYYY` (for example, `September 7, 2026`).
 - Prepare one draft nightly at 7:00 PM Pacific when eligible changes shipped since the latest published edition.
-- Keep **Release Notes** first in the sidebar and list dated entries newest to oldest.
+- Keep **Release Notes** first within its tab and list dated entries newest to oldest.
 - Draft on a Mintlify branch. Do not publish until the draft receives explicit approval.
 - After publication, verify the index, the new lowercase page URL, navigation order, and redirects from any replaced URL.
 
