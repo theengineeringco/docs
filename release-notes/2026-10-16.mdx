@@ -1,0 +1,185 @@
+---
+title: "October 16, 2026"
+sidebarTitle: "October 16, 2026"
+description: "Weekly release: item checks with fixes from AI, Merge When Ready, AI edits to PDFs and Word documents, AI-written PDF reports, Bitbucket Cloud, and AI-suggested spreadsheet import settings."
+---
+
+## In this release
+
+- [Item checks](#item-checks)
+- [Merge a branch automatically once it is ready](#merge-a-branch-automatically-once-it-is-ready)
+- [Ask the AI to edit a PDF or Word document](#ask-the-ai-to-edit-a-pdf-or-word-document)
+- [AI-written PDF reports](#ai-written-pdf-reports)
+- [Connect Bitbucket Cloud](#connect-bitbucket-cloud)
+- [Let the AI suggest a spreadsheet import's settings](#let-the-ai-suggest-a-spreadsheet-import's-settings)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Item checks
+
+Define the rules every item of a type should meet, in **Settings → Checks** or in the **Checks** section of each item type's page in **Settings → Data Model**. A check can require that a field is set, that a value is one of a list, that a number is within a range, that text contains or does not contain a phrase such as "TBD", or that an item has a minimum number of upstream or downstream links to chosen types. A failing field shows a cross in its cell, the details panel shows a badge such as "2 checks failed", and tables show marks once their **Show checks** display option is on.
+
+In a branch review, **Item checks** lists failures by item type and rule, and each failing item on **Changed Items** shows the same chip as its details panel. Reviews judge only items the branch created or edited. On a branch, a failing check's hover card offers one **Fix** for all of the item's failing checks, and the review's Item checks row offers **Fix all**. The agent works only on the failing items and fields and waits for your plan approval before writing. You can also ask the assistant which items fail and why, and data-model admins can have it add, change, or remove checks after approving them in the chat. Failing item checks never block approval or merging.
+
+## Merge a branch automatically once it is ready
+
+With **Allow automatic merging** on in **Settings → Reviews**, a branch still waiting on approvals, checks, or stage reviews offers **Merge When Ready** in its merge box. The branch then merges itself, as the person who asked, as soon as every merge requirement is met. Anyone who can merge the branch can cancel the request, and switching the setting off cancels every waiting branch.
+
+## Ask the AI to edit a PDF or Word document
+
+Attach a PDF and ask the assistant to change values, dates, or single lines. Edits keep the page's own font, size, color, and position. Compare original and edited pages side by side, with removed text in red and added text in green, and use the page label to jump between edited pages. Scanned or outlined text can only be covered over, and the card lists any edit that could not be made, with the reason.
+
+Attach a .docx or .dotx and ask the assistant to fill it in from the project or from what you tell it, or to bring stale values up to date. It fills placeholders, content controls, and mail merge fields, including in tables, headers, and footers, and keeps the existing formatting. In both cases the assistant returns a new file you can download from the chat and leaves the original untouched.
+
+## AI-written PDF reports
+
+Ask the assistant for a report, and it researches the project and returns a PDF in the chat. The report includes a cover, contents, sections, tables, charts, a data-sources appendix, and numbered references to the items it cites.
+
+Every number in a table or chart must come from data the assistant retrieved in that conversation, so a figure it cannot trace is refused rather than printed. Re-rendering after feedback creates a new version linked to the previous one. A scheduled automation can produce a report on each run and list it in its finish notification.
+
+## Connect Bitbucket Cloud
+
+Admins can connect Bitbucket Cloud from **Settings → Integrations** with **Connect Bitbucket**, which adds webhooks to the repositories they select, or with an API token. The AI agent can then browse repositories, open draft pull requests through write-back, and run pull-request automations from Bitbucket webhooks.
+
+Each person connects their own Bitbucket account. The agent reads repositories and opens pull requests as that person, so Flow never shows anyone a repository their Bitbucket account cannot open.
+
+## Let the AI suggest a spreadsheet import's settings
+
+Once the import wizard has read your file, **Suggest settings** on the item type step asks the AI to propose the whole import from the first 20 rows and the project's data model. It suggests the item types, the identity column, field mappings, and link columns, and for a mixed file, the column and values that tell types apart.
+
+The proposal fills every step of the wizard as an editable draft. The AI never invents item types, fields, or keys, and lists anything it dropped or left unmapped with a reason. Nothing is imported until you review and import as usual.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Structured questions.** When the agent needs a decision, it asks with a question card offering one-line choices, the recommended one first, and an **Other** box. Unanswered questions also land in your inbox.
+- **Address a comment with AI.** Open comments on a branch offer **Address with AI**. The agent proposes a plan for your approval, makes the change on that branch, and replies in the thread with what it did.
+- **Compare two branches.** Ask the assistant what differs between any two branches, or a branch and Base, and it reports each changed item with old and new values without switching branches or writing.
+- **Personal views.** Ask the agent for "my view" and it creates a private view only you see, listed under **Private views** in the view picker. It can also edit, delete, and share your own private views.
+- **Item references in rich text.** Ask the assistant to point a reference at another item, show one of its fields or its description, or pin it to a version.
+- **Stored files in AI scripts.** Scripts the AI runs can read large stored CSV, spreadsheet, JSON, text, and Word files row by row and save results as new project files.
+- **Require plan approval in every chat.** Admins can turn off **Allow Auto-accept in chats** under **Organization settings → AI Settings**. Every chat then asks for plan approval before changing data.
+- **Switching to Auto-accept mid-chat.** The switch applies from the assistant's next step, including a reply already in progress.
+- **Edit with AI is a normal chat.** Right-click → **Edit with AI** starts an ordinary chat with the selected items attached, using your usual plan and auto-accept defaults.
+- **Edited files.** A reply that edited PDFs, workbooks, or Word documents ends with a card per file, with **View changes** and **Download**. Edited workbooks show only changed rows and their neighbors, with each sheet's change count on its tab.
+- **PDFs from LaTeX.** The assistant and automation scripts can compile a self-contained LaTeX document into a PDF saved to the project's files.
+- **Impact analysis.** Analyses close with a summary card of up to three key findings, each with a suggested action and owner, and focus on downstream items that need attention.
+- **Focused answers.** Overviews and explanations stay focused on your question, with incidental requirement conflicts noted after the answer.
+- **Large imports in chat.** Opening a chat whose agent changed thousands of items no longer freezes the page. **Keep All** and **Undo All** work on imports of any size.
+- **Agent imports.** Items can no longer be created with a type missing from views.
+
+### Automations
+
+- **Advisory branch checks.** Turn off **Required to merge** on a script branch check so it still runs and shows its result, marked **Not required**, without blocking the merge. Existing checks stay required.
+- **Script automations are always on.** Every workspace can create and run Python script automations, including branch checks. Existing script branch checks now run on branch review and can block merging.
+- **Branch checks can read approvals.** Branch check scripts can read the approvals Merge counts and the reviewers on the review page, so a check can require a named approver.
+- **Document exports from scripts.** Scripts and the agent can read the tree a saved view shows under an item and save HTML as a project file. HTML files open rendered in the file preview, with **Download as PDF**.
+- **Scheduled agent automations.** Scheduled runs that open a branch for their changes no longer fail to start.
+
+### Branching
+
+- **Merge a branch that has sub-branches.** The merge carries each sub-branch onto the branch it merges into, with its own changes intact. The review panel lists which sub-branches will be updated, and a failed update rolls the whole merge back.
+- **Creating branches in large projects.** Creating a branch, or rebasing onto another, no longer fails with a server error in projects with many formulas or queued recalculations.
+- **Update from parent in large projects.** Updates no longer time out partway through, and branch trees with many sub-branches update faster.
+- **Opening views after an update.** Opening a view on a deep branch right after updating it from its parent loads faster.
+- **Deleting or merging large branches.** Cleanup afterward no longer holds up other branch operations.
+
+### Data Model
+
+- **Children when deleting an item.** The confirmation shows how many children an item has and lets you orphan them, remove them from every view (the default), move them up a level, or delete everything below the item in the current view. A confirmation then offers **Undo**.
+- **Show unit on number fields.** Turn off **Show unit** to show a number field's values as plain numbers. Stored units return when you turn it back on.
+- **Requirement values when creating an item.** Typing a target such as "should be 500 m/s" into a new item's description offers to fill a number field.
+
+### Diagrams
+
+- **Auto arrange direction.** The chevron next to **Auto arrange** lays a diagram out left to right or top to bottom. Top-to-bottom wires route at right angles and avoid interfaces on other wires.
+- **Auto arrange on non-rectangular shapes.** Connections end on the outline of diamonds, triangles, and ellipses.
+- **AI diagram layout.** Asking the assistant to auto-arrange a diagram no longer fails, and diagrams it creates are laid out as **Auto arrange** would draw them.
+- **Double-click picker.** Enter activates the highlighted row, including **Create …** when nothing matches.
+- **Accessibility.** Screen readers announce an entity card's name and type, canvas tool buttons have names, and Escape closes the details panel.
+- **Canvas panning on macOS.** A two-finger horizontal pan no longer navigates back or forward in Chrome and Safari.
+
+### Files
+
+- **Spreadsheet and CSV previews.** .xlsx, .xls, .ods, CSV, and TSV attachments open in a spreadsheet grid with a tab per sheet. A reference to rows of a sheet opens with the rows highlighted.
+- **Sharper PDF previews.** PDF pages render at higher resolution and scroll as one document, with zoom controls. While editing a citation, select, move, resize, or draw its highlighted region on any cited page.
+- **Attachment citations in tables.** Changing the pages or region an attachment cites from a table cell's preview now saves.
+- **Faster image thumbnails.** File fields load image thumbnails without downloading the full image first.
+
+### Formulas
+
+- **Use a spreadsheet cell in a field.** In an attached Excel or CSV preview, click a cell and choose **Set an item's field from this cell...** or **Copy formula referencing this cell**. The field updates when a new version of the file is attached.
+- **Reset formula to default.** When an item's formula differs from the field's default, the Formula Builder and inline editor offer **Reset to default**.
+- **Formula assistant.** The assistant no longer fails with an error after writing a working formula, and says why when it cannot make one.
+- **Item references.** An item reference in the formula editor no longer turns blank after typing or pasting it.
+
+### Import and Export
+
+- **Choose how spreadsheet links resolve.** Pick the field a link value uses to name its target, for the whole import or per link column. A missing or ambiguous target blocks the import and names the column and key. Export's **Write links by** matches it, so an exported file re-imports with matching settings.
+- **Re-importing a Flow export.** The **Identity column** defaults to the file's first identity column, so re-importing an unchanged export updates its items instead of creating duplicates.
+- **Clearer identity conflicts.** When a row's identity matches no single item, the import explains why.
+- **ReqIF export.** Every ReqIF export runs on the server. Each scope's preview is always available, item counts appear on the Mappings step, and the download is always a `.reqifz` archive.
+
+### Integrations
+
+- **GitLab code search in Flow AI.** With GitLab Repo Browsing on, the assistant can find code by terms inside files on a connected GitLab project.
+- **Connect Jira from issue pickers.** The connection prompt opens Jira settings in a new tab.
+
+### Login
+
+- **SSO sign-in.** Links to a different organization explain when your saved SSO session is not valid there, instead of saying it expired.
+- **First admin invitations.** Invitation emails for a new hosted workspace's first admin link to the workspace's Flow address.
+
+### Notifications
+
+- **Update banner.** When a new version of Flow is released while you have it open, a notice offers **Refresh**.
+
+### Permissions and Sharing
+
+- **Allow a migration import.** Workspace admins can allow Flow's migration service to create and fill a project from **Settings → Organization**. The permission lapses after 30 days, can be withdrawn at any time, and shows who allowed it and when.
+
+### Reader
+
+- **Rich-text table ranges.** With several cells selected, the cell menu offers **Delete selected rows**, **Delete selected columns**, and **Clear cells**.
+- **Live collaboration retired.** Reader live collaboration (beta) no longer shares keystrokes or shows editor presence. Other sessions still receive saved edits.
+
+### Review
+
+- **Reviewer changes.** Reviewers and approval progress update as soon as you add or remove a reviewer or group. Re-adding a required reviewer you just removed no longer fails with a permission error.
+- **Impact analysis severity filter.** Hiding Severe or Moderate findings no longer hides findings of the other severity nested beneath them.
+- **Fixing impact analysis findings.** The **Fix inconsistencies** button is removed. Ask the agent in the analysis conversation to fix flagged items.
+
+### Search
+
+- **More forgiving item search.** Global search and entity pickers find close matches, including punctuation differences and small typos, after literal matches, including across branches.
+- **Search, filter, and group relationships.** The details panel's Relationships tab can search links by name, filter them, and list them as Upstream, Downstream, and Cross-links.
+
+### Settings
+
+- **Control access to Anthropic models.** Admins turn on **Allow Anthropic Models** in **Settings → Organization** to make them available across AI features. The setting is off by default, and AI never falls back to Anthropic models while they are disallowed.
+- **Turning off Flow AI.** Turning off Flow AI in **Settings → Organization** stops every AI feature, including agent automations. Script automations and branch checks keep running.
+- **Profile pictures** _(self-hosted)_. Uploads work on installs using Azure Blob Storage or an S3-compatible store such as MinIO.
+
+<Warning>
+  Self-hosted upgrades: enable **Allow Anthropic Models** before using these models. Deployments that serve only Anthropic models cannot run AI while it is off. Existing explicit Anthropic opt-ins are preserved.
+</Warning>
+
+### Table
+
+- **Wrap item names.** With **Wrap columns** on, long item names show in full over several lines.
+- **Additional tables.** Tables scroll within their cards and keep all rows and columns reachable after resizing, collapsing, or reopening cards.
+
+### Views
+
+- **Private views.** **New private view** in **Settings → Views → My views** starts a blank personal view. The view picker on review and comparison pages lists your private views and those shared with you.
+- **Links to an item.** Opening a link to a focused item expands the sidebar to show and highlight it.
+
+## API Changes
+
+- **Plan approval for API chats.** When an admin turns off **Allow Auto-accept in chats**, chats started through the [Customer API](/api/reference) also ask for plan approval before changing data.
+- **Flow AI turned off.** While Flow AI is off, AI requests and agent chats started through the [Customer API](/api/reference) or MCP are refused with "AI is turned off for this organization".
+- **Choose your MCP tools.** **Settings → API & MCP** lets you select the tools your agent client loads and copy a connection URL for that selection. See [MCP tools](/api/mcp/tools).
+- **Remove users.** Admins can remove one user or many at once with an API key through the [Customer API](/api/reference). A bulk request reports any user it could not remove. Hosted MCP does not offer these actions.
+- **Merging branches with sub-branches.** `GET branch/:id/merge-rebase-preview` lists the sub-branches a merge will update. `POST branch/:id/merge` accepts `expected_rebase_ids`, and the merge is refused if that set has changed.
+- **Diagram layout.** Diagrams the Customer API creates are laid out as **Auto arrange** would draw them, instead of on a plain grid.
