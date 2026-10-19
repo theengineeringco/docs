@@ -128,6 +128,52 @@
             "nullable": true,
             "type": "string"
           },
+          "error_envelope": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "properties": {
+                  "code": {
+                    "enum": [
+                      "AI_PROVIDER_KEY_MISSING"
+                    ],
+                    "type": "string"
+                  },
+                  "model": {
+                    "type": "string"
+                  },
+                  "provider": {
+                    "enum": [
+                      "openai",
+                      "anthropic",
+                      "xai"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "provider",
+                  "model"
+                ],
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "code": {
+                    "enum": [
+                      "AI_CREDITS_EXHAUSTED"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code"
+                ],
+                "type": "object"
+              }
+            ]
+          },
           "id": {
             "type": "string"
           },
@@ -208,6 +254,7 @@
               "gitlab",
               "bitbucket",
               "onshape",
+              "teamcenter",
               "webhook",
               "assistant",
               "entity_edit",
@@ -234,6 +281,7 @@
           "title",
           "error",
           "error_details",
+          "error_envelope",
           "branch_id",
           "project_id",
           "config_id",
@@ -356,6 +404,7 @@
               "gitlab",
               "bitbucket",
               "onshape",
+              "teamcenter",
               "webhook",
               "assistant",
               "entity_edit",
@@ -696,7 +745,7 @@
             "type": "array"
           },
           "source": {
-            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape), 'manual', or the name of a custom webhook trigger.",
+            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape, teamcenter), 'manual', or the name of a custom webhook trigger.",
             "example": "schedule",
             "type": "string"
           },
@@ -3437,6 +3486,7 @@
               "verificationResult",
               "diagram",
               "jira",
+              "teamcenter",
               "linear",
               "googleDoc",
               "googleSheet",
@@ -6490,7 +6540,7 @@
             "type": "string"
           },
           "source": {
-            "description": "The automation trigger source to fire. One of the built-in sources (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape), or the name given to an automation's custom webhook trigger.",
+            "description": "The automation trigger source to fire. One of the built-in sources (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape, teamcenter), or the name given to an automation's custom webhook trigger.",
             "type": "string"
           },
           "wait": {
@@ -11949,15 +11999,15 @@
             "bearer": []
           }
         ],
-        "summary": "Reopen a merged change request as a new draft",
+        "summary": "Revert a merged change request into a new draft",
         "tags": [
           "Branches"
         ],
         "x-mint": {
           "href": "/api/endpoints/post-project-projectid-branch-id-reopen-as-draft",
           "metadata": {
-            "sidebarTitle": "Reopen a merged change request as a new draft",
-            "title": "Reopen a merged change request as a new draft"
+            "sidebarTitle": "Revert a merged change request into a new draft",
+            "title": "Revert a merged change request into a new draft"
           }
         }
       }
