@@ -54,6 +54,147 @@
         "properties": {},
         "type": "object"
       },
+      "AdminAuditLogEntryDto": {
+        "properties": {
+          "action": {
+            "enum": [
+              "category.create",
+              "category.rename",
+              "category.config_update",
+              "category.delete",
+              "category.reorder",
+              "field.add",
+              "field.update",
+              "field.default_formula_reapply",
+              "field.remove",
+              "field.reorder",
+              "view.create",
+              "view.rename",
+              "view.update",
+              "view.delete",
+              "view.reorder",
+              "baseline.rename",
+              "project.ai_model_update",
+              "review_policy.update",
+              "template.create",
+              "template.rename",
+              "template.update",
+              "template.delete",
+              "template.reorder",
+              "automation.create",
+              "automation.update",
+              "automation.delete",
+              "automation.reorder",
+              "automation.claim",
+              "flow_md.update",
+              "skill.create",
+              "skill.update",
+              "skill.delete",
+              "skill.reorder",
+              "skill_folder.create",
+              "skill_folder.update",
+              "skill_folder.delete",
+              "skill_folder.reorder",
+              "user.access_granted",
+              "user.role_change",
+              "user.project_access_update",
+              "user.access_removed"
+            ],
+            "type": "string"
+          },
+          "actorAgentId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "actorEmail": {
+            "nullable": true,
+            "type": "string"
+          },
+          "actorUserId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "detail": {
+            "additionalProperties": true,
+            "nullable": true,
+            "type": "object"
+          },
+          "id": {
+            "type": "string"
+          },
+          "resourceId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "resourceName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "resourceType": {
+            "enum": [
+              "data_model",
+              "view",
+              "baseline",
+              "project",
+              "template",
+              "automation",
+              "flow_md",
+              "skill",
+              "user",
+              "review_policy"
+            ],
+            "type": "string"
+          },
+          "revertible": {
+            "type": "boolean"
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "action",
+          "resourceType",
+          "summary",
+          "createdAt",
+          "revertible"
+        ],
+        "type": "object"
+      },
+      "AdminAuditLogPageDto": {
+        "properties": {
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/AdminAuditLogEntryDto"
+            },
+            "type": "array"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "moreAvailable": {
+            "type": "boolean"
+          },
+          "nextCursor": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entries",
+          "limit"
+        ],
+        "type": "object"
+      },
       "AgentChatListDto": {
         "properties": {
           "items": {
@@ -577,8 +718,16 @@
                 "$ref": "#/components/schemas/AutomationTriggerDto"
               }
             ],
+            "description": "The first of `triggers`, or null when there is none. Kept for clients written before an automation could have several triggers.",
             "nullable": true,
             "type": "object"
+          },
+          "triggers": {
+            "description": "Every trigger, in order. The automation runs when any of them fires. Empty for an automation that is only run by hand. Always answered.",
+            "items": {
+              "$ref": "#/components/schemas/AutomationTriggerDto"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -735,6 +884,10 @@
           "cronExpression": {
             "description": "Schedule triggers: a five-field cron expression.",
             "example": "0 9 * * 1-5",
+            "type": "string"
+          },
+          "id": {
+            "description": "The trigger's id within its automation. Always answered. On a write, omit it for a new trigger; a trigger sent without one keeps the id of the trigger at the same position.",
             "type": "string"
           },
           "paths": {
@@ -1110,6 +1263,7 @@
             "enum": [
               "passed",
               "failed",
+              "warning",
               "stale",
               "not_run"
             ],
@@ -2232,9 +2386,17 @@
                 "$ref": "#/components/schemas/AutomationTriggerDto"
               }
             ],
-            "description": "When the automation runs. Omit or send null for an automation that is only run by hand.",
+            "description": "The first trigger. Without `triggers`, it replaces only the first trigger and keeps the others; null removes the trigger of an automation that has at most one. With `triggers`, it must be equal to the first entry.",
             "nullable": true,
             "type": "object"
+          },
+          "triggers": {
+            "description": "Every trigger, in order; replaces the whole list. The automation runs when any of them fires. Send [] for an automation that is only run by hand. A branch check (a script with a branch trigger) can have no other trigger.",
+            "items": {
+              "$ref": "#/components/schemas/AutomationTriggerDto"
+            },
+            "maxItems": 20,
+            "type": "array"
           }
         },
         "required": [
@@ -4604,8 +4766,8 @@
           },
           "status": {
             "enum": [
+              "waiting",
               "queued",
-              "planning",
               "running",
               "succeeded",
               "failed",
@@ -4679,6 +4841,15 @@
             "description": "Reading stopped a few pages past what its agent chat has taken, until that chat runs a turn again.",
             "type": "boolean"
           },
+          "phase": {
+            "enum": [
+              "queued",
+              "planning",
+              "reading",
+              "done"
+            ],
+            "type": "string"
+          },
           "relationshipCount": {
             "type": "number"
           },
@@ -4687,8 +4858,8 @@
           },
           "status": {
             "enum": [
+              "waiting",
               "queued",
-              "planning",
               "running",
               "succeeded",
               "failed",
@@ -4700,6 +4871,7 @@
         "required": [
           "runId",
           "status",
+          "phase",
           "fileIds",
           "chunksTotal",
           "chunksDone",
@@ -5400,32 +5572,41 @@
       "ReqifImportJobResponseDto": {
         "properties": {
           "branch_id": {
-            "nullable": true,
+            "description": "The branch the import lands on, once reserved.",
             "type": "string"
           },
           "branch_name": {
-            "nullable": true,
+            "type": "string"
+          },
+          "completed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
             "type": "string"
           },
           "id": {
             "type": "string"
           },
           "items_done": {
+            "description": "Completed work in the current phase.",
             "type": "number"
           },
           "items_total": {
-            "nullable": true,
+            "description": "Total work in the current phase; absent when it has no measure.",
             "type": "number"
           },
           "last_error": {
-            "nullable": true,
+            "description": "Reader-safe description of the last handled failure. With status \"failed\" it is the terminal one; with \"queued\" the job is being retried after it.",
             "type": "string"
           },
           "last_error_reference": {
-            "nullable": true,
+            "description": "Support reference for `last_error`.",
             "type": "string"
           },
           "phase": {
+            "description": "Where the job is in its plan. A failed job keeps the phase the failure interrupted; `status` says it failed.",
             "type": "string"
           },
           "schema": {
@@ -5434,11 +5615,11 @@
             "type": "object"
           },
           "status": {
+            "description": "Who holds the job: the user (waiting), the queue (queued), a worker (running), or nobody again (succeeded, failed).",
             "enum": [
-              "awaiting_upload",
-              "parsing",
-              "parsed",
-              "importing",
+              "waiting",
+              "queued",
+              "running",
               "succeeded",
               "failed",
               "cancelled"
@@ -5450,6 +5631,7 @@
           "id",
           "status",
           "phase",
+          "created_at",
           "items_done"
         ],
         "type": "object"
@@ -5808,18 +5990,23 @@
       },
       "SendMessageResponseDto": {
         "properties": {
+          "duplicate": {
+            "description": "True when this exact send was already accepted earlier (a retry of a message the chat has already taken), so nothing changed and no new turn starts; `job_id` is the original send. False for a new message.",
+            "type": "boolean"
+          },
           "job_id": {
             "description": "Identifies this send within the chat.",
             "type": "string"
           },
           "queued": {
-            "description": "False: the chat was idle and this message became a turn at once. True: a turn was already running and this message runs after it finishes.",
+            "description": "False: the chat was idle and this message became a turn at once, or the send already happened (see `duplicate`). True: a turn was already running and this message runs after it finishes.",
             "type": "boolean"
           }
         },
         "required": [
           "job_id",
-          "queued"
+          "queued",
+          "duplicate"
         ],
         "type": "object"
       },
@@ -6761,9 +6948,17 @@
                 "$ref": "#/components/schemas/AutomationTriggerDto"
               }
             ],
-            "description": "When the automation runs. Omit or send null for an automation that is only run by hand.",
+            "description": "The first trigger. Without `triggers`, it replaces only the first trigger and keeps the others; null removes the trigger of an automation that has at most one. With `triggers`, it must be equal to the first entry.",
             "nullable": true,
             "type": "object"
+          },
+          "triggers": {
+            "description": "Every trigger, in order; replaces the whole list. The automation runs when any of them fires. Send [] for an automation that is only run by hand. A branch check (a script with a branch trigger) can have no other trigger.",
+            "items": {
+              "$ref": "#/components/schemas/AutomationTriggerDto"
+            },
+            "maxItems": 20,
+            "type": "array"
           }
         },
         "type": "object"
@@ -6936,6 +7131,26 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "UpdateUserNameDto": {
+        "properties": {
+          "family_name": {
+            "description": "Use an empty string for a user without a family name.",
+            "example": "Lovelace",
+            "maxLength": 255,
+            "type": "string"
+          },
+          "given_name": {
+            "example": "Ada",
+            "maxLength": 255,
+            "type": "string"
+          }
+        },
+        "required": [
+          "given_name",
+          "family_name"
+        ],
         "type": "object"
       },
       "UpdateVariantsEnabledDto": {
@@ -7447,7 +7662,7 @@
     },
     "/ai/agents/{id}/messages": {
       "post": {
-        "description": "Queues the message and starts the agent on it as soon as the chat is idle. With `queued: false` the turn has started: poll GET /ai/trigger/runs?agent_ids={id} until the run is not `running`, then GET /ai/agents/{id}. With `queued: true` an earlier turn is still running and the run status finishes for that turn first, so poll GET /ai/agents/{id} until the reply to this message is in the transcript.",
+        "description": "Queues the message and starts the agent on it as soon as the chat is idle. With `queued: false` the turn has started: poll GET /ai/trigger/runs?agent_ids={id} until the run is not `running`, then GET /ai/agents/{id}. With `queued: true` an earlier turn is still running and the run status finishes for that turn first, so poll GET /ai/agents/{id} until the reply to this message is in the transcript. With `duplicate: true` this exact send already happened: `job_id` is the original send, nothing changed and there is no new turn to wait for.",
         "operationId": "AgentChatController_sendMessage",
         "parameters": [
           {
@@ -7937,6 +8152,94 @@
           "metadata": {
             "sidebarTitle": "Poll automation runs by agent id — status, and the integration response once finished",
             "title": "Poll automation runs by agent id — status, and the integration response once finished"
+          }
+        }
+      }
+    },
+    "/audit-log": {
+      "get": {
+        "description": "User administration (members joining and leaving, role and project-access changes) and organization review-policy changes, newest first. Requires an admin with access to every project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
+        "operationId": "WorkspaceAuditController_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Keyset cursor. Use 0 for the first page, then pass back nextCursor.",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "default": "0",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only entries created at or after this time, as an RFC 3339 date-time with a time zone (e.g. 2026-10-01T00:00:00Z). Composes with cursor paging and search.",
+            "in": "query",
+            "name": "since",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAuditLogPageDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List workspace-wide admin audit log entries",
+        "tags": [
+          "Audit"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-audit-log",
+          "metadata": {
+            "sidebarTitle": "List workspace-wide admin audit log entries",
+            "title": "List workspace-wide admin audit log entries"
           }
         }
       }
@@ -9347,6 +9650,133 @@
         }
       }
     },
+    "/project/{projectId}/audit-log": {
+      "get": {
+        "description": "Changes to a project's configuration (data model, saved views, templates, automations, skills, Flow.md, merge-history labels and the default AI model), newest first. Requires an admin of the project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
+        "operationId": "AuditController_list",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Keyset cursor. Use 0 for the first page, then pass back nextCursor.",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "default": "0",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Legacy offset paging, used only when cursor is absent. Prefer cursor.",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "resourceType",
+            "required": false,
+            "schema": {
+              "enum": [
+                "data_model",
+                "view",
+                "baseline",
+                "project",
+                "template",
+                "automation",
+                "flow_md",
+                "skill",
+                "user",
+                "review_policy"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only entries created at or after this time, as an RFC 3339 date-time with a time zone (e.g. 2026-10-01T00:00:00Z). Composes with cursor paging and search.",
+            "in": "query",
+            "name": "since",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAuditLogPageDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List admin audit log entries for a project",
+        "tags": [
+          "Audit"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-audit-log",
+          "metadata": {
+            "sidebarTitle": "List admin audit log entries for a project",
+            "title": "List admin audit log entries for a project"
+          }
+        }
+      }
+    },
     "/project/{projectId}/automations": {
       "get": {
         "operationId": "AutomationsController_list",
@@ -9637,7 +10067,7 @@
         }
       },
       "patch": {
-        "description": "Updating shared automations requires Admin access. Changes only the fields you send; `trigger` replaces the whole trigger, and null makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer.",
+        "description": "Updating shared automations requires Admin access. Changes only the fields you send; `triggers` replaces the trigger list, `trigger` alone replaces only the first trigger, and `triggers: []` makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer.",
         "operationId": "AutomationsController_update",
         "parameters": [
           {
@@ -11875,7 +12305,7 @@
     },
     "/project/{projectId}/branch/{id}/rebase-onto": {
       "post": {
-        "description": "Replays this branch's changes onto a different base and returns the result as a NEW branch; the branch named in the path is not modified. The copy keeps this branch's value for every field it changed and resolves every field it did not from the new base. Changes to items the new base does not have cannot appear on the copy: relationships to them are left out, and the items are listed in `missing_items`. Its sub-branches, baselines, comments, and reviews are not copied. Refuses with 400 for the Base branch, a malformed id, a missing `newParentId`, or a target equal to the branch itself; 404 when either branch is not live in this project.",
+        "description": "Replays this branch's changes onto a different base and returns the result as a NEW branch; the branch named in the path is not modified. The copy keeps this branch's value for every field it changed and resolves every field it did not from the new base. Changes to items the new base does not have cannot appear on the copy: relationships to them are left out, and the items are listed in `missing_items`. The copy carries this branch's own comments, re-keyed to the copy, except a thread on an item the new base does not have and a reply to a thread that is not in the copy's lineage; a comment inherited from the old base stays there. Its sub-branches, baselines, and reviews are not copied. Refuses with 400 for the Base branch, a malformed id, a missing `newParentId`, or a target equal to the branch itself; 404 when either branch is not live in this project.",
         "operationId": "BranchController_rebaseOnto",
         "parameters": [
           {
@@ -19461,6 +19891,72 @@
         }
       }
     },
+    "/users/{id}/name": {
+      "patch": {
+        "description": "Requires an all-project admin. Replaces both name fields for the specified user, including users who have not signed in yet. Does not change email, role, or project access.",
+        "operationId": "UsersController_updateName",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserNameDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a user’s name in this workspace",
+        "tags": [
+          "Users"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/patch-users-id-name",
+          "metadata": {
+            "sidebarTitle": "Update a user’s name in this workspace",
+            "title": "Update a user’s name in this workspace"
+          }
+        }
+      }
+    },
     "/users/{id}/profile-picture-url": {
       "get": {
         "operationId": "UsersController_getProfilePictureUrl",
@@ -19529,6 +20025,9 @@
     }
   ],
   "tags": [
+    {
+      "name": "Audit"
+    },
     {
       "name": "Automations"
     },
