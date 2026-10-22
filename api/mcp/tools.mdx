@@ -42,6 +42,20 @@ Tools group request inputs into `path`, `query`, and `body` where the operation 
 
 The [endpoint reference](/api/reference) explains the underlying operation. For common workflows, see [Read entities](/api/examples/read-entities), [Batch writes](/api/examples/batch-writes), and [Trigger and poll automations](/api/examples/automations).
 
+## Limit the tools your client loads
+
+By default, the MCP URL exposes every Flow tool. To load only the tools a workflow needs, open **Settings → API & MCP**, select tools under **MCP URL**, and copy the updated URL. Flow adds the selection as a comma-separated `tools` query parameter:
+
+```text
+https://backend.branch.flowengineering.com/mcp/your-workspace?tools=flow_tool_name_1,flow_tool_name_2
+```
+
+Replace the URL in your client configuration and refresh its tools. Flow does not store the selection; it applies to clients that use that URL.
+
+With a selection, the tool list and the `flow://customer-api/openapi` and `flow://customer-api/tool-index` resources include only the selected tools. A call to a tool outside the selection fails. Flow rejects a URL that repeats the `tools` parameter with `400`. A selection only narrows the tools. The connected user's permissions still apply.
+
+To restore every tool, choose **All tools** and copy the URL again, or remove the `tools` parameter.
+
 ## Inspect reference resources
 
 Clients that support MCP resources can read:
