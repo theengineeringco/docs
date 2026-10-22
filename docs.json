@@ -25,7 +25,8 @@
               "api/conventions",
               "api/reference",
               "api/examples/read-entities",
-              "api/examples/batch-writes"
+              "api/examples/batch-writes",
+              "api/examples/comment-threads"
             ]
           },
           {
