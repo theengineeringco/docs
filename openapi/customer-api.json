@@ -664,14 +664,14 @@
             "type": "boolean"
           },
           "enabled": {
-            "description": "Whether script automation runs are enabled. Defaults to true; ignored in agent mode.",
+            "description": "Whether the automation runs at all, in either mode: off, no trigger, schedule or hand launch starts a run. Defaults to true.",
             "type": "boolean"
           },
           "id": {
             "type": "string"
           },
           "invalidateOn": {
-            "description": "Branch events after which a branch check must rerun, beyond a data change: comment_set_changed, comment_resolution_changed, comment_text_changed. Absent declares none.",
+            "description": "Branch-review automations: comment events after which the last result is out of date, beyond a data change (a check reruns, an agent run is offered for re-running): comment_set_changed, comment_resolution_changed, comment_text_changed. Absent declares none. An Agent-mode automation cannot declare comment_set_changed: its own comments would mark its run out of date.",
             "items": {
               "enum": [
                 "comment_set_changed",
@@ -2333,11 +2333,11 @@
             "type": "boolean"
           },
           "enabled": {
-            "description": "Whether script automation runs are enabled. Defaults to true; ignored in agent mode.",
+            "description": "Whether the automation runs at all, in either mode: off, no trigger, schedule or hand launch starts a run. Defaults to true.",
             "type": "boolean"
           },
           "invalidateOn": {
-            "description": "Branch checks: the branch events after which the check must rerun, beyond a data change: comment_set_changed, comment_resolution_changed, comment_text_changed. Omit to declare none on create; on update, omit to keep the current declaration and send [] to clear it.",
+            "description": "Branch-review automations: the comment events after which the last result is out of date, beyond a data change (a check reruns, an agent run is offered for re-running): comment_set_changed, comment_resolution_changed, comment_text_changed. Omit to declare none on create; on update, omit to keep the current declaration and send [] to clear it. An Agent-mode automation cannot declare comment_set_changed: its own comments would mark its run out of date.",
             "items": {
               "enum": [
                 "comment_set_changed",
@@ -2391,7 +2391,7 @@
             "type": "object"
           },
           "triggers": {
-            "description": "Every trigger, in order; replaces the whole list. The automation runs when any of them fires. Send [] for an automation that is only run by hand. A branch check (a script with a branch trigger) can have no other trigger.",
+            "description": "Every trigger, in order; replaces the whole list. The automation runs when any of them fires. Send [] for an automation that is only run by hand. A script with a branch trigger runs as a read-only branch check when its branch is reviewed; its other triggers run it as an ordinary script.",
             "items": {
               "$ref": "#/components/schemas/AutomationTriggerDto"
             },
@@ -2837,7 +2837,7 @@
             "type": "string"
           },
           "entity_id": {
-            "description": "Entity the comment is attached to.",
+            "description": "ID this comment directly attaches to: an item or branch ID for a conversation starter, or a comment ID for a reply (normally the original comment that started the conversation). Use this value as entityId when fetching, editing or deleting this comment. For older nested replies it may identify another reply, not the conversation starter.",
             "type": "string"
           },
           "id": {
@@ -2895,7 +2895,7 @@
       "CustomerCreateCommentDto": {
         "properties": {
           "branch_id": {
-            "description": "Branch to post the comment on. Omit (or pass \"master\") to post on the main line.",
+            "description": "Branch to post on, for any comment or reply. Pass the branch ID explicitly when discussing items or the branch there; it is not inherited from the original comment. Omit (or pass \"master\") to post on Base.",
             "type": "string"
           },
           "text": {
@@ -6891,11 +6891,11 @@
             "type": "boolean"
           },
           "enabled": {
-            "description": "Whether script automation runs are enabled. Defaults to true; ignored in agent mode.",
+            "description": "Whether the automation runs at all, in either mode: off, no trigger, schedule or hand launch starts a run. Defaults to true.",
             "type": "boolean"
           },
           "invalidateOn": {
-            "description": "Branch checks: the branch events after which the check must rerun, beyond a data change: comment_set_changed, comment_resolution_changed, comment_text_changed. Omit to declare none on create; on update, omit to keep the current declaration and send [] to clear it.",
+            "description": "Branch-review automations: the comment events after which the last result is out of date, beyond a data change (a check reruns, an agent run is offered for re-running): comment_set_changed, comment_resolution_changed, comment_text_changed. Omit to declare none on create; on update, omit to keep the current declaration and send [] to clear it. An Agent-mode automation cannot declare comment_set_changed: its own comments would mark its run out of date.",
             "items": {
               "enum": [
                 "comment_set_changed",
@@ -6953,7 +6953,7 @@
             "type": "object"
           },
           "triggers": {
-            "description": "Every trigger, in order; replaces the whole list. The automation runs when any of them fires. Send [] for an automation that is only run by hand. A branch check (a script with a branch trigger) can have no other trigger.",
+            "description": "Every trigger, in order; replaces the whole list. The automation runs when any of them fires. Send [] for an automation that is only run by hand. A script with a branch trigger runs as a read-only branch check when its branch is reviewed; its other triggers run it as an ordinary script.",
             "items": {
               "$ref": "#/components/schemas/AutomationTriggerDto"
             },
@@ -15306,6 +15306,7 @@
     },
     "/project/{projectId}/entities/{entityId}/comments": {
       "get": {
+        "description": "Pass the item or branch ID as entityId to list the comments that start conversations. To read a conversation, keep the original comment and call again with its id as entityId to fetch its direct replies, oldest first. Replies are not embedded in the first list. Use the same branch_id for both calls; omit it for Base. Set include_resolved=true to include resolved comments. Each call returns direct replies only: any existing replies to replies require separate calls using those reply IDs.",
         "operationId": "CustomerCommentsController_list",
         "parameters": [
           {
@@ -15317,6 +15318,7 @@
             }
           },
           {
+            "description": "For a new thread, the item or branch ID. For replies, the ID of the original comment that started the conversation, even when responding to a later reply. For an existing comment, use its returned entity_id when fetching, editing or deleting it.",
             "in": "path",
             "name": "entityId",
             "required": true,
@@ -15373,19 +15375,20 @@
             "bearer": []
           }
         ],
-        "summary": "List comments on an entity",
+        "summary": "List comment threads or replies in a thread",
         "tags": [
           "Comments"
         ],
         "x-mint": {
           "href": "/api/endpoints/get-project-projectid-entities-entityid-comments",
           "metadata": {
-            "sidebarTitle": "List comments on an entity",
-            "title": "List comments on an entity"
+            "sidebarTitle": "List comment threads or replies in a thread",
+            "title": "List comment threads or replies in a thread"
           }
         }
       },
       "post": {
+        "description": "Comment threads are used in item discussions, branch discussions and reviews. To start a conversation, pass the item or branch ID as entityId. To join an existing conversation, read it first, then pass the ID of the original comment that started it as entityId, with text in the body. Use that same original comment ID for every follow-up, even when answering another reply. For example, if A starts a thread and B replies to A, answer B using entityId=A, not B. Using B creates a deeper nested reply; the API accepts this, but thread cards and internal AI thread reads do not consistently include deeper replies. Pass branch_id for the branch you are posting on; omit it for Base. The branch is not inherited from the original comment. Posting a reply does not resolve or reopen the thread.",
         "operationId": "CustomerCommentsController_create",
         "parameters": [
           {
@@ -15397,6 +15400,7 @@
             }
           },
           {
+            "description": "For a new thread, the item or branch ID. For replies, the ID of the original comment that started the conversation, even when responding to a later reply. For an existing comment, use its returned entity_id when fetching, editing or deleting it.",
             "in": "path",
             "name": "entityId",
             "required": true,
@@ -15444,21 +15448,22 @@
             "bearer": []
           }
         ],
-        "summary": "Add a comment to an entity",
+        "summary": "Add a comment or reply in an existing thread",
         "tags": [
           "Comments"
         ],
         "x-mint": {
           "href": "/api/endpoints/post-project-projectid-entities-entityid-comments",
           "metadata": {
-            "sidebarTitle": "Add a comment to an entity",
-            "title": "Add a comment to an entity"
+            "sidebarTitle": "Add a comment or reply in an existing thread",
+            "title": "Add a comment or reply in an existing thread"
           }
         }
       }
     },
     "/project/{projectId}/entities/{entityId}/comments/{commentId}": {
       "delete": {
+        "description": "Pass the target comment id as commentId and its returned entity_id as entityId. Only the author can delete their comment.",
         "operationId": "CustomerCommentsController_remove",
         "parameters": [
           {
@@ -15470,6 +15475,7 @@
             }
           },
           {
+            "description": "For a new thread, the item or branch ID. For replies, the ID of the original comment that started the conversation, even when responding to a later reply. For an existing comment, use its returned entity_id when fetching, editing or deleting it.",
             "in": "path",
             "name": "entityId",
             "required": true,
@@ -15508,19 +15514,20 @@
             "bearer": []
           }
         ],
-        "summary": "Delete a comment",
+        "summary": "Delete a comment or reply",
         "tags": [
           "Comments"
         ],
         "x-mint": {
           "href": "/api/endpoints/delete-project-projectid-entities-entityid-comments-commentid",
           "metadata": {
-            "sidebarTitle": "Delete a comment",
-            "title": "Delete a comment"
+            "sidebarTitle": "Delete a comment or reply",
+            "title": "Delete a comment or reply"
           }
         }
       },
       "get": {
+        "description": "Pass the target comment id as commentId and its returned entity_id as entityId. This reads one comment, not the whole conversation; use the list operation with the original comment ID to read the thread replies.",
         "operationId": "CustomerCommentsController_getOne",
         "parameters": [
           {
@@ -15532,6 +15539,7 @@
             }
           },
           {
+            "description": "For a new thread, the item or branch ID. For replies, the ID of the original comment that started the conversation, even when responding to a later reply. For an existing comment, use its returned entity_id when fetching, editing or deleting it.",
             "in": "path",
             "name": "entityId",
             "required": true,
@@ -15577,19 +15585,20 @@
             "bearer": []
           }
         ],
-        "summary": "Get a single comment on an entity",
+        "summary": "Get a single comment or reply",
         "tags": [
           "Comments"
         ],
         "x-mint": {
           "href": "/api/endpoints/get-project-projectid-entities-entityid-comments-commentid",
           "metadata": {
-            "sidebarTitle": "Get a single comment on an entity",
-            "title": "Get a single comment on an entity"
+            "sidebarTitle": "Get a single comment or reply",
+            "title": "Get a single comment or reply"
           }
         }
       },
       "patch": {
+        "description": "Pass the target comment id as commentId and its returned entity_id as entityId. To resolve or reopen the conversation, update the original comment that started it.",
         "operationId": "CustomerCommentsController_update",
         "parameters": [
           {
@@ -15601,6 +15610,7 @@
             }
           },
           {
+            "description": "For a new thread, the item or branch ID. For replies, the ID of the original comment that started the conversation, even when responding to a later reply. For an existing comment, use its returned entity_id when fetching, editing or deleting it.",
             "in": "path",
             "name": "entityId",
             "required": true,
