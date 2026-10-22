@@ -1,0 +1,108 @@
+---
+title: "October 20, 2026"
+sidebarTitle: "October 20, 2026"
+description: "Blocking item checks, multiple automation triggers, AI-suggested conflict resolutions, notification quick actions, agent work that needs you, and Ask AI in the agent sidebar."
+---
+
+## In this release
+
+- [Blocking item checks](#blocking-item-checks)
+- [Multiple automation triggers](#multiple-automation-triggers)
+- [AI-suggested conflict resolutions](#ai-suggested-conflict-resolutions)
+- [Notification quick actions](#notification-quick-actions)
+- [Agent work that needs you](#agent-work-that-needs-you)
+- [Ask AI in the agent sidebar](#ask-ai-in-the-agent-sidebar)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Blocking item checks
+
+Each item check now has a severity: **Warning**, **Blocking**, or **Off**. A branch cannot merge while an item it changed fails a Blocking check, and the branch page shows which checks block. A new Blocking check applies at once to every open branch. Existing checks stay Warning.
+
+Admins can still force a merge, and the merge record lists the failing checks. The branch page also checks items affected through a link, such as a requirement whose test case the branch deleted, and says which change affected them.
+
+## Multiple automation triggers
+
+An automation can now have more than one trigger, for example two schedules, or a schedule and a GitHub trigger. It runs when any of its triggers fires, and each run records which trigger started it. Add triggers with **Add trigger** in the automation editor or ask the AI agent. See [Automations](/api/automations/overview).
+
+## AI-suggested conflict resolutions
+
+In **Update from parent**, **Suggest resolutions** asks the AI to propose how to resolve each conflict: keep the parent's version, keep the branch's version, or merge both for text, rich text, and multi-select tags. Each proposal has a one-line reason.
+
+Proposals arrive as an editable draft. Conflicts the AI is unsure about are left for you, and nothing is updated until you click **Update from parent**.
+
+## Notification quick actions
+
+Notifications in the Inbox, the sidebar bell, and pop-ups now offer the next step directly: **Reply**, **Review**, **Answer**, or **Open**, plus **Unsubscribe from item**. You can hand comments, reviews that request changes, and failed automation runs to the Flow AI agent, which proposes a plan before it changes anything.
+
+Every notification now has a short title naming who or what and the event, with a line of context under it. The Inbox, bell, pop-ups, emails, and Slack messages use the same words. **Mark all as read** in the bell popover closes it right away.
+
+## Agent work that needs you
+
+A new chat now lists the chats and agent work that need you, newest first: questions waiting for your answer, finished or failed chats you have not opened, failed automation runs, and reviews requested from you. Each item opens with one click. Chat lists mark each chat that needs input, finished, or failed.
+
+## Ask AI in the agent sidebar
+
+**Ask AI** in a rich-text field, an automation's Instructions box, or the script editor now opens the Flow AI sidebar. The assistant's proposal streams into the field itself, so you can read every change in place and accept or discard it. Discard restores the previous text.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Uploaded project files.** Flow AI can find and read files already uploaded to the project, including sources attached in other chats, without asking you to upload them again.
+- **Chat per browser tab.** Each tab keeps its selected conversation when you refresh or switch between Systems and Review.
+
+### Automations
+
+- **Changed-item limits in scripts.** Use `changed_items_exceed(limit)` to check whether a branch exceeds an item limit without loading its entire changed-item list.
+
+### Branching
+
+- **Rebase onto keeps comments.** Rebasing a branch onto another parent carries the branch's own comments, branch discussion, and property review comments onto the rebased copy.
+- **Branch creation after removing a formula.** New branches are created as quickly as before after a formula is removed.
+
+### Collaboration
+
+- **Comments after a merge.** Comment-filtered views, the review Comments feed, and open-comment item checks no longer fail to load right after a branch with many commented items merges.
+
+### Import and Export
+
+- **Spreadsheet imports run on the server.** Closing the tab, losing your connection, or a server restart no longer loses or duplicates rows. Reopening an import shows its state.
+- **ReqIF formatting.** Bold, italic, underlined, struck-through, subscript, superscript, and code text stay inside their sentence instead of breaking onto a separate line.
+- **ReqIF re-import.** When a re-imported object has no value for a mapped attribute, Flow clears the field instead of keeping the old value.
+
+### Integrations
+
+- **Long Confluence pages.** Flow AI reads Confluence pages to the end instead of stopping after the first 10,000 characters.
+
+### Review
+
+- **Branch check warnings.** A check script can end with `WARNING` to flag a finding without blocking the merge. The review Overview, editor preview, activity feed, and run notifications show the warning beside passed and failed.
+
+### Search
+
+- **Change type filter on reviews.** Filtering by change type returns exactly the items whose badge shows that type. New, deleted, and restored items no longer also match **Updated**, **Linked**, or **Reordered**, and restored items read **Restored** everywhere.
+
+### Table
+
+- **Pin table columns.** Pin any column to the left from its menu, by dragging its header onto the pinned columns, or in **Choose columns...**. Pins are saved with the view.
+- **Name column.** Name can move among the pinned columns, and you can remove it and add it back like any other column.
+
+### Tree
+
+- **Folders under a filter.** A folder whose box holds matching items shows its item count and show/hide items button instead of reading "Empty".
+
+## API Changes
+
+- **Audit log.** Admins can read workspace and project audit logs with an API key or hosted MCP, and poll for new entries with `since`. See the [API reference](/api/reference).
+- **User names.** Workspace admins can update existing users' first and last names, including users who have not signed in yet.
+- **Automation triggers.** Automations accept a `triggers` list. The single `trigger` field still works and reads as the first trigger. See [Automations](/api/automations/overview).
+- **Import job status.** ReqIF and spreadsheet import jobs report the same status (`waiting`, `queued`, `running`, `succeeded`, `failed`, `cancelled`) and a `phase`. The AI document import's former `planning` status is now the `planning` phase.
+- **ReqIF parse.** `POST /reqif/parse` decodes character references such as `&#160;` the same way the import does.
+- **Clearing formulas.** Clearing a formula by sending `null` to the diff API now behaves like clearing it in the app, so it no longer slows down creating branches.
+- **Comment IDs.** Requests with a malformed comment ID return a `400` validation error instead of an internal server error.
+- **MCP tools by section.** Settings → API & MCP lists hosted MCP tools under the sections of the API docs. Select a section to pick every tool in it, or expand it to pick individual tools. See [MCP tools](/api/mcp/tools).
+
+<Warning>
+  If your integration polls a ReqIF import job, read `phase` to see where it is (`parsed` while it waits on the mapping). The former `awaiting_upload`, `parsing`, `parsed`, and `importing` statuses are no longer returned.
+</Warning>
