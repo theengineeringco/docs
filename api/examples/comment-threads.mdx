@@ -1,0 +1,263 @@
+---
+title: "Comment threads"
+description: "Read item and branch discussions, reply in the original thread, and resolve a conversation."
+---
+
+Comments in item discussions, branch discussions, and reviews form threads. A conversation starts with a comment on an item or branch. Every reply attaches to that original comment.
+
+Use the `FLOW_API_URL`, `FLOW_CUSTOMER`, and `FLOW_API_KEY` variables from the [quickstart](/api/quickstart), and the `PROJECT_ID` from [Read entities](/api/examples/read-entities). Set `ENTITY_ID` to the item or branch ID whose discussion you want. Set `BRANCH_ID` to the branch you are reading or posting on, or `master` for Base.
+
+```bash
+export ENTITY_ID="your-item-or-branch-id"
+export BRANCH_ID="master"
+```
+
+## How thread IDs work
+
+The `entityId` path parameter changes meaning with the task:
+
+| Task | `entityId` |
+| --- | --- |
+| List or start conversations | The item or branch ID. |
+| Read or post replies | The `id` of the original comment that started the conversation. |
+| Get, edit, or delete one comment | That comment's returned `entity_id`. |
+
+Always reply with the original comment's ID, even when you answer a later reply. If comment A starts a thread and B replies to A, answer B with `entityId` set to A. Using B creates a deeper nested reply. The API accepts it, but thread cards and AI thread reads in Flow do not consistently include deeper replies.
+
+Comments are scoped to a branch. Send the same `branch_id` on every list call and every post. Flow does not inherit the branch from the original comment. Omit `branch_id` or pass `master` for Base.
+
+## List conversations
+
+List the comments that start conversations on an item or branch. Replies are not embedded in this list. Add `include_resolved=true` to include resolved threads.
+
+<CodeGroup>
+
+```bash cURL
+curl --fail-with-body --silent --show-error --get \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities/$ENTITY_ID/comments" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  --data-urlencode "branch_id=$BRANCH_ID" \
+  --data-urlencode "include_resolved=true" \
+  | jq '.[] | {id, text, resolved}'
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/entities/{os.environ['ENTITY_ID']}/comments",
+    headers=headers, timeout=30,
+    params={"branch_id": os.environ["BRANCH_ID"], "include_resolved": "true"}
+)
+response.raise_for_status()
+for comment in response.json():
+    print(json.dumps({key: comment[key] for key in ("id", "text", "resolved")}))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities/${process.env.ENTITY_ID}/comments`);
+url.searchParams.set("branch_id", process.env.BRANCH_ID);
+url.searchParams.set("include_resolved", "true");
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+for (const { id, text, resolved } of await response.json()) console.log({ id, text, resolved });
+```
+
+</CodeGroup>
+
+Set `THREAD_ID` to the `id` of the conversation you want to read or join.
+
+```bash
+export THREAD_ID="original-comment-id"
+```
+
+## Read the replies
+
+Call the same list endpoint with the original comment's ID as `entityId`. Flow returns its direct replies, oldest first. Each reply's `entity_id` is the original comment's ID.
+
+<CodeGroup>
+
+```bash cURL
+curl --fail-with-body --silent --show-error --get \
+  "$FLOW_API_URL/project/$PROJECT_ID/entities/$THREAD_ID/comments" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  --data-urlencode "branch_id=$BRANCH_ID" \
+  | jq '.[] | {id, entity_id, author_id, text, created_at}'
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/entities/{os.environ['THREAD_ID']}/comments",
+    headers=headers, timeout=30,
+    params={"branch_id": os.environ["BRANCH_ID"]}
+)
+response.raise_for_status()
+for reply in response.json():
+    print(json.dumps({key: reply[key] for key in ("id", "entity_id", "author_id", "text", "created_at")}))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities/${process.env.THREAD_ID}/comments`);
+url.searchParams.set("branch_id", process.env.BRANCH_ID);
+const response = await fetch(url, {
+  method: "GET",
+  headers,
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+for (const { id, entity_id, author_id, text, created_at } of await response.json()) {
+  console.log({ id, entity_id, author_id, text, created_at });
+}
+```
+
+</CodeGroup>
+
+Each call returns direct replies only. Older threads can contain deeper replies. To read them, call the list endpoint again with that reply's ID.
+
+## Reply in the thread
+
+Post to the original comment's ID with `text` and the same `branch_id`. Flow returns `201` with the new comment. Posting a reply does not resolve or reopen the thread.
+
+<CodeGroup>
+
+```bash cURL
+curl --fail-with-body --silent --show-error \
+  -X POST "$FLOW_API_URL/project/$PROJECT_ID/entities/$THREAD_ID/comments" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  -H "Content-Type: application/json" \
+  --data "$(jq -n --arg branch_id "$BRANCH_ID" '{text: "Updated the requirement to match the interface.", branch_id: $branch_id}')"
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.post(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/entities/{os.environ['THREAD_ID']}/comments",
+    headers=headers, timeout=30,
+    json={"text": "Updated the requirement to match the interface.", "branch_id": os.environ["BRANCH_ID"]}
+)
+response.raise_for_status()
+print(json.dumps(response.json(), indent=2))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+  "Content-Type": "application/json",
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities/${process.env.THREAD_ID}/comments`);
+const response = await fetch(url, {
+  method: "POST",
+  headers,
+  body: JSON.stringify({ text: "Updated the requirement to match the interface.", branch_id: process.env.BRANCH_ID }),
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+console.log(JSON.stringify(await response.json(), null, 2));
+```
+
+</CodeGroup>
+
+To start a new conversation instead, post to `ENTITY_ID` with the same body.
+
+## Resolve the conversation
+
+Update the original comment to resolve or reopen the whole thread. Pass the original comment's ID as `commentId` and its `entity_id` as `entityId`. For a conversation starter, `entity_id` is the item or branch ID. Send `resolved: false` to reopen.
+
+<CodeGroup>
+
+```bash cURL
+curl --fail-with-body --silent --show-error \
+  -X PATCH "$FLOW_API_URL/project/$PROJECT_ID/entities/$ENTITY_ID/comments/$THREAD_ID" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  -H "Content-Type: application/json" \
+  --data '{"resolved": true}'
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.patch(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/entities/{os.environ['ENTITY_ID']}/comments/{os.environ['THREAD_ID']}",
+    headers=headers, timeout=30,
+    json={"resolved": True}
+)
+response.raise_for_status()
+print(json.dumps(response.json(), indent=2))
+```
+
+```javascript JavaScript
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+  "Content-Type": "application/json",
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/entities/${process.env.ENTITY_ID}/comments/${process.env.THREAD_ID}`);
+const response = await fetch(url, {
+  method: "PATCH",
+  headers,
+  body: JSON.stringify({ resolved: true }),
+  signal: AbortSignal.timeout(30_000),
+});
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+console.log(JSON.stringify(await response.json(), null, 2));
+```
+
+</CodeGroup>
+
+The same `PATCH` request edits a comment's `text`. Only the author can delete a comment. Updates and deletes return `409` when the comment is busy with another write or is an immutable review explanation.
+
+## Comment endpoints
+
+- [List comment threads or replies in a thread](/api/endpoints/get-project-projectid-entities-entityid-comments)
+- [Add a comment or reply in an existing thread](/api/endpoints/post-project-projectid-entities-entityid-comments)
+- [Get a single comment or reply](/api/endpoints/get-project-projectid-entities-entityid-comments-commentid)
+- [Update a comment](/api/endpoints/patch-project-projectid-entities-entityid-comments-commentid)
+- [Delete a comment or reply](/api/endpoints/delete-project-projectid-entities-entityid-comments-commentid)
