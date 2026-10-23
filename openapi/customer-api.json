@@ -312,6 +312,39 @@
                   "code"
                 ],
                 "type": "object"
+              },
+              {
+                "properties": {
+                  "code": {
+                    "enum": [
+                      "AI_OWN_ENDPOINT_MISSING"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code"
+                ],
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "code": {
+                    "enum": [
+                      "AI_OWN_ENDPOINT_REJECTED"
+                    ],
+                    "type": "string"
+                  },
+                  "status": {
+                    "nullable": true,
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "code",
+                  "status"
+                ],
+                "type": "object"
               }
             ]
           },
@@ -396,6 +429,7 @@
               "bitbucket",
               "onshape",
               "teamcenter",
+              "project_activity",
               "webhook",
               "assistant",
               "entity_edit",
@@ -546,6 +580,7 @@
               "bitbucket",
               "onshape",
               "teamcenter",
+              "project_activity",
               "webhook",
               "assistant",
               "entity_edit",
@@ -898,7 +933,7 @@
             "type": "array"
           },
           "source": {
-            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape, teamcenter), 'manual', or the name of a custom webhook trigger.",
+            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape, teamcenter, project_activity), 'manual', or the name of a custom webhook trigger.",
             "example": "schedule",
             "type": "string"
           },
@@ -5034,7 +5069,8 @@
               "AgentChatFinished",
               "AgentChatNeedsInput",
               "AutomationActivity",
-              "AutomationItemsChanged"
+              "AutomationItemsChanged",
+              "WatcherFindingRaised"
             ],
             "type": "string"
           },
@@ -5108,7 +5144,8 @@
               "AgentChatFinished",
               "AgentChatNeedsInput",
               "AutomationActivity",
-              "AutomationItemsChanged"
+              "AutomationItemsChanged",
+              "WatcherFindingRaised"
             ],
             "type": "string"
           },
@@ -6727,7 +6764,7 @@
             "type": "string"
           },
           "source": {
-            "description": "The automation trigger source to fire. One of the built-in sources (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape, teamcenter), or the name given to an automation's custom webhook trigger.",
+            "description": "The automation trigger source to fire. One of the built-in sources (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape, teamcenter, project_activity), or the name given to an automation's custom webhook trigger.",
             "type": "string"
           },
           "wait": {
@@ -7014,7 +7051,8 @@
               "AgentChatFinished",
               "AgentChatNeedsInput",
               "AutomationActivity",
-              "AutomationItemsChanged"
+              "AutomationItemsChanged",
+              "WatcherFindingRaised"
             ],
             "type": "string"
           },
