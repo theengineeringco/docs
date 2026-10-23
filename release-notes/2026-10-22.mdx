@@ -1,0 +1,78 @@
+---
+title: "October 22, 2026"
+sidebarTitle: "October 22, 2026"
+description: "Automations that run when the project changes, linked Slack accounts, AND/OR item checks, AI formula generation beside the builder, automation messages to project members, and a Personal Log."
+---
+
+## In this release
+
+- [Automations that run when the project changes](#automations-that-run-when-the-project-changes)
+- [Linked Slack accounts](#linked-slack-accounts)
+- [AND/OR conditions in item checks](#and/or-conditions-in-item-checks)
+- [Generate formulas with AI](#generate-formulas-with-ai)
+- [Automation notifications](#automation-notifications)
+- [Personal Log](#personal-log)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Automations that run when the project changes
+
+The trigger picker now offers **When the project changes**. Every five minutes, each branch with new edits or comments gets one run on that branch, covering the changes since its last run. These runs have the same tools, branches, and permissions as any other automation. See [Automations](/api/automations/overview).
+
+The Findings page offers a ready-made **Project watcher** automation. It reviews each branch's changes, raises findings such as contradictions, drift from a parent or design value, requirements with no verification, stale checks, and changes that break a blocking item check, and proposes fixes on its own branch for review. Any automation can raise findings. Each issue has one open finding, dismissed findings stay dismissed, and the people whose changes caused a finding get a pop-up with a link to the run and a one-click dismiss.
+
+## Linked Slack accounts
+
+Link your Slack account to your signed-in Flow account, even when the email addresses differ. Agent requests from Slack use your Flow access, and notifications and mentions prefer your linked Slack account. You can unlink your account in Slack integration settings.
+
+<Note>
+Every Slack user, including existing users, must run `/flow` and confirm their account link before using the agent or its Slack settings. Replacing the bot token or disconnecting the integration clears account links, so users must link again after reconnecting.
+</Note>
+
+## AND/OR conditions in item checks
+
+An item check can now hold several conditions joined by AND or OR, such as "Has an upstream Requirement or Derived is true," built as rows like advanced filters. **Applies when** limits a check to the items a filter selects; other items pass. A new **Yes/no is** rule checks that a yes/no field is true or false. All of these work with Warning and Blocking severity.
+
+## Generate formulas with AI
+
+**Generate formula with AI** in the formula builder's Templates tab opens the AI chat beside the builder, and the formula it writes goes straight into the editor. **Discard** in the chat restores your previous draft. In an empty formula editor, press Space to describe the formula in your own words.
+
+## Automation notifications
+
+Automations can now notify chosen project members with a link to an item or a branch review. Recipients get an Inbox row and a pop-up. They can turn on email or Slack, or turn these messages off, under **Messages from automations** in notification settings.
+
+## Personal Log
+
+Review, search, and revert changes to your personal skills, skill folders, automations, Flow.md, and private views from Settings. Your log is visible only to you.
+
+## Improvements & Fixes
+
+### Automations
+
+- **Manual runs.** Running an automation from its detail page or the Automations list now uses the selected branch, including Base.
+
+### Data Model
+
+- **Duplicating items.** A duplicate is no longer linked under deleted parents, so review no longer shows a relationship the item page doesn't list.
+
+### Import and Export
+
+- **Workbook sheet picker.** Uploading an Excel workbook with several tabs offers a **Sheet** picker. The import starts on the first sheet with data, and choosing another sheet imports exactly that sheet's rows.
+- **Document export order.** Linked rows that point toward their parent keep their view order in exported documents instead of falling back to creation order.
+
+### Integrations
+
+- **Jira for external collaborators.** External collaborators can connect their own Jira account to view issues and link them to shared items they can edit. Workspace configuration remains admin-only.
+
+### Notifications
+
+- **Inbox filters.** The Inbox type filters and the list of agent work that needs you now load for people with large notification histories instead of failing with an error.
+
+### Review
+
+- **Review sidebar order.** Changed items in the review sidebar appear in the same order as in the main view, including reordered siblings and top-level items.
+- **Change cards.** Change cards on review and comparison pages no longer intermittently fail with "snapshot is still settling" while other work is running in the workspace.
+
+## API Changes
+
+- **Entity history.** Paged entity-history reads no longer intermittently fail with "snapshot is still settling" while other work is running in the workspace.
