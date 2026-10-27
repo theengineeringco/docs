@@ -373,6 +373,10 @@
             "nullable": true,
             "type": "string"
           },
+          "persistent_agent_id": {
+            "nullable": true,
+            "type": "string"
+          },
           "plan_headline": {
             "nullable": true,
             "type": "string"
@@ -425,7 +429,9 @@
               "schedule",
               "slack",
               "github",
+              "github_merged",
               "gitlab",
+              "gitlab_merged",
               "bitbucket",
               "onshape",
               "teamcenter",
@@ -460,6 +466,7 @@
           "branch_id",
           "project_id",
           "config_id",
+          "persistent_agent_id",
           "parent_agent_id",
           "root_agent_id",
           "spawn_depth",
@@ -524,6 +531,10 @@
             "nullable": true,
             "type": "string"
           },
+          "persistent_agent_id": {
+            "nullable": true,
+            "type": "string"
+          },
           "plan_headline": {
             "nullable": true,
             "type": "string"
@@ -576,7 +587,9 @@
               "schedule",
               "slack",
               "github",
+              "github_merged",
               "gitlab",
+              "gitlab_merged",
               "bitbucket",
               "onshape",
               "teamcenter",
@@ -609,6 +622,7 @@
           "branch_id",
           "project_id",
           "config_id",
+          "persistent_agent_id",
           "visibility",
           "created_by",
           "shared_with",
@@ -625,6 +639,57 @@
           "spawn_tool_call_id",
           "archived",
           "last_user_message_at"
+        ],
+        "type": "object"
+      },
+      "AgentDefinitionDto": {
+        "properties": {
+          "botUserId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "suggestOnly": {
+            "type": "boolean"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "projectId",
+          "name",
+          "instructions",
+          "botUserId",
+          "enabled",
+          "suggestOnly",
+          "createdBy",
+          "updatedBy",
+          "createdAt",
+          "updatedAt"
         ],
         "type": "object"
       },
@@ -730,6 +795,14 @@
           "prompt": {
             "type": "string"
           },
+          "runNotifications": {
+            "description": "Whether finished runs notify the person a run executes as. `findings` (the default) notifies when a run fails, changes an item, or raises, updates or resolves a finding. `off` never notifies. A hand-launched run always reports back.",
+            "enum": [
+              "off",
+              "findings"
+            ],
+            "type": "string"
+          },
           "runsAs": {
             "$ref": "#/components/schemas/AutomationRunsAsDto"
           },
@@ -747,6 +820,10 @@
           "scriptTimeoutSeconds": {
             "type": "number"
           },
+          "suggestOnly": {
+            "description": "Whether runs only suggest: they read everything, raise findings and comment on the items they concern, but change no item, field, link or branch. Defaults to false.",
+            "type": "boolean"
+          },
           "trigger": {
             "allOf": [
               {
@@ -763,6 +840,10 @@
               "$ref": "#/components/schemas/AutomationTriggerDto"
             },
             "type": "array"
+          },
+          "writeBranchId": {
+            "description": "The branch every run writes on (`master` for Base), whatever its trigger names; a change-request review trigger still works on the change request under review. Base or a variant takes the writes directly only while it allows edits to live, and an unprotected change request always does; otherwise runs use a change request under it. Absent: triggered runs use a change request (see `branchPerRun`) and hand-launched runs write where they are launched.",
+            "type": "string"
           }
         },
         "required": [
@@ -933,7 +1014,7 @@
             "type": "array"
           },
           "source": {
-            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape, teamcenter, project_activity), 'manual', or the name of a custom webhook trigger.",
+            "description": "When the automation runs: a built-in source (branch, endpoint, import, schedule, slack, github, github_merged, gitlab, gitlab_merged, bitbucket, onshape, teamcenter, project_activity), 'manual', or the name of a custom webhook trigger.",
             "example": "schedule",
             "type": "string"
           },
@@ -1745,6 +1826,9 @@
             "nullable": true,
             "type": "string"
           },
+          "live_edits_allowed": {
+            "type": "boolean"
+          },
           "merged_at": {
             "nullable": true,
             "type": "string"
@@ -1813,6 +1897,7 @@
           "created_at",
           "updated_at",
           "is_protected",
+          "live_edits_allowed",
           "require_review",
           "ready_for_review",
           "owner_id",
@@ -2320,6 +2405,10 @@
             },
             "type": "array"
           },
+          "persistent_agent_id": {
+            "description": "The persistent agent to activate, independently of any automation.",
+            "type": "string"
+          },
           "project_id": {
             "type": "string"
           },
@@ -2346,6 +2435,27 @@
         },
         "required": [
           "project_id"
+        ],
+        "type": "object"
+      },
+      "CreateAgentDefinitionDto": {
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "suggestOnly": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "instructions"
         ],
         "type": "object"
       },
@@ -2399,6 +2509,14 @@
             "description": "The instructions an agent automation follows. Required in agent mode.",
             "type": "string"
           },
+          "runNotifications": {
+            "description": "Whether finished runs notify the person a run executes as. `findings` (the default) notifies when a run fails, changes an item, or raises, updates or resolves a finding. `off` never notifies. A hand-launched run always reports back.",
+            "enum": [
+              "off",
+              "findings"
+            ],
+            "type": "string"
+          },
           "scope": {
             "description": "Which list this write is to. Required, as `\"personal\"`, when the request has `scope=personal`; optional for the project's list. Must agree with the `scope` query.",
             "enum": [
@@ -2414,6 +2532,10 @@
           "scriptTimeoutSeconds": {
             "description": "Script automations: how many seconds one run may take before it is stopped. Omit for the workspace default; the workspace cap bounds it (the error names the cap). A run always holds one executor slot within its project's share, however long it may run.",
             "type": "number"
+          },
+          "suggestOnly": {
+            "description": "Whether runs only suggest: they read everything, raise findings and comment on the items they concern, but change no item, field, link or branch. Defaults to false.",
+            "type": "boolean"
           },
           "trigger": {
             "allOf": [
@@ -2432,6 +2554,11 @@
             },
             "maxItems": 20,
             "type": "array"
+          },
+          "writeBranchId": {
+            "description": "The branch every run writes on (`master` for Base), whatever its trigger names; a change-request review trigger still works on the change request under review. Base or a variant takes the writes directly only while it allows edits to live, and an unprotected change request always does; otherwise runs use a change request under it. Absent: triggered runs use a change request (see `branchPerRun`) and hand-launched runs write where they are launched.",
+            "nullable": true,
+            "type": "object"
           }
         },
         "required": [
@@ -5070,7 +5197,8 @@
               "AgentChatNeedsInput",
               "AutomationActivity",
               "AutomationItemsChanged",
-              "WatcherFindingRaised"
+              "WatcherFindingRaised",
+              "AutomationNotification"
             ],
             "type": "string"
           },
@@ -5145,7 +5273,8 @@
               "AgentChatNeedsInput",
               "AutomationActivity",
               "AutomationItemsChanged",
-              "WatcherFindingRaised"
+              "WatcherFindingRaised",
+              "AutomationNotification"
             ],
             "type": "string"
           },
@@ -6105,6 +6234,10 @@
         ],
         "type": "object"
       },
+      "SetLiveEditsAllowedDto": {
+        "properties": {},
+        "type": "object"
+      },
       "SetReadyForReviewDto": {
         "properties": {},
         "type": "object"
@@ -6764,7 +6897,7 @@
             "type": "string"
           },
           "source": {
-            "description": "The automation trigger source to fire. One of the built-in sources (branch, endpoint, import, schedule, slack, github, gitlab, bitbucket, onshape, teamcenter, project_activity), or the name given to an automation's custom webhook trigger.",
+            "description": "The automation trigger source to fire. One of the built-in sources (branch, endpoint, import, schedule, slack, github, github_merged, gitlab, gitlab_merged, bitbucket, onshape, teamcenter, project_activity), or the name given to an automation's custom webhook trigger.",
             "type": "string"
           },
           "wait": {
@@ -6909,6 +7042,23 @@
         ],
         "type": "object"
       },
+      "UpdateAgentDefinitionDto": {
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "suggestOnly": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "UpdateAutomationDto": {
         "properties": {
           "advisory": {
@@ -6963,6 +7113,14 @@
             "description": "Confirms that this automation should run as you from now on. Required when you are not its current writer and the edit changes what it runs, or how and when it runs. Renaming it, disabling it or turning off admin tools never changes whom it runs as. Sent with no other change, it only makes you the writer.",
             "type": "boolean"
           },
+          "runNotifications": {
+            "description": "Whether finished runs notify the person a run executes as. `findings` (the default) notifies when a run fails, changes an item, or raises, updates or resolves a finding. `off` never notifies. A hand-launched run always reports back.",
+            "enum": [
+              "off",
+              "findings"
+            ],
+            "type": "string"
+          },
           "scope": {
             "description": "Which list this write is to. Required, as `\"personal\"`, when the request has `scope=personal`; optional for the project's list. Must agree with the `scope` query.",
             "enum": [
@@ -6978,6 +7136,10 @@
           "scriptTimeoutSeconds": {
             "description": "Script automations: how many seconds one run may take before it is stopped. Omit for the workspace default; the workspace cap bounds it (the error names the cap). A run always holds one executor slot within its project's share, however long it may run.",
             "type": "number"
+          },
+          "suggestOnly": {
+            "description": "Whether runs only suggest: they read everything, raise findings and comment on the items they concern, but change no item, field, link or branch. Defaults to false.",
+            "type": "boolean"
           },
           "trigger": {
             "allOf": [
@@ -6996,6 +7158,11 @@
             },
             "maxItems": 20,
             "type": "array"
+          },
+          "writeBranchId": {
+            "description": "The branch every run writes on (`master` for Base), whatever its trigger names; a change-request review trigger still works on the change request under review. Base or a variant takes the writes directly only while it allows edits to live, and an unprotected change request always does; otherwise runs use a change request under it. Absent: triggered runs use a change request (see `branchPerRun`) and hand-launched runs write where they are launched.",
+            "nullable": true,
+            "type": "object"
           }
         },
         "type": "object"
@@ -7052,7 +7219,8 @@
               "AgentChatNeedsInput",
               "AutomationActivity",
               "AutomationItemsChanged",
-              "WatcherFindingRaised"
+              "WatcherFindingRaised",
+              "AutomationNotification"
             ],
             "type": "string"
           },
@@ -7266,6 +7434,9 @@
           "id": {
             "type": "string"
           },
+          "is_bot": {
+            "type": "boolean"
+          },
           "role": {
             "allOf": [
               {
@@ -7474,6 +7645,14 @@
           {
             "in": "query",
             "name": "configId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "persistentAgentId",
             "required": false,
             "schema": {
               "type": "string"
@@ -9684,6 +9863,320 @@
           "metadata": {
             "sidebarTitle": "Update a project — slug is regenerated when name changes",
             "title": "Update a project — slug is regenerated when name changes"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/agents": {
+      "get": {
+        "operationId": "AgentDefinitionsController_list",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AgentDefinitionDto"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the persistent agents of a project",
+        "tags": [
+          "Persistent agents"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-agents",
+          "metadata": {
+            "sidebarTitle": "List the persistent agents of a project",
+            "title": "List the persistent agents of a project"
+          }
+        }
+      },
+      "post": {
+        "description": "Project admins only. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it.",
+        "operationId": "AgentDefinitionsController_create",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentDefinitionDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentDefinitionDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a persistent agent",
+        "tags": [
+          "Persistent agents"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-agents",
+          "metadata": {
+            "sidebarTitle": "Create a persistent agent",
+            "title": "Create a persistent agent"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/agents/{agentId}": {
+      "delete": {
+        "description": "Withdraws the agent from the project and stops future activation. Its identity, conversations and memories are retained.",
+        "operationId": "AgentDefinitionsController_archive",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "agentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Archive a persistent agent",
+        "tags": [
+          "Persistent agents"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/delete-project-projectid-agents-agentid",
+          "metadata": {
+            "sidebarTitle": "Archive a persistent agent",
+            "title": "Archive a persistent agent"
+          }
+        }
+      },
+      "get": {
+        "operationId": "AgentDefinitionsController_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "agentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentDefinitionDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a persistent agent",
+        "tags": [
+          "Persistent agents"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-agents-agentid",
+          "metadata": {
+            "sidebarTitle": "Get a persistent agent",
+            "title": "Get a persistent agent"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "AgentDefinitionsController_update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "agentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAgentDefinitionDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentDefinitionDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a persistent agent",
+        "tags": [
+          "Persistent agents"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/patch-project-projectid-agents-agentid",
+          "metadata": {
+            "sidebarTitle": "Update a persistent agent",
+            "title": "Update a persistent agent"
           }
         }
       }
@@ -13159,6 +13652,73 @@
           "metadata": {
             "sidebarTitle": "Assign or clear the user groups allowed to edit this branch",
             "title": "Assign or clear the user groups allowed to edit this branch"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/branch/{id}/set-live-edits-allowed": {
+      "post": {
+        "operationId": "BranchController_setLiveEditsAllowed",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetLiveEditsAllowedDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Allow or stop edits on a variant landing on it directly instead of opening a change request",
+        "tags": [
+          "Branches"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-branch-id-set-live-edits-allowed",
+          "metadata": {
+            "sidebarTitle": "Allow or stop edits on a variant landing on it directly instead of opening a change request",
+            "title": "Allow or stop edits on a variant landing on it directly instead of opening a change request"
           }
         }
       }
@@ -20105,6 +20665,9 @@
     },
     {
       "name": "Notifications"
+    },
+    {
+      "name": "Persistent agents"
     },
     {
       "name": "Projects"
