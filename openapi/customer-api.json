@@ -359,8 +359,15 @@
             "nullable": true,
             "type": "string"
           },
+          "is_main_chat": {
+            "type": "boolean"
+          },
           "last_user_message_at": {
             "format": "date-time",
+            "type": "string"
+          },
+          "main_chat_id": {
+            "nullable": true,
             "type": "string"
           },
           "messages": {
@@ -467,6 +474,8 @@
           "project_id",
           "config_id",
           "persistent_agent_id",
+          "main_chat_id",
+          "is_main_chat",
           "parent_agent_id",
           "root_agent_id",
           "spawn_depth",
@@ -523,8 +532,15 @@
           "id": {
             "type": "string"
           },
+          "is_main_chat": {
+            "type": "boolean"
+          },
           "last_user_message_at": {
             "format": "date-time",
+            "type": "string"
+          },
+          "main_chat_id": {
+            "nullable": true,
             "type": "string"
           },
           "parent_agent_id": {
@@ -623,6 +639,8 @@
           "project_id",
           "config_id",
           "persistent_agent_id",
+          "main_chat_id",
+          "is_main_chat",
           "visibility",
           "created_by",
           "shared_with",
@@ -644,6 +662,53 @@
       },
       "AgentDefinitionDto": {
         "properties": {
+          "avatarColor": {
+            "enum": [
+              "primary",
+              "red",
+              "amber",
+              "lime",
+              "emerald",
+              "sky",
+              "blue",
+              "indigo",
+              "violet",
+              "fuchsia",
+              "gray",
+              "black"
+            ],
+            "type": "string"
+          },
+          "avatarRatio": {
+            "enum": [
+              "1:1",
+              "1:2",
+              "2:1",
+              "2:3",
+              "1:3",
+              "3:1"
+            ],
+            "type": "string"
+          },
+          "avatarShape": {
+            "enum": [
+              "square",
+              "squircle",
+              "circle",
+              "pill",
+              "diamond",
+              "triangle",
+              "pentagon",
+              "hexagon",
+              "octagon",
+              "shield",
+              "scallop",
+              "blob",
+              "drop",
+              "star"
+            ],
+            "type": "string"
+          },
           "botUserId": {
             "type": "string"
           },
@@ -651,6 +716,10 @@
             "type": "string"
           },
           "createdBy": {
+            "type": "string"
+          },
+          "description": {
+            "nullable": true,
             "type": "string"
           },
           "enabled": {
@@ -683,9 +752,13 @@
           "projectId",
           "name",
           "instructions",
+          "description",
           "botUserId",
           "enabled",
           "suggestOnly",
+          "avatarColor",
+          "avatarShape",
+          "avatarRatio",
           "createdBy",
           "updatedBy",
           "createdAt",
@@ -1348,6 +1421,44 @@
         ],
         "type": "object"
       },
+      "BranchChangedPayloadDto": {
+        "properties": {
+          "diff_count": {
+            "description": "Item diffs this event covers (cascades excluded).",
+            "type": "number"
+          },
+          "entity_count": {
+            "type": "number"
+          },
+          "entity_ids": {
+            "description": "Touched entity ids, at most 100; see truncated.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "first_seq_id": {
+            "description": "Origin seq of the first diff this event covers: the position the write entered the log, stable across rebases.",
+            "type": "string"
+          },
+          "last_seq_id": {
+            "description": "Origin seq of the last diff this event covers.",
+            "type": "string"
+          },
+          "truncated": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "diff_count",
+          "entity_count",
+          "entity_ids",
+          "truncated",
+          "first_seq_id",
+          "last_seq_id"
+        ],
+        "type": "object"
+      },
       "BranchCheckItemDto": {
         "properties": {
           "advisory": {
@@ -1745,6 +1856,34 @@
         ],
         "type": "object"
       },
+      "BranchRebasedPayloadDto": {
+        "properties": {
+          "branch_name": {
+            "type": "string"
+          },
+          "parent_branch_id": {
+            "description": "The branch the branch re-anchored onto; null means Base.",
+            "nullable": true,
+            "type": "string"
+          },
+          "parent_seq_id": {
+            "description": "The fork point the branch moved to (its parent_seq_id after the rebase).",
+            "nullable": true,
+            "type": "string"
+          },
+          "rebase_event_id": {
+            "description": "ID of the rebase-history row; stable across reads.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rebase_event_id",
+          "branch_name",
+          "parent_branch_id",
+          "parent_seq_id"
+        ],
+        "type": "object"
+      },
       "BranchResponseDto": {
         "properties": {
           "auto_merge_requested_at": {
@@ -1926,6 +2065,46 @@
         },
         "required": [
           "chain"
+        ],
+        "type": "object"
+      },
+      "BranchReviewPayloadDto": {
+        "properties": {
+          "baseline_id": {
+            "description": "The baseline a merge produced.",
+            "type": "string"
+          },
+          "branch_name": {
+            "type": "string"
+          },
+          "comment_id": {
+            "description": "The review comment attached to the decision.",
+            "type": "string"
+          },
+          "review_event_id": {
+            "description": "ID of the review-history row; stable across reads.",
+            "type": "string"
+          },
+          "subject_user_group_id": {
+            "type": "string"
+          },
+          "subject_user_group_name": {
+            "type": "string"
+          },
+          "subject_user_id": {
+            "description": "The user the event is about when it is not the actor (a dismissed approval, a removed reviewer, a new owner).",
+            "type": "string"
+          },
+          "target_branch_id": {
+            "description": "The branch’s merge target as the event recorded it, else its current parent; null means Base.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "review_event_id",
+          "branch_name",
+          "target_branch_id"
         ],
         "type": "object"
       },
@@ -2398,6 +2577,10 @@
             "nullable": true,
             "type": "string"
           },
+          "main_chat_id": {
+            "description": "Create a side chat under this persistent main chat. Its transcript and execution state stay separate.",
+            "type": "string"
+          },
           "messages": {
             "description": "The opening turn. Each message is `{ \"role\": \"user\", \"content\": \"…\" }`; given, the agent starts answering as soon as the chat exists. Omitted, the chat is created idle and POST /ai/agents/{id}/messages starts it.",
             "items": {
@@ -2440,6 +2623,58 @@
       },
       "CreateAgentDefinitionDto": {
         "properties": {
+          "avatarColor": {
+            "enum": [
+              "primary",
+              "red",
+              "amber",
+              "lime",
+              "emerald",
+              "sky",
+              "blue",
+              "indigo",
+              "violet",
+              "fuchsia",
+              "gray",
+              "black"
+            ],
+            "type": "string"
+          },
+          "avatarRatio": {
+            "enum": [
+              "1:1",
+              "1:2",
+              "2:1",
+              "2:3",
+              "1:3",
+              "3:1"
+            ],
+            "type": "string"
+          },
+          "avatarShape": {
+            "enum": [
+              "square",
+              "squircle",
+              "circle",
+              "pill",
+              "diamond",
+              "triangle",
+              "pentagon",
+              "hexagon",
+              "octagon",
+              "shield",
+              "scallop",
+              "blob",
+              "drop",
+              "star"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "description": "A short description shown under the name. Blank clears it.",
+            "nullable": true,
+            "type": "string"
+          },
           "enabled": {
             "type": "boolean"
           },
@@ -5579,6 +5814,119 @@
         ],
         "type": "object"
       },
+      "ProjectEventActorDto": {
+        "properties": {
+          "id": {
+            "description": "User or agent ID. Omitted for system actors.",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "user",
+              "agent",
+              "system"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "ProjectEventDto": {
+        "properties": {
+          "actor": {
+            "$ref": "#/components/schemas/ProjectEventActorDto"
+          },
+          "app_url": {
+            "description": "Absolute URL of the event’s subject in Flow: the branch’s table for branch.changed, its review otherwise.",
+            "type": "string"
+          },
+          "branch_id": {
+            "description": "Branch the event belongs to; \"master\" means Base.",
+            "type": "string"
+          },
+          "event_type": {
+            "enum": [
+              "branch.changed",
+              "branch.rebased",
+              "branch.created",
+              "branch.ready_for_review",
+              "branch.draft",
+              "branch.approved",
+              "branch.rejected",
+              "branch.review_cleared",
+              "branch.reviewer_removed",
+              "branch.owner_changed",
+              "branch.editor_groups_changed",
+              "branch.approval_dismissed",
+              "branch.admin_bypass",
+              "branch.closed",
+              "branch.reopened",
+              "branch.merged",
+              "branch.extracted",
+              "branch.extraction_undone"
+            ],
+            "type": "string"
+          },
+          "occurred_at": {
+            "description": "The recorded time of the event. Informational: delivery order follows next_cursor, and occurred_at can be out of order across pages (historical imports carry past timestamps), so order by delivery, not by this field.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "payload": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BranchChangedPayloadDto"
+              },
+              {
+                "$ref": "#/components/schemas/BranchReviewPayloadDto"
+              },
+              {
+                "$ref": "#/components/schemas/BranchRebasedPayloadDto"
+              }
+            ]
+          },
+          "project_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "event_type",
+          "occurred_at",
+          "project_id",
+          "branch_id",
+          "actor",
+          "app_url",
+          "payload"
+        ],
+        "type": "object"
+      },
+      "ProjectEventPageDto": {
+        "properties": {
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/ProjectEventDto"
+            },
+            "type": "array"
+          },
+          "more_available": {
+            "description": "True when this page filled the requested limit and more settled events wait beyond it.",
+            "type": "boolean"
+          },
+          "next_cursor": {
+            "description": "Position from which the next read continues. Pass it back as cursor. It is a checkpoint, not merely the last delivered event: when the page is short it is the stream’s settled floor, so nothing at or below it can appear later.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "events",
+          "next_cursor",
+          "more_available"
+        ],
+        "type": "object"
+      },
       "ProjectResponseDto": {
         "properties": {
           "ai_model": {
@@ -7044,6 +7392,58 @@
       },
       "UpdateAgentDefinitionDto": {
         "properties": {
+          "avatarColor": {
+            "enum": [
+              "primary",
+              "red",
+              "amber",
+              "lime",
+              "emerald",
+              "sky",
+              "blue",
+              "indigo",
+              "violet",
+              "fuchsia",
+              "gray",
+              "black"
+            ],
+            "type": "string"
+          },
+          "avatarRatio": {
+            "enum": [
+              "1:1",
+              "1:2",
+              "2:1",
+              "2:3",
+              "1:3",
+              "3:1"
+            ],
+            "type": "string"
+          },
+          "avatarShape": {
+            "enum": [
+              "square",
+              "squircle",
+              "circle",
+              "pill",
+              "diamond",
+              "triangle",
+              "pentagon",
+              "hexagon",
+              "octagon",
+              "shield",
+              "scallop",
+              "blob",
+              "drop",
+              "star"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "description": "A short description shown under the name. Blank clears it.",
+            "nullable": true,
+            "type": "string"
+          },
           "enabled": {
             "type": "boolean"
           },
@@ -7717,6 +8117,32 @@
             "description": "Only chats started to address this comment (`trigger_info.comment_id`).",
             "in": "query",
             "name": "commentId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Pass true to list only chats addressed to a custom agent (any agent). Use persistentAgentId for one agent.",
+            "in": "query",
+            "name": "withPersistentAgent",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Pass true to leave out conversations with a custom agent, which are reached from the agent itself. Cannot be combined with persistentAgentId or withPersistentAgent.",
+            "in": "query",
+            "name": "excludePersistentAgentChats",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mainChatId",
             "required": false,
             "schema": {
               "type": "string"
@@ -17173,6 +17599,112 @@
         }
       }
     },
+    "/project/{projectId}/events": {
+      "get": {
+        "description": "Engineering events for one project in delivery order: branch.changed (item changes on a branch or Base, one event per branch and actor within the page, with the touched entity ids and the origin diff-seq window they cover), branch.rebased (one event per branch per update-from-parent: the branch re-anchored onto new parent state, so re-read it — its already-delivered changes are never re-reported) and the branch review workflow (branch.created, branch.ready_for_review, branch.approved, branch.rejected, branch.merged, …, each naming the branch, its merge target and the people involved). Poll without a cursor to read from the beginning, or with start=now to receive an empty page whose next_cursor is the present (future events only, no history replayed); then store and pass back next_cursor: pages are bounded by the stream’s settled floor, so a stored cursor never skips an event that commits late. Delivery order follows next_cursor; occurred_at can be out of order across pages (historical imports carry past timestamps). Filter by comma-separated type and/or one branch (branch=<id> or branch=master for Base); a cursor minted under a filter admits that filter or a narrower one — widening is a 400 instead of a silent skip of the excluded events, so restart from an earlier cursor to widen. Events carry the project, branch (\"master\" means Base), actor and an app_url back into Flow.",
+        "operationId": "ProjectEventsController_list",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The next_cursor of the previous page. Omit it to read from the beginning, or pass start=now instead to begin at the present. A cursor admits the type filter it was minted under and any narrower one; a wider filter is a 400 — restart from an earlier cursor to widen.",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "start=now answers an empty page whose next_cursor is the present: poll from it to receive only events that happen after this call, without replaying history. Takes no cursor; the minted cursor is unfiltered, so it admits any later type filter.",
+            "in": "query",
+            "name": "start",
+            "required": false,
+            "schema": {
+              "enum": [
+                "now"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Comma-separated event types to include (branch.changed, branch.rebased, branch.created, branch.ready_for_review, branch.draft, branch.approved, branch.rejected, branch.review_cleared, branch.reviewer_removed, branch.owner_changed, branch.editor_groups_changed, branch.approval_dismissed, branch.admin_bypass, branch.closed, branch.reopened, branch.merged, branch.extracted, branch.extraction_undone). Omit to read every type.",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only events of one branch: a branch id, or \"master\" for Base. Omit to read every branch. Like type, a cursor minted under a branch admits only that branch (a wider poll is a 400).",
+            "in": "query",
+            "name": "branch",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectEventPageDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Read the project event stream",
+        "tags": [
+          "Events"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-events",
+          "metadata": {
+            "sidebarTitle": "Read the project event stream",
+            "title": "Read the project event stream"
+          }
+        }
+      }
+    },
     "/project/{projectId}/files": {
       "get": {
         "description": "Returns up to 500 of the project's most recently uploaded files, newest first.",
@@ -20656,6 +21188,9 @@
     },
     {
       "name": "Entities"
+    },
+    {
+      "name": "Events"
     },
     {
       "name": "Files"
