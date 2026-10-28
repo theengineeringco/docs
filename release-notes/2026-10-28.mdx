@@ -1,0 +1,82 @@
+---
+title: "October 28, 2026"
+sidebarTitle: "October 28, 2026"
+description: "Mention people, branches, and reviews in AI chat, feature a type's key fields by default, react to comments with emoji, and poll a project event stream."
+---
+
+## In this release
+
+- [Mentions and reference pills in AI chat](#mentions-and-reference-pills-in-ai-chat)
+- [Featured fields](#featured-fields)
+- [Comment reactions](#comment-reactions)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Mentions and reference pills in AI chat
+
+Type `@` in the AI chat box to mention a project member, or to pick a branch or a review. Flow AI knows who and what you mean. You can also mention project members in descriptions and other rich-text fields.
+
+When Flow AI names a comment in its reply, the reply shows a pill with the author, a short excerpt, and the item or review it is on. Click the pill to open the comment. Branch and automation links in replies now use the same pill style as item links.
+
+## Featured fields
+
+Choose a type's featured fields in the **Featured fields** section of **Settings → Data Model**, or from a field's options menu. Featured fields appear in the new-item form without **Add more**, in a view's columns when the view has none configured, and in the details panel until someone chooses their own fields.
+
+## Comment reactions
+
+React to any comment or reply with an emoji. Reactions show as chips under the comment with a count and who reacted, and update live for everyone in the thread.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Approvals in one box.** When an AI reply asks to approve actions, the chat groups them under a title that says what the step does, with a checkbox for each action. **Confirm** runs the checked actions, and **Reject** runs none.
+- **Approving several actions.** Approving several actions from one AI reply now runs all of them. A chat that stopped after such an approval works again on its next message.
+- **Ready for review.** Flow AI can mark a branch ready for review, or remove the mark, when the owner or an admin asks.
+- **GitHub pull requests.** Flow AI can read pull request details, browse changed files, and inspect selected patches through your workspace's GitHub connection.
+- **Automation links.** An automation named in an AI reply now opens that automation instead of the page you are on.
+
+### Automations
+
+- **GitHub automation filters.** Author and changed-file filters now select matching pull request reviews and merge events. Author filters use the pull request author. Activity explains when a changed-file list could not be verified.
+
+### Branching
+
+- **Restricted merges.** When editor groups stop you from merging, the message names the branch and the groups that block the merge, and says who to ask.
+
+### Dashboards
+
+- **Widget filters.** The widget editor is larger, so you can always remove filter chips. The editor also tells you when a filter has no value yet and will not be saved.
+
+### Files
+
+- **Chat attachments.** New chats are saved as soon as you send files, with per-file progress while you keep working. Large batches no longer time out. After a refresh, reselect only the missing files; completed uploads stay saved.
+- **Description attachments.** Files added by the agent open correctly from item descriptions, in the same preview dialog as chat attachments.
+
+### Import and Export
+
+- **Filtered ReqIF exports.** A filtered export keeps the parents of matching requirements, so the specification hierarchy matches Flow.
+
+### Integrations
+
+- **Deleted projects.** Deleted projects no longer block GitHub deliveries to active projects, and Slack ignores mentions that target deleted projects.
+
+### Reader
+
+- **Descriptions across branches.** Descriptions clear when their saved value is removed, including when you switch branches. Rich-text edits and undo history stay with the selected branch.
+
+### Review
+
+- **Mentions in review diffs.** Changed mentions are outlined in the diff color and stay readable. Mentions on the Base side show the referenced item's Base value.
+
+### Settings
+
+- **AI settings section.** Settings has a new **AI** section with General, Automations, Skills, Activity Log, and Usage. Flow AI and model controls moved there from the Organization page. Old links open the new pages.
+
+### Tree
+
+- **Drag to reorder.** Reordering items in the navigator and tables works under parents whose children are linked in different directions.
+
+## API Changes
+
+- **Project event stream.** Poll `GET /project/{projectId}/events` for an ordered feed of item changes, branch updates from parent, and branch review transitions. Pass back `next_cursor` to resume without skipped or repeated events, use `start=now` to skip history, and filter by event type or branch. The feed is also a hosted MCP tool. See the [API reference](/api/reference).
