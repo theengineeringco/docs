@@ -95,6 +95,8 @@
               "skill_folder.update",
               "skill_folder.delete",
               "skill_folder.reorder",
+              "agent.create",
+              "agent.archive",
               "user.access_granted",
               "user.role_change",
               "user.project_access_update",
@@ -144,7 +146,8 @@
               "flow_md",
               "skill",
               "user",
-              "review_policy"
+              "review_policy",
+              "agent"
             ],
             "type": "string"
           },
@@ -376,6 +379,15 @@
             },
             "type": "array"
           },
+          "opening_submission": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentOpeningSubmissionDto"
+              }
+            ],
+            "nullable": true,
+            "type": "object"
+          },
           "parent_agent_id": {
             "nullable": true,
             "type": "string"
@@ -420,6 +432,10 @@
           "status": {
             "type": "string"
           },
+          "sudo_enabled": {
+            "default": false,
+            "type": "boolean"
+          },
           "title": {
             "nullable": true,
             "type": "string"
@@ -445,6 +461,7 @@
               "project_activity",
               "webhook",
               "assistant",
+              "agent_task",
               "entity_edit",
               "manual",
               "impact_analysis",
@@ -612,6 +629,7 @@
               "project_activity",
               "webhook",
               "assistant",
+              "agent_task",
               "entity_edit",
               "manual",
               "impact_analysis",
@@ -728,13 +746,14 @@
           "id": {
             "type": "string"
           },
-          "instructions": {
-            "type": "string"
-          },
           "name": {
             "type": "string"
           },
           "projectId": {
+            "type": "string"
+          },
+          "role": {
+            "nullable": true,
             "type": "string"
           },
           "suggestOnly": {
@@ -751,8 +770,8 @@
           "id",
           "projectId",
           "name",
-          "instructions",
           "description",
+          "role",
           "botUserId",
           "enabled",
           "suggestOnly",
@@ -763,6 +782,37 @@
           "updatedBy",
           "createdAt",
           "updatedAt"
+        ],
+        "type": "object"
+      },
+      "AgentOpeningSubmissionDto": {
+        "properties": {
+          "attachments": {
+            "items": {
+              "$ref": "#/components/schemas/OpeningAttachmentDto"
+            },
+            "type": "array"
+          },
+          "id": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "uploading",
+              "accepted",
+              "canceled"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "prompt",
+          "attachments"
         ],
         "type": "object"
       },
@@ -2588,6 +2638,9 @@
             },
             "type": "array"
           },
+          "opening_submission": {
+            "$ref": "#/components/schemas/CreateOpeningSubmissionDto"
+          },
           "persistent_agent_id": {
             "description": "The persistent agent to activate, independently of any automation.",
             "type": "string"
@@ -2671,17 +2724,19 @@
             "type": "string"
           },
           "description": {
-            "description": "A short description shown under the name. Blank clears it.",
+            "description": "What the agent is for, in markdown, shown to people; the brief the agent follows on every turn. Blank clears it.",
             "nullable": true,
             "type": "string"
           },
           "enabled": {
             "type": "boolean"
           },
-          "instructions": {
+          "name": {
             "type": "string"
           },
-          "name": {
+          "role": {
+            "description": "A one-line role shown under the name, such as \"Thermal reviewer\". Blank clears it.",
+            "nullable": true,
             "type": "string"
           },
           "suggestOnly": {
@@ -2689,8 +2744,7 @@
           }
         },
         "required": [
-          "name",
-          "instructions"
+          "name"
         ],
         "type": "object"
       },
@@ -2964,6 +3018,34 @@
           "original_name",
           "size",
           "mime_type"
+        ],
+        "type": "object"
+      },
+      "CreateOpeningSubmissionDto": {
+        "properties": {
+          "attachments": {
+            "items": {
+              "$ref": "#/components/schemas/OpeningAttachmentInputDto"
+            },
+            "type": "array"
+          },
+          "context": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "id": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "prompt",
+          "attachments"
         ],
         "type": "object"
       },
@@ -5546,6 +5628,67 @@
         ],
         "type": "object"
       },
+      "OpeningAttachmentDto": {
+        "properties": {
+          "file_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "last_modified": {
+            "type": "number"
+          },
+          "mime_type": {
+            "type": "string"
+          },
+          "original_name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "uploaded": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "original_name",
+          "size",
+          "mime_type",
+          "id",
+          "last_modified",
+          "uploaded"
+        ],
+        "type": "object"
+      },
+      "OpeningAttachmentInputDto": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "last_modified": {
+            "type": "number"
+          },
+          "mime_type": {
+            "type": "string"
+          },
+          "original_name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "original_name",
+          "size",
+          "mime_type",
+          "id",
+          "last_modified"
+        ],
+        "type": "object"
+      },
       "PageBoxDto": {
         "properties": {
           "height": {
@@ -7440,17 +7583,19 @@
             "type": "string"
           },
           "description": {
-            "description": "A short description shown under the name. Blank clears it.",
+            "description": "What the agent is for, in markdown, shown to people; the brief the agent follows on every turn. Blank clears it.",
             "nullable": true,
             "type": "string"
           },
           "enabled": {
             "type": "boolean"
           },
-          "instructions": {
+          "name": {
             "type": "string"
           },
-          "name": {
+          "role": {
+            "description": "A one-line role shown under the name, such as \"Thermal reviewer\". Blank clears it.",
+            "nullable": true,
             "type": "string"
           },
           "suggestOnly": {
@@ -8114,7 +8259,7 @@
             }
           },
           {
-            "description": "Only chats started to address this comment (`trigger_info.comment_id`).",
+            "description": "Only chats started to address this comment or respond to its agent mention.",
             "in": "query",
             "name": "commentId",
             "required": false,
@@ -10351,7 +10496,7 @@
         }
       },
       "post": {
-        "description": "Project admins only. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it.",
+        "description": "Project admins only. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it. An enabled agent opens the creator's main chat with it and speaks first, asking what it is for so it can write its description.",
         "operationId": "AgentDefinitionsController_create",
         "parameters": [
           {
@@ -10667,7 +10812,8 @@
                 "flow_md",
                 "skill",
                 "user",
-                "review_policy"
+                "review_policy",
+                "agent"
               ],
               "type": "string"
             }
