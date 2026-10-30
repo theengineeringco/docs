@@ -73,6 +73,7 @@
               "view.update",
               "view.delete",
               "view.reorder",
+              "baseline.create",
               "baseline.rename",
               "project.ai_model_update",
               "review_policy.update",
@@ -351,6 +352,16 @@
               }
             ]
           },
+          "forked_from_chat_id": {
+            "description": "The chat this side chat was started from.",
+            "nullable": true,
+            "type": "string"
+          },
+          "forked_from_message_id": {
+            "description": "The message of the source chat that the copy ends on.",
+            "nullable": true,
+            "type": "string"
+          },
           "id": {
             "type": "string"
           },
@@ -543,6 +554,16 @@
             "type": "string"
           },
           "error_details": {
+            "nullable": true,
+            "type": "string"
+          },
+          "forked_from_chat_id": {
+            "description": "The chat this side chat was started from.",
+            "nullable": true,
+            "type": "string"
+          },
+          "forked_from_message_id": {
+            "description": "The message of the source chat that the copy ends on.",
             "nullable": true,
             "type": "string"
           },
@@ -759,6 +780,152 @@
           "suggestOnly": {
             "type": "boolean"
           },
+          "triggers": {
+            "items": {
+              "$ref": "#/components/schemas/AgentTriggerDto"
+            },
+            "type": "array"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "projectId",
+          "name",
+          "description",
+          "role",
+          "botUserId",
+          "enabled",
+          "suggestOnly",
+          "avatarColor",
+          "avatarShape",
+          "avatarRatio",
+          "createdBy",
+          "updatedBy",
+          "createdAt",
+          "updatedAt",
+          "triggers"
+        ],
+        "type": "object"
+      },
+      "AgentHandTriggerDto": {
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "agentName": {
+            "type": "string"
+          },
+          "branch": {
+            "description": "Offered by the branch menu.",
+            "type": "boolean"
+          },
+          "triggerId": {
+            "type": "string"
+          },
+          "types": {
+            "description": "Offered by the context menus of these item types.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "agentId",
+          "agentName",
+          "triggerId",
+          "branch",
+          "types"
+        ],
+        "type": "object"
+      },
+      "AgentListItemDto": {
+        "properties": {
+          "avatarColor": {
+            "enum": [
+              "primary",
+              "red",
+              "amber",
+              "lime",
+              "emerald",
+              "sky",
+              "blue",
+              "indigo",
+              "violet",
+              "fuchsia",
+              "gray",
+              "black"
+            ],
+            "type": "string"
+          },
+          "avatarRatio": {
+            "enum": [
+              "1:1",
+              "1:2",
+              "2:1",
+              "2:3",
+              "1:3",
+              "3:1"
+            ],
+            "type": "string"
+          },
+          "avatarShape": {
+            "enum": [
+              "square",
+              "squircle",
+              "circle",
+              "pill",
+              "diamond",
+              "triangle",
+              "pentagon",
+              "hexagon",
+              "octagon",
+              "shield",
+              "scallop",
+              "blob",
+              "drop",
+              "star"
+            ],
+            "type": "string"
+          },
+          "botUserId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "role": {
+            "nullable": true,
+            "type": "string"
+          },
+          "suggestOnly": {
+            "type": "boolean"
+          },
           "updatedAt": {
             "type": "string"
           },
@@ -848,6 +1015,116 @@
         ],
         "type": "object"
       },
+      "AgentTriggerDto": {
+        "properties": {
+          "configuredAt": {
+            "type": "string"
+          },
+          "configuredBy": {
+            "description": "Who last wrote this entry.",
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "trigger": {
+            "$ref": "#/components/schemas/AgentTriggerSettingsDto"
+          }
+        },
+        "required": [
+          "id",
+          "prompt",
+          "trigger",
+          "configuredBy",
+          "configuredAt"
+        ],
+        "type": "object"
+      },
+      "AgentTriggerFiredDto": {
+        "properties": {
+          "chatId": {
+            "description": "The side chat the firing started.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "chatId"
+        ],
+        "type": "object"
+      },
+      "AgentTriggerInputDto": {
+        "properties": {
+          "id": {
+            "description": "The id of a stored entry to keep; omitted for a new one.",
+            "type": "string"
+          },
+          "prompt": {
+            "description": "What the agent is told when the trigger fires.",
+            "type": "string"
+          },
+          "trigger": {
+            "$ref": "#/components/schemas/AgentTriggerSettingsDto"
+          }
+        },
+        "required": [
+          "prompt",
+          "trigger"
+        ],
+        "type": "object"
+      },
+      "AgentTriggerSettingsDto": {
+        "properties": {
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "branch": {
+            "description": "A manual trigger that the branch menu offers.",
+            "type": "boolean"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "branchIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "cronExpression": {
+            "type": "string"
+          },
+          "paths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "source": {
+            "description": "An automation trigger source: manual, schedule, branch, endpoint, github, github_merged, gitlab, gitlab_merged, bitbucket, onshape, teamcenter, import, slack, project_activity, or a custom webhook name.",
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          },
+          "types": {
+            "description": "A manual trigger that the context menus of these item types (category ids) offer.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "source"
+        ],
+        "type": "object"
+      },
       "AiContextUsageDto": {
         "properties": {
           "budgetTokens": {
@@ -867,6 +1144,40 @@
           "usedTokens",
           "budgetTokens",
           "droppedCount"
+        ],
+        "type": "object"
+      },
+      "ArchitectureLayoutDto": {
+        "properties": {
+          "schema": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "store": {
+            "additionalProperties": true,
+            "type": "object"
+          }
+        },
+        "required": [
+          "store",
+          "schema"
+        ],
+        "type": "object"
+      },
+      "ArchitectureLayoutResponseDto": {
+        "properties": {
+          "snapshot": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArchitectureLayoutDto"
+              }
+            ],
+            "nullable": true,
+            "type": "object"
+          }
+        },
+        "required": [
+          "snapshot"
         ],
         "type": "object"
       },
@@ -2648,6 +2959,10 @@
           "project_id": {
             "type": "string"
           },
+          "sender_branch_id": {
+            "description": "The sender's page branch at send time (master for Base). Records message provenance and admits that branch for this turn without moving the chat.",
+            "type": "string"
+          },
           "title": {
             "type": "string"
           },
@@ -2741,6 +3056,13 @@
           },
           "suggestOnly": {
             "type": "boolean"
+          },
+          "triggers": {
+            "description": "The agent's triggers, written whole: each one an automation trigger's settings and the prompt a firing hands the agent. Firing one starts a side chat with the agent, as the agent, with that prompt.",
+            "items": {
+              "$ref": "#/components/schemas/AgentTriggerInputDto"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -3051,6 +3373,10 @@
       },
       "CreateProjectDto": {
         "properties": {
+          "copyAgents": {
+            "description": "Copy the source project persistent agents. Defaults to true. Only used when copyFromProjectId is set; ignored otherwise.",
+            "type": "boolean"
+          },
           "copyAutomations": {
             "description": "Copy the source project automations. Defaults to true.",
             "type": "boolean"
@@ -4957,6 +5283,22 @@
         ],
         "type": "object"
       },
+      "FireAgentTriggerDto": {
+        "properties": {
+          "branchId": {
+            "description": "The branch the agent works on: a branch's id, or Base's.",
+            "type": "string"
+          },
+          "entityIds": {
+            "description": "The items the agent is launched on, if any: ids of items in the project.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
       "FlowMdResponseDto": {
         "properties": {
           "content": {
@@ -6638,6 +6980,10 @@
               "type": "object"
             },
             "type": "array"
+          },
+          "sender_branch_id": {
+            "description": "The sender's page branch at send time (master for Base). Records message provenance and admits that branch for this turn without moving the chat.",
+            "type": "string"
           }
         },
         "required": [
@@ -7600,6 +7946,13 @@
           },
           "suggestOnly": {
             "type": "boolean"
+          },
+          "triggers": {
+            "description": "The agent's triggers, written whole: each one an automation trigger's settings and the prompt a firing hands the agent. Firing one starts a side chat with the agent, as the agent, with that prompt.",
+            "items": {
+              "$ref": "#/components/schemas/AgentTriggerInputDto"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -8081,6 +8434,9 @@
           "id": {
             "type": "string"
           },
+          "is_bot": {
+            "type": "boolean"
+          },
           "project_access": {
             "$ref": "#/components/schemas/ProjectAccessSummaryDto"
           },
@@ -8288,6 +8644,15 @@
           {
             "in": "query",
             "name": "mainChatId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only the side chats started from a message of this chat that the caller may see.",
+            "in": "query",
+            "name": "forkedFromChatId",
             "required": false,
             "schema": {
               "type": "string"
@@ -10466,7 +10831,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/AgentDefinitionDto"
+                    "$ref": "#/components/schemas/AgentListItemDto"
                   },
                   "type": "array"
                 }
@@ -10557,6 +10922,65 @@
           "metadata": {
             "sidebarTitle": "Create a persistent agent",
             "title": "Create a persistent agent"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/agents/hand-triggers": {
+      "get": {
+        "description": "An agent's manual trigger is a hand launch: the branch menu and the context menus of the item types it names offer the agent, and running it starts a side chat with the agent, as the agent, with the trigger's prompt. The prompt stays on the agent.",
+        "operationId": "AgentDefinitionsController_handTriggers",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AgentHandTriggerDto"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the hand launches the agents of a project offer",
+        "tags": [
+          "Persistent agents"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-agents-hand-triggers",
+          "metadata": {
+            "sidebarTitle": "List the hand launches the agents of a project offer",
+            "title": "List the hand launches the agents of a project offer"
           }
         }
       }
@@ -10752,9 +11176,92 @@
         }
       }
     },
+    "/project/{projectId}/agents/{agentId}/triggers/{triggerId}/fire": {
+      "post": {
+        "description": "Starts a side chat with the agent, as the agent, with the trigger's prompt, on the branch named and about the items picked. Editors and admins who can see the agent may run it. The bot authors the turn, using the caller's current project permissions.",
+        "operationId": "AgentDefinitionsController_fire",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "agentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "triggerId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FireAgentTriggerDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentTriggerFiredDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Fire one of an agent's manual triggers by hand",
+        "tags": [
+          "Persistent agents"
+        ],
+        "x-flow-mcp-tool": false,
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-agents-agentid-triggers-triggerid-fire",
+          "metadata": {
+            "sidebarTitle": "Fire one of an agent's manual triggers by hand",
+            "title": "Fire one of an agent's manual triggers by hand"
+          }
+        }
+      }
+    },
     "/project/{projectId}/audit-log": {
       "get": {
-        "description": "Changes to a project's configuration (data model, saved views, templates, automations, skills, Flow.md, merge-history labels and the default AI model), newest first. Requires an admin of the project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
+        "description": "Changes to a project's configuration (data model, saved views, templates, automations, skills, Flow.md, change-request merges and merge-history labels, and the default AI model), newest first. Requires an admin of the project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
         "operationId": "AuditController_list",
         "parameters": [
           {
@@ -15345,6 +15852,140 @@
           "metadata": {
             "sidebarTitle": "Create or update a diagram",
             "title": "Create or update a diagram"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/diagrams/architecture-layout/{scope}": {
+      "get": {
+        "operationId": "DiagramsController_getArchitectureLayout",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scope",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchitectureLayoutResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Read shared architecture layout, independent of change requests",
+        "tags": [
+          "Diagrams"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-diagrams-architecture-layout-scope",
+          "metadata": {
+            "sidebarTitle": "Read shared architecture layout, independent of change requests",
+            "title": "Read shared architecture layout, independent of change requests"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DiagramsController_saveArchitectureLayout",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scope",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArchitectureLayoutDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchitectureLayoutResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Save shared architecture layout without model diffs",
+        "tags": [
+          "Diagrams"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/put-project-projectid-diagrams-architecture-layout-scope",
+          "metadata": {
+            "sidebarTitle": "Save shared architecture layout without model diffs",
+            "title": "Save shared architecture layout without model diffs"
           }
         }
       }
@@ -20588,6 +21229,14 @@
             }
           },
           {
+            "in": "query",
+            "name": "agent_project_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -20883,6 +21532,14 @@
           {
             "in": "query",
             "name": "project_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "agent_project_id",
             "required": false,
             "schema": {
               "type": "string"
