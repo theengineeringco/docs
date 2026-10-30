@@ -1,0 +1,91 @@
+---
+title: "October 29, 2026"
+sidebarTitle: "October 29, 2026"
+description: "Show a field as another branch has it beside your own, branch an AI chat from any message, and pin cross-links to a past version."
+---
+
+## In this release
+
+- [Compare a field across branches](#compare-a-field-across-branches)
+- [Side chats in AI chats](#side-chats-in-ai-chats)
+- [Cross-links to past versions](#cross-links-to-past-versions)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Compare a field across branches
+
+In a table, open **Choose columns → Add field** and pick **Field in another branch…**. Choose Base or any live branch other than the one you are viewing, then a field. The table gains a read-only column, named for the field and branch, that shows the field as that branch has it for each row. Items the other branch does not hold read "Not in" followed by the branch name instead of blank.
+
+The column stays bound to its branch when you switch branches and saves with the view like any other column. Reader offers the same option under **Configure fields...**. Copying a cell copies the other branch's value, and CSV, JSON, and Excel exports include the column.
+
+## Side chats in AI chats
+
+Start a side chat from any message to try a different direction. The side chat keeps the conversation up to that message and is named "Side chat:" followed by the chat title. The original message shows how many side chats started from it.
+
+## Cross-links to past versions
+
+Hover a cross-link's pill and pick a version to pin the link to its target as it was then. The pill shows and opens that version, and later edits to the target do not move the pin.
+
+Viewing a past version of an item now shows its relationships as they were at that version. Each linked item is named, previewed, and opened as it was then. A linked item deleted later still appears in that version's relationship list.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Base in AI chat mentions.** The `@` menu in the AI chat box lists Base, so you can reference the main branch directly. A branch open for review shows under both Branches and Reviews.
+- **Branch protection.** Project admins can ask Flow AI to protect or unprotect a branch. Both need super user mode, and each unprotect step also needs your approval.
+- **Super user mode.** "Sudo mode" is now "Super user mode." An approval card with one waiting action shows **Reject** and **Confirm** without a checkbox.
+- **AI changes drawer.** The list of items an AI chat changed starts collapsed above the composer. Expand it to review, keep, or undo items. **Keep All** and **Undo All** stay available while it is collapsed.
+- **Automation destinations.** Flow AI can choose where an automation's runs write, and chat confirmations show the saved destination.
+- **Readable chat steps.** Marking a branch ready for review, renaming a chat, showing dependencies, and Asana, Relyence, Linear, GitHub, and GitLab actions show a readable step instead of the raw tool name and input.
+- **Failed steps.** Failed actions in a chat show their failure status and error message instead of a successful-looking summary.
+- **AI comments.** Mentions in comments written by Flow AI tag and notify the named person, and comments keep their rich-text formatting.
+- **Branch listings.** Flow AI's branch listings include Base with its protection state and tags.
+- **Interface links.** Flow AI no longer refuses a requested interface link only because it forms a feedback loop.
+- **Impact analysis.** Deleted linked items no longer stop an analysis early. Partial results explain when linked impacts were left out and whether retrying can help.
+
+### Architecture
+
+- **Dependency view.** The dependency view for an item with thousands of cross links no longer freezes or crashes the tab. Every linked item stays reachable by panning and clicking.
+- **Architecture views.** Systems are drawn even when documents or requirements appear before them, and the drawing limit counts only eligible systems.
+
+### Audit
+
+- **Automation warnings.** Automation threads with warnings show "Completed · Warning" in the Activity Log instead of appearing as failed.
+
+### Automations
+
+- **Request reviewers.** Flow AI and automation scripts can add required reviewers and reviewer groups to a branch. Review page permissions apply, and each reviewer gets the usual review request notification.
+- **Batch field reads.** Use `values_of(items, "Field Name")` in scripts and branch checks to read a field across many items at once, which speeds up checks on large item lists. See [Automations](/api/automations/overview).
+
+### Collaboration
+
+- **Pasted links.** Pasting a URL into a description, comment, or AI chat message turns it into a clickable link. Pasting a URL over selected text links that text.
+
+### Diagrams
+
+- **Image export.** Fields shown inside diagram blocks appear in PNG and SVG exports, including **Copy as**.
+
+### Integrations
+
+- **GitHub disconnect.** Pull request automation settings disappear after you disconnect the last GitHub organization. Saved review settings return when you reconnect.
+
+### Permissions and Sharing
+
+- **Grant Access.** Grant Access blocks malformed email entries and explains how to fix or remove them before sending invitations. Addresses pasted in angle brackets are accepted without the brackets.
+
+### Reader
+
+- **Section numbers.** An item's section number, such as 2.3.1, sits on the same line as its title. Reader exports read "2.3.1 Title" the same way.
+
+### Tree
+
+- **Navigator width.** Drag the navigator out to the edge of the window. It no longer stops at 800 px.
+
+### Views
+
+- **Update view defaults.** **Update view defaults** and the modified dot appear whenever the view on screen differs from the selected view, including changes on top of a private view and display-only changes to a shared view.
+
+## API Changes
+
+- **Branch-scoped project triggers.** Limit an automation's "when the project changes" trigger to chosen branches through the API. Other branches no longer start its runs. See [Automations](/api/automations/overview).
