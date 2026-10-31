@@ -199,6 +199,114 @@
         ],
         "type": "object"
       },
+      "AgentAutomationTriggerDto": {
+        "properties": {
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "branch": {
+            "description": "A manual trigger that the branch menu offers.",
+            "type": "boolean"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "branchIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "cronExpression": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "paths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "source": {
+            "description": "An automation trigger source: manual, schedule, branch, endpoint, github, github_merged, gitlab, gitlab_merged, bitbucket, onshape, teamcenter, import, slack, project_activity, or a custom webhook name.",
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          },
+          "types": {
+            "description": "A manual trigger that the context menus of these item types (category ids) offer.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "source",
+          "id"
+        ],
+        "type": "object"
+      },
+      "AgentAutomationTriggerInputDto": {
+        "properties": {
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "branch": {
+            "description": "A manual trigger that the branch menu offers.",
+            "type": "boolean"
+          },
+          "branchId": {
+            "type": "string"
+          },
+          "branchIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "cronExpression": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The id of a stored trigger to keep; omitted for a new one, which keeps the id of the stored trigger at its position.",
+            "type": "string"
+          },
+          "paths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "source": {
+            "description": "An automation trigger source: manual, schedule, branch, endpoint, github, github_merged, gitlab, gitlab_merged, bitbucket, onshape, teamcenter, import, slack, project_activity, or a custom webhook name.",
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          },
+          "types": {
+            "description": "A manual trigger that the context menus of these item types (category ids) offer.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "source"
+        ],
+        "type": "object"
+      },
       "AgentChatListDto": {
         "properties": {
           "items": {
@@ -433,6 +541,11 @@
             },
             "type": "array"
           },
+          "source_entity_id": {
+            "description": "The item whose comment thread mentioned the agent and started this side chat.",
+            "nullable": true,
+            "type": "string"
+          },
           "spawn_depth": {
             "type": "number"
           },
@@ -444,6 +557,10 @@
             "type": "string"
           },
           "sudo_enabled": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sudo_mode": {
             "default": false,
             "type": "boolean"
           },
@@ -477,7 +594,8 @@
               "manual",
               "impact_analysis",
               "what_if_analysis",
-              "subagent"
+              "subagent",
+              "agent_correspondence"
             ],
             "nullable": true,
             "type": "string"
@@ -615,6 +733,11 @@
             },
             "type": "array"
           },
+          "source_entity_id": {
+            "description": "The item whose comment thread mentioned the agent and started this side chat.",
+            "nullable": true,
+            "type": "string"
+          },
           "spawn_depth": {
             "type": "number"
           },
@@ -655,7 +778,8 @@
               "manual",
               "impact_analysis",
               "what_if_analysis",
-              "subagent"
+              "subagent",
+              "agent_correspondence"
             ],
             "nullable": true,
             "type": "string"
@@ -1024,20 +1148,39 @@
             "description": "Who last wrote this entry.",
             "type": "string"
           },
+          "enabled": {
+            "type": "boolean"
+          },
           "id": {
+            "type": "string"
+          },
+          "name": {
             "type": "string"
           },
           "prompt": {
             "type": "string"
           },
           "trigger": {
-            "$ref": "#/components/schemas/AgentTriggerSettingsDto"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentTriggerSettingsDto"
+              }
+            ],
+            "description": "The first of `triggers`."
+          },
+          "triggers": {
+            "items": {
+              "$ref": "#/components/schemas/AgentAutomationTriggerDto"
+            },
+            "type": "array"
           }
         },
         "required": [
           "id",
+          "enabled",
           "prompt",
           "trigger",
+          "triggers",
           "configuredBy",
           "configuredAt"
         ],
@@ -1057,21 +1200,40 @@
       },
       "AgentTriggerInputDto": {
         "properties": {
+          "enabled": {
+            "description": "Off: no trigger of it fires.",
+            "type": "boolean"
+          },
           "id": {
             "description": "The id of a stored entry to keep; omitted for a new one.",
             "type": "string"
           },
+          "name": {
+            "description": "Shown in the agent’s automation list.",
+            "type": "string"
+          },
           "prompt": {
-            "description": "What the agent is told when the trigger fires.",
+            "description": "What the agent is told when the automation fires.",
             "type": "string"
           },
           "trigger": {
-            "$ref": "#/components/schemas/AgentTriggerSettingsDto"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentTriggerSettingsDto"
+              }
+            ],
+            "description": "The first trigger, as clients from before several triggers write it. It replaces the first trigger and keeps the others."
+          },
+          "triggers": {
+            "description": "Every trigger, in order. At most one is manual.",
+            "items": {
+              "$ref": "#/components/schemas/AgentAutomationTriggerInputDto"
+            },
+            "type": "array"
           }
         },
         "required": [
-          "prompt",
-          "trigger"
+          "prompt"
         ],
         "type": "object"
       },
@@ -2963,6 +3125,10 @@
             "description": "The sender's page branch at send time (master for Base). Records message provenance and admits that branch for this turn without moving the chat.",
             "type": "string"
           },
+          "sudo_mode": {
+            "description": "Super user mode: while on, the agent's request for super user mode in a turn a project admin starts is approved at once instead of waiting for that admin to confirm it. Only a project admin may turn it on. Kept on the chat for every later turn.",
+            "type": "boolean"
+          },
           "title": {
             "type": "string"
           },
@@ -3058,7 +3224,7 @@
             "type": "boolean"
           },
           "triggers": {
-            "description": "The agent's triggers, written whole: each one an automation trigger's settings and the prompt a firing hands the agent. Firing one starts a side chat with the agent, as the agent, with that prompt.",
+            "description": "The agent's automations, written whole: each one a name, an enabled switch, automation triggers and the prompt a firing hands the agent. Firing one starts a side chat with the agent, as the agent, with that prompt.",
             "items": {
               "$ref": "#/components/schemas/AgentTriggerInputDto"
             },
@@ -7948,7 +8114,7 @@
             "type": "boolean"
           },
           "triggers": {
-            "description": "The agent's triggers, written whole: each one an automation trigger's settings and the prompt a firing hands the agent. Firing one starts a side chat with the agent, as the agent, with that prompt.",
+            "description": "The agent's automations, written whole: each one a name, an enabled switch, automation triggers and the prompt a firing hands the agent. Firing one starts a side chat with the agent, as the agent, with that prompt.",
             "items": {
               "$ref": "#/components/schemas/AgentTriggerInputDto"
             },
