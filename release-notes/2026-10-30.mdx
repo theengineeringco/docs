@@ -1,0 +1,191 @@
+---
+title: "October 30, 2026"
+sidebarTitle: "October 30, 2026"
+description: "Weekly release: compare a field across branches, find and undo a person's changes with AI, mentions in AI chat, cross-links to past versions, featured fields, and forms and secrets in AI chat."
+---
+
+## In this release
+
+- [Compare a field across branches](#compare-a-field-across-branches)
+- [Find and undo a person's changes with AI](#find-and-undo-a-person's-changes-with-ai)
+- [Mentions and reference pills in AI chat](#mentions-and-reference-pills-in-ai-chat)
+- [Cross-links to past versions](#cross-links-to-past-versions)
+- [Featured fields](#featured-fields)
+- [Forms and secrets in AI chat](#forms-and-secrets-in-ai-chat)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Compare a field across branches
+
+In a table, open **Choose columns → Add field** and pick **Field in another branch…**. Choose Base or any live branch other than the one you are viewing, then a field. The table gains a read-only column, named for the field and branch, that shows the field as that branch has it for each row. Items the other branch does not hold read "Not in" followed by the branch name instead of blank.
+
+The column stays bound to its branch when you switch branches and saves with the view like any other column. Reader offers the same option under **Configure fields...**. Copying a cell copies the other branch's value, and CSV, JSON, and Excel exports include the column.
+
+## Find and undo a person's changes with AI
+
+Ask the AI assistant what someone changed on a branch or on Base, optionally narrowed to certain fields, items, or a time range, and it lists their edits.
+
+Ask it to undo some of them, such as their description edits, and it puts those fields back as they were. Anything someone else changed since is left alone and reported.
+
+## Mentions and reference pills in AI chat
+
+Type `@` in the AI chat box to mention a project member, or to pick Base, a branch, or a review. Flow AI knows who and what you mean. A branch open for review shows under both Branches and Reviews. You can also mention project members in descriptions and other rich-text fields.
+
+When Flow AI names a comment in its reply, the reply shows a pill with the author, a short excerpt, and the item or review it is on. Hover the pill to preview the comment, or click it to open the comment. Branch and automation links in replies use the same pill style as item links.
+
+## Cross-links to past versions
+
+Hover a cross-link's pill and pick a version to pin the link to its target as it was then. The pill shows and opens that version, and later edits to the target do not move the pin.
+
+Viewing a past version of an item now shows its relationships as they were at that version. Each linked item is named, previewed, and opened as it was then. A linked item deleted later still appears in that version's relationship list.
+
+## Featured fields
+
+Choose a type's featured fields in the **Featured fields** section of **Settings → Data Model**, or from a field's options menu. Featured fields appear in the new-item form without **Add more**, in a view's columns when the view has none configured, and in the details panel until someone chooses their own fields.
+
+## Forms and secrets in AI chat
+
+The agent can ask for structured data with a form card in the chat. An API key or password goes in a masked secret field. Flow stores it encrypted, and the agent uses it by name for one API host without ever seeing it. A key pasted into the composer is held, so you can save it as a secret instead of sending it.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Side chats.** Start a side chat from any message to try a different direction. The side chat keeps the conversation up to that message, and the original message shows how many side chats started from it.
+- **Super user mode.** "Sudo mode" is now "Super user mode." A project admin can turn on **Super user** in the chat composer before or during a run, so the agent's requests for it are approved automatically in turns that admin starts. An approval card with one waiting action shows **Reject** and **Confirm** without a checkbox.
+- **Automations from chat.** Admins can create, edit, and delete project automations in chat without super user mode. Automations with admin tools enabled still need it to edit.
+- **Branch updates.** Flow AI and automations can read their working branch's description, rename the branch, and update the description. Existing text is kept unless you ask to replace it.
+- **Branch protection.** Project admins can ask Flow AI to protect or unprotect a branch. Both need super user mode, and each unprotect step also needs your approval.
+- **Ready for review.** Flow AI can mark a branch ready for review, or remove the mark, when the owner or an admin asks.
+- **GitHub pull requests.** Flow AI can read pull request details, browse changed files, and inspect selected patches through your workspace's GitHub connection.
+- **Automation destinations.** Flow AI can choose where an automation's runs write, and chat confirmations show the saved destination.
+- **Chat and run links.** When Flow AI names a chat, the reply shows a pill with the chat title. When it names an automation run, the pill shows the automation and the run status. Click a pill to open it.
+- **Approvals in one box.** When an AI reply asks to approve actions, the chat groups them under a title that says what the step does. **Confirm** runs the checked actions, and **Reject** runs none. Approving several actions now runs all of them.
+- **AI changes drawer.** The list of items an AI chat changed starts collapsed above the composer. **Keep All** and **Undo All** stay available while it is collapsed.
+- **AI comments.** Mentions in comments written by Flow AI tag and notify the named person, and comments keep their rich-text formatting. Items, branches, reviews, and other references show as the same pills a person's mention shows.
+- **Comment steps.** When Flow AI replies to a comment, the chat step reads "Responded to a comment" instead of a false missing-item message. Both replies and new comments open the discussion.
+- **AI text edits.** Rewording uniformly formatted text keeps its bold, italic, and other formatting.
+- **Model selection.** New chats remember your last selected model or speed, including after a refresh. Choose Default to use the project default again.
+- **Deleted branches.** Chats follow you to the new branch when the current branch is deleted.
+- **Readable chat steps.** More actions, including Asana, Relyence, Linear, GitHub, and GitLab actions, show a readable step instead of the raw tool name and input. Failed actions show their failure status and error message.
+- **Search results in chat.** Expanding a completed "Searched" step lists the matching items instead of reporting "Search failed".
+- **Branch listings.** Flow AI's branch listings include Base with its protection state and tags.
+- **Interface links.** Flow AI no longer refuses a requested interface link only because it forms a feedback loop.
+- **Impact analysis.** Deleted linked items no longer stop an analysis early. Partial results explain when linked impacts were left out.
+- **Automation links.** An automation named in an AI reply opens that automation instead of the page you are on.
+
+### Architecture
+
+- **Dependency view.** The dependency view for an item with thousands of cross links no longer freezes or crashes the tab. Large graphs show up to 600 items and 1,500 connections, with a warning when more are left out.
+- **Architecture views.** Systems are drawn even when documents or requirements appear before them, and the drawing limit counts only eligible systems.
+
+### Audit
+
+- **Automation warnings.** Automation threads with warnings show "Completed · Warning" in the Activity Log instead of appearing as failed.
+
+### Automations
+
+- **Request reviewers.** Flow AI and automation scripts can add required reviewers and reviewer groups to a branch. Each reviewer gets the usual review request notification.
+- **Batch field reads.** Use `values_of(items, "Field Name")` in scripts and branch checks to read a field across many items at once. See [Automations](/api/automations/overview).
+- **GitHub automation filters.** Author and changed-file filters now select matching pull request reviews and merge events. Author filters use the pull request author.
+
+### Branching
+
+- **Merge conflicts on formula fields.** A formula's result no longer shows as a conflict when only its inputs differ, and **Keep parent** on a formula field adopts the parent's formula. Reverting a changed item that has a formula no longer fails on the review page.
+- **Restricted merges.** When editor groups stop you from merging, the message names the branch and the blocking groups, and says who to ask.
+
+### Collaboration
+
+- **Comment reactions.** React to any comment or reply with an emoji. Reactions show as chips with a count and who reacted, and update live for everyone in the thread.
+- **Long comment threads.** Threads in item discussions and on the review page show their latest two replies and fold earlier ones into an expandable row. Open threads with replies keep their reply box open.
+- **Mention-only comments.** Comments containing only an @mention can now be sent.
+- **Pasted links.** Pasting a URL into a description, comment, or AI chat message turns it into a clickable link. Pasting a URL over selected text links that text.
+
+### Dashboards
+
+- **AI summaries.** An AI summary widget shows its last summary and when it was generated when the dashboard opens. Press Refresh to update it with the latest figures.
+- **Widget filters.** The widget editor is larger, so you can always remove filter chips, and it tells you when a filter has no value yet.
+
+### Data Model
+
+- **Checks on diagrams.** The built-in Diagram item type now offers item checks in **Settings → Data Model**.
+- **Merging field options.** Legacy option values beginning with a bracket no longer prevent an option merge from completing.
+
+### Diagrams
+
+- **Visio import (experimental).** The diagram **Import** dialog accepts Visio `.vsdx` files and brings in the first page's shapes, text, and connectors.
+- **draw.io import.** Diagrams with nested shapes no longer gain an extra empty box or black outlines around invisible containers, and container labels stay centered.
+- **Image export.** Fields shown inside diagram blocks appear in PNG and SVG exports, including **Copy as**.
+
+### Files
+
+- **PowerPoint previews.** View PPTX attachments as slides in Flow, with zoom and slide navigation. The original file stays available to download.
+- **Item attachments.** Upload several files to an item at once, with progress for each file. Retry failed uploads or cancel the rest. Uploads continue after you close the item panel.
+- **Chat attachments.** New chats are saved as soon as you send files, with per-file progress. Large batches no longer time out.
+- **Description attachments.** Inline file links in item details and Reader open directly in the file preview dialog, including files added by the agent.
+
+### Import and Export
+
+- **V2 migration.** Nested interfaces and test plans keep their structure, and items keep their current V2 name and stay visible even when V2's change history is incomplete.
+- **V2 migration values.** Calculated design values that read a "more than" or "less than" value compute the same number as V2. Requirement values shown in text match V2 when the requirement has a linked target value.
+- **Multi-select tags.** When several imported values map to one tag option, the item stores and shows that option once, including items imported earlier.
+- **Filtered ReqIF exports.** A filtered export keeps the parents of matching requirements, so the specification hierarchy matches Flow.
+
+### Integrations
+
+- **Slack channel history.** Agents and automations can read message history from channels approved for their project. Admins configure read access separately from posting, and no channels are readable by default.
+- **GitHub inline review mentions.** Newly created dedicated GitHub Apps receive inline pull request review comments, so `@flow` mentions there can trigger automations. For an existing App, an owner needs to update its event subscriptions in GitHub.
+- **GitHub disconnect.** Pull request automation settings disappear after you disconnect the last GitHub organization. Saved review settings return when you reconnect.
+- **Deleted projects.** Deleted projects no longer block GitHub deliveries to active projects, and Slack ignores mentions that target deleted projects.
+
+### Permissions and Sharing
+
+- **Grant Access.** Grant Access blocks malformed email entries and explains how to fix them before sending invitations. Addresses pasted in angle brackets are accepted.
+
+### Projects
+
+- **Copying projects.** Field default formulas and formula presets are kept when you create a project from an existing project or the default template.
+- **New project dialog.** Pressing Enter after choosing what a project starts from creates the project instead of closing the dialog.
+
+### Reader
+
+- **Section numbers.** An item's section number, such as 2.3.1, sits on the same line as its title, including in Reader exports.
+- **Descriptions across branches.** Descriptions clear when their saved value is removed, including when you switch branches. Rich-text edits and undo history stay with the selected branch.
+
+### Review
+
+- **Viewed marks.** A changed item marked as viewed is unmarked for every reviewer when it changes again, and its card shows "Changed since viewed".
+- **Reverting cleared fields.** Reverting an item whose field was empty when the branch was created removes it from Changed items and no longer blocks the merge.
+- **Stage-gate approvals.** An item owner who is also its assigned reviewer can approve a gated stage transition on a branch they own.
+- **Change counts.** Creating or moving top-level items no longer adds an extra item to change counts.
+- **Mentions in review diffs.** Changed mentions are outlined in the diff color and stay readable. Mentions on the Base side show the referenced item's Base value.
+
+### Search
+
+- **Filtered hierarchies.** With ancestors of filter results shown, large shared hierarchies filter much faster.
+
+### Settings
+
+- **AI settings section.** Settings has a new **AI** section with General, Automations, Skills, Activity Log, and Usage. Old links open the new pages.
+
+### Table
+
+- **Tables on busy branches.** Tables on a branch where many items were created or placed at the top level no longer fail to load.
+
+### Tree
+
+- **Navigator width.** Drag the navigator out to the edge of the window. It no longer stops at 800 px.
+- **Drag to reorder.** Reordering items in the navigator and tables works under parents whose children are linked in different directions.
+
+### Views
+
+- **Save current view.** Save a private or shared view from the View structure card, and edit its structure, display options, filters, and sorting before saving.
+- **Update view defaults.** **Update view defaults** and the modified dot appear whenever the view on screen differs from the selected view.
+- **Narrow screens.** The content toolbar stays on one line by compacting its controls when space runs out. On small screens the sidebar starts closed.
+- **Root items.** Views no longer show root-placed items from disconnected relationship rules.
+
+## API Changes
+
+- **Project event stream.** Poll `GET /project/{projectId}/events` for an ordered feed of item changes, branch updates from parent, and branch review transitions. Pass back `next_cursor` to resume without skipped or repeated events, use `start=now` to skip history, and filter by event type or branch. The feed is also a hosted MCP tool. See the [API reference](/api/reference).
+- **Branch-scoped project triggers.** Limit an automation's "when the project changes" trigger to chosen branches through the API. Other branches no longer start its runs. See [Automations](/api/automations/overview).
+- **Cross-links and upserts.** Linking items to an item that already has thousands of links no longer slows down with each new link, so long-running integrations stay fast instead of timing out.
