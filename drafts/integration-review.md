@@ -57,3 +57,13 @@ For the other providers, see `integration-evidence-work-tracking.md`, `integrati
 - Review integration scope distinctions and any backend/UI discrepancies recorded in the provider evidence files.
 - Validate Mintlify, internal links, navigation coverage, and the existing documentation tests.
 - Obtain publication approval before merging the draft PR.
+
+## Pre-PR review results
+
+Manual simplification retained the provider-specific setup paths and removed repeated Jira disconnect prose. A separate correctness review verified all twenty guides against the source. Three findings were confirmed and fixed:
+
+- Google: a mounted folder is the default browse/search scope, not a complete read boundary. Direct Docs/Sheets reads and explicit-folder listing use the connected account's access. Separately configured restrictions still control picker searches and Sheets writes and are not cleared by changing the mount. Evidence: `google-integration.service.ts` listFiles/readDoc/readSheet/writeSheetValues and scope helpers.
+- GitLab: configure a self-managed server through Advanced server settings → Change → Save base URL before entering the separate token setup view.
+- Boltline: publication is an option on create/revise, not a standalone Flow action on an existing draft. Direct users to finish an existing draft in Boltline.
+
+No correctness findings were rejected. No production integrations were connected or modified during validation.

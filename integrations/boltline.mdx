@@ -56,7 +56,7 @@ BOM reads report when depth or size limits stop traversal. A partial tree is not
 
 {/* ![Enable Boltline write-back](images/boltline-write-back.png "human-intervention: enable Boltline write-back") */}
 
-New plans remain drafts unless you ask the agent to publish. A published template is revised through a new draft version.
+New plans remain drafts unless you explicitly request publication as part of the same create or revise operation. A published template is revised through a new draft version. Review and publish an already-created draft in Boltline.
 
 <Warning>
   Writes take effect in Boltline directly. Discarding a Flow branch does not undo them. If a write fails part-way, inspect the reported plan and operations in Boltline before retrying.
@@ -68,7 +68,7 @@ Ask Flow AI to find a known work plan and read its operations and steps. Then as
 
 Confirm the returned identifiers and content in Boltline. If a result is truncated, ask the agent to continue from the relevant child part or narrow the request.
 
-To check write-back, request a clearly named draft template with a small set of operations. Review the proposed change in Flow and the resulting draft in Boltline before requesting publication.
+To check write-back, request a clearly named draft template with a small set of operations. Review the proposed change in Flow and the resulting draft in Boltline. If you want to keep and publish that draft, finish publication in Boltline.
 
 ## Troubleshooting
 
@@ -83,7 +83,7 @@ To check write-back, request a clearly named draft template with a small set of 
     Check whether the result reports a depth or size limit. Ask for the next level under a named part or instance instead of treating the partial tree as complete.
   </Accordion>
   <Accordion title="A write fails after creating some operations">
-    Use the plan and operation identifiers in the result to inspect what already exists. Continue from that draft rather than recreating the full plan blindly.
+    Use the plan and operation identifiers in the result to inspect what already exists. Finish that draft in Boltline rather than recreating the full plan blindly.
   </Accordion>
   <Accordion title="Connection controls are missing">
     Ask a Flow admin with access to all projects to manage the shared connection.

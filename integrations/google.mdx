@@ -3,13 +3,13 @@ title: Google Drive
 description: Connect Google Drive, read Docs and Sheets, and optionally let Flow AI update spreadsheet cells.
 ---
 
-Connect your Google account to bring Drive files, Google Docs, and Google Sheets into Flow AI. Each person connects their own account. A workspace admin controls the shared Drive scope and Sheets write-back setting.
+Connect your Google account to bring Drive files, Google Docs, and Google Sheets into Flow AI. Each person connects their own account. A workspace admin controls the default browsing folder and Sheets write-back setting.
 
 ## What you can do
 
 | Capability | How it works |
 | --- | --- |
-| Browse Drive | Ask the agent to list files and folders your account can access within the workspace scope. |
+| Browse Drive | Start from the mounted folder, or ask for another folder your Google account can access. |
 | Read documents | Bring Google Docs content into an agent conversation. |
 | Read spreadsheets | Read Google Sheets and reference them through Google Sheet fields. |
 | Link documents | Reference a Google Doc through a Google Doc field. |
@@ -25,7 +25,7 @@ Connect your Google account to bring Drive files, Google Docs, and Google Sheets
 The Google authorization requests your identity and read access to Drive, Docs, and Sheets. With Sheets write-back enabled, connecting or reconnecting requests Sheets write access instead of Sheets read-only access.
 
 <Note>
-  By default, Flow can access the Drive content your connected Google account can access. A workspace folder restriction narrows that scope. Connecting an account does not grant that account access to files in Google.
+  Your connected Google account's permissions determine which content Flow can read. Mounting a folder sets the default browsing location and scopes picker searches; it does not prevent direct reads of other Docs, Sheets, or folders your account can access. Sheets writes are checked against the configured restrictions separately.
 </Note>
 
 ## Connect Google Drive
@@ -44,9 +44,9 @@ The Google authorization requests your identity and read access to Drive, Docs, 
     {/* ![Authorize Flow with Google](images/google-authorize.png "human-intervention: authorize Flow in Google") */}
   </Step>
   <Step title="Set the shared folder scope">
-    **Requires you to act:** As a Flow admin, review **Drive scope**. To limit access, select **Choose folder to mount**, browse to the intended folder, and select **Mount this folder**.
+    **Requires you to act:** As a Flow admin, review **Drive scope**. Select **Choose folder to mount**, browse to the intended folder, and select **Mount this folder** to set the default browsing location.
 
-    The folder choice applies across the workspace. Each connected person still needs Google access to that folder. Leave the scope unrestricted only when full Drive access is intended.
+    The folder choice applies across the workspace. Each connected person still needs Google access to that folder. Use Google permissions to restrict what the account can read.
 
     {/* ![Choose a Google Drive folder in Flow](images/google-scope.png "human-intervention: choose the Drive scope") */}
   </Step>
@@ -72,11 +72,11 @@ For Sheets, ask the agent to read a known range. To verify write-back, explicitl
 
 ## Change the scope
 
-**Requires you to act:** Use **Change folder** to select a different folder. Review the displayed scope before using the agent again.
+**Requires you to act:** Use **Change folder** to select a different default folder. Review any separately configured file or folder restrictions as well; changing the mount does not clear them.
 
 {/* ![Change the mounted Google Drive folder](images/google-change-scope.png "human-intervention: change the Drive scope") */}
 
-Removing a mounted folder restores full Drive access unless another restriction is configured. It does not disconnect Google.
+Removing a mounted folder restores browsing from the Drive root. Any separately configured restrictions still apply to picker searches and Sheets writes. It does not disconnect Google.
 
 ## Troubleshooting
 
@@ -85,7 +85,7 @@ Removing a mounted folder restores full Drive access unless another restriction 
     Connect your own Google account first. Changing the shared folder requires a Flow admin.
   </Accordion>
   <Accordion title="A file is missing or permission is denied">
-    Check that the connected Google account can open the file and that the file is inside the configured Drive scope. A shared workspace connection does not share another person's Google permissions.
+    Check that the connected Google account can open the file. If it is missing from a picker, check the mounted folder and any separately configured restrictions. A shared workspace connection does not share another person's Google permissions.
   </Accordion>
   <Accordion title="Reading works, but writing to Sheets fails">
     Check the workspace write-back setting, the target sheet's edit permissions, and whether the account card asks you to reconnect for Sheets. The sheet must be within the configured Drive scope.
