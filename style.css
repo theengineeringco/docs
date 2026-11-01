@@ -154,3 +154,18 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
     background: linear-gradient(to top, var(--sidebar-surface), transparent);
   }
 }
+
+/* Match the product catalog's monochrome icons and white Boltline wordmark. */
+.dark img[src*="/images/integrations/cursor.svg"],
+.dark img[src*="/images/integrations/github.svg"],
+.dark img[src*="/images/integrations/linear.svg"],
+.dark img[src*="/images/integrations/relyence.svg"] {
+  filter: invert(1);
+}
+
+img[src*="/images/integrations/boltline.png"] {
+  background: #000;
+  border-radius: 4px;
+  padding: 2px;
+  object-fit: contain;
+}
