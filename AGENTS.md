@@ -104,3 +104,13 @@ A short Release Notes edition is acceptable when little shipped. Significance ma
 - The nightly GitHub workflow compares deployed customer specs. Unchanged docs produce no update. All reference updates, including changes and removals to existing contracts, publish automatically after validation without a review PR. Divergence or failure preserves the published spec. These API rules do not change release-note publication approvals.
 - Keep guide and authentication prose under review when the contract changes. Playground requests go directly to the selected hosted API. On-premises access uses its own Swagger docs.
 - The generator normalizes known editorial wording to workspace terminology. New disallowed text in contract fields or examples stops synchronization for review; never rewrite wire names, enum values, or example payloads to satisfy wording checks.
+
+## Integration documentation
+
+- Keep external-app guides in a separate **Integrations** tab between **API** and **Release Notes**, with `/integrations` as its overview. Use lowercase `/integrations/<provider>` URLs.
+- Cover capabilities, prerequisites and permissions, connection steps, verification, troubleshooting, and disconnect behavior. Use the actual labels and authentication paths implemented in `theengineeringco/branch-demo`; vendor examples supply structure, not Flow behavior.
+- State whether credentials and access are personal, project-scoped, or workspace-wide. Distinguish default search scope from enforced access boundaries, and explain write-back controls separately from reads.
+- State configuration and availability limits explicitly. Cross-check source behavior against release evidence before publication. Keep source references, deployment checks, and missing screenshot capture lists in excluded `drafts/` editorial records.
+- Keep **Custom MCP** here for external tools used by Flow. Keep **Flow MCP** under the API tab for external clients using Flow tools; cross-link them.
+- Manual steps use `**Requires you to act:**` and annotated screenshots. Until real screenshots are captured, retain the image placeholders inside MDX comments and track them in the editorial record; never render broken or invented screenshots.
+- Validate with `npx --yes mint@4.2.939 validate`, check internal links, and run the existing documentation tests after navigation changes. Prepare a reviewed PR; publication requires approval.

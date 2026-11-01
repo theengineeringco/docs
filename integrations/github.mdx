@@ -1,0 +1,116 @@
+---
+title: GitHub
+description: Connect GitHub organizations for repository context, pull request reviews, and automations.
+---
+
+Connect GitHub to let Flow AI read repository content, inspect pull requests, and run project automations. One Flow workspace can connect multiple organizations using the same GitHub server and App.
+
+## What you can do
+
+| Capability | Access control |
+| --- | --- |
+| Browse repositories and read pull requests | Enable **GitHub Repo Browsing** for the workspace. |
+| Create branches, update files, and open pull requests | Enable **GitHub Writeback**. |
+| Run pull request reviews | Enable **Review pull requests** for a repository in the current Flow project. |
+| Review automatically | Enable **Auto-review** for an enabled repository. With it off, reviews run through `@flow` mentions. |
+| Run on pull request merges | Configure a merge trigger in a project automation. See [Automations](/api/automations/overview). |
+
+<Note>
+  With repository browsing enabled, the repositories granted to the connection are available across all projects in the Flow workspace. Project repository settings control automation; they do not restrict read access.
+</Note>
+
+## Before you start
+
+You need a Flow admin who can manage the workspace connection and permission to install or approve a GitHub App in the target organization. For organizations with SSO, sign in through the organization's SSO before installing the App.
+
+Use the managed Flow GitHub App when that option is available. Choose a dedicated App for GitHub Enterprise Server or an organization that requires its own App. GHE.com is a separate Enterprise Cloud option in dedicated-App setup.
+
+Flow's dedicated-App setup requests read and write permissions for contents, pull requests, issues, and checks, plus read permission for metadata. Review the permissions and repository selection on GitHub before approving.
+
+## Connect GitHub
+
+<Tabs>
+  <Tab title="Flow GitHub App">
+    <Steps>
+      <Step title="Start in Flow">
+        **Requires you to act:** Open **Settings → Integrations → GitHub**, choose **Use the Flow GitHub App**, and select **Install the GitHub App**.
+
+        {/* ![Choose the managed GitHub App](images/github-managed-app.png "human-intervention: choose the Flow GitHub App") */}
+      </Step>
+      <Step title="Grant repository access">
+        **Requires you to act:** In GitHub, choose the account and repositories Flow can access, then approve the installation. If organization-owner approval is required, complete that approval before returning to Flow.
+
+        {/* ![Select repositories for the GitHub App](images/github-install.png "human-intervention: approve GitHub repository access") */}
+      </Step>
+      <Step title="Review and connect">
+        **Requires you to act:** Back in Flow, review the installation and select **Connect organization**. Access verification alone does not save the connection.
+
+        If the installation ID is not filled in, select **Enter installation ID manually**. Copy the numeric ID from the App's installation configuration URL in GitHub, then select **Review connection**.
+
+        {/* ![Review and save a GitHub organization connection](images/github-connect.png "human-intervention: connect the GitHub organization") */}
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Dedicated GitHub App">
+    <Steps>
+      <Step title="Choose your GitHub service">
+        **Requires you to act:** In **Settings → Integrations → GitHub**, choose **Create a dedicated GitHub App**. Select **GitHub.com**, **GHE.com**, or **Enterprise Server**. Enter the server URL when requested and the GitHub organization that will own the App. An organization is required for GHE.com.
+
+        {/* ![Configure a dedicated GitHub App](images/github-dedicated-app.png "human-intervention: configure a dedicated GitHub App") */}
+      </Step>
+      <Step title="Create and install the App">
+        **Requires you to act:** Select **Create GitHub App**, approve the App on GitHub, and choose its repository access. Return to Flow, review the installation, and select **Connect organization**.
+
+        Apps created for Enterprise Server can be installed by other organizations on that server. Each organization chooses its repository grants.
+
+        {/* ![Approve and install the dedicated GitHub App](images/github-dedicated-install.png "human-intervention: approve the dedicated GitHub App") */}
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Enable browsing and automation
+
+**Requires you to act:** Enable **GitHub Repo Browsing** to let Flow AI read connected repositories. Enable **GitHub Writeback** only when you want it to create branches, edit files, or open pull requests.
+
+{/* ![Configure GitHub browsing and writeback](images/github-access.png "human-intervention: enable GitHub capabilities") */}
+
+**Requires you to act:** Under **Pull request automation**, check the current Flow project, find a repository, and enable **Review pull requests**. Enable **Auto-review** if reviews should run without an `@flow` mention. Configure the work to run in the project's automations.
+
+{/* ![Configure project pull request automation](images/github-automation.png "human-intervention: enable project pull request automation") */}
+
+Changes made in GitHub take effect directly. Reverting a Flow branch does not undo a GitHub action.
+
+## Verify the connection
+
+Confirm the organization appears under **Workspace access** with a connected status. With browsing enabled, ask Flow AI to read a known file or pull request in a granted repository.
+
+For automation, use a test pull request in a repository enabled for the current project. Mention `@flow` and inspect the resulting automation run. A successful repository read does not verify webhook delivery.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The installation is waiting for approval">
+    Have a GitHub organization owner approve the App. Return to Flow and enter the installation ID manually if the browser did not complete the return flow. Review access and select **Connect organization**.
+  </Accordion>
+  <Accordion title="A repository is missing">
+    Check its organization's App installation and repository grants in GitHub, then refresh the connection in Flow. If one organization fails to load, other organizations can still return repositories; check the reported error before treating the list as complete.
+  </Accordion>
+  <Accordion title="The agent cannot browse, even though automation is configured">
+    Enable **GitHub Repo Browsing**. Project review settings do not enable browsing. Also check that Flow AI is enabled and that the repository belongs to a connected installation.
+  </Accordion>
+  <Accordion title="An inline @flow mention does not trigger a review">
+    Check project repository settings and the automation trigger. Existing dedicated Apps need the appropriate pull request review comment event subscription in GitHub; newer Apps include it during setup.
+  </Accordion>
+  <Accordion title="You need another organization or a different GitHub server">
+    Use **Add organization** for another installation of the same App on the same server. Replacing the App or server requires disconnecting every existing installation first.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect an organization
+
+**Requires you to act:** Use the disconnect control for the organization under **Workspace access**. This removes its access across all Flow projects. Saved project automation settings remain and resume when that organization is reconnected.
+
+{/* ![Disconnect a GitHub organization](images/github-disconnect.png "human-intervention: disconnect a GitHub organization") */}
+
+Disconnecting in Flow does not delete repositories or uninstall the App from GitHub. Manage the App's installation in GitHub when you also want to remove its GitHub-side access.

@@ -1,0 +1,121 @@
+---
+title: Bitbucket
+description: Connect Bitbucket Cloud or Data Center for repository context, pull-request automations, and write-back.
+---
+
+Connect Bitbucket to read repository content, propose code changes, and run pull-request automations. Setup has two parts: an admin connects the workspace, and each person connects their own Bitbucket account.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Read repositories | Enable **Bitbucket Repo Browsing**. Flow AI reads with the requesting person's Bitbucket access. |
+| Propose changes | Enable **Bitbucket Writeback** to create branches, commit files, and open pull requests. Delete and merge actions are not exposed. |
+| Automate reviews | Connect repository webhooks and configure Bitbucket pull-request automations. |
+| Use Data Center | Connect an approved self-hosted server with HTTP access tokens. |
+
+An automation runs only on repositories its writer's Bitbucket account can read. The shared connection does not replace personal authorization.
+
+## Before you start
+
+- A Flow admin with access to all projects must configure the shared connection and capability settings.
+- For Cloud OAuth setup, the option must be enabled in Flow and the authorizing Bitbucket account must administer the repositories you select.
+- For token setup, prepare the credentials described below and a webhook secret.
+- Data Center requires Flow administrator approval for your server address.
+- Each person using repository tools needs their own Bitbucket connection. Flow AI must be enabled for agent access.
+
+## Connect the workspace with Bitbucket Cloud
+
+<Steps>
+  <Step title="Authorize the workspace connection">
+    **Requires you to act:** Open **Settings → Integrations → Bitbucket**. In the workspace connection section, select **Connect Bitbucket** and approve Flow with an account that administers the intended repositories.
+
+    If OAuth is unavailable, use the token setup below.
+
+    {/* ![Authorize the shared Bitbucket connection](images/bitbucket-workspace-authorize.png "human-intervention: authorize the Bitbucket workspace connection") */}
+  </Step>
+  <Step title="Select webhook repositories">
+    **Requires you to act:** Under **Pull request automations**, select the repositories that should send events and select **Save webhooks**. Flow creates the webhooks for you.
+
+    Only repositories administered by the connected account appear. Review and correct any repository-specific errors.
+
+    {/* ![Choose Bitbucket webhook repositories](images/bitbucket-repositories.png "human-intervention: select Bitbucket webhook repositories") */}
+  </Step>
+</Steps>
+
+## Connect the workspace with a token
+
+For Bitbucket Cloud, an Atlassian API token requires the account email and these scopes: `read:user:bitbucket`, `read:repository:bitbucket`, `write:repository:bitbucket`, `read:pullrequest:bitbucket`, and `write:pullrequest:bitbucket`.
+
+A Bitbucket Premium workspace access token can be used for the shared connection instead. Leave the email blank and grant Repository Read and Write plus Pull Requests Read and Write. Automated reviews need write access to publish comments and build statuses.
+
+For Data Center, use an HTTP access token with **Repository write** permission. A project, repository, or service-account token can configure the shared connection.
+
+<Steps>
+  <Step title="Enter and test the credentials">
+    **Requires you to act:** Select **Use an API token instead**, when shown. Enter the token, account email where required, and **Webhook Secret**. For Data Center, enter the approved **Bitbucket Data Center server URL** and use **HTTP Access Token**.
+
+    Select **Test Connection**, then **Save** after a successful test. If credentials change, test them again before saving. **Workspace** for Cloud or **Project key** for Data Center is optional.
+
+    {/* ![Configure Bitbucket token credentials](images/bitbucket-token.png "human-intervention: configure the Bitbucket token connection") */}
+  </Step>
+  <Step title="Create matching webhooks">
+    **Requires you to act:** Copy Flow's **Webhook URL** into the Bitbucket webhook settings and set the same secret. In Cloud, subscribe to `pullrequest:created` and `pullrequest:updated`.
+
+    In Data Center, use **Opened**, **Source branch updated**, and **Modified** pull-request events on the relevant repository or project webhook.
+
+    {/* ![Configure the Bitbucket webhook](images/bitbucket-webhook.png "human-intervention: configure Bitbucket webhooks") */}
+  </Step>
+</Steps>
+
+## Connect your personal account
+
+**Requires you to act:** In the personal connection section, select **Connect your Bitbucket account** and complete Cloud authorization. Alternatively, select **Use an API token instead** and provide your personal Atlassian API token with the scopes listed above and your account email.
+
+{/* ![Connect a personal Bitbucket Cloud account](images/bitbucket-personal-cloud.png "human-intervention: connect your Bitbucket Cloud account") */}
+
+**Requires you to act:** For Data Center, create a personal HTTP access token on the connected server under your profile's **Manage account → HTTP access tokens**. Use **Repository read** for reads or **Repository write** for write-back, then enter it in Flow and select **Connect**.
+
+{/* ![Connect a personal Bitbucket Data Center token](images/bitbucket-personal-server.png "human-intervention: connect your Bitbucket Data Center account") */}
+
+A workspace access token is not accepted for a personal connection. Confirm the personal card's **Connected as** account before using the agent.
+
+## Enable agent capabilities
+
+**Requires you to act:** As a Flow admin, enable **Bitbucket Repo Browsing** for reads and **Bitbucket Writeback** for supported code changes.
+
+{/* ![Enable Bitbucket agent capabilities](images/bitbucket-capabilities.png "human-intervention: enable Bitbucket capabilities") */}
+
+Write-back uses each person's Bitbucket permissions. On Data Center, each changed file is committed separately. Changes take effect in Bitbucket directly and are not undone by discarding a Flow branch.
+
+## Verify the connection
+
+Ask Flow AI to read a known file in a repository your personal account can access. For automation verification, use a test pull request matching a configured Bitbucket automation and inspect the integration activity and run result.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The repository picker is empty">
+    The Cloud OAuth picker lists repositories administered by the shared connection's account. Check that account's administrative access.
+  </Accordion>
+  <Accordion title="The workspace is connected, but the agent cannot read a repository">
+    Connect your personal Bitbucket account, confirm its repository access, and check **Bitbucket Repo Browsing**. For an automation, check its writer's personal connection.
+  </Accordion>
+  <Accordion title="Save is unavailable after entering a token">
+    Complete a successful **Test Connection** with the current credentials and enter the webhook secret. Changing connection details requires another test.
+  </Accordion>
+  <Accordion title="An automation does not run">
+    Check the webhook events, URL and secret, automation filters, and the writer's repository access. A saved connection alone does not create an automation.
+  </Accordion>
+  <Accordion title="Data Center rejects the server address">
+    Ask your Flow administrator to approve the server for your workspace and verify network access before retrying.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Bitbucket
+
+**Requires you to act:** Use **Disconnect** on your personal card to remove your account connection. An admin can use **Disconnect** on the workspace card to remove the shared connection.
+
+{/* ![Disconnect personal or shared Bitbucket access](images/bitbucket-disconnect.png "human-intervention: disconnect Bitbucket") */}
+
+Removing the shared connection stops its webhook processing. Flow attempts to remove OAuth-managed webhooks; remove manually created token webhooks in Bitbucket. Personal connections are separate. Existing repositories, commits, and pull requests remain in Bitbucket.

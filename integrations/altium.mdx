@@ -1,0 +1,98 @@
+---
+title: Altium
+description: Connect your Altium 365 account so Flow AI can read PCB projects, schematics, components, and BOMs.
+---
+
+Connect your own Altium 365 account to give Flow AI access to the design data you can read through Nexar. Each person connects separately.
+
+The integration is read-only. Flow cannot change your Altium designs.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Find PCB projects | Ask the agent to find projects available to your Altium 365 account. |
+| Read design context | Inspect available schematic and component data. |
+| Read BOMs | Ask about a project's bill of materials and narrow the request to the parts you need. |
+| Respect account access | Every query uses your personal Altium connection. |
+
+The connection does not give colleagues access to your account. Another person's connection does not enable Altium tools for you.
+
+## Before you start
+
+- You need an Altium 365 account with access to the design data you want to read.
+- Your Flow installation must have the Nexar connection configured. If Flow shows that Altium is not set up, ask your Flow administrator to configure it.
+- Flow AI must be enabled for agent access.
+- Read-only Flow members can connect their own Altium account; a workspace admin is not required for personal authorization.
+
+<Note>
+  Availability depends on the Nexar configuration for your Flow installation. The connection page reports whether setup is available.
+</Note>
+
+## Connect Altium
+
+<Steps>
+  <Step title="Start your personal connection">
+    **Requires you to act:** Open **Settings → Integrations → Altium** and select **Connect Altium**.
+
+    Flow redirects you to the authorization flow for your Altium account.
+
+    {/* ![Start a personal Altium connection](images/altium-connect.png "human-intervention: connect Altium") */}
+  </Step>
+  <Step title="Authorize your account">
+    **Requires you to act:** Sign in with the Altium 365 account you want Flow to use and complete the consent shown by the provider.
+
+    Choose the account that can read your intended projects. Flow cannot grant your account additional Altium permissions.
+
+    {/* ![Authorize the Altium connection](images/altium-authorize.png "human-intervention: authorize Altium access") */}
+  </Step>
+  <Step title="Confirm the connected account">
+    **Requires you to act:** Return to Flow and check that the card shows **Connected to Altium**. Confirm the account email when shown.
+
+    If the connection displays a **reconnect after** time, plan to reconnect after that time. This appears when the authorization cannot refresh automatically.
+
+    {/* ![Confirm the connected Altium account](images/altium-connected.png "human-intervention: verify the Altium account") */}
+  </Step>
+</Steps>
+
+## Verify the connection
+
+Ask Flow AI to list PCB projects available through your Altium account. Then ask it to inspect a known project and read a small part of its BOM.
+
+Compare the project and component details with Altium 365. Start with a project you can already open in Altium.
+
+For a large design, name the project and the specific components or BOM section you need. A narrower question avoids oversized results.
+
+## Access and changes
+
+Altium permissions continue to apply after connection. If your account loses access to a project, connecting Flow does not restore it.
+
+There is no Altium write-back setting. Requests to modify a design must be completed in Altium.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Flow says Altium is not set up">
+    Ask your Flow administrator to configure the Nexar connection for your installation. Personal sign-in cannot complete until that setup is available.
+  </Accordion>
+  <Accordion title="Authorization fails or the connection expires">
+    Start the connection again and complete the sign-in flow. If a connected card shows a reconnect time, reconnect after expiry. If the same authorization error persists, give your administrator the error shown in Flow.
+  </Accordion>
+  <Accordion title="The agent cannot find a project">
+    Check the connected account and confirm it can read that project in Altium 365. Use the project's name or identifier to narrow the request.
+  </Accordion>
+  <Accordion title="A large query fails">
+    Ask for fewer fields, one project, or a smaller BOM section. Flow limits the size of an individual Altium result.
+  </Accordion>
+  <Accordion title="A colleague cannot use my connection">
+    Each person must connect their own Altium account. Agent reads use the requesting person's access.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Altium
+
+**Requires you to act:** Select **Disconnect** on your **Connected to Altium** card.
+
+{/* ![Disconnect your Altium account](images/altium-disconnect.png "human-intervention: disconnect Altium") */}
+
+This removes your personal connection from Flow. It does not disconnect colleagues or change any design data in Altium.

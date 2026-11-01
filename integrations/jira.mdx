@@ -1,0 +1,123 @@
+---
+title: Jira
+description: Connect your Jira account, link workspace projects, and optionally let Flow AI create and update issues.
+---
+
+Connect Jira to read issues and link engineering work to Flow items. Each person connects their own account; a Flow admin configures the shared Jira site and linked projects.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Find and read issues | Search linked projects and read issue details using your Jira permissions. |
+| Link work to Flow items | Select an issue in a Jira issue field, including by issue key or pasted Jira link. |
+| Understand project progress | Read boards, sprints, epics, and their issues. |
+| Create and update issues | Enable **Jira Write-Back** to create issues, edit details, change status, and link issues, subject to Jira permissions. |
+
+Your Jira permissions apply to your requests. Another user's connection does not grant you access to Jira.
+
+## Before you start
+
+The integration must be available in your Flow installation. If it is missing from **Settings → Integrations**, ask your Flow administrator to check availability.
+
+- Each user needs a Jira account with access to the intended site and issues.
+- A Flow admin with access to all projects must configure the workspace site, linked projects, and write-back.
+- Have the Jira project keys ready, such as `ENG`.
+- Flow AI must be enabled for agent use. Jira issue fields also use your personal connection.
+
+Follow the connection method shown in Flow. Some installations offer **Connect Atlassian**; installations configured for API-token authentication show credential fields instead.
+
+## Connect with Atlassian sign-in
+
+<Steps>
+  <Step title="Authorize your account">
+    **Requires you to act:** Open **Settings → Integrations → Jira**, select **Connect Atlassian**, and complete Atlassian's authorization flow with the account you want Flow to use.
+
+    On return, confirm that Flow shows your connected Atlassian account. Authorization requests Jira work read/write access, user identity access, and offline access; **Jira Write-Back** separately controls whether the agent can make changes.
+
+    {/* ![Authorize a personal Atlassian connection](images/jira-authorize.png "human-intervention: authorize your Jira account") */}
+  </Step>
+  <Step title="Choose the workspace site">
+    **Requires you to act:** For initial workspace setup, a Flow admin selects the intended **Jira site** and **Save site** when Flow asks for a site. Review the site shown on **Workspace integration**.
+
+    If your workspace is already configured, use that site. Connecting another user's account does not change the workspace's site.
+
+    {/* ![Select the shared Jira site in Flow](images/jira-site.png "human-intervention: choose the Jira workspace site") */}
+  </Step>
+  <Step title="Link projects">
+    **Requires you to act:** On **Workspace integration**, enter a project key under **Linked Projects** and select **Add project**. Repeat for each intended project.
+
+    The admin must have a personal Jira connection to validate a project. The first linked project is the default for operations that omit a target project.
+
+    {/* ![Add linked Jira projects in Flow](images/jira-projects.png "human-intervention: link Jira projects") */}
+  </Step>
+</Steps>
+
+## Connect with an API token
+
+Use these steps when Flow shows **Email or username** and **API token / PAT** instead of Atlassian sign-in. API-token authentication requires installation configuration.
+
+<Steps>
+  <Step title="Configure the workspace instance">
+    **Requires you to act:** A Flow admin enters **Base URL**, chooses **Cloud** or **Data Center / Server**, and enters **Initial project key**, then selects **Save instance**.
+
+    Use the HTTPS base URL appropriate to the Jira instance, including its product path when required. If Flow rejects the address, ask your Flow administrator to arrange approval for the workspace.
+
+    {/* ![Configure the Jira instance for token authentication](images/jira-api-instance.png "human-intervention: configure the Jira instance") */}
+  </Step>
+  <Step title="Save your personal credential">
+    **Requires you to act:** Enter your Atlassian account email for Cloud, or your Data Center username, in **Email or username**. Enter your API token or personal access token in **API token / PAT**, then select **Save credential**.
+
+    Each user saves their own credential. The shared instance configuration contains the site and projects, not a credential for everyone.
+
+    {/* ![Save a personal Jira API credential](images/jira-api-credential.png "human-intervention: save your Jira credential") */}
+  </Step>
+  <Step title="Test the saved credential">
+    **Requires you to act:** Select **Test Connection** and confirm the returned identity. Use **Update credential** if the token or account needs correction.
+
+    This test uses the saved credential. Add further projects through **Linked Projects** after the connection succeeds.
+
+    {/* ![Test the saved Jira credential](images/jira-api-test.png "human-intervention: test your Jira credential") */}
+  </Step>
+</Steps>
+
+## Enable write-back
+
+**Requires you to act:** A Flow admin turns on **Jira Write-Back** in the shared integration settings. Each user still needs their own connected account and the Jira permissions required for the requested change.
+
+{/* ![Enable Jira write-back in Flow](images/jira-write-back.png "human-intervention: enable Jira write-back") */}
+
+Name the linked project when creating an issue outside the default project. Linked projects control searches and creation targets; they do not replace Jira's permissions for direct issue operations. Changes made in Jira are not undone by reverting a Flow branch.
+
+## Verify the connection
+
+Find a known issue in a Jira issue field or ask Flow AI to read its key. Confirm the issue summary and status match Jira. For write-back, explicitly request a disposable issue in a named linked project and verify the result in Jira.
+
+External collaborators can connect their own Jira accounts and link issues to shared Flow items they can edit. They cannot change the workspace integration.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The workspace is configured, but I cannot read issues">
+    Connect your own Jira account and confirm it can read those issues in Jira. A shared site configuration does not supply another user's permissions.
+  </Accordion>
+  <Accordion title="The selected Jira site is wrong">
+    A Flow admin can remove the workspace integration and select another site. Personal Atlassian connections remain connected. Relink the intended projects after configuring the replacement site.
+  </Accordion>
+  <Accordion title="A project cannot be added or removed">
+    An admin must be personally connected to validate a new project and have access to it in Jira. The last linked project cannot be removed individually; remove the workspace integration instead.
+  </Accordion>
+  <Accordion title="Reads succeed, but an issue cannot be changed">
+    Check **Jira Write-Back**, your Flow permissions, and your Jira permissions. Status changes must match an available Jira workflow transition.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Jira
+
+**Requires you to act:** Select **Disconnect** on your personal connection card to remove your Jira connection. Other users' personal connections and the shared workspace configuration remain in place.
+
+{/* ![Disconnect a personal Jira connection](images/jira-disconnect.png "human-intervention: disconnect your Jira account") */}
+
+**Requires you to act:** To remove the shared site and project configuration, a Flow admin selects **Remove workspace integration**. This removes the shared site and project configuration. Personal OAuth connections remain available for setup again. In API-token mode, removing the workspace integration also clears users' saved Jira credentials.
+
+{/* ![Remove the shared Jira integration](images/jira-remove-workspace.png "human-intervention: remove the Jira workspace integration") */}

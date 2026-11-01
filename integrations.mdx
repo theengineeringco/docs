@@ -1,0 +1,101 @@
+---
+title: Integrations
+description: Connect engineering, development, and collaboration tools to Flow.
+---
+
+Connect the tools your team uses to give Flow context from engineering work, documents, code, and conversations. Each guide explains what the integration can do, who can configure it, how to connect it, and how to verify access.
+
+Open **Settings → Integrations** in Flow to see the connections available to your workspace. Some connections require additional configuration or are available only on supported deployments; the individual guides describe those requirements.
+
+## Issues and planning
+
+<CardGroup cols={2}>
+  <Card title="Linear" icon="list-checks" href="/integrations/linear">
+    Read issues, cycles, and comments. Enable issue creation and updates.
+  </Card>
+  <Card title="Jira" icon="list-checks" href="/integrations/jira">
+    Connect your account to read and work with Jira issues.
+  </Card>
+  <Card title="Asana" icon="list-checks" href="/integrations/asana">
+    Read tasks and sections, and configure task write-back.
+  </Card>
+</CardGroup>
+
+## Code and development
+
+<CardGroup cols={2}>
+  <Card title="GitHub" icon="git-pull-request" href="/integrations/github">
+    Browse repositories, review pull requests, and run automations.
+  </Card>
+  <Card title="GitLab" icon="git-pull-request" href="/integrations/gitlab">
+    Connect repositories and configure merge request workflows.
+  </Card>
+  <Card title="Bitbucket" icon="git-pull-request" href="/integrations/bitbucket">
+    Connect your workspace and account for repository workflows.
+  </Card>
+  <Card title="Cursor" icon="code" href="/integrations/cursor">
+    Launch coding agents against a configured repository.
+  </Card>
+</CardGroup>
+
+## Documents and collaboration
+
+<CardGroup cols={2}>
+  <Card title="Slack" icon="messages-square" href="/integrations/slack">
+    Talk to Flow from Slack and configure channel access.
+  </Card>
+  <Card title="Google Drive" icon="folder" href="/integrations/google">
+    Connect Drive content, Google Docs, and Google Sheets.
+  </Card>
+  <Card title="Microsoft SharePoint" icon="folder" href="/integrations/sharepoint">
+    Read SharePoint and OneDrive files through your account.
+  </Card>
+  <Card title="Confluence" icon="book-open" href="/integrations/confluence">
+    Search wiki content and read pages as engineering context.
+  </Card>
+  <Card title="Notion" icon="book-open" href="/integrations/notion">
+    Read pages shared with your Notion connection.
+  </Card>
+  <Card title="AoDocs" icon="files" href="/integrations/aodocs">
+    Connect libraries and read documents where AoDocs is enabled.
+  </Card>
+</CardGroup>
+
+## Engineering and verification
+
+<CardGroup cols={2}>
+  <Card title="Onshape" icon="box" href="/integrations/onshape">
+    Connect CAD data and model-change workflows.
+  </Card>
+  <Card title="Altium" icon="circuit-board" href="/integrations/altium">
+    Read Altium 365 design data through your personal connection.
+  </Card>
+  <Card title="Siemens Teamcenter X" icon="box" href="/integrations/teamcenter">
+    Link engineering items on compatible, configured deployments.
+  </Card>
+  <Card title="Boltline" icon="wrench" href="/integrations/boltline">
+    Read parts, inventory, and manufacturing work plans.
+  </Card>
+  <Card title="Relyence" icon="workflow" href="/integrations/relyence">
+    Read FMEA data from a linked analysis.
+  </Card>
+  <Card title="Qase" icon="check-check" href="/integrations/qase">
+    Search test projects and read verification results.
+  </Card>
+</CardGroup>
+
+## Custom tools
+
+<Card title="Custom MCP" icon="plug" href="/integrations/custom-mcp">
+  Connect an external MCP server and choose the tools Flow AI can use.
+</Card>
+
+To use Flow's tools from an external AI client, see [Flow MCP](/api/mcp/overview). To build an integration against Flow's REST API, start with the [API quickstart](/api/quickstart).
+
+## Choose the access you need
+
+Connections differ in how they grant access. Some use shared workspace credentials; others require each person to sign in. A default project, folder, or search filter is not always an access boundary. Check the guide before choosing a scope.
+
+Where an integration supports write-back, both the external account and Flow's settings must permit the action. External changes take effect in the connected tool and are not undone by reverting a Flow branch.
+
+See [Release Notes](/release-notes) for changes to integration capabilities.

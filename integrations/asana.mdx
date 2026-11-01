@@ -1,0 +1,94 @@
+---
+title: Asana
+description: Connect an Asana workspace and project to read tasks and optionally create or update them.
+---
+
+Connect Asana to bring task details and project sections into Flow AI. Enable write-back when you want the agent to create, edit, or move tasks.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Read project work | List tasks and sections in the configured project. |
+| Find tasks | Search tasks across the configured Asana workspace and read their details. |
+| Create tasks | Enable **Asana Write-Back** to create tasks in the configured project. |
+| Update tasks | With write-back enabled, edit task details or move tasks between sections. |
+
+Flow uses a shared personal access token. The configured project sets the default for project operations; task search covers the workspace. Task access also depends on the token owner's Asana permissions.
+
+## Before you start
+
+The integration must be available in your Flow installation. If it is missing from **Settings → Integrations**, ask your Flow administrator to check availability.
+
+- A Flow admin with access to all projects must configure the connection.
+- An Asana account must be able to create a personal access token and access the intended workspace and project.
+- You need the numeric **Workspace GID** and **Project GID**.
+- Flow AI must be enabled to use the connection from an agent.
+
+Choose an Asana account with access appropriate for your Flow workspace. The project field does not restrict all reads and writes to that project.
+
+## Connect Asana
+
+<Steps>
+  <Step title="Create a personal access token">
+    **Requires you to act:** Open the Asana apps page linked in Flow's setup instructions. Under **Personal access tokens**, select **Create new token** and copy the token when it appears.
+
+    {/* ![Create an Asana personal access token](images/asana-token.png "human-intervention: create an Asana token") */}
+  </Step>
+  <Step title="Enter your workspace and project">
+    **Requires you to act:** In Flow, open **Settings → Integrations → Asana**. Paste the token into **Access Token**, then enter **Workspace GID** and **Project GID**.
+
+    Use numeric IDs, not display names. The project ID appears in the Asana project URL. Flow's setup instructions also link to the workspace lookup endpoint.
+
+    {/* ![Enter the Asana token and numeric IDs in Flow](images/asana-settings.png "human-intervention: enter Asana connection details") */}
+  </Step>
+  <Step title="Test and save">
+    **Requires you to act:** Select **Test Connection**. Confirm that the returned workspace and project names match your intended connection, then select **Save**.
+
+    Testing does not save the connection. The saved card shows **Connected**, **Workspace GID**, and **Project GID**.
+
+    {/* ![Test and save the Asana connection](images/asana-test-save.png "human-intervention: test and save Asana") */}
+  </Step>
+</Steps>
+
+## Enable write-back
+
+**Requires you to act:** Turn on **Asana Write-Back** on the connected integration to allow the agent to create tasks, edit existing tasks, and move tasks between sections.
+
+{/* ![Enable Asana write-back in Flow](images/asana-write-back.png "human-intervention: enable Asana write-back") */}
+
+The token owner's Asana permissions still apply. A successful connection test verifies read access; it does not verify every write operation. External changes take effect in Asana and are not undone by reverting a Flow branch.
+
+## Verify the connection
+
+Ask Flow AI to list the sections and recent tasks in the connected project. Read one task and compare its name, status, and due date with Asana.
+
+For write-back, explicitly ask the agent to create a disposable task in the configured project. Check the resulting task in Asana before using the connection for active work.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The workspace or project is not found">
+    Confirm that both IDs contain digits only and that the token owner can open the workspace and project in Asana. Use the project GID, not a task GID.
+  </Accordion>
+  <Accordion title="Search returns tasks outside the configured project">
+    Task search spans the configured workspace. The project setting controls project listings and task creation; it is not an access boundary. Limit the connected account's access in Asana when needed.
+  </Accordion>
+  <Accordion title="Reading works, but a task cannot be changed">
+    Check **Asana Write-Back**, the token owner's edit permissions, and your Flow permissions. For a move, confirm the intended destination section.
+  </Accordion>
+  <Accordion title="The setup controls are unavailable">
+    Connection management requires a Flow admin with access to all projects. A saved connection also needs Flow AI enabled before the agent can use it.
+  </Accordion>
+  <Accordion title="The agent cannot use a saved connection">
+    Confirm the connection test succeeds. If Flow reports that the integration is unavailable, contact your Flow administrator to check whether Asana is enabled for your installation.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Asana
+
+**Requires you to act:** Select **Disconnect** on the connected card to remove the shared Asana connection. Existing Asana tasks remain in Asana.
+
+{/* ![Disconnect Asana in Flow](images/asana-disconnect.png "human-intervention: disconnect Asana") */}
+
+If the token is no longer needed, revoke it in Asana. Disconnecting Flow does not revoke the source token.

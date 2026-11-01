@@ -1,0 +1,116 @@
+---
+title: GitLab
+description: Connect GitLab projects for repository context, merge-request automations, and controlled write-back.
+---
+
+Connect GitLab to browse code, review merge requests, and run automations. A Flow admin configures the connection for the workspace. GitLab actions use the authorized account or saved token, subject to Flow permissions.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Read repository context | Enable **GitLab Repo Browsing** for Flow AI to search code and read files. |
+| Automate merge-request work | Configure GitLab automations and the matching project webhooks. |
+| Propose code changes | Enable **GitLab Writeback** to create branches, commit files, and open merge requests. Delete and merge actions are not exposed. |
+| Start approved CI pipelines | With write-back enabled, configure allowed pipelines, variables, and users or automations for each Flow project. |
+
+Connected repositories are available across the Flow workspace under existing Flow permissions. This is a shared connection, not a separate GitLab login for every Flow member.
+
+## Before you start
+
+- A Flow admin with access to all projects must configure the shared connection.
+- For GitLab.com authorization, the connection option must be enabled for your Flow installation and you need **Maintainer** or **Owner** access to selected GitLab projects.
+- For token setup, use a group or project access token with the `api` scope and at least the **Developer** role.
+- Self-managed GitLab requires Flow administrator approval for that server address.
+- Flow AI must be enabled for agent capabilities. A connection alone does not create automations.
+
+## Connect with GitLab.com
+
+<Steps>
+  <Step title="Authorize the account">
+    **Requires you to act:** Open **Settings → Integrations → GitLab**, select **Continue to GitLab**, and complete authorization with the account you want the workspace to use.
+
+    If the button is unavailable, use token setup below.
+
+    {/* ![Authorize a GitLab account](images/gitlab-authorize.png "human-intervention: authorize GitLab") */}
+  </Step>
+  <Step title="Select projects">
+    **Requires you to act:** Select the GitLab projects to connect, then select **Save selected projects**. Only projects where you can manage webhooks can complete setup. No projects are selected automatically.
+
+    Flow configures merge-request and comment webhooks for the selected projects.
+
+    {/* ![Select GitLab projects for Flow](images/gitlab-projects.png "human-intervention: select GitLab projects") */}
+  </Step>
+  <Step title="Check project status">
+    **Requires you to act:** Review the projects under **Workspace access**. If a project needs attention, select **Retry webhook setup** after correcting its permissions.
+
+    Use **Add projects** later to connect additional repositories.
+
+    {/* ![Review GitLab project connection status](images/gitlab-status.png "human-intervention: verify GitLab project setup") */}
+  </Step>
+</Steps>
+
+## Connect with a token
+
+<Steps>
+  <Step title="Prepare the host and token">
+    **Requires you to act:** In GitLab, create a group or project access token with the `api` scope and at least the **Developer** role. In Flow, select **Set up with a token**.
+
+    For an approved self-managed host, first set **Advanced server settings → GitLab API Base URL** to its API address and select **Save base URL**. Keep the default for GitLab.com.
+
+    {/* ![Prepare GitLab token authentication](images/gitlab-token-setup.png "human-intervention: prepare GitLab token setup") */}
+  </Step>
+  <Step title="Test and save the credentials">
+    **Requires you to act:** Enter **Access Token** and a random **Webhook Secret Token**. Select **Test Connection**, confirm the account, and select **Save**.
+
+    {/* ![Save GitLab token credentials](images/gitlab-token-save.png "human-intervention: test and save GitLab credentials") */}
+  </Step>
+  <Step title="Create project webhooks">
+    **Requires you to act:** Copy the **Webhook URL** shown in Flow. In each GitLab project's **Settings → Webhooks**, add that URL with the same secret and enable **Merge request events** and **Comments**.
+
+    Comments allow reviewers to mention **@flow** on a merge request to rerun its automations.
+
+    {/* ![Configure a GitLab project webhook](images/gitlab-webhook.png "human-intervention: configure GitLab webhooks") */}
+  </Step>
+</Steps>
+
+## Enable agent capabilities
+
+**Requires you to act:** Turn on **GitLab Repo Browsing** for repository reads and **GitLab Writeback** for supported code changes.
+
+{/* ![Enable GitLab repository capabilities](images/gitlab-capabilities.png "human-intervention: enable GitLab capabilities") */}
+
+**Requires you to act:** To allow CI runs, configure **Pipeline triggers** for the current Flow project. Specify the GitLab project, branch or tag, allowed variables, and who can start it. Write-back must also be enabled.
+
+{/* ![Configure GitLab pipeline permissions](images/gitlab-pipelines.png "human-intervention: configure GitLab pipeline access") */}
+
+GitLab changes take effect directly. Discarding a Flow branch does not undo a commit or pipeline run.
+
+## Verify the connection
+
+Ask Flow AI to find and read a known file in a connected repository. For automations, use a test merge request that matches the configured trigger and inspect the integration activity and automation result.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A GitLab.com project cannot connect">
+    Confirm that the authorized account has Maintainer or Owner access. Retry the project's webhook setup after correcting access. Use **Reauthorize account** if authorization needs renewal.
+  </Accordion>
+  <Accordion title="A token connection fails with 403">
+    Check the token's `api` scope, expiry, project or group coverage, and role. Flow's setup requires at least Developer access; Guest and Reporter tokens are insufficient.
+  </Accordion>
+  <Accordion title="Webhooks arrive but nothing runs">
+    Confirm the URL and secret, enabled event types, and automation trigger filters. A connection and webhook do not create an automation.
+  </Accordion>
+  <Accordion title="A pipeline cannot start">
+    Check write-back, the allowed pipeline and ref, allowed variable names, and permission for the requesting person or automation in the current Flow project.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect GitLab
+
+**Requires you to act:** Select **Disconnect** and confirm. For token connections, also remove the webhooks you created in GitLab.
+
+{/* ![Disconnect the shared GitLab connection](images/gitlab-disconnect.png "human-intervention: disconnect GitLab") */}
+
+Disconnecting clears credentials, selected projects, and pipeline permissions. OAuth setup also attempts to remove its managed webhooks and revoke authorization; follow any **Remote cleanup needs attention** message. Server settings, capability controls, automations, and history remain. Reconnecting requires project selection or token setup and new pipeline permissions.

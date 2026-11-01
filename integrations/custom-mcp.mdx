@@ -1,0 +1,112 @@
+---
+title: Custom MCP
+description: Connect external MCP tools to Flow AI and choose which tools your workspace can use.
+---
+
+Connect a Model Context Protocol (MCP) server to make its tools available to Flow AI. Use custom MCP connections for external workflows and tools supplied by your organization or another provider.
+
+To expose Flow tools to an external AI client, use [Flow MCP](/api/mcp/overview) in the API documentation. This guide covers external tools connected into Flow.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Connect external tools | Add a server that supports MCP over Streamable HTTP. |
+| Configure authentication | Use no authentication, a bearer token, or OAuth. |
+| Choose available tools | Discover the server's tools and explicitly allow the ones Flow can use. |
+| Run external workflows | Workspace editors and automations use the connection's account to call enabled tools. |
+
+<Warning>
+  Enabled tools can send Flow data to the server and change external systems. Flow cannot undo those external changes. Review each tool's purpose and permissions before enabling it.
+</Warning>
+
+## Before you start
+
+- A Flow admin with access to all projects must manage the connection.
+- Flow AI must be enabled for agent use.
+- Obtain the server's MCP endpoint URL and its authentication requirements from its owner.
+- Use a public HTTPS endpoint. Internal HTTP or HTTPS endpoints require a Flow deployment configured for private-network MCP access.
+- Enter credentials in the authentication fields, not in URL query parameters.
+
+## Connect an MCP server
+
+<Steps>
+  <Step title="Enter the server details">
+    **Requires you to act:** Open **Settings → Integrations → Custom MCP**. Under **Add MCP server**, enter a descriptive **Name** and the **Server URL**.
+
+    {/* ![Enter an external MCP server in Flow](images/custom-mcp-server.png "human-intervention: enter the MCP server") */}
+  </Step>
+  <Step title="Choose authentication">
+    **Requires you to act:** Select **Authentication** and supply the server's required credentials.
+
+    | Option | What to enter |
+    | --- | --- |
+    | **None** | Use when the server requires no credentials. |
+    | **Bearer token** | Enter the token supplied for this server in **Bearer token**. |
+    | **OAuth** | Leave client credentials blank when the server supports automatic client registration. Otherwise enter the registered client ID and, when required, client secret. |
+
+    For a manually registered OAuth client, copy the **OAuth redirect URL** displayed by Flow into the server's client registration.
+
+    {/* ![Choose MCP authentication in Flow](images/custom-mcp-authentication.png "human-intervention: configure MCP authentication") */}
+  </Step>
+  <Step title="Add and authorize the connection">
+    **Requires you to act:** Select **Add server**. For OAuth, sign in to the provider and approve the requested access. After returning to Flow, select **Finish connecting** to discover tools.
+
+    The connection starts disabled.
+
+    {/* ![Authorize and finish an MCP connection](images/custom-mcp-authorize.png "human-intervention: authorize the MCP connection") */}
+  </Step>
+  <Step title="Choose tools and enable the connection">
+    **Requires you to act:** Review the names and descriptions under **Allowed tools**. Select the tools your workspace should use, then turn on **Enabled**.
+
+    At least one allowed tool is required to enable the connection.
+
+    {/* ![Select and enable allowed MCP tools](images/custom-mcp-enable.png "human-intervention: enable selected MCP tools") */}
+  </Step>
+</Steps>
+
+## Verify the connection
+
+**Requires you to act:** Select **Test connection**. Confirm that Flow reports a connected server and the available tool count.
+
+{/* ![Test a custom MCP connection](images/custom-mcp-test.png "human-intervention: test the MCP connection") */}
+
+Ask Flow AI to perform a small, explicitly requested operation using an enabled tool. Start with a read operation when the server provides one. Check the response against the external system before using tools that change data.
+
+Custom MCP tools are workspace-only. They are unavailable to external shared users and cannot run during what-if analysis.
+
+## Refresh available tools
+
+**Requires you to act:** Select **Refresh tools** after the server's tool catalog changes. Review **Allowed tools** again before re-enabling tools whose definitions changed.
+
+{/* ![Refresh and review custom MCP tools](images/custom-mcp-refresh.png "human-intervention: refresh MCP tools") */}
+
+New tools are not automatically allowed. Changed or removed tools lose their previous selection; the connection becomes disabled if no allowed tools remain.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Flow rejects the server URL">
+    Use the MCP endpoint without query parameters. Public endpoints require HTTPS. For an internal server, ask your Flow administrator whether private-network MCP access is configured and whether the server is reachable.
+  </Accordion>
+  <Accordion title="OAuth authorization fails or remains incomplete">
+    Check the registered redirect URL and client credentials. Select **Connect account** to restart authorization, complete provider consent, and select **Finish connecting** after returning to Flow.
+  </Accordion>
+  <Accordion title="An existing OAuth connection asks to be recreated">
+    Remove and recreate the connection when Flow reports missing saved authorization-server information. Review the tools again and explicitly enable the replacement connection.
+  </Accordion>
+  <Accordion title="The connection works, but a tool is unavailable">
+    Check that the tool is selected under **Allowed tools** and that **Enabled** is on. Refresh the catalog after server changes. External shared users and what-if analysis cannot invoke these tools.
+  </Accordion>
+  <Accordion title="The server is reachable but discovery fails">
+    Confirm that the URL is an MCP Streamable HTTP endpoint and that its authentication matches the selected method. A normal web page or unrelated API endpoint cannot supply an MCP tool catalog.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect a custom MCP server
+
+**Requires you to act:** Turn off **Enabled** to stop tool use while retaining the configuration. To delete it, select **Remove**, then confirm **Remove connection**.
+
+{/* ![Disable or remove a custom MCP connection](images/custom-mcp-remove.png "human-intervention: disable or remove an MCP connection") */}
+
+Removing a connection does not reverse changes already made in external systems. Revoke its credentials with the provider when they are no longer needed.
