@@ -66,54 +66,29 @@
         },
         "groups": [
           {
-            "group": "Get started",
+            "group": "Integrations",
             "pages": [
-              "integrations"
-            ]
-          },
-          {
-            "group": "Issues and planning",
-            "pages": [
-              "integrations/linear",
-              "integrations/jira",
-              "integrations/asana"
-            ]
-          },
-          {
-            "group": "Code and development",
-            "pages": [
+              "integrations",
+              "integrations/altium",
+              "integrations/aodocs",
+              "integrations/asana",
+              "integrations/bitbucket",
+              "integrations/boltline",
+              "integrations/confluence",
+              "integrations/cursor",
+              "integrations/custom-mcp",
               "integrations/github",
               "integrations/gitlab",
-              "integrations/bitbucket",
-              "integrations/cursor"
-            ]
-          },
-          {
-            "group": "Documents and collaboration",
-            "pages": [
-              "integrations/slack",
               "integrations/google",
+              "integrations/jira",
+              "integrations/linear",
               "integrations/sharepoint",
-              "integrations/confluence",
               "integrations/notion",
-              "integrations/aodocs"
-            ]
-          },
-          {
-            "group": "Engineering and verification",
-            "pages": [
               "integrations/onshape",
-              "integrations/altium",
-              "integrations/teamcenter",
-              "integrations/boltline",
+              "integrations/qase",
               "integrations/relyence",
-              "integrations/qase"
-            ]
-          },
-          {
-            "group": "Custom tools",
-            "pages": [
-              "integrations/custom-mcp"
+              "integrations/teamcenter",
+              "integrations/slack"
             ]
           }
         ]

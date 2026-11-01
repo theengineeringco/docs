@@ -108,6 +108,8 @@ A short Release Notes edition is acceptable when little shipped. Significance ma
 ## Integration documentation
 
 - Keep external-app guides in a separate **Integrations** tab between **API** and **Release Notes**, with `/integrations` as its overview. Use lowercase `/integrations/<provider>` URLs.
+- List providers alphabetically by display name in one sidebar group after the overview, and use the same order for the overview cards. Do not divide integrations into workflow sections.
+- Keep the desktop section-switcher rows compact. Its dock height and the sidebar's bottom offset must share one value that fits all three rows, gaps, padding, and divider.
 - Cover capabilities, prerequisites and permissions, connection steps, verification, troubleshooting, and disconnect behavior. Use the actual labels and authentication paths implemented in `theengineeringco/branch-demo`; vendor examples supply structure, not Flow behavior.
 - State whether credentials and access are personal, project-scoped, or workspace-wide. Distinguish default search scope from enforced access boundaries, and explain write-back controls separately from reads.
 - State configuration and availability limits explicitly. Cross-check source behavior against release evidence before publication. Keep source references, deployment checks, and missing screenshot capture lists in excluded `drafts/` editorial records.
