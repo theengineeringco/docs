@@ -14,6 +14,9 @@ An automation contains instructions and can have a trigger. Create and manage it
 | API endpoint | Automations configured with the `endpoint` source. |
 | Connected app | Events from an app connected to Flow, such as GitHub or Slack. |
 | Branch review | Checks and actions associated with a Flow branch review. |
+| Project changes | Periodic runs on each branch with new edits or comments, using the `project_activity` source. |
+
+An automation can have more than one trigger. It runs when any of its triggers fires.
 
 Integrations connect external apps to Flow. Automations define the work Flow runs when an event arrives.
 
@@ -28,7 +31,7 @@ A trigger request matches automations by source. One request can start multiple 
 
 ## Manage project automations
 
-Use `GET /project/{projectId}/automations` to list automations, or add an automation ID to read, update, or delete one. `POST /project/{projectId}/automations` creates an automation; `PATCH /project/{projectId}/automations/{automationId}` changes only the fields you send. A supplied `trigger` replaces the whole trigger, and `null` makes the automation manual. Set `enabled: false` to turn an automation off in either mode. A disabled automation starts no run from a trigger, a schedule, or a manual launch.
+Use `GET /project/{projectId}/automations` to list automations, or add an automation ID to read, update, or delete one. `POST /project/{projectId}/automations` creates an automation; `PATCH /project/{projectId}/automations/{automationId}` changes only the fields you send. `triggers` lists every trigger in order, up to 20, and a supplied list replaces the whole list. Send `triggers: []` to make the automation manual. The single `trigger` field reads as the first trigger. Without `triggers`, a supplied `trigger` replaces only the first trigger and keeps the others; `null` removes the trigger only from an automation that has at most one. If you send both fields, `trigger` must equal the first entry in `triggers`. Each trigger has an `id`. Omit it for a new trigger; a trigger sent without one keeps the ID of the trigger at the same position. Set `enabled: false` to turn an automation off in either mode. A disabled automation starts no run from a trigger, a schedule, or a manual launch.
 
 An automation runs with the permissions of the person who last saved what it runs. When changing another person's automation in a way that affects its work or trigger, send `runAsMe: true` to confirm that it will run as you; otherwise the update returns `409`. Renaming, disabling, or turning off admin tools keeps the current writer. An API key cannot enable `allowAdminTools`. Script mode requires the automation scripts beta.
 
