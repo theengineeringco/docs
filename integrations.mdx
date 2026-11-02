@@ -4,81 +4,26 @@ sidebarTitle: Overview
 description: Connect engineering, development, and collaboration tools to Flow.
 ---
 
-Connect the tools your team uses to give Flow context from engineering work, documents, code, and conversations. Each guide explains what the integration can do, who can configure it, how to connect it, and how to verify access.
+![Abstract amber peaks against a blue background](/images/integrations-overview-peaks.jpg)
 
-Open **Settings → Integrations** in Flow to see the connections available to your workspace. Some connections require additional configuration or are available only on supported deployments; the individual guides describe those requirements.
+Bring context from your team's tools into Flow. Integrations connect engineering data, documents, code, and conversations so you can work with them alongside your systems graph.
 
-## Browse integrations
+## Get started
 
-<CardGroup cols={2}>
-  <Card title="Altium" icon="circuit-board" href="/integrations/altium">
-    Read Altium 365 design data through your personal connection.
-  </Card>
-  <Card title="AoDocs" icon="/images/integrations/aodocs.svg" href="/integrations/aodocs">
-    Connect libraries and read documents where AoDocs is enabled.
-  </Card>
-  <Card title="Asana" icon="/images/integrations/asana.svg" href="/integrations/asana">
-    Read tasks and sections, and configure task write-back.
-  </Card>
-  <Card title="Bitbucket" icon="/images/integrations/bitbucket.svg" href="/integrations/bitbucket">
-    Connect your workspace and account for repository workflows.
-  </Card>
-  <Card title="Boltline" icon="/images/integrations/boltline.png" href="/integrations/boltline">
-    Read parts, inventory, and manufacturing work plans.
-  </Card>
-  <Card title="Confluence" icon="/images/integrations/confluence.svg" href="/integrations/confluence">
-    Search wiki content and read pages as engineering context.
-  </Card>
-  <Card title="Cursor" icon="/images/integrations/cursor.svg" href="/integrations/cursor">
-    Launch coding agents against a configured repository.
-  </Card>
-  <Card title="Custom MCP" icon="plug" href="/integrations/custom-mcp">
-    Connect an external MCP server and choose the tools Flow AI can use.
-  </Card>
-  <Card title="GitHub" icon="/images/integrations/github.svg" href="/integrations/github">
-    Browse repositories, review pull requests, and run automations.
-  </Card>
-  <Card title="GitLab" icon="/images/integrations/gitlab.svg" href="/integrations/gitlab">
-    Connect repositories and configure merge request workflows.
-  </Card>
-  <Card title="Google Drive" icon="/images/integrations/google.svg" href="/integrations/google">
-    Connect Drive content, Google Docs, and Google Sheets.
-  </Card>
-  <Card title="Jira" icon="/images/integrations/jira.svg" href="/integrations/jira">
-    Connect your account to read and work with Jira issues.
-  </Card>
-  <Card title="Linear" icon="/images/integrations/linear.svg" href="/integrations/linear">
-    Read issues, cycles, and comments. Enable issue creation and updates.
-  </Card>
-  <Card title="Microsoft SharePoint" icon="/images/integrations/sharepoint.svg" href="/integrations/sharepoint">
-    Read SharePoint and OneDrive files through your account.
-  </Card>
-  <Card title="Notion" icon="/images/integrations/notion.svg" href="/integrations/notion">
-    Read pages shared with your Notion connection.
-  </Card>
-  <Card title="Onshape" icon="/images/integrations/onshape.svg" href="/integrations/onshape">
-    Connect CAD data and model-change workflows.
-  </Card>
-  <Card title="Qase" icon="/images/integrations/qase.svg" href="/integrations/qase">
-    Search test projects and read verification results.
-  </Card>
-  <Card title="Relyence" icon="/images/integrations/relyence.svg" href="/integrations/relyence">
-    Read FMEA data from a linked analysis.
-  </Card>
-  <Card title="Siemens Teamcenter X" icon="/images/integrations/teamcenter.svg" href="/integrations/teamcenter">
-    Link engineering items on compatible, configured deployments.
-  </Card>
-  <Card title="Slack" icon="/images/integrations/slack.svg" href="/integrations/slack">
-    Talk to Flow from Slack and configure channel access.
-  </Card>
-</CardGroup>
+Choose an application from the sidebar to find its setup guide. Each guide covers capabilities, permissions, connection steps, and verification. **Settings → Integrations** in Flow shows the connections available to your workspace.
 
-To use Flow's tools from an external AI client, see [Flow MCP](/api/mcp/overview). To build an integration against Flow's REST API, start with the [API quickstart](/api/quickstart).
+Some connections require additional configuration or are available only on supported deployments. Check the guide's prerequisites before you begin.
 
 ## Choose the access you need
 
-Connections differ in how they grant access. Some use shared workspace credentials; others require each person to sign in. A default project, folder, or search filter is not always an access boundary. Check the guide before choosing a scope.
+Some integrations use shared workspace credentials; others require each person to sign in. A default project, folder, or search filter is not always an access boundary. Each guide explains which account provides access and how to limit its scope.
 
 Where an integration supports write-back, both the external account and Flow's settings must permit the action. External changes take effect in the connected tool and are not undone by reverting a Flow branch.
 
-See [Release Notes](/release-notes) for changes to integration capabilities.
+## Connect custom tools
+
+Use [Custom MCP](/integrations/custom-mcp) to connect an external MCP server and choose the tools Flow AI can use.
+
+To use Flow's tools from an external AI client, see [Flow MCP](/api/mcp/overview). To build an integration against Flow's REST API, start with the [API quickstart](/api/quickstart).
+
+Integration updates are included in the [release notes](/release-notes).

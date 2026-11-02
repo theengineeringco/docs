@@ -108,8 +108,8 @@ A short Release Notes edition is acceptable when little shipped. Significance ma
 ## Integration documentation
 
 - Keep external-app guides in a separate **Integrations** tab between **API** and **Release Notes**, with `/integrations` as its overview. Use lowercase `/integrations/<provider>` URLs.
-- List providers alphabetically by display name in one sidebar group after the overview, and use the same order for the overview cards. Do not divide integrations into workflow sections.
-- Reuse the application icons from `branch-demo` in both overview cards and guide navigation. Keep their brand colors, monochrome dark-mode contrast, and Boltline’s dark backing consistent with the product catalog.
+- List providers alphabetically by display name in one sidebar group after the overview. Do not divide integrations into workflow sections. Keep the overview concise, with an existing Flow brand image and getting-started guidance, matching the API overview; do not repeat the full provider catalog.
+- Reuse the application icons from `branch-demo` in guide navigation. Keep their brand colors, monochrome dark-mode contrast, and Boltline’s dark backing consistent with the product catalog.
 - Keep the desktop section-switcher rows compact. Its dock height and the sidebar's bottom offset must share one value that fits all three rows, gaps, padding, and divider.
 - Cover capabilities, prerequisites and permissions, connection steps, verification, troubleshooting, and disconnect behavior. Use the actual labels and authentication paths implemented in `theengineeringco/branch-demo`; vendor examples supply structure, not Flow behavior.
 - State whether credentials and access are personal, project-scoped, or workspace-wide. Distinguish default search scope from enforced access boundaries, and explain write-back controls separately from reads.
