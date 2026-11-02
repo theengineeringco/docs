@@ -67,3 +67,7 @@ Manual simplification retained the provider-specific setup paths and removed rep
 - Boltline: publication is an option on create/revise, not a standalone Flow action on an existing draft. Direct users to finish an existing draft in Boltline.
 
 No correctness findings were rejected. No production integrations were connected or modified during validation.
+
+## Altium logo source
+
+The Altium navigation icon is the unmodified 32px brand icon linked by https://www.altium.com/: https://cdn.files.altium.com/sites/default/files/favicons/altium.com/favicon-32x32.png. It is stored at `images/integrations/altium.png`.

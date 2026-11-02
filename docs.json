@@ -76,7 +76,6 @@
               "integrations/boltline",
               "integrations/confluence",
               "integrations/cursor",
-              "integrations/custom-mcp",
               "integrations/github",
               "integrations/gitlab",
               "integrations/google",
@@ -89,6 +88,12 @@
               "integrations/relyence",
               "integrations/teamcenter",
               "integrations/slack"
+            ]
+          },
+          {
+            "group": "Custom MCP",
+            "pages": [
+              "integrations/custom-mcp"
             ]
           }
         ]
