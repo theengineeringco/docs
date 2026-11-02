@@ -25,30 +25,6 @@ Flow uses a personal API key. The connection is shared across your Flow workspac
 - “Summarize unfinished work in the current cycle for the connected ENG team, grouped by state and assignee.”
 - With write-back: “Create an issue in the connected ENG team and its Verification project for this test failure. Include the Flow test-case reference, set the priority, and assign it to the named team member.”
 
-## Automation ideas
-
-These are workflows to configure around connected teams and Flow data. Connecting Linear does not automatically copy issues or synchronize their states.
-
-There is no built-in Linear issue-change webhook receiver in this connection. Use a schedule, a manual run, or a [custom webhook sender](/api/automations/webhooks). The shared API key must cover the target team, and any required Flow project approval must be in place. Scheduled runs also use the automation writer's Flow permissions. See [Automations](/api/automations/overview) for run setup.
-
-### Cycle readiness summary
-
-**Trigger:** Schedule before a planning meeting.
-
-Read a named team's cycle issues and compare them with linked Flow requirements. Return incomplete work, owners, and missing evidence with Linear issue references.
-
-### Follow up on failed tests
-
-**Trigger:** Manual run after reviewing test results.
-
-Search the selected team for an existing issue tied to each failed Flow test case. Create an issue only when none exists, placing it in the named Linear project with the agreed labels and priority. Requires Linear write-back.
-
-### Review issue decisions against requirements
-
-**Trigger:** Schedule or custom webhook carrying an issue identifier.
-
-Read the issue and its comments, compare decisions with linked Flow requirements, and return proposed changes for review. Keep issue creation and status changes out of this recipe unless explicitly intended.
-
 ## Before you start
 
 - A Flow admin with access to all projects must configure the shared connection and write-back setting.

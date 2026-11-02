@@ -24,30 +24,6 @@ Posting permission, channel-history permission, and project connections are sepa
 - In Flow: “Read yesterday's top-level messages in the approved #design-review channel. Summarize decisions and open questions, and state any gaps in the available context.”
 - With write-back: “Send this review summary to the allowed #engineering channel, include the Flow item links, and mention the review owner.”
 
-## Automation ideas
-
-Use Slack as a source of approved conversation context, a destination for results, or an interactive way to ask Flow for work.
-
-An `@Flow` mention starts an interactive conversation; it is not a subscription to every message in a channel. For recurring work, configure a [scheduled automation](/api/automations/overview) and name its source channels, time window, destination, and desired output. History reads cover top-level messages, so a roundup should not claim to summarize every thread reply. Each project's history grants and the separate posting allowlist still apply.
-
-### Daily project digest
-
-**Trigger:** Schedule.
-
-Read selected Flow requirements and test results. Post a short summary of unresolved work and owners to an allowed channel. Requires Slack write-back and destination access.
-
-### Channel decision roundup
-
-**Trigger:** Schedule.
-
-Read top-level messages from an approved channel for a defined time window. List decisions, unanswered questions, and candidate Flow items to review. History access is required; posting the digest also requires write-back.
-
-### Implementation update
-
-**Trigger:** GitHub pull request merged or GitLab merge request merged.
-
-Use the connected repository event to summarize the change and affected Flow items, then post the summary and repository link to an allowed channel. Requires the repository integration and Slack write-back.
-
 ## Before you start
 
 A Flow admin configures the shared app, project connections, and channel permissions. You also need permission to create and install a Slack app in the intended Slack workspace.

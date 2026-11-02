@@ -24,30 +24,6 @@ Your Jira permissions apply to your requests. Another user's connection does not
 - “Summarize the active sprint for ENG. Group unfinished issues by status and include their assignees and Jira links.”
 - With write-back: “Create a Bug in ENG for this failed test case. Include the observed result, expected result, and Flow item reference, then return the new issue key.”
 
-## Automation ideas
-
-These are workflows you can configure. Connecting Jira does not install them or automatically synchronize issue changes.
-
-Jira has no built-in issue-change webhook trigger in this connection. Use a schedule or manual run, or configure a [custom webhook sender](/api/automations/webhooks) for event-driven work. Scheduled runs need the automation writer's personal Jira connection and permissions. See [Automations](/api/automations/overview) for trigger setup and run access.
-
-### Sprint readiness report
-
-**Trigger:** Schedule before your planning meeting.
-
-Read the selected sprint's issues and compare them with linked Flow requirements. Return unresolved work, dependencies, and missing evidence with issue references. Read access is sufficient.
-
-### Verification follow-up
-
-**Trigger:** Manual run after a test review.
-
-Read the failed test cases you select. Search ENG for an existing issue for each case; create a Bug only when none exists. Include the Flow reference and test evidence. Requires Jira write-back.
-
-### Issue-change impact review
-
-**Trigger:** Custom webhook from your Jira event sender.
-
-Pass the issue key to Flow, read its current details, and identify linked Flow items that need review. Return proposed follow-up work. The sender must translate and authenticate the event.
-
 ## Before you start
 
 The integration must be available in your Flow installation. If it is missing from **Settings → Integrations**, ask your Flow administrator to check availability.

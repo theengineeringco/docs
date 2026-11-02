@@ -27,30 +27,6 @@ Connect GitHub to let Flow AI read repository content, inspect pull requests, an
 - “Find the configuration files in this repository and explain how their limits compare with the limits defined in Flow.”
 - With write-back: “Update this repository's interface documentation to match the reviewed Flow requirements. Open a draft pull request and include the requirement references in its description.”
 
-## Automation ideas
-
-Define the review criteria and output in a project automation. Connecting the App and enabling a repository do not supply those instructions for you.
-
-Automatic reviews require **Auto-review**; with it off, use an `@flow` mention for an enabled repository. Merge-triggered work is separate and does not require Auto-review. Configure triggers through [Automations](/api/automations/overview). If the workflow also posts to [Slack](/integrations/slack) or opens a [Jira issue](/integrations/jira), configure that connection and its write-back permissions too. Opening a draft PR does not approve or merge it.
-
-### Review code against requirements
-
-**Trigger:** GitHub pull request review event.
-
-Read the PR changes and the Flow requirements they reference. Report mismatches, missing tests, and evidence you could not inspect. Return a review outcome using explicit criteria. Requires project repository review access and browsing for additional file reads.
-
-### Documentation impact after merge
-
-**Trigger:** GitHub pull request merged.
-
-Inspect the merged change and identify affected Flow interfaces or requirements. Return a follow-up summary with the PR link and affected items; enable updates only if the automation is meant to change them.
-
-### Repository documentation refresh
-
-**Trigger:** Manual run or schedule.
-
-Compare a named documentation file with selected Flow items. If they differ, create the agreed file updates on a new branch and open a draft PR. Requires GitHub write-back; record the PR link to avoid duplicate proposals.
-
 ## Before you start
 
 You need a Flow admin who can manage the workspace connection and permission to install or approve a GitHub App in the target organization. For organizations with SSO, sign in through the organization's SSO before installing the App.

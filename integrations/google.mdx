@@ -22,30 +22,6 @@ Connect your Google account to bring Drive files, Google Docs, and Google Sheets
 - “Read `Results!A1:F100` in this spreadsheet. Match rows to Flow test cases by test ID and summarize failures and unmatched IDs.”
 - With Sheets write-back: “Read `Status!A1:D50`, match rows by requirement ID, and update only the status cells for the requirements listed here. Preserve the other cells.”
 
-## Automation ideas
-
-These examples combine Google source material with Flow data. They do not create a continuous two-way sync.
-
-There is no built-in Drive-file-changed or Sheet-edited trigger in this connection. Use a schedule, a manual run, or a [custom webhook sender](/api/automations/webhooks). Scheduled runs use the automation writer's Google connection. Sheets must be read before they are updated; the integration does not edit Google Docs, move Drive files, or change sharing permissions. See [Automations](/api/automations/overview) for run setup.
-
-### Check design documents
-
-**Trigger:** Schedule or manual run before a review.
-
-Read named Google Docs and compare their constraints with selected Flow requirements. Return conflicting values and missing coverage with document links. Read access is sufficient.
-
-### Review test results from a spreadsheet
-
-**Trigger:** Schedule, or custom webhook after a test export.
-
-Read a specific sheet tab and range. Match rows to Flow test cases by a stable ID, summarize failures, and flag missing or duplicate IDs before proposing updates in Flow.
-
-### Publish a status snapshot
-
-**Trigger:** Schedule.
-
-Read selected Flow requirement statuses, then read a designated reporting sheet. Update only agreed output ranges, using requirement IDs to match rows. Requires Sheets write-back, Google write authorization, and an allowed destination.
-
 ## Before you start
 
 - Google Drive must be configured for your Flow workspace. If connection setup is unavailable, contact your Flow administrator.
