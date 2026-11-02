@@ -10,12 +10,44 @@ Connect Bitbucket to read repository content, propose code changes, and run pull
 
 | Capability | How it works |
 | --- | --- |
-| Read repositories | Enable **Bitbucket Repo Browsing**. Flow AI reads with the requesting person's Bitbucket access. |
-| Propose changes | Enable **Bitbucket Writeback** to create branches, commit files, and open pull requests. Delete and merge actions are not exposed. |
-| Automate reviews | Connect repository webhooks and configure Bitbucket pull-request automations. |
-| Use Data Center | Connect an approved self-hosted server with HTTP access tokens. |
+| Browse repositories | With **Bitbucket Repo Browsing**, list repositories visible to your own account, explore directories, and find files by path. |
+| Read implementation details | Read files or selected line ranges at a chosen ref and compare them with requirements, interfaces, or test cases in Flow. |
+| Propose code or documentation changes | With **Bitbucket Writeback**, create a branch, commit file creates or updates, and open a pull request. Delete and merge actions are not exposed. |
+| Review pull requests automatically | Use repository webhooks and a Bitbucket pull-request automation to review new or updated pull requests against the instructions you define. |
+| Publish review outcomes | A configured review can return findings and a build status to the pull request. The shared connection needs permission to publish these results. |
+| Use Cloud or Data Center | Connect Bitbucket Cloud or an approved Data Center server using the setup paths below. Personal repository permissions still apply. |
 
 An automation runs only on repositories its writer's Bitbucket account can read. The shared connection does not replace personal authorization.
+
+## Try it with Flow AI
+
+- “Read the hardware-interface configuration in this Bitbucket repository and compare its values with the interface requirements in Flow.”
+- “Find the test files for this subsystem, read the relevant sections, and identify requirements with no evidence in those files.”
+- With write-back: “Update the selected documentation files to reflect these reviewed requirements and open a pull request with links to the Flow items.”
+
+## Automation ideas
+
+Configure a Bitbucket automation with explicit review instructions and matching repository webhooks.
+
+Cloud review events are `pullrequest:created` and `pullrequest:updated`; Data Center uses the corresponding events listed in the setup steps below. Do not rely on a Bitbucket merge event to start these recipes. Use a [custom webhook sender](/api/automations/webhooks) if you need another event type. See [Automations](/api/automations/overview) for trigger configuration. Flow does not merge or delete repository content through this integration.
+
+### Review pull requests against requirements
+
+**Trigger:** Bitbucket pull request created or updated.
+
+Compare the incoming change with referenced Flow requirements. Report inconsistencies and missing evidence, then publish the review result. Requires webhook setup, result-posting permissions, and the automation writer's repository access.
+
+### Interface contract check
+
+**Trigger:** Bitbucket pull request event with a changed-path filter.
+
+Focus on interface or configuration paths. Read relevant files and compare changed constants, units, or field definitions with Flow's interface data. Return actionable discrepancies.
+
+### Documentation maintenance
+
+**Trigger:** Manual run or schedule.
+
+Compare named repository documents with reviewed Flow requirements. Open a PR for agreed changes when needed. Requires write-back and the writer's personal Bitbucket account; retain the resulting PR link to avoid duplicate proposals.
 
 ## Before you start
 

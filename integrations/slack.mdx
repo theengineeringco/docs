@@ -8,14 +8,45 @@ Use Flow from Slack by mentioning the bot and continuing conversations in thread
 
 ## What you can do
 
-| Capability | Required setup |
+| Capability | How it works |
 | --- | --- |
-| Ask Flow AI from Slack | Configure the app and signing secret, connect a project, and link your personal account. |
-| Receive notifications | Configure the app and your Slack notification preferences in Flow. |
-| Send agent messages to channels | Enable **Slack Write-Back** and allow the destination channels. |
-| Read channel history | Grant each channel under **Channel history access** for the current project. |
+| Work with Flow from a thread | Mention the bot, ask about the selected Flow project and branch, and continue the conversation in replies. The linked user's Flow permissions apply. |
+| Read approved channel history | Read recent top-level messages from channels explicitly approved for the current project. Use a time window to prepare a digest or identify decisions to review. |
+| Use a mentioned thread as context | An explicit `@Flow` mention supplies that thread's context. A channel-history read does not include all thread replies. |
+| Send messages and thread replies | With **Slack Write-Back**, post to allowed channels or reply to a specified thread. Mention a selected teammate by resolving their Slack account. |
+| Receive Flow notifications | Choose Slack delivery in your Flow notification preferences for supported events such as review assignments and comment mentions. |
 
 Posting permission, channel-history permission, and project connections are separate. An explicit `@Flow` mention lets the agent use that specific thread as context; broader channel history requires an explicit project grant.
+
+## Try it with Flow AI
+
+- In Slack: “@Flow, compare the decision in this thread with the interface requirements in our selected project. Which items need review?”
+- In Flow: “Read yesterday's top-level messages in the approved #design-review channel. Summarize decisions and open questions, and state any gaps in the available context.”
+- With write-back: “Send this review summary to the allowed #engineering channel, include the Flow item links, and mention the review owner.”
+
+## Automation ideas
+
+Use Slack as a source of approved conversation context, a destination for results, or an interactive way to ask Flow for work.
+
+An `@Flow` mention starts an interactive conversation; it is not a subscription to every message in a channel. For recurring work, configure a [scheduled automation](/api/automations/overview) and name its source channels, time window, destination, and desired output. History reads cover top-level messages, so a roundup should not claim to summarize every thread reply. Each project's history grants and the separate posting allowlist still apply.
+
+### Daily project digest
+
+**Trigger:** Schedule.
+
+Read selected Flow requirements and test results. Post a short summary of unresolved work and owners to an allowed channel. Requires Slack write-back and destination access.
+
+### Channel decision roundup
+
+**Trigger:** Schedule.
+
+Read top-level messages from an approved channel for a defined time window. List decisions, unanswered questions, and candidate Flow items to review. History access is required; posting the digest also requires write-back.
+
+### Implementation update
+
+**Trigger:** GitHub pull request merged or GitLab merge request merged.
+
+Use the connected repository event to summarize the change and affected Flow items, then post the summary and repository link to an allowed channel. Requires the repository integration and Slack write-back.
 
 ## Before you start
 

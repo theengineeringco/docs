@@ -10,12 +10,44 @@ Connect GitLab to browse code, review merge requests, and run automations. A Flo
 
 | Capability | How it works |
 | --- | --- |
-| Read repository context | Enable **GitLab Repo Browsing** for Flow AI to search code and read files. |
-| Automate merge-request work | Configure GitLab automations and the matching project webhooks. |
-| Propose code changes | Enable **GitLab Writeback** to create branches, commit files, and open merge requests. Delete and merge actions are not exposed. |
-| Start approved CI pipelines | With write-back enabled, configure allowed pipelines, variables, and users or automations for each Flow project. |
+| Explore repositories | With **GitLab Repo Browsing**, list projects, browse directories, find files by path, and search terms inside files. |
+| Read specific implementation evidence | Read a whole file or a line range at a branch, tag, or commit. Use a commit reference when the analysis needs to identify an exact revision. |
+| Automate merge-request reviews | Use merge-request webhooks to review opened, reopened, or code-updated requests. An `@flow` comment can rerun the review when comment webhooks are enabled. |
+| Propose code or documentation changes | With **GitLab Writeback**, create a branch, commit file creates or updates, and open a draft merge request. Delete and merge actions are not exposed. |
+| Start approved CI pipelines | With write-back enabled, run only the GitLab projects, refs, and variables an admin has allowed for the requesting person or automation in the current Flow project. |
+| Follow up after a merge | Use a GitLab merge-request-merged trigger, optionally filtered by author or changed path, with Merge request events enabled on the webhook. |
 
 Connected repositories are available across the Flow workspace under existing Flow permissions. This is a shared connection, not a separate GitLab login for every Flow member.
+
+## Try it with Flow AI
+
+- “Find where this interface limit is implemented in the GitLab project. Read the relevant file at this commit and compare it with the requirement in Flow.”
+- “Search this project for the calibration parameter, then explain its use with file and line references.”
+- With write-back: “Update the integration-test documentation to cover these reviewed requirements and open a draft merge request.”
+
+## Automation ideas
+
+These workflows use the repository events and pipeline permissions you configure; they are not enabled just by connecting GitLab.
+
+Use **Merge request events** on the GitLab webhook for review and merge triggers. Enable **Comments** to rerun reviews with `@flow`. A pipeline start confirms that CI was launched, not that it passed; a CI job can report results through a separately configured [custom webhook](/api/automations/webhooks). See [Automations](/api/automations/overview) for trigger setup. Flow's code write-back opens a draft merge request for review; it does not merge it.
+
+### Requirement and interface review
+
+**Trigger:** GitLab merge request review event.
+
+Review the incoming changes against referenced Flow requirements and read the relevant files. Report mismatches and missing evidence. Optional author and changed-path filters keep the review focused.
+
+### Post-merge impact summary
+
+**Trigger:** GitLab merge request merged.
+
+Identify affected requirements, interfaces, and test cases in Flow. Return a summary with the merged request and source references, or post it to an allowed Slack channel when Slack write-back is configured.
+
+### Approved verification run
+
+**Trigger:** Manual run or a configured GitLab event.
+
+Start an admin-approved pipeline on its allowed branch or tag with the permitted variables. Return the pipeline reference. Requires GitLab write-back and an explicit pipeline grant for the automation.
 
 ## Before you start
 

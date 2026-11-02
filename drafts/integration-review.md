@@ -71,3 +71,18 @@ No correctness findings were rejected. No production integrations were connected
 ## Altium logo source
 
 The Altium navigation icon is the unmodified 32px brand icon linked by https://www.altium.com/: https://cdn.files.altium.com/sites/default/files/favicons/altium.com/favicon-32x32.png. It is stored at `images/integrations/altium.png`.
+
+## Capability and automation expansion — November 2, 2026
+
+Expanded Jira, Slack, Google Drive, GitHub, GitLab, Bitbucket, and Linear with source-backed capabilities, three example requests, and three automation ideas each. These are configurable recipes, not claims that automations are installed or running.
+
+Reference: `theengineeringco/branch-demo` `origin/master` at `e9bc3131cf119fca022ebeb1ba926c30791bcfa4`. The user's main checkout was older, so the audit uses freshly fetched source from the existing source-audit worktree. No integration credentials, customer application data, or production connections were accessed.
+
+- `backend/src/llms/ai.service.ts`: Jira read/write tool schemas, named Linear projects and issue comments, Google folder/Doc/range reads and Sheets writes, Slack history and posting, repository browsing and write-back, and allowed GitLab pipelines.
+- `shared/src/trigger-types.ts`: schedules, GitHub/GitLab review and merge sources, Bitbucket events, and writer permissions. Jira, Google, and Linear have no built-in event sources/receivers here; recipes use schedules/manual runs or authenticated custom senders.
+- `backend/src/github-integration/github-integration.controller.ts` and `backend/src/gitlab-integration/gitlab-integration.controller.ts`: review/merge webhook handling and mention reruns. `backend/src/bitbucket-integration/bitbucket-integration.controller.ts`: created/updated pull-request events, results, and build statuses.
+- `backend/src/slack-integration/slack-integration.controller.ts`: mentions start interactive conversations. Project channel-history reads return top-level messages, not every thread reply. Attachment access is intentionally not added in this expansion.
+- `frontend/src/components/settings/automations/automation-settings-page.tsx` and trigger types: schedules and author/path scopes. Existing API automation/webhook guides supply the configuration links.
+- Release notes: October 2 (run identity and schedules), October 9 (Linear project placement, GitLab mentions, Jira details), October 16 (Bitbucket, GitLab code search), October 23 (merge triggers and Linear comment reads), and October 30 (Slack history).
+
+Examples distinguish reading, external writes, and proposed Flow updates. Pipeline start is not a successful CI result; CI result delivery is a separate custom sender. Recurring issue/PR creation recipes include duplicate-check or output-link guidance. The existing draft publication, screenshot, and availability review requirements remain in effect.

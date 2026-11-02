@@ -10,12 +10,43 @@ Connect Jira to read issues and link engineering work to Flow items. Each person
 
 | Capability | How it works |
 | --- | --- |
-| Find and read issues | Search linked projects and read issue details using your Jira permissions. |
-| Link work to Flow items | Select an issue in a Jira issue field, including by issue key or pasted Jira link. |
-| Understand project progress | Read boards, sprints, epics, and their issues. |
-| Create and update issues | Enable **Jira Write-Back** to create issues, edit details, change status, and link issues, subject to Jira permissions. |
+| Find and read issues | Search a linked project, look up an issue key, and inspect its description, status, resolution, assignee, labels, and linked issues. |
+| Inspect sprint and epic work | Read sprints and epics from Jira Software boards, then list their issues to assess progress and dependencies. |
+| Link work to Flow items | Select an issue in a Jira issue field, including by issue key or pasted Jira link. Use those references to compare implementation work with Flow requirements and test cases. |
+| Create and edit issues | With **Jira Write-Back**, create issues and update summaries, descriptions, labels, priorities, and supported custom fields. Jira validates the available fields and values. |
+| Change status and connect issues | With write-back, use available workflow transitions and create links such as blocks or relates to. Link types and direction come from your Jira configuration. |
 
 Your Jira permissions apply to your requests. Another user's connection does not grant you access to Jira.
+
+## Try it with Flow AI
+
+- “Read ENG-142 and its linked issues. Compare the issue description with the linked requirements in Flow and list any gaps.”
+- “Summarize the active sprint for ENG. Group unfinished issues by status and include their assignees and Jira links.”
+- With write-back: “Create a Bug in ENG for this failed test case. Include the observed result, expected result, and Flow item reference, then return the new issue key.”
+
+## Automation ideas
+
+These are workflows you can configure. Connecting Jira does not install them or automatically synchronize issue changes.
+
+Jira has no built-in issue-change webhook trigger in this connection. Use a schedule or manual run, or configure a [custom webhook sender](/api/automations/webhooks) for event-driven work. Scheduled runs need the automation writer's personal Jira connection and permissions. See [Automations](/api/automations/overview) for trigger setup and run access.
+
+### Sprint readiness report
+
+**Trigger:** Schedule before your planning meeting.
+
+Read the selected sprint's issues and compare them with linked Flow requirements. Return unresolved work, dependencies, and missing evidence with issue references. Read access is sufficient.
+
+### Verification follow-up
+
+**Trigger:** Manual run after a test review.
+
+Read the failed test cases you select. Search ENG for an existing issue for each case; create a Bug only when none exists. Include the Flow reference and test evidence. Requires Jira write-back.
+
+### Issue-change impact review
+
+**Trigger:** Custom webhook from your Jira event sender.
+
+Pass the issue key to Flow, read its current details, and identify linked Flow items that need review. Return proposed follow-up work. The sender must translate and authenticate the event.
 
 ## Before you start
 

@@ -10,11 +10,41 @@ Connect your Google account to bring Drive files, Google Docs, and Google Sheets
 
 | Capability | How it works |
 | --- | --- |
-| Browse Drive | Start from the mounted folder, or ask for another folder your Google account can access. |
-| Read documents | Bring Google Docs content into an agent conversation. |
-| Read spreadsheets | Read Google Sheets and reference them through Google Sheet fields. |
-| Link documents | Reference a Google Doc through a Google Doc field. |
-| Update spreadsheet cells | Enable **Google Sheets write-back** and authorize Sheets write access. Drive and Docs remain read-only. |
+| Browse Drive folders | List files, subfolders, and modification times. Start from the mounted folder or another folder your connected Google account can access. |
+| Read Google Docs | Read the document's text, including paragraph and table-cell content, and return its source link. Use it alongside requirements or design data in Flow. |
+| Read Google Sheets | Inspect tab names and cell values, either from the first tab or a specified range such as `Results!A1:F100`. |
+| Link source material | Reference a Google Doc through a Google Doc field, or a spreadsheet through a Google Sheet field. |
+| Update spreadsheet values | With **Google Sheets write-back** and Google write authorization, read the target sheet and update specified cell ranges. Drive files and Google Docs remain read-only. |
+
+## Try it with Flow AI
+
+- “Read this Google Doc and compare its design constraints with the requirements in Flow. List discrepancies and link to the source document.”
+- “Read `Results!A1:F100` in this spreadsheet. Match rows to Flow test cases by test ID and summarize failures and unmatched IDs.”
+- With Sheets write-back: “Read `Status!A1:D50`, match rows by requirement ID, and update only the status cells for the requirements listed here. Preserve the other cells.”
+
+## Automation ideas
+
+These examples combine Google source material with Flow data. They do not create a continuous two-way sync.
+
+There is no built-in Drive-file-changed or Sheet-edited trigger in this connection. Use a schedule, a manual run, or a [custom webhook sender](/api/automations/webhooks). Scheduled runs use the automation writer's Google connection. Sheets must be read before they are updated; the integration does not edit Google Docs, move Drive files, or change sharing permissions. See [Automations](/api/automations/overview) for run setup.
+
+### Check design documents
+
+**Trigger:** Schedule or manual run before a review.
+
+Read named Google Docs and compare their constraints with selected Flow requirements. Return conflicting values and missing coverage with document links. Read access is sufficient.
+
+### Review test results from a spreadsheet
+
+**Trigger:** Schedule, or custom webhook after a test export.
+
+Read a specific sheet tab and range. Match rows to Flow test cases by a stable ID, summarize failures, and flag missing or duplicate IDs before proposing updates in Flow.
+
+### Publish a status snapshot
+
+**Trigger:** Schedule.
+
+Read selected Flow requirement statuses, then read a designated reporting sheet. Update only agreed output ranges, using requirement IDs to match rows. Requires Sheets write-back, Google write authorization, and an allowed destination.
 
 ## Before you start
 

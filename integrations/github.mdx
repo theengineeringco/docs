@@ -8,17 +8,48 @@ Connect GitHub to let Flow AI read repository content, inspect pull requests, an
 
 ## What you can do
 
-| Capability | Access control |
+| Capability | How it works |
 | --- | --- |
-| Browse repositories and read pull requests | Enable **GitHub Repo Browsing** for the workspace. |
-| Create branches, update files, and open pull requests | Enable **GitHub Writeback**. |
-| Run pull request reviews | Enable **Review pull requests** for a repository in the current Flow project. |
-| Review automatically | Enable **Auto-review** for an enabled repository. With it off, reviews run through `@flow` mentions. |
-| Run on pull request merges | Configure a merge trigger in a project automation. See [Automations](/api/automations/overview). |
+| Browse repository context | With **GitHub Repo Browsing**, list connected repositories, browse directories, find files by name or path, and read file contents at a chosen ref. |
+| Inspect pull requests | Read a pull request's description, author, branches, merged status, changed files, and patches. Compare the change with requirements and tests in Flow. |
+| Propose a code or documentation change | With **GitHub Writeback**, create a new branch, create or update files, and open a draft pull request. This does not merge the change or delete files. |
+| Run pull request reviews | Enable **Review pull requests** for a repository in the current Flow project and configure the review automation's instructions. |
+| Choose automatic or requested reviews | Enable **Auto-review** for automatic review events. With it off, request a review through an `@flow` mention. |
+| Follow up after a merge | Use a GitHub pull-request-merged trigger for repositories enabled in the project. This does not require Auto-review or an `@flow` mention. |
 
 <Note>
   With repository browsing enabled, the repositories granted to the connection are available across all projects in the Flow workspace. Project repository settings control automation; they do not restrict read access.
 </Note>
+
+## Try it with Flow AI
+
+- “Read this pull request's changed files and patches. Compare the implementation with the linked interface requirements in Flow, citing the files behind each finding.”
+- “Find the configuration files in this repository and explain how their limits compare with the limits defined in Flow.”
+- With write-back: “Update this repository's interface documentation to match the reviewed Flow requirements. Open a draft pull request and include the requirement references in its description.”
+
+## Automation ideas
+
+Define the review criteria and output in a project automation. Connecting the App and enabling a repository do not supply those instructions for you.
+
+Automatic reviews require **Auto-review**; with it off, use an `@flow` mention for an enabled repository. Merge-triggered work is separate and does not require Auto-review. Configure triggers through [Automations](/api/automations/overview). If the workflow also posts to [Slack](/integrations/slack) or opens a [Jira issue](/integrations/jira), configure that connection and its write-back permissions too. Opening a draft PR does not approve or merge it.
+
+### Review code against requirements
+
+**Trigger:** GitHub pull request review event.
+
+Read the PR changes and the Flow requirements they reference. Report mismatches, missing tests, and evidence you could not inspect. Return a review outcome using explicit criteria. Requires project repository review access and browsing for additional file reads.
+
+### Documentation impact after merge
+
+**Trigger:** GitHub pull request merged.
+
+Inspect the merged change and identify affected Flow interfaces or requirements. Return a follow-up summary with the PR link and affected items; enable updates only if the automation is meant to change them.
+
+### Repository documentation refresh
+
+**Trigger:** Manual run or schedule.
+
+Compare a named documentation file with selected Flow items. If they differ, create the agreed file updates on a new branch and open a draft PR. Requires GitHub write-back; record the PR link to avoid duplicate proposals.
 
 ## Before you start
 

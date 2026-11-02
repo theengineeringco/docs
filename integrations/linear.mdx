@@ -10,12 +10,44 @@ Connect one or more Linear teams to give Flow AI access to their issues, cycles,
 
 | Capability | How it works |
 | --- | --- |
-| Read issues | Ask the agent to find issues and read their details and comment threads. |
-| Understand team progress | Read cycles, labels, and workflow states from connected teams. |
-| Link engineering work | Use a Linear issue field to reference an issue from a Flow item. |
-| Create and update issues | Enable **Linear Write-Back** and give the API key the required permissions. Name a connected team when creating an issue; otherwise Flow uses the first connected team. |
+| Search and inspect issues | Find issues by keyword or read recently updated issues. Inspect their title, description, state, priority, assignee, team, and Linear project. |
+| Read issue discussions | Read an issue's comments and replies to understand decisions and feedback, including comments posted by other integrations. |
+| Review team and cycle progress | List connected teams, workflow states, cycles, and cycle issues. Use these to summarize work against Flow requirements or milestones. |
+| Link work to Flow items | Use a Linear issue field to reference an issue from a Flow item. |
+| Create and organize issues | With **Linear Write-Back**, create an issue in a connected team and place it in an accessible Linear project. Set its priority, labels, cycle, and assignee where supported. |
+| Update issues and status | With write-back, edit issue details or move an issue to an available workflow state. Name the team when creating an issue; otherwise Flow uses the first connected team. |
 
 Flow uses a personal API key. The connection is shared across your Flow workspace, with access limited to the Linear teams you select.
+
+## Try it with Flow AI
+
+- “Read ENG-142 and its comments. Summarize the decision, remaining questions, and any mismatch with its linked requirement in Flow.”
+- “Summarize unfinished work in the current cycle for the connected ENG team, grouped by state and assignee.”
+- With write-back: “Create an issue in the connected ENG team and its Verification project for this test failure. Include the Flow test-case reference, set the priority, and assign it to the named team member.”
+
+## Automation ideas
+
+These are workflows to configure around connected teams and Flow data. Connecting Linear does not automatically copy issues or synchronize their states.
+
+There is no built-in Linear issue-change webhook receiver in this connection. Use a schedule, a manual run, or a [custom webhook sender](/api/automations/webhooks). The shared API key must cover the target team, and any required Flow project approval must be in place. Scheduled runs also use the automation writer's Flow permissions. See [Automations](/api/automations/overview) for run setup.
+
+### Cycle readiness summary
+
+**Trigger:** Schedule before a planning meeting.
+
+Read a named team's cycle issues and compare them with linked Flow requirements. Return incomplete work, owners, and missing evidence with Linear issue references.
+
+### Follow up on failed tests
+
+**Trigger:** Manual run after reviewing test results.
+
+Search the selected team for an existing issue tied to each failed Flow test case. Create an issue only when none exists, placing it in the named Linear project with the agreed labels and priority. Requires Linear write-back.
+
+### Review issue decisions against requirements
+
+**Trigger:** Schedule or custom webhook carrying an issue identifier.
+
+Read the issue and its comments, compare decisions with linked Flow requirements, and return proposed changes for review. Keep issue creation and status changes out of this recipe unless explicitly intended.
 
 ## Before you start
 
