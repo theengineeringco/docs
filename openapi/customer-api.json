@@ -3664,6 +3664,35 @@
         ],
         "type": "object"
       },
+      "CreateSharedSavedViewDto": {
+        "properties": {
+          "icon": {
+            "$ref": "#/components/schemas/SavedViewIconDto"
+          },
+          "id": {
+            "description": "Id for the new view: letters, digits, `.`, `_` and `-`, starting with a letter or digit. Supply one so a retry of an unknown outcome can be checked by reading it; omitted, Flow picks one.",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Nesting rules, in order: under each `parentType`, show items of `childType`. Replaces every rule; send [] to remove them all. Stored as `state.relationships`.",
+            "items": {
+              "$ref": "#/components/schemas/SavedViewRelationshipDto"
+            },
+            "type": "array"
+          },
+          "rootType": {
+            "description": "Data type id of the items the view starts from (its \"Start type\"). Stored as `state.rootType`.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
       "CreateSubscriptionDto": {
         "properties": {
           "branch_id": {
@@ -5996,6 +6025,100 @@
         },
         "type": "object"
       },
+      "MergeReadinessBlockerDto": {
+        "properties": {
+          "items": {
+            "description": "Ids of the items this blocker names.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "kind": {
+            "enum": [
+              "not_ready_for_review",
+              "variant",
+              "editor_groups",
+              "merge_in_progress",
+              "no_changes",
+              "checks",
+              "designated_reviewers",
+              "required_reviewers",
+              "review_policy_items",
+              "min_approvals",
+              "item_checks",
+              "stage_gates",
+              "conflicts"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "description": "Why this gate blocks the merge.",
+            "type": "string"
+          },
+          "people": {
+            "description": "Ids of the users whose action clears this blocker.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "kind",
+          "message"
+        ],
+        "type": "object"
+      },
+      "MergeReadinessResponseDto": {
+        "properties": {
+          "blockers": {
+            "items": {
+              "$ref": "#/components/schemas/MergeReadinessBlockerDto"
+            },
+            "type": "array"
+          },
+          "ready": {
+            "description": "True only when no gate blocks the merge and every gate could be judged.",
+            "type": "boolean"
+          },
+          "unknown": {
+            "items": {
+              "$ref": "#/components/schemas/MergeReadinessUnknownDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "ready",
+          "blockers",
+          "unknown"
+        ],
+        "type": "object"
+      },
+      "MergeReadinessUnknownDto": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "no_changes",
+              "reviewers",
+              "item_checks",
+              "stage_gates",
+              "conflicts"
+            ],
+            "type": "string"
+          },
+          "reason": {
+            "description": "Why this gate cannot be judged yet, for example a scan that is still running or too large.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "reason"
+        ],
+        "type": "object"
+      },
       "NotificationFeedItemDto": {
         "properties": {
           "created_at": {
@@ -7092,6 +7215,49 @@
         ],
         "type": "string"
       },
+      "SavedViewIconDto": {
+        "properties": {
+          "colour": {
+            "description": "Icon color, as data types use.",
+            "type": "string"
+          },
+          "icon": {
+            "description": "Icon name, as data types use.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "icon",
+          "colour"
+        ],
+        "type": "object"
+      },
+      "SavedViewRelationshipDto": {
+        "properties": {
+          "childType": {
+            "description": "Data type id of the items shown under each parent.",
+            "type": "string"
+          },
+          "direction": {
+            "description": "Which links the view follows from parent to child: `downstream` (the parent links to the child), `upstream` (the child links to the parent) or `both`. Defaults to `both`.",
+            "enum": [
+              "upstream",
+              "downstream",
+              "both"
+            ],
+            "type": "string"
+          },
+          "parentType": {
+            "description": "Data type id of the parent.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "parentType",
+          "childType"
+        ],
+        "type": "object"
+      },
       "SearchResultDto": {
         "properties": {
           "entity_id": {
@@ -7395,10 +7561,21 @@
           "branch_id": {
             "type": "string"
           },
+          "branch_name": {
+            "nullable": true,
+            "type": "string"
+          },
           "branch_scope": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/SharedBranchScope"
+              }
+            ]
+          },
+          "branch_state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SharedGrantBranchState"
               }
             ]
           },
@@ -7505,6 +7682,14 @@
         ],
         "type": "string"
       },
+      "SharedGrantBranchState": {
+        "enum": [
+          "open",
+          "merged",
+          "closed"
+        ],
+        "type": "string"
+      },
       "SharedGrantWriteAccessResponseDto": {
         "properties": {
           "can_write": {
@@ -7513,6 +7698,49 @@
         },
         "required": [
           "can_write"
+        ],
+        "type": "object"
+      },
+      "SharedSavedViewDto": {
+        "properties": {
+          "icon": {
+            "$ref": "#/components/schemas/SavedViewIconDto"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "description": "Display order among the shared views.",
+            "type": "number"
+          },
+          "state": {
+            "additionalProperties": true,
+            "description": "The view configuration: `rootType` and `relationships` as written here, plus columns, filters, sort and display options edited in Flow.",
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object"
+      },
+      "SharedSavedViewsResponseDto": {
+        "properties": {
+          "views": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "required": [
+          "views"
         ],
         "type": "object"
       },
@@ -8366,6 +8594,36 @@
         },
         "type": "object"
       },
+      "UpdateSharedSavedViewDto": {
+        "properties": {
+          "icon": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SavedViewIconDto"
+              }
+            ],
+            "description": "null removes the icon.",
+            "nullable": true,
+            "type": "object"
+          },
+          "name": {
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Nesting rules, in order: under each `parentType`, show items of `childType`. Replaces every rule; send [] to remove them all. Stored as `state.relationships`.",
+            "items": {
+              "$ref": "#/components/schemas/SavedViewRelationshipDto"
+            },
+            "type": "array"
+          },
+          "rootType": {
+            "description": "Data type id of the items the view starts from (its \"Start type\"). Stored as `state.rootType`. null clears it.",
+            "nullable": true,
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "UpdateUpstreamContextDto": {
         "properties": {
           "upstream_context_path": {
@@ -8819,6 +9077,15 @@
             "description": "Only the side chats started from a message of this chat that the caller may see.",
             "in": "query",
             "name": "forkedFromChatId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Pass true with forkedFromChatId to also list the agent tasks and agent conversations under that chat or under its custom agent's shared main.",
+            "in": "query",
+            "name": "linkedChats",
             "required": false,
             "schema": {
               "type": "string"
@@ -11027,7 +11294,7 @@
         }
       },
       "post": {
-        "description": "Project admins only. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it. An enabled agent opens the creator's main chat with it and speaks first, asking what it is for so it can write its description.",
+        "description": "Project admins only. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it. An enabled agent opens the creator's main chat with it and speaks first, introducing itself and what the creator can ask it for.",
         "operationId": "AgentDefinitionsController_create",
         "parameters": [
           {
@@ -12084,6 +12351,114 @@
             "required": false,
             "schema": {
               "type": "boolean"
+            }
+          },
+          {
+            "description": "A user id: the person who deleted the row; keeps only rows that match it (or, with exclude_deleted_by=true, every other row).",
+            "in": "query",
+            "name": "deleted_by",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "true inverts deleted_by: rows that do not match it, including rows with no value.",
+            "in": "query",
+            "name": "exclude_deleted_by",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ISO 8601 instant; keeps only rows deleted at or after it.",
+            "in": "query",
+            "name": "deleted_since",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ISO 8601 instant; keeps only rows deleted before it.",
+            "in": "query",
+            "name": "deleted_until",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A user id: the branch's owner; keeps only rows that match it (or, with exclude_owner=true, every other row).",
+            "in": "query",
+            "name": "owner",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "true inverts owner: rows that do not match it, including rows with no value.",
+            "in": "query",
+            "name": "exclude_owner",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "A branch id, or \"master\" for Base: the branch the row was created from; keeps only rows that match it (or, with exclude_parent=true, every other row).",
+            "in": "query",
+            "name": "parent",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "true inverts parent: rows that do not match it, including rows with no value.",
+            "in": "query",
+            "name": "exclude_parent",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "A tag, matched ignoring case; keeps only rows that match it (or, with exclude_tag=true, every other row).",
+            "in": "query",
+            "name": "tag",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "true inverts tag: rows that do not match it, including rows with no value.",
+            "in": "query",
+            "name": "exclude_tag",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ISO 8601 instant; keeps only rows created at or after it.",
+            "in": "query",
+            "name": "created_since",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ISO 8601 instant; keeps only rows created before it.",
+            "in": "query",
+            "name": "created_until",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -13766,6 +14141,78 @@
             }
           },
           {
+            "description": "A user id: the person who deleted the row; keeps only rows that match it (or, with exclude_deleted_by=true, every other row).",
+            "in": "query",
+            "name": "deleted_by",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "true inverts deleted_by: rows that do not match it, including rows with no value.",
+            "in": "query",
+            "name": "exclude_deleted_by",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "ISO 8601 instant; keeps only rows deleted at or after it.",
+            "in": "query",
+            "name": "deleted_since",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ISO 8601 instant; keeps only rows deleted before it.",
+            "in": "query",
+            "name": "deleted_until",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A user id: the item's owner; keeps only rows that match it (or, with exclude_owner=true, every other row).",
+            "in": "query",
+            "name": "owner",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "true inverts owner: rows that do not match it, including rows with no value.",
+            "in": "query",
+            "name": "exclude_owner",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "An item type's id; keeps only rows that match it (or, with exclude_type=true, every other row).",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "true inverts type: rows that do not match it, including rows with no value.",
+            "in": "query",
+            "name": "exclude_type",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "The `cursor` of the last row already shown; returns the page after it. Omit for the first page.",
             "in": "query",
             "name": "before",
@@ -13955,6 +14402,71 @@
           "metadata": {
             "sidebarTitle": "Merge a branch into its parent",
             "title": "Merge a branch into its parent"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/branch/{id}/merge-readiness": {
+      "get": {
+        "description": "Lists every blocker, not only the first. The merge gates an ordinary merge by the caller checks: variant, editor groups, branch checks, designated and required reviewers, review policy approvals, blocking item checks and stage gates. The review page holds that the merge itself does not enforce: draft state, a merge already queued or running, and no changes. The advisory merge conflict preview; the merge runs its own exact conflict check. A gate that cannot be judged yet (a scan still running or too large) is listed under `unknown`, and `ready` is true only when both lists are empty. This read enforces nothing; the merge re-checks its own gates.",
+        "operationId": "BranchController_mergeReadiness",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "description": "Project UUID, not a slug. Resolve a slug with GET /project/slug/{slug} using the same workspace and credentials, then pass the returned id.",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MergeReadinessResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Check whether a branch is ready to merge",
+        "tags": [
+          "Branches"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-branch-id-merge-readiness",
+          "metadata": {
+            "sidebarTitle": "Check whether a branch is ready to merge",
+            "title": "Check whether a branch is ready to merge"
           }
         }
       }
@@ -20430,6 +20942,476 @@
         }
       }
     },
+    "/project/{projectId}/views/saved": {
+      "get": {
+        "description": "Every shared view, in display order, each shaped like the single-view responses. A view's `id` is what sharing a view takes as `view_id`.",
+        "operationId": "ViewsController_listSavedViews",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedSavedViewsResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the project's shared saved views",
+        "tags": [
+          "Views"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-views-saved",
+          "metadata": {
+            "sidebarTitle": "List the project's shared saved views",
+            "title": "List the project's shared saved views"
+          }
+        }
+      },
+      "post": {
+        "description": "Requires Admin access. Adds one view after the existing shared views, visible to every project member. Sets its structure only — start type and nesting rules, by data type id; columns, filters and display options are edited in Flow. An id that is already a shared view answers 409.",
+        "operationId": "ViewsController_createSavedView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSharedSavedViewDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedSavedViewDto"
+                }
+              }
+            },
+            "description": ""
+          },
+          "409": {
+            "description": "A shared view already has this id."
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a shared saved view",
+        "tags": [
+          "Views"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-views-saved",
+          "metadata": {
+            "sidebarTitle": "Create a shared saved view",
+            "title": "Create a shared saved view"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/views/saved/{viewId}": {
+      "delete": {
+        "description": "Requires Admin access. Removes the view for every project member. An admin can restore it from the audit log.",
+        "operationId": "ViewsController_deleteSavedView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "viewId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a shared saved view",
+        "tags": [
+          "Views"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/delete-project-projectid-views-saved-viewid",
+          "metadata": {
+            "sidebarTitle": "Delete a shared saved view",
+            "title": "Delete a shared saved view"
+          }
+        }
+      },
+      "get": {
+        "operationId": "ViewsController_getSavedView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "viewId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedSavedViewDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a shared saved view",
+        "tags": [
+          "Views"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-views-saved-viewid",
+          "metadata": {
+            "sidebarTitle": "Get a shared saved view",
+            "title": "Get a shared saved view"
+          }
+        }
+      },
+      "patch": {
+        "description": "Requires Admin access. Changes only the fields you send and keeps the rest of the view, including its columns, filters and display options. `relationships` replaces every nesting rule.",
+        "operationId": "ViewsController_updateSavedView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "viewId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSharedSavedViewDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedSavedViewDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a shared saved view",
+        "tags": [
+          "Views"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/patch-project-projectid-views-saved-viewid",
+          "metadata": {
+            "sidebarTitle": "Update a shared saved view",
+            "title": "Update a shared saved view"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/views/saved/{viewId}/relationships": {
+      "delete": {
+        "description": "Requires Admin access. Removes the rule for `parentType` and `childType` and keeps the view's other rules. A view without that rule answers 404. Returns the view.",
+        "operationId": "ViewsController_removeSavedViewRelationship",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "viewId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Data type id of the rule's parent.",
+            "in": "query",
+            "name": "parentType",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Data type id of the rule's child.",
+            "in": "query",
+            "name": "childType",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedSavedViewDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove a nesting rule from a shared saved view",
+        "tags": [
+          "Views"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/delete-project-projectid-views-saved-viewid-relationships",
+          "metadata": {
+            "sidebarTitle": "Remove a nesting rule from a shared saved view",
+            "title": "Remove a nesting rule from a shared saved view"
+          }
+        }
+      },
+      "post": {
+        "description": "Requires Admin access. Appends one rule (\"under `parentType`, show items of `childType`\") after the view's other rules, which are kept. A rule is identified by its `parentType` and `childType`: sending a rule the view already has, with the same direction, changes nothing, so a retry is safe; the same pair with another direction answers 409. Returns the view.",
+        "operationId": "ViewsController_addSavedViewRelationship",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "viewId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavedViewRelationshipDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedSavedViewDto"
+                }
+              }
+            },
+            "description": ""
+          },
+          "409": {
+            "description": "The view already has a rule for this pair with another direction."
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add a nesting rule to a shared saved view",
+        "tags": [
+          "Views"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-views-saved-viewid-relationships",
+          "metadata": {
+            "sidebarTitle": "Add a nesting rule to a shared saved view",
+            "title": "Add a nesting rule to a shared saved view"
+          }
+        }
+      }
+    },
     "/reqif/parse": {
       "post": {
         "description": "Resolves a ReqIF document against an optional import mapping and returns the entities it describes (identifier, flow type, field values — with XHTML fields converted to rich-text JSON), the hierarchy/relation links, and the file-derived default schema. No entities are created; this is a read-only preview of what an import would produce.",
@@ -20725,15 +21707,15 @@
             "bearer": []
           }
         ],
-        "summary": "List every shared-access grant in a project, including expired ones",
+        "summary": "List shared-access grants in a project, including expired ones. Admins get every grant; other members get the grants they created.",
         "tags": [
           "Shared Access Grants"
         ],
         "x-mint": {
           "href": "/api/endpoints/get-shared-grants-project-projectid",
           "metadata": {
-            "sidebarTitle": "List every shared-access grant in a project, including expired ones",
-            "title": "List every shared-access grant in a project, including expired ones"
+            "sidebarTitle": "List shared-access grants in a project, including expired ones. Admins get every grant; other members get the grants they created.",
+            "title": "List shared-access grants in a project, including expired ones. Admins get every grant; other members get the grants they created."
           }
         }
       }
@@ -22193,6 +23175,9 @@
     },
     {
       "name": "Users"
+    },
+    {
+      "name": "Views"
     }
   ]
 }
