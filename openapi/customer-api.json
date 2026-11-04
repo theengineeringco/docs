@@ -77,6 +77,9 @@
               "baseline.rename",
               "project.ai_model_update",
               "review_policy.update",
+              "google.oauth_acknowledged",
+              "google.project_approved",
+              "google.project_revoked",
               "template.create",
               "template.rename",
               "template.update",
@@ -148,6 +151,7 @@
               "skill",
               "user",
               "review_policy",
+              "integration",
               "agent"
             ],
             "type": "string"
@@ -492,6 +496,9 @@
             "nullable": true,
             "type": "string"
           },
+          "messageOffset": {
+            "type": "number"
+          },
           "messages": {
             "items": {
               "type": "object"
@@ -567,6 +574,9 @@
           "title": {
             "nullable": true,
             "type": "string"
+          },
+          "totalMessageCount": {
+            "type": "number"
           },
           "trigger_info": {
             "nullable": true,
@@ -894,6 +904,11 @@
           "name": {
             "type": "string"
           },
+          "ownerUserId": {
+            "description": "The person this agent belongs to, or null for the project's. A personal agent is listed to its owner alone.",
+            "nullable": true,
+            "type": "string"
+          },
           "projectId": {
             "type": "string"
           },
@@ -924,6 +939,7 @@
           "description",
           "role",
           "botUserId",
+          "ownerUserId",
           "enabled",
           "suggestOnly",
           "avatarColor",
@@ -1040,6 +1056,11 @@
           "name": {
             "type": "string"
           },
+          "ownerUserId": {
+            "description": "The person this agent belongs to, or null for the project's. A personal agent is listed to its owner alone.",
+            "nullable": true,
+            "type": "string"
+          },
           "projectId": {
             "type": "string"
           },
@@ -1064,6 +1085,7 @@
           "description",
           "role",
           "botUserId",
+          "ownerUserId",
           "enabled",
           "suggestOnly",
           "avatarColor",
@@ -1436,6 +1458,10 @@
               "$ref": "#/components/schemas/AutomationTriggerDto"
             },
             "type": "array"
+          },
+          "url": {
+            "description": "Link to the automation in Flow, where a person reviews it and turns it on or off.",
+            "type": "string"
           },
           "writeBranchId": {
             "description": "The branch every run writes on (`master` for Base), whatever its trigger names; a change-request review trigger still works on the change request under review. Base or a variant takes the writes directly only while it allows edits to live, and an unprotected change request always does; otherwise runs use a change request under it. Absent: triggered runs use a change request (see `branchPerRun`) and hand-launched runs write where they are launched.",
@@ -3218,6 +3244,14 @@
           "role": {
             "description": "A one-line role shown under the name, such as \"Thermal reviewer\". Blank clears it.",
             "nullable": true,
+            "type": "string"
+          },
+          "scope": {
+            "description": "Whose agent this is: `project` (the default) for one every member sees and project admins manage, `personal` for the caller's own, which exists for nobody else. Ownership is set at creation and never changes.",
+            "enum": [
+              "project",
+              "personal"
+            ],
             "type": "string"
           },
           "suggestOnly": {
@@ -9192,13 +9226,37 @@
     },
     "/ai/agents/{id}": {
       "get": {
-        "description": "`messages` is the whole transcript so far, `status` is `streaming` while a turn runs, `ready` when the agent has answered, or `error` (with `error` set) when the last turn failed.",
+        "description": "`messages` is the whole transcript unless messageLimit requests a latest-first page. `status` is `streaming` while a turn runs, `ready` when the agent has answered, or `error` (with `error` set) when the last turn failed.",
         "operationId": "AgentChatController_findById",
         "parameters": [
           {
             "in": "path",
             "name": "id",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "messageLimit",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "beforeMessageId",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -9744,7 +9802,7 @@
     },
     "/audit-log": {
       "get": {
-        "description": "User administration (members joining and leaving, role and project-access changes) and organization review-policy changes, newest first. Requires an admin with access to every project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
+        "description": "User administration, organization review-policy changes, and Google integration acknowledgments and project revocations, newest first. Requires an admin with access to every project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
         "operationId": "WorkspaceAuditController_list",
         "parameters": [
           {
@@ -11238,6 +11296,7 @@
     },
     "/project/{projectId}/agents": {
       "get": {
+        "description": "The project's agents and the caller's own personal ones (`ownerUserId` set). Nobody else's personal agent is listed: it exists for its owner alone.",
         "operationId": "AgentDefinitionsController_list",
         "parameters": [
           {
@@ -11294,7 +11353,7 @@
         }
       },
       "post": {
-        "description": "Project admins only. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it. An enabled agent opens the creator's main chat with it and speaks first, introducing itself and what the creator can ask it for.",
+        "description": "A project agent (the default `scope`) takes a project admin and is every member's; a personal agent (`scope: personal`) is the caller's own, which any member who can write may create and which exists for nobody else in the project. Whose it is never changes. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it (the owner, for a personal agent). An enabled agent opens the creator's main chat with it and speaks first, introducing itself and what the creator can ask it for.",
         "operationId": "AgentDefinitionsController_create",
         "parameters": [
           {
@@ -11420,7 +11479,7 @@
     },
     "/project/{projectId}/agents/{agentId}": {
       "delete": {
-        "description": "Withdraws the agent from the project and stops future activation. Its identity, conversations and memories are retained.",
+        "description": "Withdraws the agent from the project and stops future activation. Its identity, conversations and memories are retained. A project admin for the project's agent, its owner for a personal one while the owner can write to the project.",
         "operationId": "AgentDefinitionsController_archive",
         "parameters": [
           {
@@ -11537,6 +11596,7 @@
         }
       },
       "patch": {
+        "description": "A project admin for the project's agent, its owner for a personal one while the owner can write to the project.",
         "operationId": "AgentDefinitionsController_update",
         "parameters": [
           {
@@ -11753,6 +11813,7 @@
                 "skill",
                 "user",
                 "review_policy",
+                "integration",
                 "agent"
               ],
               "type": "string"
@@ -11888,7 +11949,7 @@
         }
       },
       "post": {
-        "description": "Creates one automation at the end of the project's list, or of your personal list with `scope=personal`. Creating shared automations requires Admin access. It runs as you: its scheduled and webhook runs use your access to the project for as long as you can edit it, and pause when you no longer can. Check `runsAs` on the response. Script automations need the automation scripts beta, and `allowAdminTools` cannot be turned on with an API key.",
+        "description": "Creates one automation at the end of the project's list, or of your personal list with `scope=personal`. Creating shared automations requires Admin access. It runs as you: its scheduled and webhook runs use your access to the project for as long as you can edit it, and pause when you no longer can. Check `runsAs` on the response. Script automations need the automation scripts beta, and `allowAdminTools` cannot be turned on with an API key. Through Flow's hosted MCP server, a new automation is saved turned off (`enabled: false`) and runs only once a person turns it on in Flow: give them the `url` in the response. `enabled: true` is refused there.",
         "operationId": "AutomationsController_create",
         "parameters": [
           {
@@ -11956,7 +12017,6 @@
         "tags": [
           "Automations"
         ],
-        "x-flow-mcp-tool": false,
         "x-mint": {
           "href": "/api/endpoints/post-project-projectid-automations",
           "metadata": {
@@ -12026,7 +12086,6 @@
         "tags": [
           "Automations"
         ],
-        "x-flow-mcp-tool": false,
         "x-mint": {
           "href": "/api/endpoints/delete-project-projectid-automations-automationid",
           "metadata": {
@@ -12110,7 +12169,7 @@
         }
       },
       "patch": {
-        "description": "Updating shared automations requires Admin access. Changes only the fields you send; `triggers` replaces the trigger list, `trigger` alone replaces only the first trigger, and `triggers: []` makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer.",
+        "description": "Updating shared automations requires Admin access. Changes only the fields you send; `triggers` replaces the trigger list, `trigger` alone replaces only the first trigger, and `triggers: []` makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer. Through Flow's hosted MCP server, an edit that changes what an enabled automation runs, or how or when it runs, is refused with 409: turn it off first (`enabled: false`), edit it, and give the person the `url` in the response to turn it back on in Flow. Renaming it, turning it off or changing who is notified works on an enabled automation and leaves it on. `enabled: true` is refused there.",
         "operationId": "AutomationsController_update",
         "parameters": [
           {
@@ -12189,7 +12248,6 @@
         "tags": [
           "Automations"
         ],
-        "x-flow-mcp-tool": false,
         "x-mint": {
           "href": "/api/endpoints/patch-project-projectid-automations-automationid",
           "metadata": {
@@ -18935,6 +18993,15 @@
             "required": false,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "Include creation and last-updated timestamps",
+            "in": "query",
+            "name": "include_metadata",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
