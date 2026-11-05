@@ -1435,6 +1435,14 @@
           "script": {
             "type": "string"
           },
+          "scriptCategoryReferenceMode": {
+            "description": "Category references used by script tools. Omit for legacy stable IDs.",
+            "enum": [
+              "display-name",
+              "stable-id"
+            ],
+            "type": "string"
+          },
           "scriptTimeoutSeconds": {
             "type": "number"
           },
@@ -3340,6 +3348,14 @@
             "description": "The python a script automation runs. Required in script mode.",
             "type": "string"
           },
+          "scriptCategoryReferenceMode": {
+            "description": "Category references used by script tools. Omit for legacy stable IDs.",
+            "enum": [
+              "display-name",
+              "stable-id"
+            ],
+            "type": "string"
+          },
           "scriptTimeoutSeconds": {
             "description": "Script automations: how many seconds one run may take before it is stopped. Omit for the workspace default; the workspace cap bounds it (the error names the cap). A run always holds one executor slot within its project's share, however long it may run.",
             "type": "number"
@@ -3700,6 +3716,774 @@
       },
       "CreateSharedSavedViewDto": {
         "properties": {
+          "columns": {
+            "description": "Table columns, in order. Replaces every column; [] leaves the view on the default columns. Stored as `state.columns`.",
+            "items": {
+              "$ref": "#/components/schemas/SavedViewColumnDto"
+            },
+            "type": "array"
+          },
+          "filters": {
+            "allOf": [
+              {
+                "properties": {
+                  "nodes": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                              "minLength": 1,
+                              "type": "string"
+                            },
+                            "kind": {
+                              "enum": [
+                                "group"
+                              ],
+                              "type": "string"
+                            },
+                            "nodes": {
+                              "description": "The same leaves as the top level; groups may nest.",
+                              "items": {},
+                              "type": "array"
+                            },
+                            "operator": {
+                              "enum": [
+                                "and",
+                                "or"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "kind",
+                            "operator",
+                            "nodes"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "anyOf": [
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "description": "Value-agnostic presence check; supply no value operand.",
+                                  "enum": [
+                                    "isPopulated",
+                                    "isEmpty"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "tag",
+                                    "stage",
+                                    "verificationResult",
+                                    "text",
+                                    "richText",
+                                    "number",
+                                    "date",
+                                    "user"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "tags": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "tag",
+                                    "stage",
+                                    "verificationResult"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "tags"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "equals",
+                                    "notEquals",
+                                    "contains",
+                                    "notContains",
+                                    "startsWith",
+                                    "endsWith"
+                                  ],
+                                  "type": "string"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "text",
+                                    "richText"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "text"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "equals",
+                                    "notEquals",
+                                    "greaterThan",
+                                    "greaterThanOrEqual",
+                                    "lessThan",
+                                    "lessThanOrEqual",
+                                    "between"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "number"
+                                  ],
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                },
+                                "valueTo": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "value"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "date": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "dateTo": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "on",
+                                    "before",
+                                    "after",
+                                    "between"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "date"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "date"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "date": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "dateTo": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "on",
+                                    "before",
+                                    "after",
+                                    "between",
+                                    "within",
+                                    "notWithin"
+                                  ],
+                                  "type": "string"
+                                },
+                                "range": {
+                                  "description": "For within / notWithin: the rolling window ending now — the last 24 hours, 7, 30 or 90 days.",
+                                  "enum": [
+                                    "day",
+                                    "week",
+                                    "month",
+                                    "quarter"
+                                  ],
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "timestamp": {
+                                  "description": "Which lifecycle instant to compare: when the item was created, or when it last changed (any field or link edit visible on this branch).",
+                                  "enum": [
+                                    "createdAt",
+                                    "updatedAt"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "timestamp"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "timestamp",
+                                "operation",
+                                "date"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "isTrue",
+                                    "isFalse"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "toggle"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "user"
+                                  ],
+                                  "type": "string"
+                                },
+                                "userIds": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "userIds"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "type"
+                                  ],
+                                  "type": "string"
+                                },
+                                "typeIds": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "typeIds"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "fieldType": {
+                                  "enum": [
+                                    "jira",
+                                    "teamcenter",
+                                    "linear",
+                                    "googleDoc",
+                                    "googleSheet",
+                                    "aodocsDoc",
+                                    "file",
+                                    "cadFile"
+                                  ],
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "isPopulated",
+                                    "isEmpty"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "presence"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "fieldType",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "changedInBranch"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "isPopulated",
+                                    "isEmpty"
+                                  ],
+                                  "type": "string"
+                                },
+                                "resolved": {
+                                  "enum": [
+                                    "open",
+                                    "resolved"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "hasComments"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "resolved": {
+                                  "enum": [
+                                    "open",
+                                    "resolved"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "commentBy"
+                                  ],
+                                  "type": "string"
+                                },
+                                "userIds": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "userIds"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "contains",
+                                    "notContains"
+                                  ],
+                                  "type": "string"
+                                },
+                                "resolved": {
+                                  "enum": [
+                                    "open",
+                                    "resolved"
+                                  ],
+                                  "type": "string"
+                                },
+                                "text": {
+                                  "maxLength": 1000,
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "commentText"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "text"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "resolved": {
+                                  "enum": [
+                                    "open",
+                                    "resolved"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "commentField"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "fieldId"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "matches"
+                                  ],
+                                  "type": "string"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "search"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "text"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "direction": {
+                                  "description": "Which links count: `upstream` (inbound), `downstream` (outbound), `up+downstream`, or `cross-link`. Omit to count a link of any kind — inbound, outbound and cross-link alike — which is also what the view toolbar does with no direction set.",
+                                  "enum": [
+                                    "upstream",
+                                    "downstream",
+                                    "up+downstream",
+                                    "cross-link"
+                                  ],
+                                  "type": "string"
+                                },
+                                "entityId": {
+                                  "default": null,
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "targetKind": {
+                                  "description": "Whether the target is one entity (`entityId`) or any entity of a type (`typeId`). Inferred from which id is given when omitted.",
+                                  "enum": [
+                                    "entity",
+                                    "type"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "linkedTo"
+                                  ],
+                                  "type": "string"
+                                },
+                                "typeId": {
+                                  "default": null,
+                                  "description": "Entity-type reference for \"linked to any entity of this type\"; use the category form required by the calling tool.",
+                                  "nullable": true,
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation"
+                              ],
+                              "type": "object"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "type": "array"
+                  },
+                  "operator": {
+                    "enum": [
+                      "and",
+                      "or"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "operator",
+                  "nodes"
+                ],
+                "type": "object"
+              }
+            ],
+            "description": "Conditions every item the view shows must meet, joined by `operator`; a `group` node joins its own `nodes` with its own operator. Each leaf's `type` is the FIELD'S DATA TYPE (`tag`, `stage`, `verificationResult`, `text`, `richText`, `number`, `date`, `toggle`, `user`, `presence`) with `fieldId` a field key from the categories endpoint (or `<typeId>::<key>`), or a structural condition (`type`, `linkedTo`, `timestamp`, `changedInBranch`, the comment conditions). Tag, stage and verification values are option NAMES; user values are user ids; type ids are data type ids. Unknown fields, options, types or operations answer 400 and nothing is saved. Example — Status is Triage: {\"operator\":\"and\",\"nodes\":[{\"type\":\"tag\",\"fieldId\":\"status\",\"operation\":\"overlaps\",\"tags\":[\"Triage\"]}]}. Stored as `state.filters`."
+          },
           "icon": {
             "$ref": "#/components/schemas/SavedViewIconDto"
           },
@@ -3720,6 +4504,13 @@
           "rootType": {
             "description": "Data type id of the items the view starts from (its \"Start type\"). Stored as `state.rootType`.",
             "type": "string"
+          },
+          "sort": {
+            "description": "Ordered sort keys, the first most significant. Replaces the whole sort; send [] for the natural order. Stored as `state.sort`.",
+            "items": {
+              "$ref": "#/components/schemas/SavedViewSortDto"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -7249,6 +8040,38 @@
         ],
         "type": "string"
       },
+      "SavedViewColumnDto": {
+        "properties": {
+          "categories": {
+            "description": "Field columns only: the data type ids the column applies to. Omitted or empty, it applies to every type that carries the field. A `link` column takes none.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "key": {
+            "description": "Field key of the column: a key from the categories endpoint (`name`, `description`, `owner`, `reviewers`, `unique_entity_number` or a custom field key), `<typeId>::<key>` to pin one type's field, or a reserved key: `__createdAt` (Created), `__updatedAt` (Updated), `__entityType` (Type), `__hierarchyDepth` or `__itemLink`. Give exactly one of `key` and `link`.",
+            "type": "string"
+          },
+          "link": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SavedViewLinkColumnDto"
+              }
+            ],
+            "description": "A linked-items column instead of a field column."
+          },
+          "pinned": {
+            "description": "Keep the column pinned on the left of the table.",
+            "type": "boolean"
+          },
+          "wrap": {
+            "description": "Wrap cell text onto several lines.",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "SavedViewIconDto": {
         "properties": {
           "colour": {
@@ -7263,6 +8086,29 @@
         "required": [
           "icon",
           "colour"
+        ],
+        "type": "object"
+      },
+      "SavedViewLinkColumnDto": {
+        "properties": {
+          "direction": {
+            "description": "Which links the column follows from the row: `downstream` (the row links to the item), `upstream` (the item links to the row), `up+downstream` or `cross-link`.",
+            "enum": [
+              "up+downstream",
+              "cross-link",
+              "upstream",
+              "downstream"
+            ],
+            "type": "string"
+          },
+          "entityType": {
+            "description": "Data type id of the linked items the column lists.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "entityType",
+          "direction"
         ],
         "type": "object"
       },
@@ -7289,6 +8135,26 @@
         "required": [
           "parentType",
           "childType"
+        ],
+        "type": "object"
+      },
+      "SavedViewSortDto": {
+        "properties": {
+          "columnId": {
+            "description": "A column key as in `columns`: a field key or `<typeId>::<key>` ref; a reserved key (`name`, `__createdAt`, `__updatedAt`, `__entityType`, `__hierarchyDepth`). A linked-items column cannot be sorted by.",
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "columnId",
+          "direction"
         ],
         "type": "object"
       },
@@ -7752,7 +8618,7 @@
           },
           "state": {
             "additionalProperties": true,
-            "description": "The view configuration: `rootType` and `relationships` as written here, plus columns, filters, sort and display options edited in Flow.",
+            "description": "The view configuration: `rootType`, `relationships`, `columns`, `filters` and `sort` as written here, plus display options edited in Flow.",
             "type": "object"
           }
         },
@@ -8459,6 +9325,14 @@
             "description": "The python a script automation runs. Required in script mode.",
             "type": "string"
           },
+          "scriptCategoryReferenceMode": {
+            "description": "Category references used by script tools. Omit for legacy stable IDs.",
+            "enum": [
+              "display-name",
+              "stable-id"
+            ],
+            "type": "string"
+          },
           "scriptTimeoutSeconds": {
             "description": "Script automations: how many seconds one run may take before it is stopped. Omit for the workspace default; the workspace cap bounds it (the error names the cap). A run always holds one executor slot within its project's share, however long it may run.",
             "type": "number"
@@ -8630,6 +9504,776 @@
       },
       "UpdateSharedSavedViewDto": {
         "properties": {
+          "columns": {
+            "description": "Table columns, in order. Replaces every column; [] leaves the view on the default columns. Stored as `state.columns`. null clears them too.",
+            "items": {
+              "$ref": "#/components/schemas/SavedViewColumnDto"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "filters": {
+            "allOf": [
+              {
+                "properties": {
+                  "nodes": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                              "minLength": 1,
+                              "type": "string"
+                            },
+                            "kind": {
+                              "enum": [
+                                "group"
+                              ],
+                              "type": "string"
+                            },
+                            "nodes": {
+                              "description": "The same leaves as the top level; groups may nest.",
+                              "items": {},
+                              "type": "array"
+                            },
+                            "operator": {
+                              "enum": [
+                                "and",
+                                "or"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "kind",
+                            "operator",
+                            "nodes"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "anyOf": [
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "description": "Value-agnostic presence check; supply no value operand.",
+                                  "enum": [
+                                    "isPopulated",
+                                    "isEmpty"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "tag",
+                                    "stage",
+                                    "verificationResult",
+                                    "text",
+                                    "richText",
+                                    "number",
+                                    "date",
+                                    "user"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "tags": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "tag",
+                                    "stage",
+                                    "verificationResult"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "tags"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "equals",
+                                    "notEquals",
+                                    "contains",
+                                    "notContains",
+                                    "startsWith",
+                                    "endsWith"
+                                  ],
+                                  "type": "string"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "text",
+                                    "richText"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "text"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "equals",
+                                    "notEquals",
+                                    "greaterThan",
+                                    "greaterThanOrEqual",
+                                    "lessThan",
+                                    "lessThanOrEqual",
+                                    "between"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "number"
+                                  ],
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                },
+                                "valueTo": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "value"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "date": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "dateTo": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "on",
+                                    "before",
+                                    "after",
+                                    "between"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "date"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "date"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "date": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "dateTo": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "on",
+                                    "before",
+                                    "after",
+                                    "between",
+                                    "within",
+                                    "notWithin"
+                                  ],
+                                  "type": "string"
+                                },
+                                "range": {
+                                  "description": "For within / notWithin: the rolling window ending now — the last 24 hours, 7, 30 or 90 days.",
+                                  "enum": [
+                                    "day",
+                                    "week",
+                                    "month",
+                                    "quarter"
+                                  ],
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "timestamp": {
+                                  "description": "Which lifecycle instant to compare: when the item was created, or when it last changed (any field or link edit visible on this branch).",
+                                  "enum": [
+                                    "createdAt",
+                                    "updatedAt"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "timestamp"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "timestamp",
+                                "operation",
+                                "date"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "isTrue",
+                                    "isFalse"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "toggle"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "user"
+                                  ],
+                                  "type": "string"
+                                },
+                                "userIds": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "operation",
+                                "userIds"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "type"
+                                  ],
+                                  "type": "string"
+                                },
+                                "typeIds": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "typeIds"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "type": "string"
+                                },
+                                "fieldType": {
+                                  "enum": [
+                                    "jira",
+                                    "teamcenter",
+                                    "linear",
+                                    "googleDoc",
+                                    "googleSheet",
+                                    "aodocsDoc",
+                                    "file",
+                                    "cadFile"
+                                  ],
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "isPopulated",
+                                    "isEmpty"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "presence"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "fieldId",
+                                "fieldType",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "changedInBranch"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "isPopulated",
+                                    "isEmpty"
+                                  ],
+                                  "type": "string"
+                                },
+                                "resolved": {
+                                  "enum": [
+                                    "open",
+                                    "resolved"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "hasComments"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "resolved": {
+                                  "enum": [
+                                    "open",
+                                    "resolved"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "commentBy"
+                                  ],
+                                  "type": "string"
+                                },
+                                "userIds": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "userIds"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "contains",
+                                    "notContains"
+                                  ],
+                                  "type": "string"
+                                },
+                                "resolved": {
+                                  "enum": [
+                                    "open",
+                                    "resolved"
+                                  ],
+                                  "type": "string"
+                                },
+                                "text": {
+                                  "maxLength": 1000,
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "commentText"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "text"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fieldId": {
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "resolved": {
+                                  "enum": [
+                                    "open",
+                                    "resolved"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "commentField"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "fieldId"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "matches"
+                                  ],
+                                  "type": "string"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "search"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation",
+                                "text"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "direction": {
+                                  "description": "Which links count: `upstream` (inbound), `downstream` (outbound), `up+downstream`, or `cross-link`. Omit to count a link of any kind — inbound, outbound and cross-link alike — which is also what the view toolbar does with no direction set.",
+                                  "enum": [
+                                    "upstream",
+                                    "downstream",
+                                    "up+downstream",
+                                    "cross-link"
+                                  ],
+                                  "type": "string"
+                                },
+                                "entityId": {
+                                  "default": null,
+                                  "nullable": true,
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "Any string unique within the expression; Flow assigns one when omitted.",
+                                  "minLength": 1,
+                                  "type": "string"
+                                },
+                                "operation": {
+                                  "enum": [
+                                    "overlaps",
+                                    "excludes"
+                                  ],
+                                  "type": "string"
+                                },
+                                "targetKind": {
+                                  "description": "Whether the target is one entity (`entityId`) or any entity of a type (`typeId`). Inferred from which id is given when omitted.",
+                                  "enum": [
+                                    "entity",
+                                    "type"
+                                  ],
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "linkedTo"
+                                  ],
+                                  "type": "string"
+                                },
+                                "typeId": {
+                                  "default": null,
+                                  "description": "Entity-type reference for \"linked to any entity of this type\"; use the category form required by the calling tool.",
+                                  "nullable": true,
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "operation"
+                              ],
+                              "type": "object"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "type": "array"
+                  },
+                  "operator": {
+                    "enum": [
+                      "and",
+                      "or"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "operator",
+                  "nodes"
+                ],
+                "type": "object"
+              }
+            ],
+            "description": "Conditions every item the view shows must meet, joined by `operator`; a `group` node joins its own `nodes` with its own operator. Each leaf's `type` is the FIELD'S DATA TYPE (`tag`, `stage`, `verificationResult`, `text`, `richText`, `number`, `date`, `toggle`, `user`, `presence`) with `fieldId` a field key from the categories endpoint (or `<typeId>::<key>`), or a structural condition (`type`, `linkedTo`, `timestamp`, `changedInBranch`, the comment conditions). Tag, stage and verification values are option NAMES; user values are user ids; type ids are data type ids. Unknown fields, options, types or operations answer 400 and nothing is saved. Example — Status is Triage: {\"operator\":\"and\",\"nodes\":[{\"type\":\"tag\",\"fieldId\":\"status\",\"operation\":\"overlaps\",\"tags\":[\"Triage\"]}]}. Stored as `state.filters`. null clears them.",
+            "nullable": true
+          },
           "icon": {
             "allOf": [
               {
@@ -8654,6 +10298,14 @@
             "description": "Data type id of the items the view starts from (its \"Start type\"). Stored as `state.rootType`. null clears it.",
             "nullable": true,
             "type": "object"
+          },
+          "sort": {
+            "description": "Ordered sort keys, the first most significant. Replaces the whole sort; send [] for the natural order. Stored as `state.sort`. null clears it.",
+            "items": {
+              "$ref": "#/components/schemas/SavedViewSortDto"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
         "type": "object"
@@ -21065,7 +22717,7 @@
         }
       },
       "post": {
-        "description": "Requires Admin access. Adds one view after the existing shared views, visible to every project member. Sets its structure only — start type and nesting rules, by data type id; columns, filters and display options are edited in Flow. An id that is already a shared view answers 409.",
+        "description": "Requires Admin access. Adds one view after the existing shared views, visible to every project member. Sets its structure (start type and nesting rules, by data type id) and optionally its table columns, filters and sort, each checked against the data model; display options are edited in Flow. An id that is already a shared view answers 409.",
         "operationId": "ViewsController_createSavedView",
         "parameters": [
           {
@@ -21250,7 +22902,7 @@
         }
       },
       "patch": {
-        "description": "Requires Admin access. Changes only the fields you send and keeps the rest of the view, including its columns, filters and display options. `relationships` replaces every nesting rule.",
+        "description": "Requires Admin access. Changes only the fields you send and keeps the rest of the view, including its display options. `relationships`, `columns`, `filters` and `sort` each replace that whole part of the view; null clears columns, filters or sort.",
         "operationId": "ViewsController_updateSavedView",
         "parameters": [
           {
