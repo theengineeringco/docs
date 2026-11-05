@@ -11,12 +11,16 @@ on:
       - 'scripts/test_sync_customer_api.py'
       - 'scripts/test_api_docs.py'
       - 'scripts/test_api_deployment.mjs'
+      - 'scripts/test_docs_routing.py'
       - 'api-deployment.js'
       - '.github/workflows/sync-customer-api.yml'
       - 'openapi/customer-api.json'
       - 'api/**'
       - 'api.mdx'
       - 'docs.json'
+      - 'overview.mdx'
+      - 'overview/**'
+      - 'style.css'
 
 permissions:
   contents: read

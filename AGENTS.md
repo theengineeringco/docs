@@ -11,7 +11,8 @@
 
 ## TL;DR
 
-- Redirect `/` to the API overview at `/api`, and keep the logo linked to `/api`.
+- Keep the tabs ordered **Overview**, **API**, then **Release Notes**. Overview introduces Flow to clients, systems engineers, and domain engineers; API contains integration documentation.
+- Redirect `/` to the product overview at `/overview`, and keep the logo linked to `/overview`. Keep the API introduction at `/api` so existing integration links continue to work.
 - Use `/release-notes` as the only Release Notes index URL.
 - Store every dated page at lowercase `release-notes/YYYY-MM-DD`.
 - Use ISO dates in paths and filenames: `YYYY-MM-DD`.
