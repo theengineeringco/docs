@@ -1,0 +1,83 @@
+---
+title: "November 5, 2026"
+sidebarTitle: "November 5, 2026"
+description: "Flow AI starts GitHub Actions workflows you allow, Slack setup from settings or the AI assistant, an interface color filter on the Architecture tab, named dashboard widgets, and personal API keys for external collaborators."
+---
+
+## In this release
+
+- [Start GitHub Actions workflows from Flow AI](#start-github-actions-workflows-from-flow-ai)
+- [Set up Slack from settings or the AI assistant](#set-up-slack-from-settings-or-the-ai-assistant)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Start GitHub Actions workflows from Flow AI
+
+With GitHub write-back on, GitHub settings list each repository's workflows, and an admin turns on the ones the agent may start. Every workflow starts off.
+
+The agent can start an enabled workflow on any branch with its inputs. It then reads the run's status, each job's annotations and the end of its log, and the names of its artifacts.
+
+<Note>
+  Starting and reading workflow runs needs the GitHub App's **Actions** permission (read and write). Apps created from Flow now request it. For an existing App, an organization owner adds it under the App's permissions and accepts the change on the installation. The settings page explains how. Other GitHub features work without it.
+</Note>
+
+## Set up Slack from settings or the AI assistant
+
+**Settings → Integrations → Slack** asks you to choose between Flow's Slack app (Add to Slack) and your own Slack app, with a shorter, three-step setup for your own app. Your own app's bot token and signing secret are entered together. You pick the channels the agent may post to or read from a list of your workspace's public channels, several at a time, instead of typing channel IDs. Once connected, the page flags anything the connection needs and asks before you disconnect. Opening the account link that `/flow` sends shows a page that only asks you to confirm or cancel linking your Slack account to Flow.
+
+Organization admins can also ask the AI assistant to connect Slack. It offers Add to Slack or creating your own Slack app from a manifest, then proposes the projects and channels to enable on a card where you untick anything you don't want before applying. The assistant can also summarize the current setup or disconnect Slack.
+
+## Improvements & Fixes
+
+### Agent
+
+- **AI chat confirmations.** When you click **Confirm** on an action, the action runs first, and a message you queued meanwhile is sent after it. A confirmed action in a chat with an open to-do list no longer fails with an error.
+
+### Architecture
+
+- **Interface color filter.** A filter beside the diagram menu on the Architecture tab shows or hides interfaces by their Interface color option, so you can read a dense breakdown one kind of connection at a time. Flow remembers the choice per project, and exports draw only what is shown.
+
+### Automations
+
+- **Project change triggers.** Changes made immediately after you enable a trigger are included in its first scheduled check.
+
+### Branching
+
+- **Update from parent on long-lived branches.** Resolving conflicts and updating from the parent take time proportional to the smaller of the two change sets, so a small branch under a busy parent, or a small parent update into a busy branch, no longer slows down with the larger side. The banner shows an approximate count of the items the parent touched, and the review dialog lists them page by page.
+
+### Dashboards
+
+- **Widget names.** Give any dashboard widget its own title from the name field in the widget dialog. Unnamed widgets, including existing ones, keep their description, such as "Owner in System", as the title.
+
+### Diagrams
+
+- **Curved connectors.** Curved connectors run between the shapes they join and land on them, rather than looping back when the shapes are close. Dragging the middle of a straight line bends it into a curve again.
+- **Line tool curves.** Curved lines drawn with the Line tool draw as smooth curves through their points again, instead of straight segments.
+- **Dotted strokes.** Dotted wires, shape outlines, and lines draw as visible dots again.
+- **Wire and shape editing.** A wire end dropped on a shape attaches where it was dropped. Alt-drag drags a copy, Shift while resizing keeps proportions, the style panel switches a selected wire between elbow and straight, and you can widen an entity pill on a wire from its ends.
+- **Entity card names.** A long item name wraps onto the lines the card has room for instead of being cut off, and any fields on the card move below it.
+
+### Formulas
+
+- **Hierarchy formulas.** A formula that walks the hierarchy around its own item, such as summing values in its parent's other children, no longer gets stuck showing an error instead of its result.
+- **V2 migration.** Filtered aggregates migrate as live formulas instead of fixed numbers, so their totals keep updating and include matching values added later.
+
+### Integrations
+
+- **Connecting GitHub.** **Continue to GitHub** and **Create GitHub App** open GitHub in a new tab, and your original Flow tab moves on to the next step when GitHub sends you back. If GitHub can't send you back, the Flow tab is still there to continue from. A newly created App appears without refreshing, with clear steps for installing it on repositories or entering an existing installation ID.
+
+### Review
+
+- **Stage gates.** Fully reverted field and relationship edits no longer block merges through stage gates. Released items no longer appear changed or require fresh approval solely because an automatic update recorded their existing placement on Home. Review checks are faster on branches with many items that do not require stage approval.
+
+### Table
+
+- **Large projects.** Open tables no longer reload their top-level items over and over while Flow records item placement in the background, which had slowed the app for everyone in large projects.
+
+### Views
+
+- **Empty linked-item tabs.** A linked-item tab in the details panel, such as Verification, with no items shows its header and **Open in main view** to read-only viewers instead of a blank panel.
+
+## API Changes
+
+- **Personal API keys for external collaborators.** External collaborators can create and revoke personal API keys in **Settings → API & MCP**. Keys keep their existing shared access and supported-operation permissions.
