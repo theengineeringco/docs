@@ -14,6 +14,23 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Overview",
+        "icon": {
+          "name": "book-open",
+          "library": "lucide"
+        },
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "overview",
+              "overview/why-flow",
+              "overview/core-concepts"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "API",
         "groups": [
           {
@@ -121,12 +138,12 @@
   "logo": {
     "light": "/images/flow-brandmark-black.svg",
     "dark": "/images/flow-brandmark-white.svg",
-    "href": "/api"
+    "href": "/overview"
   },
   "redirects": [
     {
       "source": "/",
-      "destination": "/api",
+      "destination": "/overview",
       "permanent": false
     },
     {

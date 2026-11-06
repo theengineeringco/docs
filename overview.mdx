@@ -1,0 +1,39 @@
+---
+title: "What is Flow?"
+description: "Understand how Flow connects engineering information and helps teams manage change."
+---
+
+Flow helps engineering teams keep requirements, system designs, and verification evidence connected as a project changes. Teams can see how the pieces relate, assess the effects of a proposed change, and review it before it becomes part of the agreed project state.
+
+## A shared model of the system
+
+Engineering decisions depend on information from several disciplines. A requirement describes what a system must do. A component helps fulfill it. A test provides evidence that it has been met. When one changes, the others may need attention.
+
+Flow represents these pieces as **items** with fields and relationships. Together, they form a connected model called a **systems graph**. Engineers can follow those relationships to understand the reasoning behind a design and the work affected by a change.
+
+The model can be explored as a table, tree, document, or diagram. These views give people different ways to work with the same underlying information.
+
+## An example: changing a cooling system
+
+Consider a fictional cooling subsystem. Its model connects an operating-temperature requirement to a cooling assembly and a verification test. Test evidence can be attached to the relevant item.
+
+If the required operating range changes, the team has a starting point for its review: the connected assembly and test. The mechanical engineer can assess the design, the test engineer can assess the verification work, and the systems engineer can examine the proposal in the context of the wider system.
+
+Flow makes those connections available for inspection. Engineers still decide whether the design and evidence are sufficient.
+
+## Work from proposal to agreement
+
+Teams use Flow to:
+
+1. **Organize information.** Define the types of items and fields the project needs, then connect requirements, designs, and evidence.
+2. **Propose a change.** Work on a branch: a separate version where a proposal can develop before it changes the agreed state.
+3. **Review the consequences.** Inspect what changed, follow related items, discuss the proposal, and record review decisions.
+4. **Accept and record the work.** Merge approved work into its parent branch and retain the history of the change.
+
+Systems engineers can follow relationships across disciplines. Domain engineers can develop and review the parts they own. Project leads and reviewers can inspect proposals with the supporting context.
+
+## Where to go next
+
+- [Why Flow?](/overview/why-flow) explains the practical value of connected information and controlled change.
+- [Core concepts](/overview/core-concepts) introduces the building blocks of a Flow project.
+- [API introduction](/api) is for teams connecting other tools or building integrations. No API knowledge is needed to read this Overview.
