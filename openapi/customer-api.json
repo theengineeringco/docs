@@ -6832,7 +6832,7 @@
         "properties": {
           "bypass_review": {
             "default": false,
-            "description": "Admin-only force merge. Overrides known review, branch-check, stage-policy, editor-group, and merge-conflict blockers once, while preserving structural and incomplete-scan protections. Requires review_bypass_reason.",
+            "description": "Force merge. The organization review policy (Settings → Reviews) decides who may use it: nobody when merge override is off, project admins (the default), or project admins plus the owner of the branch's direct parent (never for merges into Base). Overrides known review, branch-check, stage-policy, and merge-conflict blockers once; editor-group blockers are overridden only for project admins. Structural and incomplete-scan protections are preserved. Requires review_bypass_reason.",
             "type": "boolean"
           },
           "expected_rebase_ids": {
@@ -16043,7 +16043,7 @@
     },
     "/project/{projectId}/branch/{id}/merge": {
       "post": {
-        "description": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Live sub-branches of the merged branch are rebased onto the merge target in the same merge, keeping their own changes (GET :id/merge-rebase-preview lists them, with the fields where their change and the newly inherited history differ; pass its ids as expected_rebase_ids to refuse the merge with 409 if that set has changed). Depending on the organization review policy, project admins (and optionally the parent branch owner) may set bypass_review with a review_bypass_reason to force past known review-policy, branch-check, stage-policy, editor-group, and merge-conflict blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-scan protections remain enforced. Poll the returned job until it succeeds or fails.",
+        "description": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Live sub-branches of the merged branch are rebased onto the merge target in the same merge, keeping their own changes (GET :id/merge-rebase-preview lists them, with the fields where their change and the newly inherited history differ; pass its ids as expected_rebase_ids to refuse the merge with 409 if that set has changed). Depending on the organization review policy, project admins (and optionally the parent branch owner, except for merges into Base) may set bypass_review with a review_bypass_reason to force past known review-policy, branch-check, stage-policy, and merge-conflict blockers; only project admins can also force past editor-group blockers. The reason and blocker snapshot are preserved in merge history while structural and incomplete-scan protections remain enforced. Poll the returned job until it succeeds or fails.",
         "operationId": "BranchController_merge",
         "parameters": [
           {
