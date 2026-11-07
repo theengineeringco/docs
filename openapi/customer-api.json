@@ -5194,11 +5194,15 @@
                 "default_formula_changed": "#/components/schemas/CustomerDefaultFormulaChangedReasonDto",
                 "default_formula_reapplied": "#/components/schemas/CustomerDefaultFormulaReappliedReasonDto",
                 "field_type_changed": "#/components/schemas/CustomerFieldTypeChangedReasonDto",
-                "formula_recomputed": "#/components/schemas/CustomerFormulaRecomputedReasonDto"
+                "formula_recomputed": "#/components/schemas/CustomerFormulaRecomputedReasonDto",
+                "root_link_backfill": "#/components/schemas/CustomerRootLinkBackfillReasonDto"
               },
               "propertyName": "type"
             },
             "oneOf": [
+              {
+                "$ref": "#/components/schemas/CustomerRootLinkBackfillReasonDto"
+              },
               {
                 "$ref": "#/components/schemas/CustomerFormulaRecomputedReasonDto"
               },
@@ -5557,6 +5561,21 @@
           "type": {
             "enum": [
               "formula_recomputed"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "CustomerRootLinkBackfillReasonDto": {
+        "properties": {
+          "type": {
+            "description": "Records an existing top-level placement during the root-link backfill; not an authored change.",
+            "enum": [
+              "root_link_backfill"
             ],
             "type": "string"
           }
