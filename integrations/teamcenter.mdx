@@ -1,0 +1,102 @@
+---
+title: Siemens Teamcenter X
+description: Link Teamcenter items to Flow requirements and choose the revision rule for each project.
+icon: /images/integrations/teamcenter.svg
+---
+
+Connect one Teamcenter server for your Flow workspace, then choose the revision rule each project uses. Link Teamcenter items to requirements and other Flow items while keeping Teamcenter as the system of record.
+
+<Note>
+  This integration requires installation-specific configuration and compatibility checks. It is not yet available on Flow-hosted installations. Ask your Flow administrator to confirm availability before setup.
+</Note>
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Link items | Store multiple Teamcenter references in a **Teamcenter Item** field. |
+| Select revisions | Each project's revision rule determines which revision of a linked item Flow displays. |
+| Search and inspect | Find Teamcenter items and inspect linked details, including through Flow AI. |
+| Respond to changes | Use changes to linked items as automation triggers. Flow checks for changes without installing a component in Teamcenter. |
+
+Flow reads Teamcenter data. This connection does not write to Teamcenter, import BOMs, download JT files, or convert CAD files.
+
+## Before you start
+
+- A Flow admin with access to all projects must manage the workspace connection.
+- A project admin can choose revision rules for projects they administer.
+- Your Flow administrator must enable the integration, approve your Teamcenter server, and verify compatibility with your installation.
+- Flow must be able to reach the Teamcenter web tier over HTTPS.
+- Prepare a read-only Teamcenter service account, its password, and the server URL.
+- If item links use a separate Active Workspace address, prepare that URL too.
+
+The service account determines what Teamcenter data the shared connection can read. Confirm that its access is appropriate for the Flow projects that will use it.
+
+## Connect Teamcenter
+
+<Steps>
+  <Step title="Enter the server and account">
+    **Requires you to act:** Open **Settings → Integrations → Teamcenter X** and expand **Connect your Teamcenter server**. Enter **Server URL**, **Service account**, and **Password**.
+
+    Use the Teamcenter web tier address. Select **Set a separate Active Workspace URL** if links should open at a different address.
+
+    {/* ![Enter the Teamcenter server and service account](images/teamcenter-connection.png "human-intervention: enter Teamcenter connection details") */}
+  </Step>
+  <Step title="Test and connect">
+    **Requires you to act:** Select **Test and connect**. Confirm that Flow can sign in and reports the server version.
+
+    If the sign-in test fails after the connection is saved, use **Edit** to correct the credentials and **Test** to retry.
+
+    {/* ![Test the Teamcenter connection](images/teamcenter-test.png "human-intervention: test and connect Teamcenter") */}
+  </Step>
+  <Step title="Choose project revision rules">
+    **Requires you to act:** Expand **Choose revision rules**. Select the required rule for each project you administer. Use **Set all** when every project in a group should use the same rule.
+
+    Projects without a valid revision rule cannot link or resolve Teamcenter items. Changing a rule changes the displayed revision while preserving the linked item's identity.
+
+    {/* ![Choose Teamcenter revision rules for Flow projects](images/teamcenter-rules.png "human-intervention: choose Teamcenter revision rules") */}
+  </Step>
+</Steps>
+
+## Link and verify an item
+
+**Requires you to act:** Add a new **Teamcenter Item** field to the relevant Flow category, then use the field on an item to search for and select a known Teamcenter item. Existing fields cannot be converted into reference fields.
+
+{/* ![Select a Teamcenter item in Flow](images/teamcenter-link.png "human-intervention: link a Teamcenter item") */}
+
+Confirm the item identity, resolved revision, and link destination. The revision should match the project's selected rule. Normal Flow editing permissions, branches, review, and merge apply to the reference.
+
+## Change detection
+
+Flow checks linked items for changes when an automation uses Teamcenter changes. The connection page shows the check interval, last check, and any connection error. Without a relevant automation, change detection is paused.
+
+A first observation establishes a baseline. Later detected changes can trigger automations; detection itself does not edit Flow fields. Dataset or CAD changes that do not update the Teamcenter item or revision are outside this detection scope.
+
+**Requires you to act:** Use **Check now** on the connection to request a check when you need to verify a configured automation. Existing retry delays and an already-running check still apply.
+
+{/* ![Check linked Teamcenter items for changes](images/teamcenter-check.png "human-intervention: check Teamcenter changes") */}
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Flow cannot connect to the server">
+    Check the HTTPS address, service-account credentials, server approval, and network access with your administrator. Compatibility must be verified against your Teamcenter installation.
+  </Accordion>
+  <Accordion title="Items cannot be linked or resolved">
+    Confirm that the project has a revision rule that Teamcenter still offers. Also confirm that the service account can read the item and that the chosen rule selects a revision.
+  </Accordion>
+  <Accordion title="Change detection is off">
+    Configure an automation that uses Teamcenter changes and link at least one relevant item. Flow does not poll the connection solely because it is saved.
+  </Accordion>
+  <Accordion title="I need a different server URL">
+    The server URL is fixed because existing references identify that server. Disconnect before connecting another server. Review existing references before changing the connection.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Teamcenter
+
+**Requires you to act:** Select **Disconnect** on the connection and confirm the dialog.
+
+{/* ![Confirm Teamcenter disconnection](images/teamcenter-disconnect.png "human-intervention: disconnect Teamcenter") */}
+
+Flow stops checking linked items and clears every project's revision rule. References stay on Flow items but stop showing Teamcenter details until a connection is restored. Teamcenter data remains unchanged.

@@ -1,0 +1,104 @@
+---
+title: Qase
+description: Search Qase TestOps data and read test results mapped to Flow verification outcomes.
+icon: /images/integrations/qase.svg
+---
+
+Connect Qase TestOps so Flow AI can search test data and read verification results alongside your requirements and test cases.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Search test data | Search cases, runs, results, defects, plans, and requirements available to the connected Qase account. |
+| Read verification results | Retrieve the latest matching result per case from a configured project. |
+| Interpret outcomes | Map Qase `passed` to **Pass**, `failed` to **Fail**, and other statuses to **Inconclusive**. |
+| Investigate a result | Read available case and suite names, run IDs, timestamps, and result comments. |
+
+The integration reads Qase data. It does not write test cases or results back to Qase.
+
+## Before you start
+
+The integration must be available in your Flow installation. If it is missing from **Settings → Integrations**, ask your Flow administrator to check availability.
+
+- A Flow admin with access to all projects must configure the shared connection.
+- You need a Qase API token that can read the required projects and test data.
+- You need the project codes for verification lookups.
+- Flow AI must be enabled to use the connection from an agent.
+
+<Note>
+  Project codes configure verification lookups and their default project. They do not restrict account-wide search. Scope the token's access in Qase to control which data the shared connection can search.
+</Note>
+
+## Connect Qase
+
+<Steps>
+  <Step title="Prepare an API token">
+    **Requires you to act:** Create or obtain a Qase API token with access to the test data intended for Flow. Check its project access in Qase before saving it in Flow.
+
+    {/* ![Prepare a Qase token with the required access](images/qase-api-token.png "human-intervention: prepare a Qase API token") */}
+  </Step>
+  <Step title="Test the token">
+    **Requires you to act:** Open **Settings → Integrations → Qase** in Flow. Paste the token into **Qase API token**, then select **Test connection**.
+
+    A successful test shows the available project count and populates the project picker. The saved token is not displayed again.
+
+    {/* ![Test a Qase API token in Flow](images/qase-test.png "human-intervention: test the Qase token") */}
+  </Step>
+  <Step title="Choose verification projects">
+    **Requires you to act:** Under **Projects**, select the project codes to use for verification lookups. If a code is missing from the picker, enter it in **Project code** and select **Add project**.
+
+    The first configured project is the default when a request does not name a project. Name the intended configured project in requests that need another one.
+
+    {/* ![Choose Qase project codes in Flow](images/qase-projects.png "human-intervention: select Qase projects") */}
+  </Step>
+  <Step title="Save the connection">
+    **Requires you to act:** Select **Save**. Confirm that the connection card shows **Connected** and the intended project codes.
+
+    A successful test does not save the token or the project selection.
+
+    {/* ![Save and inspect the Qase connection](images/qase-save.png "human-intervention: save the Qase connection") */}
+  </Step>
+</Steps>
+
+## Verify the connection
+
+Ask Flow AI to find a known Qase test case. Then ask for verification results in a named configured project, limited to a specific run or a small set of case IDs.
+
+Compare the returned case IDs and mapped outcomes with Qase. A lookup returns the latest result per case within the requested filters; it does not return the full execution history.
+
+Reading results does not automatically populate Flow fields. If you want to update verification fields in Flow, specify the target items and fields in your request and review the resulting Flow changes.
+
+## Replace the token
+
+**Requires you to act:** Select **Replace token**, enter the replacement token, test it, review the selected project codes, and select **Save**.
+
+{/* ![Replace the saved Qase token](images/qase-replace-token.png "human-intervention: replace the Qase token") */}
+
+Test the new token before revoking the old one in Qase. Project access follows the replacement token.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Search returns data outside the selected projects">
+    Qase search covers the connected account. Selected project codes control verification lookups, not search permissions. Restrict the token's access in Qase when needed.
+  </Accordion>
+  <Accordion title="Verification lookup says no project is configured">
+    Add a project code in the connection settings. For a non-default project, name one of the configured codes in your request.
+  </Accordion>
+  <Accordion title="A verification lookup asks for narrower filters">
+    Flow reads a bounded set of matching results before selecting the latest result per case. Narrow the request to a run, case IDs, or an updated-since date so the latest results can be determined reliably.
+  </Accordion>
+  <Accordion title="The token works, but a case or result is missing">
+    Confirm the token can read that project and that your run, case, and date filters include the expected result. Check the configured project code rather than its display name.
+  </Accordion>
+  <Accordion title="A blocked or skipped test appears as Inconclusive">
+    Only Qase passed and failed statuses map to Pass and Fail. All other statuses map to Inconclusive.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Qase
+
+**Requires you to act:** Select **Disconnect** on the connection card. This removes Flow's shared Qase connection. It does not delete Qase test data or revoke the token in Qase.
+
+{/* ![Disconnect Qase in Flow](images/qase-disconnect.png "human-intervention: disconnect Qase") */}

@@ -1,0 +1,102 @@
+---
+title: Microsoft SharePoint
+description: Connect Microsoft SharePoint and OneDrive so Flow AI can read files within your chosen scope.
+icon: /images/integrations/sharepoint.svg
+---
+
+Connect your Microsoft account to browse SharePoint and OneDrive files from Flow AI. Flow reads files using each person's Microsoft permissions, with an optional folder limit shared across the workspace.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Browse files | List accessible OneDrive files and SharePoint document libraries. |
+| Read documents | Bring Word document content into an agent conversation. |
+| Read workbooks | Read Excel workbooks as engineering context. |
+| Limit access | A Flow admin can restrict the integration to one folder and its contents. |
+
+The integration is read-only. It does not write changes back to SharePoint or OneDrive.
+
+## Before you start
+
+- SharePoint requires configuration by your Flow administrator before it appears in Integrations.
+- Use a Microsoft account with access to the intended sites, libraries, and files.
+- A Flow admin with access to all projects manages workspace enablement and the shared folder scope.
+- Connecting a Microsoft account requires a Flow role that can make changes; read-only members can view connection status.
+- Flow AI must be enabled to use the connection from an agent.
+
+Flow requests delegated Microsoft permissions: `User.Read`, `Files.Read.All`, and `Sites.Read.All`, plus identity and offline access. These permissions identify your account, read accessible files and sites, and keep the connection active. Your Microsoft organization controls consent requirements.
+
+## Connect Microsoft SharePoint
+
+<Steps>
+  <Step title="Connect your Microsoft account">
+    **Requires you to act:** Open **Settings → Integrations → Microsoft SharePoint** and select **Connect Microsoft**.
+
+    {/* ![Connect Microsoft in Flow](images/sharepoint-connect.png "human-intervention: connect Microsoft") */}
+  </Step>
+  <Step title="Authorize Flow">
+    **Requires you to act:** Sign in to the intended Microsoft account and review the requested permissions. Complete the consent process to return to Flow.
+
+    Confirm that the account card shows **Connected to Microsoft** with the intended account. Every teammate connects their own Microsoft account.
+
+    {/* ![Authorize Flow with Microsoft](images/sharepoint-authorize.png "human-intervention: authorize Flow in Microsoft") */}
+  </Step>
+  <Step title="Enable the workspace connection">
+    **Requires you to act:** If Flow shows **Enable SharePoint for workspace**, a connected Flow admin selects it to restore or initialize the shared setup.
+
+    {/* ![Enable SharePoint for the Flow workspace](images/sharepoint-enable.png "human-intervention: enable SharePoint for the workspace") */}
+  </Step>
+  <Step title="Choose the file scope">
+    **Requires you to act:** As a Flow admin, review **AI access scope**. Select **Limit access to a folder** to choose a OneDrive or SharePoint library, browse into the intended folder, and select **Mount this folder**.
+
+    Use **Search SharePoint sites** if the library does not appear in the initial list.
+
+    {/* ![Limit SharePoint access to a folder](images/sharepoint-scope.png "human-intervention: choose the SharePoint file scope") */}
+  </Step>
+</Steps>
+
+<Note>
+  **All accessible files** means each user can access the files their own Microsoft account permits. **Limited to one folder** adds a workspace restriction. Selecting a folder does not grant Microsoft access to teammates who lack it.
+</Note>
+
+## Verify the connection
+
+Ask Flow AI to list the files in the selected folder, then read a known Word document or Excel workbook. Confirm that the result matches the expected site, library, and file.
+
+If the workspace uses all accessible files, name the intended SharePoint site or library in your request. Different sites can contain libraries with the same name.
+
+## Change the scope
+
+**Requires you to act:** Use **Change folder** to select another folder, or **Allow all accessible files** to remove the folder restriction.
+
+{/* ![Change the SharePoint access scope](images/sharepoint-change-scope.png "human-intervention: change the SharePoint access scope") */}
+
+Removing the folder restriction expands access to all files each connected Microsoft account can reach. It does not disconnect the integration.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Microsoft asks for administrator approval">
+    Ask your Microsoft administrator to review the requested delegated permissions and your organization's consent policy. Retry authorization after approval.
+  </Accordion>
+  <Accordion title="A SharePoint library is missing">
+    Use the site search in the folder picker. The initial list is bounded, so a missing library is not proof that the account lacks access. Also confirm that the connected Microsoft account can open the site.
+  </Accordion>
+  <Accordion title="The agent cannot read a file">
+    Check the account shown on the connection card, the file's Microsoft permissions, and the workspace folder scope. Reconnect if Flow reports that the Microsoft connection has expired.
+  </Accordion>
+  <Accordion title="SharePoint is unavailable in Integrations">
+    Ask your Flow administrator to confirm that SharePoint is configured for your workspace. Availability depends on the configured Microsoft connection.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Microsoft SharePoint
+
+**Requires you to act:** Select **Disconnect my account** to remove your personal Microsoft connection. Other users and the workspace scope remain in place.
+
+{/* ![Disconnect a personal Microsoft account](images/sharepoint-disconnect.png "human-intervention: disconnect your Microsoft account") */}
+
+**Requires you to act:** A Flow admin can select **Disable SharePoint for workspace** to remove the shared setup. This leaves personal Microsoft connections stored separately and does not delete files in Microsoft.
+
+{/* ![Disable the SharePoint workspace integration](images/sharepoint-disable.png "human-intervention: disable SharePoint for the workspace") */}
