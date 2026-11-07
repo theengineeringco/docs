@@ -56,6 +56,12 @@ With a selection, the tool list and the `flow://customer-api/openapi` and `flow:
 
 To restore every tool, choose **All tools** and copy the URL again, or remove the `tools` parameter.
 
+## Create and edit automations
+
+MCP clients can create, update, and delete [project automations](/api/automations/overview). Flow saves a new automation turned off (`enabled: false`), and it runs only after a person turns it on in Flow. The response includes a `url` that links to the automation. Give that link to the person who reviews and enables it. A request that sends `enabled: true` is refused.
+
+To change what an enabled automation runs, or how or when it runs, turn it off first (`enabled: false`), make the edit, and share the `url` so a person can turn it back on. Otherwise Flow returns `409`. Renaming an enabled automation, turning it off, or changing who is notified works without turning it off first and leaves it on.
+
 ## Inspect reference resources
 
 Clients that support MCP resources can read:

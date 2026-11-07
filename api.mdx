@@ -29,6 +29,22 @@ Use [Flow MCP](/api/mcp/overview) to connect an AI client to your systems graph.
 
 Use `POST /ai/agents` with `project_id` and an optional opening `messages` array to create a chat. Chats are private to the key owner by default; set `visibility` to `shared` only when the workspace should see them. When you provide opening messages, the default `wait: false` returns while the agent works. Without messages, the chat starts idle. Read `GET /ai/agents/{id}` for its transcript and status, then use `POST /ai/agents/{id}/messages` to start or continue it. The [endpoint reference](/api/reference) describes the full request bodies.
 
+## Check whether a branch can merge
+
+Use [`GET /project/{projectId}/branch/{id}/merge-readiness`](/api/endpoints/get-project-projectid-branch-id-merge-readiness) before you merge a branch. The response lists every gate that blocks the merge in `blockers`, not only the first. Each blocker has a `kind`, a `message`, and, when relevant, the `items` it names and the `people` whose action clears it. Gates that Flow cannot judge yet, such as a scan that is still running, appear in `unknown` with a `reason`. `ready` is `true` only when both lists are empty.
+
+The read enforces nothing. `POST /project/{projectId}/branch/{id}/merge` checks its own gates again when you merge.
+
+## Manage shared saved views
+
+[`GET /project/{projectId}/views/saved`](/api/endpoints/get-project-projectid-views-saved) lists the project's shared saved views in display order. A view's `id` is the `view_id` that sharing a view takes. Creating, updating, and deleting shared views requires Admin access, and changes apply to every project member.
+
+- [`POST /project/{projectId}/views/saved`](/api/endpoints/post-project-projectid-views-saved) adds a view after the existing ones. Set its start type and nesting rules by data type ID, and optionally its table `columns`, `filters`, and `sort`. Flow checks each against the data model and refuses a filter that names an unknown field, option, or type without saving anything. An `id` that already belongs to a shared view returns `409`.
+- [`PATCH /project/{projectId}/views/saved/{viewId}`](/api/endpoints/patch-project-projectid-views-saved-viewid) changes only the fields you send. `relationships`, `columns`, `filters`, and `sort` each replace that whole part of the view. Send `null` to clear columns, filters, or sort.
+- [`POST`](/api/endpoints/post-project-projectid-views-saved-viewid-relationships) and [`DELETE /project/{projectId}/views/saved/{viewId}/relationships`](/api/endpoints/delete-project-projectid-views-saved-viewid-relationships) add or remove one nesting rule, identified by `parentType` and `childType`, and keep the view's other rules. Adding a rule the view already has with the same `direction` changes nothing, so a retry is safe. The same pair with another direction returns `409`.
+
+Display options are edited in Flow.
+
 ## Run automations
 
 Learn how [automations and triggers](/api/automations/overview) work together. [Set up a webhook automation](/api/automations/webhooks), then [start runs and poll their results](/api/examples/automations).
