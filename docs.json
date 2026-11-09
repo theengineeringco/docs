@@ -60,6 +60,46 @@
         }
       },
       {
+        "tab": "Integrations",
+        "icon": {
+          "name": "plug",
+          "library": "lucide"
+        },
+        "groups": [
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations",
+              "integrations/altium",
+              "integrations/aodocs",
+              "integrations/asana",
+              "integrations/bitbucket",
+              "integrations/boltline",
+              "integrations/confluence",
+              "integrations/cursor",
+              "integrations/github",
+              "integrations/gitlab",
+              "integrations/google",
+              "integrations/jira",
+              "integrations/linear",
+              "integrations/sharepoint",
+              "integrations/notion",
+              "integrations/onshape",
+              "integrations/qase",
+              "integrations/relyence",
+              "integrations/teamcenter",
+              "integrations/slack"
+            ]
+          },
+          {
+            "group": "Custom MCP",
+            "pages": [
+              "integrations/custom-mcp"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Release Notes",
         "icon": {
           "name": "book-open",
@@ -99,7 +139,7 @@
       "download-spec"
     ]
   },
-  "description": "Customer API documentation, authentication, and release notes from Flow.",
+  "description": "Customer API documentation, integration setup guides, and release notes from Flow.",
   "appearance": {
     "default": "system",
     "strict": false

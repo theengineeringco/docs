@@ -1,0 +1,113 @@
+---
+title: Google Drive
+description: Connect Google Drive, read Docs and Sheets, and optionally let Flow AI update spreadsheet cells.
+icon: /images/integrations/google.svg
+---
+
+Connect your Google account to bring Drive files, Google Docs, and Google Sheets into Flow AI. Each person connects their own account. A workspace admin controls the default browsing folder and Sheets write-back setting.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Browse Drive folders | List files, subfolders, and modification times. Start from the mounted folder or another folder your connected Google account can access. |
+| Read Google Docs | Read the document's text, including paragraph and table-cell content, and return its source link. Use it alongside requirements or design data in Flow. |
+| Read Google Sheets | Inspect tab names and cell values, either from the first tab or a specified range such as `Results!A1:F100`. |
+| Link source material | Reference a Google Doc through a Google Doc field, or a spreadsheet through a Google Sheet field. |
+| Update spreadsheet values | With **Google Sheets write-back** and Google write authorization, read the target sheet and update specified cell ranges. Drive files and Google Docs remain read-only. |
+
+## Try it with Flow AI
+
+- “Read this Google Doc and compare its design constraints with the requirements in Flow. List discrepancies and link to the source document.”
+- “Read `Results!A1:F100` in this spreadsheet. Match rows to Flow test cases by test ID and summarize failures and unmatched IDs.”
+- With Sheets write-back: “Read `Status!A1:D50`, match rows by requirement ID, and update only the status cells for the requirements listed here. Preserve the other cells.”
+
+## Before you start
+
+- Google Drive must be configured for your Flow workspace. If connection setup is unavailable, contact your Flow administrator.
+- Connect a Google account that can access the intended files.
+- A Flow admin with access to all projects manages the shared folder scope and write-back setting.
+- Flow AI must be enabled to use the connection from an agent.
+
+The Google authorization requests your identity and read access to Drive, Docs, and Sheets. With Sheets write-back enabled, connecting or reconnecting requests Sheets write access instead of Sheets read-only access.
+
+<Note>
+  Your connected Google account's permissions determine which content Flow can read. Mounting a folder sets the default browsing location and scopes picker searches; it does not prevent direct reads of other Docs, Sheets, or folders your account can access. Sheets writes are checked against the configured restrictions separately.
+</Note>
+
+## Connect Google Drive
+
+<Steps>
+  <Step title="Connect your Google account">
+    **Requires you to act:** Open **Settings → Integrations → Google Drive** and select **Connect Google**.
+
+    {/* ![Connect a Google account in Flow](images/google-connect.png "human-intervention: connect Google") */}
+  </Step>
+  <Step title="Authorize Flow">
+    **Requires you to act:** Sign in with the intended Google account and review the requested permissions. Approve access to return to Flow.
+
+    The connection card shows **Connected to Google** and the account email. Each teammate completes this step with their own account, including read-only members who need to connect.
+
+    {/* ![Authorize Flow with Google](images/google-authorize.png "human-intervention: authorize Flow in Google") */}
+  </Step>
+  <Step title="Set the shared folder scope">
+    **Requires you to act:** As a Flow admin, review **Drive scope**. Select **Choose folder to mount**, browse to the intended folder, and select **Mount this folder** to set the default browsing location.
+
+    The folder choice applies across the workspace. Each connected person still needs Google access to that folder. Use Google permissions to restrict what the account can read.
+
+    {/* ![Choose a Google Drive folder in Flow](images/google-scope.png "human-intervention: choose the Drive scope") */}
+  </Step>
+</Steps>
+
+## Enable Sheets write-back
+
+**Requires you to act:** As a Flow admin, enable **Google Sheets write-back** to allow the agent to insert and update cell values within the configured Drive scope.
+
+{/* ![Enable Google Sheets write-back](images/google-write-back.png "human-intervention: enable Google Sheets write-back") */}
+
+**Requires you to act:** If your account card shows **Reconnect for Sheets**, select it and approve the additional Sheets permission in Google.
+
+{/* ![Reconnect Google for Sheets write access](images/google-reconnect.png "human-intervention: authorize Google Sheets write access") */}
+
+The connected account must also have edit access to the target sheet. Write-back changes the sheet in Google directly; reverting a Flow branch does not undo those edits.
+
+## Verify the connection
+
+Ask Flow AI to list files in the configured folder and summarize a known Google Doc. Confirm that the result comes from the intended account and folder.
+
+For Sheets, ask the agent to read a known range. To verify write-back, explicitly request a change to a disposable cell in a test sheet and check the resulting value in Google Sheets.
+
+## Change the scope
+
+**Requires you to act:** Use **Change folder** to select a different default folder. Review any separately configured file or folder restrictions as well; changing the mount does not clear them.
+
+{/* ![Change the mounted Google Drive folder](images/google-change-scope.png "human-intervention: change the Drive scope") */}
+
+Removing a mounted folder restores browsing from the Drive root. Any separately configured restrictions still apply to picker searches and Sheets writes. It does not disconnect Google.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The folder picker is disabled">
+    Connect your own Google account first. Changing the shared folder requires a Flow admin.
+  </Accordion>
+  <Accordion title="A file is missing or permission is denied">
+    Check that the connected Google account can open the file. If it is missing from a picker, check the mounted folder and any separately configured restrictions. A shared workspace connection does not share another person's Google permissions.
+  </Accordion>
+  <Accordion title="Reading works, but writing to Sheets fails">
+    Check the workspace write-back setting, the target sheet's edit permissions, and whether the account card asks you to reconnect for Sheets. The sheet must be within the configured Drive scope.
+  </Accordion>
+  <Accordion title="Google reports that the connection is not configured">
+    Ask your Flow administrator to confirm that Google authorization is configured. Retry connecting after the configuration is available.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Google Drive
+
+**Requires you to act:** Select **Disconnect** on your account card to remove your personal connection. Other connected users and the shared folder scope remain in place.
+
+{/* ![Disconnect a personal Google account](images/google-disconnect.png "human-intervention: disconnect your Google account") */}
+
+**Requires you to act:** To remove the shared setup, a Flow admin selects **Remove workspace integration**. Personal Google connections remain stored separately; each person can disconnect their own account.
+
+{/* ![Remove the Google workspace integration](images/google-remove-workspace.png "human-intervention: remove the Google workspace integration") */}

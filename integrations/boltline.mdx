@@ -1,0 +1,100 @@
+---
+title: Boltline
+description: Read manufacturing data from Boltline and optionally create or revise work plan templates.
+icon: /images/integrations/boltline.png
+---
+
+Connect Boltline so Flow AI can read work plans, runs, workflows, parts, inventory, and BOMs. Enable write-back when the agent should create or revise work plan templates.
+
+A Flow admin configures the shared connection with a Boltline API key. Flow uses the access of the user who owns that key.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Read manufacturing work | Inspect work plans, runs, workflows, operations, and steps. |
+| Inspect parts and inventory | Find parts and inspect available manufacturing context. |
+| Read engineering BOMs | Read the design tree below a part revision. |
+| Read as-built BOMs | Read the physical tree below a serial number. |
+| Create and revise templates | Enable **Boltline Write-Back** and use an API key with write permission. |
+
+BOM reads report when depth or size limits stop traversal. A partial tree is not a complete BOM.
+
+## Before you start
+
+- A Flow admin with access to all projects must configure the shared connection and write-back setting.
+- You need a Boltline account that can generate an API key and read the intended organization data.
+- Write-back requires an API key with write permission.
+- Flow AI must be enabled for agent access.
+
+## Connect Boltline
+
+<Steps>
+  <Step title="Generate a Boltline API key">
+    **Requires you to act:** Open the Boltline profile page linked in Flow's setup instructions, at `/me` on your Boltline server. Generate an API key and copy it.
+
+    The key is scoped to your Boltline organization and acts as your user.
+
+    {/* ![Generate a Boltline API key](images/boltline-api-key.png "human-intervention: generate a Boltline API key") */}
+  </Step>
+  <Step title="Enter the key in Flow">
+    **Requires you to act:** Open **Settings → Integrations → Boltline** and paste the generated key into **API Key**.
+
+    {/* ![Enter the Boltline API key](images/boltline-connection.png "human-intervention: enter the Boltline API key") */}
+  </Step>
+  <Step title="Test and save">
+    **Requires you to act:** Select **Test Connection** and confirm the **Connected as** result. Select **Save** to store the connection.
+
+    The saved card shows **Connected**. Testing alone does not save the key.
+
+    {/* ![Test and save Boltline](images/boltline-test-save.png "human-intervention: test and save Boltline") */}
+  </Step>
+</Steps>
+
+## Enable write-back
+
+**Requires you to act:** Turn on **Boltline Write-Back** on the integration page when the agent should create work plan templates or draft new versions of published templates.
+
+{/* ![Enable Boltline write-back](images/boltline-write-back.png "human-intervention: enable Boltline write-back") */}
+
+New plans remain drafts unless you explicitly request publication as part of the same create or revise operation. A published template is revised through a new draft version. Review and publish an already-created draft in Boltline.
+
+<Warning>
+  Writes take effect in Boltline directly. Discarding a Flow branch does not undo them. If a write fails part-way, inspect the reported plan and operations in Boltline before retrying.
+</Warning>
+
+## Verify the connection
+
+Ask Flow AI to find a known work plan and read its operations and steps. Then ask for a specific part revision's engineering BOM or a known serial number's as-built BOM.
+
+Confirm the returned identifiers and content in Boltline. If a result is truncated, ask the agent to continue from the relevant child part or narrow the request.
+
+To check write-back, request a clearly named draft template with a small set of operations. Review the proposed change in Flow and the resulting draft in Boltline. If you want to keep and publish that draft, finish publication in Boltline.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Test Connection fails">
+    Check that the API key is current and belongs to the intended Boltline organization. Confirm the account can read Boltline data before trying again.
+  </Accordion>
+  <Accordion title="Reads work, but a template cannot be created">
+    Check **Boltline Write-Back**, your Flow permissions, and the key's write permission. The connection test checks authentication, not every write operation.
+  </Accordion>
+  <Accordion title="A BOM is incomplete">
+    Check whether the result reports a depth or size limit. Ask for the next level under a named part or instance instead of treating the partial tree as complete.
+  </Accordion>
+  <Accordion title="A write fails after creating some operations">
+    Use the plan and operation identifiers in the result to inspect what already exists. Finish that draft in Boltline rather than recreating the full plan blindly.
+  </Accordion>
+  <Accordion title="Connection controls are missing">
+    Ask a Flow admin with access to all projects to manage the shared connection.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Boltline
+
+**Requires you to act:** Select **Disconnect** on the connected card.
+
+{/* ![Disconnect Boltline](images/boltline-disconnect.png "human-intervention: disconnect Boltline") */}
+
+This removes the shared connection from Flow. Existing plans and changes remain in Boltline. Revoke the API key in Boltline if it is no longer needed.
