@@ -5925,6 +5925,13 @@
             "description": "Id of another entity/node in this payload that should contain this card. When set, the card is nested inside that container and auto-arranged inside it. Omit for a top-level card.",
             "type": "string"
           },
+          "shownFields": {
+            "description": "Field keys the card shows as rows under its name (a pill shows them as value chips, all but the description). The card gets one line per field and a longer value wraps into the room it has; keys the type does not have draw nothing.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "type": {
             "description": "Entity type label (e.g. \"Requirement\")",
             "type": "string"
@@ -5968,7 +5975,7 @@
             "type": "string"
           },
           "h": {
-            "description": "Height override in pixels (≥ 1)",
+            "description": "Height override in pixels (≥ 1); defaults to the shape's own size",
             "type": "number"
           },
           "id": {
@@ -5984,14 +5991,36 @@
             "type": "string"
           },
           "shape": {
-            "description": "Geometric shape type — defaults to \"rectangle\"",
+            "description": "Shape — defaults to \"rectangle\". Any geo of the editor's shape picker; \"frame\", \"swimlane-horizontal\" and \"swimlane-vertical\" draw a container titled with `name`, which other items join via parentId.",
             "enum": [
+              "cloud",
               "rectangle",
               "ellipse",
-              "diamond",
               "triangle",
+              "diamond",
+              "pentagon",
+              "hexagon",
+              "octagon",
               "star",
-              "cloud"
+              "rhombus",
+              "rhombus-2",
+              "oval",
+              "trapezoid",
+              "arrow-right",
+              "arrow-left",
+              "arrow-up",
+              "arrow-down",
+              "x-box",
+              "check-box",
+              "heart",
+              "monitor",
+              "mobile",
+              "user",
+              "cylinder",
+              "chevron",
+              "frame",
+              "swimlane-horizontal",
+              "swimlane-vertical"
             ],
             "type": "string"
           },
@@ -6006,7 +6035,7 @@
             "type": "string"
           },
           "w": {
-            "description": "Width override in pixels (≥ 1)",
+            "description": "Width override in pixels (≥ 1); defaults to the shape's own size",
             "type": "number"
           },
           "x": {
@@ -7372,6 +7401,44 @@
         ],
         "type": "object"
       },
+      "PreviewReqifImportDto": {
+        "properties": {
+          "base_branch_id": {
+            "description": "The branch the import would start from, which decides whether a row creates or updates an item. Omit or \"master\" for the base branch.",
+            "type": "string"
+          },
+          "clause_id": {
+            "description": "The clause whose rows to return. Omit to return no rows.",
+            "type": "string"
+          },
+          "clauses": {
+            "description": "The mapping clauses to preview, in precedence order, as the commit takes them.",
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "include_counts": {
+            "description": "Also count, for every clause, the rows that would create and update items.",
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 50,
+            "description": "Rows to return.",
+            "maximum": 100,
+            "type": "number"
+          },
+          "offset": {
+            "default": 0,
+            "description": "Rows of the clause to skip, in document order.",
+            "type": "number"
+          }
+        },
+        "required": [
+          "clauses"
+        ],
+        "type": "object"
+      },
       "ProfilePictureUrlDto": {
         "properties": {
           "expires_in": {
@@ -7572,6 +7639,22 @@
         ],
         "type": "object"
       },
+      "QueuedMessageDeliveryDto": {
+        "properties": {
+          "delivery": {
+            "description": "How the waiting message reaches the chat. `live`: the running turn reads it at its next step, so the agent sees it before finishing its current work; this needs the running turn to be yours (same person and role), otherwise the message waits like the default. `eventually`: it waits for the running turn to end and runs as the next turn, which every send does unless set otherwise.",
+            "enum": [
+              "live",
+              "eventually"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "delivery"
+        ],
+        "type": "object"
+      },
       "RebaseOntoBranchDto": {
         "properties": {
           "name": {
@@ -7765,6 +7848,86 @@
           "phase",
           "created_at",
           "items_done"
+        ],
+        "type": "object"
+      },
+      "ReqifImportPreviewCountDto": {
+        "properties": {
+          "clause_id": {
+            "type": "string"
+          },
+          "created": {
+            "type": "number"
+          },
+          "updated": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "clause_id",
+          "created",
+          "updated"
+        ],
+        "type": "object"
+      },
+      "ReqifImportPreviewResponseDto": {
+        "properties": {
+          "counts": {
+            "description": "Per-clause counts, when requested.",
+            "items": {
+              "$ref": "#/components/schemas/ReqifImportPreviewCountDto"
+            },
+            "type": "array"
+          },
+          "counts_complete": {
+            "description": "False when the counts stopped short of the whole document, so they are lower bounds.",
+            "type": "boolean"
+          },
+          "has_more": {
+            "description": "Whether the clause has rows past this page.",
+            "type": "boolean"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/ReqifImportPreviewRowDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "rows",
+          "has_more"
+        ],
+        "type": "object"
+      },
+      "ReqifImportPreviewRowDto": {
+        "properties": {
+          "id_value": {
+            "description": "The value the row is identified by (its Source ID).",
+            "type": "string"
+          },
+          "identifier": {
+            "description": "The ReqIF object identifier.",
+            "type": "string"
+          },
+          "outcome": {
+            "description": "Whether the commit would create a new item or update an existing one.",
+            "enum": [
+              "created",
+              "updated"
+            ],
+            "type": "string"
+          },
+          "values": {
+            "description": "The Flow field values the commit would write, by field key, in stored form.",
+            "type": "object"
+          }
+        },
+        "required": [
+          "identifier",
+          "outcome",
+          "id_value",
+          "values"
         ],
         "type": "object"
       },
@@ -10977,7 +11140,7 @@
     },
     "/ai/agents/{id}/messages": {
       "post": {
-        "description": "Queues the message and starts the agent on it as soon as the chat is idle. With `queued: false` the turn has started: poll GET /ai/trigger/runs?agent_ids={id} until the run is not `running`, then GET /ai/agents/{id}. With `queued: true` an earlier turn is still running and the run status finishes for that turn first, so poll GET /ai/agents/{id} until the reply to this message is in the transcript. With `duplicate: true` this exact send already happened: `job_id` is the original send, nothing changed and there is no new turn to wait for.",
+        "description": "Queues the message and starts the agent on it as soon as the chat is idle. With `queued: false` the turn has started: poll GET /ai/trigger/runs?agent_ids={id} until the run is not `running`, then GET /ai/agents/{id}. With `queued: true` an earlier turn is still running and the run status finishes for that turn first, so poll GET /ai/agents/{id} until the reply to this message is in the transcript (or PATCH /ai/agents/{id}/messages/{job_id} with `delivery: \"live\"` so the running turn reads it at its next step). With `duplicate: true` this exact send already happened: `job_id` is the original send, nothing changed and there is no new turn to wait for.",
         "operationId": "AgentChatController_sendMessage",
         "parameters": [
           {
@@ -11037,6 +11200,73 @@
           "metadata": {
             "sidebarTitle": "Send a follow-up message to an agent chat",
             "title": "Send a follow-up message to an agent chat"
+          }
+        }
+      }
+    },
+    "/ai/agents/{id}/messages/{jobId}": {
+      "patch": {
+        "description": "Changes the delivery of a message still waiting in the queue. `live`: the running turn reads it at its next step, before finishing its current work, when that turn is yours (same person and role); otherwise it waits like the default. `eventually` (the default of every send): it waits for the running turn to end and runs as the next turn. A message set to move the chat to another branch cannot be `live`, because a live message never moves the chat (400). A message that has already started into a turn is left as it is.",
+        "operationId": "AgentChatController_setQueuedMessageDelivery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueuedMessageDeliveryDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Queued message delivery set"
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Set how a queued message reaches the running turn",
+        "tags": [
+          "Automations"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/patch-ai-agents-id-messages-jobid",
+          "metadata": {
+            "sidebarTitle": "Set how a queued message reaches the running turn",
+            "title": "Set how a queued message reaches the running turn"
           }
         }
       }
@@ -22446,6 +22676,80 @@
           "metadata": {
             "sidebarTitle": "Parse an uploaded ReqIF archive",
             "title": "Parse an uploaded ReqIF archive"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/reqif-import/{jobId}/preview": {
+      "post": {
+        "description": "Streams the parsed document with the given mapping and returns one page of a clause's rows, each marked as creating or updating an item on the starting branch, plus optional per-clause counts. Writes nothing.",
+        "operationId": "ReqifImportController_preview",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "jobId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreviewReqifImportDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReqifImportPreviewResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Preview what a commit with this mapping would write",
+        "tags": [
+          "ReqIF Import"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/post-project-projectid-reqif-import-jobid-preview",
+          "metadata": {
+            "sidebarTitle": "Preview what a commit with this mapping would write",
+            "title": "Preview what a commit with this mapping would write"
           }
         }
       }
