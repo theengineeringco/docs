@@ -45,6 +45,17 @@ The read enforces nothing. `POST /project/{projectId}/branch/{id}/merge` checks 
 
 Display options are edited in Flow.
 
+## Import ReqIF documents
+
+A ReqIF import runs as a job. Each step returns quickly. Poll [`GET /project/{projectId}/reqif-import/{jobId}`](/api/endpoints/get-project-projectid-reqif-import-jobid) for its `status`, `phase`, and progress.
+
+1. [`POST /project/{projectId}/reqif-import/upload`](/api/endpoints/post-project-projectid-reqif-import-upload) with `file_name`, `size`, and `mime_type` creates the job. PUT the `.reqif` or `.reqifz` bytes to the returned `upload_url` with its `upload_headers`.
+2. [`POST /project/{projectId}/reqif-import/{jobId}/parse`](/api/endpoints/post-project-projectid-reqif-import-jobid-parse) parses the archive. Once parsed, the job's `schema` describes the file's types and attributes for your mapping.
+3. [`POST /project/{projectId}/reqif-import/{jobId}/preview`](/api/endpoints/post-project-projectid-reqif-import-jobid-preview) shows what a commit with your mapping `clauses` would write. It writes nothing.
+4. [`POST /project/{projectId}/reqif-import/{jobId}/commit`](/api/endpoints/post-project-projectid-reqif-import-jobid-commit) with the same `clauses` and a `branch_name` writes the import onto a new branch. Poll the job for progress and its `branch_id`.
+
+Send the preview the clauses in the order you will commit them. `base_branch_id` names the branch the import would start from (omit it or send `master` for Base), and that branch decides whether each row creates or updates an item. Set `clause_id` to one clause's `id` to get a page of its rows. Each row has the ReqIF `identifier`, its `id_value`, the `values` the commit would write, and an `outcome` of `created` or `updated`. Page with `offset` and `limit` (default 50, maximum 100) while `has_more` is `true`. Set `include_counts` to also get created and updated `counts` for every clause. When `counts_complete` is `false`, the counts stopped before the end of the document and are lower bounds. The preview returns `400` unless the job is parsed and waiting for your mapping (`status` `waiting`, `phase` `parsed`).
+
 ## Run automations
 
 Learn how [automations and triggers](/api/automations/overview) work together. [Set up a webhook automation](/api/automations/webhooks), then [start runs and poll their results](/api/examples/automations).
