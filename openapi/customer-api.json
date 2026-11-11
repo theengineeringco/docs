@@ -8527,7 +8527,7 @@
             "description": "Capability granted for this scope. Viewer preserves v1 read-only sharing."
           },
           "branch_id": {
-            "description": "Branch the grant unlocks. Use \"master\" for the base branch.",
+            "description": "Branch the grant unlocks. Use \"master\" for the base branch. Required unless `scopes` is sent.",
             "type": "string"
           },
           "branch_scope": {
@@ -8555,8 +8555,15 @@
             },
             "type": "array"
           },
+          "scopes": {
+            "description": "Several destinations shared in one request instead of branch_id / view_id / starting_entity_id (send one form or the other). Every recipient gets a grant for each destination, and one share email for the request.",
+            "items": {
+              "$ref": "#/components/schemas/ShareViewScopeDto"
+            },
+            "type": "array"
+          },
           "starting_entity_id": {
-            "description": "Entity the view should anchor to for the recipient",
+            "description": "Entity the view should anchor to for the recipient. Required unless `scopes` is sent.",
             "type": "string"
           },
           "suppress_notification": {
@@ -8571,16 +8578,13 @@
             "type": "array"
           },
           "view_id": {
-            "description": "CustomView.id from the project-scoped custom-views-2 registry",
+            "description": "CustomView.id from the project-scoped custom-views-2 registry. Required unless `scopes` is sent.",
             "type": "string"
           }
         },
         "required": [
           "recipients",
-          "project_id",
-          "branch_id",
-          "view_id",
-          "starting_entity_id"
+          "project_id"
         ],
         "type": "object"
       },
@@ -8622,6 +8626,35 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "ShareViewScopeDto": {
+        "properties": {
+          "branch_id": {
+            "description": "Branch the grant unlocks. Use \"master\" for the base branch.",
+            "type": "string"
+          },
+          "starting_entity_id": {
+            "description": "Entity the view should anchor to for the recipient",
+            "type": "string"
+          },
+          "upstream_context_path": {
+            "description": "Entity ids on the path above starting_entity_id in the shared view, top first. Each is shared individually together with this destination.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "view_id": {
+            "description": "CustomView.id from the project-scoped custom-views-2 registry",
+            "type": "string"
+          }
+        },
+        "required": [
+          "branch_id",
+          "view_id",
+          "starting_entity_id"
+        ],
         "type": "object"
       },
       "SharedAccessGrantRecipientType": {
@@ -24160,15 +24193,15 @@
             "bearer": []
           }
         ],
-        "summary": "Issue one grant per recipient under a single scope. Atomic across the batch.",
+        "summary": "Issue one grant per recipient for each destination. Atomic across the batch.",
         "tags": [
           "Shared Access Grants"
         ],
         "x-mint": {
           "href": "/api/endpoints/post-shared-grants-share-view",
           "metadata": {
-            "sidebarTitle": "Issue one grant per recipient under a single scope. Atomic across the batch.",
-            "title": "Issue one grant per recipient under a single scope. Atomic across the batch."
+            "sidebarTitle": "Issue one grant per recipient for each destination. Atomic across the batch.",
+            "title": "Issue one grant per recipient for each destination. Atomic across the batch."
           }
         }
       }

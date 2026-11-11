@@ -29,6 +29,10 @@ Use [Flow MCP](/api/mcp/overview) to connect an AI client to your systems graph.
 
 Use `POST /ai/agents` with `project_id` and an optional opening `messages` array to create a chat. Chats are private to the key owner by default; set `visibility` to `shared` only when the workspace should see them. When you provide opening messages, the default `wait: false` returns while the agent works. Without messages, the chat starts idle. Read `GET /ai/agents/{id}` for its transcript and status, then use `POST /ai/agents/{id}/messages` to start or continue it. The [endpoint reference](/api/reference) describes the full request bodies.
 
+`POST /ai/agents/{id}/messages` returns `job_id`, `queued`, and `duplicate`. With `queued: false`, the turn has started. Poll `GET /ai/trigger/runs?agent_ids={id}` until the run is not `running`, then read `GET /ai/agents/{id}`. With `queued: true`, an earlier turn is still running and the message waits for it to end. Poll `GET /ai/agents/{id}` until the reply is in the transcript. With `duplicate: true`, this exact send already happened and `job_id` is the original send.
+
+To have a running turn read a queued message at its next step, send [`PATCH /ai/agents/{id}/messages/{jobId}`](/api/endpoints/patch-ai-agents-id-messages-jobid) with `delivery` set to `live`. This applies only when the running turn is yours (same person and role). Otherwise the message keeps waiting. `eventually` is the default. A message that moves the chat to another branch cannot be `live` and returns `400`. A message that has already started a turn is left as it is.
+
 ## Check whether a branch can merge
 
 Use [`GET /project/{projectId}/branch/{id}/merge-readiness`](/api/endpoints/get-project-projectid-branch-id-merge-readiness) before you merge a branch. The response lists every gate that blocks the merge in `blockers`, not only the first. Each blocker has a `kind`, a `message`, and, when relevant, the `items` it names and the `people` whose action clears it. Gates that Flow cannot judge yet, such as a scan that is still running, appear in `unknown` with a `reason`. `ready` is `true` only when both lists are empty.
