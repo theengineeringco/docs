@@ -131,7 +131,7 @@
       "download-spec"
     ]
   },
-  "description": "Customer API documentation, authentication, and release notes from Flow.",
+  "description": "Product guides, customer API documentation, and release notes from Flow.",
   "appearance": {
     "default": "system",
     "strict": false

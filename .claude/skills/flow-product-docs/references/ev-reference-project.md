@@ -95,7 +95,6 @@ thermal limits in firmware to −5 °C and 30 °C. Flow's review on the pull req
 - names the people who resolve it: the BMS software engineer, who owns the code, and
   the battery systems engineer, who owns the requirement.
 
-Grounded on `master`: automations can trigger on GitHub pull request review events.
 Describe the outcome, not internal trigger names.
 
 ## Saved views

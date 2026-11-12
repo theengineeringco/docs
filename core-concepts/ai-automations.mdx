@@ -1,5 +1,5 @@
 ---
-title: "AI & Automations"
+title: "How Flow uses AI"
 description: "Agents use the systems graph as context, meet engineers in their own tools, and leave decisions with the owners."
 ---
 
@@ -11,7 +11,7 @@ The same connections that let a person trace Top Speed down to frontal area let 
 
 A question such as "What needs attention if the Truck's battery capacity rises to 120 kWh?" depends on the recorded requirements, the systems that deliver them, the relationships between them, and the latest verification results.
 
-The agent works from that project context. Its answer is only as complete as the graph. A missing relationship or an unrecorded result is still a gap, and a good request asks the agent to separate what the model supports from what still needs investigation.
+The agent works from that project context, so a [missing link](/core-concepts/the-systems-graph#follow-the-consequences-of-change) limits its answer as much as anyone's. A good request asks the agent to separate what the model supports from what still needs investigation.
 
 Give the task its context: the project, the branch, the items involved, the outcome you want, and what the agent may change.
 
@@ -33,15 +33,13 @@ These build on one another.
 | A skill | Saves how a recurring task should be done | Write requirements in the team's "The system shall…" form |
 | An automation | Runs configured work when a trigger fires | Review every firmware pull request against the requirements |
 
-A skill captures how. An automation decides when. Chat lets you supply context and refine the request as you go. When the agent imports a review deck, it applies the team's skills so the new requirements follow house rules.
-
 [Skills](/ai-automations/skills) covers creating and scoping skills. Automation setup is covered in the [API automation guides](/api/automations/overview).
 
 ## The agent proposes, the owner decides
 
 Treat the agent's answer as the start of an inspection. Follow its references to the items. Review proposed changes in their branch, where they can be compared with the parent before anyone accepts them. Check whether the agent covered the scope you asked for and whether it hit incomplete information.
 
-The agent acts within your permissions. In a connected tool it can take actions that Flow's branch history does not reverse, so scope those tasks with care.
+The agent acts within your permissions; [Automations](/api/automations/overview) describes whose permissions a saved automation uses. Scope tasks in connected tools with care; [branches do not reverse](/core-concepts/branching#keep-the-context-visible) what happens there.
 
 For a recurring task, inspect a few runs before you depend on it, and keep its instructions current as the model and standards change.
 

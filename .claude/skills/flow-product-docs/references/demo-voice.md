@@ -29,15 +29,7 @@ The second demo adds three useful patterns, to be re-expressed with the EV proje
 
 ## What the docs drop
 
-- Filler and intensifiers: "very, very", "really", "easily", "actually", "Fantastic".
-- Presenter framing: "Let me show you", "As you can see", "I've loaded in".
-- First-person singular narration. Rewrite as "you" (Get started) or third person
-  (Core concepts).
-- Customer names, customer programs, and customer vocabulary.
-- People's names. Use roles.
-- Counts tied to a specific dataset (for example, how many dependencies a demo
-  analysis reviewed).
-- Claims about features that are not on `master`.
+Filler and intensifiers ("very, very", "really", "easily", "actually"), presenter framing ("Let me show you", "As you can see"), and first-person narration. Everything else excluded is listed in the skill's product-page boundaries.
 
 ## Before and after
 

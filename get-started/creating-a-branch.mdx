@@ -9,38 +9,26 @@ This guide runs the battery capacity trade study on the Truck: raising **Battery
 
 You need permission to create branches in the project.
 
-## Choose the parent
-
-The parent is the state your branch starts from. For a proposal against the Truck's agreed design, the parent is **Truck**. For work that depends on another proposal, the parent is that proposal's branch.
-
-Choose the parent that contains the records you intend to change. Check it explicitly; different entry points can start with different parents selected.
-
 ## Create the branch
 
 Open the branch selector and create a new branch. In workspaces that separate variants from proposals, the dialog is **New change request**; otherwise it is **New branch**.
 
-1. Enter a name that says what the work is, such as **Battery capacity trade study**.
-2. Check the parent and change it if needed.
+1. Enter a name that says what the work is, such as **Battery capacity trade study**. `main` and `master` are reserved.
+2. Check the parent: the state your branch starts from. For a proposal against the Truck's agreed design, choose **Truck**; for work that depends on another proposal, choose that proposal's branch. Different entry points can preselect different parents.
 3. Create the branch.
 
-`main` and `master` are reserved names.
+## Make the change and see its impact
 
-## Make the change in context
+1. Confirm the sidebar shows your new branch.
+2. Open **Battery Usable Capacity**, change its target to 120 kWh, and record the rationale in the description.
+3. Update what depends on it and what the proposal needs. Range, vehicle mass, and DC fast charge time all trace to battery capacity. Leave historical results as they are; a new target does not change what an earlier test measured.
+4. Open **Review** for your branch. **Changed Items** lists every recorded difference from the parent.
+5. Open the **Impact analysis** tab and choose **Run impact analysis**. Flow follows the connections from what you changed, summarizes which requirements and systems are affected, and shows who owns them.
 
-Confirm the sidebar shows your new branch before you edit. Open **Battery Usable Capacity** and change its target to 120 kWh, with the rationale in the description.
-
-Then look at what depends on it. Range, vehicle mass, and DC fast charge time all trace to battery capacity. Update what the proposal needs; leave historical results as they are. A new target does not change what an earlier test measured.
-
-If you ask the agent to help, name the branch and the task, and ask it to inspect before it edits.
-
-## See the impact
-
-Open **Review** for your branch. **Changed Items** lists every recorded difference from the parent. Then open the **Impact analysis** tab and choose **Run impact analysis**. Flow follows the connections from what you changed, summarizes which requirements and systems are affected, and shows who owns them.
-
-Use the result to decide who to talk to: the charging engineer about charge time, the vehicle lead about mass.
+Use the result to decide who to talk to: the charging engineer about charge time, the vehicle lead about mass. If you ask the agent to help, name the branch and the task, and ask it to inspect before it edits.
 
 ## Keep the proposal current
 
-Keep the work for one proposal together: the revised requirement, its rationale, and any design or verification changes it needs. If the parent changes while you work, use **Update from parent** to bring that work into your branch, and resolve any conflicts deliberately.
+Keep one proposal's work together: the revised requirement, its rationale, and the design and verification changes it needs. If the parent changes while you work, use **Update from parent** to bring that work into your branch, and resolve any conflicts deliberately.
 
 [Branching](/core-concepts/branching) explains why Flow manages change this way.

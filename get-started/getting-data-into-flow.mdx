@@ -13,6 +13,7 @@ Most programs already have their requirements somewhere: a spreadsheet, a review
 | A spreadsheet of requirements | **Import from → CSV/Excel** | Column mapping, matching, relationships, validation |
 | A document, deck, or image | Ask the agent to extract it | Each candidate against its source, and its mapping to your model |
 | A connected tool | That integration's workflow | Access scope, and whether it reads, imports, or writes |
+| Your own scripts or AI clients | The [Customer API](/api/examples/batch-writes) or [Flow MCP](/api/mcp/overview) | Authentication, branch, and permissions |
 
 ## Import a spreadsheet
 
@@ -39,9 +40,7 @@ Extraction and creation are separate steps. Check each candidate against its sou
 
 ## Use connected tools deliberately
 
-An integration can let Flow read information without creating a matching Flow record. Other integration actions create or update records in Flow or in the connected tool. Check what a connection does before you depend on it.
-
-A change made in an external tool happens in that tool. Flow's branch history does not undo it.
+An integration can let Flow read information without creating a matching Flow record. Other integration actions create or update records in Flow or in the connected tool, where Flow's branches [do not reach](/core-concepts/branching#keep-the-context-visible). Check what a connection does before you depend on it.
 
 ## Check what arrived
 
