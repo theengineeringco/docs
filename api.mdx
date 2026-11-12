@@ -29,6 +29,10 @@ Use [Flow MCP](/api/mcp/overview) to connect an AI client to your systems graph.
 
 Use `POST /ai/agents` with `project_id` and an optional opening `messages` array to create a chat. Chats are private to the key owner by default; set `visibility` to `shared` only when the workspace should see them. When you provide opening messages, the default `wait: false` returns while the agent works. Without messages, the chat starts idle. Read `GET /ai/agents/{id}` for its transcript and status, then use `POST /ai/agents/{id}/messages` to start or continue it. The [endpoint reference](/api/reference) describes the full request bodies.
 
+`POST /ai/agents/{id}/messages` returns `job_id`, `queued`, and `duplicate`. With `queued: false`, the turn has started. Poll `GET /ai/trigger/runs?agent_ids={id}` until the run is not `running`, then read `GET /ai/agents/{id}`. With `queued: true`, an earlier turn is still running and the message waits for it to end. Poll `GET /ai/agents/{id}` until the reply is in the transcript. With `duplicate: true`, this exact send already happened and `job_id` is the original send.
+
+To have a running turn read a queued message at its next step, send [`PATCH /ai/agents/{id}/messages/{jobId}`](/api/endpoints/patch-ai-agents-id-messages-jobid) with `delivery` set to `live`. This applies only when the running turn is yours (same person and role). Otherwise the message keeps waiting. `eventually` is the default. A message that moves the chat to another branch cannot be `live` and returns `400`. A message that has already started a turn is left as it is.
+
 ## Check whether a branch can merge
 
 Use [`GET /project/{projectId}/branch/{id}/merge-readiness`](/api/endpoints/get-project-projectid-branch-id-merge-readiness) before you merge a branch. The response lists every gate that blocks the merge in `blockers`, not only the first. Each blocker has a `kind`, a `message`, and, when relevant, the `items` it names and the `people` whose action clears it. Gates that Flow cannot judge yet, such as a scan that is still running, appear in `unknown` with a `reason`. `ready` is `true` only when both lists are empty.
@@ -44,6 +48,25 @@ The read enforces nothing. `POST /project/{projectId}/branch/{id}/merge` checks 
 - [`POST`](/api/endpoints/post-project-projectid-views-saved-viewid-relationships) and [`DELETE /project/{projectId}/views/saved/{viewId}/relationships`](/api/endpoints/delete-project-projectid-views-saved-viewid-relationships) add or remove one nesting rule, identified by `parentType` and `childType`, and keep the view's other rules. Adding a rule the view already has with the same `direction` changes nothing, so a retry is safe. The same pair with another direction returns `409`.
 
 Display options are edited in Flow.
+
+## Import ReqIF documents
+
+A ReqIF import runs as a job. Each step returns quickly. Poll [`GET /project/{projectId}/reqif-import/{jobId}`](/api/endpoints/get-project-projectid-reqif-import-jobid) for its `status`, `phase`, and progress.
+
+1. [`POST /project/{projectId}/reqif-import/upload`](/api/endpoints/post-project-projectid-reqif-import-upload) with `file_name`, `size`, and `mime_type` creates the job. PUT the `.reqif` or `.reqifz` bytes to the returned `upload_url` with its `upload_headers`.
+2. [`POST /project/{projectId}/reqif-import/{jobId}/parse`](/api/endpoints/post-project-projectid-reqif-import-jobid-parse) parses the archive. Once parsed, the job's `schema` describes the file's types and attributes for your mapping.
+3. [`POST /project/{projectId}/reqif-import/{jobId}/preview`](/api/endpoints/post-project-projectid-reqif-import-jobid-preview) shows what a commit with your mapping `clauses` would write. It writes nothing.
+4. [`POST /project/{projectId}/reqif-import/{jobId}/commit`](/api/endpoints/post-project-projectid-reqif-import-jobid-commit) with the same `clauses` and a `branch_name` writes the import onto a new branch. Poll the job for progress and its `branch_id`.
+
+Send the preview the clauses in the order you will commit them. `base_branch_id` names the branch the import would start from (omit it or send `master` for Base), and that branch decides whether each row creates or updates an item. Set `clause_id` to one clause's `id` to get a page of its rows. Each row has the ReqIF `identifier`, its `id_value`, the `values` the commit would write, and an `outcome` of `created` or `updated`. Page with `offset` and `limit` (default 50, maximum 100) while `has_more` is `true`. Set `include_counts` to also get created and updated `counts` for every clause. When `counts_complete` is `false`, the counts stopped before the end of the document and are lower bounds. The preview returns `400` unless the job is parsed and waiting for your mapping (`status` `waiting`, `phase` `parsed`).
+
+## Draw diagrams with engineering symbols
+
+[`GET /project/{projectId}/diagram-symbols`](/api/endpoints/get-project-projectid-diagram-symbols) lists the project's enabled ISO 1219 fluid-power, IEC 60617 electrical, and ISA-5.1 instrumentation symbols. The response is `libraries`, each with an `id`, a `label`, and `symbols`. Each symbol has an `id`, a `label`, a `size` (`w`, `h`), a `labelSlot` of `below` or `inside`, and its `ports`. Each port has an `id`, a normalized `at` position as `[x, y]`, and a `side` of `n`, `e`, `s`, or `w`.
+
+In the structured input of `POST /project/{projectId}/diagrams`, use a symbol `id`, such as `iso1219:pump`, as a node's `shape` or an entity's `geo`. Set a connection's `fromPort` or `toPort` to a terminal `id` from that symbol's `ports`, or omit them for automatic routing. A port that is not a terminal of the symbol at that end returns `400`. Symbols cannot contain children, so an item whose `parentId` is a symbol returns `400`. Use a card or rectangle as the container instead.
+
+[`GET`](/api/endpoints/get-project-projectid-symbol-libraries) and [`PUT /project/{projectId}/symbol-libraries`](/api/endpoints/put-project-projectid-symbol-libraries) read and replace the libraries the shape picker offers, as `enabled` IDs: `iso1219`, `iec60617`, and `isa51`. Every library is enabled until the project sets the list. `PUT` requires Admin access and replaces the whole list. An unknown library ID returns `400`. External grant recipients get an empty list from `GET`, which does not reflect the stored setting.
 
 ## Run automations
 
