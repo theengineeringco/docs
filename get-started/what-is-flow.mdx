@@ -1,0 +1,52 @@
+---
+title: "What is Flow"
+description: "One connected source of truth for hardware teams that iterate quickly on their design."
+---
+
+Flow is the single source of truth for your system. It is built for hardware teams that change their design quickly and need every engineer working in the same direction while they do.
+
+These guides use one example throughout: an electric vehicle program.
+
+## Know why every requirement exists
+
+Open the vehicle's requirements and follow **Top Speed** down. It decomposes into the **Aerodynamic Drag Coefficient** and **Powertrain Peak Torque**. Drag decomposes again into **Frontal Area**.
+
+Each requirement now has a visible reason to exist. The aerodynamics engineer can see that a frontal-area limit protects the top-speed target. Without that link, two engineers can optimize in opposite directions and only find out at integration.
+
+## Give each requirement an owner
+
+Every requirement in Flow has an owner, and assigning one is deliberate. Ownership does not default to a systems engineer. It belongs to the engineer closest to the design: the aerodynamics engineer owns the drag target, the powertrain engineer owns the torque requirement, and the BMS software engineer owns the battery firmware limits.
+
+The person who designs the part is best placed to say what its requirement should be, especially when the design is changing every week.
+
+## See where each requirement is delivered
+
+Requirements connect to the systems that deliver them. The vehicle decomposes into body and aerodynamics, powertrain, battery system, and charging system; the battery system decomposes into the battery pack and the battery management system (BMS). Open any system to see the requirements that define its performance.
+
+The same records answer different questions. A project can save views for systems, functions, verification, and risk, and each view presents the information for that task. Work in a **table** to edit values the way you would in a spreadsheet, a **tree** to see decomposition, or **Reader** to read and discuss the content as a document. Highlight a passage in Reader and comment to ask a colleague whether a simulation has been rerun. The conversation stays with the record.
+
+## Iterate in parallel with branches
+
+Branches do two jobs.
+
+- **Variants** hold lasting differences. A **Base** holds what every model shares, such as standards and regulations. **Coupe**, **Truck**, and **SUV** branch from it and differ where they need to.
+- **Proposals** hold work in progress. On the Truck, one engineer runs a battery capacity trade study while others improve the BMS and add DC fast charging, all at the same time and without disturbing the agreed design.
+
+## Keep teams aligned with agents
+
+Flow's agent connects to the tools your teams already use, such as Slack, Jira, SharePoint, and your code repositories. When information changes there, the agent can tell the people it affects.
+
+It also works where engineers work. When the BMS software engineer opens a pull request in GitHub that changes the battery thermal limits, Flow reviews it against the requirements. It finds that the new limits conflict with the cell-temperature requirement, suggests the missing traceability links, and names the two people who resolve it: the engineer who owns the code and the engineer who owns the requirement.
+
+The agent proposes. The owners decide.
+
+## Start here
+
+All of your system's information lives in one place. You can iterate on it quickly, and agents keep the team moving in the same direction.
+
+1. [Start a project](/get-started/starting-a-project).
+2. [Connect a requirement, a system, and a test](/get-started/requirements-systems-tests).
+3. [Bring in your existing information](/get-started/getting-data-into-flow).
+4. [Create a branch](/get-started/creating-a-branch) for your first proposal.
+
+For the reasoning behind this design, read [The systems graph](/core-concepts/the-systems-graph).

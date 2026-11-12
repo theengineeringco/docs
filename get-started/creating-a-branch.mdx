@@ -1,0 +1,46 @@
+---
+title: "Creating a branch"
+description: "Develop a proposed change in its own branch, alongside the work of the rest of the team."
+---
+
+A branch is where you develop a change without disturbing the agreed design. Other engineers keep working, and several proposals can move forward at once.
+
+This guide runs the battery capacity trade study on the Truck: raising **Battery Usable Capacity** from 100 kWh to 120 kWh.
+
+You need permission to create branches in the project.
+
+## Choose the parent
+
+The parent is the state your branch starts from. For a proposal against the Truck's agreed design, the parent is **Truck**. For work that depends on another proposal, the parent is that proposal's branch.
+
+Choose the parent that contains the records you intend to change. Check it explicitly; different entry points can start with different parents selected.
+
+## Create the branch
+
+Open the branch selector and create a new branch. In workspaces that separate variants from proposals, the dialog is **New change request**; otherwise it is **New branch**.
+
+1. Enter a name that says what the work is, such as **Battery capacity trade study**.
+2. Check the parent and change it if needed.
+3. Create the branch.
+
+`main` and `master` are reserved names.
+
+## Make the change in context
+
+Confirm the sidebar shows your new branch before you edit. Open **Battery Usable Capacity** and change its target to 120 kWh, with the rationale in the description.
+
+Then look at what depends on it. Range, vehicle mass, and DC fast charge time all trace to battery capacity. Update what the proposal needs; leave historical results as they are. A new target does not change what an earlier test measured.
+
+If you ask the agent to help, name the branch and the task, and ask it to inspect before it edits.
+
+## See the impact
+
+Open **Review** for your branch. **Changed Items** lists every recorded difference from the parent. Then open the **Impact analysis** tab and choose **Run impact analysis**. Flow follows the connections from what you changed, summarizes which requirements and systems are affected, and shows who owns them.
+
+Use the result to decide who to talk to: the charging engineer about charge time, the vehicle lead about mass.
+
+## Keep the proposal current
+
+Keep the work for one proposal together: the revised requirement, its rationale, and any design or verification changes it needs. If the parent changes while you work, use **Update from parent** to bring that work into your branch, and resolve any conflicts deliberately.
+
+[Branching](/core-concepts/branching) explains why Flow manages change this way.

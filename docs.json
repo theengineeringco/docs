@@ -59,6 +59,40 @@
         }
       },
       {
+        "tab": "Guides",
+        "icon": {
+          "name": "book-marked",
+          "library": "lucide"
+        },
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "get-started/what-is-flow",
+              "get-started/starting-a-project",
+              "get-started/requirements-systems-tests",
+              "get-started/getting-data-into-flow",
+              "get-started/creating-a-branch"
+            ]
+          },
+          {
+            "group": "Core concepts",
+            "pages": [
+              "core-concepts/the-systems-graph",
+              "core-concepts/the-data-model",
+              "core-concepts/branching",
+              "core-concepts/ai-automations"
+            ]
+          },
+          {
+            "group": "AI & Automations",
+            "pages": [
+              "ai-automations/skills"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Release Notes",
         "icon": {
           "name": "book-open",

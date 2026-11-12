@@ -1,0 +1,46 @@
+---
+title: "Requirements, systems, tests"
+description: "Build one connected thread: an owned system, the requirement it delivers, and the evidence that verifies it."
+---
+
+Two questions come up on every program: why does this requirement exist, and where in the design is it delivered? This guide builds one thread that answers both, from the top-speed target down to coastdown test results.
+
+You need permission to edit the current branch, and a data model with categories for systems, requirements, and tests. Category and field names depend on your project. If the current branch is protected, [create a branch](/get-started/creating-a-branch) first.
+
+## 1. Create the system and its owner
+
+Use the create control in your current view and choose your project's systems category. Name the item **Body & Aerodynamics** and place it under **Vehicle**. Describe its boundary: the body surfaces and the components that shape airflow around the vehicle.
+
+Set the **Owner** to the aerodynamics engineer. Ownership goes to the engineer closest to the design, not to whoever manages the requirements.
+
+## 2. Record the requirement
+
+Create a requirement named **Aerodynamic Drag Coefficient**. Write the statement with its condition and expected outcome:
+
+> The vehicle shall have an aerodynamic drag coefficient no greater than 0.28, measured by coastdown in its delivered configuration.
+
+Enter **0.28** in the target value field as well as in the statement, so Flow can compare it with measured results. Set the owner and lifecycle state, and use the description for rationale.
+
+## 3. Connect it upward and to its system
+
+Connect the requirement to its parent, **Top Speed**. That link answers why it exists: drag limits top speed. Then connect it to **Body & Aerodynamics**. That link answers where it is delivered.
+
+Check each relationship from both sides. A link's type and direction carry its meaning; a requirement that only sits near a system in a table is not connected to it. If the relationship you need is missing, ask your Admin to check the data model.
+
+## 4. Define the verification
+
+Create a test case named **Coastdown Test** and connect it to the requirement. Record the configuration, track conditions, equipment, method, and expected result. Group it under the **Aerodynamic Verification** test plan, and keep the detailed track procedure in a separate document.
+
+Creating a test case organizes the work. It does not run a test.
+
+## 5. Record each result
+
+After each coastdown run, create a test result with the measured value, date, conditions, and outcome, and attach the run report. Connect it to the test case.
+
+Keep each run separate. Prototype Build 1 measured 0.296, Build 2 measured 0.287, and Build 3 measured 0.279. Only Build 3 meets the target. Averaging the three does not describe any vehicle.
+
+## Check the thread
+
+Start at **Top Speed** and follow it to the drag requirement, its system, its owner, and its latest result. Then start at the Build 3 result and follow it back up to the target it supports.
+
+If another engineer can make that trip without asking you anything, the thread is complete. Repeat the pattern across the program. [The systems graph](/core-concepts/the-systems-graph) explains why it matters; [Getting data into Flow](/get-started/getting-data-into-flow) shows how to bring in the records you already have.

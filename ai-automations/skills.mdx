@@ -1,0 +1,51 @@
+---
+title: "Skills"
+description: "Instructions the agent loads on request, shared with your project or kept to yourself."
+---
+
+Skills save reusable instructions for recurring tasks. Use **FLOW.md** for broad project rules and skills for specific methods.
+
+## When to use a skill
+
+Use a skill to apply a consistent method to different items or branches: writing requirements, checking evidence, or reviewing against a standard. Define the inputs, checks, and expected output. Use an automation to run it on a schedule or event.
+
+## Example skills
+
+Adapt these instructions to your project's fields and engineering rules.
+
+### Check safety-requirement traceability
+
+> Check selected safety requirements against our approved checklist for [ISO 26262-8:2018](https://www.iso.org/standard/68390.html). Follow source and verification links. List gaps and inconsistencies with item references. Do not edit data.
+
+Provide the checklist and supporting evidence; findings support review rather than establish certification.
+
+### Write a functional requirement
+
+> Rewrite the selected requirement as one clear “The system shall…” statement describing observable behavior and the conditions in which it applies. Preserve stated limits; flag missing acceptance criteria instead of inventing them. Return a proposed rewrite for review.
+
+### Check test coverage
+
+> Compare selected requirements with their linked tests. Check that each test verifies the required behavior, operating conditions, and acceptance limits. List uncovered requirements and mismatches with item references. Do not edit data.
+
+## Create and use a skill
+
+1. Open **Settings → AI → Skills**.
+2. Select **New skill** under **Organizational Skills** or **Personal Skills**.
+3. Name the task and specify inputs, checks, permitted changes, and expected output. Save and reopen to check the instructions and generated description.
+4. In chat, ask for the skill by name and reference the items to inspect.
+5. Inspect the **Loaded skill** action to confirm which instructions ran, then check the findings against their sources.
+
+You can also ask the agent to create or update a skill from chat. Review the result before relying on it.
+
+## Choose the scope
+
+| Instructions | Available in |
+| --- | --- |
+| Organizational Skills and FLOW.md | Every agent conversation and automation in the project |
+| Personal Skills and My FLOW.md | Your conversations in this project, including agents you delegate to |
+
+Personal instructions do not follow you to other projects. Automation runs use only organizational configuration, excluding Personal Skills and My FLOW.md.
+
+Personal and organizational skills can share a name; neither replaces the other. Specify the scope when invoking one.
+
+Viewers can inspect skills but cannot create or edit them. When you create a **New project** from an existing project with **Skills** selected, Flow copies its organizational skills and folders, excluding personal skills. Check copied instructions for references to the original project.

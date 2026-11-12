@@ -1,0 +1,53 @@
+---
+title: "The systems graph"
+description: "Why Flow connects engineering information around systems, ownership, and traceability."
+---
+
+An engineering program is a network of commitments. A requirement states what a system must achieve. An interface constrains how it connects to another system. A test provides evidence that the design meets the expectation. Change one, and the others can move.
+
+Flow keeps those commitments connected in a systems graph. The graph answers the questions engineers ask every day: why does this requirement exist, where is it delivered, and what else changes if it changes.
+
+## Start from an owned system
+
+Take the battery system in the electric vehicle. Its owner, the battery systems engineer, is responsible for the battery pack, the battery management system, and their connections to the rest of the vehicle. That includes their requirements, their interfaces, and the evidence that verifies them.
+
+Flow is built around this kind of ownership. Every system and requirement has an accountable person, and that person is the engineer closest to the design. The BMS software engineer owns the firmware limits. The aerodynamics engineer owns the drag target. They still work with specialists and reviewers; ownership gives that collaboration a center.
+
+Ownership only helps when the owner can see their dependencies. The graph makes them visible.
+
+## Make every connection explicit
+
+Flow represents information as **items** connected by **relationships**. Systems, requirements, interfaces, and tests are all items.
+
+Some relationships express decomposition. The vehicle contains the battery system; the battery system contains the pack and the BMS. Top Speed decomposes into drag coefficient and powertrain torque.
+
+Other relationships cross that hierarchy. **Range** depends on both **Battery Usable Capacity** and the vehicle's drag. **Cell Temperature During DC Fast Charging** is delivered by the BMS but constrains the charging system. A folder tree cannot hold both kinds of connection. A graph can.
+
+Verification relationships complete the picture. The drag requirement connects to the coastdown test case, its procedure, and one result per prototype build. The system structure says what is being designed. The verification relationships say how the team knows it works.
+
+## Change the view, not the data
+
+Different jobs ask different questions of the same records. The aerodynamics engineer wants their system and its open requirements. A systems architect wants interfaces and traceability. A program lead wants verification progress.
+
+Each gets a view, and every view reads the same items:
+
+- A **table** compares fields across items and edits them in bulk.
+- A **tree** shows hierarchy and decomposition.
+- **Reader** presents the content as a document people can read and comment on.
+- A **diagram** draws selected structures and connections.
+
+Saved views such as **Systems**, **Functions**, **Verification**, and **Risks** start from different parts of the graph. Nothing is copied between them. Editing a value in one view changes the item every view shows.
+
+A filtered view is a perspective, not a permission. Access is configured separately.
+
+## Follow the consequences of change
+
+Suppose the Truck's battery capacity rises from 100 kWh to 120 kWh. The question is not the new number. It is everything connected to it: range improves, vehicle mass rises, and DC fast charge time may no longer meet its target.
+
+The graph turns that question into a set of records to inspect and people to talk to. Its answers are only as good as its links. A missing relationship is a gap in traceability, and a recorded one still needs engineering judgment.
+
+## Build on the graph
+
+[The data model](/core-concepts/the-data-model) defines what items, fields, and relationships mean. [Branching](/core-concepts/branching) lets the graph change safely. [AI & Automations](/core-concepts/ai-automations) use its connections as context.
+
+To build your first connected thread, follow [Requirements, systems, tests](/get-started/requirements-systems-tests).

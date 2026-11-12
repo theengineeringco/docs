@@ -1,0 +1,50 @@
+---
+title: "Getting data into Flow"
+description: "Bring existing spreadsheets, documents, and connected tools into Flow, then check what arrived."
+---
+
+Most programs already have their requirements somewhere: a spreadsheet, a review deck, a specification, an issue tracker. Choose the route by the source, and start with a small sample before you bring in everything.
+
+## Choose the route
+
+| Source | Route | Check |
+| --- | --- | --- |
+| A few records | Create and edit items directly | Category, fields, owner, links |
+| A spreadsheet of requirements | **Import from → CSV/Excel** | Column mapping, matching, relationships, validation |
+| A document, deck, or image | Ask the agent to extract it | Each candidate against its source, and its mapping to your model |
+| A connected tool | That integration's workflow | Access scope, and whether it reads, imports, or writes |
+
+## Import a spreadsheet
+
+Suppose the battery team keeps its pack requirements in Excel.
+
+1. Open the project and branch, then a view of the records you are importing.
+2. Choose **More actions → Import from → CSV/Excel**.
+3. Select the file. For Excel, Flow reads the first worksheet, so put the data there.
+4. Map columns to categories, fields, and relationships: the requirement name, its statement, **Battery Usable Capacity**'s target of 100 kWh, its unit, and its parent system **Battery Pack**.
+5. Choose how rows match existing items with **Match items by**, so rows update records that already exist instead of duplicating them.
+6. Review the validation and the proposed changes.
+
+A relationship column must refer to the related item consistently. If a value matches more than one item, or the same source row appears twice with different values, fix it before you continue.
+
+**Requires you to act:** Resolve blocking validation issues and confirm the import. Flow writes the import into a new branch, so you can inspect it before it reaches shared work.
+
+## Extract from a document
+
+The agent can turn a document into candidate records. Give it a bounded task: the source, the item types you want, what to preserve, and whether you want analysis or changes.
+
+For example, attach the aerodynamics review deck and ask the agent to extract the drag and frontal-area targets, with the slide each came from, as requirements under **Body & Aerodynamics**. If your team has [skills](/ai-automations/skills) for writing requirements, the agent applies them so the results follow your house rules.
+
+Extraction and creation are separate steps. Check each candidate against its source, especially values read from tables, charts, or diagrams.
+
+## Use connected tools deliberately
+
+An integration can let Flow read information without creating a matching Flow record. Other integration actions create or update records in Flow or in the connected tool. Check what a connection does before you depend on it.
+
+A change made in an external tool happens in that tool. Flow's branch history does not undo it.
+
+## Check what arrived
+
+Open a handful of the new records. Check names, values, units, and owners, and follow their relationships. For an update, confirm the intended records changed and no duplicates appeared.
+
+Then continue with [Creating a branch](/get-started/creating-a-branch).
