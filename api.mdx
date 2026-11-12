@@ -60,6 +60,14 @@ A ReqIF import runs as a job. Each step returns quickly. Poll [`GET /project/{pr
 
 Send the preview the clauses in the order you will commit them. `base_branch_id` names the branch the import would start from (omit it or send `master` for Base), and that branch decides whether each row creates or updates an item. Set `clause_id` to one clause's `id` to get a page of its rows. Each row has the ReqIF `identifier`, its `id_value`, the `values` the commit would write, and an `outcome` of `created` or `updated`. Page with `offset` and `limit` (default 50, maximum 100) while `has_more` is `true`. Set `include_counts` to also get created and updated `counts` for every clause. When `counts_complete` is `false`, the counts stopped before the end of the document and are lower bounds. The preview returns `400` unless the job is parsed and waiting for your mapping (`status` `waiting`, `phase` `parsed`).
 
+## Draw diagrams with engineering symbols
+
+[`GET /project/{projectId}/diagram-symbols`](/api/endpoints/get-project-projectid-diagram-symbols) lists the project's enabled ISO 1219 fluid-power, IEC 60617 electrical, and ISA-5.1 instrumentation symbols. The response is `libraries`, each with an `id`, a `label`, and `symbols`. Each symbol has an `id`, a `label`, a `size` (`w`, `h`), a `labelSlot` of `below` or `inside`, and its `ports`. Each port has an `id`, a normalized `at` position as `[x, y]`, and a `side` of `n`, `e`, `s`, or `w`.
+
+In the structured input of `POST /project/{projectId}/diagrams`, use a symbol `id`, such as `iso1219:pump`, as a node's `shape` or an entity's `geo`. Set a connection's `fromPort` or `toPort` to a terminal `id` from that symbol's `ports`, or omit them for automatic routing. A port that is not a terminal of the symbol at that end returns `400`. Symbols cannot contain children, so an item whose `parentId` is a symbol returns `400`. Use a card or rectangle as the container instead.
+
+[`GET`](/api/endpoints/get-project-projectid-symbol-libraries) and [`PUT /project/{projectId}/symbol-libraries`](/api/endpoints/put-project-projectid-symbol-libraries) read and replace the libraries the shape picker offers, as `enabled` IDs: `iso1219`, `iec60617`, and `isa51`. Every library is enabled until the project sets the list. `PUT` requires Admin access and replaces the whole list. An unknown library ID returns `400`. External grant recipients get an empty list from `GET`, which does not reflect the stored setting.
+
 ## Run automations
 
 Learn how [automations and triggers](/api/automations/overview) work together. [Set up a webhook automation](/api/automations/webhooks), then [start runs and poll their results](/api/examples/automations).

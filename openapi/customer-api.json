@@ -3605,6 +3605,10 @@
             "description": "When provided, copies structure from the specified project into the new one. Which parts are copied is controlled by the copy* flags below (all default to true, so omitting them copies everything, as before). Takes precedence over seedFromTemplate.",
             "type": "string"
           },
+          "copyItems": {
+            "description": "Copy the live items on the source project main branch (type, field values, formulas, links between copied items). Requires copyDataModel. Refused when the source has more than 50,000 items. Defaults to false. The response returns once the project exists; the items are copied by a job afterwards (poll GET /project/:id/item-copy), and copied automations are added when it finishes.",
+            "type": "boolean"
+          },
           "copySkills": {
             "description": "Copy the source project skills (and skill folders). Defaults to true.",
             "type": "boolean"
@@ -5868,6 +5872,10 @@
             "description": "Source entity or node ID",
             "type": "string"
           },
+          "fromPort": {
+            "description": "Source terminal ID from GET /project/{projectId}/diagram-symbols; omit for automatic routing",
+            "type": "string"
+          },
           "interface": {
             "allOf": [
               {
@@ -5891,6 +5899,10 @@
           "to": {
             "description": "Target entity or node ID",
             "type": "string"
+          },
+          "toPort": {
+            "description": "Target terminal ID from GET /project/{projectId}/diagram-symbols; omit for automatic routing",
+            "type": "string"
           }
         },
         "required": [
@@ -5906,10 +5918,56 @@
             "type": "number"
           },
           "geo": {
-            "description": "Visual treatment of the card. 'pill' renders a compact single-row oval (the clean affordance for interfaces and other entities mounted on a connection); omit or 'card' for the default header + body card.",
+            "description": "Visual treatment: card, pill, or a symbol ID from GET /project/{projectId}/diagram-symbols. Symbols cannot contain children. 'pill' renders a compact single-row oval (the clean affordance for interfaces and other entities mounted on a connection); omit or 'card' for the default header + body card.",
             "enum": [
               "card",
-              "pill"
+              "pill",
+              "iso1219:pump",
+              "iso1219:valve-2-2",
+              "iso1219:valve-3-2",
+              "iso1219:check-valve",
+              "iso1219:heat-exchanger",
+              "iso1219:fan",
+              "iso1219:reservoir",
+              "iso1219:orifice",
+              "iso1219:sensor-temperature",
+              "iso1219:sensor-pressure",
+              "iso1219:sensor-level",
+              "iso1219:sensor-flow",
+              "iso1219:junction-t",
+              "iso1219:junction-cross",
+              "iec60617:resistor",
+              "iec60617:capacitor",
+              "iec60617:inductor",
+              "iec60617:diode",
+              "iec60617:battery",
+              "iec60617:dc-source",
+              "iec60617:ac-source",
+              "iec60617:earth",
+              "iec60617:motor",
+              "iec60617:generator",
+              "iec60617:switch-no",
+              "iec60617:switch-nc",
+              "iec60617:relay-coil",
+              "iec60617:contactor",
+              "iec60617:fuse",
+              "iec60617:circuit-breaker",
+              "iec60617:transformer",
+              "isa51:field-instrument",
+              "isa51:panel-instrument",
+              "isa51:auxiliary-panel-instrument",
+              "isa51:pressure-indicator",
+              "isa51:pressure-transmitter",
+              "isa51:pressure-controller",
+              "isa51:temperature-indicator",
+              "isa51:temperature-transmitter",
+              "isa51:temperature-controller",
+              "isa51:flow-indicator",
+              "isa51:flow-transmitter",
+              "isa51:flow-controller",
+              "isa51:level-indicator",
+              "isa51:level-transmitter",
+              "isa51:level-controller"
             ],
             "type": "string"
           },
@@ -5924,6 +5982,13 @@
           "parentId": {
             "description": "Id of another entity/node in this payload that should contain this card. When set, the card is nested inside that container and auto-arranged inside it. Omit for a top-level card.",
             "type": "string"
+          },
+          "shownFieldKeys": {
+            "description": "Field keys displayed below the symbol or on the card",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "shownFields": {
             "description": "Field keys the card shows as rows under its name (a pill shows them as value chips, all but the description). The card gets one line per field and a longer value wraps into the room it has; keys the type does not have draw nothing.",
@@ -5991,7 +6056,7 @@
             "type": "string"
           },
           "shape": {
-            "description": "Shape — defaults to \"rectangle\". Any geo of the editor's shape picker; \"frame\", \"swimlane-horizontal\" and \"swimlane-vertical\" draw a container titled with `name`, which other items join via parentId.",
+            "description": "Shape — defaults to \"rectangle\". Any geo of the editor's shape picker; \"frame\", \"swimlane-horizontal\" and \"swimlane-vertical\" draw a container titled with `name`, which other items join via parentId. Symbol IDs from GET /project/{projectId}/diagram-symbols preserve authored aspect ratio and cannot contain children.",
             "enum": [
               "cloud",
               "rectangle",
@@ -6020,7 +6085,53 @@
               "chevron",
               "frame",
               "swimlane-horizontal",
-              "swimlane-vertical"
+              "swimlane-vertical",
+              "iso1219:pump",
+              "iso1219:valve-2-2",
+              "iso1219:valve-3-2",
+              "iso1219:check-valve",
+              "iso1219:heat-exchanger",
+              "iso1219:fan",
+              "iso1219:reservoir",
+              "iso1219:orifice",
+              "iso1219:sensor-temperature",
+              "iso1219:sensor-pressure",
+              "iso1219:sensor-level",
+              "iso1219:sensor-flow",
+              "iso1219:junction-t",
+              "iso1219:junction-cross",
+              "iec60617:resistor",
+              "iec60617:capacitor",
+              "iec60617:inductor",
+              "iec60617:diode",
+              "iec60617:battery",
+              "iec60617:dc-source",
+              "iec60617:ac-source",
+              "iec60617:earth",
+              "iec60617:motor",
+              "iec60617:generator",
+              "iec60617:switch-no",
+              "iec60617:switch-nc",
+              "iec60617:relay-coil",
+              "iec60617:contactor",
+              "iec60617:fuse",
+              "iec60617:circuit-breaker",
+              "iec60617:transformer",
+              "isa51:field-instrument",
+              "isa51:panel-instrument",
+              "isa51:auxiliary-panel-instrument",
+              "isa51:pressure-indicator",
+              "isa51:pressure-transmitter",
+              "isa51:pressure-controller",
+              "isa51:temperature-indicator",
+              "isa51:temperature-transmitter",
+              "isa51:temperature-controller",
+              "isa51:flow-indicator",
+              "isa51:flow-transmitter",
+              "isa51:flow-controller",
+              "isa51:level-indicator",
+              "isa51:level-transmitter",
+              "isa51:level-controller"
             ],
             "type": "string"
           },
@@ -6067,6 +6178,122 @@
         "required": [
           "store",
           "schema"
+        ],
+        "type": "object"
+      },
+      "DiagramSymbolDto": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "labelSlot": {
+            "enum": [
+              "below",
+              "inside"
+            ],
+            "type": "string"
+          },
+          "ports": {
+            "items": {
+              "$ref": "#/components/schemas/DiagramSymbolPortDto"
+            },
+            "type": "array"
+          },
+          "size": {
+            "$ref": "#/components/schemas/DiagramSymbolSizeDto"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "size",
+          "labelSlot",
+          "ports"
+        ],
+        "type": "object"
+      },
+      "DiagramSymbolLibraryDto": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "symbols": {
+            "items": {
+              "$ref": "#/components/schemas/DiagramSymbolDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "symbols"
+        ],
+        "type": "object"
+      },
+      "DiagramSymbolPortDto": {
+        "properties": {
+          "at": {
+            "description": "Normalized [x, y] position in the unrotated symbol box",
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
+          },
+          "id": {
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "n",
+              "e",
+              "s",
+              "w"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "at",
+          "side"
+        ],
+        "type": "object"
+      },
+      "DiagramSymbolSizeDto": {
+        "properties": {
+          "h": {
+            "type": "number"
+          },
+          "w": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "w",
+          "h"
+        ],
+        "type": "object"
+      },
+      "DiagramSymbolsResponseDto": {
+        "properties": {
+          "libraries": {
+            "items": {
+              "$ref": "#/components/schemas/DiagramSymbolLibraryDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "libraries"
         ],
         "type": "object"
       },
@@ -9180,6 +9407,21 @@
         ],
         "type": "object"
       },
+      "SymbolLibrariesResponseDto": {
+        "properties": {
+          "enabled": {
+            "description": "Ids of the diagram symbol libraries the shape picker offers, for example \"iso1219\".",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "enabled"
+        ],
+        "type": "object"
+      },
       "TldrawSnapshotToXmlDto": {
         "properties": {
           "name": {
@@ -9319,6 +9561,10 @@
       "TriggerResultItemDto": {
         "properties": {
           "agent_id": {
+            "type": "string"
+          },
+          "agent_name": {
+            "nullable": true,
             "type": "string"
           },
           "automation_id": {
@@ -10523,6 +10769,20 @@
             "type": "array"
           }
         },
+        "type": "object"
+      },
+      "UpdateSymbolLibrariesDto": {
+        "properties": {
+          "enabled": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "enabled"
+        ],
         "type": "object"
       },
       "UpdateUpstreamContextDto": {
@@ -18460,6 +18720,62 @@
         }
       }
     },
+    "/project/{projectId}/diagram-symbols": {
+      "get": {
+        "description": "Lists the enabled ISO 1219, IEC 60617 and ISA-5.1 symbols, authored sizes and terminal IDs. Use symbol IDs as nodes.shape or entities.geo and terminal IDs as connections.fromPort/toPort in POST /project/{projectId}/diagrams. Symbols are leaves and cannot contain children.",
+        "operationId": "ProjectController_getDiagramSymbols",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagramSymbolsResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Discover enabled diagram symbols and named terminals",
+        "tags": [
+          "Projects"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-diagram-symbols",
+          "metadata": {
+            "sidebarTitle": "Discover enabled diagram symbols and named terminals",
+            "title": "Discover enabled diagram symbols and named terminals"
+          }
+        }
+      }
+    },
     "/project/{projectId}/diagrams": {
       "post": {
         "description": "Creates a diagram entity from either a raw tldraw snapshot or structured input, and optionally links it to a host entity. Typical draw.io import flow: (1) convert XML via POST /convert/drawio-to-tldraw, (2) call this endpoint with the returned `snapshot` plus a `hostEntityId`, (3) optionally embed the diagram in the host's rich-text field (e.g. `description`) by appending a node of the form `{\"type\": \"tldraw\", \"diagramId\": \"<id>\", \"children\": [{\"text\": \"\"}]}` via PUT /project/{projectId}/entities/{entityId}/values — embeds only resolve diagrams linked to the entity that owns the field. Upsert semantics: re-POSTing with the same `id` replaces that diagram's name and snapshot in place (e.g. re-importing an updated source file); an `id` belonging to a non-diagram entity is rejected with 409.",
@@ -22838,6 +23154,126 @@
           "metadata": {
             "sidebarTitle": "Get the project's sidebar notifications toggle",
             "title": "Get the project's sidebar notifications toggle"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/symbol-libraries": {
+      "get": {
+        "description": "The symbol libraries (for example ISO 1219-1 fluid power) the diagram shape picker offers in this project. External grant recipients receive an empty list because project configuration is not exposed to them; this does not describe the stored setting.",
+        "operationId": "ProjectController_getSymbolLibraries",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SymbolLibrariesResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get the project's diagram symbol libraries",
+        "tags": [
+          "Projects"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/get-project-projectid-symbol-libraries",
+          "metadata": {
+            "sidebarTitle": "Get the project's diagram symbol libraries",
+            "title": "Get the project's diagram symbol libraries"
+          }
+        }
+      },
+      "put": {
+        "description": "Admins only. Replaces the list of enabled symbol libraries.",
+        "operationId": "ProjectController_updateSymbolLibraries",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Workspace identifier",
+            "in": "header",
+            "name": "customer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSymbolLibrariesDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SymbolLibrariesResponseDto"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Set the project's diagram symbol libraries",
+        "tags": [
+          "Projects"
+        ],
+        "x-mint": {
+          "href": "/api/endpoints/put-project-projectid-symbol-libraries",
+          "metadata": {
+            "sidebarTitle": "Set the project's diagram symbol libraries",
+            "title": "Set the project's diagram symbol libraries"
           }
         }
       }
