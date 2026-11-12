@@ -1,0 +1,91 @@
+---
+title: "November 11, 2026"
+sidebarTitle: "November 11, 2026"
+description: "Engineering symbol libraries for fluid-power, electrical, and instrumentation diagrams, comparisons from any point in a branch's history, workspace Back and Forward, new projects that copy their source's items, and project memories for agents."
+---
+
+## In this release
+
+- [Engineering symbol libraries for diagrams](#engineering-symbol-libraries-for-diagrams)
+- [Compare from any point in branch history](#compare-from-any-point-in-branch-history)
+- [Back and Forward across the workspace](#back-and-forward-across-the-workspace)
+- [New projects with copied items](#new-projects-with-copied-items)
+- [Project memories](#project-memories)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Engineering symbol libraries for diagrams
+
+The diagram shape picker has a Symbols section with ISO 1219-1 fluid-power symbols, including pumps, 2/2 and 3/2 valves, check valves, heat exchangers, fans, expansion tanks, orifices, sensors, and junctions. IEC 60617 electrical and ISA-5.1 instrumentation starter libraries add components, instrument tags, and connection terminals. Each symbol draws as a line drawing in its stroke color with its name under the glyph, so a cooling or hydraulic schematic reads the way the one you share with partners does. Project admins choose which libraries the shape picker offers in **Settings → Diagrams → Symbol libraries**. All libraries are enabled by default.
+
+A wire end dropped near a symbol's port, such as a pump's outlet or a valve's A, P, or T, snaps to it, and Auto-arrange routes the wire to that port on the side the symbol draws it. **Convert to Entity** on an ISO 1219 symbol keeps the glyph, with the item's name and any shown fields below it, so the pump on the schematic is the pump component. Importing a draw.io file maps its P&ID and Fluid Power (ISO 1219) pumps, valves, heat exchangers, vessels, gauges, and similar shapes onto these symbols instead of rectangles. Flow AI can create fluid-power, electrical, and instrumentation diagrams with connections at named terminals, and edit and arrange existing symbol diagrams.
+
+## Compare from any point in branch history
+
+The Point control on the branch menu's **Compare with...** page and in an item's **Compare with branch...** dialog opens on Current and the branch's baselines, searchable by name. Every row offers **Changes up to …**, which lists the changes recorded since the previous named position, newest first and worded as in the History tab. Current's list covers the changes since the newest baseline, and a branch with no baseline has one list for its whole history. The item dialog shows the same lists for that item, and a History row's menu offers **Compare from this version**.
+
+## Back and Forward across the workspace
+
+Back and Forward sit at the top of the sidebar, beside the collapse control. They step across engineering views, Review, Agents, and Settings on every branch of a project, name the branch they return to, and step through the review tabs you opened. Returning restores your open Details stack, and selecting a section resumes where you left off in it.
+
+Table, Tree, and Reader carry your current filters when you switch between them. After opening a diagram or a linked-items table, the content Back arrow returns you to the previous view with its context restored.
+
+## New projects with copied items
+
+The **New project** dialog can copy the source project's items along with its data model. Each item keeps its type, field values, formulas, and links to the other copied items, and its history starts in the new project. The project opens at once while the items arrive in the background, with the percentage copied shown. Copied automations are added once the items are in. A source with more than 50,000 items cannot have its items copied, and the dialog says so.
+
+## Project memories
+
+Agents can save a memory for the whole project. A project memory is recalled in every run of the project's custom agents, whichever agent runs and whoever directs it. Saving, editing, or forgetting one takes project-admin authority in a run that may write to the project. The agent Memories dialog shows them in a **Project memories** tab beside **My memories** and **Agent memories**.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Long-running chats and automations.** A conversation condensed many times, such as an automation that runs every few minutes in one chat, no longer stops with "This conversation is too large for the AI". Its earlier messages stay available to the assistant. Flow AI now condenses a long conversation right after the reply that filled it, and the context meter shows "Compacting…" while it does.
+- **Questions card.** Pressing Enter in the agent's questions card moves to the next question, or submits on the last one.
+- **Review stages.** Flow AI reads an item's current Review stage with its ID and name, including the default stage when no value has been set.
+
+### Branching
+
+- **Baselines made right after branching.** A baseline recorded before the branch's first change now sits at the fork in the History tab and the Point control. Current's list shows only the branch's own changes, and the baseline's list shows what the branch inherited. Existing baselines of this kind are moved there.
+
+### Collaboration
+
+- **Comments on replaced text.** A comment whose highlighted text was removed or replaced, for example by keeping the parent's version during Update from parent, shows a "Referenced text changed" label above its quote.
+
+### Data Model
+
+- **Review stages.** Data types that do not already have review stages can no longer add them. Types that already use review stages keep them and stay editable.
+
+### Diagrams
+
+- **Controls beside AI chat.** Drawing and zoom controls stay usable when AI chat narrows the canvas, including with the minimap open.
+- **Elbow connectors.** Connectors with hand-placed bends, or with an end on empty canvas, draw as they did before the diagram editor update. Dragging the loose end of an older connector, or of one inside a frame, onto empty canvas leaves it where you release it.
+
+### Integrations
+
+- **GitHub pull request comments.** Automation review comments on GitHub pull requests end with "Sent by" and a link to the run that wrote them, naming the custom agent when one ran it.
+
+### Permissions and Sharing
+
+- **Merging sub-branches.** A member of the parent branch's editor groups can merge a sub-branch into it, even when they are not in the sub-branch's editor groups. They can also create baselines on that sub-branch, and revert or reopen it after it merges. Anyone else trying to merge is told to ask the parent's editor groups.
+
+### Review
+
+- **Reverting many changes.** **Revert filtered** and **Revert selected** show progress as each change is reverted, cannot be started again while a revert is running, and no longer freeze the page when a large revert finishes.
+
+### Table
+
+- **Returning to a large Table.** Returning to a large, paginated Table brings back the visible rows and active cell without loading every preceding page. Changing display options keeps further rows available as you scroll.
+
+### Views
+
+- **Linked items in the main pane.** Open a linked-items list in the main pane from the Details drawer, or from the header of a linked-items table embedded in the Reader, while the Navigator stays in place. The promoted table keeps its columns and widths.
+- **Default expand depth of 0.** Items such as Verifications appear in an item's linked-item tab and in Reader linked tables when the organization's default expand depth is 0.
+- **Heavily linked items.** The app no longer freezes for many seconds when the view refreshes while the sidebar shows an item with tens of thousands of links.
+
+## API Changes
+
+- **Symbol diagrams over MCP.** Connected MCP agents can discover diagram symbol libraries and create ISO 1219 fluid-power, IEC 60617 electrical, and ISA-5.1 instrumentation diagrams with connections at named terminals. See [MCP tools](/api/mcp/tools).
+- **API key search.** Search API keys by name or creator email in **Settings → API & MCP**.
