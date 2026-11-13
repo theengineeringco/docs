@@ -39,6 +39,10 @@ Use [`GET /project/{projectId}/branch/{id}/merge-readiness`](/api/endpoints/get-
 
 The read enforces nothing. `POST /project/{projectId}/branch/{id}/merge` checks its own gates again when you merge.
 
+## Revert a merge safely
+
+[`POST /project/{projectId}/branch/baseline/{baselineId}/revert`](/api/endpoints/post-project-projectid-branch-baseline-baselineid-revert) creates a branch that undoes a merge. Reverting a large merge can take longer than your connection stays open. Send a `request_id` that you generate as a UUID, and reuse it if you retry. A retry with the same `request_id` returns the branch the earlier attempt created instead of creating a second one. While that attempt is still running, a retry returns `409`. Wait and retry again. Reusing a `request_id` for a different revert also returns `409`.
+
 ## Manage shared saved views
 
 [`GET /project/{projectId}/views/saved`](/api/endpoints/get-project-projectid-views-saved) lists the project's shared saved views in display order. A view's `id` is the `view_id` that sharing a view takes. Creating, updating, and deleting shared views requires Admin access, and changes apply to every project member.
@@ -48,6 +52,10 @@ The read enforces nothing. `POST /project/{projectId}/branch/{id}/merge` checks 
 - [`POST`](/api/endpoints/post-project-projectid-views-saved-viewid-relationships) and [`DELETE /project/{projectId}/views/saved/{viewId}/relationships`](/api/endpoints/delete-project-projectid-views-saved-viewid-relationships) add or remove one nesting rule, identified by `parentType` and `childType`, and keep the view's other rules. Adding a rule the view already has with the same `direction` changes nothing, so a retry is safe. The same pair with another direction returns `409`.
 
 Display options are edited in Flow.
+
+## Assign people to items
+
+To list who can be an item's owner, assignee, or reviewer, call [`GET /users`](/api/endpoints/get-users) or [`GET /users/page`](/api/endpoints/get-users-page) with `assignable=true`. This leaves out personal agents. A personal agent works for one person, so writing its user ID to a user field such as owner, assignee, or reviewers returns `400`. A personal agent also cannot own a branch.
 
 ## Import ReqIF documents
 
