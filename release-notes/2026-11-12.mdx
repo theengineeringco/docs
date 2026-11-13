@@ -1,0 +1,85 @@
+---
+title: "November 12, 2026"
+sidebarTitle: "November 12, 2026"
+description: "Connect, change, or disconnect any integration from the AI assistant, Slack threads that link back to their Flow AI chat, Jira attachments in Flow AI, and MCP access for external collaborators."
+---
+
+## In this release
+
+- [Set up any integration from the AI assistant](#set-up-any-integration-from-the-ai-assistant)
+- [Slack threads that return to their Flow AI chat](#slack-threads-that-return-to-their-flow-ai-chat)
+- [Jira attachments in Flow AI](#jira-attachments-in-flow-ai)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Set up any integration from the AI assistant
+
+Ask the AI assistant to connect, change, or disconnect an integration, such as Slack, Google Drive, GitHub, Jira, Linear, Confluence, Notion, or an MCP connection. It offers the settings page's own connection form or sign-in on a card. It then proposes changes such as write-back or allowlisted projects as rows you confirm with your own permissions.
+
+When a request needs a setting that is off, such as write-back, the assistant offers to turn it on and then carries on. Credentials are typed into the card and never pass through the conversation.
+
+## Slack threads that return to their Flow AI chat
+
+Every message Flow AI posts in Slack ends with a link to the chat that wrote it, labeled as a chat, a private chat, or an automation run. Replies in a thread that a Flow AI chat or automation run started go back to that chat or run. They show there under the name of the person who wrote them in Slack, with a link back to the reply.
+
+In a thread Flow AI started, a reply is answered without mentioning @Flow again. Asking `@Flow` a question in Slack gets the answer in the thread, not only a follow-up offer.
+
+## Jira attachments in Flow AI
+
+The agent and automation scripts can list a Jira issue's attachments and read one like any uploaded file. When Jira write-back is on, they can also attach a Flow file to an issue. They act with the connected user's own Jira access.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Collapsed steps in AI chat.** Steps where the agent changed settings, branch details, views, memory, or connected tools, or ran a script, start collapsed so the agent's replies stay easy to follow. Click a step to see its details.
+- **Filtering in the transcript.** When the agent filters items, those calls fold into the collapsed line with its other lookups instead of each showing as a separate card.
+- **Personal agents.** A personal agent can no longer be made an item's owner, assignee, or reviewer, or a branch's owner, and a branch it opens belongs to its owner. Its name carries a lock whose hover card names its owner, so everyone can see whose agent did the work.
+- **Agent chat breadcrumb.** Clicking the agent's name in a trigger or automation run chat opens your own main chat with that agent instead of a blank chat.
+
+### Branching
+
+- **Tag from the branch menu.** Tag a branch from the sidebar kebab or the Branch view row menu without opening the Branch view first.
+- **Reverting a large merge.** Reverting a merge of tens of thousands of items completes instead of failing after a couple of minutes. Flow waits for a slow revert and opens the revert branch once it is ready, and clicking **Revert** again picks up the same revert instead of starting a second one.
+
+### Collaboration
+
+- **Long mentions.** Long mentions of items, people, agents, branches, reviews, and other references in descriptions, comments, and AI chat wrap onto the next line instead of being cut off.
+
+### Diagrams
+
+- **Connectors.** Dropping a connector's end in the middle of a shape connects it to the shape's center again. An end dropped near the middle of a side snaps to it, and a connector can start and end on the same shape, looping around its outside.
+- **Large diagrams.** Very large diagrams show their preview in the Diagram field and the Reader instead of "Failed to render diagram". They export and copy as PNG at a reduced resolution instead of failing.
+
+### Import and Export
+
+- **V2 migration.** Saved filter views carry over. A private V2 view becomes a personal view for the person who saved it, and a public one becomes a shared view. A view whose filters can't be reproduced exactly is left out and listed with its page, owner, and reason.
+- **V2 migration units.** Units from V2, including a project's own custom units, appear beside migrated values and in their history across tables, trees, diagrams, exports, and the details panel.
+- **V2 migration content.** Images in V2 comments and earlier revisions appear instead of showing as unavailable. Mentions set to "Display Reference" stay reference pills, and a renamed V2 stage keeps its history under the new name.
+
+### Integrations
+
+- **Jira connection prompts.** When the assistant can't reach Jira because your own Atlassian account isn't connected, the failed step offers **Connect Jira**, returns you to the same conversation, and continues your request. **Settings → Integrations** also shows when your own account isn't connected.
+- **Custom MCP connection errors.** When Flow refuses an MCP server, **Settings → Integrations → Custom MCP** shows the reason instead of the raw server response.
+- **Large GitHub pull requests.** A pull request whose diff is too large for GitHub to return still gets its automated review, which reads the changes file by file.
+
+### Projects
+
+- **Switching projects.** Items no longer show another project's values after you switch between two projects that hold the same items. Stage and tag cells no longer show a raw ID with an orphaned-value warning until the page is reloaded.
+
+### Reader
+
+- **Item references in rich text.** After typing `=`, you can keep typing straight into the item search without losing characters. Pressing Backspace in the empty search removes the `=` and closes the picker.
+
+### Review
+
+- **Stage skips.** A configured stage transition that skips intermediate stages can be merged without visiting those stages. Sequential gates still apply when no skip is configured.
+- **Force merge.** Eligible users force merge from the header's **Merge status** popover. The review Overview's three-dot menu no longer offers it.
+
+### Table
+
+- **Rich-text cells.** With **Wrap columns** on, a long rich-text editor or read-only expansion stays inside the visible table area and scrolls inside itself, so its toolbar and content stay reachable. Editors grow upward to fit longer content while neighboring columns stay visible.
+
+## API Changes
+
+- **MCP for external collaborators.** External share recipients can connect MCP clients with a personal API key or sign-in. Their access is limited to the items already shared with them and their existing permissions. See [Connect a client](/api/mcp/connect).
