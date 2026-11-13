@@ -3,6 +3,8 @@ title: "Dashboards"
 description: "Summarize the live state of a project with counts, distributions, coverage, and trends."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Dashboards summarize the live state of a branch: how many items exist, how their values are distributed, how well they connect, and how that has changed over time. They read the current branch only, so they are unavailable while you view a baseline or a review snapshot.
 
 Editors create and change dashboards; read-only users can view them. External users cannot open dashboards.
@@ -19,6 +21,8 @@ Filter changes save as you make them.
 
 ## Choose a widget
 
+<VisualPlaceholder kind="Screenshot" title="Dashboard with a bound view, a Filter that includes Within items, and the Value block, Property summary and Link coverage widgets" />
+
 | Widget type | Shows |
 | --- | --- |
 | Value block | The number of items, filled values, or percent filled, or the sum, average, minimum, or maximum of a number property |
@@ -31,5 +35,7 @@ A widget's own **Filter** narrows that widget only. Link coverage counts links, 
 ## Read historical charts
 
 A property summary can show history. Choose a historical chart (**Line**, **Multi-line**, **Stacked area**, **Bars**, or **Stacked bars**), set the date range and interval, and optionally add milestones to mark targets.
+
+<VisualPlaceholder kind="Screenshot" title="Historical Property summary chart with milestones and the &quot;Not filtered by this dashboard&quot; notice" />
 
 Historical charts ignore the dashboard's filter and the saved view's filters, and the card says so. A widget filter blocks historical charts; remove it to choose one. **Within items** still applies, using today's hierarchy, so moving or deleting items also changes past buckets. Account for both before you compare a trend with a filtered current count.

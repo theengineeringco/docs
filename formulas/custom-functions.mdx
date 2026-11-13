@@ -3,11 +3,15 @@ title: "Custom functions"
 description: "Reference for Flow's formula helpers: signatures, results, missing values, and examples."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Formulas read fields, follow links through the systems graph, and calculate values. This reference covers Flow's **24 custom names**: 23 functions plus `mean`, an alias of `avg`. The last section lists the standard Python and math functions also available.
 
 ## Write a formula
 
 A formula is one Python expression. Lists, comprehensions, generators, lambdas, and conditional expressions work; imports, assignments, and function definitions do not. The result must fit the destination field's type.
+
+<VisualPlaceholder kind="Screenshot" title="Formula editor with `latest(...)` keyed on Test Date over three coastdown results, and the calculated value" />
 
 - Use `self` for the current item and `get(...)` for another item in the same project and branch.
 - Read fields with `self.Target_Value` or `self["Target Value"]`. Brackets accept exact display names and avoid collisions with helper names, as in `self["children"]`.

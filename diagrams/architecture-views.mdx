@@ -3,7 +3,11 @@ title: "Architecture views"
 description: "See a system's breakdown and interfaces drawn straight from the model, with a layout you arrange once."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 The **Architecture** tab draws a system's breakdown from its items and links: its subsystems as cards and the interfaces that connect them. Because the drawing comes from the model, it stays current as the model changes, and you only arrange the layout.
+
+<VisualPlaceholder kind="Screenshot" title="Settings → Architecture" />
 
 ## Turn on the view
 
@@ -12,6 +16,8 @@ The Architecture tab is in beta and appears only in workspaces where it is turne
 The tab appears when the focused item's type, or the view's root type when nothing is focused, is a configured node type. If it is missing, check both settings with your administrator.
 
 ## Explore the system
+
+<VisualPlaceholder kind="Screenshot" title="Architecture tab on Battery System" />
 
 1. Focus a system in a view and select the **Architecture** tab.
 2. Read its breakdown: child items of the same type as cards, joined by the interfaces between them.

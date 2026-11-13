@@ -3,6 +3,8 @@ title: "The data model"
 description: "Categories, fields, and relationships give connected engineering information a shared meaning."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 The systems graph connects engineering information. The data model defines what that information means.
 
 A project's data model sets out its **categories** of items, the **fields** they carry, and the **relationships** that connect them. Flow has no fixed set of categories: a team models whatever structures its program runs on. The model is the team's shared vocabulary, for engineers and agents alike.
@@ -33,6 +35,8 @@ An item's name makes it recognizable. Its identity is what Flow tracks. Rename a
 ## Give relationships a meaning
 
 Relationships carry the graph's meaning. System to subsystem expresses decomposition. Interface to system expresses what connects. A target to its parent expresses why it exists, and a target to its system where it is delivered. Evidence to a target expresses how the team knows.
+
+<VisualPlaceholder kind="Diagram" title="Categories, fields, and relationships" />
 
 Agree each relationship's type and direction before linking in bulk or importing. Views, formulas, and impact analysis follow those links; if they are inconsistent, the answers will be too.
 

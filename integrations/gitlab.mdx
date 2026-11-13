@@ -3,11 +3,17 @@ title: "GitLab"
 description: "Connect GitLab projects so agents can read repositories and review merge requests."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Connect GitLab so agents can read repositories and review merge requests against what your project in Flow intends. Automations run when a merge request opens, reopens, receives a code push, or merges.
 
 ## Connect GitLab
 
 Open **Settings → Administration → Integrations → GitLab**. Under **Connect GitLab**, use the option your deployment offers.
+
+<VisualPlaceholder kind="Screenshot" title="Connect GitLab panel with &quot;Continue to GitLab&quot; and &quot;Set up with a token&quot;" />
+
+<VisualPlaceholder kind="Screenshot" title="Token form plus GitLab project webhook (URL, secret, Merge request events, Comments)" />
 
 **Continue to GitLab** authorizes your GitLab.com account. Select projects and Flow configures their webhooks. You need Maintainer or Owner access to those projects.
 
@@ -28,6 +34,8 @@ Open **Settings → Administration → Integrations → GitLab**. Under **Connec
 ## Review merge requests
 
 Create an [automation](/ai-automations/automations) with **GitLab: merge request is opened** or **GitLab: merge request is merged**. To narrow it:
+
+<VisualPlaceholder kind="Screenshot" title="Automation trigger with Authors (optional) and Paths (optional)" />
 
 - **Authors (optional)**: GitLab usernames without the `@`, comma-separated.
 - **Paths (optional)**: files or folders, comma-separated. Folders need a trailing `/`, as in `firmware/`.

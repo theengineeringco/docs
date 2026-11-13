@@ -3,6 +3,8 @@ title: "User groups"
 description: "Name a team once, then use it for reviews, branch editing, and sharing."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 A user group is a named set of people, such as a review board or a team. Assign the group wherever Flow asks for reviewers, editors, or share recipients, and membership changes apply everywhere at once. Groups do not change anyone's role or project access.
 
 Creating and editing groups needs an Admin with access to all projects.
@@ -29,6 +31,8 @@ Whether reviewers can remove an assigned group from a review is set by **Allow r
 
 As the branch owner or an Admin, open the branch's actions, choose **Editor groups**, and select one or more groups. Members of any selected group can edit and merge the branch, subject to their role and any branch protection. Choose **Anyone (no restriction)** to remove the restriction. Base cannot be restricted. See [Managing branches](/branching/managing-branches).
 
+<VisualPlaceholder kind="Screenshot" title="Branch actions → Editor groups picker with &quot;Anyone (no restriction)&quot;" />
+
 ## Share with a group
 
 - **Items:** in the item's **Share** dialog, choose a group as the recipient. See [Sharing](/collaboration/sharing).
@@ -37,6 +41,8 @@ As the branch owner or an Admin, open the branch's actions, choose **Editor grou
 Before removing members or deleting a group, check where it is used: reviews, branch editing, and shares all follow its membership.
 
 ## Sync membership from SSO
+
+<VisualPlaceholder kind="Screenshot" title="&quot;Sync from SSO&quot; dialog with Match, SSO role, Provider" />
 
 1. Open **Group actions** and select **Sync from SSO...** (or **Manage SSO sync...** if the group is already bound).
 2. Under **Match**, choose **Users with an IdP role** and enter the **SSO role**, or choose **All users from a provider**. Pick the **Provider**.
@@ -47,3 +53,5 @@ Saving a binding clears the current members. Matching users join on their next s
 ## SCIM groups
 
 Groups tagged **SCIM** come from your identity provider. Change their membership there. A SCIM group cannot also be bound to an SSO role. See [SSO and SCIM](/administration/sso-scim).
+
+<VisualPlaceholder kind="Screenshot" title="User Groups page with one group expanded, showing SSO and SCIM badges and the Group actions menu open" />

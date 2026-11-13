@@ -80,7 +80,14 @@ On top of `AGENTS.md`'s content boundaries:
 
 - No presenter or colleague names from demos. Use roles.
 - No customer-specific vocabulary from demos; re-express the idea generically or with the reference project.
-- No screenshot placeholders, `noindex`, or author notes on a published page. This
-  overrides the placeholder rule in the user-level `flow-doc-style` skill. Track
-  needed visuals in `references/shot-list.md`.
+- Mark every visual a page needs with the `VisualPlaceholder` component from
+  `/snippets/visual-placeholder.jsx` (`kind="Screenshot"` or `kind="Diagram"`, and a
+  reader-facing `title`), placed right after the paragraph it illustrates. Keep capture
+  instructions in `references/shot-list.md`, one row per placeholder, never on the
+  page. No `noindex`, `<Note>` placeholders, or author notes. When a real image lands,
+  replace the component and remove its row.
+- Visuals follow the `flow-brand` skill in `theengineeringco/branch-demo`
+  (`references/product-media.md` and `references/backgrounds.md`): real product pixels
+  from a disposable preview with the seeded Electric Vehicle demo, on the supplied
+  logo-free backgrounds. Never AI-generated UI. Diagrams follow its line-art language.
 - No links to pages that are not in this repository.

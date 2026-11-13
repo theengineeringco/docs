@@ -3,6 +3,8 @@ title: "Creating a branch"
 description: "Develop a proposed change in its own branch, alongside the work of the rest of the team."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 A branch is where you develop a change without disturbing the agreed design. Other engineers keep working, and several proposals can move forward at once.
 
 This guide runs the battery capacity trade study on the Truck: raising **Battery Usable Capacity** from 100 kWh to 120 kWh.
@@ -13,11 +15,15 @@ You need permission to create branches in the project.
 
 Open the branch selector and create a new branch. In workspaces that separate variants from proposals, the dialog is **New change request**; otherwise it is **New branch**.
 
+<VisualPlaceholder kind="Screenshot" title="New branch dialog" />
+
 1. Enter a name that says what the work is, such as **Battery capacity trade study**. `main` and `master` are reserved.
 2. Check the parent: the state your branch starts from. For a proposal against the Truck's agreed design, choose **Truck**; for work that depends on another proposal, choose that proposal's branch. Different entry points can preselect different parents.
 3. Create the branch.
 
 ## Make the change and see its impact
+
+<VisualPlaceholder kind="Screenshot" title="Impact analysis tab" />
 
 1. Confirm the sidebar shows your new branch.
 2. Open **Battery Usable Capacity**, change its target to 120 kWh, and record the rationale in the description.

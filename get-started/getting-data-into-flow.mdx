@@ -3,6 +3,8 @@ title: "Getting data into Flow"
 description: "Bring existing spreadsheets, documents, and connected tools into Flow, then check what arrived."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Most programs already have their engineering information somewhere: spreadsheets, specifications, review decks, models, and issue trackers. Choose the route by the source, and start with a small sample before you bring in everything.
 
 ## Choose the route
@@ -15,7 +17,11 @@ Most programs already have their engineering information somewhere: spreadsheets
 | A connected tool | That integration's workflow | Access scope, and whether it reads, imports, or writes |
 | Your own scripts or AI clients | The [Customer API](/api/examples/batch-writes) or [Flow MCP](/api/mcp/overview) | Authentication, branch, and permissions |
 
+<VisualPlaceholder kind="Diagram" title="Routes into Flow: import, extraction, connected tools, and the API" />
+
 ## Import a spreadsheet
+
+<VisualPlaceholder kind="Screenshot" title="CSV/Excel import mapping" />
 
 1. Open the project and branch, then a view of the records you are importing.
 2. Choose **More actions → Import from → CSV/Excel**.

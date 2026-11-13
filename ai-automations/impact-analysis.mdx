@@ -3,9 +3,15 @@ title: "Impact analysis"
 description: "Find the connected items a branch's changes affect before you merge."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Impact analysis follows a branch's changes through the systems graph and flags connected items that may need to change too. A proposal that raises Battery Usable Capacity from 100 to 120 kWh, for example, reaches range, vehicle mass, and DC fast charge time; the analysis lists the connected items to check.
 
 ## Run an analysis
+
+<VisualPlaceholder kind="Screenshot" title="Review page, Impact analysis tab: tree of affected items with Severe and Moderate findings, Re-run, Display Options" />
+
+<VisualPlaceholder kind="Screenshot" title="A finding marked Fixed after the agent's fix-and-re-run loop" />
 
 1. Open the branch's **Review** page and select the **Impact analysis** tab.
 2. Select **Run impact analysis**. Opening the tab does not start an analysis.

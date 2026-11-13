@@ -3,9 +3,13 @@ title: "CSV"
 description: "Import, update, and export items as CSV, using a stable identity so a round trip updates items instead of duplicating them."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 CSV maps rows to items, columns to fields, and link columns to relationships. Choose a stable identity and later imports update the items they match instead of creating copies.
 
 ## Import or update items
+
+<VisualPlaceholder kind="Screenshot" title="Import wizard mapping step" />
 
 1. Prepare a UTF-8 file with a header row. For several item types in one file, include a type column.
 2. Choose **More actions → Import from → CSV/Excel**, or **Import here** on a sidebar item, and upload the file.
@@ -20,6 +24,8 @@ CSV maps rows to items, columns to fields, and link columns to relationships. Ch
 The import writes to a new branch named after the file, so you can inspect it before it reaches shared work.
 
 ## Export
+
+<VisualPlaceholder kind="Screenshot" title="Export dialog" />
 
 1. Open the branch and view you want, and choose **More actions → Export as → CSV**.
 2. Choose the **Identity** written for each row. **None** writes no row identity.

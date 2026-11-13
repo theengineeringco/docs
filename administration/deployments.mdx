@@ -3,6 +3,8 @@ title: "Deployments"
 description: "What changes when Flow runs as a hosted service or in your own infrastructure."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Flow runs as a hosted service or in infrastructure you manage. The deployment decides which capabilities exist: sign-in options, integrations, AI models, and billing controls. Workspace settings turn those capabilities on or off, but cannot add one the deployment does not provide.
 
 Two roles share the work. Workspace Admins manage settings inside Flow. Deployment operators run the infrastructure and the services Flow depends on.
@@ -19,6 +21,8 @@ Take settings questions to a workspace Admin. Take missing capabilities or infra
 ## Customer-managed Flow
 
 Flow installs into any Kubernetes cluster from a Helm chart, including AWS EKS, Azure AKS, and bare-metal clusters. Operators supply PostgreSQL, object storage, an OIDC identity provider, ingress and TLS, and the AI services the deployment uses. Follow the installation and operations guide for your deployment when making changes.
+
+<VisualPlaceholder kind="Diagram" title="Hosted vs customer-managed Flow, labelling app, database, object storage, identity provider, AI services, and Admin vs operator responsibilities" />
 
 A customer-managed deployment can require a Flow license key. When it does, Flow blocks access while the key is missing, invalid, or expired, until the operator installs a valid one.
 

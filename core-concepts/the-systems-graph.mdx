@@ -3,7 +3,11 @@ title: "The systems graph"
 description: "Why Flow connects engineering information around systems, ownership, and the links between them."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 A physical system is described by many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, risks, and decisions. Each is useful alone. The understanding comes from how they connect. Change one, and the others can move.
+
+<VisualPlaceholder kind="Screenshot" title="One graph, four views" />
 
 Flow keeps all of them connected in a systems graph. The graph answers the questions engineers ask every day: what is this part of, why is it this way, what backs it up, and what else changes if it changes.
 
@@ -18,6 +22,8 @@ Ownership only helps when the owner can see their dependencies. The graph makes 
 ## Make every connection explicit
 
 Flow represents information as **items** connected by **relationships**. A system, an interface, a requirement, an analysis, a test, or a part are all items, in categories your team defines.
+
+<VisualPlaceholder kind="Diagram" title="Decomposition and cross-cutting relationships in one graph" />
 
 Some relationships express decomposition: a vehicle contains a battery system, which contains a pack and its management electronics.
 

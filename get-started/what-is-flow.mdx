@@ -3,11 +3,15 @@ title: "What is Flow"
 description: "A source of truth that lets engineers and agents understand your physical system, and close the gap between what you intend to build and where you are."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Flow is a source of truth that lets humans and agents deeply understand your physical system. It pulls and manages context from the places your team already works, so it is clear what you intend to build and how close you are to achieving it. On that foundation, you can spin up agents that work in the background to close the gap and increase your engineering velocity.
 
 ## Model any system and any structure
 
 Hardware programs run on many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, suppliers, risks, and decisions. Flow holds all of them. Your team defines the categories of items and the fields they carry, and Flow keeps them connected.
+
+<VisualPlaceholder kind="Screenshot" title="Several structures connected in one model" />
 
 Those connections are what make the system understandable. Follow a design decision to the systems it affects, an interface to the two teams on either side of it, or a target to the analyses and tests that back it. [The systems graph](/core-concepts/the-systems-graph) explains how the connections work, and [the data model](/core-concepts/the-data-model) how your team shapes them.
 
@@ -20,6 +24,8 @@ Engineering information is spread across spreadsheets, documents, models, code, 
 ## See what you intend and how close you are
 
 When intent and evidence sit in the same connected model, the gap between them is visible. A target sits next to its latest measured value. A system with no verification stands out. A change shows which connected items have not caught up with it.
+
+<VisualPlaceholder kind="Diagram" title="Intent beside evidence: a target, its latest result, and the gap between them" />
 
 Views show the same items for different jobs: a table to compare and edit, a tree for structure, **Reader** to read and comment like a document, and a diagram to see how parts connect.
 

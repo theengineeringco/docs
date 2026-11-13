@@ -3,6 +3,8 @@ title: "Branching"
 description: "Manage variation in the design and develop changes in parallel, while preserving an agreed state and its history."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Hardware teams change their design while depending on it. A target gets revised mid-study. Three disciplines change related parts in the same week. One platform becomes three products.
 
 Flow handles this with branches. A branch is a state of the project relative to a parent. Branches do two jobs: they manage variation in the design, and they let the team work on several changes at once.
@@ -10,6 +12,8 @@ Flow handles this with branches. A branch is a state of the project relative to 
 ## Hold lasting variation
 
 A product family shares a lot across its models: architecture, standards, regulations, common parts. That shared information lives in a base branch, and each model branches from it to hold only what is different. In an electric vehicle family, a **Truck** branch might relax the drag target and add towing loads, while a **Coupe** inherits the base values. A change in the base can flow to every model without being re-entered.
+
+<VisualPlaceholder kind="Diagram" title="Base → Coupe / Truck / SUV, proposals on Truck" />
 
 These long-lived branches are **variants**. They are not meant to merge back. Some workspaces label them explicitly as variants.
 

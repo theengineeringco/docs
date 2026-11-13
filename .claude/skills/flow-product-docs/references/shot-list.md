@@ -1,19 +1,25 @@
 # Visuals still needed
 
-Published pages carry no placeholders. Capture these from the shipped app (`master`
-UI, a workspace with the EV reference project loaded), then add them to the page and
-remove the line here. Do not use AI-generated screenshots.
+Each row matches a `VisualPlaceholder` on its page. Capture screenshots from the shipped
+app (`master` UI, the seeded Electric Vehicle demo) and frame them per the `flow-brand`
+skill's product-media guidance in branch-demo. Replace the placeholder with the image
+and remove the row. Do not use AI-generated screenshots.
 
 | Page | Shot | Notes |
 | --- | --- | --- |
+| get-started/what-is-flow | Diagram: Intent beside evidence: a target, its latest result, and the gap between them | Diagram, not UI |
 | get-started/what-is-flow | Several structures connected in one model | Systems, interfaces, targets, and evidence in a tree or diagram; owners visible |
 | get-started/starting-a-project | New project dialog | Annotate Start from and What to import (human step) |
 | get-started/requirements-systems-tests | One connected thread | System, its target, evidence, three results |
+| get-started/getting-data-into-flow | Diagram: Routes into Flow: import, extraction, connected tools, and the API | Diagram, not UI |
 | get-started/getting-data-into-flow | CSV/Excel import mapping | Annotate Match items by, validation, confirm (human step) |
 | get-started/creating-a-branch | New branch dialog | Show both labels or note the variant-view flag |
 | get-started/creating-a-branch | Impact analysis tab | Battery capacity trade study result |
+| core-concepts/the-systems-graph | Diagram: Decomposition and cross-cutting relationships in one graph | Diagram, not UI |
 | core-concepts/the-systems-graph | One graph, four views | Table, tree, Reader, diagram of the same items |
+| core-concepts/the-data-model | Diagram: categories, fields, and relationships | A few categories as nodes with typed relationship arrows; fields listed inside each |
 | core-concepts/branching | Base → Coupe / Truck / SUV, proposals on Truck | Diagram, not UI |
+| core-concepts/ai-automations | Diagram: The agent reading the systems graph and acting in connected tools | Diagram, not UI |
 | core-concepts/ai-automations | GitHub pull request review | Thermal-limit conflict and named owners |
 | ai-automations/skills | Settings → AI → Skills | Organizational and Personal sections |
 | administration/users-roles | Settings → Users list with Role and Access columns, several rows selected and the Actions menu open | Synthetic users; show Resend invite / Project access / Set role / Remove user |

@@ -3,11 +3,15 @@ title: "Slack"
 description: "Mention Flow in Slack threads, control which channels agents read and post to, and choose which projects Slack can reach."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Connect Slack so your team can ask Flow about the system from the threads where the work is discussed. Connecting the workspace, reading channels, posting messages, and project access are separate settings.
 
 ## Connect Slack
 
 An administrator sets up the connection.
+
+<VisualPlaceholder kind="Screenshot" title="Slack settings: connect options, Channel history access, write-back + Allowed channels, Projects" />
 
 1. Open **Settings → Administration → Integrations → Slack**.
 2. Choose **Flow's Slack app** and select **Add to Slack**. Slack asks a workspace admin to approve Flow's permissions, then returns you to Flow.
@@ -15,6 +19,8 @@ An administrator sets up the connection.
 4. Under **Projects**, turn on each Flow project that should be available in Slack.
 
 ## Use Flow from Slack
+
+<VisualPlaceholder kind="Screenshot" title="/flow settings modal in Slack (project, branch, fork-a-branch option)" />
 
 1. Run `/flow` in Slack. The first time, follow the link to connect your Slack account to Flow and select **Confirm account link**.
 2. Run `/flow` again to pick the project and branch your chats run on, and whether each new Slack chat forks a fresh branch. These settings are yours alone.

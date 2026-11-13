@@ -3,6 +3,8 @@ title: "Users and roles"
 description: "Control what each person can do in Flow and which projects they can open."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 A role sets what a person can do; project access sets where. Branch protection, editor groups, and item restrictions can narrow both further.
 
 Flow has four roles: **Admin**, **Member**, **Viewer**, and **External**.
@@ -62,6 +64,10 @@ External users see only what is [shared](/collaboration/sharing) with them; the 
 People whose email domain requires SSO sign in through your identity provider.
 
 ## Change or remove access
+
+<VisualPlaceholder kind="Screenshot" title="Settings → Users list with Role and Access columns, several rows selected and the Actions menu open" />
+
+<VisualPlaceholder kind="Screenshot" title="Grant User Access dialog" />
 
 - To change one person's projects, open the project list in their **Access** column.
 - To act on several people, select their rows and open **Actions**. You can also right-click a row. The menu offers **Resend invite**, **Project access**, **Set role**, and **Remove user**.

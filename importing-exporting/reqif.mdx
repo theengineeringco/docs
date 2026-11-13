@@ -3,11 +3,15 @@ title: "ReqIF"
 description: "Exchange item hierarchies, attributes, and relationships with other tools through explicit ReqIF mappings."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 ReqIF is an interchange format many engineering tools read and write. Flow exports any item types you map, with their attributes, hierarchy, and links, and imports ReqIF documents into a new branch.
 
 Anyone who can see the data can export it. Importing requires editing access; read-only and external users cannot import.
 
 ## Export
+
+<VisualPlaceholder kind="Screenshot" title="ReqIF export Mappings" />
 
 1. Choose **More actions → Export as → ReqIF**.
 2. Select **Add scope** for each part of the project to export. A scope pairs a root item with a saved view, and can be filtered. Then select **Continue to mappings**.
@@ -20,6 +24,8 @@ Excluding a type moves its children up to the next included level. The `.reqifz`
 To reuse a mapping, save it as a preset. Presets belong to the project. After changing a preset's mapping, select **Update** to save it.
 
 ## Import
+
+<VisualPlaceholder kind="Screenshot" title="ReqIF import Destination step" />
 
 1. Choose **More actions → Import from → ReqIF** and upload a `.reqif` or `.reqifz` file.
 2. Map each ReqIF type to an existing Flow item type. Objects of unmapped types are skipped; the import does not add types to your data model.
