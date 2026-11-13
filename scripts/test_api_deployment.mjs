@@ -32,6 +32,8 @@ function visit(value, storage = new Map(), storageUnavailable = false) {
 test("app links select only supported hosted backend roots", () => {
   for (const value of [
     defaultBaseUrl,
+    "https://backend.eu1.flowengineering.com",
+    "https://backend.eu1.flowengineering.com/",
     "https://backend.acme.branch.flowengineering.com",
     "https://acme.backend.branch.flowengineering.com",
     "https://backend.acme-west.branch.flowengineering.com/",
@@ -44,6 +46,8 @@ test("reject untrusted hosts, protocols, credentials, paths, and malformed links
   for (const value of [
     "", "not a URL", "javascript:alert(1)", "http://backend.branch.flowengineering.com",
     "https://backend.branch.flowengineering.com.attacker.example",
+    "https://backend.eu1.flowengineering.com.attacker.example",
+    "https://other.eu1.flowengineering.com",
     "https://attacker.example/backend.branch.flowengineering.com",
     "https://backend.deployment-test-branch.flowengineering.com",
     "https://backend.govcloud.example", "https://localhost", "http://localhost:3000",
@@ -64,7 +68,7 @@ test("reject untrusted hosts, protocols, credentials, paths, and malformed links
 test("selection survives reloads and updates when opened from another app", () => {
   const storage = new Map();
   const first = "https://backend.acme.branch.flowengineering.com";
-  const second = "https://backend.other.branch.flowengineering.com";
+  const second = "https://backend.eu1.flowengineering.com";
   assert.equal(visit(first, storage), first);
   assert.equal(visit(undefined, storage), first);
   assert.equal(visit(second, storage), second);
