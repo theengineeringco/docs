@@ -22,21 +22,9 @@ Creating a branch copies nothing. The branch starts from its parent's state at t
 
 A sub-branch starts from another branch and merges back into it, so you can try an idea on top of a proposal without touching the proposal itself:
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "Agreed design"
-  branch Trade-study
-  checkout Trade-study
-  commit id: "120 kWh"
-  branch Pack-layout
-  checkout Pack-layout
-  commit id: "New module layout"
-  checkout Trade-study
-  merge Pack-layout id: "Merged sub-branch"
-  checkout Base
-  merge Trade-study id: "Merged" tag: "Merge: Trade-study"
-```
+<VisualPlaceholder kind="Diagram" title="A sub-branch on a proposal">
+  Three lanes: Base, Trade-study, Pack-layout. Base starts at "Agreed design". Trade-study branches from it with "120 kWh". Pack-layout branches from Trade-study (not from Base) with "New module layout", then merges back into Trade-study ("Merged sub-branch"). Trade-study then merges into Base, tagged "Merge: Trade-study". Callout on the fork point: "Nothing copied; the branch starts from its parent's state here".
+</VisualPlaceholder>
 
 Viewers cannot create branches, and editor groups can limit who edits a branch. See [Managing branches](/branching/managing-branches).
 
@@ -55,19 +43,9 @@ The parent keeps moving while you work. Updating brings that newer work into you
 
 A conflict is the same information changed in incompatible ways on both sides, such as a field edited differently or an item deleted on one side and edited on the other.
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "Cd ≤ 0.28"
-  branch Proposal
-  checkout Proposal
-  commit id: "Your change"
-  checkout Base
-  commit id: "Regulation update"
-  checkout Proposal
-  merge Base id: "Update from parent"
-  commit id: "More work"
-```
+<VisualPlaceholder kind="Diagram" title="Updating from the parent">
+  Two lanes: Base and Proposal. Base: "Cd ≤ 0.28", then later "Regulation update". Proposal branches before the update with "Your change". An arrow from "Regulation update" down into Proposal, labelled "Update from parent", lands after "Your change"; Proposal then continues with "More work". Base is unchanged by the update. Inset: one conflicting field shown as two values side by side with Keep parent and Keep current, and a note that keeping the parent's value is recorded as your change. Small label on the update dot: "Listed in Parent update history; can be reverted".
+</VisualPlaceholder>
 
 Updating changes only your branch. Your own changes keep their authors and times. Where you choose **Keep parent**, the parent's value is written to your branch as a change by you, so the choice is in the record. The parent changes when your branch is reviewed and merged.
 
@@ -83,22 +61,9 @@ Sometimes a proposal is started from the wrong branch, such as Base instead of T
 2. Pick the new parent.
 3. Flow creates a new branch under it, holding a copy of every change from your branch with its original author and time.
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "Agreed design"
-  branch Truck
-  checkout Truck
-  commit id: "Cd ≤ 0.35"
-  checkout Base
-  branch Proposal
-  checkout Proposal
-  commit id: "Towing loads"
-  checkout Truck
-  branch Proposal-on-Truck
-  checkout Proposal-on-Truck
-  commit id: "Towing loads (copied)"
-```
+<VisualPlaceholder kind="Diagram" title="Rebase onto: copying work to a new parent">
+  Lanes: Base, Truck, Proposal, Proposal-on-Truck. Truck branches from Base with "Cd ≤ 0.35". Proposal was started from Base by mistake with "Towing loads". A dashed copy arrow runs from Proposal's dot to a new lane, Proposal-on-Truck, branching from Truck, with "Towing loads (copied)" carrying the same author avatar and timestamp. The original Proposal lane stays intact, greyed, with a note "Unchanged; delete when the copy is right". Side note listing what comes along (changes, comments) and what does not (sub-branches, baselines, reviews).
+</VisualPlaceholder>
 
 Your original branch stays as it was. Changes to items the new parent does not have are left out, and Flow lists them. Comments come with the copy; sub-branches, baselines, and reviews do not. When the copy is right, delete the original.
 

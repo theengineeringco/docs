@@ -1,26 +1,34 @@
 # Diagrams
 
-Draw branching and history diagrams as Mermaid `gitGraph` blocks; Mintlify renders
-them natively, so they ship with the page instead of waiting on a placeholder. Use a
-`VisualPlaceholder` only for screenshots and for diagrams Mermaid cannot express.
+For now, every diagram is a `VisualPlaceholder` with `kind="Diagram"`. The final
+diagrams will be drawn in Flow and replace the placeholders later. Do not use Mermaid
+or other generated diagrams on product pages.
 
-Start every `gitGraph` with this init line so branches use Flow's palette and the
-main line is called **Base**:
+## Writing the description
 
-```
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-```
+The description is the brief for whoever draws the diagram in Flow, so it must be
+complete on its own:
 
-Conventions:
+- **Layout**: what the lanes or boxes are and how they are arranged.
+- **Nodes**: every element, with its exact label from the reference project.
+- **Connections**: every arrow or merge, with its label and direction.
+- **Emphasis**: callouts, notes, or styling that carry the point of the section.
+- **Takeaway**: what the reader should conclude, said in a callout or note.
 
-- A commit is a recorded change; label it with the value or the change, not "commit".
-- A `merge` is a Flow merge, or an update from the parent when the parent merges into
-  the child. Tag merges into a parent with `Merge: <branch>`, matching the record Flow
-  creates.
-- Use `tag:` for baselines and `type: REVERSE` for reverts.
-- Branch names have no spaces; use hyphens (`Trade-study`). Commit ids must be unique
-  within a diagram.
-- Keep each diagram to the one action the section explains. Follow the diagram with a
-  sentence that says what it shows.
-- Check every diagram in `mint dev` before pushing; a syntax error renders as an error
-  box on the page.
+Mirror each placeholder as one row in `shot-list.md`.
+
+## Branching and history diagrams
+
+Draw branches as horizontal lanes, Base on top, with time running left to right. A
+dot on a lane is a recorded change, labelled with the value or change, not "commit".
+
+- A merge into a parent is tagged `Merge: <branch>`, matching the record Flow creates.
+- An update from the parent is an arrow from the parent's lane down into the child,
+  labelled **Update from parent**.
+- Baselines are flags above a dot. Reverts are reverse-marked dots on a
+  `Revert: <name>` lane.
+- Variants run to the right edge without merging back and are drawn solid. Proposals
+  are short and drawn dashed.
+- Never remove a dot to show an undo or a delete. Fade, close, or reverse it, so the
+  diagram shows that history is kept.
+- Use one diagram per action. Follow it with a sentence that says what it shows.

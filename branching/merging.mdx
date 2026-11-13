@@ -25,21 +25,9 @@ The review panel shows **Ready to merge** or **Not ready**, with what is blockin
   Review side panel on the Battery capacity trade study: two approvals, Ready to merge, and the Merge button. Inset: the Not ready state listing one missing required review.
 </VisualPlaceholder>
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "Agreed design"
-  branch Trade-study
-  checkout Trade-study
-  commit id: "120 kWh"
-  commit id: "Range 520 km"
-  checkout Base
-  commit id: "Regulation update"
-  checkout Trade-study
-  merge Base id: "Update from parent"
-  checkout Base
-  merge Trade-study id: "Merged" tag: "Merge: Trade-study"
-```
+<VisualPlaceholder kind="Diagram" title="What a merge does">
+  Two lanes: Base and Trade-study. Base: "Agreed design", later "Regulation update". Trade-study: "120 kWh", "Range 520 km", then takes the regulation update from Base ("Update from parent"). Trade-study then merges into Base; the merge dot is tagged "Merge: Trade-study" and expands into a card listing: merged by, when, changed items, reviews, description, discussion. The Trade-study lane ends after the merge with a closed marker and the note "Closed: read-only, links open Base". A side arrow shows comments moving to Base, labelled with their source branch.
+</VisualPlaceholder>
 
 A merge writes the branch's net changes onto the parent. For each field, the parent records the final value from the branch and the person who last changed it there.
 
@@ -71,18 +59,9 @@ If a branch has grown to hold two changes, move part of it into its own branch s
 2. Choose **Create branch and move**. Flow creates a new branch beside this one, with the same parent, holding those items' changes.
 3. Review each branch on its own.
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "Agreed design"
-  branch Trade-study
-  checkout Trade-study
-  commit id: "Battery changes"
-  checkout Base
-  branch Charging
-  checkout Charging
-  commit id: "Moved: charging changes"
-```
+<VisualPlaceholder kind="Diagram" title="Splitting a branch">
+  Lanes: Base, Trade-study, Charging. Before: Trade-study holds two groups of changes, battery changes and charging changes, shown as differently shaded dots. After "Create branch and move", the charging dots move to a new sibling lane, Charging, which branches from Base (the same parent), and Trade-study keeps only the battery changes. A dotted return arrow labelled "Move changes back" shows the undo. Note: "Recorded on the review timeline".
+</VisualPlaceholder>
 
 The move is recorded on the review timeline. **Move changes back** undoes it.
 

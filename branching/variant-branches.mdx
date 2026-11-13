@@ -28,23 +28,9 @@ Some items exist only because of the variant. On a variant, select one or more i
 
 A variant never merges, so it takes in shared work by updating from its parent. Choose **Update from parent...**, or **Sync changes with parent...** in the updated variant view. Inspect the incoming changes, settle each conflict, and confirm. See [Working in a branch](/branching/branching#update-from-the-parent).
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "Shared design"
-  branch Truck
-  checkout Truck
-  commit id: "Cd ≤ 0.35"
-  commit id: "Towing loads"
-  checkout Base
-  commit id: "Regulation update"
-  checkout Truck
-  merge Base id: "Update from parent"
-  checkout Base
-  commit id: "New cell supplier"
-  checkout Truck
-  merge Base id: "Update again"
-```
+<VisualPlaceholder kind="Diagram" title="A variant taking in shared work">
+  Two lanes: Base and Truck (variant). Base: "Shared design", later "Regulation update", later "New cell supplier". Truck runs to the right edge without merging back, with "Cd ≤ 0.35" and "Towing loads". Two arrows flow down from Base into Truck, each labelled "Update from parent". A short dashed proposal lane under Truck merges back into Truck to show where proposals for the variant go.
+</VisualPlaceholder>
 
 Proposals for a variant branch from the variant and merge back into it, like any other branch.
 
@@ -56,21 +42,9 @@ Work on a variant often produces changes every model needs. **Extract non-varian
 2. Flow creates `Extract from <variant>` under the target, holding every change except those to variant-specific items and the relationships that touch them.
 3. Review the new branch before merging it. It follows the target's review and merge rules.
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "Shared design"
-  branch Truck
-  checkout Truck
-  commit id: "Cd ≤ 0.35 (variant)"
-  commit id: "Procedure fix"
-  checkout Base
-  branch Extract-from-Truck
-  checkout Extract-from-Truck
-  commit id: "Procedure fix (copied)"
-  checkout Base
-  merge Extract-from-Truck id: "Merged" tag: "Merge: Extract from Truck"
-```
+<VisualPlaceholder kind="Diagram" title="Extracting non-variant changes">
+  Lanes: Base, Truck (variant), Extract-from-Truck. Truck has two dots: "Cd ≤ 0.35" marked variant-specific (pinned icon) and "Procedure fix" unmarked. A copy arrow takes only "Procedure fix" into a new lane, "Extract from Truck", branching from Base, which merges into Base tagged "Merge: Extract from Truck". The variant-specific dot stays on Truck. Notes: copied changes keep their authors and times; extracted items get new item numbers; Truck is unchanged.
+</VisualPlaceholder>
 
 The extracted changes keep their original authors and times. The extracted items get new item numbers in the new branch.
 

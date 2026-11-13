@@ -3,6 +3,8 @@ title: "Tracing history"
 description: "Find who changed a value, when, on which branch, and how it reached the branch you are on, and undo a change without erasing the record."
 ---
 
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
 Flow keeps every change it records. Each edit is stored with the branch it was made on, the person or agent who made it, and when. Branch actions add to that record instead of rewriting it: a merge adds a merge record, a revert adds changes that undo earlier ones, and a deleted branch can be restored. [Branching](/core-concepts/branching#every-change-is-traceable) explains why.
 
 That means you can answer four questions about any value: who set it, when, on which branch, and how it got to the branch you are looking at.
@@ -15,17 +17,9 @@ That means you can answer four questions about any value: who set it, when, on w
 
 In this example, the battery systems engineer raised **Battery Usable Capacity** in a trade study branch, in two steps, and the branch then merged into Base:
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "100 kWh"
-  branch Trade-study
-  checkout Trade-study
-  commit id: "110 kWh"
-  commit id: "120 kWh"
-  checkout Base
-  merge Trade-study id: "Merged from Trade-study" tag: "Merge: Trade-study"
-```
+<VisualPlaceholder kind="Diagram" title="One value's history across a merge">
+  Two lanes: Base and Trade-study, following one field, Battery Usable Capacity. Base: "100 kWh". Trade-study branches and records "110 kWh", then "120 kWh", each with the battery systems engineer's avatar and a date. Trade-study merges into Base, tagged "Merge: Trade-study". Beside it, a mock of the item's History tab: a "Merged from Trade-study" section containing "120 kWh" by the battery systems engineer, and an earlier Base section with "100 kWh". The 110 kWh dot is shown on the branch only, with a note: "Intermediate values stay on the branch, not on Base".
+</VisualPlaceholder>
 
 On Base, the item shows 120 kWh under **Merged from Trade-study**, attributed to the engineer who last changed it on the branch. The merge record names who merged it and holds the branch's reviews and discussion. Intermediate values from the branch, such as 110 kWh, are not repeated on the parent.
 
@@ -49,17 +43,9 @@ When you choose a revert from the history menu, choose where the undo goes:
 - **Revert and create a new branch** puts the undo in a branch so it can be reviewed and merged like any other change.
 - **Revert in this branch** makes the undo directly, as your edit. It is not available on protected branches.
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "100 kWh"
-  commit id: "120 kWh (merged)"
-  branch Revert
-  checkout Revert
-  commit id: "Back to 100 kWh" type: REVERSE
-  checkout Base
-  merge Revert id: "Merge: Revert"
-```
+<VisualPlaceholder kind="Diagram" title="Undo without erasing">
+  Two lanes: Base and Revert. Base: "100 kWh", then "120 kWh (merged)". A Revert lane branches after it with one reverse-marked dot "Back to 100 kWh", then merges into Base tagged "Merge: Revert". All three Base dots remain visible, so the value's path reads 100 → 120 → 100 with nothing removed. Small alternative path drawn dashed: "Revert in this branch" writing the same reverse dot directly on Base as your edit.
+</VisualPlaceholder>
 
 To undo everything a merge or milestone did, revert its baseline instead. See [Baselining](/branching/baselining#revert-a-baseline).
 

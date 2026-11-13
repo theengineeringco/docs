@@ -31,17 +31,9 @@ Admins can protect a branch against direct edits, renames, and deletion. Base st
 
 Deleting closes a branch; it does not erase its changes.
 
-```mermaid
-%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
-gitGraph
-  commit id: "Agreed design"
-  branch Idea
-  checkout Idea
-  commit id: "Abandoned idea"
-  commit id: "Deleted" type: HIGHLIGHT
-  commit id: "Restored" type: HIGHLIGHT
-  commit id: "Work resumes"
-```
+<VisualPlaceholder kind="Diagram" title="Deleting and restoring a branch">
+  Two lanes: Base and Idea. Idea branches from Base with "Abandoned idea". A delete marker closes the Idea lane, which fades to grey but keeps its dots ("Changes kept"). Later a restore marker reopens the same lane, which continues with "Work resumes". Side panel: the Deleted branches list with one row showing Deleted by and Deleted at, and a Restore button. Labels: "Closed" and "Reopened" recorded on the review timeline.
+</VisualPlaceholder>
 
 1. Inspect the branch's changes. If it has sub-branches, delete or move those first; Flow blocks the deletion until you do. Base and protected branches cannot be deleted.
 2. Choose **Delete branch**. The confirmation says whether the branch can be restored later or will be deleted permanently. Read it, then confirm.
