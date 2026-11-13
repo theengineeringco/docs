@@ -8305,6 +8305,11 @@
             "description": "Narrow the revert to one item the baseline changed. The proposed branch then undoes only that item's part of the merge — its fields, its links at either end, and its child order. Omit to revert the whole baseline. The id must be one the baseline actually changed; any other id is rejected.",
             "maxLength": 255,
             "type": "string"
+          },
+          "request_id": {
+            "description": "A caller-chosen id for this revert. Retrying with the same id returns the branch an earlier attempt created instead of creating another, and GET baseline/:baselineId/revert/:requestId reports whether that attempt is still running. Use it when the request may outlive your connection.",
+            "format": "uuid",
+            "type": "string"
           }
         },
         "type": "object"
@@ -10996,6 +11001,9 @@
       },
       "UserWithPermissionsDto": {
         "properties": {
+          "custom_agents_enabled": {
+            "type": "boolean"
+          },
           "deactivated_at": {
             "format": "date-time",
             "nullable": true,
@@ -24896,6 +24904,14 @@
             }
           },
           {
+            "in": "query",
+            "name": "assignable",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "Workspace identifier",
             "in": "header",
             "name": "customer",
@@ -25210,6 +25226,14 @@
             "required": false,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "assignable",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           },
           {
