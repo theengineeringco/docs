@@ -3,23 +3,21 @@ title: "Branching"
 description: "Manage variation in the design and develop changes in parallel, while preserving an agreed state and its history."
 ---
 
-Hardware teams change their design while depending on it. A requirement gets revised mid-study. Three disciplines change related parts in the same week. One platform becomes three products.
+Hardware teams change their design while depending on it. A target gets revised mid-study. Three disciplines change related parts in the same week. One platform becomes three products.
 
 Flow handles this with branches. A branch is a state of the project relative to a parent. Branches do two jobs: they manage variation in the design, and they let the team work on several changes at once.
 
 ## Hold lasting variation
 
-The electric vehicle program shares a lot across its models: standards, regulations, common requirements. That shared information lives in **Base**.
-
-**Coupe**, **Truck**, and **SUV** branch from Base. Each holds what is different about that model. The Truck relaxes the drag target to 0.35 and adds towing requirements; the Coupe and SUV inherit Base's 0.28. A change to a regulation in Base can flow to every model without being re-entered three times.
+A product family shares a lot across its models: architecture, standards, regulations, common parts. That shared information lives in a base branch, and each model branches from it to hold only what is different. In an electric vehicle family, a **Truck** branch might relax the drag target and add towing loads, while a **Coupe** inherits the base values. A change in the base can flow to every model without being re-entered.
 
 These long-lived branches are **variants**. They are not meant to merge back. Some workspaces label them explicitly as variants.
 
 ## Develop changes in parallel
 
-On the Truck, three pieces of work are underway at once: a battery capacity trade study, BMS improvements, and the addition of DC fast charging. Each lives in its own branch from Truck.
+Several pieces of work are often underway at once: a trade study, a design update, a new feature. Each lives in its own branch from the state it changes.
 
-These short-lived branches are **proposals**. Some workspaces call them change requests. Each one holds a coherent change: the revised requirements, their rationale, and the design and verification edits that go with them. The Truck's agreed state stays intact while the work happens, and nobody waits for anyone else to finish.
+These short-lived branches are **proposals**. Some workspaces call them change requests. Each one holds a coherent change: the revised items, their rationale, and the design and verification edits that go with them. The agreed state stays intact while the work happens, and nobody waits for anyone else to finish.
 
 The point is not isolation for its own sake. It is speed. Parallel proposals let the team explore options and pick the best answer sooner.
 
@@ -27,7 +25,7 @@ The point is not isolation for its own sake. It is speed. Parallel proposals let
 
 Software teams use version control to develop work independently and compare it with an established state. Flow applies the same principle to structured engineering information.
 
-Anyone can open a proposal and compare it with its parent to see which items and values changed. Impact analysis goes further: it follows the graph from those changes to the requirements, systems, and owners they affect. Raising battery capacity reaches range, mass, and charge time, and names the engineers responsible for each.
+Anyone can open a proposal and compare it with its parent to see which items and values changed. [Impact analysis](/ai-automations/impact-analysis) goes further: it follows the graph from those changes to the items and owners they affect.
 
 A comparison shows recorded differences. Engineering judgment decides whether they add up to an acceptable design change.
 
@@ -39,7 +37,7 @@ Permissions and branch policies decide who can change a branch and who can incor
 
 ## Name meaningful points in time
 
-A **baseline** marks a state worth returning to, such as the design as presented at a milestone review. Branches and baselines answer different questions. A branch is where work happens. A baseline is a reference you compare against later.
+A [baseline](/branching/baselining) marks a state worth returning to, such as the design as presented at a milestone review. Branches and baselines answer different questions. A branch is where work happens. A baseline is a reference you compare against later.
 
 When an accepted change has to be reversed, history matters. Flow reverses it as a reviewable change, so engineers can see what returns and what has happened since.
 
@@ -49,4 +47,4 @@ The same item can have a different value in another branch. Before editing, impo
 
 Branches govern changes inside Flow. An action taken in a connected external tool takes effect in that tool, and switching branches in Flow does not undo it.
 
-To run your first proposal, follow [Creating a branch](/get-started/creating-a-branch).
+To run your first proposal, follow [Creating a branch](/get-started/creating-a-branch). [Branching](/branching/branching) covers the day-to-day tasks.

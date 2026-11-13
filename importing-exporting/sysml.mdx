@@ -1,0 +1,27 @@
+---
+title: "SysML"
+description: "Export a saved view as SysML v2 text or SysML 1.7 XMI for use in a modeling tool."
+---
+
+SysML export translates a saved view into a model a SysML tool can open. It is in beta and appears only in workspaces where it is turned on. Flow does not import SysML.
+
+## Export a model
+
+1. Open the branch you want and choose **More actions → Export as → SysML**.
+2. Choose the **Format**: **SysML v2 (.sysml)** or **SysML 1.7 XMI (.uml)**.
+3. Choose the **View to export** and set the **Root package name**.
+4. Under **Types**, choose a **Definition kind** and **Package** for each Flow type, and the fields to export as attributes.
+5. Under **Traceability**, choose the SysML relationship each kind of link exports as: satisfy, verify, allocate, connect, or none.
+6. Check the **Preview**, then download the file.
+
+Test a representative sample in the receiving tool before relying on a full export. The preview shows the generated text; it does not check it with a SysML parser.
+
+## Format differences
+
+**SysML v2** shows what the export left out, and why, beside the preview. Select **Download manifest** to save a record of each exported item's Flow ID and anything omitted, and keep it with the `.sysml` file.
+
+**SysML 1.7 XMI** asks for a **Tool profile** that matches your modeling tool. To use your tool's own profile, choose **Profile exported from your tool** and select its `SysML.profile.uml`. SysML 1.7 exports do not include connect relationships. After importing, check that blocks and requirements show their SysML stereotypes; if they do not, try another tool profile.
+
+## Reuse settings
+
+Save the current settings as a named preset for each format. A preset sets every option on the page. Read-only users can apply presets but cannot save them.

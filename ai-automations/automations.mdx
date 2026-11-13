@@ -1,0 +1,63 @@
+---
+title: "Automations"
+description: "Run saved instructions or scripts in the background, on a schedule, or when something happens."
+---
+
+Automations run saved work in the background so the project keeps checking the gap between what you intend to build and where it stands. An automation runs on a schedule, when a branch opens for review, when a connected tool sends an event, or when someone starts it.
+
+## Create an automation
+
+1. Open **Settings → AI → Automations**.
+2. Select **New automation** under **Automations**, shared with the project, or **Personal Automations**, which only you see.
+3. Name the automation.
+4. Under **Triggers**, select **Add trigger** and choose when it runs. Leave it without a trigger to run it only by hand.
+5. Under **Instructions**, state the inputs, checks, permitted changes, and expected result. Reference a [skill](/ai-automations/skills) where it helps.
+6. Check who it runs as on the status line under the name, then select **Create**.
+
+Only admins create and edit project automations. Anyone who can edit the project can create personal automations. Saved automations use the project's organizational instructions, never Personal Skills or My FLOW.md.
+
+## Choose a trigger
+
+| Trigger | Runs when |
+| --- | --- |
+| **On a schedule** | At the times you set, in your time zone, on the branches you pick |
+| **Branch is reviewed** | A branch opens for review |
+| **When the project changes** | Flow checks every five minutes and starts one run on each branch with new edits or comments |
+| **Run from branch or item menus** | Someone starts it from the menus of the branches or item types you choose |
+| **Document import finishes** | A document import into the project completes |
+| Connected tools | Slack, GitHub, GitLab, Bitbucket, or Onshape sends a matching event, such as a pull request opening |
+| **API: custom webhook is called** or **API: request sent to the endpoint** | Another system calls Flow. See the [automation API overview](/api/automations/overview) |
+
+With the organization's updated variant view, **Branch is reviewed** reads **Change request is reviewed**.
+
+## Who a run acts as
+
+A run keeps the permissions of the person it runs as.
+
+- Branch reviews, schedules, project changes, and GitHub, GitLab, and Onshape events run as the person who last saved the automation.
+- Manual runs, API calls, imports, and Slack mentions run as the person or caller that starts them.
+- Personal automations always run as you.
+
+If the last person to save an automation can no longer edit the project, its scheduled and event runs pause until an admin saves it again.
+
+**Allow admin tools**, under **Advanced**, is off by default. Only an admin can turn it on. It keeps the data-model, saved-view, and template tools available to runs, and a run still does only what its runner can do.
+
+## Control what runs change
+
+- **Suggest only** makes runs change nothing. They raise findings and comment on the affected items with a suggested fix.
+- **Runs write to**, under **Advanced**, chooses where changes land: one branch for the automation, a new branch every run, a branch you choose, or where it is launched.
+- On a branch review, **Agent mode** defaults to **Plan before executing**: reads proceed, and changes wait for approval on the review page. **Auto-accept changes** makes changes without waiting.
+
+Define the allowed actions before you save. Scheduled and event runs have no reviewer waiting to approve them.
+
+## Run and inspect
+
+1. Select **Run now** on the automation's page, or **Run automation** from its options in the list. An automation limited to branch or item menus runs from those menus. Viewers cannot run automations.
+2. Select **View runs** to open [Activity](/ai-automations/activity) filtered to this automation.
+3. Inspect each run's conversation and its saved changes.
+
+## Scripts
+
+Above the instructions, choose **Agent** or **Script**. An agent follows your instructions; a script is Python that runs exactly as written. Flow keeps both bodies, and only the selected mode runs. **Run timeout** applies to scripts only.
+
+On a branch review, a script runs read-only as a check. Turn on **Required to merge** to block the merge until the check passes. Only a script check can block a merge.

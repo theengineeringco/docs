@@ -1,0 +1,34 @@
+---
+title: "Jira"
+description: "Link Jira issues to items in Flow, and let agents read and update Jira with your own account."
+---
+
+Connect Jira so the work tracked there sits next to the items it changes in Flow. Each person connects their own account: agents read with that account's access, and anything they write appears in Jira as that person.
+
+## Connect your account
+
+1. Open **Settings → Personal → Jira**.
+2. Select **Connect Atlassian** and authorize your account.
+3. On deployments that use API tokens instead, enter **Email or username** and **API token / PAT**, select **Save credential**, then **Test Connection**.
+
+You only see issues your Jira account can see. Disconnecting removes your personal connection and leaves the workspace configuration in place.
+
+## Set up the workspace
+
+An administrator chooses which Jira the workspace uses.
+
+1. Open **Settings → Administration → Integrations → Jira** and connect your own account.
+2. If your account can reach more than one site, choose the **Jira site** and select **Save site**.
+3. Under **Linked Projects**, add the project keys agents may work in.
+
+On API-token deployments, the administrator first uses **Configure Jira instance** to set the **Base URL**, **Instance type**, and an initial project key.
+
+## Link issues to items
+
+Add a field of type **Jira issue** to the [data model](/core-concepts/the-data-model). In the field, search issues or paste a link. Searches use your own Jira access, so a link someone else added does not give you access to the issue.
+
+## Let agents change Jira
+
+Turn on **Jira Write-Back** to let agents create issues, edit fields, move issues through workflow transitions, and link issues. Each person's Jira permissions still apply. For custom fields, ask the agent to look up the field before it writes.
+
+Check the returned issue key, and select **View activity** to review what was sent. Reverting a Flow branch does not undo changes in Jira. See [Branching](/core-concepts/branching).

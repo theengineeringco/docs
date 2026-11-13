@@ -1,0 +1,31 @@
+---
+title: "Architecture views"
+description: "See a system's breakdown and interfaces drawn straight from the model, with a layout you arrange once."
+---
+
+The **Architecture** tab draws a system's breakdown from its items and links: its subsystems as cards and the interfaces that connect them. Because the drawing comes from the model, it stays current as the model changes, and you only arrange the layout.
+
+## Turn on the view
+
+The Architecture tab is in beta and appears only in workspaces where it is turned on. An administrator also chooses which types it draws: in **Settings → Architecture**, pick a **Node type**, such as your system type, and the **Interface type** that connects its items.
+
+The tab appears when the focused item's type, or the view's root type when nothing is focused, is a configured node type. If it is missing, check both settings with your administrator.
+
+## Explore the system
+
+1. Focus a system in a view and select the **Architecture** tab.
+2. Read its breakdown: child items of the same type as cards, joined by the interfaces between them.
+3. Select a subsystem card and choose **Open architecture** to drill into it.
+4. Select a card and choose **See Details** to open its item.
+
+For example, focusing Battery System draws Battery Pack and Battery Management System as cards, with the interfaces your project links between them.
+
+Only items of the node type become cards. Inspect other linked items in Table, Tree, or Reader. For a large scope, Flow asks before drawing; narrow the focus, or select **Generate anyway**.
+
+## Edit the architecture
+
+Positions and annotations save automatically. The layout is shared across branches; the items and links it draws come from the branch you are on.
+
+Creating subsystems or interfaces on the canvas changes the model, so do it on a branch where you intend to propose that change. The pickers offer only the node type and its interface type.
+
+For a freely drawn explanation that does not follow the model, use a [diagram](/diagrams/diagrams).

@@ -5,47 +5,45 @@ description: "Categories, fields, and relationships give connected engineering i
 
 The systems graph connects engineering information. The data model defines what that information means.
 
-A project's data model sets out its **categories** of items, the **fields** they carry, and the **relationships** that connect them. It is the team's shared vocabulary. Without it, one engineer's "requirement" is another's note.
+A project's data model sets out its **categories** of items, the **fields** they carry, and the **relationships** that connect them. Flow has no fixed set of categories: a team models whatever structures its program runs on. The model is the team's shared vocabulary, for engineers and agents alike.
 
 ## Define the vocabulary
 
-A model separates design structure, expectations, planned verification, and evidence. In the electric vehicle project:
+A useful model separates what is being built, what it must achieve, and the evidence of how close it is. For example:
 
-| Category | Example item | Fields |
-| --- | --- | --- |
-| Systems | Battery Management System | Owner, description, boundary |
-| Requirement | Aerodynamic Drag Coefficient | Target value 0.28, unit, owner, lifecycle state |
-| Test Plan | Aerodynamic Verification | Scope, test cases |
-| Test Case | Coastdown Test | Method, preconditions, equipment, expected result |
-| Document | Coastdown Procedure | Detailed instructions |
-| Test Result | Coastdown: Prototype Build 3 | Measured value 0.279, test date, status |
+| Kind of structure | Example categories |
+| --- | --- |
+| Design structure | Systems, subsystems, parts, interfaces |
+| Intent | Requirements, design targets, budgets |
+| Evidence | Analyses, test cases, test results |
+| Program context | Risks, decisions, suppliers, documents |
 
-Your project's names can differ. The distinctions should not. A test case describes work to perform. A test result records one execution of it.
+Your project's names will differ. The distinctions matter more than the names: a test case describes work to perform, and a test result records one execution of it.
 
-A category defines a kind of information. An item is one record in it. A field is an attribute, and its value is the current information. Because every requirement shares the same owner field and the same lifecycle options, the team can filter, compare, and summarize them consistently.
+A category defines a kind of information. An item is one record in it. A field is an attribute, and its value is the current information. Because every item in a category shares the same fields and options, the team can filter, compare, and summarize them consistently.
 
 ## Choose field types for how values are used
 
 A field's type decides what it can do. Text holds statements and rationale. Numbers and dates can be compared and calculated. People fields record responsibility. Options give a controlled vocabulary.
 
-The drag target and each measured value belong in number fields. That is what lets Flow compare 0.279 with 0.28 and select the latest result. Written only in a statement, the same numbers can be read but not checked.
+Targets and measured values belong in number fields. That is what lets Flow compare a result with its target and select the latest one. Written only in text, the same numbers can be read but not checked.
 
-An item's name makes it recognizable. Its identity is what Flow tracks. Rename **Aerodynamic Drag Coefficient** and it is still the same requirement, with the same history and links. That matters when imports update existing records.
+An item's name makes it recognizable. Its identity is what Flow tracks. Rename an item and it is still the same item, with the same history and links. That matters when imports update existing records.
 
 ## Give relationships a meaning
 
-Relationships carry the graph's meaning. System to subsystem expresses decomposition. Requirement to parent requirement expresses why it exists. Requirement to system expresses where it is delivered. Requirement to test case expresses how it is verified.
+Relationships carry the graph's meaning. System to subsystem expresses decomposition. Interface to system expresses what connects. A target to its parent expresses why it exists, and a target to its system where it is delivered. Evidence to a target expresses how the team knows.
 
 Agree each relationship's type and direction before linking in bulk or importing. Views, formulas, and impact analysis follow those links; if they are inconsistent, the answers will be too.
 
 ## Fit the model to the program
 
-Programs differ. A battery team may track cell chemistries and thermal margins; a body team may track tooling and supplier parts. Start with the smallest model that makes the immediate work clear, and add a category, field, or relationship when it has a defined purpose.
+Programs differ. One team tracks cell chemistries and thermal margins; another tracks tooling and supplier parts. Start with the smallest model that makes the immediate work clear, and add a category, field, or relationship when it has a defined purpose.
 
 Two tools help:
 
 - A **template** gives repeated work a consistent starting point, from a whole project to a recurring set of items.
-- A **formula** derives a value from other information, such as rolling up the latest test results to a requirement's status.
+- A **formula** derives a value from other information, such as rolling up the latest results to show how close an item is to its target.
 
 ## Change the model deliberately
 

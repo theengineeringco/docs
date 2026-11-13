@@ -1,6 +1,6 @@
 # Electric vehicle reference project
 
-The worked example for every product page. It follows the team's standard demo
+The shared example for product pages, used sparingly (see the skill's "Examples" section). It follows the team's standard demo
 project. Values are illustrative and internally consistent; keep them that way.
 If a page needs a new record, add it here first, then use it.
 

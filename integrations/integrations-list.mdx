@@ -1,0 +1,36 @@
+---
+title: "Integrations list"
+description: "The external tools Flow connects to, and what agents can read or change in each."
+---
+
+Integrations pull context from the tools your team already uses, so people and agents see what you intend to build and how close you are in one place. Open **Settings → Administration → Integrations** to see the ones available on your deployment. What an agent can do also depends on administrator settings, the connected account, and that tool's own permissions.
+
+| Integration | What it does |
+| --- | --- |
+| [GitHub](/integrations/github) | Read repositories and review pull requests; optionally create branches, update files, and open pull requests |
+| [GitLab](/integrations/gitlab) | Read repositories and review merge requests; optionally create branches, commit files, and open merge requests |
+| Bitbucket | Review pull requests with automations |
+| Cursor | Launch Cursor's coding agent to implement code changes and open pull requests |
+| [Jira](/integrations/jira) | Read and link issues with each person's own account; optionally create, edit, transition, and link issues |
+| [Linear](/integrations/linear) | Read issues, cycles, and workflow states for connected teams; optionally create and update issues |
+| Asana | Read tasks and sections; optionally create or update tasks |
+| [Slack](/integrations/slack) | Mention Flow in threads and share files; optionally let agents post to allowed channels |
+| Google Drive | Read files, Google Docs, and Google Sheets from a connected folder; optionally write to Sheets |
+| Microsoft SharePoint | Read SharePoint and OneDrive files, Word documents, and Excel workbooks |
+| AoDocs | Search libraries and read documents |
+| Confluence | Search and read wiki pages |
+| Notion | Read pages and documents |
+| Onshape | Sync CAD data and trigger automations when models change |
+| Altium | Read PCB projects, schematics, and BOMs from Altium 365, read-only |
+| Siemens Teamcenter X | Search Teamcenter, link items to Flow, and run automations when linked items change |
+| Boltline | Read work plans, workflows, parts, and inventory; optionally write back |
+| Relyence | Read FMEA subsystems and functions |
+| Qase | Search test projects and read verification results |
+
+## Connect your own tools
+
+**Custom MCP** connects an MCP server you run to Flow's AI. An administrator with access to all projects adds the server under **Settings → Administration → Integrations → Custom MCP**, chooses its **Allowed tools**, and turns on **Enabled**. New connections start disabled.
+
+To reach Flow from your own code or AI clients, use the [customer API](/api/quickstart) or [Flow MCP](/api/mcp/overview). Both act with the connected user's permissions.
+
+Before turning on writes, check the connected account with a narrow read. Changes made in an external tool happen immediately and are not undone by Flow branches. Review them in [Activity](/ai-automations/activity).

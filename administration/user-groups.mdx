@@ -1,0 +1,49 @@
+---
+title: "User groups"
+description: "Name a team once, then use it for reviews, branch editing, and sharing."
+---
+
+A user group is a named set of people, such as a review board or a team. Assign the group wherever Flow asks for reviewers, editors, or share recipients, and membership changes apply everywhere at once. Groups do not change anyone's role or project access.
+
+Creating and editing groups needs an Admin with access to all projects.
+
+## Create a group
+
+1. Open **Settings → User Groups** and select **Create group**.
+2. Enter a **Name** and add **Members**. Leave **SSO role (optional)** empty to manage members by hand.
+3. Select **Create group**.
+
+Expand a group to add or remove members. Open **Group actions** to **Rename...** or **Delete** the group. Deleting a group removes its members as eligible reviewers on any stage gate that names it.
+
+## Use a group for reviews
+
+- **Branch review:** select **Add reviewer** on the branch and choose the group.
+- **Item reviews:** name the group in an item's reviewer field to bring that team into reviews of changes to the item.
+- **Stage gates:** in **Settings → Data Model**, open the stage field and add the group to a stage's entering or leaving gate.
+
+A group counts as one reviewer requirement: one member's approval satisfies it. Other required reviewers and merge conditions still apply. The branch author cannot approve their own change, so keep at least one other eligible member in the group.
+
+Whether reviewers can remove an assigned group from a review is set by **Allow reviewer removal** in **Settings → Reviews**.
+
+## Restrict who can edit a branch
+
+As the branch owner or an Admin, open the branch's actions, choose **Editor groups**, and select one or more groups. Members of any selected group can edit and merge the branch, subject to their role and any branch protection. Choose **Anyone (no restriction)** to remove the restriction. Base cannot be restricted. See [Managing branches](/branching/managing-branches).
+
+## Share with a group
+
+- **Items:** in the item's **Share** dialog, choose a group as the recipient. See [Sharing](/collaboration/sharing).
+- **Personal views:** share a view from **Settings → Views → My views** with a group. Recipients can use the view but not change it, and still see only data they can access. See [Sharing views](/collaboration/sharing-views).
+
+Before removing members or deleting a group, check where it is used: reviews, branch editing, and shares all follow its membership.
+
+## Sync membership from SSO
+
+1. Open **Group actions** and select **Sync from SSO...** (or **Manage SSO sync...** if the group is already bound).
+2. Under **Match**, choose **Users with an IdP role** and enter the **SSO role**, or choose **All users from a provider**. Pick the **Provider**.
+3. Select **Save**.
+
+Saving a binding clears the current members. Matching users join on their next sign-in, and users who no longer match are removed. Membership becomes read-only in Flow. To manage members by hand again, open **Manage SSO sync...**, clear the role, and select **Detach from SSO**; current members stay.
+
+## SCIM groups
+
+Groups tagged **SCIM** come from your identity provider. Change their membership there. A SCIM group cannot also be bound to an SSO role. See [SSO and SCIM](/administration/sso-scim).

@@ -1,0 +1,30 @@
+---
+title: "Working in a branch"
+description: "Create a branch, keep a connected change together, and update it from its parent."
+---
+
+A branch gives a change its own working state. The parent stays as it is until the branch merges. Keep everything one change needs in the same branch: the items it edits, the relationships it adds, and the evidence that goes with them. [Branching](/core-concepts/branching) explains why Flow works this way.
+
+## Create a branch
+
+1. Open the branch selector and choose **New Branch**. To start from an existing branch, open its actions menu and choose **Create a sub branch**.
+2. In the **New branch** dialog, enter a name that says what the work is.
+3. Check **Parent Branch**. Choose Base for the shared project state, or another branch when your work depends on it.
+4. Create the branch, then confirm its name in the branch selector before you edit.
+
+A sub-branch starts from its parent and merges back into it. Viewers cannot create branches, and editor groups can limit who edits a branch. See [Managing branches](/branching/managing-branches).
+
+## Update from the parent
+
+The parent keeps moving while you work. Updating brings that newer work into your branch.
+
+1. Open the branch's actions menu and choose **Update from parent...**.
+2. Inspect the incoming changes.
+3. For each conflict, choose **Keep parent** or **Keep current**. **Keep parent changes** and **Keep current changes** settle every conflict at once. If AI is enabled, **Suggest resolutions** proposes a choice for each unresolved conflict, with a reason, which you can change.
+4. Select **Update from parent**, then check the affected items.
+
+A conflict is the same information changed in incompatible ways on both sides, such as a field edited differently or an item deleted on one side and edited on the other.
+
+Updating changes only your branch. The parent changes when your branch is reviewed and merged.
+
+Use [Comparing branches](/branching/comparing-branches) to inspect differences between any two states. In workspaces that use the updated variant view, branches appear as variants and change requests; see [Variant branches](/branching/variant-branches).

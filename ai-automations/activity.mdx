@@ -1,0 +1,37 @@
+---
+title: "Activity"
+description: "Trace automation runs and connected-tool events from trigger to result."
+---
+
+The Activity Log shows every automation run in the project and the events exchanged with connected tools: what came in, what ran, and what the agent did back in those tools. Use it to find out why something ran, or why it did not.
+
+## Find a run
+
+1. Open **Settings → AI → Activity Log**, or select **View runs** on an automation to open the log filtered to it.
+2. In the sidebar, choose **Automations** for Flow's own runs or a connected tool. **All sources** shows everything.
+3. Narrow the feed with **Search activity** and the branch, status, and date filters.
+4. Expand a threaded row to see its related events and runs. A thread shows the worst status among its members.
+5. Select a row to open the run's conversation and results. To see a thread as a graph, hover its row and select **Thread**.
+
+## Read the status
+
+Runs:
+
+| Status | Meaning |
+| --- | --- |
+| Running | The run is in progress. |
+| Completed | The run finished. A check also shows its verdict: Passed, Failed, Warning, or Skipped. |
+| Crashed | The run itself went wrong. Open it for details. |
+
+Events:
+
+| Status | Meaning |
+| --- | --- |
+| Received | Flow accepted the event. |
+| Matched | The event matched an automation. Open the resulting run. |
+| Ignored | No automation matched. Hidden by default; choose **Any status** when you are looking for a missing run. |
+| Rejected | Flow refused the event. |
+| Failed | The event errored, or Flow's action in the connected tool failed. |
+| Sent | Flow's action in the connected tool succeeded. |
+
+A completed run is not an accepted result. Check the saved changes in Flow and the result in the connected tool.

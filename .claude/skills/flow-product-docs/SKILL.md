@@ -3,41 +3,64 @@ name: flow-product-docs
 description: >-
   Write, revise, or place Flow product documentation (the Guides tab: Get
   started, Core concepts, AI & Automations, and later product sections) in the
-  voice of Flow's own product demos, grounded in the electric vehicle reference
-  project. Use whenever drafting or editing an MDX page outside the API and
+  voice of Flow's own product demos. Use whenever drafting or editing an MDX page outside the API and
   Release Notes tabs, choosing a worked example, or turning demo or sales
   material into docs.
 ---
 
 # Flow product docs
 
-Flow's product docs teach the way the team demos the product: start from a question
-an engineer asks, show where Flow answers it, and keep one example project running
-through every page. The example is an **electric vehicle**.
+## The guiding principle
+
+> Flow is a source of truth that lets humans and agents deeply understand your
+> physical system. It pulls and manages context from multiple places to make it clear
+> what you are intending to build and how close you are to achieving that. Based on
+> this, it lets you spin up bots which work in the background to help close the gap
+> and increase your engineering velocity.
+
+Every page should serve that sentence. Three consequences:
+
+- **Flow models any system and any structure**: product breakdowns, interfaces,
+  requirements, tests, analyses, parts, suppliers, risks, decisions, whatever the team
+  defines. Requirements are one kind of item, not the center. Never describe Flow as
+  a requirements tool, and do not default to a requirement when any item would do.
+- **Intent and progress**: frame features by how they show what the team intends to
+  build and how close it is.
+- **Humans and agents read the same source**: context in Flow is what makes agents
+  useful; agents run in the background to close the gap.
 
 `AGENTS.md` (Voice, Content boundaries, Guides) applies in full. This skill adds only
 what is specific to product pages.
 
 | Read | When |
 | --- | --- |
-| `references/ev-reference-project.md` | Always. The only source for example names, values, and owners |
+| `references/ev-reference-project.md` | You need a concrete example. The only source for example names, values, and owners |
 | `references/demo-voice.md` | Converting demo or sales narration into docs |
 | `references/verified-ui.md` | Writing steps that name UI labels or click paths |
 | `references/placement.md` | Adding a page or choosing its group |
 
+## Examples: use sparingly
+
+The electric vehicle is the shared example, not the subject. Use it only where a
+concrete case teaches something a plain description cannot, usually once per page, and
+never as the frame of a feature page. Most task pages need no example at all. When
+you do use one, take names and values from the reference project, never invent a
+second product, and do not reuse the electric bike from earlier drafts. Vary the item
+kinds: a system, an interface, an analysis, or a test, not always a requirement.
+
 ## The voice
 
 1. **Lead with the engineer's question**, then show the Flow feature that answers it.
-2. **One example, all the way down.** Never invent a second vehicle or reuse the
-   electric bike from earlier drafts.
-3. **Owners are engineers closest to the design**, named by role.
-4. **Describe views by the task they serve.** Same records, no duplication.
-5. **Branches do two jobs**: lasting variants and in-progress proposals. Keep them apart.
-6. **The agent proposes; the owner decides.**
-7. **Close on the outcome**, once per page.
+2. **Owners are engineers closest to the design**, named by role.
+3. **Describe views by the task they serve.** Same records, no duplication.
+4. **Branches do two jobs**: lasting variants and in-progress proposals. Keep them apart.
+5. **The agent proposes; the owner decides.**
+6. **Close on the outcome**, once per page.
+7. **Plain and short.** Task pages state what the feature is for in one or two
+   sentences, then the steps, then the limits that matter.
 
-Get started is second person with numbered steps. Core concepts is declarative third
-person.
+Get started and feature task pages are second person with numbered steps. Core
+concepts is declarative third person.
 
 ## Tell each story once
 
@@ -56,7 +79,7 @@ Each recurring idea has one home page; elsewhere, one sentence and a link.
 On top of `AGENTS.md`'s content boundaries:
 
 - No presenter or colleague names from demos. Use roles.
-- No customer-specific vocabulary from demos; re-express the idea with the EV project.
+- No customer-specific vocabulary from demos; re-express the idea generically or with the reference project.
 - No screenshot placeholders, `noindex`, or author notes on a published page. This
   overrides the placeholder rule in the user-level `flow-doc-style` skill. Track
   needed visuals in `references/shot-list.md`.

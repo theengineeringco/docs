@@ -1,0 +1,36 @@
+---
+title: "CSV"
+description: "Import, update, and export items as CSV, using a stable identity so a round trip updates items instead of duplicating them."
+---
+
+CSV maps rows to items, columns to fields, and link columns to relationships. Choose a stable identity and later imports update the items they match instead of creating copies.
+
+## Import or update items
+
+1. Prepare a UTF-8 file with a header row. For several item types in one file, include a type column.
+2. Choose **More actions → Import from → CSV/Excel**, or **Import here** on a sidebar item, and upload the file.
+3. Import every row as a **Single item type**, or choose **Mixed item types** and split rows by the type column.
+4. Map each column to a field. Columns you do not need can be ignored.
+5. Set **Identity column** to the file column that names each row, and **Match items by** to the Flow identity it matches: **Source ID**, **Entity ID**, **Entity Numeric ID**, or an eligible field such as Name. Leave the identity column on **Skip — autogenerate** to create new items for every row.
+6. Map link columns as upstream or downstream relationships. Use **Resolve links by** to choose the identity their values name.
+7. Under **Destination**, choose where items without a parent in the file go: **Project root**, **Link to an item**, or **File links only**.
+8. In **Review**, fix the blockers, such as an identity repeated across rows or one that matches more than one existing item. Warnings list links and user values that will be skipped.
+9. Select **Import to new branch**, then **View imported entities** to check the result.
+
+The import writes to a new branch named after the file, so you can inspect it before it reaches shared work.
+
+## Export
+
+1. Open the branch and view you want, and choose **More actions → Export as → CSV**.
+2. Choose the **Identity** written for each row. **None** writes no row identity.
+3. If the export includes link columns, choose **Write links by**, or a key for each link column.
+4. Turn on **Include collapsed rows** to include items hidden under collapsed parents. Filters still limit what is exported.
+5. Check the columns and the item count, then select **Export**.
+
+Changing the export's columns does not change the view.
+
+## Round trip safely
+
+Before a large update, export a small scope, edit one value, and import it again with the same identity under **Match items by** and the same keys under **Resolve links by**. Confirm the item updated and no duplicate appeared.
+
+CSV carries field values and links. It does not carry branch history or project configuration.

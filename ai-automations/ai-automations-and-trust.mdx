@@ -1,0 +1,31 @@
+---
+title: "AI, automations, and trust"
+description: "Trace what the agent read, did, and changed before you rely on a result."
+---
+
+Flow records each agent conversation with the items the agent read, the actions it took, and the changes it made. Inspect that record before you accept a result. The agent proposes; the owner decides.
+
+## Define the task
+
+Choose the project and branch, reference the items involved, and state the question and what the agent may change. For example:
+
+> Check whether the linked test cases cover the operating limits on this interface. List missing evidence with item references. Do not edit data.
+
+The agent works with the permissions of the person running it. A Viewer cannot edit through chat, and a [skill](/ai-automations/skills) adds instructions, not permissions.
+
+## Trace the result
+
+1. Expand the action cards in the conversation to see each read and change. **Loaded skill** shows which skill ran.
+2. Open cited items and connected sources to check the evidence.
+3. Compare the reported changes with the saved fields and relationships.
+4. Check failed actions, missing evidence, and open decisions. A finished run is not engineering acceptance.
+
+## Approve a plan
+
+When the agent proposes a plan, select **Execute** to authorize its actions, **Refine** to change it, or press **Esc** to cancel.
+
+## Background work
+
+[Automations](/ai-automations/automations) run on schedules and events without anyone watching. Check an automation's instructions, triggers, and who it runs as before you save it. An automation that runs when a branch is reviewed plans first by default, so its changes wait for approval on the review page.
+
+Changes in Flow stay inspectable in their branch. Actions in connected tools take effect there, and [branches do not reverse them](/core-concepts/branching#keep-the-context-visible). [Activity](/ai-automations/activity) links each event to its run and the actions it recorded.

@@ -1,46 +1,38 @@
 ---
-title: "Requirements, systems, tests"
-description: "Build one connected thread: an owned system, the requirement it delivers, and the evidence that verifies it."
+title: "Connecting your first items"
+description: "Build one connected thread: an owned system, what it must achieve, and the evidence that shows how close it is."
 ---
 
-Two questions come up on every program: why does this requirement exist, and where in the design is it delivered? This guide builds one thread that answers both, from the top-speed target down to coastdown test results.
+Flow becomes useful once items are connected. This guide builds one short thread: a system, what it must achieve, and the evidence that shows how close it is. The same pattern works for any structure your team models, such as interfaces, parts, analyses, or risks.
 
-You need permission to edit the current branch, and a data model with categories for systems, requirements, and tests. Category and field names depend on your project. If the current branch is protected, [create a branch](/get-started/creating-a-branch) first.
+You need permission to edit the current branch, and a data model with the categories you plan to use. Category and field names depend on your project. If the current branch is protected, [create a branch](/get-started/creating-a-branch) first.
 
-## 1. Create the system and its owner
+## 1. Create a system and give it an owner
 
-Use the create control in your current view and choose your project's systems category. Name the item **Body & Aerodynamics** and place it under **Vehicle**. Describe its boundary: the body surfaces and the components that shape airflow around the vehicle.
+Use the create control in your current view and choose your project's systems category. Name the item, place it under its parent system, and describe its boundary: what is inside it and what it connects to.
 
-Set the **Owner** to the aerodynamics engineer, the person closest to this part of the design.
+Set the **Owner** to the engineer closest to that part of the design. They are best placed to keep it current.
 
-## 2. Record the requirement
+## 2. Record what it must achieve
 
-Create a requirement named **Aerodynamic Drag Coefficient**. Write the statement with its condition and expected outcome:
+Add the item that states the intent. That is often a requirement, but it can be an interface definition, a design target, or a budget, depending on your model. Put measurable values in number fields as well as in the text, so Flow can compare them with results later.
 
-> The vehicle shall have an aerodynamic drag coefficient no greater than 0.28, measured by coastdown in its delivered configuration.
+For example, a vehicle team records an **Aerodynamic Drag Coefficient** target of 0.28 against its **Body & Aerodynamics** system.
 
-Enter **0.28** in the target value field as well as in the statement, so Flow can compare it with measured results. Set the owner and lifecycle state, and use the description for rationale.
+## 3. Connect it
 
-## 3. Connect it upward and to its system
+Connect the new item to the system that delivers it, and to anything it comes from, such as a higher-level target. Those links answer two questions every engineer asks: where is this delivered, and why does it exist?
 
-Connect the requirement to its parent, **Top Speed**. That link answers why it exists: drag limits top speed. Then connect it to **Body & Aerodynamics**. That link answers where it is delivered.
+Check each relationship from both sides. A link's type and direction carry its meaning; two items that only sit near each other in a table are not connected. If the relationship you need is missing, ask your Admin to check the data model.
 
-Check each relationship from both sides. A link's type and direction carry its meaning; a requirement that only sits near a system in a table is not connected to it. If the relationship you need is missing, ask your Admin to check the data model.
+## 4. Record the evidence
 
-## 4. Define the verification
+Add how you will know the intent is met, such as a test case or an analysis, and connect it. Record each result as its own item with the measured value, date, and conditions, and attach the report.
 
-Create a test case named **Coastdown Test** and connect it to the requirement. Record the configuration, track conditions, equipment, method, and expected result. Group it under the **Aerodynamic Verification** test plan, and keep the detailed track procedure in a separate document.
-
-Creating a test case organizes the work. It does not run a test.
-
-## 5. Record each result
-
-After each coastdown run, create a test result with the measured value, date, conditions, and outcome, and attach the run report. Connect it to the test case.
-
-Keep each run separate. Prototype Build 1 measured 0.296, Build 2 measured 0.287, and Build 3 measured 0.279. Only Build 3 meets the target. Averaging the three does not describe any vehicle.
+Keep results separate rather than overwriting one value. In the vehicle example, three prototype builds measured 0.296, 0.287, and 0.279; only the last meets the target, and the history shows the trend toward it.
 
 ## Check the thread
 
-Start at **Top Speed** and follow it to the drag requirement, its system, its owner, and its latest result. Then start at the Build 3 result and follow it back up to the target it supports.
+Start at the system and follow it to what it must achieve, who owns it, and the latest evidence. Then start from a result and follow it back up.
 
-If another engineer can make that trip without asking you anything, the thread is complete. Repeat the pattern across the program. [The systems graph](/core-concepts/the-systems-graph) explains why it matters; [Getting data into Flow](/get-started/getting-data-into-flow) shows how to bring in the records you already have.
+If another engineer can make that trip without asking you anything, the thread is complete. [The systems graph](/core-concepts/the-systems-graph) explains why it matters; [Getting data into Flow](/get-started/getting-data-into-flow) shows how to bring in the records you already have.

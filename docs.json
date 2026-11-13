@@ -87,7 +87,92 @@
           {
             "group": "AI & Automations",
             "pages": [
-              "ai-automations/skills"
+              "ai-automations/ai-automations-and-trust",
+              "ai-automations/skills",
+              "ai-automations/automations",
+              "ai-automations/activity",
+              "ai-automations/impact-analysis"
+            ]
+          },
+          {
+            "group": "Branching",
+            "pages": [
+              "branching/branching",
+              "branching/comparing-branches",
+              "branching/managing-branches",
+              "branching/baselining",
+              "branching/variant-branches"
+            ]
+          },
+          {
+            "group": "Collaboration",
+            "pages": [
+              "collaboration/commenting",
+              "collaboration/sharing",
+              "collaboration/sharing-views",
+              "collaboration/subscriptions-notifications"
+            ]
+          },
+          {
+            "group": "Searching & Filtering",
+            "pages": [
+              "searching-filtering/searching",
+              "searching-filtering/filtering"
+            ]
+          },
+          {
+            "group": "Diagrams",
+            "pages": [
+              "diagrams/diagrams",
+              "diagrams/architecture-views",
+              "diagrams/importing-exporting-diagrams"
+            ]
+          },
+          {
+            "group": "Dashboards",
+            "pages": [
+              "dashboards/dashboards"
+            ]
+          },
+          {
+            "group": "Formulas",
+            "pages": [
+              "formulas/custom-functions"
+            ]
+          },
+          {
+            "group": "Importing & Exporting",
+            "pages": [
+              "importing-exporting/csv",
+              "importing-exporting/excel",
+              "importing-exporting/reqif",
+              "importing-exporting/sysml",
+              "importing-exporting/markdown",
+              "importing-exporting/word",
+              "importing-exporting/pdf",
+              "importing-exporting/html"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/integrations-list",
+              "integrations/github",
+              "integrations/gitlab",
+              "integrations/slack",
+              "integrations/jira",
+              "integrations/linear"
+            ]
+          },
+          {
+            "group": "Administration",
+            "pages": [
+              "administration/users-roles",
+              "administration/user-groups",
+              "administration/audit-log",
+              "administration/deployments",
+              "administration/sso-scim",
+              "administration/usage-billing"
             ]
           }
         ]

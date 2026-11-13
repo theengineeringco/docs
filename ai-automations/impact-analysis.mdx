@@ -1,0 +1,29 @@
+---
+title: "Impact analysis"
+description: "Find the connected items a branch's changes affect before you merge."
+---
+
+Impact analysis follows a branch's changes through the systems graph and flags connected items that may need to change too. A proposal that raises Battery Usable Capacity from 100 to 120 kWh, for example, reaches range, vehicle mass, and DC fast charge time; the analysis lists the connected items to check.
+
+## Run an analysis
+
+1. Open the branch's **Review** page and select the **Impact analysis** tab.
+2. Select **Run impact analysis**. Opening the tab does not start an analysis.
+3. Inspect the tree of affected items and the summary in the agent conversation. Open each reference and check its explanation against the data.
+
+Running an analysis requires edit access and AI turned on for your organization. Read-only users can see existing results. External users cannot open impact analysis.
+
+## Read the findings
+
+- **Severe impact**: the item likely needs an update.
+- **Moderate impact**: worth knowing when you evaluate the change; no update required.
+
+Use the filter and **Display Options** to choose item types and severity levels. Hiding a finding does not resolve it.
+
+**Stop** ends a running analysis and keeps the findings returned so far. **Re-run** starts a new analysis. **More options → Clear analysis** removes the results.
+
+## Address findings
+
+Edit the affected items yourself and re-run, or ask the agent in the analysis conversation to fix them. Review its plan, use **Refine** to adjust the scope, and select **Execute** to authorize it.
+
+The agent marks each finding it addresses **Fixed** and re-runs the analysis. Check the saved edits and the remaining findings before you accept the result.

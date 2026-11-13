@@ -1,0 +1,43 @@
+---
+title: "Filtering"
+description: "Narrow a view or a branch review to the items that meet field conditions."
+---
+
+Filters show only the items that meet the conditions you set. They do not change any records, and filtering a review does not change what a merge includes.
+
+## Filter a view
+
+1. Select **Filter** in the toolbar, or open a column's menu and select **Filter on this field**.
+2. Choose a field, an operator, and a value.
+3. Add more conditions as needed. Separate filter chips must all match.
+
+| To find | Use |
+| --- | --- |
+| Items with no owner | Owner **is empty** |
+| Items at a stage | The stage field, then the stage |
+| Values above a limit | A number field, greater than, then the limit |
+
+The fields and operators on offer come from your [data model](/core-concepts/the-data-model). Results stay within the current branch, view, and focus.
+
+To match any of several conditions, add an **Advanced filter**. It starts as **OR**; switch it to **AND** from its operator. For example, a stage chip together with an advanced filter of Owner **is empty** **OR** Description **is empty** finds items at that stage that are missing either one.
+
+Remove a chip to drop its condition. Filter changes apply only for you until you [save the view](/collaboration/sharing-views); **Reset to default** returns to the view's saved filters.
+
+Turn on **Show ancestors of filter results** in the view's display options to keep each match's parents visible for context. Those parents do not have to match.
+
+## Filter a review
+
+On a branch's **Review** page, open **Changed Items** and select **Filter**.
+
+| To find | Use |
+| --- | --- |
+| Added or removed items | **Change type**: Created or Deleted |
+| Changes by a person or by AI | **Changed by**: a person, or **Any AI** |
+| Edits to one field | The field **is changed** |
+| Changed items missing a value | The field **is empty** |
+
+The other change types are Updated, Restored, Linked, and Reordered.
+
+Chips match whole items. Combining **Changed by** with **is changed** finds items that person changed and whose field changed; it does not show that the person made that field edit. Open the change to confirm who made it.
+
+Review filters are remembered per branch in your browser. Clear them before you approve so you see the full set of changes. To look up an item by name, use [Searching](/searching-filtering/searching).

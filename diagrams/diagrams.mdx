@@ -1,0 +1,30 @@
+---
+title: "Diagrams"
+description: "Combine drawings and live item cards to explain a system's boundaries, connections, and design intent."
+---
+
+A diagram mixes shapes and text with live cards for Flow items. Cards show each item's current name and selected fields, so the drawing stays tied to the model while you arrange it however the explanation needs.
+
+## Build a diagram
+
+1. Create an item of the **Diagram** type, then open it from the sidebar or choose **Open diagram** from its context menu.
+2. Add shapes and text. Add item cards with **Entity** on the toolbar, or drag items from the sidebar onto the canvas.
+3. Select a card and use **Show fields** to display its values, or **See Details** to open the item.
+4. Connect and position shapes. Use **Auto arrange** to lay out the connected cards, then adjust by hand.
+
+Changes save automatically.
+
+## Decide which gestures change the model
+
+Some gestures can also change Flow's relationships:
+
+- **Drawing a connector between two cards** offers **Create a link in Flow**, **Connect via…**, or **Create basic arrow**.
+- **Nesting a card inside another, or moving it out**, asks whether to add, move, or remove the matching link in Flow.
+
+Check both items and the direction before you confirm. Dismissing the prompt keeps the drawing without changing the model.
+
+If an item is deleted elsewhere, its card stays on the diagram, marked as deleted. Update the drawing yourself, or use an [architecture view](/diagrams/architecture-views) for a breakdown that follows the model automatically.
+
+## When you cannot edit
+
+A diagram is read-only on a protected branch, on a branch restricted to other editor groups, at a locked stage, or with read-only access. On a protected branch, select **Create a branch** to make changes. You can still select, pan, zoom, copy, and [export](/diagrams/importing-exporting-diagrams).

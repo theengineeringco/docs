@@ -1,0 +1,35 @@
+---
+title: "Dashboards"
+description: "Summarize the live state of a project with counts, distributions, coverage, and trends."
+---
+
+Dashboards summarize the live state of a branch: how many items exist, how their values are distributed, how well they connect, and how that has changed over time. They read the current branch only, so they are unavailable while you view a baseline or a review snapshot.
+
+Editors create and change dashboards; read-only users can view them. External users cannot open dashboards.
+
+## Create a dashboard
+
+1. Select **Dashboard** in the navigation, then **New dashboard** in the sidebar.
+2. Name it and select **Create dashboard**.
+3. Optionally, pick a saved view in **Select a view** to scope the dashboard to that view's types and filters.
+4. Use **Filter** for conditions that apply to the whole dashboard. Add **Within items** to limit it to chosen items and everything below them.
+5. Select **Add widget**, choose a **Widget type**, configure it, check the preview, and select **Add widget**.
+
+Filter changes save as you make them.
+
+## Choose a widget
+
+| Widget type | Shows |
+| --- | --- |
+| Value block | The number of items, filled values, or percent filled, or the sum, average, minimum, or maximum of a number property |
+| Property summary | How a property's values are distributed, as a donut, bar chart, stacked bar, or histogram, or how they changed over time |
+| Link coverage | How many items of one type link to another type in the direction you choose, as a coverage donut or a percentage |
+| AI summary | A generated reading of the dashboard from your prompt. Available when AI is on |
+
+A widget's own **Filter** narrows that widget only. Link coverage counts links, not results: a test case linked to a system does not mean the test passed. Select a chart segment to list the items behind it, and check an AI summary against the widgets it describes before you share it.
+
+## Read historical charts
+
+A property summary can show history. Choose a historical chart (**Line**, **Multi-line**, **Stacked area**, **Bars**, or **Stacked bars**), set the date range and interval, and optionally add milestones to mark targets.
+
+Historical charts ignore the dashboard's filter and the saved view's filters, and the card says so. A widget filter blocks historical charts; remove it to choose one. **Within items** still applies, using today's hierarchy, so moving or deleting items also changes past buckets. Account for both before you compare a trend with a filtered current count.

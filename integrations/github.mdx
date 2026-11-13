@@ -1,0 +1,47 @@
+---
+title: "GitHub"
+description: "Connect a GitHub organization so agents can read your code, review pull requests, and optionally open them."
+---
+
+Connect GitHub so agents can read the code behind your system and review pull requests against what the project in Flow says you intend to build. Reads and writes are separate switches, and both start under your control.
+
+## Connect an organization
+
+You need administrator access to all projects.
+
+1. Open **Settings → Administration → Integrations → GitHub**.
+2. Under **How do you want to connect?**, choose **Standard Cloud Account** to install the Flow GitHub App, or **GitHub Enterprise Accounts and Customized App** to create your own App. Select **Continue**.
+3. In GitHub, choose the organization and pick the repositories Flow can see. Every project in the workspace can use them. If the organization uses single sign-on, sign in to it on GitHub first.
+4. Return to Flow, check the connection details, and select **Connect organization**. If you are not an organization owner, GitHub asks an owner to approve; once they do, select **Enter installation ID**.
+5. Under **AI access**, choose what agents may do, then select **Finish setup**.
+
+| Switch | What it allows |
+| --- | --- |
+| **Browse organization repositories** | Agents read connected repositories from any project in the workspace |
+| **Writeback** | Agents create branches, update files, and open pull requests |
+
+Change these later under **Advanced** on the GitHub settings page. With **Writeback** on, **Workflow triggers** lets agents start GitHub Actions workflows that have a `workflow_dispatch` trigger.
+
+## Review pull requests
+
+Pull request reviews are set per Flow project and run through an [automation](/ai-automations/automations).
+
+1. Create an automation with the trigger **GitHub: pull request is opened**. Use **GitHub: pull request is merged** to run after a merge instead.
+2. On the GitHub settings page, choose the project in **Settings for**.
+3. Under **Repositories**, set each repository's review mode.
+
+| Mode | Behavior |
+| --- | --- |
+| **Off** | No pull request access, unless **Browse organization repositories** is on |
+| **On request** | Flow reviews a pull request only when someone mentions `@flow` |
+| **Automatic** | Flow reviews every pull request |
+
+The merged trigger runs on every merge in a connected repository, without needing **Automatic** or an `@flow` mention. Comments Flow writes itself never start another run.
+
+After changing repository access in GitHub, use **Refresh repositories**. Check deliveries and runs in [Activity](/ai-automations/activity).
+
+## Limits
+
+- Repository browsing covers every project in the workspace. Per-project review settings do not restrict it.
+- Reverting a Flow branch does not undo changes made in GitHub. See [Branching](/core-concepts/branching).
+- **Disconnect GitHub** stops repository reads, writes, and pull request automation across all projects. Project review settings are kept and restored when you reconnect.

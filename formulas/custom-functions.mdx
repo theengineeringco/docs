@@ -1,0 +1,285 @@
+---
+title: "Custom functions"
+description: "Reference for Flow's formula helpers: signatures, results, missing values, and examples."
+---
+
+Formulas read fields, follow links through the systems graph, and calculate values. This reference covers Flow's **24 custom names**: 23 functions plus `mean`, an alias of `avg`. The last section lists the standard Python and math functions also available.
+
+## Write a formula
+
+A formula is one Python expression. Lists, comprehensions, generators, lambdas, and conditional expressions work; imports, assignments, and function definitions do not. The result must fit the destination field's type.
+
+- Use `self` for the current item and `get(...)` for another item in the same project and branch.
+- Read fields with `self.Target_Value` or `self["Target Value"]`. Brackets accept exact display names and avoid collisions with helper names, as in `self["children"]`.
+- Spell custom fields exactly. Built-in fields such as Name are case-insensitive. Names beginning with `_` are blocked.
+- Tag and stage values read as their display names. A missing field, including a misspelled one, can return `None`.
+
+Aggregators take **one iterable**: `avg([2, 4])`, not `avg(2, 4)`. A `*` in a signature means the options after it must be named. Replace the type and field names in these examples with your project's own.
+
+`None` means missing; `0`, `False`, and `""` are values. The null-skipping helpers do not convert numeric text or suppress errors, and `sum(None)` still fails because `None` is not a collection. Booleans count as 1 and 0 in arithmetic unless you exclude them.
+
+A field read directly after `latest`, `min`, `max`, or `coalesce` is null-safe: `latest(linked("Test Result")).Measured_Value` returns `None` when nothing is selected. Other chains and indexes are not; `parents()[0]` fails on an empty list.
+
+## Item access
+
+### get
+
+`get(entity_id)` → item reference.
+
+Type `@` in the formula editor to pick an item. Read a field from the reference, for example `get(42).Expected_Result`.
+
+An integer is an item number; a nonempty string is an item ID, even if it contains only digits. Booleans, floats, empty strings, and `None` are rejected, and a missing item number raises an error. References cannot cross projects.
+
+## Graph traversal
+
+These functions return lists of item references along directed links, skipping deleted items. They do not depend on what a view shows. Upstream means parent or source; downstream means child or destination.
+
+Targets accept item references or ID strings; use `get(42)` for an item number. Type filters take a data type name, and an unknown name raises an error. Do not rely on the order of the returned items.
+
+### children
+
+`children(entity_id_or_proxy=None, type=None)` · Method: `item.children(type=None)`
+
+Returns the immediate downstream items, starting from `self` by default. `children(type="Test Case")` filters by type; `children("Test Case")` instead treats the text as a target ID. No matches returns `[]`.
+
+### parents
+
+`parents(entity_id_or_proxy=None, type=None)` · Method: `item.parents(type=None)`
+
+Returns the immediate upstream items, with the same arguments as `children`. An item can have several parents; choose one deliberately rather than assuming `[0]` is the one you want.
+
+### descendants
+
+`descendants(entity_id_or_proxy=None, max_depth=20, type=None)` · Method: `item.descendants(max_depth=20, type=None)`
+
+Walks downstream breadth-first, skipping repeats and cycles and excluding the starting item. Depth 1 returns direct children; depth 0 returns `[]`. The type filter applies after the walk, so paths can pass through other types.
+
+Example: `count(descendants(type="Test Case"))`.
+
+### inbound
+
+`inbound(type)` or `inbound(item, type)` · Method: `item.inbound(type)`
+
+Returns the direct upstream items of a type. The one-argument form starts at `self`; `inbound("")` returns every type. No matches returns `[]`.
+
+### outbound
+
+`outbound(type)` or `outbound(item, type)` · Method: `item.outbound(type)`
+
+Returns the direct downstream items of a type, with the same arguments as `inbound`. It does not recurse.
+
+### linked
+
+`linked(type)` or `linked(item, type)` · Method: `item.linked(type)`
+
+Returns inbound items, then outbound items. The type is required; `linked("")` returns every type. **No deduplication:** an item linked in both directions counts twice in an aggregate.
+
+## Aggregation and selection
+
+Except for `coalesce`, these helpers take one collection. Supply numbers for arithmetic and comparable values for ranking.
+
+### sum
+
+`sum(items, *, start=0)`
+
+Adds the values that are not `None`. Empty or all-missing input returns `start`. `sum([2, None, 3])` → `5`; `sum([2, 3], start=10)` → `15`.
+
+### count
+
+`count(items, *, only_non_null=True)`
+
+Counts entries that are not `None`, including `0`, `False`, and empty text. Set `only_non_null=False` to count everything. Empty input returns `0`.
+
+`count(children())` counts items; `count(c.Result for c in children())` counts populated results.
+
+### avg
+
+`avg(items)`
+
+Returns the mean of the values that are not `None`, as a floating-point number. No values returns `None`. `avg([2, None, 4])` → `3.0`.
+
+### mean
+
+`mean(items)`
+
+An alias of `avg`.
+
+### min
+
+`min(items, *, key=None, default=None)`
+
+Returns the smallest value, or the item with the smallest `key`. Skips `None` items and keys; with no candidates, returns `default`. Ties keep the first item. Values that cannot be compared raise an error.
+
+`min(linked("Test Result"), key=lambda t: t.Measured_Value).Name`
+
+### max
+
+`max(items, *, key=None, default=None)`
+
+Like `min`, for the largest value or key. `max([3, None, 1])` → `3`; `max([], default=0)` → `0`.
+
+### product
+
+`product(items)`
+
+Multiplies the values that are not `None`. Empty input returns `None`. `product([2, None, 3])` → `6`.
+
+### divide
+
+`divide(items)`
+
+Drops `None`, then divides left to right. `divide([24, None, 3, 2])` → `4.0`. Empty input or a zero divisor returns `None`. **A single value returns `0`.**
+
+For a simple guarded ratio, write `self.Actual_Value / self.Target_Value if self.Target_Value else None`.
+
+### coalesce
+
+`coalesce(*values)`
+
+Returns the first argument that is not `None`, keeping `0`, `False`, and empty text. Every argument is evaluated first, so `coalesce(5, 1 / 0)` raises an error. Use a conditional expression to avoid evaluating an unused fallback.
+
+### latest
+
+`latest(items, key=None)`
+
+Returns the most recently **created** item, not the most recently edited. With `key`, it returns the item with the largest key instead. Items without a rank are skipped; no candidates returns `None`; ties keep the first item. Plain values need a `key`.
+
+Creation order can mislead. Three coastdown results recorded for one test case read Cd 0.296, 0.287, and 0.279, but if the Build 1 result was entered last, `latest` returns 0.296. Rank by the test date instead:
+
+```python
+latest(linked("Test Result"), key=lambda t: parse_date(t.Test_Date)).Measured_Value
+```
+
+## Verification and typed rollups
+
+### worst_of
+
+`worst_of(items)`
+
+Priority: **Fail → Inconclusive → Pass**. Accepts those exact, case-sensitive status values and ignores anything else; if none is recognized, returns `None`. Pass a collection of field values, not item references or a single string. Nested lists and dictionaries raise errors.
+
+`worst_of(t.Results_Status for t in linked("Test Result"))`
+
+Missing results do not count as failures: `["Pass", None]` returns `"Pass"`. Add a completeness check if every test must report.
+
+### best_of
+
+`best_of(items)`
+
+Priority: **Pass → Inconclusive → Fail**, with the same input rules as `worst_of`. Use it when one passing result is enough.
+
+### rollup
+
+`rollup(category_name, field_name)`
+
+Aggregates a field across matching descendants, choosing the reduction from the field's type. Supply the data type name and the field name; an unknown type or field raises an error.
+
+It covers descendants of that type within 20 links, without repeats, excluding `self`. Intermediate items and leaves both contribute, so a parent that already holds a total can double-count. For a verification field on an item of a different type, direct inbound items of the named type are included too.
+
+| Field type | Reduction | No contributing values |
+| --- | --- | --- |
+| Number | Sum of numbers, excluding booleans and numeric text | `None` |
+| Toggle | True only if every value is true | `None` |
+| Verification | `worst_of` | `None` |
+| Other | List of values, keeping `None` | `[]` |
+
+`rollup("Test Result", "Measured Value")` sums a Number field. Select explicitly when you need leaves only or a single result. A Toggle rollup of `[True, None]` returns `True`; missing values do not count as false.
+
+## Dates
+
+### today
+
+`today()`
+
+Returns the current UTC date. A formula that calls it refreshes after the next UTC midnight, and the displayed value can update a little later. Every call in one evaluation returns the same date. Date-field results are stored as ISO text.
+
+### parse_date
+
+`parse_date(s)`
+
+Returns a date, or `None` for missing or invalid input. Dates pass through unchanged. Other input is read as an ISO date from its first 10 characters, so `parse_date("2026-10-06T23:30:00-07:00")` → `2026-10-06`, with no time zone conversion. Use `YYYY-MM-DD`; spreadsheet date serials are not converted.
+
+### days_between
+
+`days_between(a, b)`
+
+Parses both inputs and returns `(b - a).days`. October 1 to October 6 returns `5`; reversed, `-5`. Missing or unparseable input returns `None`.
+
+## Spreadsheets
+
+### get_cell
+
+`get_cell(ref, cell)` or `get_cell(ref, sheet_name, cell)`
+
+Reads one cell from an uploaded Excel file or a live Google Sheet. The reference is an attachment field, a Google Sheet field, a sheet URL, or a Drive ID. An omitted or `None` sheet name reads the first sheet.
+
+```python
+get_cell(self.Attachment, "Mass budget", "B2")
+get_cell(self.Budget, "B2")
+get_cell(self.Attachment, "B2") if self.Attachment else None
+```
+
+Use a single cell such as `B2`. Ranges are rejected. Empty cells return `None`; other values arrive unformatted, so numbers stay numbers. An empty attachment is an invalid reference, so guard it as in the last example.
+
+| Source | Behavior |
+| --- | --- |
+| Uploaded Excel | `.xls`, `.xlsb`, `.xlsm`, or `.xlsx`, up to 8 MiB. Reads saved values without running formulas or macros. Dates return as ISO text. |
+| Google Sheets | Read through the workspace's Google connection, within the administrator's Drive restrictions. Results refresh every five minutes by default. Dates return as day serial numbers. Branches do not freeze live sheet contents. |
+
+An invalid reference, unknown sheet, multi-cell range, denied read, or Excel error cell raises an error. If Google is briefly unavailable, the last good value stays while the read retries.
+
+## Standard functions
+
+These **16 Python built-ins and 28 math functions** are available by name, with no import or `math.` prefix. They keep their standard behavior; only the Flow helpers above skip `None`.
+
+### Python built-ins
+
+| Function | Behavior |
+| --- | --- |
+| `abs(x)` | Absolute value |
+| `round(number, ndigits=None)` | Round; halfway cases round to even |
+| `int(value=0, ...)` | Convert to an integer, truncating toward zero |
+| `float(value=0)` | Convert numbers or numeric text to floating point |
+| `str(value="")` | Convert to text; `str(None)` is `"None"` |
+| `bool(value=False)` | Truthiness; nonempty text such as `"False"` is true |
+| `len(value)` | Length; counts `None` entries and does not accept a generator |
+| `list(iterable=())` | Build a list |
+| `dict(...)` | Build a dictionary |
+| `set(iterable=())` | Build a set; do not rely on its order |
+| `tuple(iterable=())` | Build a tuple |
+| `isinstance(value, type_or_tuple)` | Test a type; booleans are instances of `int` |
+| `any(items)` | True if any item is truthy; empty input is false |
+| `all(items)` | True if every item is truthy; empty input is true |
+| `sorted(items, key=None, reverse=False)` | Sorted list; does not remove `None` |
+| `range(stop)` / `range(start, stop, step=1)` | Integer sequence excluding `stop` |
+
+### Math functions
+
+| Function | Behavior |
+| --- | --- |
+| `sqrt(x)` | Square root |
+| `log(x, base=e)` | Natural logarithm, or logarithm to a base |
+| `log2(x)` | Base-2 logarithm |
+| `log10(x)` | Base-10 logarithm |
+| `exp(x)` | e raised to x |
+| `pow(x, y)` | Floating-point power, two arguments only |
+| `floor(x)` | Greatest integer less than or equal to x |
+| `ceil(x)` | Smallest integer greater than or equal to x |
+| `trunc(x)` | Integer part, toward zero |
+| `fabs(x)` | Floating-point absolute value |
+| `fmod(x, y)` | Remainder with the sign of x |
+| `copysign(x, y)` | Magnitude of x with the sign of y |
+| `hypot(*coordinates)` | Euclidean length |
+| `isnan(x)` | Whether x is NaN |
+| `isinf(x)` | Whether x is infinite |
+| `isfinite(x)` | Whether x is neither NaN nor infinite |
+| `sin(x)`, `cos(x)`, `tan(x)` | Trigonometric functions, in radians |
+| `asin(x)`, `acos(x)`, `atan(x)` | Inverse trigonometric functions, in radians |
+| `atan2(y, x)` | Quadrant-aware angle in radians |
+| `sinh(x)`, `cosh(x)`, `tanh(x)` | Hyperbolic functions |
+| `degrees(x)` | Radians to degrees |
+| `radians(x)` | Degrees to radians |
+
+`pi`, `e`, and `tau` are constants. Operators such as `+`, `/`, `**`, and `%` also work. Domain errors, division by zero, and incompatible operands produce formula errors, and a NaN result is an error.
+
+Names such as `date`, `datetime`, `math`, `enumerate`, `zip`, `map`, and `filter` are not available; use comprehensions instead.

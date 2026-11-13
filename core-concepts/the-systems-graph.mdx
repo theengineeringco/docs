@@ -1,33 +1,33 @@
 ---
 title: "The systems graph"
-description: "Why Flow connects engineering information around systems, ownership, and traceability."
+description: "Why Flow connects engineering information around systems, ownership, and the links between them."
 ---
 
-An engineering program is a network of commitments. A requirement states what a system must achieve. An interface constrains how it connects to another system. A test provides evidence that the design meets the expectation. Change one, and the others can move.
+A physical system is described by many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, risks, and decisions. Each is useful alone. The understanding comes from how they connect. Change one, and the others can move.
 
-Flow keeps those commitments connected in a systems graph. The graph answers the questions engineers ask every day: why does this requirement exist, where is it delivered, and what else changes if it changes.
+Flow keeps all of them connected in a systems graph. The graph answers the questions engineers ask every day: what is this part of, why is it this way, what backs it up, and what else changes if it changes.
 
 ## Start from an owned system
 
-Take the battery system in the electric vehicle. Its owner, the battery systems engineer, is responsible for the battery pack, the battery management system, and their connections to the rest of the vehicle. That includes their requirements, their interfaces, and the evidence that verifies them.
+Flow is built around ownership. Every item has an accountable person, and that person is the engineer closest to the design. In an electric vehicle, the battery systems engineer owns the battery system: its pack, its management system, their interfaces to the rest of the vehicle, and the evidence that they work.
 
-Flow is built around this kind of ownership. Every system and requirement has an accountable person, and that person is the engineer closest to the design. The BMS software engineer owns the firmware limits. The aerodynamics engineer owns the drag target. They still work with specialists and reviewers; ownership gives that collaboration a center.
+The owner still works with specialists and reviewers; ownership gives that collaboration a center, and keeps each part of the model current while the design changes.
 
 Ownership only helps when the owner can see their dependencies. The graph makes them visible.
 
 ## Make every connection explicit
 
-Flow represents information as **items** connected by **relationships**. Systems, requirements, interfaces, and tests are all items.
+Flow represents information as **items** connected by **relationships**. A system, an interface, a requirement, an analysis, a test, or a part are all items, in categories your team defines.
 
-Some relationships express decomposition. The vehicle contains the battery system; the battery system contains the pack and the BMS. Top Speed decomposes into drag coefficient and powertrain torque.
+Some relationships express decomposition: a vehicle contains a battery system, which contains a pack and its management electronics.
 
-Other relationships cross that hierarchy. **Range** depends on both **Battery Usable Capacity** and the vehicle's drag. **Cell Temperature During DC Fast Charging** is delivered by the BMS but constrains the charging system. A folder tree cannot hold both kinds of connection. A graph can.
+Other relationships cross that hierarchy. A vehicle's range depends on both battery capacity and aerodynamic drag, which belong to different systems and different owners. An interface ties two systems together. A folder tree cannot hold both kinds of connection. A graph can.
 
-Verification relationships complete the picture. The drag requirement connects to the coastdown test case, its procedure, and one result per prototype build. The system structure says what is being designed. The verification relationships say how the team knows it works.
+Evidence completes the picture. Analyses, tests, and their results connect to what they support. The structure says what the team intends to build. The evidence says how close it is.
 
 ## Change the view, not the data
 
-Different jobs ask different questions of the same records. The aerodynamics engineer wants their system and its open requirements. A systems architect wants interfaces and traceability. A program lead wants verification progress.
+Different jobs ask different questions of the same records. A subsystem owner wants their system and what is still open on it. A systems architect wants interfaces and dependencies. A program lead wants progress across the whole program.
 
 Each gets a view, and every view reads the same items:
 
@@ -36,18 +36,18 @@ Each gets a view, and every view reads the same items:
 - **Reader** presents the content as a document people can read and comment on.
 - A **diagram** draws selected structures and connections.
 
-Saved views such as **Systems**, **Functions**, **Verification**, and **Risks** start from different parts of the graph. Nothing is copied between them. Editing a value in one view changes the item every view shows.
+Saved views can start from different parts of the graph, such as systems, functions, verification, or risks. Nothing is copied between them. Editing a value in one view changes the item every view shows.
 
 A filtered view is a perspective, not a permission. Access is configured separately.
 
 ## Follow the consequences of change
 
-Suppose the Truck's battery capacity rises from 100 kWh to 120 kWh. The question is not the new number. It is everything connected to it: range improves, vehicle mass rises, and DC fast charge time may no longer meet its target.
+Suppose battery capacity rises. The question is not the new number. It is everything connected to it: range improves, vehicle mass rises, and charge time may no longer meet its target.
 
-The graph turns that question into a set of records to inspect and people to talk to. Its answers are only as good as its links. A missing relationship is a gap in traceability, and a recorded one still needs engineering judgment.
+The graph turns that question into a set of records to inspect and people to talk to. Its answers are only as good as its links. A missing relationship is a gap in understanding, for engineers and agents alike, and a recorded one still needs engineering judgment.
 
 ## Build on the graph
 
 [The data model](/core-concepts/the-data-model) defines what items, fields, and relationships mean. [Branching](/core-concepts/branching) lets the graph change safely. [Flow's AI](/core-concepts/ai-automations) uses its connections as context.
 
-To build your first connected thread, follow [Requirements, systems, tests](/get-started/requirements-systems-tests).
+To build your first connected thread, follow [Connecting your first items](/get-started/requirements-systems-tests).

@@ -1,41 +1,39 @@
 ---
 title: "What is Flow"
-description: "One connected source of truth for hardware teams that iterate quickly on their design."
+description: "A source of truth that lets engineers and agents understand your physical system, and close the gap between what you intend to build and where you are."
 ---
 
-Flow is the single source of truth for your system. It is built for hardware teams that change their design quickly and need every engineer working in the same direction while they do.
+Flow is a source of truth that lets humans and agents deeply understand your physical system. It pulls and manages context from the places your team already works, so it is clear what you intend to build and how close you are to achieving it. On that foundation, you can spin up agents that work in the background to close the gap and increase your engineering velocity.
 
-These guides use one example throughout: an electric vehicle program.
+## Model any system and any structure
 
-## Know why every requirement exists
+Hardware programs run on many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, suppliers, risks, and decisions. Flow holds all of them. Your team defines the categories of items and the fields they carry, and Flow keeps them connected.
 
-Open the vehicle's requirements and follow **Top Speed** down. It decomposes into the **Aerodynamic Drag Coefficient** and **Powertrain Peak Torque**. Drag decomposes again into **Frontal Area**.
+Those connections are what make the system understandable. Follow a design decision to the systems it affects, an interface to the two teams on either side of it, or a target to the analyses and tests that back it. [The systems graph](/core-concepts/the-systems-graph) explains how the connections work, and [the data model](/core-concepts/the-data-model) how your team shapes them.
 
-Each requirement now has a visible reason to exist. The aerodynamics engineer can see that a frontal-area limit protects the top-speed target. Without that link, two engineers can optimize in opposite directions and only find out at integration.
+## Pull context from where work happens
 
-## Give every requirement an owner
+Engineering information is spread across spreadsheets, documents, models, code, tickets, and chat. Flow brings it together: import files, extract records from documents with the agent, and connect the tools your team already uses. Each item has an owner, the engineer closest to that part of the design, who keeps it current.
 
-Make the owner the engineer closest to the design, not a central systems engineer. The person who designs the part is best placed to say what its requirement should be, especially when the design changes every week. [The systems graph](/core-concepts/the-systems-graph) explains why Flow is built around ownership.
+[Getting data into Flow](/get-started/getting-data-into-flow) covers the routes in.
 
-## See where each requirement is delivered
+## See what you intend and how close you are
 
-Requirements connect to the systems that deliver them. Open **Battery System** to see the requirements that define its performance, then follow them down to the battery pack and the battery management system (BMS).
+When intent and evidence sit in the same connected model, the gap between them is visible. A target sits next to its latest measured value. A system with no verification stands out. A change shows which connected items have not caught up with it.
 
-The same records answer different questions in different views. Edit values in a table, see decomposition in a tree, or read the content as a document in **Reader**. Highlight a passage in Reader and comment to ask a colleague whether a simulation has been rerun; the conversation stays with the record.
+Views show the same items for different jobs: a table to compare and edit, a tree for structure, **Reader** to read and comment like a document, and a diagram to see how parts connect.
 
-## Iterate in parallel with branches
+## Change the design in parallel
 
-Branches hold lasting differences, such as the **Coupe**, **Truck**, and **SUV** built from a shared **Base**. They also hold work in progress, so several engineers can develop changes at once without disturbing the agreed design. [Branching](/core-concepts/branching) explains both jobs.
+Branches let the design change without losing the agreed state. They hold lasting variants built from a shared base, and they hold proposals in progress, so several engineers can develop changes at once and compare each one with its parent before it is accepted. [Branching](/core-concepts/branching) explains both jobs.
 
-## Keep teams aligned with agents
+## Close the gap with agents
 
-Flow's agent connects to the tools your teams already use and works inside them. When a firmware change in GitHub conflicts with a requirement, Flow's review flags it and names the engineers who resolve it. [How Flow uses AI](/core-concepts/ai-automations) walks through that review.
+Agents read the same source of truth your engineers do. Chat with the agent to answer a question or make a change, save how your team does a task as a [skill](/ai-automations/skills), and set up automations that work in the background: reviewing a pull request against the system it touches, or flagging what a change affects and who owns it. [How Flow uses AI](/core-concepts/ai-automations) walks through an example.
 
 ## Start here
 
-All of your system's information lives in one place. You can iterate on it quickly, and agents keep the team moving in the same direction.
-
 1. [Start a project](/get-started/starting-a-project).
-2. [Connect a requirement, a system, and a test](/get-started/requirements-systems-tests).
+2. [Connect your first items](/get-started/requirements-systems-tests).
 3. [Bring in your existing information](/get-started/getting-data-into-flow).
 4. [Create a branch](/get-started/creating-a-branch) for your first proposal.

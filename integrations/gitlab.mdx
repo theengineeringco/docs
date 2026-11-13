@@ -1,0 +1,44 @@
+---
+title: "GitLab"
+description: "Connect GitLab projects so agents can read repositories and review merge requests."
+---
+
+Connect GitLab so agents can read repositories and review merge requests against what your project in Flow intends. Automations run when a merge request opens, reopens, receives a code push, or merges.
+
+## Connect GitLab
+
+Open **Settings → Administration → Integrations → GitLab**. Under **Connect GitLab**, use the option your deployment offers.
+
+**Continue to GitLab** authorizes your GitLab.com account. Select projects and Flow configures their webhooks. You need Maintainer or Owner access to those projects.
+
+**Set up with a token** works with GitLab.com and approved self-managed hosts:
+
+1. For a self-managed host, enter its **GitLab API Base URL** and select **Save base URL**. Contact Flow to approve the host first.
+2. In GitLab, create a group or project access token with the `api` scope and at least the **Developer** role.
+3. In Flow, enter the **Access Token** and a **Webhook Secret Token** of your choice. Select **Test Connection**, then **Save**.
+4. In each GitLab project, add a webhook with Flow's **Webhook URL** and the same secret. Enable **Merge request events** and **Comments**.
+
+## Choose what agents can do
+
+| Switch | What it allows |
+| --- | --- |
+| **GitLab Repo Browsing** | Agents browse connected repositories across the workspace, within existing Flow permissions |
+| **GitLab Writeback** | Agents create branches, commit files, and open merge requests. Delete and merge actions are never exposed |
+
+## Review merge requests
+
+Create an [automation](/ai-automations/automations) with **GitLab: merge request is opened** or **GitLab: merge request is merged**. To narrow it:
+
+- **Authors (optional)**: GitLab usernames without the `@`, comma-separated.
+- **Paths (optional)**: files or folders, comma-separated. Folders need a trailing `/`, as in `firmware/`.
+
+When both are set, both must match. A path-scoped automation does not run if Flow cannot get the full list of changed files.
+
+A new comment that mentions `@flow` reruns the merge request's automations. Edited comments, system notes, and Flow's own comments do not.
+
+Select **View activity** to check deliveries and runs. If nothing runs, check the webhook URL, secret, enabled events, token access, and the automation's filters.
+
+## Limits
+
+- Reverting a Flow branch does not undo commits or comments in GitLab. See [Branching](/core-concepts/branching).
+- Disconnecting stops repository access and automation across the workspace and clears the saved credentials. Your browsing and write-back settings, automations, and history remain. Remove any token webhooks in GitLab yourself.

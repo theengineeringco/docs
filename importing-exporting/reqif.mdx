@@ -1,0 +1,32 @@
+---
+title: "ReqIF"
+description: "Exchange item hierarchies, attributes, and relationships with other tools through explicit ReqIF mappings."
+---
+
+ReqIF is an interchange format many engineering tools read and write. Flow exports any item types you map, with their attributes, hierarchy, and links, and imports ReqIF documents into a new branch.
+
+Anyone who can see the data can export it. Importing requires editing access; read-only and external users cannot import.
+
+## Export
+
+1. Choose **More actions → Export as → ReqIF**.
+2. Select **Add scope** for each part of the project to export. A scope pairs a root item with a saved view, and can be filtered. Then select **Continue to mappings**.
+3. For each Flow type, set the exported ReqIF type name and choose which fields to include, with their attribute names and datatypes. For tag fields, edit the exported enumeration values; leave a value blank to exclude it.
+4. Set **Spec object ID** for each item's identity and **Spec hierarchy ID** for its place in the hierarchy. Each can be auto-generated, the Flow ID, or a Flow field, with an optional suffix. Match your exchange partner's convention.
+5. Check the summary of scopes, items, and types, then select **Download .reqifz**.
+
+Excluding a type moves its children up to the next included level. The `.reqifz` archive includes embedded files.
+
+To reuse a mapping, save it as a preset. Presets belong to the project. After changing a preset's mapping, select **Update** to save it.
+
+## Import
+
+1. Choose **More actions → Import from → ReqIF** and upload a `.reqif` or `.reqifz` file.
+2. Map each ReqIF type to an existing Flow item type. Objects of unmapped types are skipped; the import does not add types to your data model.
+3. For each mapped type, map attributes to fields and enumeration values to options, and choose how objects match existing items.
+4. Under **Destination**, choose the branch to start from, name the new branch, and place the top-level objects at the **Project root** or **Under an item**.
+5. Set each link type to **Downstream**, **Upstream**, **Cross-link**, or **Skip**.
+6. Check the preview in **Review**. Nothing is written until you import.
+7. After the import, select **Open branch** and check the hierarchy, values, and links.
+
+Before a full handoff, exchange a small sample that includes nesting, enumerations, links, and an embedded image, and open it in the receiving tool.

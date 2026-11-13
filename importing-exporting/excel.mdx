@@ -1,0 +1,30 @@
+---
+title: "Excel"
+description: "Import worksheet rows into Flow, or export a view as an Excel workbook."
+---
+
+Excel uses the same mapping and identity steps as [CSV](/importing-exporting/csv). Import accepts `.xlsx` and `.xls`; export produces `.xlsx`.
+
+## Import
+
+1. Put the table in one sheet with the column headers in the first row.
+2. Choose **More actions → Import from → CSV/Excel**, or **Import here** on a sidebar item, and upload the workbook.
+3. If the workbook has several sheets, choose the **Sheet** to import. Import other sheets separately.
+4. Choose the item type, or split rows by a type column, then map fields and relationships.
+5. Set **Identity column** and **Match items by** so rows update existing items. Without them, every row creates a new item.
+6. Choose the **Destination**, fix the blockers in **Review**, and select **Import to new branch**.
+
+Flow imports cell values. Formatting, charts, and spreadsheet formulas do not carry over, so check the values in the review.
+
+## Export
+
+1. Open the branch and view you want, and choose **More actions → Export as → Excel**.
+2. Choose the **Identity**, the link keys, and the columns.
+3. Turn on **Include collapsed rows** to include hidden descendants. Filters still limit what is exported.
+4. Select **Export**, and keep the tab open while **Exporting…** shows.
+
+Excel exports run in your browser and are limited to 100,000 items. Narrow the scope or export CSV for larger sets.
+
+## Edit and re-import
+
+Keep the identity column and link references intact while you edit. Test a small re-import before the full workbook. Changes in the workbook reach Flow only when you import it.

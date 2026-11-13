@@ -1,0 +1,27 @@
+---
+title: "Audit log"
+description: "See who changed a project's configuration or workspace access, and revert supported changes."
+---
+
+The audit log records changes to how a project is set up and who can use the workspace. Edits to items are tracked separately, in each item's history.
+
+The audit log requires the Admin role.
+
+## Find a change
+
+1. Open **Settings → Audit Log**.
+2. If you have access to all projects, choose **This project** or **Workspace users**. Other Admins see the project log only.
+3. Search by summary, actor email, or name, or filter project entries by type.
+4. Read the entry's **When**, **Who**, **Action**, and **Change** columns. Select **Details** to see the recorded values. Scroll to load older entries.
+
+The project log covers project settings, the data model, views, templates, automations, Flow.md, skills, and merge history. Changes made by an agent show as **AI agent**. **Workspace users** records user access and role changes, review requirements, and some integration changes.
+
+Changes to your personal skills, automations, My FLOW.md, and private views appear only in your own log, at **Settings → Personal Log**.
+
+## Revert a change
+
+1. Compare the entry with the current configuration, including any later changes.
+2. Select **Revert** and confirm.
+3. Check the affected settings and the new entry that records the revert.
+
+Reverting adds a new entry; the original stays in the log. When **Revert** is unavailable, hover over it to see why. Roles and access are changed on **Settings → Users**, and merges are reverted from change history, not here.
