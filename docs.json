@@ -98,9 +98,11 @@
             "group": "Branching",
             "pages": [
               "branching/branching",
+              "branching/merging",
+              "branching/tracing-history",
               "branching/comparing-branches",
-              "branching/managing-branches",
               "branching/baselining",
+              "branching/managing-branches",
               "branching/variant-branches"
             ]
           },

@@ -21,11 +21,23 @@ Flow opens a comparison of what the new baseline contains. **Overview** shows wh
 
 Viewers and external users cannot create baselines. If an editor group restricts the branch or its parent, only members can create one.
 
+```mermaid
+%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
+gitGraph
+  commit id: "Concept targets"
+  commit id: "Pack sized" tag: "Design review 1"
+  commit id: "Cooling added"
+  commit id: "Range update" tag: "Design review 2"
+  commit id: "Work continues"
+```
+
+A baseline copies nothing. It marks a point in the branch's history, so it costs nothing to create one at every milestone.
+
 ## Compare against a baseline
 
 Select a baseline in **Change history** to open it. To see what happened since, compare it with **Current**; to inspect an interval, compare two baselines. See [Comparing branches](/branching/comparing-branches).
 
-Every merge also adds an entry to the history, carrying the review and merge context. Admins can rename entries with **Rename merge**.
+Every merge also adds a `Merge: <branch>` entry to the history, carrying the review and merge context, so merges work like baselines. Admins can rename entries with **Rename merge**; renames appear in the [audit log](/administration/audit-log).
 
 ## Revert a baseline
 
@@ -33,4 +45,17 @@ Every merge also adds an entry to the history, carrying the review and merge con
 2. Confirm **Create revert branch**.
 3. Flow creates a branch named `Revert: <baseline>` from the branch the baseline belongs to, fills it with the reverse of the baseline's changes, and opens its review.
 
-Nothing changes until that branch is merged. Before you merge it, check the result: changes to formulas are not reverted, and a reverted field returns to its earlier value even if someone has edited it since.
+```mermaid
+%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
+gitGraph
+  commit id: "Pack sized" tag: "Design review 1"
+  commit id: "Cooling added"
+  branch Revert-review-1
+  checkout Revert-review-1
+  commit id: "Opposite changes" type: REVERSE
+  checkout Base
+  commit id: "Other work"
+  merge Revert-review-1 id: "Merge: Revert"
+```
+
+Nothing changes until that branch is merged. The original changes stay in history beside the revert, so you can always see what was undone and by whom. Before you merge it, check the result: changes to formulas are not reverted, and a reverted field returns to its earlier value even if someone has edited it since.

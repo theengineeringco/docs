@@ -3,19 +3,71 @@ title: "Branching"
 description: "Manage variation in the design and develop changes in parallel, while preserving an agreed state and its history."
 ---
 
-import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
-
 Hardware teams change their design while depending on it. A target gets revised mid-study. Three disciplines change related parts in the same week. One platform becomes three products.
 
-Flow handles this with branches. A branch is a state of the project relative to a parent. Branches do two jobs: they manage variation in the design, and they let the team work on several changes at once.
+Flow handles this with branches. A branch is a state of the project relative to a parent. Branches do two jobs: they manage variation in the design, and they let the team work on several changes at once. Underneath both is one principle: every change stays traceable.
+
+## Every change is traceable
+
+The most important idea in Flow is that history is never lost. Every edit is recorded with the branch it was made on, the person or agent who made it, and when. Branch actions add to that record instead of rewriting it:
+
+- **Merging** writes a branch's changes onto its parent under a `Merge: <branch>` record that keeps who merged it, the reviews, and the discussion.
+- **Updating from a parent** brings in newer work and lists the update in the branch's history, where it can be reverted.
+- **Reverting** adds changes that undo earlier ones, usually in a branch of its own that is reviewed like any other. The changes it undoes stay in history.
+- **Deleting** a branch closes it. Its changes are kept, and it can be restored.
+
+```mermaid
+%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
+gitGraph
+  commit id: "Agreed design"
+  branch Truck
+  checkout Truck
+  commit id: "Cd ≤ 0.35"
+  branch Trade-study
+  checkout Trade-study
+  commit id: "120 kWh"
+  checkout Base
+  commit id: "Regulation update"
+  checkout Truck
+  merge Base id: "Update from parent"
+  checkout Trade-study
+  merge Truck id: "Updated"
+  commit id: "Range 520"
+  checkout Truck
+  merge Trade-study id: "Merged" tag: "Merge: Trade-study"
+  branch Revert
+  checkout Revert
+  commit id: "Undo range" type: REVERSE
+```
+
+So for any value, the team can answer: who set it, when, on which branch, and how it reached the branch they are looking at. The answer is evidence, not memory: a reviewer, an auditor, or an agent can follow the same trail. [Tracing history](/branching/tracing-history) shows where to look, and what each action records.
 
 ## Hold lasting variation
 
 A product family shares a lot across its models: architecture, standards, regulations, common parts. That shared information lives in a base branch, and each model branches from it to hold only what is different. In an electric vehicle family, a **Truck** branch might relax the drag target and add towing loads, while a **Coupe** inherits the base values. A change in the base can flow to every model without being re-entered.
 
-<VisualPlaceholder kind="Diagram" title="Variants and proposals">
-  Base at the top with three long-lived variant branches below it: Coupe, Truck, SUV, drawn as solid lines. From Truck, three short proposal branches (Battery capacity trade study, BMS improvements, DC fast charging) drawn as dashed lines that loop back into Truck.
-</VisualPlaceholder>
+```mermaid
+%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
+gitGraph
+  commit id: "Shared design"
+  branch Coupe
+  commit id: "Coupe body"
+  checkout Base
+  branch Truck
+  commit id: "Cd ≤ 0.35, towing"
+  branch Battery-study
+  commit id: "120 kWh"
+  checkout Truck
+  branch BMS-update
+  commit id: "New thermal limits"
+  checkout Truck
+  merge Battery-study id: "Merge: Battery study"
+  checkout Base
+  branch SUV
+  commit id: "SUV seating"
+```
+
+Coupe, Truck, and SUV are long-lived variants of the shared design. Battery-study and BMS-update are proposals on Truck: each starts from Truck, and each merges back into it when it is accepted.
 
 These long-lived branches are **variants**. They are not meant to merge back. Some workspaces label them explicitly as variants.
 
@@ -45,7 +97,7 @@ Permissions and branch policies decide who can change a branch and who can incor
 
 A [baseline](/branching/baselining) marks a state worth returning to, such as the design as presented at a milestone review. Branches and baselines answer different questions. A branch is where work happens. A baseline is a reference you compare against later.
 
-When an accepted change has to be reversed, history matters. Flow reverses it as a reviewable change, so engineers can see what returns and what has happened since.
+When an accepted change has to be reversed, history matters. Flow reverses it as a reviewable change, so engineers can see what returns and what has happened since, and the original change stays on the record.
 
 ## Keep the context visible
 

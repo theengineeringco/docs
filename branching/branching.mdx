@@ -18,7 +18,27 @@ A branch gives a change its own working state. The parent stays as it is until t
 3. Check **Parent Branch**. Choose Base for the shared project state, or another branch when your work depends on it.
 4. Create the branch, then confirm its name in the branch selector before you edit.
 
-A sub-branch starts from its parent and merges back into it. Viewers cannot create branches, and editor groups can limit who edits a branch. See [Managing branches](/branching/managing-branches).
+Creating a branch copies nothing. The branch starts from its parent's state at that moment, and from then on records only its own changes, each with who made it, or which agent, and when. Flow records who created the branch.
+
+A sub-branch starts from another branch and merges back into it, so you can try an idea on top of a proposal without touching the proposal itself:
+
+```mermaid
+%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
+gitGraph
+  commit id: "Agreed design"
+  branch Trade-study
+  checkout Trade-study
+  commit id: "120 kWh"
+  branch Pack-layout
+  checkout Pack-layout
+  commit id: "New module layout"
+  checkout Trade-study
+  merge Pack-layout id: "Merged sub-branch"
+  checkout Base
+  merge Trade-study id: "Merged" tag: "Merge: Trade-study"
+```
+
+Viewers cannot create branches, and editor groups can limit who edits a branch. See [Managing branches](/branching/managing-branches).
 
 ## Update from the parent
 
@@ -35,6 +55,51 @@ The parent keeps moving while you work. Updating brings that newer work into you
 
 A conflict is the same information changed in incompatible ways on both sides, such as a field edited differently or an item deleted on one side and edited on the other.
 
-Updating changes only your branch. The parent changes when your branch is reviewed and merged.
+```mermaid
+%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
+gitGraph
+  commit id: "Cd ≤ 0.28"
+  branch Proposal
+  checkout Proposal
+  commit id: "Your change"
+  checkout Base
+  commit id: "Regulation update"
+  checkout Proposal
+  merge Base id: "Update from parent"
+  commit id: "More work"
+```
 
-Use [Comparing branches](/branching/comparing-branches) to inspect differences between any two states. In workspaces that use the updated variant view, branches appear as variants and change requests; see [Variant branches](/branching/variant-branches).
+Updating changes only your branch. Your own changes keep their authors and times. Where you choose **Keep parent**, the parent's value is written to your branch as a change by you, so the choice is in the record. The parent changes when your branch is reviewed and merged.
+
+### Undo an update
+
+Each update is listed in **Parent update history**, in the branch's actions menu and in **Change history**. To undo one, open it and choose **Create revert request**. Flow puts the undo in a branch for review.
+
+## Move work to another parent
+
+Sometimes a proposal is started from the wrong branch, such as Base instead of Truck. **Rebase onto...** copies your work to the right place.
+
+1. Open the branch's actions menu and choose **Rebase onto...**.
+2. Pick the new parent.
+3. Flow creates a new branch under it, holding a copy of every change from your branch with its original author and time.
+
+```mermaid
+%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
+gitGraph
+  commit id: "Agreed design"
+  branch Truck
+  checkout Truck
+  commit id: "Cd ≤ 0.35"
+  checkout Base
+  branch Proposal
+  checkout Proposal
+  commit id: "Towing loads"
+  checkout Truck
+  branch Proposal-on-Truck
+  checkout Proposal-on-Truck
+  commit id: "Towing loads (copied)"
+```
+
+Your original branch stays as it was. Changes to items the new parent does not have are left out, and Flow lists them. Comments come with the copy; sub-branches, baselines, and reviews do not. When the copy is right, delete the original.
+
+When the work is ready, [review and merge it](/branching/merging). Use [Comparing branches](/branching/comparing-branches) to inspect differences between any two states, and [Tracing history](/branching/tracing-history) to follow any change back to where it was made. In workspaces that use the updated variant view, branches appear as variants and change requests; see [Variant branches](/branching/variant-branches).

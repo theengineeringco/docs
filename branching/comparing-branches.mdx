@@ -13,6 +13,20 @@ A comparison shows what differs between two states of the project: two branches,
 2. On each side, pick a **Branch** and a **Point**. A point is **Current**, a baseline, or a single change. Put the starting state on the left and the resulting state on the right.
 3. Open **Compare changes** and select an item to see its changed fields and relationships.
 
+```mermaid
+%%{init: {"theme": "base", "gitGraph": {"mainBranchName": "Base", "rotateCommitLabel": false}, "themeVariables": {"fontFamily": "Inter, sans-serif", "git0": "#1F3ACB", "git1": "#646461", "git2": "#C9A227", "git3": "#979692", "git4": "#4F6BED", "git5": "#8A6D1B", "gitBranchLabel0": "#ffffff", "gitBranchLabel1": "#ffffff", "gitBranchLabel2": "#1a1a1a", "gitBranchLabel3": "#ffffff", "gitBranchLabel4": "#ffffff", "gitBranchLabel5": "#ffffff", "commitLabelColor": "#3a3a38", "commitLabelBackground": "#F6F6F3", "tagLabelColor": "#1F3ACB", "tagLabelBackground": "#EEF1FD", "tagLabelBorder": "#1F3ACB"}}}%%
+gitGraph
+  commit id: "Agreed design" tag: "Design review 1"
+  branch Proposal
+  checkout Proposal
+  commit id: "Change A"
+  commit id: "Change B"
+  checkout Base
+  commit id: "Change C"
+```
+
+Comparing **Base** at *Design review 1* with **Proposal** at **Current** shows changes A and B. Comparing **Base** at **Current** with **Proposal** at **Current** also shows change C, from the other side. Open the proposal's review to see only what it would merge: A and B.
+
 Use the swap control to reverse the two sides. Filters and display options narrow the list; clear them to see the full difference.
 
 To compare a single item, open its menu and choose **Compare with branch...**.

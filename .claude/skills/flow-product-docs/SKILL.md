@@ -38,6 +38,7 @@ what is specific to product pages.
 | `references/demo-voice.md` | Converting demo or sales narration into docs |
 | `references/verified-ui.md` | Writing steps that name UI labels or click paths |
 | `references/placement.md` | Adding a page or choosing its group |
+| `references/diagrams.md` | Drawing a branching or history diagram |
 
 ## Examples: use sparingly
 
@@ -72,6 +73,7 @@ Each recurring idea has one home page; elsewhere, one sentence and a link.
 | Views (table, tree, Reader, diagram) | `core-concepts/the-systems-graph` |
 | Variants and proposals | `core-concepts/branching` |
 | External-tool actions are not undone by branches | `core-concepts/branching` |
+| Every change is traceable | `core-concepts/branching`; task detail in `branching/tracing-history` |
 | The GitHub firmware review | `core-concepts/ai-automations` |
 
 ## Product-page boundaries
