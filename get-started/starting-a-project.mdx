@@ -8,7 +8,7 @@ import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 A project holds one program's engineering model, saved views, and working information.
 
 <VisualPlaceholder kind="Screenshot" title="New project dialog">
-  Project switcher → New project, with Name filled in ("Electric Vehicle"), Start from set to an existing project, and What to import showing Data model, Views, Automations, and Skills all checked. Callouts on Start from and What to import.
+  Project switcher → New project, with Name filled in ("Electric Vehicle"), Start from set to an existing project, and What to import showing Data model, Items, Views, Automations, and Skills all checked. Callouts on Start from and on the Items checkbox.
 </VisualPlaceholder>
 
 Before you create a project, check whether your team already has one. Related work belongs in the same project so its items can connect.
@@ -23,11 +23,15 @@ Open the project switcher and choose **New project**. Enter a **Name**, then cho
 | --- | --- | --- |
 | **Default template** | Your organization's configured data model, saved views, and dashboards | Your organization has an established structure |
 | **Blank project** | An empty model with only the built-in Diagram category | You are defining a new workflow from scratch |
-| An existing project | The parts of that project you select | You are starting a program like one you already run |
+| An existing project | The parts of that project you select, including its items if you choose | You are starting a program like one you already run, or from a design you already have |
 
-When you start from an existing project, **What to import** lets you choose **Data model**, **Views**, **Automations**, and **Skills**. Views depend on the data model, so selecting views also selects the model. Copying configuration does not copy the source project's working history.
+When you start from an existing project, **What to import** lists **Data model**, **Items**, **Views**, **Automations**, and **Skills**. Everything except **Items** starts checked. Views and items depend on the data model, so clearing **Data model** clears them too.
 
-**Requires you to act:** Check the name, the starting point, and the selected parts, then create the project.
+**Items** copies the source project's current items from Base. Each copy is a new item with its own number, carrying the source item's category, field values, formulas, and links to the other copied items. The copy starts its history in the new project: branches, past history, comments, files in file fields, and pins on links stay behind. A source with more than 50,000 items cannot have its items copied, and the dialog says so.
+
+**Requires you to act:** Check the name, the starting point, and the selected parts, then choose **Create**.
+
+The project opens straight away. Copied items arrive in the background, with the percentage copied shown while they do, and copied automations are added once the items are in.
 
 ## Agree the model before adding data
 

@@ -1,40 +1,50 @@
 ---
 title: "Jira"
-description: "Link Jira issues to items in Flow, and let agents read and update Jira with your own account."
+description: "Link Jira issues to items in Flow, and let agents read and update Jira with each person's own account."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Connect Jira so the work tracked there sits next to the items it changes in Flow. Each person connects their own account: agents read with that account's access, and anything they write appears in Jira as that person.
+Connect Jira so the work tracked there sits next to the items it changes in Flow, and agents can see both. Each person connects their own account: agents read with that account's access, and anything they write appears in Jira as that person.
 
 ## Connect your account
 
 <VisualPlaceholder kind="Screenshot" title="Connecting Jira">
-  Settings → Personal → Jira with Connect Atlassian. Inset: the admin Jira page with the site, Linked Projects, and Jira Write-Back. Masked emails.
+  Settings → Personal → Jira showing Your Atlassian account is not connected with Connect Atlassian. Inset: the Administration Jira page with Jira site, Linked Projects listing two project keys, and Jira Write-Back. Masked emails.
 </VisualPlaceholder>
 
 1. Open **Settings → Personal → Jira**.
 2. Select **Connect Atlassian** and authorize your account.
 3. On deployments that use API tokens instead, enter **Email or username** and **API token / PAT**, select **Save credential**, then **Test Connection**.
 
-You only see issues your Jira account can see. Disconnecting removes your personal connection and leaves the workspace configuration in place.
+You only see issues your Jira account can see. Disconnecting removes your personal connection and leaves the workspace configuration in place. External collaborators can connect their own account too, to view issues and link them to shared items they can edit.
+
+If you ask the agent for something in Jira before connecting, the failed step offers **Connect Jira**. Connect, and Flow returns you to the same conversation and the agent carries on with your request. If the step ran with someone else's account, it names the person who needs to connect.
+
+<VisualPlaceholder kind="Screenshot" title="Connecting Jira from a failed step">
+  An agent conversation where a Jira read failed because the person's account is not connected: the step reads Connect your Jira account, with a Connect Jira button under it. Inset: the same step afterwards, reading Connected to Jira and The conversation continued after connecting.
+</VisualPlaceholder>
 
 ## Set up the workspace
 
-An administrator chooses which Jira the workspace uses.
+An Admin with access to all projects chooses which Jira the workspace uses.
 
 1. Open **Settings → Administration → Integrations → Jira** and connect your own account.
 2. If your account can reach more than one site, choose the **Jira site** and select **Save site**.
 3. Under **Linked Projects**, add the project keys agents may work in.
 
-On API-token deployments, the administrator first uses **Configure Jira instance** to set the **Base URL**, **Instance type**, and an initial project key.
+On API-token deployments, the Admin first uses **Configure Jira instance** to set the **Base URL**, **Instance type**, and an initial project key.
+
+To change sites, select **Remove workspace integration**, then choose the new site.
 
 ## Link issues to items
 
-Add a field of type **Jira issue** to the [data model](/core-concepts/the-data-model). In the field, search issues or paste a link. Searches use your own Jira access, so a link someone else added does not give you access to the issue.
+Add a field of type **Jira issue** to the [data model](/core-concepts/the-data-model). In the field, search by key or text, or paste a link. Searches use your own Jira access, so a link someone else added does not give you access to the issue.
 
 ## Let agents change Jira
 
-Turn on **Jira Write-Back** to let agents create issues, edit fields, move issues through workflow transitions, and link issues. Each person's Jira permissions still apply. For custom fields, ask the agent to look up the field before it writes.
+Turn on **Jira Write-Back** to let agents create issues, edit fields, move issues through workflow transitions, link issues, and attach Flow files to issues. Each person's Jira permissions still apply. For custom fields, ask the agent to look up the field before it writes.
 
-Check the returned issue key, and select **View activity** to review what was sent. Reverting a Flow branch does not undo changes in Jira. See [Branching](/core-concepts/branching).
+Agents can read an issue's attachments without write-back.
+
+Check the returned issue key, and select **View activity** to review what was sent. Changes made in Jira are not undone by Flow branches. See [Branching](/core-concepts/branching).

@@ -1,35 +1,40 @@
 ---
 title: "Diagrams"
-description: "Combine drawings and live item cards to explain a system's boundaries, connections, and design intent."
+description: "Draw shapes, schematics, and live item cards that stay tied to the systems graph."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-A diagram mixes shapes and text with live cards for Flow items. Cards show each item's current name and selected fields, so the drawing stays tied to the model while you arrange it however the explanation needs.
+A diagram explains part of your system the way you would sketch it: boundaries, connections, flows, and the reasoning behind them. Shapes and text are free drawing. Item cards are live: each shows an item's current name and the fields you choose, so the picture stays tied to the model while you arrange it however the explanation needs.
 
 ## Build a diagram
 
 <VisualPlaceholder kind="Screenshot" title="A diagram with item cards">
-  A diagram canvas with three item cards (Battery Pack, BMS, Charging System) showing selected fields such as owner and mass, connected by arrows, with the link-choice popover open on a new connector.
+  A diagram canvas with three item cards (Battery Pack, Battery Management System, Charging System) connected by arrows. The Battery Pack card is selected, its card toolbar shows See Details and Fields, and the Fields popover lists Owner and Mass with their row order. A new connector between two cards has the link choice open: Create a link in Flow, Connect via…, Create basic arrow.
 </VisualPlaceholder>
 
 1. Create an item of the **Diagram** type, then open it from the sidebar or choose **Open diagram** from its context menu.
-2. Add shapes and text. Add item cards with **Entity** on the toolbar, or drag items from the sidebar onto the canvas.
-3. Select a card and use **Show fields** to display its values, or **See Details** to open the item.
-4. Connect and position shapes. Use **Auto arrange** to lay out the connected cards, then adjust by hand.
+2. Draw with the toolbar at the bottom of the canvas: **Arrow**, **Text**, **Image**, and the shape picker, which also holds frames, swimlanes, and any [engineering symbols](/diagrams/engineering-symbols) the project offers.
+3. Add item cards with **Entity** on the toolbar, by dragging items from the sidebar onto the canvas, or by double-clicking empty canvas and searching.
+4. Select a card and use **Fields** to choose which values it shows and in what order, or **See Details** to open the item.
+5. Select **Auto arrange** to lay out connected cards, or use the chevron beside it to arrange left to right or top to bottom. Adjust by hand afterward.
 
-Changes save automatically.
+Changes save automatically. The diagram menu at the top left holds Edit, View, **Import**, **Export**, and **Preferences** such as **Show grid** and **Always snap**.
 
 ## Decide which gestures change the model
 
-Some gestures can also change Flow's relationships:
+Most drawing changes only the diagram. A few gestures can also change Flow's relationships:
 
 - **Drawing a connector between two cards** offers **Create a link in Flow**, **Connect via…**, or **Create basic arrow**.
 - **Nesting a card inside another, or moving it out**, asks whether to add, move, or remove the matching link in Flow.
 
-Check both items and the direction before you confirm. Dismissing the prompt keeps the drawing without changing the model.
+Check both items and the direction before you confirm. Dismissing the prompt keeps the drawing without changing the model. Placing an item on a wire with **Allocate entity…** changes the drawing only, never the item's links.
 
 If an item is deleted elsewhere, its card stays on the diagram, marked as deleted. Update the drawing yourself, or use an [architecture view](/diagrams/architecture-views) for a breakdown that follows the model automatically.
+
+## Ask the agent to draw
+
+Ask the agent to draw a diagram from items in the project, or from a schematic, P&ID, or wiring sheet you attach. It can use every shape in the picker, the project's enabled symbol libraries, and the fields you want shown on each card. Where a line on a schematic forks, it draws a junction so each branch reaches the component it runs to. Select **Open diagram** on the preview in the chat to review and edit the result.
 
 ## When you cannot edit
 

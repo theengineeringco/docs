@@ -1,27 +1,29 @@
 ---
 title: "Activity"
-description: "Trace automation runs and connected-tool events from trigger to result."
+description: "Trace automation runs and connected-tool events from trigger to result, and review the findings they raise."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-The Activity Log shows every automation run in the project and the events exchanged with connected tools: what came in, what ran, and what the agent did back in those tools. Use it to find out why something ran, or why it did not.
+The Activity Log shows the work automations do in the background and the events exchanged with connected tools: what came in, what ran, and what the agent did back in those tools. Use it to find out why something ran, or why it did not.
 
 <VisualPlaceholder kind="Screenshot" title="A run's thread">
-  The thread view opened from a run's Thread button: a GitHub pull-request event in, the Firmware PR review run, and the review comment posted back to GitHub, connected in order.
+  The thread view opened from a run's View thread button: a GitHub pull-request event in, the Firmware PR review run, and the review comment posted back to GitHub, connected in order.
 </VisualPlaceholder>
 
 ## Find a run
 
 <VisualPlaceholder kind="Screenshot" title="Activity Log">
-  Settings → AI → Activity Log with the source sidebar (All sources, Automations, GitHub), the search and status filters, and the feed showing runs with status chips such as Completed · Passed and Matched. One row expanded.
+  Settings → AI → Activity Log with the source sidebar (All sources, Automations, GitHub), the Findings and Manage integrations buttons in the header, the search, branch, status, and date filters, and the feed with Source, Event, Status, and When columns. Status chips such as Completed · Passed and Matched; one threaded row expanded.
 </VisualPlaceholder>
 
 1. Open **Settings → AI → Activity Log**, or select **View runs** on an automation to open the log filtered to it.
 2. In the sidebar, choose **Automations** for Flow's own runs or a connected tool. **All sources** shows everything.
 3. Narrow the feed with **Search activity** and the branch, status, and date filters.
 4. Expand a threaded row to see its related events and runs. A thread shows the worst status among its members.
-5. Select a row to open the run's conversation and results. To see a thread as a graph, hover its row and select **Thread**.
+5. Select a row to open the run's conversation and results. To see a thread as a graph, hover its row and select **View thread**.
+
+Messages Flow posts in Slack and automation review comments on GitHub pull requests end with a link to the chat or run that wrote them, so you can trace them back from the tool.
 
 ## Read the status
 
@@ -29,9 +31,11 @@ Runs:
 
 | Status | Meaning |
 | --- | --- |
+| Queued | The run is waiting to start. |
 | Running | The run is in progress. |
 | Completed | The run finished. A check also shows its verdict: Passed, Failed, Warning, or Skipped. |
 | Crashed | The run itself went wrong. Open it for details. |
+| Cancelled | The run was stopped before it finished. |
 
 Events:
 
@@ -41,7 +45,22 @@ Events:
 | Matched | The event matched an automation. Open the resulting run. |
 | Ignored | No automation matched. Hidden by default; choose **Any status** when you are looking for a missing run. |
 | Rejected | Flow refused the event. |
-| Failed | The event errored, or Flow's action in the connected tool failed. |
+| Failed | The event errored, or Flow's action in the connected tool failed. In the status filter, this is **Delivery failed**. |
 | Sent | Flow's action in the connected tool succeeded. |
 
 A completed run is not an accepted result. Check the saved changes in Flow and the result in the connected tool.
+
+## Review findings
+
+Automations can raise findings: an issue they found in the project, such as a contradiction or a value that has drifted, with the evidence, the items involved, and a next step. Suggest-only automations report through findings instead of changing anything.
+
+<VisualPlaceholder kind="Screenshot" title="Findings">
+  The Findings page opened from the Activity Log, with Open selected among Open, Dismissed, and Resolved. Two findings listed, each with a severity badge, its kind, the statement, the evidence, a Next step line, and a Dismiss button. The Add Project watcher automation button in the header.
+</VisualPlaceholder>
+
+1. In the Activity Log, select **Findings**.
+2. Switch between **Open**, **Dismissed**, and **Resolved**.
+3. Read the evidence and next step, then open the items it names.
+4. Select **Dismiss** for a finding that does not need action, or **Reopen** to bring one back.
+
+One issue has one open finding, and a dismissed finding stays dismissed. Admins can select **Add Project watcher automation** to start from a ready-made automation that reviews each branch's changes and raises findings.

@@ -1,11 +1,11 @@
 ---
 title: "Dashboards"
-description: "Summarize the live state of a project with counts, distributions, coverage, and trends."
+description: "See how close a project is to its targets with counts, distributions, coverage, and trends."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Dashboards summarize the live state of a branch: how many items exist, how their values are distributed, how well they connect, and how that has changed over time. They read the current branch only, so they are unavailable while you view a baseline or a review snapshot.
+Dashboards show how close a branch is to what the team intends to build: how many items exist, how their values are distributed, how well they connect, and how that has changed over time. They read the live state of the current branch, so they are unavailable while you view a baseline or a review snapshot.
 
 Editors create and change dashboards; read-only users can view them. External users cannot open dashboards.
 
@@ -15,14 +15,17 @@ Editors create and change dashboards; read-only users can view them. External us
 2. Name it and select **Create dashboard**.
 3. Optionally, pick a saved view in **Select a view** to scope the dashboard to that view's types and filters.
 4. Use **Filter** for conditions that apply to the whole dashboard. Add **Within items** to limit it to chosen items and everything below them.
-5. Select **Add widget**, choose a **Widget type**, configure it, check the preview, and select **Add widget**.
+5. Select **Add widget**, choose a **Widget type**, configure it, and check the preview. Optionally type a name in the box at the top; an unnamed widget is titled by what it shows.
+6. Select **Add widget**.
 
-Filter changes save as you make them.
+Filter changes save as you make them. Drag a widget beside another or into its own row to arrange the dashboard; everyone sees the same layout.
+
+You can also ask the Flow agent to build or edit a dashboard in chat. It works from the same project data and returns a link to the result.
 
 ## Choose a widget
 
 <VisualPlaceholder kind="Screenshot" title="A verification dashboard">
-  A dashboard bound to a verification view: a filter using Within items set to Battery System, a Value block (percent of targets with evidence), a Property summary donut of test status, and a Link coverage widget. One donut segment selected to show its item list.
+  A dashboard bound to a verification view with Within items set to Battery System: a Value block named "Tests with results", a Property summary donut of test status, and a Link coverage widget, two on one row and one below. One donut segment is selected, showing its item list with Open in table.
 </VisualPlaceholder>
 
 | Widget type | Shows |
@@ -32,14 +35,16 @@ Filter changes save as you make them.
 | Link coverage | How many items of one type link to another type in the direction you choose, as a coverage donut or a percentage |
 | AI summary | A generated reading of the dashboard from your prompt. Available when AI is on |
 
-A widget's own **Filter** narrows that widget only. Link coverage counts links, not results: a test case linked to a system does not mean the test passed. Select a chart segment to list the items behind it, and check an AI summary against the widgets it describes before you share it.
+A widget's own **Filter** narrows that widget only. Link coverage counts links, not results: a test case linked to a system does not mean the test passed.
+
+Select a chart segment to list the items behind it. When the dashboard has a saved view, **Open in table** opens those items in that view, keeping its filters. An AI summary shows its last result and when it was generated; select the refresh icon beside its title to update it, and check it against the widgets it describes before you share it.
 
 ## Read historical charts
 
-A property summary can show history. Choose a historical chart (**Line**, **Multi-line**, **Stacked area**, **Bars**, or **Stacked bars**), set the date range and interval, and optionally add milestones to mark targets.
+A property summary can show history. Choose a historical chart (**Line**, **Multi-line**, **Stacked area**, **Bars**, or **Stacked bars**), set the date range and interval, and optionally add **Milestones** to mark dates such as a design review.
 
 <VisualPlaceholder kind="Screenshot" title="A historical chart">
   A Property summary set to a Line chart of test status over 90 days with two milestones marked, and the "Not filtered by this dashboard" notice on the card.
 </VisualPlaceholder>
 
-Historical charts ignore the dashboard's filter and the saved view's filters, and the card says so. A widget filter blocks historical charts; remove it to choose one. **Within items** still applies, using today's hierarchy, so moving or deleting items also changes past buckets. Account for both before you compare a trend with a filtered current count.
+Historical charts ignore the dashboard's filter and the saved view's filters, and the card says so. A widget filter blocks historical charts; remove it to choose one. **Within items** still applies, using today's hierarchy, so moving or deleting items also changes past buckets. Account for both before you compare a trend with a filtered current count. To see what changed and who changed it, use [Tracing history](/branching/tracing-history).

@@ -7,7 +7,7 @@ import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
 SSO signs people in through your identity provider. SCIM lets that provider create and deactivate users and manage groups in Flow.
 
-Both live in **Settings → SSO and Provisioning**, which has three tabs: **SSO Setup**, **SSO Roles**, and **SCIM Provisioning**. Configuring SSO and SCIM needs an Admin with access to all projects. Self-serve **SSO Setup** appears only where your deployment enables it; otherwise, contact Flow. You also need access to your identity provider and your DNS.
+Both live in **Settings → Administration → SSO and Provisioning**, which has three tabs: **SSO Setup**, **SSO Roles**, and **SCIM Provisioning**. Configuring SSO and SCIM needs an Admin with access to all projects. Self-serve **SSO Setup** connects an OIDC provider and appears only where your deployment enables it. Otherwise, or if your identity provider supports only SAML, contact Flow. You also need access to your identity provider and your DNS.
 
 ## Set up SSO
 
@@ -43,7 +43,7 @@ Under **Automatic user provisioning**, choose the role and projects a person get
 2. Set **Role for provisioned users** and **Projects for provisioned users**. Admin is not available as a provisioned role.
 3. Optionally, choose **Groups that grant Member**: Viewers in these SCIM groups become Members.
 4. Select **Generate Token**, name it, and copy the token. Flow shows it only once. Enter it in your provider.
-5. Provision a test user and group. Check the user's role and access, and that the group shows the **SCIM** tag in **Settings → User Groups**.
+5. Provision a test user and group. Check the user's role and access, and that the group shows the **SCIM** tag in **Settings → Administration → User Groups**.
 
 Treat a SCIM token as an administrative credential. To stop a connection, revoke its token; set up a replacement first if provisioning must continue.
 

@@ -1,57 +1,68 @@
 ---
 title: "GitHub"
-description: "Connect a GitHub organization so agents can read your code, review pull requests, and optionally open them."
+description: "Connect a GitHub organization so agents can read the code behind your system, review pull requests against it, and optionally open them."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Connect GitHub so agents can read the code behind your system and review pull requests against what the project in Flow says you intend to build. Reads and writes are separate switches, and both start under your control.
+Connect GitHub so the code behind your system becomes part of the context in Flow. Agents can read and search it, review pull requests against what your project says you intend to build, and, if you allow it, make changes. Reading, writing, and pull request reviews are set separately.
 
 ## Connect an organization
 
-You need administrator access to all projects.
+You need the Admin role with access to all projects. Each workspace connects one GitHub organization.
 
 <VisualPlaceholder kind="Screenshot" title="Connecting GitHub">
-  The GitHub setup wizard at How do you want to connect?, with Standard Cloud Account and GitHub Enterprise Accounts and Customized App.
-</VisualPlaceholder>
-
-<VisualPlaceholder kind="Screenshot" title="GitHub settings">
-  GitHub settings after connecting: the organization, the Repositories list with the Settings for project picker, the Off / On request / Automatic choice, and the Advanced switches. Placeholder organization and repository names.
+  The Connect GitHub page on the Choose app step, with the four setup steps (Choose app, Grant access, Review, AI access) across the top, and How do you want to connect? showing Standard Cloud Account (Recommended) and GitHub Enterprise Accounts and Customized App. Highlight Standard Cloud Account.
 </VisualPlaceholder>
 
 1. Open **Settings → Administration → Integrations → GitHub**.
-2. Under **How do you want to connect?**, choose **Standard Cloud Account** to install the Flow GitHub App, or **GitHub Enterprise Accounts and Customized App** to create your own App. Select **Continue**.
-3. In GitHub, choose the organization and pick the repositories Flow can see. Every project in the workspace can use them. If the organization uses single sign-on, sign in to it on GitHub first.
-4. Return to Flow, check the connection details, and select **Connect organization**. If you are not an organization owner, GitHub asks an owner to approve; once they do, select **Enter installation ID**.
-5. Under **AI access**, choose what agents may do, then select **Finish setup**.
+2. Under **How do you want to connect?**, choose **Standard Cloud Account** to install the Flow GitHub App, or **GitHub Enterprise Accounts and Customized App** to create your own App. Select **Continue**, or, for your own App, choose the **GitHub service** and select **Create GitHub App**.
+3. In the GitHub tab that opens, choose the organization and pick the repositories Flow can see. Every project in the workspace can use them. If the organization uses single sign-on, sign in to it on GitHub first.
+4. Back in Flow, check the connection details and select **Connect organization**. If you are not an organization owner, GitHub asks an owner to approve; once they do, select **Enter installation ID**.
+5. Under **AI access**, choose what agents may do, then select **Finish setup**. Setup may also offer **Review PR** and **Auto-review** for the current project's repositories.
 
 | Switch | What it allows |
 | --- | --- |
-| **Browse organization repositories** | Agents read connected repositories from any project in the workspace |
+| **Browse organization repositories** | Agents read and search connected repositories from any project in the workspace, and read pull requests |
 | **Writeback** | Agents create branches, update files, and open pull requests |
 
-Change these later under **Advanced** on the GitHub settings page. With **Writeback** on, **Workflow triggers** lets agents start GitHub Actions workflows that have a `workflow_dispatch` trigger.
+Change these later under **Advanced** on the GitHub settings page. You can also ask the agent to set GitHub up; see [Integrations list](/integrations/integrations-list).
 
 ## Review pull requests
 
 Pull request reviews are set per Flow project and run through an [automation](/ai-automations/automations).
 
+<VisualPlaceholder kind="Screenshot" title="GitHub settings">
+  The GitHub settings page after connecting: the Organization row with a Connected status, the Repositories section with Settings for set to a project and the Search repositories box, and one repository's PR review dropdown open on Off, On request, and Automatic with their descriptions. Advanced is collapsed and reads "Browse organization repositories on · Writeback off". Placeholder organization and repository names.
+</VisualPlaceholder>
+
 1. Create an automation with the trigger **GitHub: pull request is opened**. Use **GitHub: pull request is merged** to run after a merge instead.
 2. On the GitHub settings page, choose the project in **Settings for**.
-3. Under **Repositories**, set each repository's review mode.
+3. Under **Repositories**, choose each repository's PR review setting.
 
-| Mode | Behavior |
+| Setting | Behavior |
 | --- | --- |
 | **Off** | No pull request access, unless **Browse organization repositories** is on |
-| **On request** | Flow reviews a pull request only when someone mentions `@flow` |
+| **On request** | Flow can read pull requests but reviews only when someone mentions `@flow` |
 | **Automatic** | Flow reviews every pull request |
 
-The merged trigger runs on every merge in a connected repository, without needing **Automatic** or an `@flow` mention. Comments Flow writes itself never start another run.
+The merged trigger runs on every merge in a repository enabled for the project, without needing **Automatic** or an `@flow` mention. Flow's own comments never start another run. Each review comment ends with **Sent by** and a link to the run that wrote it, so the team can trace a comment back to its work in Flow.
 
-After changing repository access in GitHub, use **Refresh repositories**. Check deliveries and runs in [Activity](/ai-automations/activity).
+After changing repository access in GitHub, select the refresh button beside **Settings for**. Check deliveries and runs in [Activity](/ai-automations/activity).
+
+## Let agents start workflows
+
+With **Writeback** on, the **Workflow triggers** section lists each repository's GitHub Actions workflows. Every workflow starts off; turn on the ones agents may start. Only a workflow with a `workflow_dispatch` trigger can be turned on. An agent can then start it on a branch with its inputs and read the run's status, job annotations, and log.
+
+<VisualPlaceholder kind="Screenshot" title="Workflow triggers">
+  The Workflow triggers section on the GitHub settings page: one repository expanded with three workflows, one switched on, one off, and one disabled with "No workflow_dispatch trigger". Placeholder repository and workflow names.
+</VisualPlaceholder>
+
+A GitHub App connected before this feature needs the **Actions** (read and write) permission. The settings page explains how to grant it.
 
 ## Limits
 
 - Repository browsing covers every project in the workspace. Per-project review settings do not restrict it.
-- Reverting a Flow branch does not undo changes made in GitHub. See [Branching](/core-concepts/branching).
-- **Disconnect GitHub** stops repository reads, writes, and pull request automation across all projects. Project review settings are kept and restored when you reconnect.
+- Code search covers each repository's default branch.
+- Changes agents make in GitHub are not undone by Flow branches. See [Branching](/core-concepts/branching).
+- To connect a different organization, disconnect the current one first. **Disconnect** stops repository reads, writes, and pull request automation across all projects. Project review settings are kept and restored when you reconnect.

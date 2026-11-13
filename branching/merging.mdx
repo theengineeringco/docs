@@ -10,10 +10,14 @@ Merging is how a proposal becomes part of the agreed design. The parent takes th
 ## Ask for review
 
 1. On the branch's **Review** page, check **Changed Items**. It lists every difference from the parent.
-2. When the work is ready, select **Ready for review**. The branch owner or an Admin can do this.
+2. When the work is ready, select **Ready for review**. The branch owner or an Admin can do this. To move it back to draft, select the status tag under the title on **Overview** and choose **Draft**.
 3. Add reviewers if the branch needs them. Required reviewers and reviewer groups can be added by an Admin, the branch owner, or an existing required reviewer. For a group, one member's approval counts for the group.
 
 Reviewers open **Submit review** and choose **Approve** or **Request changes**, with a comment. Each reviewer has one current review; submitting again replaces it.
+
+Reviewers can mark each changed item as viewed. If the item changes again, the mark clears for every reviewer and the item shows **Changed since viewed**, so you know what to read again.
+
+**Overview** holds the discussion. The comment box sits at the top, and the activity below it lists the newest first.
 
 An edit made after approval dismisses the existing approvals, so reviewers see the final state. The dismissed approvals stay on the review timeline.
 
@@ -37,7 +41,7 @@ The merge also:
 - Moves the branch's comments to the parent, labelled with the branch they came from, and carries over item subscriptions.
 - Moves any open sub-branches onto the parent, so their work continues against the merged result.
 - Closes the branch. It can no longer be edited, and links to it open the parent.
-- Appears in the workspace [audit log](/administration/audit-log).
+- Appears in the workspace [audit log](/administration/audit-log) under **Merge history**.
 
 If the parent has moved on since the branch was last updated, [update from the parent](/branching/branching#update-from-the-parent) first and settle any conflicts.
 
@@ -49,7 +53,13 @@ If your organization's review policy allows automatic merging, choose **Merge Wh
 
 ### Force a merge
 
-When a merge is blocked and your organization's review policy lets you bypass it, Flow asks **Force bypass review and merge?** and requires a reason. The merge record keeps the reason and what was blocking at the time.
+When a merge is blocked and your organization's review policy lets you bypass it, choose **Force merge…** in **Merge status**, opened from **Merge** at the top of the review. Flow asks **Force bypass review and merge?** and requires a reason. The merge record keeps the reason and what was blocking at the time.
+
+### Merge from an AI chat
+
+Ask the agent whether a branch is ready, and the chat shows the same merge status as the review page. A branch that is ready can be merged from there; one whose merge would move sub-branches is merged from its review.
+
+The agent does not merge, delete, or rebase branches on its own. When you ask it to, the chat lists each branch it would act on and says which it cannot and why. Untick any branch, then select **Merge**, **Delete**, or **Rebase**, or **Cancel**. The action runs with your permissions.
 
 ## Split a branch
 

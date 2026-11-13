@@ -5,13 +5,13 @@ description: "Name a team once, then use it for reviews, branch editing, and sha
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-A user group is a named set of people, such as a review board or a team. Assign the group wherever Flow asks for reviewers, editors, or share recipients, and membership changes apply everywhere at once. Groups do not change anyone's role or project access.
+A user group is a named set of people, such as a review board or the team that owns a subsystem. Name the group wherever Flow asks for reviewers, editors, or share recipients, and membership changes apply everywhere at once. Groups do not change anyone's role or project access.
 
 Creating and editing groups needs an Admin with access to all projects.
 
 ## Create a group
 
-1. Open **Settings → User Groups** and select **Create group**.
+1. Open **Settings → Administration → User Groups** and select **Create group**.
 2. Enter a **Name** and add **Members**. Leave **SSO role (optional)** empty to manage members by hand.
 3. Select **Create group**.
 
@@ -21,11 +21,11 @@ Expand a group to add or remove members. Open **Group actions** to **Rename...**
 
 - **Branch review:** select **Add reviewer** on the branch and choose the group.
 - **Item reviews:** name the group in an item's reviewer field to bring that team into reviews of changes to the item.
-- **Stage gates:** in **Settings → Data Model**, open the stage field and add the group to a stage's entering or leaving gate.
+- **Stage gates:** in **Settings → Project → Data Model**, open the stage field and add the group to a stage's entering or leaving gate.
 
 A group counts as one reviewer requirement: one member's approval satisfies it. Other required reviewers and merge conditions still apply. The branch author cannot approve their own change, so keep at least one other eligible member in the group.
 
-Whether reviewers can remove an assigned group from a review is set by **Allow reviewer removal** in **Settings → Reviews**.
+Whether reviewers can remove an assigned group from a review is set by **Allow reviewer removal** in **Settings → Administration → Reviews**.
 
 ## Restrict who can edit a branch
 
@@ -38,7 +38,7 @@ As the branch owner or an Admin, open the branch's actions, choose **Editor grou
 ## Share with a group
 
 - **Items:** in the item's **Share** dialog, choose a group as the recipient. See [Sharing](/collaboration/sharing).
-- **Personal views:** share a view from **Settings → Views → My views** with a group. Recipients can use the view but not change it, and still see only data they can access. See [Sharing views](/collaboration/sharing-views).
+- **Personal views:** share a view from **Settings → Project → Views → My views** with a group. Recipients can use the view but not change it, and still see only data they can access. See [Sharing views](/collaboration/sharing-views).
 
 Before removing members or deleting a group, check where it is used: reviews, branch editing, and shares all follow its membership.
 

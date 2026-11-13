@@ -1,24 +1,26 @@
 ---
 title: "Slack"
-description: "Mention Flow in Slack threads, control which channels agents read and post to, and choose which projects Slack can reach."
+description: "Bring Flow into the Slack threads where your team discusses the system, and control which channels and people agents read and message."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Connect Slack so your team can ask Flow about the system from the threads where the work is discussed. Connecting the workspace, reading channels, posting messages, and project access are separate settings.
+Connect Slack so decisions made in conversation can draw on the system in Flow, and so agents can report back where the team already talks. Connecting the workspace, reading channels, posting, and project access are separate settings.
 
 ## Connect Slack
 
-An administrator sets up the connection.
+An Admin sets up the connection. You can also ask the agent to do it; see [Integrations list](/integrations/integrations-list).
 
-<VisualPlaceholder kind="Screenshot" title="Slack settings">
-  Slack settings: the Flow's Slack app / Your own Slack app choice, Channel history access, write-back with Allowed channels, and Projects. Masked tokens and generic channel names.
+<VisualPlaceholder kind="Screenshot" title="Connecting Slack">
+  Settings → Administration → Integrations → Slack before connecting, with How to connect showing Flow's Slack app (Recommended) and its Add to Slack button, and Your own Slack app collapsed below. Highlight Add to Slack.
 </VisualPlaceholder>
 
 1. Open **Settings → Administration → Integrations → Slack**.
 2. Choose **Flow's Slack app** and select **Add to Slack**. Slack asks a workspace admin to approve Flow's permissions, then returns you to Flow.
-3. To use your own app instead, choose **Your own Slack app**: create an app from Flow's manifest, install it to your workspace, then paste its **Bot User OAuth Token** and **Signing secret**.
-4. Under **Projects**, turn on each Flow project that should be available in Slack.
+3. To use your own app instead, choose **Your own Slack app**: create an app from Flow's manifest, install it to your workspace, paste its **Bot User OAuth Token** and **Signing secret**, and select **Connect**.
+4. Under **Projects**, turn on each Flow project people can reach from Slack.
+
+When Flow adds a capability that needs a new Slack permission, the settings page asks you to **Reinstall**. For your own app, add what it names in Slack's app settings, then reinstall.
 
 ## Use Flow from Slack
 
@@ -26,20 +28,29 @@ An administrator sets up the connection.
   The /flow settings modal in Slack with a project and branch selected and the option for each new chat to fork a fresh branch.
 </VisualPlaceholder>
 
-1. Run `/flow` in Slack. The first time, follow the link to connect your Slack account to Flow and select **Confirm account link**.
+1. Run `/flow` in Slack. The first time, follow the link to Flow and select **Confirm account link**.
 2. Run `/flow` again to pick the project and branch your chats run on, and whether each new Slack chat forks a fresh branch. These settings are yours alone.
-3. Mention @Flow in a thread and keep follow-ups in the same thread.
+3. Mention @Flow in a thread. Flow follows threads it was mentioned in or started, so later replies reach it without another mention. It answers only when a reply is meant for it.
 
-Linking your account does not grant you access to any project you cannot already open in Flow. Unlink it from the Slack settings page with **Unlink my Slack account**.
+Linking your account does not give you access to any project you cannot already open in Flow. Unlink it from the Slack settings page with **Unlink my Slack account**.
+
+Every message an agent posts ends with a link to the chat or automation run that wrote it. Replies in that thread go back to the same chat or run, under the name of the person who wrote them, so the conversation in Slack and the work in Flow stay one record.
 
 ## Control reading and posting
 
+<VisualPlaceholder kind="Screenshot" title="Slack settings">
+  Slack settings after connecting: Enable Slack write-back on with two Allowed channels, Channel history access with one channel whose Attachments switch is on, and the Projects list with one project Connected. Masked tokens and generic channel names.
+</VisualPlaceholder>
+
 | Setting | What it controls |
 | --- | --- |
-| **Channel history access** | Channels that agents and automations in a project may browse. Mentioning @Flow in a thread always lets the agent read that thread |
-| **Enable Slack write-back** | Whether the agent may send messages as the Slack bot |
-| **Allowed channels** | The only channels the agent posts to and the people it may message directly |
+| **Enable Slack write-back** | Whether agents may send messages as the Slack bot |
+| **Allowed channels** | The only channels agents post to and the people they may message directly. Invite Flow to a channel before it can post there |
+| **Channel history access** | Channels that agents and automations in this project may read. Each project needs its own grants |
+| **Attachments** | Per channel, whether an agent may open a file it picks from that channel's messages |
 
-Invite Flow to a channel before it can post there. Private channels and attachments need extra Slack permissions; for your own app, add the missing scopes and reinstall it.
+Mentioning @Flow in a thread always lets the agent read that thread, even when its channel is not listed. Agents message people directly only if they are on the allowlist. To be added, ask the agent to message you and confirm the card it shows; an Admin can add other people.
+
+Private channels need the `groups:history` permission and attachments need `files:read`. For your own app, add any missing scopes and reinstall it.
 
 Select **View activity** to check deliveries and actions. Personal Slack notifications are set in **Settings → Personal → Notifications** and do not give agents permission to post.

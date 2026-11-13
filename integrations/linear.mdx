@@ -1,16 +1,16 @@
 ---
 title: "Linear"
-description: "Connect Linear teams so agents can read issues, cycles, and workflow states, and optionally create and update issues."
+description: "Connect Linear teams so agents can read issues, comments, cycles, and workflow states, and optionally create and update issues."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Connect Linear so the work your team tracks there is part of the context agents use in Flow. One shared API key gives access to the teams you connect. An administrator with access to all projects manages the connection.
+Connect Linear so the work your team tracks there is part of the context agents use in Flow. One shared API key gives access to the teams you connect. An Admin with access to all projects manages the connection, or asks the agent to; see [Integrations list](/integrations/integrations-list).
 
 ## Connect teams
 
 <VisualPlaceholder kind="Screenshot" title="Connecting Linear">
-  Linear settings with a masked API Key, Find teams, a Team ID, and the Linear Write-Back section. Synthetic team names.
+  Linear settings with a masked API Key, Find teams with two teams ticked and listed as "Name (KEY)", and the Linear Write-Back section. Synthetic team names.
 </VisualPlaceholder>
 
 1. In Linear, open **Security & access → Personal API keys** and create a key. Select **Read** and limit **Team access** to the teams Flow should reach. For write-back, also select **Create issues** and **Create comments**.
@@ -22,7 +22,7 @@ Add or remove teams later under **Teams**.
 
 ## Use Linear context
 
-Add a field of type **Linear issue** to the [data model](/core-concepts/the-data-model) and use its search to link an issue. You can also ask the agent to search issues, cycles, and workflow states. Linked issues do not update fields in Flow on their own.
+Add a field of type **Linear issue** to the [data model](/core-concepts/the-data-model) and use its search to link an issue. You can also ask the agent to search issues, cycles, and workflow states, or to read an issue's comment thread. Linked issues do not update fields in Flow on their own.
 
 ## Let agents change Linear
 
@@ -30,8 +30,8 @@ Turn on **Linear Write-Back** to let agents create and edit issues and change th
 
 Name the team when you ask for a new issue; otherwise the agent uses the first connected team. To file the issue in a Linear project, name the project too. It must belong to that team.
 
-Select **View activity** to review changes. Reverting a Flow branch does not undo them. See [Branching](/core-concepts/branching).
+Select **View activity** to review changes. Changes made in Linear are not undone by Flow branches. See [Branching](/core-concepts/branching).
 
 ## Per-project approval
 
-Some deployments require approval for each Flow project. There, an administrator turns on **This project** and accepts the **ITAR Warning** for every project that should use Linear. Adding or removing a team revokes every project approval, which must then be granted again. Turning a project off stops its reads and writes.
+Some deployments require approval for each Flow project. There, an Admin turns on **This project** and accepts the **ITAR Warning** for every project that should use Linear. Adding or removing a team revokes every project approval, which must then be granted again. Turning a project off stops its reads and writes.

@@ -5,9 +5,11 @@ description: "Reference for Flow's formula helpers: signatures, results, missing
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Formulas read fields, follow links through the systems graph, and calculate values. This reference covers Flow's **24 custom names**: 23 functions plus `mean`, an alias of `avg`. The last section lists the standard Python and math functions also available.
+Formulas keep derived values current: they read fields, follow links through the systems graph, and calculate results such as margins, totals, and verification status. This reference covers Flow's **24 custom names**: 23 functions plus `mean`, an alias of `avg`. The last section lists the standard Python and math functions also available.
 
 ## Write a formula
+
+Press `=` in a field to start a formula, or, when AI is on for your workspace, `/` to describe one in plain language and let the AI write it. In the formula builder, **Generate formula with AI** on the Templates tab does the same.
 
 A formula is one Python expression. Lists, comprehensions, generators, lambdas, and conditional expressions work; imports, assignments, and function definitions do not. The result must fit the destination field's type.
 
@@ -21,6 +23,8 @@ A formula is one Python expression. Lists, comprehensions, generators, lambdas, 
 - Tag and stage values read as their display names. A missing field, including a misspelled one, can return `None`.
 
 Aggregators take **one iterable**: `avg([2, 4])`, not `avg(2, 4)`. A `*` in a signature means the options after it must be named. Replace the type and field names in these examples with your project's own.
+
+If a save is refused because the data model is being edited, the message names the person, agent chat, or automation making the change and when it started. Save again once that change finishes.
 
 `None` means missing; `0`, `False`, and `""` are values. The null-skipping helpers do not convert numeric text or suppress errors, and `sum(None)` still fails because `None` is not a collection. Booleans count as 1 and 0 in arithmetic unless you exclude them.
 
@@ -217,7 +221,7 @@ Parses both inputs and returns `(b - a).days`. October 1 to October 6 returns `5
 
 `get_cell(ref, cell)` or `get_cell(ref, sheet_name, cell)`
 
-Reads one cell from an uploaded Excel file or a live Google Sheet. The reference is an attachment field, a Google Sheet field, a sheet URL, or a Drive ID. An omitted or `None` sheet name reads the first sheet.
+Reads one cell from an uploaded Excel, CSV, or TSV file, or from a live Google Sheet. The reference is an attachment field, a Google Sheet field, a sheet URL, or a Drive ID. An omitted or `None` sheet name reads the first sheet; CSV and TSV files have no sheets, so leave the name out.
 
 ```python
 get_cell(self.Attachment, "Mass budget", "B2")
@@ -230,9 +234,12 @@ Use a single cell such as `B2`. Ranges are rejected. Empty cells return `None`; 
 | Source | Behavior |
 | --- | --- |
 | Uploaded Excel | `.xls`, `.xlsb`, `.xlsm`, or `.xlsx`, up to 8 MiB. Reads saved values without running formulas or macros. Dates return as ISO text. |
+| Uploaded CSV or TSV | Up to 8 MiB. The first line is row 1. Values are read as written: plain decimals become numbers, and text such as `007` or a date stays text. |
 | Google Sheets | Read through the workspace's Google connection, within the administrator's Drive restrictions. Results refresh every five minutes by default. Dates return as day serial numbers. Branches do not freeze live sheet contents. |
 
 An invalid reference, unknown sheet, multi-cell range, denied read, or Excel error cell raises an error. If Google is briefly unavailable, the last good value stays while the read retries.
+
+You do not have to type the reference. Open an attached spreadsheet in the file preview, select a cell, and choose **Actions** (or right-click the cell): **Set an item's field to a formula reading this cell...** writes the formula into a field you pick, and **Copy formula referencing this cell** copies it. The field updates when a new version of the file is attached.
 
 ## Standard functions
 

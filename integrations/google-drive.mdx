@@ -1,0 +1,43 @@
+---
+title: "Google Drive"
+description: "Connect Google Drive so agents can browse a Drive folder, read Google Docs and Sheets, and optionally update Sheets."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Connect Google Drive so the specifications, analyses, and spreadsheets your team keeps there become context in Flow. Agents browse Drive and read Docs and Sheets with each person's own Google account, and formulas can read live Sheet values. You can also ask the agent to set Google Drive up; see [Integrations list](/integrations/integrations-list).
+
+## Connect
+
+<VisualPlaceholder kind="Screenshot" title="Google Drive settings">
+  Settings → Administration → Integrations → Google Drive after setup: the workspace integration row and Personal Google account connected with Disconnect, then Google Drive scope set to one shared folder, Google Docs permissions showing Read only, and Google Sheets permissions open on Read only and Read and write.
+</VisualPlaceholder>
+
+1. An Admin with access to all projects opens **Settings → Administration → Integrations → Google Drive**, selects **Connect Google**, and signs in. The first connection also sets up the workspace. If the Admin's account is already connected, the button reads **Set up workspace integration**.
+2. Everyone else opens the same page and selects **Connect Google** to connect their own account. Agents act as that person and see only what their Google account can open.
+
+**Disconnect** removes only your own connection. **Remove workspace integration** turns Google Drive off for the whole workspace.
+
+## Choose what agents can reach
+
+An Admin with access to all projects controls these settings.
+
+| Setting | What it controls |
+| --- | --- |
+| **Google Drive scope** | The folder agents browse, and the only folder that formulas and Sheets edits can use. Open it, pick a folder in the tree, and select **Mount this folder**, or select **Use all folders** |
+| **Google Docs permissions** | Always **Read only** |
+| **Google Sheets permissions** | **Read only**, or **Read and write** to let agents update cells inside the Drive scope |
+
+Unless your deployment limits it, agents can read any Doc or Sheet the person's account can open, including links shared with them; the descriptions on the page say which applies. After turning on **Read and write**, people may need to select **Reconnect for Sheets** to grant write access.
+
+## Use Drive in your project
+
+- Add a **Google Doc** or **Google Sheet** field to the [data model](/core-concepts/the-data-model) to link a file to an item.
+- Read a Sheet cell in a formula with [`get_cell`](/formulas/custom-functions).
+- Ask the agent to find or summarize files in the Drive scope.
+
+Changes agents make to a Sheet are not undone by Flow branches. See [Branching](/core-concepts/branching). Select **View activity** to review what agents read and wrote.
+
+## Per-project approval
+
+Some deployments require approval for each Flow project. There, the page shows **This project**: a project Admin turns it on after acknowledging the deployment's restrictions. Changing the workspace configuration asks projects to approve again, and approvals and revocations appear in the [audit log](/administration/audit-log).

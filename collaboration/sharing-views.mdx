@@ -10,23 +10,31 @@ A saved view gives everyone the same way to look at the same records: the system
 ## Save a view
 
 <VisualPlaceholder kind="Screenshot" title="Saving a view">
-  View structure open beside the view selector, and the Save as new view dialog with a Name ("Battery verification") and View type set to Shared view.
+  The View structure card open beside the view selector with its Save as new view button, and the Save as new view dialog with Name set to "Battery verification" and View type set to Shared view.
 </VisualPlaceholder>
 
 1. Set up the view: its structure, relationships, filters, displayed fields, and mode.
 2. Open **View structure** beside the view selector and choose **Save as new view**.
 3. Enter a **Name** and choose a **View type**: **Private view** or **Shared view**.
 
-New views are private by default. Only admins can create shared views.
+New views are private by default. Only admins can create shared views. To start a private view from scratch, open **Settings → Views** and choose **New private view** under **My views**.
 
 Changing filters or structure does not change the saved view. In **View structure**, **Reset to view defaults** discards your changes, and **Update view defaults** saves them into the view. Anyone can update their own private view; only admins can update a shared one.
 
+Private views that someone has shared with you appear under **Shared with me** in the view selector and in **Settings → Views**. They are read-only for you.
+
+Admins can also create and edit shared views through the [Customer API](/api/reference) and hosted MCP, so scripts and agents can set up the same perspectives your team uses.
+
 ## Copy a link
+
+To link to a view as it stands, hover over it in the view selector, open its menu, and choose **Copy view link**.
+
+To link to an exact destination:
 
 1. Open **Share**.
 2. Pick one item, one branch, and one saved view.
 3. Choose **Copy link**.
 
-The link opens that destination with the recipient's existing access; it grants nothing new. A private view stays personal, so use a shared view when others should see the same configuration. If someone cannot open the link, check their project membership, the branch, and their permissions.
+Either link opens with the recipient's existing access; it grants nothing new. A private view stays personal, so use a shared view when others should see the same configuration. If someone cannot open the link, check their project membership, the branch, and their permissions.
 
 To give someone access they do not already have, follow [Sharing](/collaboration/sharing).

@@ -10,7 +10,7 @@ Bring an existing drawing into a Flow diagram, or take a diagram out as XML you 
 ## Import
 
 <VisualPlaceholder kind="Screenshot" title="Import diagram dialog">
-  The Import dialog with a .drawio file selected, the accepted formats listed, and the Replace current diagram / Add to current diagram choice.
+  The Import diagram dialog with a .vsdx file dropped into the Paste XML or drop a file area, the accepted formats listed under it, and When importing set to Add to current diagram rather than Replace current diagram.
 </VisualPlaceholder>
 
 1. Open a diagram you can edit.
@@ -21,22 +21,20 @@ Bring an existing drawing into a Flow diagram, or take a diagram out as XML you 
 
 **Replace current diagram** removes every existing shape. Export the current diagram as XML first if you want to keep a copy.
 
-Only the first page of a file is imported, and shapes with no equivalent become rectangles. Check labels, connectors, nesting, colors, and images after import. Importing a drawing does not create links between Flow items.
+Only the first page of a file is imported, and shapes with no equivalent become rectangles. Common fluid power and P&ID stencils in draw.io files become [engineering symbols](/diagrams/engineering-symbols). Visio import is experimental: it brings in shapes, text, and connectors, so check labels, connectors, nesting, colors, and images closely afterward. Importing a drawing does not create links between Flow items.
 
 ## Export
 
 Choose **Export** from the diagram menu, then a format:
 
 <VisualPlaceholder kind="Screenshot" title="Export menu">
-  A diagram's menu with Export open, showing SVG, PNG, and XML.
+  A diagram's menu with Export open, showing SVG, PNG, XML, and the Transparent option.
 </VisualPlaceholder>
 
 - **SVG**: a scalable image.
 - **PNG**: a raster image.
 - **XML**: the diagram's shapes, item cards, nesting, and arrows, for importing into another diagram. To check a handoff, import the file into a separate diagram.
 
-To export only part of the drawing as an image, select those shapes and choose **Export as** from the context menu.
+Turn on **Transparent** to export an image without a background. To export or copy only part of the drawing, select those shapes and right-click for **Export as** or **Copy as**.
 
-Images use current item names and the fields each card shows. They do not update afterward, and they leave out live markers such as deleted-item indicators and relationship badges.
-
-Diagram XML is not a backup of the project's items, permissions, branches, or history.
+Images use current item names and the fields each card shows. They do not update afterward. Diagram XML is not a backup of the project's items, permissions, branches, or history.

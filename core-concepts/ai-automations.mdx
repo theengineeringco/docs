@@ -11,7 +11,7 @@ The same connections that let an engineer understand the system let the agent un
 
 ## Context comes from the graph
 
-A question such as "What needs attention if battery capacity rises to 120 kWh?" depends on the recorded items, the systems they belong to, the relationships between them, and the latest evidence.
+A question such as "What needs attention if this target changes?" depends on the recorded items, the systems they belong to, the relationships between them, and the latest evidence.
 
 <VisualPlaceholder kind="Diagram" title="The agent between the graph and your tools">
   The systems graph in the centre. On the left, the agent reads items, links, and owners from it. On the right, connected tools (GitHub, Slack, Jira) send events in and receive reviews and messages back. An engineer icon at the end marks where the owner decides.
@@ -40,14 +40,16 @@ These build on one another.
 | Capability | What it does | Example |
 | --- | --- | --- |
 | Chat with the agent | Works through one question or task with you | Find the systems that have no verification evidence yet |
-| A skill | Saves how a recurring task should be done | Write requirements in the team's "The system shall…" form |
+| A skill | Saves how a recurring task should be done | Write test procedures in the team's standard format |
 | An automation | Runs configured work in the background when a trigger fires | Review every firmware pull request against the system it changes |
 
 [Skills](/ai-automations/skills) covers creating and scoping skills. [Automations](/ai-automations/automations) covers setting them up, and [Activity](/ai-automations/activity) where to see what they did.
 
 ## The agent proposes, the owner decides
 
-Treat the agent's answer as the start of an inspection. Follow its references to the items. Review proposed changes in their branch, where they can be compared with the parent before anyone accepts them. Check whether the agent covered the scope you asked for and whether it hit incomplete information.
+Treat the agent's answer as the start of an inspection. Follow its references to the items. Review proposed changes in their branch, where they can be compared with the parent before anyone accepts them, and where every change stays [traceable](/branching/tracing-history). Check whether the agent covered the scope you asked for and whether it hit incomplete information.
+
+Each chat has a **Mode** that sets how much the agent asks first. **Ask first**, the default, proposes a plan and waits for approval before changing anything. **Auto-accept** makes changes without waiting for plan approval but still asks before admin changes. Project admins can also choose **Super user**, which approves admin changes too in the turns they start. An admin can turn off **Allow Auto-accept in chats**, so that every chat asks first. [AI, automations, and trust](/ai-automations/ai-automations-and-trust) covers approving plans and tracing what the agent did.
 
 The agent acts within your permissions; [Automations](/api/automations/overview) describes whose permissions a saved automation uses. Scope tasks in connected tools with care; [branches do not reverse](/core-concepts/branching#keep-the-context-visible) what happens there.
 

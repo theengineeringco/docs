@@ -15,7 +15,7 @@ Flow keeps all of them connected in a systems graph. The graph answers the quest
 
 ## Start from an owned system
 
-Flow is built around ownership. Every item has an accountable person, and that person is the engineer closest to the design. In an electric vehicle, the battery systems engineer owns the battery system: its pack, its management system, their interfaces to the rest of the vehicle, and the evidence that they work.
+Flow is built around ownership. Every item has an accountable person, and that person is the engineer closest to the design. The owner of a subsystem owns its parts, its interfaces to the rest of the product, and the evidence that it works.
 
 The owner still works with specialists and reviewers; ownership gives that collaboration a center, and keeps each part of the model current while the design changes.
 
@@ -29,7 +29,7 @@ Flow represents information as **items** connected by **relationships**. A syste
   Vehicle breakdown drawn as a tree (Vehicle → Battery System → Battery Pack, BMS; Vehicle → Body & Aerodynamics) in grey. Over it, blue cross-links the tree cannot express: Range depends on both Battery Usable Capacity and Drag Coefficient; an interface links Battery Pack and BMS; a test result links back to the drag target.
 </VisualPlaceholder>
 
-Some relationships express decomposition: a vehicle contains a battery system, which contains a pack and its management electronics.
+Some relationships express decomposition: a product contains systems, which contain subsystems and parts.
 
 Other relationships cross that hierarchy. A vehicle's range depends on both battery capacity and aerodynamic drag, which belong to different systems and different owners. An interface ties two systems together. A folder tree cannot hold both kinds of connection. A graph can.
 
@@ -46,13 +46,15 @@ Each gets a view, and every view reads the same items:
 - **Reader** presents the content as a document people can read and comment on.
 - A **diagram** draws selected structures and connections.
 
-Saved views can start from different parts of the graph, such as systems, functions, verification, or risks. Nothing is copied between them. Editing a value in one view changes the item every view shows.
+Saved views can start from different parts of the graph, such as systems, functions, verification, or risks. Nothing is copied between them. Editing a value in one view changes the item every view shows, and a link to an item opens it in context: focused in the main view, revealed in the navigator, and open in its details.
+
+Views can also read across branches. A table can show a field as another branch holds it, beside the current branch's value, so comparing a proposal with its parent does not mean leaving the branch.
 
 A filtered view is a perspective, not a permission. Access is configured separately.
 
 ## Follow the consequences of change
 
-Suppose battery capacity rises. The question is not the new number. It is everything connected to it: range improves, vehicle mass rises, and charge time may no longer meet its target.
+Suppose a target changes. The question is not the new number. It is everything connected to it: the items that depend on it, the budgets it feeds, and the evidence that no longer shows what it did.
 
 The graph turns that question into a set of records to inspect and people to talk to. Its answers are only as good as its links. A missing relationship is a gap in understanding, for engineers and agents alike, and a recorded one still needs engineering judgment.
 

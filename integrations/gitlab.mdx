@@ -1,39 +1,53 @@
 ---
 title: "GitLab"
-description: "Connect GitLab projects so agents can read repositories and review merge requests."
+description: "Connect GitLab projects so agents can read and search your code, review merge requests, and optionally open them."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Connect GitLab so agents can read repositories and review merge requests against what your project in Flow intends. Automations run when a merge request opens, reopens, receives a code push, or merges.
+Connect GitLab so the code behind your system becomes part of the context in Flow. Agents can browse and search repositories, review merge requests against what your project intends, and, if you allow it, make changes. Automations run when a merge request opens, reopens, receives a code push, or merges.
 
 ## Connect GitLab
 
-Open **Settings → Administration → Integrations → GitLab**. Under **Connect GitLab**, use the option your deployment offers.
+Open **Settings → Administration → Integrations → GitLab**. Under **Connect GitLab**, use the option your deployment offers. You can also ask the agent to set GitLab up; see [Integrations list](/integrations/integrations-list).
 
 <VisualPlaceholder kind="Screenshot" title="Connecting GitLab">
-  The Connect GitLab panel with Continue to GitLab and Set up with a token.
+  The Connect GitLab panel with Continue to GitLab and Set up with a token, and Advanced server settings collapsed below.
 </VisualPlaceholder>
+
+### Connect with your GitLab.com account
+
+1. Select **Continue to GitLab**, then **Authorize in GitLab**.
+2. Back in Flow, select the projects to connect and save. You need Maintainer or Owner access to each.
+3. Flow adds a webhook to each project. Each project row shows **Webhook configured** and whether the first event has arrived.
+
+Use **Add projects** to connect more later, or **Remove project** on a row to stop automation for it and remove Flow's webhook.
+
+<VisualPlaceholder kind="Screenshot" title="Connected GitLab projects">
+  The GitLab settings page after connecting with a GitLab.com account: the account row marked Authorized, Add projects, and two project rows, one showing Webhook configured and First event received, the other First event not received yet with Refresh webhook. Placeholder project names.
+</VisualPlaceholder>
+
+### Connect with a token
+
+Token setup works with GitLab.com and approved self-managed hosts.
+
+1. For a self-managed host, open **Advanced server settings**, select **Change**, enter the **GitLab API Base URL**, and select **Save base URL**. Contact Flow to approve the host first.
+2. In GitLab, create a group or project access token with the `api` scope and at least the **Developer** role.
+3. In Flow, enter the **Access Token** and a **Webhook Secret Token** of your choice. Select **Test Connection**, then **Save**.
+4. In each GitLab project, add a webhook with Flow's **Webhook URL** and the same secret. Enable **Merge request events** and **Comments**.
 
 <VisualPlaceholder kind="Screenshot" title="GitLab token and webhook">
   Flow's token form beside a GitLab project's webhook settings with the URL, a masked secret, and Merge request events and Comments checked.
 </VisualPlaceholder>
 
-**Continue to GitLab** authorizes your GitLab.com account. Select projects and Flow configures their webhooks. You need Maintainer or Owner access to those projects.
-
-**Set up with a token** works with GitLab.com and approved self-managed hosts:
-
-1. For a self-managed host, enter its **GitLab API Base URL** and select **Save base URL**. Contact Flow to approve the host first.
-2. In GitLab, create a group or project access token with the `api` scope and at least the **Developer** role.
-3. In Flow, enter the **Access Token** and a **Webhook Secret Token** of your choice. Select **Test Connection**, then **Save**.
-4. In each GitLab project, add a webhook with Flow's **Webhook URL** and the same secret. Enable **Merge request events** and **Comments**.
-
 ## Choose what agents can do
 
 | Switch | What it allows |
 | --- | --- |
-| **GitLab Repo Browsing** | Agents browse connected repositories across the workspace, within existing Flow permissions |
+| **GitLab Repo Browsing** | Agents browse and search connected repositories across the workspace, within existing Flow permissions |
 | **GitLab Writeback** | Agents create branches, commit files, and open merge requests. Delete and merge actions are never exposed |
+
+With **GitLab Writeback** on, **Pipeline triggers** lists the CI pipelines agents may start from the current project. Select **Add pipeline**, then set the **GitLab project**, **Branch or tag**, **Allowed variables**, and who in the project may start it. With no pipelines listed, agents start none.
 
 ## Review merge requests
 
@@ -50,9 +64,10 @@ When both are set, both must match. A path-scoped automation does not run if Flo
 
 A new comment that mentions `@flow` reruns the merge request's automations. Edited comments, system notes, and Flow's own comments do not.
 
-Select **View activity** to check deliveries and runs. If nothing runs, check the webhook URL, secret, enabled events, token access, and the automation's filters.
+Select **View activity** to check deliveries and runs. If nothing runs, check the webhook, its secret and enabled events, the connection's access, and the automation's filters.
 
 ## Limits
 
-- Reverting a Flow branch does not undo commits or comments in GitLab. See [Branching](/core-concepts/branching).
-- Disconnecting stops repository access and automation across the workspace and clears the saved credentials. Your browsing and write-back settings, automations, and history remain. Remove any token webhooks in GitLab yourself.
+- Changes agents make in GitLab are not undone by Flow branches. See [Branching](/core-concepts/branching).
+- Disconnect GitLab before changing the server or how you connect.
+- **Disconnect** stops repository access and automation across the workspace and clears the saved credentials, connected projects, and pipeline permissions. Your server, browsing and write-back settings, automations, and history remain. Flow removes the webhooks it created; remove token-setup webhooks in GitLab yourself.

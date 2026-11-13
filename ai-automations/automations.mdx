@@ -5,41 +5,43 @@ description: "Run saved instructions or scripts in the background, on a schedule
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Automations run saved work in the background so the project keeps checking the gap between what you intend to build and where it stands. An automation runs on a schedule, when a branch opens for review, when a connected tool sends an event, or when someone starts it.
+Automations are agents that work in the background. They watch the project and its connected tools and act on saved instructions, so the gap between what you intend to build and where it stands keeps closing without anyone starting each check. An automation runs on a schedule, when a branch opens for review, when the project changes, when a connected tool sends an event, or when someone starts it.
 
 <VisualPlaceholder kind="Screenshot" title="Automations list">
-  Settings → AI → Automations with an Automations section ("Firmware PR review", "Weekly verification gaps") and a Personal Automations section with one entry. One row's options menu open on Run automation.
+  Settings → AI → Automations with an Automations section ("Firmware PR review", "Weekly verification gaps") and a Personal Automations section with one entry. Each row shows its trigger, run count, and last run status. One row's options menu open on Run automation.
 </VisualPlaceholder>
 
 ## Create an automation
 
 <VisualPlaceholder kind="Screenshot" title="An automation's settings">
-  The "Firmware PR review" automation: name, the runs-as line, Triggers with a GitHub pull-request trigger and Add trigger, and Instructions on the Agent tab. Callouts on Run now and View runs.
+  The "Firmware PR review" automation: the name, the status line reading Enabled and who it runs as, Triggers with a GitHub pull-request trigger, Instructions on the Agent tab, and the Advanced section collapsed. Callouts on Run now and View runs.
 </VisualPlaceholder>
 
 1. Open **Settings → AI → Automations**.
-2. Select **New automation** under **Automations**, shared with the project, or **Personal Automations**, which only you see.
+2. Select **New automation** under **Automations**, shared with the project, or under **Personal Automations**, which only you see.
 3. Name the automation.
-4. Under **Triggers**, select **Add trigger** and choose when it runs. Leave it without a trigger to run it only by hand.
-5. Under **Instructions**, state the inputs, checks, permitted changes, and expected result. Reference a [skill](/ai-automations/skills) where it helps.
+4. Under **Triggers**, select **Add trigger** and choose when it runs. Add more than one if you need to; the automation runs when any of them fires, and each run records which one started it. Leave it without a trigger to run it only by hand.
+5. Under **Instructions**, state the inputs, checks, permitted changes, and expected result. Reference a [skill](/ai-automations/skills) where it helps. Select **Ask AI** in the toolbar to work the instructions out with the agent; its proposal appears in the field for you to accept or discard.
 6. Check who it runs as on the status line under the name, then select **Create**.
 
 Only admins create and edit project automations. Anyone who can edit the project can create personal automations. Saved automations use the project's organizational instructions, never Personal Skills or My FLOW.md.
 
+You can also ask the agent in chat to create or change an automation. Admins can do this for project automations without super user mode, unless the automation has **Allow admin tools** on.
+
 ## Choose a trigger
 
 <VisualPlaceholder kind="Screenshot" title="Add trigger dialog">
-  The Add trigger dialog with its groups visible: Recurring (On a schedule), Flow (Branch is reviewed, When the project changes), and Integrations (GitHub, GitLab, Slack events).
+  The Add trigger dialog with Search triggers at the top and its groups visible: Recurring (On a schedule), Flow (Branch is reviewed, Document import finishes, Run from branch or item menus, When the project changes), and Integrations (GitHub, GitLab, Bitbucket, Slack, and API events). "GitHub: pull request is merged" selected, with its description.
 </VisualPlaceholder>
 
 | Trigger | Runs when |
 | --- | --- |
 | **On a schedule** | At the times you set, in your time zone, on the branches you pick |
 | **Branch is reviewed** | A branch opens for review |
-| **When the project changes** | Flow checks every five minutes and starts one run on each branch with new edits or comments |
+| **When the project changes** | Flow checks every five minutes and starts one run on each branch with new edits or comments. A run's own changes do not start it again |
 | **Run from branch or item menus** | Someone starts it from the menus of the branches or item types you choose |
 | **Document import finishes** | A document import into the project completes |
-| Connected tools | Slack, GitHub, GitLab, Bitbucket, or Onshape sends a matching event, such as a pull request opening |
+| Connected tools | Slack, GitHub, GitLab, Bitbucket, or Onshape sends a matching event, such as a pull request opening or merging |
 | **API: custom webhook is called** or **API: request sent to the endpoint** | Another system calls Flow. See the [automation API overview](/api/automations/overview) |
 
 With the organization's updated variant view, **Branch is reviewed** reads **Change request is reviewed**.
@@ -52,23 +54,28 @@ A run keeps the permissions of the person it runs as.
 - Manual runs, API calls, imports, and Slack mentions run as the person or caller that starts them.
 - Personal automations always run as you.
 
-If the last person to save an automation can no longer edit the project, its scheduled and event runs pause until an admin saves it again.
+If the last person to save an automation can no longer edit the project, its scheduled and event runs pause and its branch reviews run as the reviewer, until an admin saves it again.
 
 **Allow admin tools**, under **Advanced**, is off by default. Only an admin can turn it on. It keeps the data-model, saved-view, and template tools available to runs, and a run still does only what its runner can do.
 
 ## Control what runs change
 
-- **Suggest only** makes runs change nothing. They raise findings and comment on the affected items with a suggested fix.
+- **Suggest only**, in the trigger dialog, makes runs change nothing. They raise findings and comment on the affected items with a suggested fix. It applies to every trigger of the automation.
 - **Runs write to**, under **Advanced**, chooses where changes land: one branch for the automation, a new branch every run, a branch you choose, or where it is launched.
 - On a branch review, **Agent mode** defaults to **Plan before executing**: reads proceed, and changes wait for approval on the review page. **Auto-accept changes** makes changes without waiting.
+- **Notify**, under **Advanced**, is on by default. A run you did not start tells the person the automation runs as only when it fails, changes an item, or raises, updates, or resolves a finding.
 
-Define the allowed actions before you save. Scheduled and event runs have no reviewer waiting to approve them.
+Runs can also notify chosen project members. Recipients manage these under **Messages from automations** in their [notification settings](/collaboration/subscriptions-notifications).
+
+Define the allowed actions before you save. Scheduled and event runs have no reviewer waiting to approve them. To pause an automation without deleting it, set its status to **Disabled**; it then ignores its triggers and cannot be started by hand.
 
 ## Run and inspect
 
-1. Select **Run now** on the automation's page, or **Run automation** from its options in the list. An automation limited to branch or item menus runs from those menus. Viewers cannot run automations.
+1. Select **Run now** on the automation's page, or **Run automation** from its options in the list. The run opens in the AI panel. An automation limited to branch or item menus runs from those menus. Viewers cannot run automations.
 2. Select **View runs** to open [Activity](/ai-automations/activity) filtered to this automation.
 3. Inspect each run's conversation and its saved changes.
+
+On a branch's review page, each automation has its own row with its status. Re-run one from its row, or select **Re-run all**.
 
 ## Scripts
 

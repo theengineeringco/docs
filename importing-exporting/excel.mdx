@@ -1,26 +1,26 @@
 ---
 title: "Excel"
-description: "Import worksheet rows into Flow, or export a view as an Excel workbook."
+description: "Import worksheet rows as any kind of item, or export a view as an Excel workbook with links back to Flow."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Excel uses the same mapping and identity steps as [CSV](/importing-exporting/csv). Import accepts `.xlsx` and `.xls`; export produces `.xlsx`.
+Excel uses the same mapping and identity steps as [CSV](/importing-exporting/csv), so a workbook of interfaces, parts, tests, or requirements comes in the same way. Import accepts `.xlsx` and `.xls`; export produces `.xlsx`.
 
 ## Import
 
 <VisualPlaceholder kind="Screenshot" title="Choosing an Excel sheet">
-  The upload step for a workbook with three sheets and the Sheet picker open.
+  The Upload step of the spreadsheet import for a workbook with three sheets, the Sheet picker open, and Columns found and Rows found shown for the selected sheet.
 </VisualPlaceholder>
 
 1. Put the table in one sheet with the column headers in the first row.
 2. Choose **More actions → Import from → CSV/Excel**, or **Import here** on a sidebar item, and upload the workbook.
-3. If the workbook has several sheets, choose the **Sheet** to import. Import other sheets separately.
+3. If the workbook has several sheets, choose the **Sheet** to import. The picker starts on the first sheet with data. Import other sheets separately.
 4. Choose the item type, or split rows by a type column, then map fields and relationships.
 5. Set **Identity column** and **Match items by** so rows update existing items. Without them, every row creates a new item.
 6. Choose the **Destination**, fix the blockers in **Review**, and select **Import to new branch**.
 
-Flow imports cell values. Formatting, charts, and spreadsheet formulas do not carry over, so check the values in the review.
+Flow imports cell values. Formatting, charts, and spreadsheet formulas do not carry over, so check the values in the review. Verification columns are matched to Pass, Fail, or Inconclusive, which you can adjust on the mapping step.
 
 ## Export
 
@@ -29,8 +29,10 @@ Flow imports cell values. Formatting, charts, and spreadsheet formulas do not ca
 3. Turn on **Include collapsed rows** to include hidden descendants. Filters still limit what is exported.
 4. Select **Export**, and keep the tab open while **Exporting…** shows.
 
+In the workbook, the identity, `id`, URL, and linked-item cells are hyperlinks that open the item in Flow. A linked-item cell that names several items stays plain text.
+
 Excel exports run in your browser and are limited to 100,000 items. Narrow the scope or export CSV for larger sets.
 
 ## Edit and re-import
 
-Keep the identity column and link references intact while you edit. Test a small re-import before the full workbook. Changes in the workbook reach Flow only when you import it.
+Keep the identity column and link references intact while you edit. Test a small re-import before the full workbook. Changes in the workbook reach Flow only when you import it, and they land on a new branch for review.

@@ -126,6 +126,7 @@
             "group": "Diagrams",
             "pages": [
               "diagrams/diagrams",
+              "diagrams/engineering-symbols",
               "diagrams/architecture-views",
               "diagrams/importing-exporting-diagrams"
             ]
@@ -162,8 +163,10 @@
               "integrations/github",
               "integrations/gitlab",
               "integrations/slack",
+              "integrations/google-drive",
               "integrations/jira",
-              "integrations/linear"
+              "integrations/linear",
+              "integrations/confluence"
             ]
           },
           {

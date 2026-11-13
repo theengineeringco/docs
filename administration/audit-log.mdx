@@ -5,7 +5,7 @@ description: "See who changed a project's configuration or workspace access, and
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-The audit log records changes to how a project is set up and who can use the workspace. Edits to items are tracked separately, in each item's history.
+The audit log records changes to how a project is set up and who can use the workspace, whether a person or an agent made them. Edits to items are tracked separately, in each item's history and on its branch; see [Branching](/core-concepts/branching).
 
 <VisualPlaceholder kind="Screenshot" title="Audit log">
   The Audit Log with the scope picker, the type filter, When / Who / Action / Change columns including one AI agent entry, a row's Details popover, and the Revert button.
@@ -15,14 +15,14 @@ The audit log requires the Admin role.
 
 ## Find a change
 
-1. Open **Settings → Audit Log**.
+1. Open **Settings → Administration → Audit Log**.
 2. If you have access to all projects, choose **This project** or **Workspace users**. Other Admins see the project log only.
 3. Search by summary, actor email, or name, or filter project entries by type.
 4. Read the entry's **When**, **Who**, **Action**, and **Change** columns. Select **Details** to see the recorded values. Scroll to load older entries.
 
-The project log covers project settings, the data model, views, templates, automations, Flow.md, skills, and merge history. Changes made by an agent show as **AI agent**. **Workspace users** records user access and role changes, review requirements, and some integration changes.
+The project log covers project settings, the data model, views, templates, automations, Flow.md, skills, and merge history: each merged change request appears as **Change request merged**. Changes made by an agent show as **AI agent**. **Workspace users** records people joining and leaving, role and project access changes, review requirements, and Google Drive project approvals and revocations.
 
-Changes to your personal skills, automations, My FLOW.md, and private views appear only in your own log, at **Settings → Personal Log**.
+Changes to your personal skills, automations, My FLOW.md, and private views appear only in your own log, at **Settings → Personal → Personal Log**. It works the same way, including **Revert**.
 
 ## Revert a change
 
@@ -30,4 +30,4 @@ Changes to your personal skills, automations, My FLOW.md, and private views appe
 2. Select **Revert** and confirm.
 3. Check the affected settings and the new entry that records the revert.
 
-Reverting adds a new entry; the original stays in the log. When **Revert** is unavailable, hover over it to see why. Roles and access are changed on **Settings → Users**, and merges are reverted from change history, not here.
+Reverting adds a new entry; the original stays in the log. When **Revert** is unavailable, hover over it to see why. Roles and access are changed on **Settings → Administration → Users**, and merges are reverted from change history, not here.

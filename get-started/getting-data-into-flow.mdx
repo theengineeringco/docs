@@ -13,6 +13,7 @@ Most programs already have their engineering information somewhere: spreadsheets
 | --- | --- | --- |
 | A few records | Create and edit items directly | Category, fields, owner, links |
 | A spreadsheet | **Import from → CSV/Excel** | Column mapping, matching, relationships, validation |
+| Another Flow project | **New project** from that project, with **Items** checked | What came across and what stayed behind; see [Starting a project](/get-started/starting-a-project) |
 | A document, deck, or image | Ask the agent to extract it | Each candidate against its source, and its mapping to your model |
 | A connected tool | That integration's workflow | Access scope, and whether it reads, imports, or writes |
 | Your own scripts or AI clients | The [Customer API](/api/examples/batch-writes) or [Flow MCP](/api/mcp/overview) | Authentication, branch, and permissions |
@@ -24,19 +25,19 @@ Most programs already have their engineering information somewhere: spreadsheets
 ## Import a spreadsheet
 
 <VisualPlaceholder kind="Screenshot" title="Spreadsheet import: map columns">
-  The CSV/Excel import mapping step for a parts spreadsheet: columns mapped to Name, Description, Mass (kg), Owner, and Parent. Match items by set to Name, a validation message for one duplicate row, and the confirm button. Callouts on Match items by and the validation message.
+  The CSV/Excel import mapping step for a parts spreadsheet, with the stepper showing Upload, Item type, the category's mapping step, Destination, and Review. Columns mapped to Name, Description, Mass (kg), Owner, and Parent, and Match items by set to Source ID. Callouts on Match items by and on the stepper.
 </VisualPlaceholder>
 
 1. Open the project and branch, then a view of the records you are importing.
-2. Choose **More actions → Import from → CSV/Excel**.
-3. Select the file. For Excel, Flow reads the first worksheet, so put the data there.
-4. Map columns to categories, fields, and relationships: names, descriptions, values and units, owners, and the parent each row belongs under.
-5. Choose how rows match existing items with **Match items by**, so rows update records that already exist instead of duplicating them.
-6. Review the validation and the proposed changes.
+2. Choose **More actions → Import from → CSV/Excel** and upload the file. If a workbook has several sheets, choose the one to import under **Sheet**.
+3. Under **Item type**, choose whether every row becomes one category or a column decides each row's category.
+4. For each category, map columns to fields and relationships: names, descriptions, values and units, owners, and the parent each row belongs under. Set **Match items by** so rows update items that already exist instead of duplicating them.
+5. Under **Destination**, choose where items without a parent in the file go: **Project root**, **Link to an item** to put them under an item you pick, or **File links only** to write only the file's own link columns.
+6. Under **Review**, check the validation and the proposed changes.
 
 A relationship column must refer to the related item consistently. If a value matches more than one item, or the same source row appears twice with different values, fix it before you continue.
 
-**Requires you to act:** Resolve blocking validation issues and confirm the import. Flow writes the import into a new branch, so you can inspect it before it reaches shared work.
+**Requires you to act:** Resolve blocking validation issues, then choose **Import to new branch**. The import lands in a branch of its own, so you can inspect it before it reaches shared work.
 
 Other formats, including ReqIF, SysML, Word, and PDF, are covered under [Importing and exporting](/importing-exporting/csv).
 
@@ -51,6 +52,8 @@ Extraction and creation are separate steps. Check each candidate against its sou
 ## Use connected tools deliberately
 
 An integration can let Flow read information without creating a matching Flow record. Other integration actions create or update records in Flow or in the connected tool, where Flow's branches [do not reach](/core-concepts/branching#keep-the-context-visible). Check what a connection does before you depend on it. [Integrations](/integrations/integrations-list) lists what each one supports.
+
+You can also ask the agent to connect, change, or disconnect an integration. It shows the same connection form or sign-in on a card, and proposes changes such as write-back for you to confirm with your own permissions. Credentials go into the card, never into the conversation.
 
 ## Check what arrived
 

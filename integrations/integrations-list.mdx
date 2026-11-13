@@ -1,30 +1,34 @@
 ---
 title: "Integrations list"
-description: "The external tools Flow connects to, and what agents can read or change in each."
+description: "How Flow pulls context from the tools your team already uses, and what agents can read or change in each."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-Integrations pull context from the tools your team already uses, so people and agents see what you intend to build and how close you are in one place. Open **Settings → Administration → Integrations** to see the ones available on your deployment. What an agent can do also depends on administrator settings, the connected account, and that tool's own permissions.
+Integrations are how Flow pulls and manages context from the places work already happens: code, tickets, chat, documents, CAD, and test data. That context sits beside your systems in Flow, so people and agents can see what you intend to build and how close you are. The same connections are how agents reach those tools to act.
+
+## See what is connected
+
+Open **Settings → Administration → Integrations**. The list shows only the integrations your deployment offers, and **Search integrations** filters it. Each row shows its status: **Connected**, **Not connected**, or, where each person connects their own account, **Your account: not connected**.
 
 <VisualPlaceholder kind="Screenshot" title="Integrations settings">
-  Settings → Administration → Integrations listing GitHub, GitLab, Slack, Jira, Linear, and a Custom MCP entry, with each integration's connection status.
+  Settings → Administration → Integrations with "git" typed in Search integrations, showing GitHub as Connected and GitLab with an Enable button. Below the search, a second capture of the unfiltered list with Custom MCP first, Slack Connected, and Jira reading Your account: not connected. Highlight the Jira status.
 </VisualPlaceholder>
 
-| Integration | What it does |
+| Integration | What agents can do |
 | --- | --- |
-| [GitHub](/integrations/github) | Read repositories and review pull requests; optionally create branches, update files, and open pull requests |
-| [GitLab](/integrations/gitlab) | Read repositories and review merge requests; optionally create branches, commit files, and open merge requests |
-| Bitbucket | Review pull requests with automations |
+| [GitHub](/integrations/github) | Read and search repositories and review pull requests; optionally create branches, update files, open pull requests, and start allowed workflows |
+| [GitLab](/integrations/gitlab) | Read and search repositories and review merge requests; optionally create branches, commit files, open merge requests, and start allowed pipelines |
+| Bitbucket | Review pull requests with automations. Each person connects their own Bitbucket account |
 | Cursor | Launch Cursor's coding agent to implement code changes and open pull requests |
-| [Jira](/integrations/jira) | Read and link issues with each person's own account; optionally create, edit, transition, and link issues |
-| [Linear](/integrations/linear) | Read issues, cycles, and workflow states for connected teams; optionally create and update issues |
+| [Jira](/integrations/jira) | Read, search, and link issues with each person's own account; optionally create, edit, transition, and link issues |
+| [Linear](/integrations/linear) | Read issues, comments, cycles, and workflow states for connected teams; optionally create and update issues |
 | Asana | Read tasks and sections; optionally create or update tasks |
-| [Slack](/integrations/slack) | Mention Flow in threads and share files; optionally let agents post to allowed channels |
-| Google Drive | Read files, Google Docs, and Google Sheets from a connected folder; optionally write to Sheets |
+| [Slack](/integrations/slack) | Answer in threads, read allowed channels, and optionally post to allowed channels and people |
+| [Google Drive](/integrations/google-drive) | Browse a Drive folder and read Google Docs and Sheets; optionally update Sheets |
 | Microsoft SharePoint | Read SharePoint and OneDrive files, Word documents, and Excel workbooks |
 | AoDocs | Search libraries and read documents |
-| Confluence | Search and read wiki pages |
+| [Confluence](/integrations/confluence) | Search and read wiki pages; optionally create and update pages |
 | Notion | Read pages and documents |
 | Onshape | Sync CAD data and trigger automations when models change |
 | Altium | Read PCB projects, schematics, and BOMs from Altium 365, read-only |
@@ -33,10 +37,26 @@ Integrations pull context from the tools your team already uses, so people and a
 | Relyence | Read FMEA subsystems and functions |
 | Qase | Search test projects and read verification results |
 
+## Set up from the agent
+
+You can also ask the agent to connect, change, or disconnect an integration, for example "Connect Slack and let the Battery System project use it."
+
+1. The agent shows a card with the integration's own sign-in or connection form. Credentials go into the card and never pass through the conversation.
+2. For changes such as turning on write-back or choosing projects and channels, the agent proposes each change as a row. Untick anything you don't want and select **Apply**.
+3. The changes run with your own permissions, so workspace-wide changes need an Admin.
+
+<VisualPlaceholder kind="Screenshot" title="Setting up Slack from the agent">
+  An agent conversation after "Connect Slack": a Slack setup card with two proposed rows (allow the Battery System project, allow posting to #battery-team), each with a checkbox, and the Apply and Cancel buttons. Highlight Apply.
+</VisualPlaceholder>
+
 ## Connect your own tools
 
-**Custom MCP** connects an MCP server you run to Flow's AI. An administrator with access to all projects adds the server under **Settings → Administration → Integrations → Custom MCP**, chooses its **Allowed tools**, and turns on **Enabled**. New connections start disabled.
+**Custom MCP** connects an MCP server you run to Flow's AI. An Admin with access to all projects adds the server under **Settings → Administration → Integrations → Custom MCP**, chooses its **Allowed tools**, and turns on **Enabled**. New connections start disabled.
 
 To reach Flow from your own code or AI clients, use the [customer API](/api/quickstart) or [Flow MCP](/api/mcp/overview). Both act with the connected user's permissions.
 
-Before turning on writes, check the connected account with a narrow read. Changes made in an external tool happen immediately and are not undone by Flow branches. Review them in [Activity](/ai-automations/activity).
+## Limits
+
+- What an agent can do depends on the deployment, administrator settings, the connected account, and that tool's own permissions.
+- Writes to an external tool happen immediately. Flow branches record changes in Flow, not in other tools; see [Branching](/core-concepts/branching).
+- Check a new connection with a narrow read before turning on writes, and review what agents sent in [Activity](/ai-automations/activity).

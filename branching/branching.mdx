@@ -49,9 +49,13 @@ A conflict is the same information changed in incompatible ways on both sides, s
 
 Updating changes only your branch. Your own changes keep their authors and times. Where you choose **Keep parent**, the parent's value is written to your branch as a change by you, so the choice is in the record. The parent changes when your branch is reviewed and merged.
 
+You can also ask the agent to update a branch. It does not run the update itself. Without conflicts, the chat shows what the update brings in, and you select **Update** or **Cancel**. With conflicts, it shows each one with a suggested version and the reason; change any choice, then select **Apply**. For several branches at once, **Update all** updates the ones without conflicts, and you apply each branch with conflicts on its own. The update runs with your permissions.
+
 ### Undo an update
 
-Each update is listed in **Parent update history**, in the branch's actions menu and in **Change history**. To undo one, open it and choose **Create revert request**. Flow puts the undo in a branch for review.
+Each update is listed in **Parent update history**, in the branch's actions menu and in **Change history**, with who ran it, when, and the items it changed. Select an update to compare the branch before and after it. To undo one, choose **Create revert request**. Flow puts the undo in a branch for review, and your branch changes only when that merges.
+
+Only updates recorded since this history was introduced are listed. An update that changed too many items to record is listed without details and cannot be reverted.
 
 ## Move work to another parent
 
