@@ -17,11 +17,15 @@ Most programs already have their engineering information somewhere: spreadsheets
 | A connected tool | That integration's workflow | Access scope, and whether it reads, imports, or writes |
 | Your own scripts or AI clients | The [Customer API](/api/examples/batch-writes) or [Flow MCP](/api/mcp/overview) | Authentication, branch, and permissions |
 
-<VisualPlaceholder kind="Diagram" title="Routes into Flow: import, extraction, connected tools, and the API" />
+<VisualPlaceholder kind="Diagram" title="Routes into Flow">
+  Five sources on the left (a spreadsheet, a PDF specification, a slide deck, a connected tool such as Jira or GitHub, and a script calling the API) each with an arrow into one Flow project on the right, labelled by route: Import, Extract with the agent, Integration, API/MCP. A small branch icon on the import arrow shows imports land in a new branch.
+</VisualPlaceholder>
 
 ## Import a spreadsheet
 
-<VisualPlaceholder kind="Screenshot" title="CSV/Excel import mapping" />
+<VisualPlaceholder kind="Screenshot" title="Spreadsheet import: map columns">
+  The CSV/Excel import mapping step for a parts spreadsheet: columns mapped to Name, Description, Mass (kg), Owner, and Parent. Match items by set to Name, a validation message for one duplicate row, and the confirm button. Callouts on Match items by and the validation message.
+</VisualPlaceholder>
 
 1. Open the project and branch, then a view of the records you are importing.
 2. Choose **More actions → Import from → CSV/Excel**.

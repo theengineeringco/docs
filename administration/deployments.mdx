@@ -22,7 +22,9 @@ Take settings questions to a workspace Admin. Take missing capabilities or infra
 
 Flow installs into any Kubernetes cluster from a Helm chart, including AWS EKS, Azure AKS, and bare-metal clusters. Operators supply PostgreSQL, object storage, an OIDC identity provider, ingress and TLS, and the AI services the deployment uses. Follow the installation and operations guide for your deployment when making changes.
 
-<VisualPlaceholder kind="Diagram" title="Hosted vs customer-managed Flow, labelling app, database, object storage, identity provider, AI services, and Admin vs operator responsibilities" />
+<VisualPlaceholder kind="Diagram" title="Hosted and customer-managed Flow">
+  Two side-by-side boxes. Hosted: Flow runs the app, database, object storage, and AI services; the customer's Admin manages users and SSO. Customer-managed: the same components in the customer's Kubernetes cluster, the operator owning PostgreSQL, object storage, OIDC, ingress, and AI services, and the Admin owning in-app settings.
+</VisualPlaceholder>
 
 A customer-managed deployment can require a Flow license key. When it does, Flow blocks access while the key is missing, invalid, or expired, until the operator installs a valid one.
 

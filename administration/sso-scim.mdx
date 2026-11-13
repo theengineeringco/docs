@@ -11,7 +11,9 @@ Both live in **Settings → SSO and Provisioning**, which has three tabs: **SSO 
 
 ## Set up SSO
 
-<VisualPlaceholder kind="Screenshot" title="SSO Setup connection card with DNS TXT records, Check DNS verification and Activate SSO" />
+<VisualPlaceholder kind="Screenshot" title="SSO setup">
+  SSO Setup with a connection card showing the DNS TXT record, Check DNS verification, and Activate SSO. Secret hidden; example.com domains.
+</VisualPlaceholder>
 
 1. In **SSO Setup**, copy the redirect URI and register it in your provider's OIDC application.
 2. Enter a **Button label**, the **OIDC issuer URL**, **Client ID**, **Client secret**, and **Allowed email domains**. Use the provider's issuer value, not its authorization or token endpoint.
@@ -25,13 +27,17 @@ Both live in **Settings → SSO and Provisioning**, which has three tabs: **SSO 
 
 On **SSO Roles**, map a role from your provider, or every user from a provider, to a [user group](/administration/user-groups). At each sign-in, Flow adds the user to groups whose mapping they match and removes them from the rest. If sign-ins do not land in the groups you expect, expand **What your IdP is sending** to see the claims Flow received.
 
-<VisualPlaceholder kind="Screenshot" title="SSO Roles with a mapping and the &quot;What your IdP is sending&quot; section expanded" />
+<VisualPlaceholder kind="Screenshot" title="SSO role mapping">
+  SSO Roles with one role mapped to a user group and What your IdP is sending expanded to show synthetic claims.
+</VisualPlaceholder>
 
 Under **Automatic user provisioning**, choose the role and projects a person gets the first time they sign in through a provider. When it is off, people need an invitation first. Email and password sign-ins always need an invitation.
 
 ## Set up SCIM
 
-<VisualPlaceholder kind="Screenshot" title="SCIM Provisioning page with SCIM URL, Role/Projects for provisioned users and SCIM Tokens" />
+<VisualPlaceholder kind="Screenshot" title="SCIM provisioning">
+  SCIM Provisioning with the SCIM URL, Role and Projects for provisioned users, Groups that grant Member, and SCIM Tokens with Generate Token. No real token.
+</VisualPlaceholder>
 
 1. On **SCIM Provisioning**, copy the **SCIM URL** into your provider.
 2. Set **Role for provisioned users** and **Projects for provisioned users**. Admin is not available as a provisioned role.

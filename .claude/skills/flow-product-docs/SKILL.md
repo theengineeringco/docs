@@ -81,10 +81,13 @@ On top of `AGENTS.md`'s content boundaries:
 - No presenter or colleague names from demos. Use roles.
 - No customer-specific vocabulary from demos; re-express the idea generically or with the reference project.
 - Mark every visual a page needs with the `VisualPlaceholder` component from
-  `/snippets/visual-placeholder.jsx` (`kind="Screenshot"` or `kind="Diagram"`, and a
-  reader-facing `title`), placed right after the paragraph it illustrates. Keep capture
-  instructions in `references/shot-list.md`, one row per placeholder, never on the
-  page. No `noindex`, `<Note>` placeholders, or author notes. When a real image lands,
+  `/snippets/visual-placeholder.jsx`: `kind="Screenshot"` or `kind="Diagram"`, a short
+  `title`, and a one- to three-sentence body that says exactly what to capture or draw.
+  Name the screen and its state, the example data on it, and what to highlight; for
+  diagrams, the nodes, the connections, and what is emphasized. "New project dialog" is
+  too vague; "New project with Start from set to an existing project and all four What
+  to import options checked" is right. Place it right after the paragraph it
+  illustrates, and mirror it as one row in `references/shot-list.md`. No `noindex`, `<Note>` placeholders, or author notes. When a real image lands,
   replace the component and remove its row.
 - Visuals follow the `flow-brand` skill in `theengineeringco/branch-demo`
   (`references/product-media.md` and `references/backgrounds.md`): real product pixels

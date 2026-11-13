@@ -5,86 +5,86 @@ app (`master` UI, the seeded Electric Vehicle demo) and frame them per the `flow
 skill's product-media guidance in branch-demo. Replace the placeholder with the image
 and remove the row. Do not use AI-generated screenshots.
 
-| Page | Shot | Notes |
+| Page | Visual | What it shows |
 | --- | --- | --- |
-| get-started/what-is-flow | Diagram: Intent beside evidence: a target, its latest result, and the gap between them | Diagram, not UI |
-| get-started/what-is-flow | Several structures connected in one model | Systems, interfaces, targets, and evidence in a tree or diagram; owners visible |
-| get-started/starting-a-project | New project dialog | Annotate Start from and What to import (human step) |
-| get-started/requirements-systems-tests | One connected thread | System, its target, evidence, three results |
-| get-started/getting-data-into-flow | Diagram: Routes into Flow: import, extraction, connected tools, and the API | Diagram, not UI |
-| get-started/getting-data-into-flow | CSV/Excel import mapping | Annotate Match items by, validation, confirm (human step) |
-| get-started/creating-a-branch | New branch dialog | Show both labels or note the variant-view flag |
-| get-started/creating-a-branch | Impact analysis tab | Battery capacity trade study result |
-| core-concepts/the-systems-graph | Diagram: Decomposition and cross-cutting relationships in one graph | Diagram, not UI |
-| core-concepts/the-systems-graph | One graph, four views | Table, tree, Reader, diagram of the same items |
-| core-concepts/the-data-model | Diagram: categories, fields, and relationships | A few categories as nodes with typed relationship arrows; fields listed inside each |
-| core-concepts/branching | Base → Coupe / Truck / SUV, proposals on Truck | Diagram, not UI |
-| core-concepts/ai-automations | Diagram: The agent reading the systems graph and acting in connected tools | Diagram, not UI |
-| core-concepts/ai-automations | GitHub pull request review | Thermal-limit conflict and named owners |
-| ai-automations/skills | Settings → AI → Skills | Organizational and Personal sections |
-| administration/users-roles | Settings → Users list with Role and Access columns, several rows selected and the Actions menu open | Synthetic users; show Resend invite / Project access / Set role / Remove user |
-| administration/users-roles | Grant User Access dialog | Send to chips, Permissions dropdown, Projects picker; synthetic emails |
-| administration/user-groups | User Groups page with one group expanded, showing SSO and SCIM badges and the Group actions menu open | Synthetic names |
-| administration/user-groups | Branch actions → Editor groups picker with "Anyone (no restriction)" | Any branch other than Base |
-| administration/user-groups | "Sync from SSO" dialog with Match, SSO role, Provider | Placeholder role and provider |
-| administration/audit-log | Audit Log with the scope picker, type filter, a row's Details popover and the Revert button | Include one "AI agent" Who entry |
-| administration/deployments | Diagram: hosted vs customer-managed Flow, labelling app, database, object storage, identity provider, AI services, and Admin vs operator responsibilities | Diagram, not a screenshot |
-| administration/sso-scim | SSO Setup connection card with DNS TXT records, Check DNS verification and Activate SSO | Hide the secret; use example.com domains |
-| administration/sso-scim | SCIM Provisioning page with SCIM URL, Role/Projects for provisioned users and SCIM Tokens | Do not show a real token |
-| administration/sso-scim | SSO Roles with a mapping and the "What your IdP is sending" section expanded | Synthetic claims |
-| administration/usage-billing | Usage page with range selector, totals, Daily AI Tokens chart and allowance cards | Synthetic values; no prices |
-| importing-exporting/csv | Import wizard mapping step | Mark Identity column, Match items by, Resolve links by |
-| importing-exporting/csv | Export dialog | Mark Identity, Write links by, Include collapsed rows, item count |
-| importing-exporting/excel | Upload step with Sheet picker | Multi-sheet workbook |
-| importing-exporting/reqif | ReqIF export Mappings | Mark Spec object ID / Spec hierarchy ID and preset bar |
-| importing-exporting/reqif | ReqIF import Destination step | New branch name, top-level placement, link directions |
-| importing-exporting/sysml | Export SysML page | Format, Types, Traceability, Preview with coverage notes (beta workspace) |
-| importing-exporting/markdown | More actions → Export as in Reader | Show Markdown and Markdown + Assets entries |
-| importing-exporting/word | Reader document beside its .docx | Headings, fields, an image |
-| importing-exporting/pdf | Browser print dialog from Reader export | Save-as-PDF destination |
-| importing-exporting/html | Exported HTML open in a browser | Headings and a table |
-| diagrams/diagrams | Diagram with item cards, shown fields, connectors | Include the link choice popover |
-| diagrams/architecture-views | Architecture tab on Battery System | Subsystem cards, interfaces, Open architecture on card toolbar |
-| diagrams/architecture-views | Settings → Architecture | Node type and Interface type |
-| diagrams/importing-exporting-diagrams | Import diagram dialog | Replace/Add choices, accepted formats |
-| diagrams/importing-exporting-diagrams | Diagram menu Export submenu | SVG, PNG, XML |
-| integrations/github | Setup wizard "How do you want to connect?" step | Show both options; mask installation IDs |
-| integrations/github | Settings page: Organization, Repositories with "Settings for" project picker and Off/On request/Automatic, Advanced switches | Placeholder org and repo names |
-| integrations/gitlab | Connect GitLab panel with "Continue to GitLab" and "Set up with a token" | — |
-| integrations/gitlab | Token form plus GitLab project webhook (URL, secret, Merge request events, Comments) | Mask secrets |
-| integrations/gitlab | Automation trigger with Authors (optional) and Paths (optional) | Use `firmware/` as path |
-| integrations/slack | Slack settings: connect options, Channel history access, write-back + Allowed channels, Projects | Mask tokens; generic channel names |
-| integrations/slack | /flow settings modal in Slack (project, branch, fork-a-branch option) | — |
-| integrations/jira | Personal Jira page with Connect Atlassian; admin Jira site, Linked Projects, Jira Write-Back | Mask account emails |
-| integrations/linear | Linear form (API Key, Find teams, Team ID) and Linear Write-Back | Masked key; synthetic team names |
-| integrations/integrations-list | Settings → Administration → Integrations list with Custom MCP entry | — |
-| searching-filtering/searching | Search dialog with Current branch / All branches tabs, Recents & favorites, a Related by meaning group | — |
-| searching-filtering/searching | Toolbar Find in view with highlighted matches and previous/next arrows | — |
-| searching-filtering/filtering | View filter bar: Owner is empty chip plus an Advanced filter with OR | — |
-| searching-filtering/filtering | Review → Changed Items filter with Changed by (Any AI) and a field "is changed" | — |
-| ai-automations/ai-automations-and-trust | Agent conversation with expanded action cards, a Loaded skill card, and a plan awaiting Execute/Refine | Use the reference project; show the cited item links |
-| ai-automations/automations | Settings → AI → Automations list showing the Automations and Personal Automations sections | Include the row options menu open on Run automation |
-| ai-automations/automations | Automation page: name, runs-as status line, Triggers with Add trigger, Instructions with the Agent/Script tabs | Label Run now and View runs |
-| ai-automations/automations | Add trigger dialog listing the trigger groups | Recurring / Flow / Integrations |
-| ai-automations/activity | Activity Log with the source sidebar (All sources, Automations), filters, and one expanded thread | Show status chips, including Completed · Passed and Matched |
-| ai-automations/activity | Activity thread graph opened from a row's Thread button | |
-| ai-automations/impact-analysis | Review page, Impact analysis tab: tree of affected items with Severe and Moderate findings, Re-run, Display Options | Battery capacity trade study branch |
-| ai-automations/impact-analysis | A finding marked Fixed after the agent's fix-and-re-run loop | |
-| dashboards/dashboards | Dashboard with a bound view, a Filter that includes Within items, and the Value block, Property summary and Link coverage widgets | Click into a chart segment to show its item list |
-| dashboards/dashboards | Historical Property summary chart with milestones and the "Not filtered by this dashboard" notice | |
-| formulas/custom-functions | Formula editor with `latest(...)` keyed on Test Date over three coastdown results, and the calculated value | Label the selected result and its field |
-| branching/branching | New branch dialog with Parent Branch | Also the branch actions menu showing Create a sub branch |
-| branching/branching | Update from parent page with a conflict | Show Keep parent / Keep current and the bulk buttons |
-| branching/comparing-branches | Comparison page, both Branch/Point pairs | Compare changes tab with one item's before/after; Swap sides icon visible |
-| branching/managing-branches | Branch actions menu | Owner actions, Editor groups submenu, Protect/Unprotect, Delete branch |
-| branching/managing-branches | Recently deleted branches page | Restore button and restore plan (human step) |
-| branching/baselining | Change history popover | Create baseline, a named baseline, the revert control |
-| branching/variant-branches | Truck variant item menu showing Apply to variant | Plus Extract non-variant changes target picker |
-| collaboration/commenting | Item Discussions tab | Question, reply with @mention, Resolve comment control |
-| collaboration/commenting | Reader margin thread | Add a comment on hover, wide layout |
-| collaboration/sharing | Share view dialog | Invite people with Can view/Can edit, Shared destination, Link options expanded, Show path above |
-| collaboration/sharing-views | View structure panel and Save as new view dialog | Private view / Shared view choice |
-| collaboration/subscriptions-notifications | Item details bell with Manage subscribers | Inbox → Notifications (All/Unread, Mark all as read) and the Settings → Notifications channel grid |
+| get-started/what-is-flow | Screenshot: One model, several structures | Tree view of the Vehicle with Battery System expanded to Battery Pack and Battery Management System. Beside each system, its linked items from other categories: an interface (Pack to BMS), a target (Battery Usable Capacity, 100 kWh), and a test result. Owner column visible. |
+| get-started/what-is-flow | Diagram: Intent, evidence, and the gap between them | Three Battery System targets in a row. Each shows its target value, its latest result, and a bar for the gap between them. One target is met, one is close (DC fast charge: 32 min against 30 min), and one has no evidence yet, drawn dashed. Line-art style, blue accent only on the gap markers. |
+| get-started/starting-a-project | Screenshot: New project dialog | Project switcher → New project, with Name filled in ("Electric Vehicle"), Start from set to an existing project, and What to import showing Data model, Views, Automations, and Skills all checked. Callouts on Start from and What to import. |
+| get-started/requirements-systems-tests | Screenshot: One connected thread | Details panel for the Body & Aerodynamics system: owner (aerodynamics engineer), the Aerodynamic Drag Coefficient target of 0.28 linked to it, the Coastdown Test linked to the target, and three results (0.296, 0.287, 0.279) with only the last marked as meeting the target. |
+| get-started/getting-data-into-flow | Diagram: Routes into Flow | Five sources on the left (a spreadsheet, a PDF specification, a slide deck, a connected tool such as Jira or GitHub, and a script calling the API) each with an arrow into one Flow project on the right, labelled by route: Import, Extract with the agent, Integration, API/MCP. A small branch icon on the import arrow shows imports land in a new branch. |
+| get-started/getting-data-into-flow | Screenshot: Spreadsheet import: map columns | The CSV/Excel import mapping step for a parts spreadsheet: columns mapped to Name, Description, Mass (kg), Owner, and Parent. Match items by set to Name, a validation message for one duplicate row, and the confirm button. Callouts on Match items by and the validation message. |
+| get-started/creating-a-branch | Screenshot: New branch dialog | New branch dialog with the name "Battery capacity trade study" typed in and the parent set to Truck. If the workspace uses the updated variant view, capture the New change request version of the same dialog alongside. |
+| get-started/creating-a-branch | Screenshot: Impact analysis on the trade study | Review page of the Battery capacity trade study branch, Impact analysis tab, after Run impact analysis. Battery Usable Capacity changed 100 to 120 kWh at the root; Range, Vehicle Mass, and DC fast charge time listed as affected, each with its owner. |
+| core-concepts/the-systems-graph | Screenshot: The same items in four views | Four panels of the same Battery System items: a table with owner and value columns, a tree showing pack and BMS under the system, Reader showing them as a document with one margin comment, and a diagram with the three as connected cards. Same item highlighted in all four. |
+| core-concepts/the-systems-graph | Diagram: Hierarchy plus cross-links | Vehicle breakdown drawn as a tree (Vehicle → Battery System → Battery Pack, BMS; Vehicle → Body & Aerodynamics) in grey. Over it, blue cross-links the tree cannot express: Range depends on both Battery Usable Capacity and Drag Coefficient; an interface links Battery Pack and BMS; a test result links back to the drag target. |
+| core-concepts/the-data-model | Diagram: A small data model | Five category boxes (System, Interface, Requirement, Test Case, Test Result), each listing two or three fields (for example Requirement: Target value, Unit, Owner). Labelled arrows between them: contains, connects, delivered by, verified by, result of. |
+| core-concepts/branching | Diagram: Variants and proposals | Base at the top with three long-lived variant branches below it: Coupe, Truck, SUV, drawn as solid lines. From Truck, three short proposal branches (Battery capacity trade study, BMS improvements, DC fast charging) drawn as dashed lines that loop back into Truck. |
+| core-concepts/ai-automations | Diagram: The agent between the graph and your tools | The systems graph in the centre. On the left, the agent reads items, links, and owners from it. On the right, connected tools (GitHub, Slack, Jira) send events in and receive reviews and messages back. An engineer icon at the end marks where the owner decides. |
+| core-concepts/ai-automations | Screenshot: Flow's review on a GitHub pull request | A firmware pull request in GitHub with Flow's review comment: the new thermal limits (−5 °C to 30 °C) conflict with Cell Temperature During DC Fast Charging (15 °C to 45 °C). The comment links the requirement, suggests the missing traceability link, and names the BMS software engineer and the requirement's owner. |
+| ai-automations/ai-automations-and-trust | Screenshot: Agent plan awaiting approval | Agent conversation asking to update Battery System targets: a Loaded skill card, expanded action cards each linking the items they cite, and the plan footer with Execute and Refine. Highlight Execute. |
+| ai-automations/skills | Screenshot: Skills settings | Settings → AI → Skills showing the Organizational Skills section with two of the example skills on this page (Write a functional requirement, Check test coverage), the Personal Skills section with one skill, and the FLOW.md and My FLOW.md entries. |
+| ai-automations/automations | Screenshot: Automations list | Settings → AI → Automations with an Automations section ("Firmware PR review", "Weekly verification gaps") and a Personal Automations section with one entry. One row's options menu open on Run automation. |
+| ai-automations/automations | Screenshot: An automation's settings | The "Firmware PR review" automation: name, the runs-as line, Triggers with a GitHub pull-request trigger and Add trigger, and Instructions on the Agent tab. Callouts on Run now and View runs. |
+| ai-automations/automations | Screenshot: Add trigger dialog | The Add trigger dialog with its groups visible: Recurring (On a schedule), Flow (Branch is reviewed, When the project changes), and Integrations (GitHub, GitLab, Slack events). |
+| ai-automations/activity | Screenshot: A run's thread | The thread view opened from a run's Thread button: a GitHub pull-request event in, the Firmware PR review run, and the review comment posted back to GitHub, connected in order. |
+| ai-automations/activity | Screenshot: Activity Log | Settings → AI → Activity Log with the source sidebar (All sources, Automations, GitHub), the search and status filters, and the feed showing runs with status chips such as Completed · Passed and Matched. One row expanded. |
+| ai-automations/impact-analysis | Screenshot: Impact analysis results | Review page, Impact analysis tab on the Battery capacity trade study: tree of affected items with one Severe finding (DC fast charge time no longer meets 30 min) and one Moderate finding (Vehicle Mass), plus the Re-run and Display Options controls. |
+| ai-automations/impact-analysis | Screenshot: A finding marked Fixed | The same tree after the agent updated DC fast charge time and re-ran the analysis: that finding now marked Fixed, with the Moderate finding still open. |
+| branching/branching | Screenshot: New branch dialog | New branch dialog with a name typed in and the Parent Branch dropdown open, listing Base, Coupe, Truck, and SUV. Inset: a branch's actions menu with Create a sub branch highlighted. |
+| branching/branching | Screenshot: Update from parent with a conflict | Update from parent on a proposal branch: incoming changes listed, one conflict on a target value with Keep parent and Keep current, and the Keep parent changes / Keep current changes buttons at the top. |
+| branching/comparing-branches | Screenshot: Comparing two branches | Comparison page with Truck on the left and the Battery capacity trade study on the right, both Branch and Point pickers visible, the Compare changes tab showing Battery Usable Capacity before (100 kWh) and after (120 kWh), and the Swap sides icon. |
+| branching/managing-branches | Screenshot: Recently deleted branches | The Recently deleted branches page with two deleted proposals, one row's Restore button selected and its restore plan shown. |
+| branching/managing-branches | Screenshot: Branch actions menu | A proposal branch's actions menu open: Reveal in Branch view, Rename..., Take ownership, the Editor groups submenu, Protect, and Delete branch. |
+| branching/baselining | Screenshot: Change history and baselines | Change history opened from the clock control on Truck: a named baseline ("Design review 1") in the timeline, the Create baseline button, and the Revert control on the baseline. |
+| branching/variant-branches | Screenshot: Apply to variant | On the Truck variant, a selected Towing Load item with its menu open on Apply to variant. Inset: the Extract non-variant changes target picker. |
+| collaboration/commenting | Screenshot: An item's discussion | The Discussions tab on a target item: a question asking whether a simulation was re-run, a reply that @mentions the owner, and the Resolve comment control. |
+| collaboration/commenting | Screenshot: Commenting in Reader | Reader in the wide layout with a highlighted sentence, the Add a comment button that appears on hover, and an open thread in the margin beside it. |
+| collaboration/sharing | Screenshot: Share view dialog | The Share view dialog: Invite people with one group set to Can view and one email set to Can edit, the shared destination, Link options expanded, and Show path above turned on. |
+| collaboration/sharing-views | Screenshot: Saving a view | View structure open beside the view selector, and the Save as new view dialog with a Name ("Battery verification") and View type set to Shared view. |
+| collaboration/subscriptions-notifications | Screenshot: Following an item | An item's details with the bell selected and Manage subscribers open. Inset: Inbox → Notifications with the All / Unread tabs and Mark all as read. |
+| searching-filtering/searching | Screenshot: Project search | The Cmd+K search dialog with "battery" typed: Current branch / All branches tabs, Recents & favorites, exact-name results, and a Related by meaning group below. |
+| searching-filtering/searching | Screenshot: Find in view | A table view with "thermal" in the Find in view box: matching rows narrowed, matches highlighted, the match counter, and the previous/next arrows. |
+| searching-filtering/filtering | Screenshot: Filtering a view | A view's filter bar with an "Owner is empty" chip and an Advanced filter open showing two conditions joined by OR. |
+| searching-filtering/filtering | Screenshot: Filtering a review | Review → Changed Items with the filter open: Changed by set to Any AI, plus a "Target value is changed" condition, and the filtered list below. |
+| diagrams/diagrams | Screenshot: A diagram with item cards | A diagram canvas with three item cards (Battery Pack, BMS, Charging System) showing selected fields such as owner and mass, connected by arrows, with the link-choice popover open on a new connector. |
+| diagrams/architecture-views | Screenshot: Architecture settings | Settings → Architecture with the Node type set to System and the Interface type set to Interface. |
+| diagrams/architecture-views | Screenshot: Battery System architecture | The Architecture tab for Battery System: Battery Pack and BMS as cards joined by their interface, and the card toolbar on BMS showing Open architecture and See Details. |
+| diagrams/importing-exporting-diagrams | Screenshot: Import diagram dialog | The Import dialog with a .drawio file selected, the accepted formats listed, and the Replace current diagram / Add to current diagram choice. |
+| diagrams/importing-exporting-diagrams | Screenshot: Export menu | A diagram's menu with Export open, showing SVG, PNG, and XML. |
+| dashboards/dashboards | Screenshot: A verification dashboard | A dashboard bound to a verification view: a filter using Within items set to Battery System, a Value block (percent of targets with evidence), a Property summary donut of test status, and a Link coverage widget. One donut segment selected to show its item list. |
+| dashboards/dashboards | Screenshot: A historical chart | A Property summary set to a Line chart of test status over 90 days with two milestones marked, and the "Not filtered by this dashboard" notice on the card. |
+| formulas/custom-functions | Screenshot: A formula that picks the latest result | The formula editor on the drag target's Latest result field, with latest(...) keyed on Test Date over the three coastdown results, and the calculated value 0.279 shown below. Callout on the selected result. |
+| importing-exporting/csv | Screenshot: CSV import mapping | The import wizard's mapping step with columns mapped to fields, the Identity column marked, Match items by, and Resolve links by. Callouts on all three. |
+| importing-exporting/csv | Screenshot: CSV export | The CSV export dialog with Identity, Write links by, Include collapsed rows, and the item count. |
+| importing-exporting/excel | Screenshot: Choosing an Excel sheet | The upload step for a workbook with three sheets and the Sheet picker open. |
+| importing-exporting/reqif | Screenshot: ReqIF export mappings | The ReqIF export Mappings step: each Flow type mapped to a ReqIF type name with its fields, Spec object ID and Spec hierarchy ID marked, and the preset bar at the top. |
+| importing-exporting/reqif | Screenshot: ReqIF import destination | The ReqIF import Destination step: the new branch name, where top-level objects are placed, and the link direction settings. |
+| importing-exporting/sysml | Screenshot: SysML export | The Export SysML page in a workspace with the beta turned on: Format, Types, Traceability, and the Preview with its coverage notes. |
+| importing-exporting/markdown | Screenshot: Markdown export | Reader with More actions → Export as open, showing Markdown and Markdown + Assets. |
+| importing-exporting/word | Screenshot: Reader and the exported Word file | A Reader document on the left and the exported .docx open in Word on the right, showing the same headings, a field value, and an embedded image. |
+| importing-exporting/pdf | Screenshot: Saving a PDF | The browser print dialog opened by Export as → PDF from Reader, with Save as PDF selected as the destination. |
+| importing-exporting/html | Screenshot: Exported HTML | The exported HTML file open in a browser, showing a heading hierarchy and a table rendered from Reader. |
+| integrations/integrations-list | Screenshot: Integrations settings | Settings → Administration → Integrations listing GitHub, GitLab, Slack, Jira, Linear, and a Custom MCP entry, with each integration's connection status. |
+| integrations/github | Screenshot: Connecting GitHub | The GitHub setup wizard at How do you want to connect?, with Standard Cloud Account and GitHub Enterprise Accounts and Customized App. |
+| integrations/github | Screenshot: GitHub settings | GitHub settings after connecting: the organization, the Repositories list with the Settings for project picker, the Off / On request / Automatic choice, and the Advanced switches. Placeholder organization and repository names. |
+| integrations/gitlab | Screenshot: Connecting GitLab | The Connect GitLab panel with Continue to GitLab and Set up with a token. |
+| integrations/gitlab | Screenshot: GitLab token and webhook | Flow's token form beside a GitLab project's webhook settings with the URL, a masked secret, and Merge request events and Comments checked. |
+| integrations/gitlab | Screenshot: GitLab trigger filters | An automation's GitLab: merge request is opened trigger with Authors (optional) left blank and Paths (optional) set to firmware/. |
+| integrations/slack | Screenshot: Slack settings | Slack settings: the Flow's Slack app / Your own Slack app choice, Channel history access, write-back with Allowed channels, and Projects. Masked tokens and generic channel names. |
+| integrations/slack | Screenshot: /flow in Slack | The /flow settings modal in Slack with a project and branch selected and the option for each new chat to fork a fresh branch. |
+| integrations/jira | Screenshot: Connecting Jira | Settings → Personal → Jira with Connect Atlassian. Inset: the admin Jira page with the site, Linked Projects, and Jira Write-Back. Masked emails. |
+| integrations/linear | Screenshot: Connecting Linear | Linear settings with a masked API Key, Find teams, a Team ID, and the Linear Write-Back section. Synthetic team names. |
+| administration/users-roles | Screenshot: Managing users | Settings → Users with Role and Access columns, three rows selected, and the Actions menu open on Resend invite, Project access, Set role, and Remove user. Synthetic names. |
+| administration/users-roles | Screenshot: Grant User Access dialog | The Grant User Access dialog with two email chips in Send to, Permissions set to Member, and the Projects picker open. Synthetic emails. |
+| administration/user-groups | Screenshot: Restricting branch editors | A proposal branch's actions menu with Editor groups open, one group checked and Anyone (no restriction) at the top. |
+| administration/user-groups | Screenshot: Sync from SSO | The Sync from SSO dialog with Match set to Users with an IdP role, an SSO role entered, and a Provider selected. |
+| administration/user-groups | Screenshot: User groups | User Groups with one group expanded to show its members, one group tagged SSO and one tagged SCIM, and the Group actions menu open. Synthetic names. |
+| administration/audit-log | Screenshot: Audit log | The Audit Log with the scope picker, the type filter, When / Who / Action / Change columns including one AI agent entry, a row's Details popover, and the Revert button. |
+| administration/deployments | Diagram: Hosted and customer-managed Flow | Two side-by-side boxes. Hosted: Flow runs the app, database, object storage, and AI services; the customer's Admin manages users and SSO. Customer-managed: the same components in the customer's Kubernetes cluster, the operator owning PostgreSQL, object storage, OIDC, ingress, and AI services, and the Admin owning in-app settings. |
+| administration/sso-scim | Screenshot: SSO setup | SSO Setup with a connection card showing the DNS TXT record, Check DNS verification, and Activate SSO. Secret hidden; example.com domains. |
+| administration/sso-scim | Screenshot: SSO role mapping | SSO Roles with one role mapped to a user group and What your IdP is sending expanded to show synthetic claims. |
+| administration/sso-scim | Screenshot: SCIM provisioning | SCIM Provisioning with the SCIM URL, Role and Projects for provisioned users, Groups that grant Member, and SCIM Tokens with Generate Token. No real token. |
+| administration/usage-billing | Screenshot: AI usage | Settings → AI → Usage set to Last 30 days: totals, the Daily AI Tokens chart, Tokens by user and Tokens by activity, and the allowance cards. Synthetic values, no prices. |
 
 The PR-asset screenshots from the agent-workspace work show an agent-sidebar Skills
 tab that is not on `master`. Do not use them.

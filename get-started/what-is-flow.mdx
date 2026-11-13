@@ -11,7 +11,9 @@ Flow is a source of truth that lets humans and agents deeply understand your phy
 
 Hardware programs run on many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, suppliers, risks, and decisions. Flow holds all of them. Your team defines the categories of items and the fields they carry, and Flow keeps them connected.
 
-<VisualPlaceholder kind="Screenshot" title="Several structures connected in one model" />
+<VisualPlaceholder kind="Screenshot" title="One model, several structures">
+  Tree view of the Vehicle with Battery System expanded to Battery Pack and Battery Management System. Beside each system, its linked items from other categories: an interface (Pack to BMS), a target (Battery Usable Capacity, 100 kWh), and a test result. Owner column visible.
+</VisualPlaceholder>
 
 Those connections are what make the system understandable. Follow a design decision to the systems it affects, an interface to the two teams on either side of it, or a target to the analyses and tests that back it. [The systems graph](/core-concepts/the-systems-graph) explains how the connections work, and [the data model](/core-concepts/the-data-model) how your team shapes them.
 
@@ -25,7 +27,9 @@ Engineering information is spread across spreadsheets, documents, models, code, 
 
 When intent and evidence sit in the same connected model, the gap between them is visible. A target sits next to its latest measured value. A system with no verification stands out. A change shows which connected items have not caught up with it.
 
-<VisualPlaceholder kind="Diagram" title="Intent beside evidence: a target, its latest result, and the gap between them" />
+<VisualPlaceholder kind="Diagram" title="Intent, evidence, and the gap between them">
+  Three Battery System targets in a row. Each shows its target value, its latest result, and a bar for the gap between them. One target is met, one is close (DC fast charge: 32 min against 30 min), and one has no evidence yet, drawn dashed. Line-art style, blue accent only on the gap markers.
+</VisualPlaceholder>
 
 Views show the same items for different jobs: a table to compare and edit, a tree for structure, **Reader** to read and comment like a document, and a diagram to see how parts connect.
 

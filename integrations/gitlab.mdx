@@ -11,9 +11,13 @@ Connect GitLab so agents can read repositories and review merge requests against
 
 Open **Settings → Administration → Integrations → GitLab**. Under **Connect GitLab**, use the option your deployment offers.
 
-<VisualPlaceholder kind="Screenshot" title="Connect GitLab panel with &quot;Continue to GitLab&quot; and &quot;Set up with a token&quot;" />
+<VisualPlaceholder kind="Screenshot" title="Connecting GitLab">
+  The Connect GitLab panel with Continue to GitLab and Set up with a token.
+</VisualPlaceholder>
 
-<VisualPlaceholder kind="Screenshot" title="Token form plus GitLab project webhook (URL, secret, Merge request events, Comments)" />
+<VisualPlaceholder kind="Screenshot" title="GitLab token and webhook">
+  Flow's token form beside a GitLab project's webhook settings with the URL, a masked secret, and Merge request events and Comments checked.
+</VisualPlaceholder>
 
 **Continue to GitLab** authorizes your GitLab.com account. Select projects and Flow configures their webhooks. You need Maintainer or Owner access to those projects.
 
@@ -35,7 +39,9 @@ Open **Settings → Administration → Integrations → GitLab**. Under **Connec
 
 Create an [automation](/ai-automations/automations) with **GitLab: merge request is opened** or **GitLab: merge request is merged**. To narrow it:
 
-<VisualPlaceholder kind="Screenshot" title="Automation trigger with Authors (optional) and Paths (optional)" />
+<VisualPlaceholder kind="Screenshot" title="GitLab trigger filters">
+  An automation's GitLab: merge request is opened trigger with Authors (optional) left blank and Paths (optional) set to firmware/.
+</VisualPlaceholder>
 
 - **Authors (optional)**: GitLab usernames without the `@`, comma-separated.
 - **Paths (optional)**: files or folders, comma-separated. Folders need a trailing `/`, as in `firmware/`.

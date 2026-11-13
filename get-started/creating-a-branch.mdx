@@ -15,7 +15,9 @@ You need permission to create branches in the project.
 
 Open the branch selector and create a new branch. In workspaces that separate variants from proposals, the dialog is **New change request**; otherwise it is **New branch**.
 
-<VisualPlaceholder kind="Screenshot" title="New branch dialog" />
+<VisualPlaceholder kind="Screenshot" title="New branch dialog">
+  New branch dialog with the name "Battery capacity trade study" typed in and the parent set to Truck. If the workspace uses the updated variant view, capture the New change request version of the same dialog alongside.
+</VisualPlaceholder>
 
 1. Enter a name that says what the work is, such as **Battery capacity trade study**. `main` and `master` are reserved.
 2. Check the parent: the state your branch starts from. For a proposal against the Truck's agreed design, choose **Truck**; for work that depends on another proposal, choose that proposal's branch. Different entry points can preselect different parents.
@@ -23,7 +25,9 @@ Open the branch selector and create a new branch. In workspaces that separate va
 
 ## Make the change and see its impact
 
-<VisualPlaceholder kind="Screenshot" title="Impact analysis tab" />
+<VisualPlaceholder kind="Screenshot" title="Impact analysis on the trade study">
+  Review page of the Battery capacity trade study branch, Impact analysis tab, after Run impact analysis. Battery Usable Capacity changed 100 to 120 kWh at the root; Range, Vehicle Mass, and DC fast charge time listed as affected, each with its owner.
+</VisualPlaceholder>
 
 1. Confirm the sidebar shows your new branch.
 2. Open **Battery Usable Capacity**, change its target to 120 kWh, and record the rationale in the description.

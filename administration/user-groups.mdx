@@ -31,7 +31,9 @@ Whether reviewers can remove an assigned group from a review is set by **Allow r
 
 As the branch owner or an Admin, open the branch's actions, choose **Editor groups**, and select one or more groups. Members of any selected group can edit and merge the branch, subject to their role and any branch protection. Choose **Anyone (no restriction)** to remove the restriction. Base cannot be restricted. See [Managing branches](/branching/managing-branches).
 
-<VisualPlaceholder kind="Screenshot" title="Branch actions → Editor groups picker with &quot;Anyone (no restriction)&quot;" />
+<VisualPlaceholder kind="Screenshot" title="Restricting branch editors">
+  A proposal branch's actions menu with Editor groups open, one group checked and Anyone (no restriction) at the top.
+</VisualPlaceholder>
 
 ## Share with a group
 
@@ -42,7 +44,9 @@ Before removing members or deleting a group, check where it is used: reviews, br
 
 ## Sync membership from SSO
 
-<VisualPlaceholder kind="Screenshot" title="&quot;Sync from SSO&quot; dialog with Match, SSO role, Provider" />
+<VisualPlaceholder kind="Screenshot" title="Sync from SSO">
+  The Sync from SSO dialog with Match set to Users with an IdP role, an SSO role entered, and a Provider selected.
+</VisualPlaceholder>
 
 1. Open **Group actions** and select **Sync from SSO...** (or **Manage SSO sync...** if the group is already bound).
 2. Under **Match**, choose **Users with an IdP role** and enter the **SSO role**, or choose **All users from a provider**. Pick the **Provider**.
@@ -54,4 +58,6 @@ Saving a binding clears the current members. Matching users join on their next s
 
 Groups tagged **SCIM** come from your identity provider. Change their membership there. A SCIM group cannot also be bound to an SSO role. See [SSO and SCIM](/administration/sso-scim).
 
-<VisualPlaceholder kind="Screenshot" title="User Groups page with one group expanded, showing SSO and SCIM badges and the Group actions menu open" />
+<VisualPlaceholder kind="Screenshot" title="User groups">
+  User Groups with one group expanded to show its members, one group tagged SSO and one tagged SCIM, and the Group actions menu open. Synthetic names.
+</VisualPlaceholder>

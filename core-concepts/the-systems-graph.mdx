@@ -7,7 +7,9 @@ import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
 A physical system is described by many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, risks, and decisions. Each is useful alone. The understanding comes from how they connect. Change one, and the others can move.
 
-<VisualPlaceholder kind="Screenshot" title="One graph, four views" />
+<VisualPlaceholder kind="Screenshot" title="The same items in four views">
+  Four panels of the same Battery System items: a table with owner and value columns, a tree showing pack and BMS under the system, Reader showing them as a document with one margin comment, and a diagram with the three as connected cards. Same item highlighted in all four.
+</VisualPlaceholder>
 
 Flow keeps all of them connected in a systems graph. The graph answers the questions engineers ask every day: what is this part of, why is it this way, what backs it up, and what else changes if it changes.
 
@@ -23,7 +25,9 @@ Ownership only helps when the owner can see their dependencies. The graph makes 
 
 Flow represents information as **items** connected by **relationships**. A system, an interface, a requirement, an analysis, a test, or a part are all items, in categories your team defines.
 
-<VisualPlaceholder kind="Diagram" title="Decomposition and cross-cutting relationships in one graph" />
+<VisualPlaceholder kind="Diagram" title="Hierarchy plus cross-links">
+  Vehicle breakdown drawn as a tree (Vehicle → Battery System → Battery Pack, BMS; Vehicle → Body & Aerodynamics) in grey. Over it, blue cross-links the tree cannot express: Range depends on both Battery Usable Capacity and Drag Coefficient; an interface links Battery Pack and BMS; a test result links back to the drag target.
+</VisualPlaceholder>
 
 Some relationships express decomposition: a vehicle contains a battery system, which contains a pack and its management electronics.
 

@@ -11,7 +11,9 @@ Formulas read fields, follow links through the systems graph, and calculate valu
 
 A formula is one Python expression. Lists, comprehensions, generators, lambdas, and conditional expressions work; imports, assignments, and function definitions do not. The result must fit the destination field's type.
 
-<VisualPlaceholder kind="Screenshot" title="Formula editor with `latest(...)` keyed on Test Date over three coastdown results, and the calculated value" />
+<VisualPlaceholder kind="Screenshot" title="A formula that picks the latest result">
+  The formula editor on the drag target's Latest result field, with latest(...) keyed on Test Date over the three coastdown results, and the calculated value 0.279 shown below. Callout on the selected result.
+</VisualPlaceholder>
 
 - Use `self` for the current item and `get(...)` for another item in the same project and branch.
 - Read fields with `self.Target_Value` or `self["Target Value"]`. Brackets accept exact display names and avoid collisions with helper names, as in `self["children"]`.

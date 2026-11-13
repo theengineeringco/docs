@@ -7,11 +7,15 @@ import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
 Automations run saved work in the background so the project keeps checking the gap between what you intend to build and where it stands. An automation runs on a schedule, when a branch opens for review, when a connected tool sends an event, or when someone starts it.
 
-<VisualPlaceholder kind="Screenshot" title="Settings → AI → Automations list showing the Automations and Personal Automations sections" />
+<VisualPlaceholder kind="Screenshot" title="Automations list">
+  Settings → AI → Automations with an Automations section ("Firmware PR review", "Weekly verification gaps") and a Personal Automations section with one entry. One row's options menu open on Run automation.
+</VisualPlaceholder>
 
 ## Create an automation
 
-<VisualPlaceholder kind="Screenshot" title="Automation page: name, runs-as status line, Triggers with Add trigger, Instructions with the Agent/Script tabs" />
+<VisualPlaceholder kind="Screenshot" title="An automation's settings">
+  The "Firmware PR review" automation: name, the runs-as line, Triggers with a GitHub pull-request trigger and Add trigger, and Instructions on the Agent tab. Callouts on Run now and View runs.
+</VisualPlaceholder>
 
 1. Open **Settings → AI → Automations**.
 2. Select **New automation** under **Automations**, shared with the project, or **Personal Automations**, which only you see.
@@ -24,7 +28,9 @@ Only admins create and edit project automations. Anyone who can edit the project
 
 ## Choose a trigger
 
-<VisualPlaceholder kind="Screenshot" title="Add trigger dialog listing the trigger groups" />
+<VisualPlaceholder kind="Screenshot" title="Add trigger dialog">
+  The Add trigger dialog with its groups visible: Recurring (On a schedule), Flow (Branch is reviewed, When the project changes), and Integrations (GitHub, GitLab, Slack events).
+</VisualPlaceholder>
 
 | Trigger | Runs when |
 | --- | --- |

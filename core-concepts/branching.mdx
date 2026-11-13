@@ -13,7 +13,9 @@ Flow handles this with branches. A branch is a state of the project relative to 
 
 A product family shares a lot across its models: architecture, standards, regulations, common parts. That shared information lives in a base branch, and each model branches from it to hold only what is different. In an electric vehicle family, a **Truck** branch might relax the drag target and add towing loads, while a **Coupe** inherits the base values. A change in the base can flow to every model without being re-entered.
 
-<VisualPlaceholder kind="Diagram" title="Base → Coupe / Truck / SUV, proposals on Truck" />
+<VisualPlaceholder kind="Diagram" title="Variants and proposals">
+  Base at the top with three long-lived variant branches below it: Coupe, Truck, SUV, drawn as solid lines. From Truck, three short proposal branches (Battery capacity trade study, BMS improvements, DC fast charging) drawn as dashed lines that loop back into Truck.
+</VisualPlaceholder>
 
 These long-lived branches are **variants**. They are not meant to merge back. Some workspaces label them explicitly as variants.
 
