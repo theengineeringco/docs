@@ -1,7 +1,7 @@
 ---
 name: flow-product-docs
 description: >-
-  Write, revise, or place Flow product documentation (the Guides tab: Get
+  Write, revise, or place Flow product documentation (the Docs tab: Get
   started, Core concepts, AI & Automations, and later product sections) in the
   voice of Flow's own product demos. Use whenever drafting or editing an MDX page outside the API and
   Release Notes tabs, choosing a worked example, or turning demo or sales
@@ -29,7 +29,7 @@ Every page should serve that sentence. Three consequences:
 - **Humans and agents read the same source**: context in Flow is what makes agents
   useful; agents run in the background to close the gap.
 
-`AGENTS.md` (Voice, Content boundaries, Guides) applies in full. This skill adds only
+`AGENTS.md` (Voice, Content boundaries, Docs) applies in full. This skill adds only
 what is specific to product pages.
 
 | Read | When |

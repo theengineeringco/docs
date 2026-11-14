@@ -59,7 +59,7 @@
         }
       },
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "icon": {
           "name": "book-marked",
           "library": "lucide"

@@ -1,6 +1,6 @@
 # Where product pages go
 
-Product pages live in the **Guides** tab. `docs.json` is the source of truth for
+Product pages live in the **Docs** tab. `docs.json` is the source of truth for
 group and page order; this file covers what belongs in each group.
 
 | Group | Folder | Purpose | Register |
