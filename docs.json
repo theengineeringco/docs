@@ -16,7 +16,7 @@
       {
         "tab": "Docs",
         "icon": {
-          "name": "book-marked",
+          "name": "book",
           "library": "lucide"
         },
         "groups": [

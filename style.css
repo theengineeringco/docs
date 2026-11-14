@@ -21,8 +21,8 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
    Mobile keeps Mintlify's built-in tab/menu navigation. */
 @media (min-width: 1024px) {
   :root {
-    /* Three 2rem rows, two 0.125rem gaps, and 0.5rem padding above and below. */
-    --nav-tabs-dock-height: 7.25rem;
+    /* Three 2.25rem rows, two 0.125rem gaps, and 0.5rem padding above and below. */
+    --nav-tabs-dock-height: 8rem;
   }
 
   #sidebar {
@@ -54,8 +54,8 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
   }
 
   #navbar-transition-maple .nav-tabs-item {
-    min-height: 2rem;
-    height: 2rem;
+    min-height: 2.25rem;
+    height: 2.25rem;
     padding: 0 0.75rem;
     color: #737373;
     background: transparent;
