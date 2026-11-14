@@ -38,8 +38,7 @@ what is specific to product pages.
 | `references/demo-voice.md` | Converting demo or sales narration into docs |
 | `references/verified-ui.md` | Writing steps that name UI labels or click paths |
 | `references/placement.md` | Adding a page or choosing its group |
-| `references/diagrams.md` | Specifying any diagram, especially branching and history |
-| `.claude/skills/flow-illustration` | Drawing a concept glyph, a how-it-works explainer, or a section hero |
+| `references/diagrams.md` | Adding or changing any diagram, especially branching and history |
 
 ## Examples: use sparingly
 
@@ -83,11 +82,10 @@ On top of `AGENTS.md`'s content boundaries:
 
 - No presenter or colleague names from demos. Use roles.
 - No customer-specific vocabulary from demos; re-express the idea generically or with the reference project.
-- Mark every visual a page needs with the `VisualPlaceholder` component from
-  `/snippets/visual-placeholder.jsx`: `kind="Screenshot"` or `kind="Diagram"`, a short
-  `title`, and a one- to three-sentence body that says exactly what to capture or draw.
-  Name the screen and its state, the example data on it, and what to highlight; for
-  diagrams, the nodes, the connections, and what is emphasized. "New project dialog" is
+- Mark every screenshot a page still needs with the `VisualPlaceholder` component from
+  `/snippets/visual-placeholder.jsx`: `kind="Screenshot"`, a short `title`, and a one- to
+  three-sentence body that says exactly what to capture. Name the screen and its state,
+  the example data on it, and what to highlight. "New project dialog" is
   too vague; "New project with Start from set to an existing project and all four What
   to import options checked" is right. Place it right after the paragraph it
   illustrates, and mirror it as one row in `references/shot-list.md`. No `noindex`, `<Note>` placeholders, or author notes. When a real image lands,
@@ -96,8 +94,6 @@ On top of `AGENTS.md`'s content boundaries:
   (`references/product-media.md` and `references/backgrounds.md`): real product pixels
   from a disposable preview with the seeded Electric Vehicle demo, on the supplied
   logo-free backgrounds. Never AI-generated UI.
-- Abstract illustrations (concept glyphs, how-it-works explainers, section heroes) come
-  from the `flow-illustration` skill in `.claude/skills/flow-illustration`: write a spec,
-  render it, never hand-write the SVG. Branching and history diagrams follow
-  `references/diagrams.md` instead.
+- Diagrams are drawn with the `flow-illustration` skill and placed with the
+  `Illustration` snippet; see `references/diagrams.md`. Placeholders are for screenshots.
 - No links to pages that are not in this repository.

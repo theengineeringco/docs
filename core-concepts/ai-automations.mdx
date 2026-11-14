@@ -4,6 +4,7 @@ description: "Agents use the systems graph as context, meet engineers in their o
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 Engineering work mixes judgment with legwork. Before an engineer can answer whether a change is safe, they collect the related items, check who owns them, and find the latest evidence. Flow's agent does that legwork with the systems graph as its context, and automations do it in the background, so the team closes the gap between what it intends to build and where it is.
 
@@ -13,9 +14,7 @@ The same connections that let an engineer understand the system let the agent un
 
 A question such as "What needs attention if this target changes?" depends on the recorded items, the systems they belong to, the relationships between them, and the latest evidence.
 
-<VisualPlaceholder kind="Diagram" title="The agent between the graph and your tools">
-  The systems graph in the centre. On the left, the agent reads items, links, and owners from it. On the right, connected tools (GitHub, Slack, Jira) send events in and receive reviews and messages back. An engineer icon at the end marks where the owner decides.
-</VisualPlaceholder>
+<Illustration name="ai-agent-and-tools" width={640} alt="The agent works from the systems graph. Connected tools send events in through the boundary and receive reviews and messages back; the owner makes the call." />
 
 The agent works from that project context, so a [missing link](/core-concepts/the-systems-graph#follow-the-consequences-of-change) limits its answer as much as anyone's. A good request asks the agent to separate what the model supports from what still needs investigation.
 

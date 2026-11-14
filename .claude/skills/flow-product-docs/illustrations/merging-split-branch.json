@@ -1,0 +1,112 @@
+{
+  "title": "Splitting a branch",
+  "description": "Some of a branch's changes move to a new branch beside it, with the same parent, so each can be reviewed and merged on its own.",
+  "size": [
+    600,
+    300
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        150
+      ],
+      "length": 504.0,
+      "laneGap": 64,
+      "radius": 10,
+      "startKind": "c",
+      "branches": [
+        {
+          "from": 0.1,
+          "until": 0.7,
+          "lane": -1,
+          "commits": [
+            0.2,
+            0.4
+          ],
+          "tip": null
+        },
+        {
+          "from": 0.42,
+          "until": 0.85,
+          "lane": 1,
+          "commits": [
+            0.45,
+            0.75
+          ],
+          "tip": null,
+          "beat": 12
+        }
+      ],
+      "head": 1
+    },
+    {
+      "type": "ghost",
+      "at": [
+        279.8,
+        86
+      ],
+      "beat": 11
+    },
+    {
+      "type": "ghost",
+      "at": [
+        340.3,
+        86
+      ],
+      "beat": 11
+    },
+    {
+      "type": "line",
+      "from": [
+        279.8,
+        86
+      ],
+      "to": "b.b1c0",
+      "route": "curve",
+      "style": "dotted",
+      "beat": 13
+    },
+    {
+      "type": "line",
+      "from": [
+        340.3,
+        86
+      ],
+      "to": "b.b1c1",
+      "route": "curve",
+      "style": "dotted",
+      "beat": 13
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane0",
+      "text": "proposal",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane1",
+      "text": "new branch",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

@@ -4,6 +4,7 @@ description: "Why Flow connects engineering information around systems, ownershi
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 A physical system is described by many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, risks, and decisions. Each is useful alone. The understanding comes from how they connect. Change one, and the others can move.
 
@@ -25,9 +26,7 @@ Ownership only helps when the owner can see their dependencies. The graph makes 
 
 Flow represents information as **items** connected by **relationships**. A system, an interface, a requirement, an analysis, a test, or a part are all items, in categories your team defines.
 
-<VisualPlaceholder kind="Diagram" title="Hierarchy plus cross-links">
-  Vehicle breakdown drawn as a tree (Vehicle → Battery System → Battery Pack, BMS; Vehicle → Body & Aerodynamics) in grey. Over it, blue cross-links the tree cannot express: Range depends on both Battery Usable Capacity and Drag Coefficient; an interface links Battery Pack and BMS; a test result links back to the drag target.
-</VisualPlaceholder>
+<Illustration name="systems-graph-cross-links" width={640} alt="The vehicle breaks down into systems and parts. Cross-links add what the tree cannot: an interface between the pack and the BMS, and a range target that depends on both the pack and the drag coefficient." />
 
 Some relationships express decomposition: a product contains systems, which contain subsystems and parts.
 

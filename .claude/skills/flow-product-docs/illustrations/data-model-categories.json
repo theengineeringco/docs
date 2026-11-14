@@ -1,0 +1,182 @@
+{
+  "title": "A small data model",
+  "description": "Five categories and the links between them: an interface connects two systems, a system's requirements are verified by test cases, and each test result belongs to a test case.",
+  "size": [
+    640,
+    260
+  ],
+  "layers": [
+    {
+      "type": "line",
+      "from": [
+        140,
+        80
+      ],
+      "to": [
+        320,
+        80
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        320,
+        80
+      ],
+      "to": [
+        500,
+        80
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        140,
+        80
+      ],
+      "to": [
+        140,
+        190
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        140,
+        190
+      ],
+      "to": [
+        320,
+        190
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        320,
+        190
+      ],
+      "to": [
+        500,
+        190
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        140,
+        80
+      ]
+    },
+    {
+      "type": "circleSmall",
+      "at": [
+        320,
+        80
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        500,
+        80
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        140,
+        190
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        320,
+        190
+      ]
+    },
+    {
+      "type": "square",
+      "at": [
+        500,
+        190
+      ]
+    },
+    {
+      "type": "label",
+      "at": [
+        140,
+        80
+      ],
+      "text": "system",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        320,
+        80
+      ],
+      "text": "interface",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        500,
+        80
+      ],
+      "text": "system",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        140,
+        190
+      ],
+      "text": "requirement",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        320,
+        190
+      ],
+      "text": "test case",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        500,
+        190
+      ],
+      "text": "test result",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

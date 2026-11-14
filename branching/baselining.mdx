@@ -4,6 +4,7 @@ description: "Name a fixed point in a branch's history and compare later work ag
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 A baseline marks a state worth coming back to, such as the design as presented at a milestone review. Work continues past it. Creating a baseline does not change any data, approve anything, or merge a branch.
 
@@ -21,9 +22,7 @@ Flow opens a comparison of what the new baseline contains. **Overview** shows wh
 
 Viewers and external users cannot create baselines. If an editor group restricts the branch or its parent, only members can create one.
 
-<VisualPlaceholder kind="Diagram" title="Baselines on a branch's timeline">
-  One lane, Base, with five dots: "Concept targets", "Pack sized", "Cooling added", "Range update", "Work continues". Flags above "Pack sized" ("Design review 1") and "Range update" ("Design review 2"). A bracket between the two flags labelled "Compare two baselines", and one from Design review 2 to the last dot labelled "Compare with Current". Note: "A baseline copies nothing; it marks a point".
-</VisualPlaceholder>
+<Illustration name="baselining-timeline" width={600} alt="Baselines mark two points in Base's history. Compare them with each other, or a baseline with the current state. A baseline copies nothing." />
 
 A baseline copies nothing. It marks a point in the branch's history, so it costs nothing to create one at every milestone.
 
@@ -39,8 +38,6 @@ Every merge also adds a `Merge: <branch>` entry to the history, carrying the rev
 2. Confirm **Create revert branch**.
 3. Flow creates a branch named `Revert: <baseline>` from the branch the baseline belongs to, fills it with the reverse of the baseline's changes, and opens its review.
 
-<VisualPlaceholder kind="Diagram" title="Reverting a baseline">
-  Two lanes: Base and Revert-review-1. Base: "Pack sized" flagged "Design review 1", then "Cooling added", then "Other work". A branch named "Revert: Design review 1" leaves Base with one reverse-marked dot "Opposite changes", then merges back tagged "Merge: Revert". Base keeps every original dot. Note on the revert branch: "Nothing changes until this merges"; small warning icon: "Formula changes are not reverted".
-</VisualPlaceholder>
+<Illustration name="baselining-revert" width={600} alt="Reverting a baseline opens a branch holding the opposite changes. Nothing on Base changes until that branch is reviewed and merged, and Base keeps every original change." />
 
 Nothing changes until that branch is merged. The original changes stay in history beside the revert, so you can always see what was undone and by whom. Before you merge it, check the result: changes to formulas are not reverted, and a reverted field returns to its earlier value even if someone has edited it since.

@@ -1,0 +1,94 @@
+{
+  "title": "One value's history across a merge",
+  "description": "Battery Usable Capacity is raised in two steps on a proposal, then merged. Base records the final value; the intermediate value stays on the branch.",
+  "size": [
+    600,
+    280
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        170
+      ],
+      "length": 504.0,
+      "laneGap": 70,
+      "radius": 10,
+      "startKind": "c",
+      "commits": [
+        0.1
+      ],
+      "commitKind": "c",
+      "branches": [
+        {
+          "from": 0.2,
+          "to": 0.72,
+          "lane": -1,
+          "commits": [
+            0.3,
+            0.7
+          ]
+        }
+      ],
+      "baselines": [
+        0.72
+      ],
+      "baselineSide": "below",
+      "baselineHeight": 14,
+      "head": 1
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        98.4,
+        170
+      ],
+      "text": "100 kWh",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.b0c0",
+      "text": "110 kWh",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.b0c1",
+      "text": "120 kWh",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.baseline0",
+      "text": "merged: 120 kWh",
+      "dx": 0,
+      "dy": 40,
+      "anchor": "middle",
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

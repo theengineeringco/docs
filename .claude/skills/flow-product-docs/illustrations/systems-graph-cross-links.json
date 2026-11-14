@@ -1,0 +1,224 @@
+{
+  "title": "Hierarchy plus cross-links",
+  "description": "The vehicle breaks down into systems and parts. Cross-links add what the tree cannot: an interface between the pack and the BMS, and a range target that depends on both the pack and the drag coefficient.",
+  "size": [
+    640,
+    310
+  ],
+  "layers": [
+    {
+      "type": "line",
+      "from": [
+        320,
+        50
+      ],
+      "to": [
+        220,
+        120
+      ],
+      "route": "elbow",
+      "axis": "y"
+    },
+    {
+      "type": "line",
+      "from": [
+        320,
+        50
+      ],
+      "to": [
+        440,
+        120
+      ],
+      "route": "elbow",
+      "axis": "y"
+    },
+    {
+      "type": "line",
+      "from": [
+        220,
+        120
+      ],
+      "to": [
+        170,
+        190
+      ],
+      "route": "elbow",
+      "axis": "y"
+    },
+    {
+      "type": "line",
+      "from": [
+        220,
+        120
+      ],
+      "to": [
+        270,
+        190
+      ],
+      "route": "elbow",
+      "axis": "y"
+    },
+    {
+      "type": "line",
+      "from": [
+        440,
+        120
+      ],
+      "to": [
+        440,
+        190
+      ]
+    },
+    {
+      "type": "node",
+      "at": [
+        320,
+        50
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        220,
+        120
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        440,
+        120
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        170,
+        190
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        270,
+        190
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        440,
+        190
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        170,
+        190
+      ],
+      "to": [
+        270,
+        190
+      ],
+      "style": "fine",
+      "beat": 12
+    },
+    {
+      "type": "line",
+      "from": [
+        170,
+        190
+      ],
+      "to": [
+        320,
+        260
+      ],
+      "style": "accentDashed",
+      "route": "curve",
+      "beat": 14
+    },
+    {
+      "type": "line",
+      "from": [
+        440,
+        190
+      ],
+      "to": [
+        320,
+        260
+      ],
+      "style": "accentDashed",
+      "route": "curve",
+      "beat": 14
+    },
+    {
+      "type": "square",
+      "at": [
+        320,
+        260
+      ],
+      "beat": 16
+    },
+    {
+      "type": "label",
+      "at": [
+        320,
+        50
+      ],
+      "text": "vehicle",
+      "dx": 18,
+      "dy": 4,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        170,
+        190
+      ],
+      "text": "battery pack",
+      "dx": -14,
+      "dy": 4,
+      "anchor": "end",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        270,
+        190
+      ],
+      "text": "BMS",
+      "dx": 14,
+      "dy": 4,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        440,
+        190
+      ],
+      "text": "drag coefficient",
+      "dx": 14,
+      "dy": 4,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        320,
+        260
+      ],
+      "text": "range",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

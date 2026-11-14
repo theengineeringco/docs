@@ -4,6 +4,7 @@ description: "Maintain a lasting alternative design and share the changes that a
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 A variant holds a lasting difference from its parent, such as one model in a product family. It stays open and cannot merge into its parent. [Branching](/core-concepts/branching) explains how variants differ from proposals.
 
@@ -30,9 +31,7 @@ When you review a variant, or a proposal on one, add the **Non-variant changes**
 
 A variant never merges, so it takes in shared work by updating from its parent. Choose **Update from parent...**, or **Sync changes with parent...** in the updated variant view. Inspect the incoming changes, settle each conflict, and confirm. See [Working in a branch](/branching/branching#update-from-the-parent).
 
-<VisualPlaceholder kind="Diagram" title="A variant taking in shared work">
-  Two lanes: Base and Truck (variant). Base: "Shared design", later "Regulation update", later "New cell supplier". Truck runs to the right edge without merging back, with "Cd ≤ 0.35" and "Towing loads". Two arrows flow down from Base into Truck, each labelled "Update from parent". A short dashed proposal lane under Truck merges back into Truck to show where proposals for the variant go.
-</VisualPlaceholder>
+<Illustration name="variants-taking-shared-work" width={600} alt="The Truck variant runs alongside Base without merging back. It takes in Base's newer changes by updating from its parent, and its own proposals merge into it." />
 
 Proposals for a variant branch from the variant and merge back into it, like any other branch.
 
@@ -44,9 +43,7 @@ Work on a variant often produces changes every model needs. **Extract non-varian
 2. Flow creates `Extract from <variant>` under the target, holding every change except those to variant-specific items and the relationships that touch them.
 3. Review the new branch before merging it. It follows the target's review and merge rules.
 
-<VisualPlaceholder kind="Diagram" title="Extracting non-variant changes">
-  Lanes: Base, Truck (variant), Extract-from-Truck. Truck has two dots: "Cd ≤ 0.35" marked variant-specific (pinned icon) and "Procedure fix" unmarked. A copy arrow takes only "Procedure fix" into a new lane, "Extract from Truck", branching from Base, which merges into Base tagged "Merge: Extract from Truck". The variant-specific dot stays on Truck. Notes: copied changes keep their authors and times; extracted items get new item numbers; Truck is unchanged.
-</VisualPlaceholder>
+<Illustration name="variants-extract" width={600} alt="A fix made on the Truck variant is copied to a new branch from Base and merged there. The Truck-only change stays on Truck, and Truck is unchanged." />
 
 The extracted changes keep their original authors and times. The extracted items get new item numbers in the new branch.
 

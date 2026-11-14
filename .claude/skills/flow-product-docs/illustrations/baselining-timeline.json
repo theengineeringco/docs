@@ -1,0 +1,149 @@
+{
+  "title": "Baselines on a branch's timeline",
+  "description": "Baselines mark two points in Base's history. Compare them with each other, or a baseline with the current state. A baseline copies nothing.",
+  "size": [
+    600,
+    260
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        170
+      ],
+      "length": 504.0,
+      "startKind": "c",
+      "commits": [
+        0.14,
+        0.3,
+        0.48,
+        0.66,
+        0.84
+      ],
+      "commitKind": "c",
+      "baselines": [
+        0.3,
+        0.66
+      ],
+      "baselineSide": "above",
+      "baselineHeight": 14,
+      "head": 1
+    },
+    {
+      "type": "donut",
+      "at": [
+        199.2,
+        110
+      ],
+      "beat": 12
+    },
+    {
+      "type": "donut",
+      "at": [
+        380.6,
+        110
+      ],
+      "beat": 13
+    },
+    {
+      "type": "line",
+      "from": [
+        199.2,
+        152
+      ],
+      "to": [
+        199.2,
+        122
+      ],
+      "style": "faintSolid",
+      "beat": 12
+    },
+    {
+      "type": "line",
+      "from": [
+        380.6,
+        152
+      ],
+      "to": [
+        380.6,
+        122
+      ],
+      "style": "faintSolid",
+      "beat": 13
+    },
+    {
+      "type": "line",
+      "from": [
+        208.3,
+        110
+      ],
+      "to": [
+        371.5,
+        110
+      ],
+      "style": "fine",
+      "beat": 15
+    },
+    {
+      "type": "line",
+      "from": [
+        389.7,
+        110
+      ],
+      "to": "b.head",
+      "route": "curve",
+      "style": "fine",
+      "beat": 16
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        199.2,
+        110
+      ],
+      "text": "design review 1",
+      "dx": 0,
+      "dy": -22,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        380.6,
+        110
+      ],
+      "text": "design review 2",
+      "dx": 0,
+      "dy": -22,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        289.9,
+        110
+      ],
+      "text": "compare",
+      "dx": 0,
+      "dy": 22,
+      "anchor": "middle",
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

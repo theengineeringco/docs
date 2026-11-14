@@ -4,6 +4,7 @@ description: "Get a branch reviewed, merge it into its parent, and know exactly 
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 Merging is how a proposal becomes part of the agreed design. The parent takes the branch's changes, and Flow records the merge as its own entry in history, with who merged it, the reviews, and the discussion. Nothing on the branch is lost.
 
@@ -29,9 +30,7 @@ The review panel shows **Ready to merge** or **Not ready**, with what is blockin
   Review side panel on the Battery capacity trade study: two approvals, Ready to merge, and the Merge button. Inset: the Not ready state listing one missing required review.
 </VisualPlaceholder>
 
-<VisualPlaceholder kind="Diagram" title="What a merge does">
-  Two lanes: Base and Trade-study. Base: "Agreed design", later "Regulation update". Trade-study: "120 kWh", "Range 520 km", then takes the regulation update from Base ("Update from parent"). Trade-study then merges into Base; the merge dot is tagged "Merge: Trade-study" and expands into a card listing: merged by, when, changed items, reviews, description, discussion. The Trade-study lane ends after the merge with a closed marker and the note "Closed: read-only, links open Base". A side arrow shows comments moving to Base, labelled with their source branch.
-</VisualPlaceholder>
+<Illustration name="merging-what-a-merge-does" width={600} alt="The proposal merges into Base. The merge is recorded with who merged it, the reviews, the discussion, and the changed items, and the proposal closes." />
 
 A merge writes the branch's net changes onto the parent. For each field, the parent records the final value from the branch and the person who last changed it there.
 
@@ -69,9 +68,7 @@ If a branch has grown to hold two changes, move part of it into its own branch s
 2. Choose **Create branch and move**. Flow creates a new branch beside this one, with the same parent, holding those items' changes.
 3. Review each branch on its own.
 
-<VisualPlaceholder kind="Diagram" title="Splitting a branch">
-  Lanes: Base, Trade-study, Charging. Before: Trade-study holds two groups of changes, battery changes and charging changes, shown as differently shaded dots. After "Create branch and move", the charging dots move to a new sibling lane, Charging, which branches from Base (the same parent), and Trade-study keeps only the battery changes. A dotted return arrow labelled "Move changes back" shows the undo. Note: "Recorded on the review timeline".
-</VisualPlaceholder>
+<Illustration name="merging-split-branch" width={600} alt="Some of a branch's changes move to a new branch beside it, with the same parent, so each can be reviewed and merged on its own." />
 
 The move is recorded on the review timeline. **Move changes back** undoes it.
 

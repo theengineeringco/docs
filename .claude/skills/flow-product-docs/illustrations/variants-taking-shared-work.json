@@ -1,0 +1,161 @@
+{
+  "title": "A variant taking in shared work",
+  "description": "The Truck variant runs alongside Base without merging back. It takes in Base's newer changes by updating from its parent, and its own proposals merge into it.",
+  "size": [
+    600,
+    330
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        80
+      ],
+      "length": 504.0,
+      "laneGap": 80,
+      "radius": 10,
+      "startKind": "c",
+      "commits": [
+        0.38,
+        0.68
+      ],
+      "commitKind": "c",
+      "branches": [
+        {
+          "from": 0.12,
+          "until": 1,
+          "lane": 1,
+          "commits": [
+            0.6,
+            0.9
+          ],
+          "tip": "c",
+          "style": "solid"
+        }
+      ],
+      "head": 1
+    },
+    {
+      "type": "line",
+      "id": "u1",
+      "from": [
+        239.5,
+        80
+      ],
+      "to": [
+        269.9,
+        160
+      ],
+      "style": "fine",
+      "beat": 12
+    },
+    {
+      "type": "line",
+      "id": "u2",
+      "from": [
+        390.7,
+        80
+      ],
+      "to": [
+        421.1,
+        160
+      ],
+      "style": "fine",
+      "beat": 14
+    },
+    {
+      "type": "circle",
+      "at": [
+        269.9,
+        160
+      ],
+      "beat": 12.5
+    },
+    {
+      "type": "circle",
+      "at": [
+        421.1,
+        160
+      ],
+      "beat": 14.5
+    },
+    {
+      "type": "traveler",
+      "along": "u1",
+      "period": 2.6
+    },
+    {
+      "type": "traveler",
+      "along": "u2",
+      "period": 2.6,
+      "phase": 0.5
+    },
+    {
+      "motif": "branch",
+      "id": "p",
+      "at": [
+        108.5,
+        160
+      ],
+      "length": 443.5,
+      "trunkStyle": "none",
+      "startKind": null,
+      "head": null,
+      "laneGap": 56,
+      "radius": 10,
+      "branches": [
+        {
+          "from": 0.12,
+          "to": 0.27,
+          "lane": 1,
+          "commits": [
+            0.5
+          ]
+        }
+      ]
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.tip0",
+      "text": "Truck",
+      "dx": 0,
+      "dy": -14,
+      "anchor": "end",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        239.5,
+        80
+      ],
+      "text": "update from parent",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "p.lane0",
+      "text": "proposal",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

@@ -3,7 +3,7 @@ title: "Tracing history"
 description: "Find who changed a value, when, on which branch, and how it reached the branch you are on, and undo a change without erasing the record."
 ---
 
-import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 Flow keeps every change it records. Each edit is stored with the branch it was made on, the person or agent who made it, and when. Branch actions add to that record instead of rewriting it: a merge adds a merge record, a revert adds changes that undo earlier ones, and a deleted branch can be restored. [Branching](/core-concepts/branching#every-change-is-traceable) explains why.
 
@@ -17,9 +17,7 @@ That means you can answer four questions about any value: who set it, when, on w
 
 In this example, the battery systems engineer raised **Battery Usable Capacity** in a trade study branch, in two steps, and the branch then merged into Base:
 
-<VisualPlaceholder kind="Diagram" title="One value's history across a merge">
-  Two lanes: Base and Trade-study, following one field, Battery Usable Capacity. Base: "100 kWh". Trade-study branches and records "110 kWh", then "120 kWh", each with the battery systems engineer's avatar and a date. Trade-study merges into Base, tagged "Merge: Trade-study". Beside it, a mock of the item's History tab: a "Merged from Trade-study" section containing "120 kWh" by the battery systems engineer, and an earlier Base section with "100 kWh". The 110 kWh dot is shown on the branch only, with a note: "Intermediate values stay on the branch, not on Base".
-</VisualPlaceholder>
+<Illustration name="history-value-across-merge" width={600} alt="Battery Usable Capacity is raised in two steps on a proposal, then merged. Base records the final value; the intermediate value stays on the branch." />
 
 On Base, the item shows 120 kWh under **Merged from Trade-study**, attributed to the engineer who last changed it on the branch. The merge record names who merged it and holds the branch's reviews and discussion. Intermediate values from the branch, such as 110 kWh, are not repeated on the parent.
 
@@ -45,9 +43,7 @@ When you choose a revert from the history menu, choose where the undo goes:
 - **Revert and create a new branch** puts the undo in a branch so it can be reviewed and merged like any other change.
 - **Revert in this branch** makes the undo directly, as your edit. It is not available on protected branches.
 
-<VisualPlaceholder kind="Diagram" title="Undo without erasing">
-  Two lanes: Base and Revert. Base: "100 kWh", then "120 kWh (merged)". A Revert lane branches after it with one reverse-marked dot "Back to 100 kWh", then merges into Base tagged "Merge: Revert". All three Base dots remain visible, so the value's path reads 100 → 120 → 100 with nothing removed. Small alternative path drawn dashed: "Revert in this branch" writing the same reverse dot directly on Base as your edit.
-</VisualPlaceholder>
+<Illustration name="history-undo-without-erasing" width={600} alt="A revert adds the opposite change on its own branch and merges it. The value reads 100, then 120, then 100 again, and both changes stay in history." />
 
 To undo everything a merge or milestone did, revert its baseline instead. See [Baselining](/branching/baselining#revert-a-baseline).
 

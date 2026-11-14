@@ -4,6 +4,7 @@ description: "Bring existing spreadsheets, documents, and connected tools into F
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 Most programs already have their engineering information somewhere: spreadsheets, specifications, review decks, models, and issue trackers. Choose the route by the source, and start with a small sample before you bring in everything.
 
@@ -18,9 +19,7 @@ Most programs already have their engineering information somewhere: spreadsheets
 | A connected tool | That integration's workflow | Access scope, and whether it reads, imports, or writes |
 | Your own scripts or AI clients | The [Customer API](/api/examples/batch-writes) or [Flow MCP](/api/mcp/overview) | Authentication, branch, and permissions |
 
-<VisualPlaceholder kind="Diagram" title="Routes into Flow">
-  Five sources on the left (a spreadsheet, a PDF specification, a slide deck, a connected tool such as Jira or GitHub, and a script calling the API) each with an arrow into one Flow project on the right, labelled by route: Import, Extract with the agent, Integration, API/MCP. A small branch icon on the import arrow shows imports land in a new branch.
-</VisualPlaceholder>
+<Illustration name="getting-data-routes" width={640} alt="Documents and tools feed one Flow project: imports and agent extraction bring documents in, integrations and the API keep tools connected, and structured items come out." />
 
 ## Import a spreadsheet
 

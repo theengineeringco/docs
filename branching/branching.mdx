@@ -4,6 +4,7 @@ description: "Create a branch, keep a connected change together, and update it f
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 A branch gives a change its own working state. The parent stays as it is until the branch merges. Keep everything one change needs in the same branch: the items it edits, the relationships it adds, and the evidence that goes with them. [Branching](/core-concepts/branching) explains why Flow works this way.
 
@@ -22,9 +23,7 @@ Creating a branch copies nothing. The branch starts from its parent's state at t
 
 A sub-branch starts from another branch and merges back into it, so you can try an idea on top of a proposal without touching the proposal itself:
 
-<VisualPlaceholder kind="Diagram" title="A sub-branch on a proposal">
-  Three lanes: Base, Trade-study, Pack-layout. Base starts at "Agreed design". Trade-study branches from it with "120 kWh". Pack-layout branches from Trade-study (not from Base) with "New module layout", then merges back into Trade-study ("Merged sub-branch"). Trade-study then merges into Base, tagged "Merge: Trade-study". Callout on the fork point: "Nothing copied; the branch starts from its parent's state here".
-</VisualPlaceholder>
+<Illustration name="branching-sub-branch" width={600} alt="A sub-branch starts from a proposal, not from Base, and merges back into the proposal. The proposal then merges into Base." />
 
 Viewers cannot create branches, and editor groups can limit who edits a branch. See [Managing branches](/branching/managing-branches).
 
@@ -43,9 +42,7 @@ The parent keeps moving while you work. Updating brings that newer work into you
 
 A conflict is the same information changed in incompatible ways on both sides, such as a field edited differently or an item deleted on one side and edited on the other.
 
-<VisualPlaceholder kind="Diagram" title="Updating from the parent">
-  Two lanes: Base and Proposal. Base: "Cd ≤ 0.28", then later "Regulation update". Proposal branches before the update with "Your change". An arrow from "Regulation update" down into Proposal, labelled "Update from parent", lands after "Your change"; Proposal then continues with "More work". Base is unchanged by the update. Inset: one conflicting field shown as two values side by side with Keep parent and Keep current, and a note that keeping the parent's value is recorded as your change. Small label on the update dot: "Listed in Parent update history; can be reverted".
-</VisualPlaceholder>
+<Illustration name="branching-update-from-parent" width={600} alt="A newer change on Base is taken into an open proposal. A field both changed is a conflict you settle once; Base itself is unchanged." />
 
 Updating changes only your branch. Your own changes keep their authors and times. Where you choose **Keep parent**, the parent's value is written to your branch as a change by you, so the choice is in the record. The parent changes when your branch is reviewed and merged.
 
@@ -65,9 +62,7 @@ Sometimes a proposal is started from the wrong branch, such as Base instead of T
 2. Pick the new parent.
 3. Flow creates a new branch under it, holding a copy of every change from your branch with its original author and time.
 
-<VisualPlaceholder kind="Diagram" title="Rebase onto: copying work to a new parent">
-  Lanes: Base, Truck, Proposal, Proposal-on-Truck. Truck branches from Base with "Cd ≤ 0.35". Proposal was started from Base by mistake with "Towing loads". A dashed copy arrow runs from Proposal's dot to a new lane, Proposal-on-Truck, branching from Truck, with "Towing loads (copied)" carrying the same author avatar and timestamp. The original Proposal lane stays intact, greyed, with a note "Unchanged; delete when the copy is right". Side note listing what comes along (changes, comments) and what does not (sub-branches, baselines, reviews).
-</VisualPlaceholder>
+<Illustration name="branching-rebase" width={600} alt="A proposal started from Base by mistake is copied onto Truck. The copy keeps each change's author and time; the original proposal is left unchanged." />
 
 Your original branch stays as it was. Changes to items the new parent does not have are left out, and Flow lists them. Comments come with the copy; sub-branches, baselines, and reviews do not. When the copy is right, delete the original.
 

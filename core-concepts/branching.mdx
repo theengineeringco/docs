@@ -3,7 +3,7 @@ title: "Branching"
 description: "Manage variation in the design and develop changes in parallel, while preserving an agreed state and its history."
 ---
 
-import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 Hardware teams change their design while depending on it. A target gets revised mid-study. Three disciplines change related parts in the same week. One platform becomes three products.
 
@@ -18,9 +18,9 @@ The most important idea in Flow is that history is never lost. Every edit is rec
 - **Reverting** adds changes that undo earlier ones, usually in a branch of its own that is reviewed like any other. The changes it undoes stay in history.
 - **Deleting** a branch closes it. Its changes are kept, and it can be restored.
 
-<VisualPlaceholder kind="Diagram" title="Every change stays on the record">
-  Four lanes: Base, Truck, Trade-study, Revert. Base: "Agreed design", then later "Regulation update". Truck branches from Base with "Cd ≤ 0.35". Trade-study branches from Truck with "120 kWh". The regulation update flows down into Truck ("Update from parent"), then into Trade-study. Trade-study adds "Range 520 km", then merges into Truck, where the merge dot carries a tag "Merge: Trade-study" with small icons for who merged, reviews, and discussion. A Revert lane leaves Truck after the merge with one dot "Undo range" drawn as a reverse marker. Every dot stays visible to the end; nothing is erased. Callout: "Who, when, which branch, and how it got here" pointing at the Range 520 km dot.
-</VisualPlaceholder>
+<Illustration name="branching-record" width={600} alt="A proposal branches from Base, takes in a newer change from Base, and merges back as a recorded merge. A revert later undoes part of it on its own branch, and every change stays visible." />
+
+Here, a proposal takes in a newer change from Base, merges back under a recorded merge, and a revert later undoes part of it on a branch of its own. Each step adds to the record; none removes anything.
 
 So for any value, the team can answer: who set it, when, on which branch, and how it reached the branch they are looking at. The answer is evidence, not memory: a reviewer, an auditor, or an agent can follow the same trail. [Tracing history](/branching/tracing-history) shows where to look, and what each action records.
 
@@ -28,9 +28,7 @@ So for any value, the team can answer: who set it, when, on which branch, and ho
 
 A product family shares a lot across its models: architecture, standards, regulations, common parts. That shared information lives in a base branch, and each model branches from it to hold only what is different. In an electric vehicle family, a **Truck** branch might relax the drag target and add towing loads, while a **Coupe** inherits the base values. A change in the base can flow to every model without being re-entered.
 
-<VisualPlaceholder kind="Diagram" title="Variants and proposals">
-  Base on top with "Shared design". Three long-lived variant lanes below it run to the right edge without merging back: Coupe ("Coupe body"), Truck ("Cd ≤ 0.35, towing"), SUV ("SUV seating"), drawn solid. Under Truck, two short proposal lanes drawn dashed: Battery-study ("120 kWh"), which merges back into Truck with a tag "Merge: Battery study", and BMS-update ("New thermal limits"), still open. Labels distinguish "Variant: never merges" from "Proposal: merges back when accepted".
-</VisualPlaceholder>
+<Illustration name="branching-variants" width={600} alt="Three variants branch from Base and run alongside it without merging back. Proposals branch from a variant and merge back into it when accepted." />
 
 Coupe, Truck, and SUV are long-lived variants of the shared design. Battery-study and BMS-update are proposals on Truck: each starts from Truck, and each merges back into it when it is accepted.
 

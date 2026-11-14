@@ -4,6 +4,7 @@ description: "Compare two branches or two points in history without changing eit
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
 
 A comparison shows what differs between two states of the project: two branches, a branch and one of its baselines, or two points in one branch's history. Nothing is applied. A comparison between two branches includes differences from both histories; to see only what a branch would merge, open its review instead.
 
@@ -13,9 +14,7 @@ A comparison shows what differs between two states of the project: two branches,
 2. On each side, pick a **Branch** and a **Point**. The **Point** list opens on **Current** and the branch's baselines. To start from a single change instead, choose **Changes up to …** on one of them and pick a change; the changes are listed newest first and you can search them. Put the starting state on the left and the resulting state on the right.
 3. Open **Compare changes** and select an item to see its changed fields and relationships.
 
-<VisualPlaceholder kind="Diagram" title="What a comparison includes">
-  Two lanes: Base and Proposal. Base: "Agreed design" tagged "Design review 1", later "Change C". Proposal branches at Design review 1 with "Change A" and "Change B". Three brackets underneath: (1) Base at Design review 1 vs Proposal at Current, covering A and B; (2) Base at Current vs Proposal at Current, covering A, B, and C; (3) the Proposal's review, covering A and B only, labelled "What would merge".
-</VisualPlaceholder>
+<Illustration name="comparing-what-a-comparison-includes" width={600} alt="A proposal made changes A and B; Base has since made change C. The proposal's review shows only A and B, what would merge. Comparing the two branches now also shows C." />
 
 Comparing **Base** at *Design review 1* with **Proposal** at **Current** shows changes A and B. Comparing **Base** at **Current** with **Proposal** at **Current** also shows change C, from the other side. Open the proposal's review to see only what it would merge: A and B.
 

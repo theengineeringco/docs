@@ -1,45 +1,44 @@
 # Diagrams
 
-For now, every diagram is a `VisualPlaceholder` with `kind="Diagram"`. The final
-diagrams will be drawn in Flow and replace the placeholders later. Do not use Mermaid
-or other generated diagrams on product pages.
+Every diagram on a product page is drawn with the `flow-illustration` skill
+(`.claude/skills/flow-illustration`). Do not use Mermaid, hand-written SVG, or other
+generated diagrams.
 
-## Writing the description
+## Add or change a diagram
 
-The description is the brief for whoever draws the diagram in Flow, so it must be
-complete on its own:
+1. Write the claim in one sentence. If there is no claim, there is no diagram.
+2. Start from the nearest spec in `illustrations/` (this skill), or from the skill's
+   concept map and examples for a new kind of figure.
+3. Save the spec as `illustrations/<page-group>-<topic>.json`. Its `description` becomes
+   the image's alt text, so write it as one or two plain sentences.
+4. Render light and dark into `images/illustrations/`:
+   `python3 .claude/skills/flow-product-docs/illustrations/build.py <name> --png <scratch dir>`.
+   Fix every lint warning, then look at both PNGs.
+5. Place it with the `Illustration` snippet after the paragraph it illustrates:
+   `<Illustration name="<name>" alt="<description>" />`, imported from
+   `/snippets/illustration.jsx`.
+6. Follow it with a sentence that says what it shows when the surrounding text doesn't.
 
-- **Layout**: what the lanes or boxes are and how they are arranged.
-- **Nodes**: every element, with its exact label from the reference project.
-- **Connections**: every arrow or merge, with its label and direction.
-- **Emphasis**: callouts, notes, or styling that carry the point of the section.
-- **Takeaway**: what the reader should conclude, said in a callout or note.
-
-Mirror each placeholder as one row in `shot-list.md`.
-
-## Illustrations
-
-Concept glyphs, how-it-works explainers, and section heroes are drawn with the
-`flow-illustration` skill (`.claude/skills/flow-illustration`). Start from its concept map
-(`references/concepts.md`), copy the nearest example, and render the spec. Its marks have
-fixed meanings, so don't reuse them for other things in the same page.
-
-Branching and history diagrams stay as placeholders until they are drawn in Flow. They
-need the exact `Merge:` and `Revert:` labels and the arrows below, which the illustration
-system does not draw.
+Labels are lowercase mono, three words or fewer; proper names (Base, Truck, GitHub) keep
+their case. Explanation belongs in the page, not in the figure.
 
 ## Branching and history diagrams
 
-Draw branches as horizontal lanes, Base on top, with time running left to right. A
-dot on a lane is a recorded change, labelled with the value or change, not "commit".
+Use the `branch` motif: Base is the trunk, time runs left to right, and Base's live state
+is the node at the right end.
 
-- A merge into a parent is tagged `Merge: <branch>`, matching the record Flow creates.
-- An update from the parent is an arrow from the parent's lane down into the child,
-  labelled **Update from parent**.
-- Baselines are flags above a dot. Reverts are reverse-marked dots on a
-  `Revert: <name>` lane.
-- Variants run to the right edge without merging back and are drawn solid. Proposals
-  are short and drawn dashed.
-- Never remove a dot to show an undo or a delete. Fade, close, or reverse it, so the
-  diagram shows that history is kept.
-- Use one diagram per action. Follow it with a sentence that says what it shows.
+- A recorded change is a circle on its lane. A result (a merge landing, a settled
+  conflict) is a blue square.
+- A merge is the lane returning to its parent with a baseline tick; label it
+  `merge recorded`.
+- A proposal is a dashed lane that merges back. A variant is a solid lane that runs to
+  the right edge and never merges.
+- An update from the parent is a fine line from the parent's change to the child, with a
+  traveller showing direction; label it `update from parent`.
+- A revert, rebase copy, move, or restore is dotted: it moves work in time. A revert
+  branch's change is a ghost circle.
+- A conflict is the one mustard flag; at most two flags per figure.
+- Never remove a mark to show an undo or a delete. Ghost it, close it, or add the reverse,
+  so the figure shows that history is kept.
+- A sub-branch, or a lane off a variant, is a second `branch` motif placed on the parent
+  lane with `trunkStyle: "none"`, `startKind: null`, and `head: null`.
