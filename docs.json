@@ -14,51 +14,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "API",
-        "groups": [
-          {
-            "group": "Quickstart",
-            "pages": [
-              "api",
-              "api/quickstart",
-              "api/authentication",
-              "api/conventions",
-              "api/reference",
-              "api/examples/read-entities",
-              "api/examples/batch-writes",
-              "api/examples/comment-threads"
-            ]
-          },
-          {
-            "group": "Automations",
-            "pages": [
-              "api/automations/overview",
-              "api/automations/webhooks",
-              "api/examples/automations"
-            ]
-          },
-          {
-            "group": "Flow MCP",
-            "pages": [
-              "api/mcp/overview",
-              "api/mcp/connect",
-              "api/mcp/tools"
-            ]
-          },
-          {
-            "group": "Endpoints",
-            "openapi": {
-              "source": "/openapi/customer-api.json",
-              "directory": "api/endpoints"
-            }
-          }
-        ],
-        "icon": {
-          "name": "code",
-          "library": "lucide"
-        }
-      },
-      {
         "tab": "Docs",
         "icon": {
           "name": "book-marked",
@@ -181,6 +136,51 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "API",
+        "groups": [
+          {
+            "group": "Quickstart",
+            "pages": [
+              "api",
+              "api/quickstart",
+              "api/authentication",
+              "api/conventions",
+              "api/reference",
+              "api/examples/read-entities",
+              "api/examples/batch-writes",
+              "api/examples/comment-threads"
+            ]
+          },
+          {
+            "group": "Automations",
+            "pages": [
+              "api/automations/overview",
+              "api/automations/webhooks",
+              "api/examples/automations"
+            ]
+          },
+          {
+            "group": "Flow MCP",
+            "pages": [
+              "api/mcp/overview",
+              "api/mcp/connect",
+              "api/mcp/tools"
+            ]
+          },
+          {
+            "group": "Endpoints",
+            "openapi": {
+              "source": "/openapi/customer-api.json",
+              "directory": "api/endpoints"
+            }
+          }
+        ],
+        "icon": {
+          "name": "code",
+          "library": "lucide"
+        }
       },
       {
         "tab": "Release Notes",
