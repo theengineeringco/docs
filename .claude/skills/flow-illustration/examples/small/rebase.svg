@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Rebase onto the latest baseline</title><desc>A branch's changes are replayed onto a newer point of the trunk, so it builds on the latest baseline.</desc><path d="M40 124L152 124" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M56.8 124L56.8 78L109.44 78" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M109.44 78L111.49 75.62L113.54 73.39L115.59 71.32L117.64 69.4L119.68 67.63L121.73 66.01L123.78 64.56L125.83 63.25L127.88 62.1L129.93 61.1L131.98 60.25L134.03 59.56L136.07 59.02L138.12 58.64L140.17 58.41L142.22 58.33L144.27 58.41L146.32 58.64L148.37 59.02L150.42 59.56L152.46 60.25L154.51 61.1L156.56 62.1L158.61 63.25L160.66 64.56L162.71 66.01L164.76 67.63L166.81 69.4L168.85 71.32L170.9 73.39L172.95 75.62L175 78" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M152 124L152 78L198 78" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="90.4" cy="124" r="2.5" fill="#8A8985"/>
+<circle cx="118.4" cy="124" r="2.5" fill="#8A8985"/>
+<circle cx="56.8" cy="124" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="83.12" cy="78" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="109.44" cy="78" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="152" cy="124" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="148" y="120" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="175" cy="78" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<rect x="193.5" y="73.5" width="9" height="9" fill="#1F3ACB"/></svg>

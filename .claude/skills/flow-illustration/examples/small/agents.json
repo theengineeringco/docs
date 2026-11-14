@@ -1,0 +1,23 @@
+{
+  "name": "agents",
+  "title": "A fleet of agents",
+  "description": "Agents orbit the live graph, working the whole program at once.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "orbit",
+      "at": [120, 100],
+      "rings": [34, 60],
+      "spin": 40,
+      "satellites": [
+        {"ring": 0, "angle": -100, "kind": "c"},
+        {"ring": 0, "angle": 40, "kind": "c"},
+        {"ring": 0, "angle": 160, "kind": "c"},
+        {"ring": 1, "angle": -135, "kind": "s"},
+        {"ring": 1, "angle": -45, "kind": "s"},
+        {"ring": 1, "angle": 70, "kind": "s"},
+        {"ring": 1, "angle": 150, "kind": "s"}
+      ]
+    }
+  ]
+}

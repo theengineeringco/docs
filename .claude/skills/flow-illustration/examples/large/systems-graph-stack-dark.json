@@ -1,0 +1,73 @@
+{
+  "name": "systems-graph-stack-dark",
+  "theme": "dark",
+  "title": "A living systems graph",
+  "description": "The systems graph stack on the site's deep neutral surface: marks keep their meaning, blue lifts to the ramp's light step.",
+  "size": [720, 560],
+  "camera": {"view": "shelf"},
+  "padding": 36,
+  "layers": [
+    {
+      "motif": "stack",
+      "id": "sg",
+      "size": [240, 170],
+      "gap": 104,
+      "labelCorner": "left",
+      "planes": [
+        {
+          "label": "tests",
+          "motif": "rows",
+          "at": [36, 45],
+          "count": 3,
+          "gap": 40,
+          "width": 168,
+          "mids": "c",
+          "ends": "csc",
+          "starts": "C"
+        },
+        {
+          "label": "cad",
+          "motif": "grid",
+          "at": [40, 37],
+          "cols": 6,
+          "rows": 4,
+          "gap": 32,
+          "dotSize": 1.8,
+          "dotColor": "line",
+          "selected": [[2, 1], [4, 2]]
+        },
+        {
+          "label": "architecture",
+          "motif": "graph",
+          "layout": "radial",
+          "at": [120, 85],
+          "size": [170, 124],
+          "rings": [4, 7],
+          "seed": 6,
+          "squareCount": 0,
+          "center": "c"
+        },
+        {
+          "label": "requirements",
+          "motif": "tree",
+          "at": [34, 85],
+          "direction": "right",
+          "route": "straight",
+          "branching": [2, 2],
+          "spacing": [74, 34],
+          "levels": ["n", "c", "c"]
+        }
+      ],
+      "connectors": [
+        {"from": "sg.p3.leaf1", "to": "sg.p2.r1n2", "style": "accentDashed"},
+        {"from": "sg.p2.r1n2", "to": "sg.p1.2,1", "style": "accentDashed"},
+        {"from": "sg.p1.2,1", "to": "sg.p0.end1", "style": "accentDashed"}
+      ]
+    },
+    {
+      "type": "traveler",
+      "along": ["sg.p3.leaf1", "sg.p2.r1n2", "sg.p1.2,1", "sg.p0.end1"],
+      "period": 5.2
+    }
+  ]
+}

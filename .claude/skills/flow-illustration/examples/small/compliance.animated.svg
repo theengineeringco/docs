@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi4ch44"><title>Every clause checked</title><desc>Checks sweep the requirements on every change: done, in progress, and one finding.</desc><style>.fi4ch44-p,.fi4ch44-f,.fi4ch44-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi4ch44-p{animation-name:fi4ch44-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi4ch44-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi4ch44-f{animation-name:fi4ch44-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi4ch44-r{animation-name:fi4ch44-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi4ch44-d{animation-name:fi4ch44-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi4ch44-m{animation:fi4ch44-march 2.6s linear infinite}
+.fi4ch44-pulse{animation:fi4ch44-pulse 2.4s ease-in-out infinite}
+@keyframes fi4ch44-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi4ch44-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi4ch44-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi4ch44-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi4ch44-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi4ch44-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi4ch44 *{animation:none!important}.fi4ch44 .fi4ch44-d{stroke-dashoffset:0}.fi4ch44 .fi4ch44-t{display:none}}</style><g class="fi4ch44-p" style="animation-delay:0.25s"><rect x="51.5" y="70.5" width="7" height="7" fill="#1F3ACB"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.27s"><rect x="77.5" y="70.5" width="7" height="7" fill="#1F3ACB"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.29s"><rect x="103.5" y="70.5" width="7" height="7" fill="#1F3ACB"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.11s"><circle cx="133" cy="74" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.13s"><circle cx="159" cy="74" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.15s"><circle cx="185" cy="74" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.27s"><rect x="51.5" y="96.5" width="7" height="7" fill="#1F3ACB"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.29s"><rect x="77.5" y="96.5" width="7" height="7" fill="#1F3ACB"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.31s"><path d="M107 94.24L112.76 100L107 105.76L101.24 100Z" fill="#E29B03" stroke-linejoin="round"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.13s"><circle cx="133" cy="100" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.15s"><circle cx="159" cy="100" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.17s"><circle cx="185" cy="100" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.29s"><rect x="51.5" y="122.5" width="7" height="7" fill="#1F3ACB"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.11s"><circle cx="81" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.13s"><circle cx="107" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.15s"><circle cx="133" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.17s"><circle cx="159" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi4ch44-p" style="animation-delay:0.19s"><circle cx="185" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g></svg>

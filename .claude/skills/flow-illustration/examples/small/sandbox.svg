@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Sandboxed analysis</title><desc>Calculations run in an isolated box; only the result comes back into the reasoning.</desc><path d="M96 68L160 68L160 132L96 132Z" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M62 100L96 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M160 100L194 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="112" cy="84" r="1.8" fill="#8A8985"/>
+<circle cx="128" cy="84" r="1.8" fill="#8A8985"/>
+<circle cx="144" cy="84" r="1.8" fill="#8A8985"/>
+<circle cx="112" cy="100" r="1.8" fill="#8A8985"/>
+<circle cx="128" cy="100" r="1.8" fill="#8A8985"/>
+<circle cx="144" cy="100" r="1.8" fill="#8A8985"/>
+<circle cx="112" cy="116" r="1.8" fill="#8A8985"/>
+<circle cx="128" cy="116" r="1.8" fill="#8A8985"/>
+<circle cx="144" cy="116" r="1.8" fill="#8A8985"/>
+<circle cx="62" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="58" y="96" width="8" height="8" fill="#1F3ACB"/>
+<rect x="189.5" y="95.5" width="9" height="9" fill="#1F3ACB"/></svg>

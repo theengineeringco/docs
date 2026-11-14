@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Verified and validated, tracked apart</title><desc>Two separate signals per item: built right (squares) and built the right thing (still pending).</desc><path d="M52 76L100 76" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M100 76L148 76" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M148 76L192 76" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M52 124L100 124" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M100 124L148 124" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M148 124L192 124" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="52" cy="76" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<rect x="95.5" y="71.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="143.5" y="71.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="187.5" y="71.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="52" cy="124" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<rect x="95.5" y="119.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="148" cy="124" r="12" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/><circle cx="148" cy="124" r="4" fill="none" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="192" cy="124" r="12" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/><circle cx="192" cy="124" r="4" fill="none" stroke="#C9C8C4" stroke-width="1"/></svg>

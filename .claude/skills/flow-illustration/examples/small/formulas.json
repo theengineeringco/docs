@@ -1,0 +1,18 @@
+{
+  "name": "formulas",
+  "title": "Live parameters",
+  "description": "Values flow from the items they depend on into one computed result that stays current.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "fan",
+      "at": [186, 100],
+      "direction": "left",
+      "inbound": true,
+      "via": 54,
+      "reach": 130,
+      "spread": 96,
+      "targets": "c"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "branching-wide",
+  "title": "Run workstreams in parallel",
+  "description": "Branches fork off the live baseline, merge back through review, and leave a baseline at every merge; a what-if stays open on the side.",
+  "size": [760, 280],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [40, 150],
+      "length": 680,
+      "laneGap": 58,
+      "radius": 10,
+      "startKind": "c",
+      "branches": [
+        {"from": 0.06, "to": 0.42, "lane": -1, "commits": [0.3, 0.7]},
+        {"from": 0.24, "to": 0.78, "lane": 1, "commits": [0.22, 0.5, 0.8]},
+        {
+          "from": 0.58,
+          "until": 0.95,
+          "lane": -1,
+          "commits": [0.45],
+          "tip": "g",
+          "style": "dotted",
+          "commitKind": "g"
+        }
+      ],
+      "baselines": [0.42, 0.78],
+      "baselineHeight": 14,
+      "head": 1
+    },
+    {"type": "label", "at": "b.lane0", "text": "supplier spec", "dx": 14, "dy": -14},
+    {"type": "label", "at": "b.lane1", "text": "agent: thermal rerun", "dx": 14, "dy": 22},
+    {"type": "label", "at": "b.lane2", "text": "what-if: 420 Nm", "dx": 14, "dy": -14},
+    {
+      "type": "label",
+      "at": "b.baseline0",
+      "text": "baseline 12",
+      "dx": 0,
+      "dy": 34,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": "b.baseline1",
+      "text": "baseline 13",
+      "dx": 0,
+      "dy": -24,
+      "anchor": "middle"
+    }
+  ]
+}

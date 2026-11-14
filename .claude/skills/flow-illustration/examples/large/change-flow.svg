@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="904" height="236" viewBox="0 0 904 236" fill="none" role="img"><title>One spec changes. The agents handle the rest.</title><desc>Four steps: a supplier spec lands, the graph flags what it touches, an agent works the change on a branch, an engineer reviews and merges.</desc><path d="M20 16L220 16L220 186L20 186Z" fill="#F6F6F3" stroke-linejoin="round"/>
+<path d="M242 16L442 16L442 186L242 186Z" fill="#F6F6F3" stroke-linejoin="round"/>
+<path d="M464 16L664 16L664 186L464 186Z" fill="#F6F6F3" stroke-linejoin="round"/>
+<path d="M686 16L886 16L886 186L686 186Z" fill="#F6F6F3" stroke-linejoin="round"/>
+<path d="M72 142L170 104" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M72 104L170 104" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M72 66L170 104" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M342 108L342 56" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M342 108L387.03 82" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M342 108L387.03 134" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M342 108L342 160" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M342 108L296.97 134" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M342 108L296.97 82" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M490 128L640 128" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M508 128L508 82L619 82" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M712 128L862 128" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M730 128L730 82L805 82L805 128" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M805 132L805 146" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="170" cy="104" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="166" y="100" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="72" cy="142" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="72" cy="104" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="72" cy="66" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/>
+<rect x="337.5" y="51.5" width="9" height="9" fill="#1F3ACB"/>
+<path d="M387.03 76.24L392.79 82L387.03 87.76L381.27 82Z" fill="#E29B03" stroke-linejoin="round"/>
+<circle cx="387.03" cy="134" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<rect x="337.5" y="155.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="296.97" cy="134" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<rect x="292.47" y="77.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="342" cy="108" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="338" y="104" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="508" cy="128" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="546.85" cy="82" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="583.48" cy="82" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="619" cy="82" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="615" y="78" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="730" cy="128" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="767.5" cy="82" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<rect x="800.5" y="123.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="862" cy="128" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="858" y="124" width="8" height="8" fill="#1F3ACB"/>
+<text x="34" y="38" fill="#1F3ACB" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">01</text>
+<text x="20" y="206" fill="#8A8985" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">A supplier spec lands</text>
+<text x="256" y="38" fill="#1F3ACB" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">02</text>
+<text x="242" y="206" fill="#8A8985" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">The graph flags what it touches</text>
+<text x="478" y="38" fill="#1F3ACB" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">03</text>
+<text x="464" y="206" fill="#8A8985" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">An agent works it on a branch</text>
+<text x="700" y="38" fill="#1F3ACB" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">04</text>
+<text x="686" y="206" fill="#8A8985" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">An engineer reviews and merges</text></svg>

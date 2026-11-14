@@ -1,0 +1,22 @@
+{
+  "name": "lissajous-hero",
+  "theme": "tile",
+  "title": "Engineering, without the drift",
+  "description": "The Flow symbol's 1:3 Lissajous in its rest pose, front arc solid, back arc dotted, dots at the turning points and crossings, with drafting guides.",
+  "size": [640, 400],
+  "layers": [
+    {
+      "motif": "lissajous",
+      "at": [320, 200],
+      "size": [300, 280],
+      "a": 1,
+      "b": 3,
+      "turn": 0,
+      "width": 1.5,
+      "guides": "y",
+      "guideExtent": 120,
+      "travelers": 2,
+      "travelPeriod": 13
+    }
+  ]
+}

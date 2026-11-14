@@ -1,0 +1,26 @@
+{
+  "name": "agents-graph-blue",
+  "theme": "blue",
+  "title": "A fleet of agents on the live graph",
+  "description": "The same figure on a brand-blue field.",
+  "size": [640, 400],
+  "layers": [
+    {
+      "motif": "graph",
+      "id": "g",
+      "layout": "radial",
+      "at": [320, 200],
+      "size": [560, 340],
+      "rings": [6, 11, 16],
+      "seed": 12,
+      "squareCount": 4,
+      "marks": {"1,4": "s", "1,8": "s", "0,2": "s", "2,11": "f"},
+      "chords": 0.35,
+      "center": null
+    },
+    {"type": "node", "at": [320, 200], "loop": "ping", "beat": 0},
+    {"type": "traveler", "from": [320, 200], "to": "g.r1n4", "period": 5.2, "offset": 0},
+    {"type": "traveler", "from": [320, 200], "to": "g.r1n8", "period": 5.2, "offset": 0.33},
+    {"type": "traveler", "from": [320, 200], "to": "g.r0n2", "period": 5.2, "offset": 0.66}
+  ]
+}

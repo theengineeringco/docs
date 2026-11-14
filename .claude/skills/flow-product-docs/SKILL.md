@@ -39,6 +39,7 @@ what is specific to product pages.
 | `references/verified-ui.md` | Writing steps that name UI labels or click paths |
 | `references/placement.md` | Adding a page or choosing its group |
 | `references/diagrams.md` | Specifying any diagram, especially branching and history |
+| `.claude/skills/flow-illustration` | Drawing a concept glyph, a how-it-works explainer, or a section hero |
 
 ## Examples: use sparingly
 
@@ -94,5 +95,9 @@ On top of `AGENTS.md`'s content boundaries:
 - Visuals follow the `flow-brand` skill in `theengineeringco/branch-demo`
   (`references/product-media.md` and `references/backgrounds.md`): real product pixels
   from a disposable preview with the seeded Electric Vehicle demo, on the supplied
-  logo-free backgrounds. Never AI-generated UI. Diagrams follow its line-art language.
+  logo-free backgrounds. Never AI-generated UI.
+- Abstract illustrations (concept glyphs, how-it-works explainers, section heroes) come
+  from the `flow-illustration` skill in `.claude/skills/flow-illustration`: write a spec,
+  render it, never hand-write the SVG. Branching and history diagrams follow
+  `references/diagrams.md` instead.
 - No links to pages that are not in this repository.

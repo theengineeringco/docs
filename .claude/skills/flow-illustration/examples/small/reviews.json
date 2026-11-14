@@ -1,0 +1,19 @@
+{
+  "name": "reviews",
+  "title": "Required reviewers",
+  "description": "A change waits at the gate; two of three required reviewers have approved, so it cannot merge yet.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [62, 128], "to": [182, 128]},
+    {"type": "line", "from": [100, 64], "to": [100, 90], "style": "fine"},
+    {"type": "line", "from": [136, 64], "to": [136, 114], "style": "fine"},
+    {"type": "line", "from": [172, 64], "to": [172, 90], "style": "fine"},
+    {"type": "line", "from": [100, 90], "to": [172, 90], "style": "fine"},
+    {"type": "line", "from": [136, 114], "to": [136, 142], "style": "solid", "loop": "none"},
+    {"type": "donut", "at": [62, 128]},
+    {"type": "square", "at": [100, 64]},
+    {"type": "square", "at": [136, 64]},
+    {"type": "circle", "at": [172, 64]},
+    {"type": "circle", "at": [182, 128]}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "systems-graph",
+  "title": "One live model",
+  "description": "Every item in the program connected to one live centre.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "graph",
+      "layout": "radial",
+      "at": [120, 100],
+      "size": [176, 156],
+      "rings": [5, 9],
+      "seed": 4,
+      "squareCount": 3
+    }
+  ]
+}

@@ -17,6 +17,17 @@ complete on its own:
 
 Mirror each placeholder as one row in `shot-list.md`.
 
+## Illustrations
+
+Concept glyphs, how-it-works explainers, and section heroes are drawn with the
+`flow-illustration` skill (`.claude/skills/flow-illustration`). Start from its concept map
+(`references/concepts.md`), copy the nearest example, and render the spec. Its marks have
+fixed meanings, so don't reuse them for other things in the same page.
+
+Branching and history diagrams stay as placeholders until they are drawn in Flow. They
+need the exact `Merge:` and `Revert:` labels and the arrows below, which the illustration
+system does not draw.
+
 ## Branching and history diagrams
 
 Draw branches as horizontal lanes, Base on top, with time running left to right. A

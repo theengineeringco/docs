@@ -1,0 +1,11 @@
+{
+  "name": "structured-authoring",
+  "title": "Written the same way",
+  "description": "Structured templates give every requirement the same shape, so checks can read them.",
+  "size": [240, 200],
+  "layers": [
+    {"motif": "chain", "points": [[52, 64], [100, 64], [148, 64], [192, 64]], "kinds": "Cccs"},
+    {"motif": "chain", "points": [[52, 100], [100, 100], [148, 100], [192, 100]], "kinds": "Cccs"},
+    {"motif": "chain", "points": [[52, 136], [100, 136], [148, 136], [192, 136]], "kinds": "Ccgc"}
+  ]
+}

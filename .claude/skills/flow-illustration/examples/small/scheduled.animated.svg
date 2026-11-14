@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi10dhs"><title>On a schedule</title><desc>Automations can run on a clock as well as on events: the agent comes round on time.</desc><style>.fi10dhs-p,.fi10dhs-f,.fi10dhs-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi10dhs-p{animation-name:fi10dhs-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi10dhs-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi10dhs-f{animation-name:fi10dhs-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi10dhs-r{animation-name:fi10dhs-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi10dhs-d{animation-name:fi10dhs-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi10dhs-m{animation:fi10dhs-march 2.6s linear infinite}
+.fi10dhs-pulse{animation:fi10dhs-pulse 2.4s ease-in-out infinite}
+@keyframes fi10dhs-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi10dhs-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi10dhs-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi10dhs-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi10dhs-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi10dhs-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi10dhs *{animation:none!important}.fi10dhs .fi10dhs-d{stroke-dashoffset:0}.fi10dhs .fi10dhs-t{display:none}}</style><g class="fi10dhs-p" style="animation-delay:0.05s"><circle cx="120" cy="100" r="56" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi10dhs-m"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.25s"><circle cx="176" cy="100" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.3s"><circle cx="168.5" cy="128" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.35s"><circle cx="148" cy="148.5" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.4s"><circle cx="120" cy="156" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.45s"><circle cx="92" cy="148.5" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.5s"><circle cx="71.5" cy="128" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.55s"><circle cx="64" cy="100" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.6s"><circle cx="71.5" cy="72" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.65s"><circle cx="92" cy="51.5" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.7s"><circle cx="148" cy="51.5" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.75s"><circle cx="168.5" cy="72" r="2.5" fill="#8A8985"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></g>
+<g><animateMotion path="M120 44A56 56 0 1 1 120 156A56 56 0 1 1 120 44" dur="10.4s" begin="0s" repeatCount="indefinite"/><g transform="translate(-120 -44)"><g class="fi10dhs-p" style="animation-delay:0.35s"><rect x="115.5" y="39.5" width="9" height="9" fill="#1F3ACB"/></g></g></g></svg>

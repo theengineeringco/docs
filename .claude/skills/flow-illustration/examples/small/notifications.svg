@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>The right people, notified</title><desc>When a change lands, the owners of affected items hear about it where they work.</desc><path d="M62 100L178 50" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M62 100L178 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M62 100L178 150" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="62" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="58" y="96" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="178" cy="50" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="178" cy="100" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="178" cy="150" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+
+
+</svg>

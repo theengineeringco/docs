@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>A permanent record</title><desc>Every revision is an entry: what changed, who changed it, and why.</desc><path d="M72 40L72 160" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M92 48L168 48" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92 76L148 76" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92 104L176 104" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92 132L136 132" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="72" cy="160" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="72" cy="132" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="72" cy="104" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="72" cy="76" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="72" cy="48" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="68" y="44" width="8" height="8" fill="#1F3ACB"/></svg>

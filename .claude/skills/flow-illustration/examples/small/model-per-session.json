@@ -1,0 +1,21 @@
+{
+  "name": "model-per-session",
+  "title": "Choose the model per session",
+  "description": "Each chat session runs on the model you pick; the others stay available for the next one.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "ring", "at": [120, 100], "r": 58, "style": "faint"},
+    {
+      "motif": "hub",
+      "id": "h",
+      "at": [120, 100],
+      "count": 5,
+      "radius": 58,
+      "start": -90,
+      "kinds": "c-ccc",
+      "spokeStyle": "faint"
+    },
+    {"type": "line", "from": "h.center", "to": "h.1", "style": "accentDashed", "beat": 7},
+    {"type": "square", "at": "h.1", "beat": 9}
+  ]
+}

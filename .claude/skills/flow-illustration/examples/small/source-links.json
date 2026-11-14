@@ -1,0 +1,21 @@
+{
+  "name": "source-links",
+  "title": "Traced to the source",
+  "description": "Each requirement keeps a live link to the document it came from.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [60, 56], "to": [124, 56], "style": "dotted"},
+    {"type": "line", "from": [60, 100], "to": [124, 100], "style": "dotted"},
+    {"type": "line", "from": [60, 144], "to": [124, 144], "style": "dotted"},
+    {"type": "line", "from": [124, 56], "to": [184, 100], "route": "elbow", "bend": 0.45},
+    {"type": "line", "from": [124, 100], "to": [184, 100]},
+    {"type": "line", "from": [124, 144], "to": [184, 100], "route": "elbow", "bend": 0.45},
+    {"type": "ghost", "at": [60, 56]},
+    {"type": "ghost", "at": [60, 100]},
+    {"type": "ghost", "at": [60, 144]},
+    {"type": "circle", "at": [124, 56]},
+    {"type": "circle", "at": [124, 100]},
+    {"type": "circle", "at": [124, 144]},
+    {"type": "node", "at": [184, 100]}
+  ]
+}

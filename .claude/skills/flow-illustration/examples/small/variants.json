@@ -1,0 +1,9 @@
+{
+  "name": "variants",
+  "title": "Variants",
+  "description": "Product families grow from one shared platform; each variant keeps what it shares.",
+  "size": [240, 200],
+  "layers": [
+    {"motif": "petals", "at": [120, 100], "count": 3, "radius": 38, "distance": 26, "marks": ["s"]}
+  ]
+}

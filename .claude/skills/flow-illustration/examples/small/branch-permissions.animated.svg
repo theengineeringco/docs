@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi1xlt3"><title>Branch-level permissions</title><desc>A branch can be scoped to the people and partners allowed to see and edit it.</desc><style>.fi1xlt3-p,.fi1xlt3-f,.fi1xlt3-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi1xlt3-p{animation-name:fi1xlt3-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi1xlt3-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi1xlt3-f{animation-name:fi1xlt3-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi1xlt3-r{animation-name:fi1xlt3-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi1xlt3-d{animation-name:fi1xlt3-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi1xlt3-m{animation:fi1xlt3-march 2.6s linear infinite}
+.fi1xlt3-pulse{animation:fi1xlt3-pulse 2.4s ease-in-out infinite}
+@keyframes fi1xlt3-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi1xlt3-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi1xlt3-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi1xlt3-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi1xlt3-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi1xlt3-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi1xlt3 *{animation:none!important}.fi1xlt3 .fi1xlt3-d{stroke-dashoffset:0}.fi1xlt3 .fi1xlt3-t{display:none}}</style><defs><mask id="fi1xlt3-k0" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M50 40L190 40L190 100L50 100Z" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1xlt3-d" style="animation-duration:0.7s;animation-delay:0.05s"/></mask><mask id="fi1xlt3-k1" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M48 128L198 128" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1xlt3-d" style="animation-duration:0.58s;animation-delay:0.15s"/></mask><mask id="fi1xlt3-k2" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M75 128L75 74L165 74L165 128" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1xlt3-d" style="animation-duration:0.76s;animation-delay:0.35s"/></mask></defs><path d="M50 40L190 40L190 100L50 100Z" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1xlt3-k0)" class="fi1xlt3-m"/>
+<path d="M48 128L198 128" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1xlt3-k1)" class="fi1xlt3-m"/>
+<path d="M75 128L75 74L165 74L165 128" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1xlt3-k2)" class="fi1xlt3-m"/>
+<g class="fi1xlt3-p" style="animation-delay:0.29s"><circle cx="75" cy="128" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi1xlt3-p" style="animation-delay:0.71s"><circle cx="106.5" cy="74" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi1xlt3-p" style="animation-delay:0.83s"><circle cx="138" cy="74" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g>
+<g class="fi1xlt3-p" style="animation-delay:1.15s"><rect x="160.5" y="123.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fi1xlt3-p" style="animation-delay:0.73s"><circle cx="198" cy="128" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="194" y="124" width="8" height="8" fill="#1F3ACB"/></g>
+<g class="fi1xlt3-p" style="animation-delay:0.2s"><circle cx="48" cy="128" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></g></svg>

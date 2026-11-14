@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi1jtha"><title>Defense-grade security</title><desc>The program sits inside nested boundaries: cloud, GovCloud, or your own hosting.</desc><style>.fi1jtha-p,.fi1jtha-f,.fi1jtha-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi1jtha-p{animation-name:fi1jtha-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi1jtha-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi1jtha-f{animation-name:fi1jtha-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi1jtha-r{animation-name:fi1jtha-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi1jtha-d{animation-name:fi1jtha-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi1jtha-m{animation:fi1jtha-march 2.6s linear infinite}
+.fi1jtha-pulse{animation:fi1jtha-pulse 2.4s ease-in-out infinite}
+@keyframes fi1jtha-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi1jtha-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi1jtha-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi1jtha-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi1jtha-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi1jtha-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi1jtha *{animation:none!important}.fi1jtha .fi1jtha-d{stroke-dashoffset:0}.fi1jtha .fi1jtha-t{display:none}}</style><g class="fi1jtha-p" style="animation-delay:0.05s"><circle cx="120" cy="100" r="30" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
+<g class="fi1jtha-p" style="animation-delay:0.1s"><circle cx="120" cy="100" r="52" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
+<g class="fi1jtha-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="74" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
+<g class="fi1jtha-p" style="animation-delay:0.35s"><rect x="115.5" y="21.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fi1jtha-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></g></svg>
