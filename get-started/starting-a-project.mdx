@@ -1,0 +1,57 @@
+---
+title: "Starting a project"
+description: "Choose a starting point for your program and confirm your working context before adding data."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+A project holds one program's engineering model, saved views, and working information.
+
+<VisualPlaceholder kind="Screenshot" title="New project dialog">
+  Project switcher → New project, with Name filled in ("Electric Vehicle"), Start from set to an existing project, and What to import showing Data model, Items, Views, Automations, and Skills all checked. Callouts on Start from and on the Items checkbox.
+</VisualPlaceholder>
+
+Before you create a project, check whether your team already has one. Related work belongs in the same project so its items can connect.
+
+Creating a project requires administrative access. If **New project** is unavailable, ask your Admin.
+
+## Choose a starting point
+
+Open the project switcher and choose **New project**. Enter a **Name**, then choose **Start from**:
+
+| Start from | What you get | Use it when |
+| --- | --- | --- |
+| **Default template** | Your organization's configured data model, saved views, and dashboards | Your organization has an established structure |
+| **Blank project** | An empty model with only the built-in Diagram category | You are defining a new workflow from scratch |
+| An existing project | The parts of that project you select, including its items if you choose | You are starting a program like one you already run, or from a design you already have |
+
+When you start from an existing project, **What to import** lists **Data model**, **Items**, **Views**, **Automations**, and **Skills**. Everything except **Items** starts checked. Views and items depend on the data model, so clearing **Data model** clears them too.
+
+**Items** copies the source project's current items from Base. Each copy is a new item with its own number, carrying the source item's category, field values, formulas, and links to the other copied items. The copy starts its history in the new project: branches, past history, comments, files in file fields, and pins on links stay behind. A source with more than 50,000 items cannot have its items copied, and the dialog says so.
+
+**Requires you to act:** Check the name, the starting point, and the selected parts, then choose **Create**.
+
+The project opens straight away. Copied items arrive in the background, with the percentage copied shown while they do, and copied automations are added once the items are in.
+
+## Agree the model before adding data
+
+Open the new project and look at its categories. Before the team enters many records, agree on four things:
+
+- Which categories hold your structures: systems, interfaces, requirements, analyses, tests, parts, or whatever your program tracks.
+- Which fields hold the values you compare, and where each item's owner is recorded.
+- Which relationships connect an item to the system it belongs to and the evidence behind it.
+- Where results and supporting files belong.
+
+A template answers most of these for you. A blank project needs them answered first; an Admin can configure the categories and fields. [The data model](/core-concepts/the-data-model) explains the ideas behind that configuration.
+
+## Open a view for your first task
+
+Choose a saved view that shows what you need. A systems view starts from the product breakdown. A table is the fastest way to check names, owners, and values side by side.
+
+If the project has no saved views yet, agree one starting view with your Admin. Refine it as the model grows.
+
+## Check your working context
+
+Before you create or change anything, confirm the current project and branch in the sidebar. Your role and the branch's permissions decide which actions you can take.
+
+You are ready when you can name the project, recognize the categories you need, and open a view of them. Continue with [Connecting your first items](/get-started/requirements-systems-tests).

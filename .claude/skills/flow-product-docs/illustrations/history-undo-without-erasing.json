@@ -1,0 +1,102 @@
+{
+  "title": "Undo without erasing",
+  "description": "A revert adds the opposite change on its own branch and merges it. The value reads 100, then 120, then 100 again, and both changes stay in history.",
+  "size": [
+    600,
+    300
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        150
+      ],
+      "length": 504.0,
+      "laneGap": 64,
+      "radius": 10,
+      "startKind": "c",
+      "commits": [
+        0.1
+      ],
+      "commitKind": "c",
+      "branches": [
+        {
+          "from": 0.18,
+          "to": 0.45,
+          "lane": -1,
+          "commits": [
+            0.5
+          ]
+        },
+        {
+          "from": 0.58,
+          "to": 0.86,
+          "lane": 1,
+          "commits": [
+            0.5
+          ],
+          "style": "dotted",
+          "commitKind": "g"
+        }
+      ],
+      "baselines": [
+        0.45,
+        0.86
+      ],
+      "baselineHeight": 14,
+      "head": 1
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        98.4,
+        150
+      ],
+      "text": "100 kWh",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.b0c0",
+      "text": "120 kWh",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane1",
+      "text": "revert",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.baseline1",
+      "text": "100 kWh again",
+      "dx": 0,
+      "dy": -30,
+      "anchor": "middle",
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

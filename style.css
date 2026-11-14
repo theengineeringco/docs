@@ -20,8 +20,13 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
 /* Dock the native section tabs below Maple's desktop sidebar.
    Mobile keeps Mintlify's built-in tab/menu navigation. */
 @media (min-width: 1024px) {
+  :root {
+    /* Three 2.25rem rows, two 0.125rem gaps, and 0.5rem padding above and below. */
+    --nav-tabs-dock-height: 8rem;
+  }
+
   #sidebar {
-    bottom: 7.5rem;
+    bottom: var(--nav-tabs-dock-height);
   }
 
   /* Remove Maple's empty footer above the section links. */
@@ -32,9 +37,9 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
   #navbar-transition-maple {
     inset: auto auto 0 0 !important;
     width: 19rem;
-    height: 7.5rem;
+    height: var(--nav-tabs-dock-height);
     margin-top: 0 !important;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border-top: 1px solid #e5e5e3;
     border-right: 1px solid #e5e5e3;
     border-bottom: 0;
@@ -45,11 +50,12 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
   #navbar-transition-maple .nav-tabs {
     width: 100%;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.125rem;
   }
 
   #navbar-transition-maple .nav-tabs-item {
-    min-height: 2.5rem;
+    min-height: 2.25rem;
+    height: 2.25rem;
     padding: 0 0.75rem;
     color: #737373;
     background: transparent;

@@ -1,0 +1,28 @@
+---
+title: "Confluence"
+description: "Connect Confluence so agents can search your wiki for context, and optionally create and update pages."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Connect Confluence so the design notes, procedures, and decisions in your wiki become context in Flow. Agents search for the pages that matter to a question and read them in full, instead of loading the whole wiki into every conversation. An Admin sets up one shared connection, or asks the agent to; see [Integrations list](/integrations/integrations-list).
+
+## Connect Confluence
+
+<VisualPlaceholder kind="Screenshot" title="Connecting Confluence">
+  Settings → Administration → Integrations → Confluence with Instance type set to Cloud, Atlassian Site, Email, a masked API Token, Space Key set to ENG, and the Test Connection and Save buttons. Placeholder site and email.
+</VisualPlaceholder>
+
+1. Open **Settings → Administration → Integrations → Confluence**.
+2. Under **Instance type**, choose **Cloud** or **Data Center / Server**.
+3. For Cloud, enter the **Atlassian Site** (hostname only), the account **Email**, and an **API Token** created in your Atlassian account. For Data Center, enter the **Base URL** and a **Personal Access Token**; contact Flow to approve the host first.
+4. Optionally enter a **Space Key** to limit searches to one space. Leave it blank to search every space the account can see.
+5. Select **Test Connection**, then **Save**.
+
+Agents search and read with the access of the account whose token you saved, so choose an account that sees only what Flow should.
+
+## Let agents change Confluence
+
+Turn on **Confluence Write-Back** to let agents create and update pages. Review what was sent with **View activity**. Changes made in Confluence are not undone by Flow branches. See [Branching](/core-concepts/branching).
+
+**Disconnect** removes the saved credentials for the whole workspace.

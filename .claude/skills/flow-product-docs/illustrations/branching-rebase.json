@@ -1,0 +1,119 @@
+{
+  "title": "Rebase onto a new parent",
+  "description": "A proposal started from Base by mistake is copied onto Truck. The copy keeps each change's author and time; the original proposal is left unchanged.",
+  "size": [
+    600,
+    320
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        150
+      ],
+      "length": 504.0,
+      "laneGap": 60,
+      "radius": 10,
+      "startKind": "c",
+      "branches": [
+        {
+          "from": 0.24,
+          "until": 0.56,
+          "lane": -1,
+          "commits": [
+            0.5
+          ],
+          "tip": "c"
+        },
+        {
+          "from": 0.12,
+          "until": 1,
+          "lane": 1,
+          "commits": [
+            0.15
+          ],
+          "tip": "c",
+          "style": "solid"
+        }
+      ],
+      "head": 1
+    },
+    {
+      "motif": "branch",
+      "id": "t",
+      "at": [
+        108.5,
+        210
+      ],
+      "length": 443.5,
+      "trunkStyle": "none",
+      "startKind": null,
+      "head": null,
+      "laneGap": 56,
+      "radius": 10,
+      "branches": [
+        {
+          "from": 0.45,
+          "until": 0.85,
+          "lane": 1,
+          "commits": [
+            0.45
+          ],
+          "tip": "c"
+        }
+      ]
+    },
+    {
+      "type": "line",
+      "from": "b.b0c0",
+      "to": "t.b0c0",
+      "route": "curve",
+      "style": "dotted",
+      "beat": 14
+    },
+    {
+      "type": "traveler",
+      "from": "b.b0c0",
+      "to": "t.b0c0",
+      "period": 5.2
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane0",
+      "text": "proposal",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane1",
+      "text": "Truck",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "t.lane0",
+      "text": "copy on Truck",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

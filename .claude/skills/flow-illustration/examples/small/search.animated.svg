@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fizkjvz"><title>Find anything</title><desc>Search across the whole program: the lens finds the few items that match.</desc><style>.fizkjvz-p,.fizkjvz-f,.fizkjvz-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fizkjvz-p{animation-name:fizkjvz-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fizkjvz-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fizkjvz-f{animation-name:fizkjvz-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fizkjvz-r{animation-name:fizkjvz-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fizkjvz-d{animation-name:fizkjvz-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fizkjvz-m{animation:fizkjvz-march 2.6s linear infinite}
+.fizkjvz-pulse{animation:fizkjvz-pulse 2.4s ease-in-out infinite}
+@keyframes fizkjvz-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fizkjvz-fade{from{opacity:0}to{opacity:1}}
+@keyframes fizkjvz-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fizkjvz-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fizkjvz-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fizkjvz-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fizkjvz *{animation:none!important}.fizkjvz .fizkjvz-d{stroke-dashoffset:0}.fizkjvz .fizkjvz-t{display:none}}</style><g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="36" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fizkjvz-m"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.05s"><circle cx="48" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.07s"><circle cx="72" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="96" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="120" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="144" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="168" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="192" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.07s"><circle cx="48" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="72" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="96" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.33s"><rect x="115.5" y="71.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="144" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="168" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="192" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="48" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="72" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="96" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.37s"><rect x="139.5" y="95.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="168" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="192" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="48" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="72" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.35s"><rect x="91.5" y="119.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="120" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="144" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="168" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.23s"><circle cx="192" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="48" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="72" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="96" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="120" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="144" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.23s"><circle cx="168" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.25s"><circle cx="192" cy="148" r="1.8" fill="#6B6A66"/></g></svg>

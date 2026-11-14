@@ -1,0 +1,149 @@
+{
+  "title": "The agent between the graph and your tools",
+  "description": "The agent works from the systems graph. Connected tools send events in through the boundary and receive reviews and messages back; the owner makes the call.",
+  "size": [
+    640,
+    330
+  ],
+  "layers": [
+    {
+      "motif": "graph",
+      "id": "g",
+      "at": [
+        320,
+        165
+      ],
+      "layout": "radial",
+      "rings": [
+        6
+      ],
+      "radii": [
+        1
+      ],
+      "chords": 0.5,
+      "center": "n",
+      "size": [
+        96,
+        96
+      ],
+      "offsets": [
+        -90
+      ]
+    },
+    {
+      "motif": "boundary",
+      "id": "bd",
+      "at": [
+        320,
+        165
+      ],
+      "rings": [
+        78
+      ],
+      "ports": [
+        200,
+        -20,
+        90
+      ],
+      "center": null
+    },
+    {
+      "type": "line",
+      "from": [
+        140,
+        120
+      ],
+      "to": "bd.port0",
+      "beat": 10
+    },
+    {
+      "type": "line",
+      "from": "bd.port1",
+      "to": [
+        500,
+        120
+      ],
+      "beat": 10
+    },
+    {
+      "type": "line",
+      "from": "bd.port2",
+      "to": [
+        320,
+        290
+      ],
+      "beat": 11
+    },
+    {
+      "type": "circle",
+      "at": [
+        140,
+        120
+      ],
+      "beat": 10
+    },
+    {
+      "type": "circle",
+      "at": [
+        500,
+        120
+      ],
+      "beat": 10
+    },
+    {
+      "type": "flag",
+      "at": [
+        320,
+        290
+      ],
+      "beat": 12
+    },
+    {
+      "type": "traveler",
+      "from": [
+        140,
+        120
+      ],
+      "to": "bd.port0",
+      "period": 2.6
+    },
+    {
+      "type": "label",
+      "at": [
+        140,
+        120
+      ],
+      "text": "GitHub, Jira",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        500,
+        120
+      ],
+      "text": "Slack",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        320,
+        290
+      ],
+      "text": "owner decides",
+      "dx": 16,
+      "dy": 4,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

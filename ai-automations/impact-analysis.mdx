@@ -1,0 +1,48 @@
+---
+title: "Impact analysis"
+description: "Find the connected items a branch's changes affect before you merge."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Impact analysis follows a branch's changes through the systems graph and flags connected items that may need to change too, so a proposal shows its consequences before anyone merges it. A proposal that raises Battery Usable Capacity from 100 to 120 kWh, for example, reaches range, vehicle mass, and DC fast charge time; the analysis lists those items for their owners to check.
+
+The analysis is only as complete as the links in the project. It reads the branch's changes against its parent, the same comparison [a review shows](/core-concepts/branching#make-change-inspectable).
+
+## Run an analysis
+
+<VisualPlaceholder kind="Screenshot" title="Impact analysis results">
+  Review page, Impact analysis tab on the Battery capacity trade study: the tree of affected items with one Severe impact finding (DC fast charge time no longer meets 30 min) and one Moderate impact finding (Vehicle Mass), the Re-run and More options controls and the impacted-items count on the left, Display Options on the right. The side panel open on Summary, showing the run's summary card.
+</VisualPlaceholder>
+
+1. Open the branch's **Review** page and select the **Impact analysis** tab.
+2. Select **Run impact analysis**. Opening the tab does not start an analysis.
+3. Read the result in the side panel. **Summary** shows the run's conversation, which ends with a summary card of the verdict and the most critical findings; **Comments** lists each finding as a comment you can reply to.
+4. Inspect the tree of affected items. Open each reference and check its explanation against the data.
+
+Running an analysis requires edit access and AI turned on for your organization. Read-only users can see existing results. External users cannot open impact analysis.
+
+## Read the findings
+
+- **Severe impact**: the item likely needs an update.
+- **Moderate impact**: worth knowing when you evaluate the change; no update required.
+
+Use the filter and **Display Options** to choose item types and severity levels. Hiding a finding does not resolve it.
+
+**Stop** ends a running analysis and keeps the findings returned so far. **Re-run** starts a new analysis. **More options → Clear analysis** removes the results from view.
+
+## Address findings
+
+<VisualPlaceholder kind="Screenshot" title="A finding marked Fixed">
+  The same tree after the agent updated DC fast charge time and re-ran the analysis: that finding now marked Fixed, with the Moderate impact finding still open.
+</VisualPlaceholder>
+
+Edit the affected items yourself and re-run, or ask the agent in the analysis conversation to fix them. Review its plan, use **Refine** to adjust the scope, and select **Execute** to authorize it.
+
+The agent marks each finding it addresses **Fixed** and re-runs the analysis. Check the saved edits and the remaining findings before you accept the result.
+
+## Limits
+
+- A missing link hides an impact. The analysis cannot reach an item the graph does not connect.
+- If linked items were left out, for example because they were deleted, the results say so and whether a re-run can help.
+- You can leave the tab while an analysis runs; the results load when you return.

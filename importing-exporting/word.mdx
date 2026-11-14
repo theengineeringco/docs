@@ -1,0 +1,35 @@
+---
+title: "Word"
+description: "Create an editable Word document from Reader, or give the agent a Word file to read, fill in, or update."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Word export creates an editable `.docx` snapshot of the Reader document, for reviews and handoffs outside Flow. Comments and edits made in the file do not flow back; apply them in Flow.
+
+<VisualPlaceholder kind="Screenshot" title="Reader and the exported Word file">
+  A Reader document on the left and the exported .docx open in Word on the right, showing the same headings with section numbers, a field value, and an embedded diagram image.
+</VisualPlaceholder>
+
+## Export
+
+1. Open the branch and view you want, then switch to **Reader**.
+2. Focus the part of the hierarchy you need, and check headings, fields, and embedded content.
+3. Choose **More actions → Export as → Word**.
+4. Open the file in Word and check page breaks, wide tables, and images.
+
+Note the branch and export date when you hand the file on. For a fixed reading copy, use [PDF](/importing-exporting/pdf).
+
+## Give the agent a Word file
+
+Attach a `.docx` to an agent conversation and ask about a specific section. To turn its content into items, name the item types, the fields to fill, and where the items belong. Check the results on your working branch against the source.
+
+The agent can also fill in or update a Word document. Attach a `.docx` or `.dotx` and ask it to fill placeholders from the project, or to bring stale values up to date. It returns a new file and leaves the original untouched.
+
+<VisualPlaceholder kind="Screenshot" title="A Word edit from the agent">
+  The agent chat after it updated a Word test report: the edit card shows the file name, a short list of changes, View changes, and Download. Beside it, the comparison opened by View changes shows the original and edited pages side by side, with removed text marked red and added text marked green.
+</VisualPlaceholder>
+
+The edit card lists what changed and anything still to fill. Select **View changes** to compare the original and edited documents side by side, with removed text in red and added text in green, then **Download** the new file.
+
+A Word file has no identity to match existing items. For repeatable updates, use [CSV](/importing-exporting/csv), [Excel](/importing-exporting/excel), or [ReqIF](/importing-exporting/reqif).

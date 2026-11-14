@@ -1,0 +1,40 @@
+---
+title: "Importing and exporting diagrams"
+description: "Import draw.io, Visio, or Flow diagram files, and export a diagram as editable XML or a static image."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Bring an existing drawing into a Flow diagram, or take a diagram out as XML you can import again or as an SVG or PNG image.
+
+## Import
+
+<VisualPlaceholder kind="Screenshot" title="Import diagram dialog">
+  The Import diagram dialog with a .vsdx file dropped into the Paste XML or drop a file area, the accepted formats listed under it, and When importing set to Add to current diagram rather than Replace current diagram.
+</VisualPlaceholder>
+
+1. Open a diagram you can edit.
+2. Choose **Import** from the diagram menu.
+3. Select **Browse files**, drop a file, or paste XML. Flow accepts its own diagram XML, `.drawio` and draw.io `.xml` files, and Visio `.vsdx` files.
+4. If the canvas already has shapes, choose **Replace current diagram** or **Add to current diagram**.
+5. Select **Import** and check the result.
+
+**Replace current diagram** removes every existing shape. Export the current diagram as XML first if you want to keep a copy.
+
+Only the first page of a file is imported, and shapes with no equivalent become rectangles. Common fluid power and P&ID stencils in draw.io files become [engineering symbols](/diagrams/engineering-symbols). Visio import is experimental: it brings in shapes, text, and connectors, so check labels, connectors, nesting, colors, and images closely afterward. Importing a drawing does not create links between Flow items.
+
+## Export
+
+Choose **Export** from the diagram menu, then a format:
+
+<VisualPlaceholder kind="Screenshot" title="Export menu">
+  A diagram's menu with Export open, showing SVG, PNG, XML, and the Transparent option.
+</VisualPlaceholder>
+
+- **SVG**: a scalable image.
+- **PNG**: a raster image.
+- **XML**: the diagram's shapes, item cards, nesting, and arrows, for importing into another diagram. To check a handoff, import the file into a separate diagram.
+
+Turn on **Transparent** to export an image without a background. To export or copy only part of the drawing, select those shapes and right-click for **Export as** or **Copy as**.
+
+Images use current item names and the fields each card shows. They do not update afterward. Diagram XML is not a backup of the project's items, permissions, branches, or history.

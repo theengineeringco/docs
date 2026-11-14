@@ -1,0 +1,58 @@
+{
+  "name": "change-flow",
+  "title": "One spec changes. The agents handle the rest.",
+  "description": "Four steps: a supplier spec lands, the graph flags what it touches, an agent works the change on a branch, an engineer reviews and merges.",
+  "size": [904, 236],
+  "layers": [
+    {
+      "motif": "steps",
+      "at": [20, 16],
+      "cell": [200, 170],
+      "gap": 22,
+      "labels": [
+        "A supplier spec lands",
+        "The graph flags what it touches",
+        "An agent works it on a branch",
+        "An engineer reviews and merges"
+      ],
+      "items": [
+        {
+          "motif": "fan",
+          "at": [150, 88],
+          "direction": "left",
+          "inbound": true,
+          "via": false,
+          "reach": 98,
+          "spread": 76,
+          "targets": "g",
+          "source": "n"
+        },
+        {
+          "motif": "hub",
+          "at": [100, 92],
+          "count": 6,
+          "radius": 52,
+          "start": -90,
+          "kinds": "sfcscs"
+        },
+        {
+          "motif": "branch",
+          "at": [26, 112],
+          "length": 150,
+          "branches": [
+            {"from": 0.12, "until": 0.86, "lane": -1, "commits": [0.35, 0.68], "tip": "n"}
+          ],
+          "head": null
+        },
+        {
+          "motif": "branch",
+          "at": [26, 112],
+          "length": 150,
+          "branches": [{"from": 0.12, "to": 0.62, "lane": -1, "commits": [0.5]}],
+          "baselines": [0.62],
+          "head": 1
+        }
+      ]
+    }
+  ]
+}

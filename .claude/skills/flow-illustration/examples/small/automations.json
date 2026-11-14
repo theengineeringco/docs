@@ -1,0 +1,9 @@
+{
+  "name": "automations",
+  "title": "Automations",
+  "description": "A change fires the agent, which fans the work out to every affected artifact.",
+  "size": [240, 200],
+  "layers": [
+    {"motif": "fan", "at": [54, 100], "via": 54, "reach": 122, "spread": 96}
+  ]
+}

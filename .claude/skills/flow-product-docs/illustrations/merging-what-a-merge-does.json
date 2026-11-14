@@ -1,0 +1,157 @@
+{
+  "title": "What a merge does",
+  "description": "The proposal merges into Base and closes. The merge is one record on Base, a Merge baseline, that holds who merged it, the reviews, the discussion, and the changed items.",
+  "size": [
+    600,
+    330
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        130
+      ],
+      "length": 504.0,
+      "laneGap": 64,
+      "radius": 10,
+      "startKind": "c",
+      "branches": [
+        {
+          "from": 0.12,
+          "to": 0.66,
+          "lane": -1,
+          "commits": [
+            0.25,
+            0.55,
+            0.8
+          ]
+        }
+      ],
+      "baselines": [
+        0.66
+      ],
+      "baselineSide": "below",
+      "baselineHeight": 14,
+      "head": 1
+    },
+    {
+      "type": "line",
+      "from": [
+        380.6,
+        130
+      ],
+      "to": [
+        380.6,
+        176
+      ],
+      "style": "solid",
+      "beat": 13
+    },
+    {
+      "type": "donut",
+      "at": [
+        380.6,
+        188
+      ],
+      "beat": 13.5
+    },
+    {
+      "motif": "fan",
+      "id": "rec",
+      "at": [
+        380.6,
+        188
+      ],
+      "direction": "down",
+      "via": false,
+      "reach": 72,
+      "spread": 290,
+      "count": 4,
+      "source": null,
+      "targets": "CCCC",
+      "lineStyle": "fine",
+      "beat": 14
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": "b.lane0",
+      "text": "proposal",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        380.6,
+        66
+      ],
+      "text": "closes on merge",
+      "dx": -10,
+      "dy": -12,
+      "size": 12,
+      "anchor": "end"
+    },
+    {
+      "type": "label",
+      "at": [
+        380.6,
+        188
+      ],
+      "text": "Merge: proposal",
+      "dx": 20,
+      "dy": 4,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "rec.0",
+      "text": "merged by",
+      "dx": 0,
+      "dy": 22,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": "rec.1",
+      "text": "reviews",
+      "dx": 0,
+      "dy": 40,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": "rec.2",
+      "text": "discussion",
+      "dx": 0,
+      "dy": 22,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": "rec.3",
+      "text": "changed items",
+      "dx": 0,
+      "dy": 40,
+      "size": 12,
+      "anchor": "middle"
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

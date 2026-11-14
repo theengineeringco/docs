@@ -1,0 +1,61 @@
+---
+title: "Getting data into Flow"
+description: "Bring existing spreadsheets, documents, and connected tools into Flow, then check what arrived."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
+
+Most programs already have their engineering information somewhere: spreadsheets, specifications, review decks, models, and issue trackers. Choose the route by the source, and start with a small sample before you bring in everything.
+
+## Choose the route
+
+| Source | Route | Check |
+| --- | --- | --- |
+| A few records | Create and edit items directly | Category, fields, owner, links |
+| A spreadsheet | **Import from → CSV/Excel** | Column mapping, matching, relationships, validation |
+| Another Flow project | **New project** from that project, with **Items** checked | What came across and what stayed behind; see [Starting a project](/get-started/starting-a-project) |
+| A document, deck, or image | Ask the agent to extract it | Each candidate against its source, and its mapping to your model |
+| A connected tool | That integration's workflow | Access scope, and whether it reads, imports, or writes |
+| Your own scripts or AI clients | The [Customer API](/api/examples/batch-writes) or [Flow MCP](/api/mcp/overview) | Authentication, branch, and permissions |
+
+<Illustration name="getting-data-routes" width={640} alt="Documents and tools feed one Flow project: imports and agent extraction bring documents in, integrations and the API keep tools connected, and structured items come out." />
+
+## Import a spreadsheet
+
+<VisualPlaceholder kind="Screenshot" title="Spreadsheet import: map columns">
+  The CSV/Excel import mapping step for a parts spreadsheet, with the stepper showing Upload, Item type, the category's mapping step, Destination, and Review. Columns mapped to Name, Description, Mass (kg), Owner, and Parent, and Match items by set to Source ID. Callouts on Match items by and on the stepper.
+</VisualPlaceholder>
+
+1. Open the project and branch, then a view of the records you are importing.
+2. Choose **More actions → Import from → CSV/Excel** and upload the file. If a workbook has several sheets, choose the one to import under **Sheet**.
+3. Under **Item type**, choose whether every row becomes one category or a column decides each row's category.
+4. For each category, map columns to fields and relationships: names, descriptions, values and units, owners, and the parent each row belongs under. Set **Match items by** so rows update items that already exist instead of duplicating them.
+5. Under **Destination**, choose where items without a parent in the file go: **Project root**, **Link to an item** to put them under an item you pick, or **File links only** to write only the file's own link columns.
+6. Under **Review**, check the validation and the proposed changes.
+
+A relationship column must refer to the related item consistently. If a value matches more than one item, or the same source row appears twice with different values, fix it before you continue.
+
+**Requires you to act:** Resolve blocking validation issues, then choose **Import to new branch**. The import lands in a branch of its own, so you can inspect it before it reaches shared work.
+
+Other formats, including ReqIF, SysML, Word, and PDF, are covered under [Importing and exporting](/importing-exporting/csv).
+
+## Extract from a document
+
+The agent can turn a document into candidate records. Give it a bounded task: the source, the item types you want, where they belong, what to preserve, and whether you want analysis or changes. For example, attach a design review deck and ask for its targets, with the slide each came from, under the system they apply to.
+
+If your team has [skills](/ai-automations/skills) for how items are written, the agent applies them so the results follow your house rules.
+
+Extraction and creation are separate steps. Check each candidate against its source, especially values read from tables, charts, or diagrams.
+
+## Use connected tools deliberately
+
+An integration can let Flow read information without creating a matching Flow record. Other integration actions create or update records in Flow or in the connected tool, where Flow's branches [do not reach](/core-concepts/branching#keep-the-context-visible). Check what a connection does before you depend on it. [Integrations](/integrations/integrations-list) lists what each one supports.
+
+You can also ask the agent to connect, change, or disconnect an integration. It shows the same connection form or sign-in on a card, and proposes changes such as write-back for you to confirm with your own permissions. Credentials go into the card, never into the conversation.
+
+## Check what arrived
+
+Open a handful of the new records. Check names, values, units, and owners, and follow their relationships. For an update, confirm the intended records changed and no duplicates appeared.
+
+Then continue with [Creating a branch](/get-started/creating-a-branch).

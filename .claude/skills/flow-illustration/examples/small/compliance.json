@@ -1,0 +1,20 @@
+{
+  "name": "compliance",
+  "title": "Every clause checked",
+  "description": "Checks sweep the requirements on every change: done, in progress, and one finding.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "grid",
+      "at": [55, 74],
+      "cols": 6,
+      "rows": 3,
+      "gap": 26,
+      "kind": "C",
+      "selectedKind": "square",
+      "selectedSize": 7,
+      "selected": [[0, 0], [1, 0], [2, 0], [0, 1], [1, 1], [0, 2]],
+      "flagged": [[2, 1]]
+    }
+  ]
+}

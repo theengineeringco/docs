@@ -1,0 +1,52 @@
+---
+title: "Connecting your first items"
+description: "Build one connected thread: an owned system, what it must achieve, and the evidence that shows how close it is."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Flow becomes useful once items are connected. This guide builds one short thread: a system, what it must achieve, and the evidence that shows how close it is. The same pattern works for any structure your team models, such as interfaces, parts, analyses, or risks.
+
+You need permission to edit the current branch, and a data model with the categories you plan to use. Category and field names depend on your project. If the current branch is protected, [create a branch](/get-started/creating-a-branch) first.
+
+## 1. Create a system and give it an owner
+
+In a Table view, focus the parent system, type a name in the bottom row (it reads **New** followed by the category, such as *New System...*), and press Enter. The new item goes under the focused item. When several categories can go there, choose one from the row's type button. For the full form, use the view's **New** button instead, such as **New System**.
+
+If the view is filtered by a tag or person field, such as Status or Owner, the new item starts with those filter values, so it stays in the view you created it from.
+
+<VisualPlaceholder kind="Screenshot" title="Adding an item from the Table">
+  Table view focused on Battery System, with Battery Management System as the existing child row. The bottom creation row reads "New System..." with "Battery Pack" typed in, and an active "Owner is Battery systems engineer" filter whose value shows muted under the Owner column of the creation row. Callouts on the creation row and the previewed owner.
+</VisualPlaceholder>
+
+Open the new item and describe its boundary: what is inside it and what it connects to.
+
+Set the **Owner** to the engineer closest to that part of the design. They are best placed to keep it current.
+
+## 2. Record what it must achieve
+
+Add the item that states the intent: a design target, a budget, an interface definition, or a requirement, depending on your model. Put measurable values in number fields as well as in the text, so Flow can compare them with results later.
+
+## 3. Connect it
+
+Connect the new item to the system that delivers it, and to anything it comes from, such as a higher-level target. Those links answer two questions every engineer asks: where is this delivered, and why does it exist?
+
+Check each relationship from both sides. A link's type and direction carry its meaning; two items that only sit near each other in a table are not connected. If the relationship you need is missing, ask your Admin to check the data model.
+
+## 4. Record the evidence
+
+Add how you will know the intent is met, such as a test case or an analysis, and connect it. From an item's details panel, a linked-items tab such as **Test Cases** has the same bottom row as the Table: type a name and press Enter to create an item that is already linked.
+
+Record each result as its own item with the measured value, date, and conditions, and attach the report. Keep results separate rather than overwriting one value. For example, a vehicle team with a drag coefficient target of 0.28 records three prototype builds at 0.296, 0.287, and 0.279: only the last meets the target, and keeping all three shows the trend toward it.
+
+## Check the thread
+
+Start at the system and follow it to what it must achieve, who owns it, and the latest evidence. Then start from a result and follow it back up.
+
+<VisualPlaceholder kind="Screenshot" title="One connected thread">
+  Details panel for the Body & Aerodynamics system: owner (aerodynamics engineer), the Aerodynamic Drag Coefficient target of 0.28 linked to it, the Coastdown Test linked to the target, and three results (0.296, 0.287, 0.279) with only the last marked as meeting the target.
+</VisualPlaceholder>
+
+To choose which fields the details panel shows for a category, open the panel's **Options** menu and choose **Configure Fields Visibility...**. Hidden fields stay one click away under **Show more**.
+
+If another engineer can make that trip without asking you anything, the thread is complete. [The systems graph](/core-concepts/the-systems-graph) explains why it matters; [Getting data into Flow](/get-started/getting-data-into-flow) shows how to bring in the records you already have.

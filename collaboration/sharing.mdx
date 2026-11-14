@@ -1,0 +1,51 @@
+---
+title: "Sharing"
+description: "Give people access to part of a project: which items they reach, on which branches, and what they can do."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+A share gives people or groups access from a starting item through a saved view. The view's structure and relationships decide which connected items they can reach. Use it to bring a supplier, a partner, or another team into exactly the part of the system they need, with the same context your own team works from.
+
+Admins can share. Editors can too when **Settings → Organization → Share view permissions** is set to **Admins and editors**.
+
+## Share access
+
+<VisualPlaceholder kind="Screenshot" title="Share view dialog">
+  The Share view dialog: Invite people with one group set to Can view and one email set to Can edit, and a Shared destination card with two items picked (Battery Pack and Battery Management System), two branches, and one saved view. Link options is expanded with This branch only and No expiry. The submit button reads Share 2 recipients.
+</VisualPlaceholder>
+
+1. Open an item's menu and choose **Share**, or select **Share** in the content toolbar. The **Share view** dialog opens.
+2. Under **Invite people**, add workspace members, groups, or email addresses. Choose **Can view** for reading and discussion, or **Can edit** to edit the items they reach.
+3. Under **Shared destination**, pick the items, **Branches**, and **Views** they will open. Each list takes several picks, and every recipient gets every combination. An item that does not exist on a picked branch is skipped there, and the dialog names it.
+4. Expand **Link options**. Choose **This branch only**, **This branch & children**, or **All branches**, and set an expiry if needed. The defaults are **This branch only** and no expiry.
+5. Optionally turn on **Show path above** when sharing one item, branch, and view. Recipients also see the items above the shared one, each on its own, without their other children.
+6. Check the scope, then select **Invite** or **Share**.
+
+Recipients already in your workspace get an email that links to what you shared; new email addresses get an invitation. **Copy link**, **Who has access**, and **Show path above** work for a single destination only.
+
+External recipients never see private fields. Discussions follow the shared scope.
+
+## What recipients can do
+
+Recipients open the shared views and filter them. They can comment on the items they reach, and open a review for a branch the share covers to discuss it and approve or request changes. Changed items and diffs stay limited to what the share reaches. A **Can edit** share does not let them merge or change review settings.
+
+External recipients can also connect an MCP client, such as an AI assistant, from **Settings → API & MCP** with their own API key. Tool calls reach only what the share reaches, and some operations are not available to external users. Revoking the share removes that access too. See [Connect a client](/api/mcp/connect).
+
+## Maintain the boundary
+
+<VisualPlaceholder kind="Screenshot" title="Shares settings">
+  Settings → Shares with a Branch state filter chip set to Merged, two rows whose branch shows its name with a Merged label, both rows selected, and the selection bar at the bottom of the table showing 2 selected and Revoke.
+</VisualPlaceholder>
+
+**Who has access** in the dialog lists the grants for a single destination, where you can revoke them. **Settings → Shares** lists every grant in the project, including expired ones. Editors who can share see the grants they created.
+
+1. Open **Settings → Shares**.
+2. Search, or select **Filter** to narrow by who shared, branch, **Branch state**, view, access, status, expiry, or when the share was opened or created. A share on a merged or closed branch shows the branch name with a **Merged** or **Closed** label.
+3. Select rows, then choose **Revoke** in the bar at the bottom of the table.
+
+What a recipient can reach is worked out on each branch. Editing items, relationships, or the saved view can change it, so recheck grants after restructuring. To change a share's path above, use **Add path above**, **Update path above**, or **Remove path above** on its row.
+
+Other grants, group membership, or project membership can still give someone access; a narrow share never reduces access they already have.
+
+To send teammates a link to the right context, see [Sharing views](/collaboration/sharing-views).

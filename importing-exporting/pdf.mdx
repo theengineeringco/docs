@@ -1,0 +1,36 @@
+---
+title: "PDF"
+description: "Save Reader content as a PDF, or give the agent a PDF to read, turn into items, or edit."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Export the Reader document as a PDF for a fixed reading copy. Or give the agent a source PDF, such as a specification, an interface control document, or a test report, to answer questions about it, turn its content into items, or update values in it.
+
+## Export a PDF
+
+<VisualPlaceholder kind="Screenshot" title="Saving a PDF">
+  The browser print dialog opened by Export as → PDF from Reader, with Save as PDF selected as the destination and the Reader document's first page in the preview.
+</VisualPlaceholder>
+
+1. Open the branch and view you want, switch to **Reader**, and check scope, fields, and embedded content.
+2. Choose **More actions → Export as → PDF**.
+3. In your browser's print dialog, choose to save as PDF. Check margins, background graphics, and headers and footers, then save.
+4. Open the saved file and check page breaks, wide tables, and diagram labels.
+
+Your browser controls the file name and page layout.
+
+## Read and extract from a PDF
+
+1. Attach the PDF to an agent conversation by dropping it into the message box.
+2. Name the pages and the question. The agent reads a long document in batches of pages and shows its progress; select **Stop reading** to end early.
+3. To create items, name the item types, the fields to fill, and where the items belong. Systems, interfaces, tests, and requirements can all come from the same document.
+4. Check the new items and links on your working branch. Compare values from tables and figures with the source pages, especially units, limits, and conditions.
+
+Keep the source file as evidence. Flow cannot read a PDF that needs a password to open; attach an unrestricted copy.
+
+## Ask the agent to edit a PDF
+
+Attach a PDF and ask the agent to change values, dates, or single lines. It returns a new file and leaves the original untouched. Select **View changes** on the edit card to compare pages side by side, then **Download** the result.
+
+Edits keep the page's own font, size, color, and position where they can. Nothing reflows, so this suits short changes, not rewriting paragraphs. Text that is part of a scan or outlined lettering can only be covered over, and the original stays in the file underneath, so an edit is never a redaction.

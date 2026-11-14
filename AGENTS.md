@@ -11,7 +11,7 @@
 
 ## TL;DR
 
-- Redirect `/` to the API overview at `/api`, and keep the logo linked to `/api`.
+- Redirect `/` to the Docs overview at `/get-started/what-is-flow`, and keep the logo linked there.
 - Use `/release-notes` as the only Release Notes index URL.
 - Store every dated page at lowercase `release-notes/YYYY-MM-DD`.
 - Use ISO dates in paths and filenames: `YYYY-MM-DD`.
@@ -89,10 +89,16 @@ Never publish:
 
 A short Release Notes edition is acceptable when little shipped. Significance matters more than volume.
 
+## Docs (product documentation)
+
+- The site has three tabs: **API** (customer API, automations, Flow MCP), **Docs** (product documentation), and **Release Notes**.
+- Docs pages use the `flow-product-docs` skill in `.claude/skills/` for voice, the electric vehicle example project, and placement. `docs.json` sets page order.
+- Before publishing a UI label, click path, or capability, confirm it on `theengineeringco/branch-demo` `master`. Demo and sales material is evidence of intent, not of shipped behavior.
+
 ## Customer API documentation
 
 - The API tab is separate from Release Notes. Keep the existing release-note URLs and content intact; link to that changelog from API pages.
-- API pages cover authentication, request conventions, endpoint reference, API examples, and automation setup and trigger guides. Product tutorials belong in the product documentation.
+- API pages cover authentication, request conventions, endpoint reference, API examples, and automation setup and trigger guides. Product tutorials belong in the **Docs** tab.
 - Keep the API sidebar sections exactly **Quickstart**, **Automations**, **Flow MCP**, and **Endpoints**. Put the read-entities and batch-writes guides under Quickstart. Reserve Integrations for external apps connected to Flow. Keep every generated automation endpoint under Endpoints; Automations contains guides only. Flow MCP covers client setup, authentication, permissions, and tool use.
 - Customer API pages, navigation, metadata, and generated reference must not introduce tenant/environment terminology or deployment names. Describe the required `customer` header as a workspace identifier; preserve its wire name, required status, and authentication behavior. Remove deployment-selection instructions from public API guides. Apply this rule to every future edit and sync.
 - Do not add AI-generated screenshots or UI images to API docs. Keep API-key and webhook setup instructions text-only, per the user's preference. Preserve user-supplied brand imagery on the overview page.

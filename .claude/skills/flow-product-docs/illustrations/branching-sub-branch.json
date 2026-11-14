@@ -1,0 +1,107 @@
+{
+  "title": "A sub-branch on a proposal",
+  "description": "A sub-branch starts from a proposal, not from Base, and merges back into the proposal, which records that merge. The proposal then merges into Base, which records its own.",
+  "size": [
+    600,
+    280
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        200
+      ],
+      "length": 504.0,
+      "laneGap": 58,
+      "radius": 10,
+      "startKind": "c",
+      "branches": [
+        {
+          "from": 0.1,
+          "to": 0.8,
+          "lane": -1,
+          "commits": [
+            0.12,
+            0.88
+          ]
+        }
+      ],
+      "baselines": [
+        0.8
+      ],
+      "baselineHeight": 14,
+      "head": 1
+    },
+    {
+      "motif": "branch",
+      "id": "s",
+      "at": [
+        98.4,
+        142
+      ],
+      "length": 352.8,
+      "trunkStyle": "none",
+      "startKind": null,
+      "head": null,
+      "laneGap": 58,
+      "radius": 10,
+      "branches": [
+        {
+          "from": 0.25,
+          "to": 0.7,
+          "lane": -1,
+          "commits": [
+            0.35,
+            0.7
+          ]
+        }
+      ],
+      "baselines": [
+        0.7
+      ],
+      "baselineHeight": 14
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        98.4,
+        142
+      ],
+      "text": "proposal",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "s.lane0",
+      "text": "sub-branch",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.baseline0",
+      "text": "merge recorded",
+      "dx": 0,
+      "dy": 40,
+      "anchor": "middle",
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

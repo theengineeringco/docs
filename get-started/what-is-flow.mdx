@@ -1,0 +1,50 @@
+---
+title: "What is Flow"
+description: "A source of truth that lets engineers and agents understand your physical system, and close the gap between what you intend to build and where you are."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
+
+Flow is a source of truth that lets humans and agents deeply understand your physical system. It pulls and manages context from the places your team already works, so it is clear what you intend to build and how close you are to achieving it. On that foundation, you can spin up agents that work in the background to close the gap and increase your engineering velocity.
+
+## Model any system and any structure
+
+Hardware programs run on many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, suppliers, risks, and decisions. Flow holds all of them. Your team defines the categories of items and the fields they carry, and Flow keeps them connected.
+
+<VisualPlaceholder kind="Screenshot" title="One model, several structures">
+  Tree view of the Vehicle with Battery System expanded to Battery Pack and Battery Management System. Beside each system, its linked items from other categories: an interface (Pack to BMS), a target (Battery Usable Capacity, 100 kWh), and a test result. Owner column visible.
+</VisualPlaceholder>
+
+Those connections are what make the system understandable. Follow a design decision to the systems it affects, an interface to the two teams on either side of it, or a target to the analyses and tests that back it. [The systems graph](/core-concepts/the-systems-graph) explains how the connections work, and [the data model](/core-concepts/the-data-model) how your team shapes them.
+
+## Pull context from where work happens
+
+Engineering information is spread across spreadsheets, documents, models, code, tickets, and chat. Flow brings it together: import files, extract records from documents with the agent, and connect the tools your team already uses. Each item has an owner, the engineer closest to that part of the design, who keeps it current.
+
+[Getting data into Flow](/get-started/getting-data-into-flow) covers the routes in.
+
+## See what you intend and how close you are
+
+When intent and evidence sit in the same connected model, the gap between them is visible. A target sits next to its latest measured value. A system with no verification stands out. A change shows which connected items have not caught up with it.
+
+<Illustration name="what-is-flow-intent-evidence" width={640} alt="Flow connects each target to the evidence for it: one target is met, one is close but not there, and one has no evidence yet." />
+
+Here, one target is met, one is close but not there yet, and one has no evidence at all.
+
+Views show the same items for different jobs: a table to compare and edit, a tree for structure, **Reader** to read and comment like a document, and a diagram to see how parts connect.
+
+## Change the design in parallel
+
+Branches let the design change without losing the agreed state. They hold lasting variants built from a shared base, and they hold proposals in progress, so several engineers can develop changes at once and compare each one with its parent before it is accepted. Every change is recorded, so the history behind any item can be [traced](/branching/tracing-history). [Branching](/core-concepts/branching) explains both jobs.
+
+## Close the gap with agents
+
+Agents read the same source of truth your engineers do. Chat with the agent to answer a question or make a change, save how your team does a task as a [skill](/ai-automations/skills), and set up automations that work in the background: reviewing a pull request against the system it touches, or flagging what a change affects and who owns it. [How Flow uses AI](/core-concepts/ai-automations) walks through an example.
+
+## Start here
+
+1. [Start a project](/get-started/starting-a-project).
+2. [Connect your first items](/get-started/requirements-systems-tests).
+3. [Bring in your existing information](/get-started/getting-data-into-flow).
+4. [Create a branch](/get-started/creating-a-branch) for your first proposal.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Merge with confidence</title><desc>Before a branch lands, its changes and conflicts with the baseline are surfaced.</desc><path d="M48 124L198 124" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M66 124L66 78L147 78L147 124" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="66" cy="124" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="94.35" cy="78" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="122.7" cy="78" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<path d="M147 118.24L152.76 124L147 129.76L141.24 124Z" fill="#E29B03" stroke-linejoin="round"/>
+<circle cx="198" cy="124" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="194" y="120" width="8" height="8" fill="#1F3ACB"/></svg>

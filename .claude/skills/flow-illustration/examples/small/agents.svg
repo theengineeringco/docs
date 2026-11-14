@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>A fleet of agents</title><desc>Agents orbit the live graph, working the whole program at once.</desc><circle cx="120" cy="100" r="34" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5"/>
+<circle cx="120" cy="100" r="60" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5"/>
+<circle cx="114.1" cy="66.52" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="146.05" cy="121.85" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="88.05" cy="111.63" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="73.07" y="53.07" width="9" height="9" fill="#1F3ACB"/>
+<rect x="157.93" y="53.07" width="9" height="9" fill="#1F3ACB"/>
+<rect x="136.02" y="151.88" width="9" height="9" fill="#1F3ACB"/>
+<rect x="63.54" y="125.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></svg>

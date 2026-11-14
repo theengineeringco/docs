@@ -1,0 +1,10 @@
+{
+  "name": "verification-validation",
+  "title": "Verified and validated, tracked apart",
+  "description": "Two separate signals per item: built right (squares) and built the right thing (still pending).",
+  "size": [240, 200],
+  "layers": [
+    {"motif": "chain", "points": [[52, 76], [100, 76], [148, 76], [192, 76]], "kinds": "Csss"},
+    {"motif": "chain", "points": [[52, 124], [100, 124], [148, 124], [192, 124]], "kinds": "Csdd"}
+  ]
+}

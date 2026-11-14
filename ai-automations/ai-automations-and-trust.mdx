@@ -1,0 +1,74 @@
+---
+title: "AI, automations, and trust"
+description: "Choose how much the agent may do on its own, approve what it proposes, and trace what it read, did, and changed."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Flow's agent reads the same source of truth your team does: the items in the project, how they connect, who owns them, and their history. Each conversation records what the agent read, the actions it took, and the changes it made, so you can check a result before you rely on it. The agent proposes; the owner decides.
+
+## Set up the task
+
+1. Open the chat on the branch you want the agent to work on, and reference the items involved.
+2. State the question, the outcome you want, and what the agent may change. For example:
+
+   > Check whether the linked test cases cover the operating limits on this interface. List missing evidence with item references. Do not edit data.
+
+3. Pick a model in the composer if you need to: **Auto**, **Fast**, or **Fastest**, or a specific model under **All models**. Admins set the project default in **Settings → AI → General**.
+
+The agent works with the permissions of the person running it. A Viewer cannot edit through chat, and a [skill](/ai-automations/skills) adds instructions, not permissions.
+
+## Choose how much the agent asks
+
+The composer's **Mode** menu sets how the agent handles changes in this chat.
+
+<VisualPlaceholder kind="Screenshot" title="Mode and model menus">
+  The chat composer with the Mode menu open, listing Ask first, Auto-accept, and Super user with their one-line descriptions, Ask first checked. Beside it, the model menu showing Auto, Fast, and Fastest above a collapsed All models row.
+</VisualPlaceholder>
+
+| Mode | What the agent does |
+| --- | --- |
+| **Ask first** | Proposes a plan and waits for your approval before changing anything |
+| **Auto-accept** | Makes changes without waiting for plan approval, but still asks before admin changes |
+| **Super user** | Project admins only. Makes every change without asking, admin changes included, in each turn you start in this chat |
+
+If an admin turns off **Allow Auto-accept in chats** in **Settings → AI → General**, every chat asks first.
+
+## Approve what the agent proposes
+
+<VisualPlaceholder kind="Screenshot" title="Agent plan awaiting approval">
+  An agent conversation in Ask first mode, asked to update the Battery System's targets: a Loaded skill card, the action cards expanded with links to the items they cite, and the plan footer with Esc to cancel, Refine, and Execute. Highlight Execute.
+</VisualPlaceholder>
+
+- **A plan**: select **Execute** to authorize it, **Refine** to change it, or press **Esc** to cancel.
+- **An action that needs approval**, such as a request for super user mode: select **Confirm** or **Reject**. When several actions wait, tick the ones to allow. A super user approval lasts only for that turn.
+- **A branch action**: when you ask the agent to delete, merge, rebase, or [update a branch from its parent](/branching/branching#update-from-the-parent), the chat shows a card listing each branch and any it cannot act on. Untick what you don't want, then select **Delete**, **Merge**, **Rebase**, or **Update**. The action runs with your own permissions; the agent does not run it.
+
+When an update from the parent has conflicts, the card shows each one with a suggested version and the reason. Change any choice, then select **Apply**. For several clean branches, **Update all** updates them together.
+
+<VisualPlaceholder kind="Screenshot" title="Update from parent in chat">
+  An agent conversation after asking to update the Battery capacity trade study from its parent: a card with two conflicts, each showing the parent and branch versions with one pre-selected and a one-line reason, and the Apply button.
+</VisualPlaceholder>
+
+The agent can also show whether a branch is ready to merge and what blocks it, mark a branch ready for review, and request reviewers. Protecting or unprotecting a branch takes a project admin in super user mode, and each unprotect waits for your approval.
+
+## Trace the result
+
+1. Expand the steps in the conversation. Lookups fold into one summary line; open it to see each read. **Loaded skill** shows which skill ran.
+2. Open the cited items and connected-tool references to check the evidence.
+3. Compare the reported changes with the saved fields and relationships. Every change the agent saves is recorded in the branch's history like anyone else's; [Tracing history](/branching/tracing-history) shows where to look.
+4. Check failed steps, missing evidence, and open questions. If you don't answer a question within two minutes, the agent carries on with the work that doesn't depend on it and leaves the rest untouched.
+
+A finished conversation is not engineering acceptance.
+
+## While the agent works
+
+A message you send while the agent is busy waits in a queue above the composer. Select **Send now** on its row to have the agent read it at its next step instead of after it finishes.
+
+For large tasks, the agent can hand parts to subagents, each with its own transcript. Their results come back to the conversation, and they work within your permissions.
+
+## Background work
+
+[Automations](/ai-automations/automations) run on schedules and events without anyone watching. Check an automation's instructions, triggers, and who it runs as before you save it. An automation that runs when a branch is reviewed plans first by default, so its changes wait for approval on the review page.
+
+Changes in Flow stay inspectable in their branch. Actions in connected tools take effect there, and [branches do not reverse them](/core-concepts/branching#keep-the-context-visible). [Activity](/ai-automations/activity) links each event to its run and the actions it recorded.

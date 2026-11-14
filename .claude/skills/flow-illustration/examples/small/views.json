@@ -1,0 +1,46 @@
+{
+  "name": "views",
+  "title": "Every discipline, its own view",
+  "description": "One model seen three ways: each plane is the same items with a different set in focus.",
+  "size": [240, 200],
+  "camera": "shelf",
+  "padding": 20,
+  "layers": [
+    {
+      "motif": "stack",
+      "size": [120, 92],
+      "gap": 46,
+      "links": true,
+      "planes": [
+        {
+          "marks": [
+            {"at": [24, 24], "kind": "c"},
+            {"at": [64, 20], "kind": "s"},
+            {"at": [98, 46], "kind": "c"},
+            {"at": [40, 66], "kind": "c"},
+            {"at": [84, 74], "kind": "c"}
+          ]
+        },
+        {
+          "marks": [
+            {"at": [24, 24], "kind": "c"},
+            {"at": [64, 20], "kind": "c"},
+            {"at": [98, 46], "kind": "s"},
+            {"at": [40, 66], "kind": "c"},
+            {"at": [84, 74], "kind": "s"}
+          ]
+        },
+        {
+          "marks": [
+            {"at": [24, 24], "kind": "s"},
+            {"at": [64, 20], "kind": "c"},
+            {"at": [98, 46], "kind": "c"},
+            {"at": [40, 66], "kind": "s"},
+            {"at": [84, 74], "kind": "c"}
+          ]
+        }
+      ],
+      "connectors": []
+    }
+  ]
+}

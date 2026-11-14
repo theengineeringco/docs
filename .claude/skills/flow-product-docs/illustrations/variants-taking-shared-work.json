@@ -1,0 +1,167 @@
+{
+  "title": "A variant taking in shared work",
+  "description": "The Truck variant runs alongside Base without merging back. Updating from its parent brings in every Base change since its last update at once, and its own proposals merge into it.",
+  "size": [
+    600,
+    330
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        80
+      ],
+      "length": 504.0,
+      "laneGap": 80,
+      "radius": 10,
+      "startKind": "c",
+      "commits": [
+        0.38,
+        0.6
+      ],
+      "commitKind": "c",
+      "branches": [
+        {
+          "from": 0.12,
+          "until": 1,
+          "lane": 1,
+          "commits": [
+            0.6,
+            0.9
+          ],
+          "tip": "c",
+          "style": "solid"
+        }
+      ],
+      "head": 1
+    },
+    {
+      "type": "line",
+      "id": "u",
+      "from": [
+        441.1,
+        80
+      ],
+      "to": [
+        477.1,
+        160
+      ],
+      "style": "fine",
+      "beat": 12
+    },
+    {
+      "type": "circle",
+      "at": [
+        477.1,
+        160
+      ],
+      "beat": 12.5
+    },
+    {
+      "type": "traveler",
+      "along": "u",
+      "period": 2.6
+    },
+    {
+      "type": "path",
+      "points": [
+        [
+          120.5,
+          56
+        ],
+        [
+          120.5,
+          50
+        ],
+        [
+          441.1,
+          50
+        ],
+        [
+          441.1,
+          56
+        ]
+      ],
+      "style": "solid",
+      "beat": 13
+    },
+    {
+      "motif": "branch",
+      "id": "p",
+      "at": [
+        108.5,
+        160
+      ],
+      "length": 443.5,
+      "trunkStyle": "none",
+      "startKind": null,
+      "head": null,
+      "laneGap": 56,
+      "radius": 10,
+      "branches": [
+        {
+          "from": 0.12,
+          "to": 0.27,
+          "lane": 1,
+          "commits": [
+            0.5
+          ]
+        }
+      ]
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": "b.tip0",
+      "text": "Truck",
+      "dx": 0,
+      "dy": -14,
+      "size": 12,
+      "anchor": "end"
+    },
+    {
+      "type": "label",
+      "at": [
+        274.8,
+        50
+      ],
+      "text": "all brought in",
+      "dx": 0,
+      "dy": -12,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": [
+        441.1,
+        80
+      ],
+      "text": "update from parent",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "p.lane0",
+      "text": "proposal",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

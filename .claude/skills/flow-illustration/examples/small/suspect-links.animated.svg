@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fiqwqam"><title>Suspect links</title><desc>When an upstream item changes, the links leaving it are suspect until someone reviews them: one reviewed, two to go.</desc><style>.fiqwqam-p,.fiqwqam-f,.fiqwqam-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fiqwqam-p{animation-name:fiqwqam-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fiqwqam-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fiqwqam-f{animation-name:fiqwqam-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fiqwqam-r{animation-name:fiqwqam-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fiqwqam-d{animation-name:fiqwqam-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fiqwqam-m{animation:fiqwqam-march 2.6s linear infinite}
+.fiqwqam-pulse{animation:fiqwqam-pulse 2.4s ease-in-out infinite}
+@keyframes fiqwqam-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fiqwqam-fade{from{opacity:0}to{opacity:1}}
+@keyframes fiqwqam-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fiqwqam-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fiqwqam-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fiqwqam-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fiqwqam *{animation:none!important}.fiqwqam .fiqwqam-d{stroke-dashoffset:0}.fiqwqam .fiqwqam-t{display:none}}</style><defs><mask id="fiqwqam-k0" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M62 100L176 52" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fiqwqam-d" style="animation-duration:0.48s;animation-delay:0.05s"/></mask><mask id="fiqwqam-k1" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M62 100L176 100" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fiqwqam-d" style="animation-duration:0.44s;animation-delay:0.15s"/></mask><mask id="fiqwqam-k2" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M62 100L176 148" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fiqwqam-d" style="animation-duration:0.48s;animation-delay:0.25s"/></mask></defs><path d="M62 100L176 52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fiqwqam-k0)" class="fiqwqam-m"/>
+<path d="M62 100L176 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fiqwqam-k1)" class="fiqwqam-m"/>
+<path d="M62 100L176 148" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fiqwqam-k2)" class="fiqwqam-m"/>
+<g class="fiqwqam-p" style="animation-delay:0.35s"><circle cx="62" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="58" y="96" width="8" height="8" fill="#1F3ACB"/></g>
+<g class="fiqwqam-p" style="animation-delay:0.45s"><rect x="171.5" y="47.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fiqwqam-p" style="animation-delay:0.55s"><circle cx="176" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g>
+<g class="fiqwqam-p" style="animation-delay:0.65s"><circle cx="176" cy="148" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g>
+<g class="fiqwqam-p" style="animation-delay:0.75s"><path d="M119 94.24L124.76 100L119 105.76L113.24 100Z" fill="#E29B03" stroke-linejoin="round"/></g>
+<g class="fiqwqam-p" style="animation-delay:0.85s"><g class="fiqwqam-pulse"><path d="M119 118.24L124.76 124L119 129.76L113.24 124Z" fill="#E29B03" stroke-linejoin="round"/></g></g></svg>

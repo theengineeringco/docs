@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Revert to any baseline</title><desc>Reverting proposes the inverse change on a branch, so going back is reviewed like going forward.</desc><path d="M48 84L192 84" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M84 74L84 94" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M141.6 74L141.6 94" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M192 84L188.63 86.75L185.25 89.32L181.88 91.71L178.5 93.92L175.13 95.96L171.75 97.82L168.38 99.5L165 101.01L161.63 102.34L158.25 103.49L154.88 104.47L151.5 105.26L148.13 105.88L144.75 106.33L141.38 106.59L138 106.68L134.63 106.59L131.25 106.33L127.88 105.88L124.5 105.26L121.13 104.47L117.75 103.49L114.38 102.34L111 101.01L107.63 99.5L104.25 97.82L100.88 95.96L97.5 93.92L94.13 91.71L90.75 89.32L87.38 86.75L84 84" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<circle cx="192" cy="84" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="188" y="80" width="8" height="8" fill="#1F3ACB"/>
+<rect x="79.5" y="79.5" width="9" height="9" fill="#1F3ACB"/></svg>

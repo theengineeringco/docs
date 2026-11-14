@@ -1,0 +1,42 @@
+---
+title: "Searching"
+description: "Jump to any item with search, or narrow the view you are in with Find in view."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Use search to jump to any item in the project, on this branch or any other. Use **Find in view** to narrow the view already on screen.
+
+## Search the project
+
+<VisualPlaceholder kind="Screenshot" title="Project search">
+  The Cmd+K search dialog with "thermal" typed: the Current branch / All branches tabs, name matches such as Battery Management System at the top, and a Related by meaning group below with items about cooling.
+</VisualPlaceholder>
+
+1. Select **Search** in the sidebar, or press **Cmd+K** (macOS) or **Ctrl+K** (Windows).
+2. Type part of an item's name, a value from one of its fields, or its ID.
+3. To look in other branches, switch from **Current branch** to **All branches**.
+4. Select a result. A result from another branch opens on that branch.
+
+Name matches come first, then matches in descriptions and other fields, then close matches such as small typos or different punctuation. Flow may also list items under **Related by meaning** when they use different words for the same idea.
+
+Add filters from the search row to narrow results by type or field. Filters search the current branch only, so the branch tabs are hidden while filters are applied. External users search the current branch only, without filters.
+
+With nothing typed, search shows **Recents & favorites** and **Browse**, which follows the project tree. Add an item to your favorites from its menu with **Add to favorites**.
+
+If Flow says "Try a longer search term or an exact ID.", it has not searched yet. Type more, or paste the ID.
+
+## Find in view
+
+<VisualPlaceholder kind="Screenshot" title="Find in view">
+  A table view with "thermal" in the Find in view box: matching rows narrowed, matches highlighted, the match counter, and the previous/next arrows.
+</VisualPlaceholder>
+
+1. Select the **Find in view** box in the toolbar, or press **Cmd+F** / **Ctrl+F**.
+2. Type a term. The view narrows to matching rows and highlights matches. Your filters and focus still apply.
+3. Press **Enter** and **Shift+Enter**, or use the arrows, to move between highlights.
+4. Clear the box, or press **Escape**, to restore the rows.
+
+Find in view matches the same values search does: text, numbers, dates, IDs, and links. A row can match on a hidden field without showing a highlight; open the item to see why it matched. Switching saved view or project clears the term. The Architecture tab has no Find in view.
+
+If an item is missing, check your filters and focus, or search **All branches**. Results only include items you can access. To find items by condition, such as a missing owner or a value above a limit, use [Filtering](/searching-filtering/filtering).

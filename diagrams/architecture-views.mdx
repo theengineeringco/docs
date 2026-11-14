@@ -1,0 +1,43 @@
+---
+title: "Architecture views"
+description: "See a system's breakdown and interfaces drawn straight from the model, with a layout you arrange once."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+The **Architecture** tab draws a system's breakdown from its items and links: its subsystems as cards and the interfaces that connect them. Because the drawing comes from the model, it stays current as the model changes, and you only arrange the layout.
+
+## Turn on the view
+
+The Architecture tab is in beta and appears only in workspaces where it is turned on. An administrator then chooses what it draws in **Settings → Architecture**:
+
+<VisualPlaceholder kind="Screenshot" title="Architecture settings">
+  Settings → Architecture with one node type card: Node type set to System, Interface type set to Interface, and Interface color set to a tag field on the interface type. The Add node type button sits below the card.
+</VisualPlaceholder>
+
+1. Select **Add node type** and pick the type to draw as cards, such as your system type.
+2. Set its **Interface type**: the type whose items link two cards.
+3. Optionally, set **Interface color** to a tag field on the interface type, so each connection takes the color of its option.
+
+The tab appears when the focused item's type, or the view's root type when nothing is focused, is a configured node type. If it is missing, check these settings with your administrator.
+
+## Explore the system
+
+<VisualPlaceholder kind="Screenshot" title="Battery System architecture">
+  The Architecture tab for Battery System: Battery Pack and Battery Management System as cards, joined by an interface drawn on the connection in its tag color. The card toolbar on Battery Management System shows See Details and Open architecture, and the Filter interfaces menu is open beside the diagram menu with one option unchecked.
+</VisualPlaceholder>
+
+1. Focus a system in a view and select the **Architecture** tab.
+2. Read its breakdown: child items of the node type as cards, with the interfaces between them drawn on the connections.
+3. Select a subsystem card and choose **Open architecture** to drill into it, or **See Details** to open its item.
+4. To read one kind of connection at a time, open **Filter interfaces** beside the diagram menu and clear the options you want to hide. **Show all** brings them back. The filter appears when the node type has an **Interface color**, is remembered in your browser for each project, and exports draw only what is shown.
+
+Only items of a node type become cards. Inspect other linked items in Table, Tree, or Reader. For a large scope, Flow asks before drawing; narrow the focus, or select **Generate anyway**.
+
+## Edit the architecture
+
+Positions and annotations save automatically. The layout is shared across branches; the items and links it draws come from the branch you are on.
+
+Creating subsystems or interfaces on the canvas changes the model, so do it on a branch where you intend to propose that change. The pickers offer only the node type and its interface type. Every model change is recorded on the branch like any other edit; see [Branching](/core-concepts/branching).
+
+For a freely drawn explanation that does not follow the model, use a [diagram](/diagrams/diagrams).

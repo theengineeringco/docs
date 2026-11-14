@@ -1,0 +1,57 @@
+---
+title: "How Flow uses AI"
+description: "Agents use the systems graph as context, meet engineers in their own tools, and leave decisions with the owners."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
+
+Engineering work mixes judgment with legwork. Before an engineer can answer whether a change is safe, they collect the related items, check who owns them, and find the latest evidence. Flow's agent does that legwork with the systems graph as its context, and automations do it in the background, so the team closes the gap between what it intends to build and where it is.
+
+The same connections that let an engineer understand the system let the agent understand it.
+
+## Context comes from the graph
+
+A question such as "What needs attention if this target changes?" depends on the recorded items, the systems they belong to, the relationships between them, and the latest evidence.
+
+<Illustration name="ai-agent-and-tools" width={640} alt="The agent works from the systems graph. Connected tools send events in through the boundary and receive reviews and messages back; the owner makes the call." />
+
+The agent works from that project context, so a [missing link](/core-concepts/the-systems-graph#follow-the-consequences-of-change) limits its answer as much as anyone's. A good request asks the agent to separate what the model supports from what still needs investigation.
+
+Give the task its context: the project, the branch, the items involved, the outcome you want, and what the agent may change.
+
+## Meet engineers in their tools
+
+The agent connects to the tools teams already use, such as Slack, Jira, SharePoint, and code repositories. When information changes in one of them, the people it affects can find out without going looking.
+
+<VisualPlaceholder kind="Screenshot" title="Flow's review on a GitHub pull request">
+  A firmware pull request in GitHub with Flow's review comment: the new thermal limits (−5 °C to 30 °C) conflict with Cell Temperature During DC Fast Charging (15 °C to 45 °C). The comment links the requirement, suggests the missing traceability link, and names the BMS software engineer and the requirement's owner.
+</VisualPlaceholder>
+
+It also works inside those tools. The BMS software engineer changes the battery thermal limits in firmware and opens a pull request in GitHub. Flow reviews the pull request against the requirements. It finds that the new limits, −5 °C to 30 °C, conflict with **Cell Temperature During DC Fast Charging** at 15 °C to 45 °C. It suggests the traceability links the change is missing and names the two people who resolve it: the engineer who owns the code and the engineer who owns the requirement.
+
+The software engineer never has to leave GitHub to know the change needs a conversation.
+
+## Assistance, skills, and automations
+
+These build on one another.
+
+| Capability | What it does | Example |
+| --- | --- | --- |
+| Chat with the agent | Works through one question or task with you | Find the systems that have no verification evidence yet |
+| A skill | Saves how a recurring task should be done | Write test procedures in the team's standard format |
+| An automation | Runs configured work in the background when a trigger fires | Review every firmware pull request against the system it changes |
+
+[Skills](/ai-automations/skills) covers creating and scoping skills. [Automations](/ai-automations/automations) covers setting them up, and [Activity](/ai-automations/activity) where to see what they did.
+
+## The agent proposes, the owner decides
+
+Treat the agent's answer as the start of an inspection. Follow its references to the items. Review proposed changes in their branch, where they can be compared with the parent before anyone accepts them, and where every change stays [traceable](/branching/tracing-history). Check whether the agent covered the scope you asked for and whether it hit incomplete information.
+
+Each chat has a **Mode** that sets how much the agent asks first. **Ask first**, the default, proposes a plan and waits for approval before changing anything. **Auto-accept** makes changes without waiting for plan approval but still asks before admin changes. Project admins can also choose **Super user**, which approves admin changes too in the turns they start. An admin can turn off **Allow Auto-accept in chats**, so that every chat asks first. [AI, automations, and trust](/ai-automations/ai-automations-and-trust) covers approving plans and tracing what the agent did.
+
+The agent acts within your permissions; [Automations](/api/automations/overview) describes whose permissions a saved automation uses. Scope tasks in connected tools with care; [branches do not reverse](/core-concepts/branching#keep-the-context-visible) what happens there.
+
+For a recurring task, inspect a few runs before you depend on it, and keep its instructions current as the model and standards change.
+
+Start with a bounded task, check the result, and turn what works into a skill.

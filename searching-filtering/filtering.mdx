@@ -1,0 +1,61 @@
+---
+title: "Filtering"
+description: "Narrow a view or a branch review to the items that meet field conditions."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Filters show only the items that meet the conditions you set, such as what has no owner, what changed this week, or what still has an open question. They do not change any records, and filtering a review does not change what a merge includes.
+
+## Filter a view
+
+<VisualPlaceholder kind="Screenshot" title="Filtering a view">
+  A view's filter bar with an "Owner is empty" chip, a Within items chip set to Battery System, and an Advanced filter open showing two conditions joined by OR. The match count shows beside the filter.
+</VisualPlaceholder>
+
+1. Select **Filter** in the toolbar, or open a column's menu and select **Filter on this field**.
+2. Choose a field, an operator, and a value.
+3. Add more conditions as needed. Separate filter chips must all match.
+
+| To find | Use |
+| --- | --- |
+| Items with no owner | Owner **is empty** |
+| Items under one part of the system | **Within items**, then pick the items |
+| Items connected to a given item | **Linked to** |
+| Values above a limit | A number field, greater than, then the limit |
+| Recent work | **Created** or **Updated**, then a date or **is within** a recent period |
+| Items with open questions | **Has comments**, **Comment by**, **Comment by keyword**, or **Comment on field** |
+| Items whose parents were deleted | **Orphaned items** |
+
+The fields and operators on offer come from your [data model](/core-concepts/the-data-model). Results stay within the current branch, view, and focus. A new comment filter looks at unresolved threads; switch it to resolved, or to unresolved or resolved, from its chip. **Created** and **Updated** read whole days in your time zone.
+
+To match any of several conditions, add an **Advanced filter**. It starts as **OR**; switch it to **AND** from its operator. For example, a stage chip together with an advanced filter of Owner **is empty** **OR** Description **is empty** finds items at that stage that are missing either one.
+
+Remove a chip to drop its condition. Filter changes apply only for you until you [save the view](/collaboration/sharing-views); **Reset to default** in the **Filter** menu returns to the view's saved filters. If filters hide every item, the view says so and offers **Clear filters**.
+
+Turn on **Show ancestors of filter results** in the view's display options to keep each match's parents visible, dimmed, for context. Those parents do not have to match.
+
+## Create items in a filtered view
+
+When a tag or user field is filtered with **is**, a new item you create from the table's creation row or the toolbar's **New** button starts with that value, so it lands in the view you created it from. A multi-select field takes every filtered value. A single-select field filtered to several values stays empty for you to choose.
+
+## Filter a review
+
+On a branch's **Review** page, open **Changed Items** and select **Filter**.
+
+<VisualPlaceholder kind="Screenshot" title="Filtering a review">
+  Review → Changed Items with the filter open: Changed by set to Any AI, plus a "Target value is changed" condition, and the filtered list below.
+</VisualPlaceholder>
+
+| To find | Use |
+| --- | --- |
+| Added or removed items | **Change type**: Created or Deleted |
+| Changes by a person or by AI | **Changed by**: a person, or **Any AI** |
+| Edits to one field | The field **is changed** |
+| Changed items missing a value | The field **is empty** |
+
+The other change types are Updated, Restored, Linked, and Reordered. Comment filters work here too, so you can list changed items that still have open threads.
+
+Chips match whole items. Combining **Changed by** with **is changed** finds items that person changed and whose field changed; it does not show that the person made that field edit. Open the change to confirm who made it, or use [Tracing history](/branching/tracing-history).
+
+Review filters are remembered per branch in your browser. Clear them before you approve so you see the full set of changes. To look up an item by name, use [Searching](/searching-filtering/searching).

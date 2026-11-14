@@ -14,6 +14,130 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Docs",
+        "icon": {
+          "name": "book",
+          "library": "lucide"
+        },
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "get-started/what-is-flow",
+              "get-started/starting-a-project",
+              "get-started/requirements-systems-tests",
+              "get-started/getting-data-into-flow",
+              "get-started/creating-a-branch"
+            ]
+          },
+          {
+            "group": "Core concepts",
+            "pages": [
+              "core-concepts/the-systems-graph",
+              "core-concepts/the-data-model",
+              "core-concepts/branching",
+              "core-concepts/ai-automations"
+            ]
+          },
+          {
+            "group": "AI & Automations",
+            "pages": [
+              "ai-automations/ai-automations-and-trust",
+              "ai-automations/skills",
+              "ai-automations/automations",
+              "ai-automations/activity",
+              "ai-automations/impact-analysis"
+            ]
+          },
+          {
+            "group": "Branching",
+            "pages": [
+              "branching/branching",
+              "branching/merging",
+              "branching/tracing-history",
+              "branching/comparing-branches",
+              "branching/baselining",
+              "branching/managing-branches",
+              "branching/variant-branches"
+            ]
+          },
+          {
+            "group": "Collaboration",
+            "pages": [
+              "collaboration/commenting",
+              "collaboration/sharing",
+              "collaboration/sharing-views",
+              "collaboration/subscriptions-notifications"
+            ]
+          },
+          {
+            "group": "Searching & Filtering",
+            "pages": [
+              "searching-filtering/searching",
+              "searching-filtering/filtering"
+            ]
+          },
+          {
+            "group": "Diagrams",
+            "pages": [
+              "diagrams/diagrams",
+              "diagrams/engineering-symbols",
+              "diagrams/architecture-views",
+              "diagrams/importing-exporting-diagrams"
+            ]
+          },
+          {
+            "group": "Dashboards",
+            "pages": [
+              "dashboards/dashboards"
+            ]
+          },
+          {
+            "group": "Formulas",
+            "pages": [
+              "formulas/custom-functions"
+            ]
+          },
+          {
+            "group": "Importing & Exporting",
+            "pages": [
+              "importing-exporting/csv",
+              "importing-exporting/excel",
+              "importing-exporting/reqif",
+              "importing-exporting/sysml",
+              "importing-exporting/markdown",
+              "importing-exporting/word",
+              "importing-exporting/pdf",
+              "importing-exporting/html"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/integrations-list",
+              "integrations/github",
+              "integrations/gitlab",
+              "integrations/slack",
+              "integrations/google-drive",
+              "integrations/jira",
+              "integrations/linear",
+              "integrations/confluence"
+            ]
+          },
+          {
+            "group": "Administration",
+            "pages": [
+              "administration/users-roles",
+              "administration/user-groups",
+              "administration/audit-log",
+              "administration/deployments",
+              "administration/sso-scim",
+              "administration/usage-billing"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "API",
         "groups": [
           {
@@ -100,7 +224,7 @@
       "download-spec"
     ]
   },
-  "description": "Customer API documentation, authentication, and release notes from Flow.",
+  "description": "Product guides, customer API documentation, and release notes from Flow.",
   "appearance": {
     "default": "system",
     "strict": false
@@ -120,12 +244,12 @@
   "logo": {
     "light": "/images/flow-brandmark-black.svg",
     "dark": "/images/flow-brandmark-white.svg",
-    "href": "/api"
+    "href": "/get-started/what-is-flow"
   },
   "redirects": [
     {
       "source": "/",
-      "destination": "/api",
+      "destination": "/get-started/what-is-flow",
       "permanent": false
     },
     {

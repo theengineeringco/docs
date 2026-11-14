@@ -1,0 +1,64 @@
+---
+title: "The systems graph"
+description: "Why Flow connects engineering information around systems, ownership, and the links between them."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+import { Illustration } from "/snippets/illustration.jsx";
+
+A physical system is described by many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, risks, and decisions. Each is useful alone. The understanding comes from how they connect. Change one, and the others can move.
+
+<VisualPlaceholder kind="Screenshot" title="The same items in four views">
+  Four panels of the same Battery System items: a table with owner and value columns, a tree showing pack and BMS under the system, Reader showing them as a document with one margin comment, and a diagram with the three as connected cards. Same item highlighted in all four.
+</VisualPlaceholder>
+
+Flow keeps all of them connected in a systems graph. The graph answers the questions engineers ask every day: what is this part of, why is it this way, what backs it up, and what else changes if it changes.
+
+## Start from an owned system
+
+Flow is built around ownership. Every item has an accountable person, and that person is the engineer closest to the design. The owner of a subsystem owns its parts, its interfaces to the rest of the product, and the evidence that it works.
+
+The owner still works with specialists and reviewers; ownership gives that collaboration a center, and keeps each part of the model current while the design changes.
+
+Ownership only helps when the owner can see their dependencies. The graph makes them visible.
+
+## Make every connection explicit
+
+Flow represents information as **items** connected by **relationships**. A system, an interface, a requirement, an analysis, a test, or a part are all items, in categories your team defines.
+
+<Illustration name="systems-graph-cross-links" width={640} alt="The vehicle breaks down into systems and parts. Cross-links add what the tree cannot: an interface between the pack and the BMS, and a range target that depends on both the pack and the drag coefficient." />
+
+Some relationships express decomposition: a product contains systems, which contain subsystems and parts.
+
+Other relationships cross that hierarchy. A vehicle's range depends on both battery capacity and aerodynamic drag, which belong to different systems and different owners. An interface ties two systems together. A folder tree cannot hold both kinds of connection. A graph can.
+
+Evidence completes the picture. Analyses, tests, and their results connect to what they support. The structure says what the team intends to build. The evidence says how close it is.
+
+## Change the view, not the data
+
+Different jobs ask different questions of the same records. A subsystem owner wants their system and what is still open on it. A systems architect wants interfaces and dependencies. A program lead wants progress across the whole program.
+
+Each gets a view, and every view reads the same items:
+
+- A **table** compares fields across items and edits them in bulk.
+- A **tree** shows hierarchy and decomposition.
+- **Reader** presents the content as a document people can read and comment on.
+- A **diagram** draws selected structures and connections.
+
+Saved views can start from different parts of the graph, such as systems, functions, verification, or risks. Nothing is copied between them. Editing a value in one view changes the item every view shows, and a link to an item opens it in context: focused in the main view, revealed in the navigator, and open in its details.
+
+Views can also read across branches. A table can show a field as another branch holds it, beside the current branch's value, so comparing a proposal with its parent does not mean leaving the branch.
+
+A filtered view is a perspective, not a permission. Access is configured separately.
+
+## Follow the consequences of change
+
+Suppose a target changes. The question is not the new number. It is everything connected to it: the items that depend on it, the budgets it feeds, and the evidence that no longer shows what it did.
+
+The graph turns that question into a set of records to inspect and people to talk to. Its answers are only as good as its links. A missing relationship is a gap in understanding, for engineers and agents alike, and a recorded one still needs engineering judgment.
+
+## Build on the graph
+
+[The data model](/core-concepts/the-data-model) defines what items, fields, and relationships mean. [Branching](/core-concepts/branching) lets the graph change safely. [Flow's AI](/core-concepts/ai-automations) uses its connections as context.
+
+To build your first connected thread, follow [Connecting your first items](/get-started/requirements-systems-tests).

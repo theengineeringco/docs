@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi1qxle"><title>Stage gates</title><desc>An item passes one gate at a time; it can't move on until the gate's checks pass.</desc><style>.fi1qxle-p,.fi1qxle-f,.fi1qxle-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi1qxle-p{animation-name:fi1qxle-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi1qxle-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi1qxle-f{animation-name:fi1qxle-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi1qxle-r{animation-name:fi1qxle-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi1qxle-d{animation-name:fi1qxle-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi1qxle-m{animation:fi1qxle-march 2.6s linear infinite}
+.fi1qxle-pulse{animation:fi1qxle-pulse 2.4s ease-in-out infinite}
+@keyframes fi1qxle-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi1qxle-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi1qxle-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi1qxle-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi1qxle-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi1qxle-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi1qxle *{animation:none!important}.fi1qxle .fi1qxle-d{stroke-dashoffset:0}.fi1qxle .fi1qxle-t{display:none}}</style><defs><mask id="fi1qxle-k0" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M48 100L192 100" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1qxle-d" style="animation-duration:0.55s;animation-delay:0.05s"/></mask></defs><path d="M48 100L192 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1qxle-k0)" class="fi1qxle-m"/>
+<path d="M84 86L84 114" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 1" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dashoffset="1" class="fi1qxle-d" style="animation-duration:0.35s;animation-delay:0.25s"/>
+<path d="M156 86L156 114" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 1" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dashoffset="1" class="fi1qxle-d" style="animation-duration:0.35s;animation-delay:0.3s"/>
+<g class="fi1qxle-p" style="animation-delay:0.35s"><rect x="43.5" y="95.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fi1qxle-p" style="animation-delay:0.4s"><circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></g>
+<g class="fi1qxle-p" style="animation-delay:0.45s"><circle cx="192" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g></svg>

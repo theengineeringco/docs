@@ -1,0 +1,117 @@
+{
+  "name": "how-reviews-work",
+  "title": "How reviews work",
+  "description": "Claim: nothing reaches the baseline until checks pass and every required reviewer approves. Four steps: a change request opens on a branch, required reviewers are assigned, checks run and reviewers approve, the branch merges and a baseline is recorded.",
+  "size": [904, 236],
+  "layers": [
+    {
+      "motif": "steps",
+      "id": "rv",
+      "at": [20, 16],
+      "cell": [200, 170],
+      "gap": 22,
+      "labels": [
+        "A change request opens",
+        "Required reviewers are assigned",
+        "Checks run, reviewers approve",
+        "It merges as a new baseline"
+      ],
+      "items": [
+        {
+          "layers": [
+            {"type": "node", "at": [176, 128], "beat": 0},
+            {
+              "motif": "branch",
+              "at": [26, 128],
+              "length": 150,
+              "branches": [
+                {"from": 0.12, "until": 0.78, "lane": -1, "commits": [0.35, 0.68], "tip": "d"}
+              ],
+              "head": null
+            }
+          ]
+        },
+        {
+          "layers": [
+            {"type": "node", "at": [176, 128], "beat": 0},
+            {
+              "motif": "branch",
+              "at": [26, 128],
+              "length": 150,
+              "branches": [
+                {"from": 0.12, "until": 0.78, "lane": -1, "commits": [0.35, 0.68], "tip": "d"}
+              ],
+              "head": null
+            },
+            {
+              "motif": "fan",
+              "at": [143, 82],
+              "direction": "up",
+              "via": false,
+              "reach": 46,
+              "spread": 64,
+              "source": null,
+              "targets": "ccc"
+            }
+          ]
+        },
+        {
+          "layers": [
+            {"type": "node", "at": [176, 128], "beat": 0},
+            {
+              "motif": "branch",
+              "at": [26, 128],
+              "length": 150,
+              "branches": [
+                {
+                  "from": 0.12,
+                  "until": 0.78,
+                  "lane": -1,
+                  "commits": [0.35, 0.68],
+                  "commitKind": "s",
+                  "tip": "d"
+                }
+              ],
+              "head": null
+            },
+            {
+              "motif": "fan",
+              "at": [143, 82],
+              "direction": "up",
+              "via": false,
+              "inbound": true,
+              "reach": 46,
+              "spread": 64,
+              "source": null,
+              "targets": "sss"
+            }
+          ]
+        },
+        {
+          "layers": [
+            {"type": "node", "at": [176, 128], "beat": 0},
+            {
+              "motif": "branch",
+              "at": [26, 128],
+              "length": 150,
+              "branches": [
+                {"from": 0.12, "to": 0.62, "lane": -1, "commits": [0.35, 0.68], "commitKind": "s"}
+              ],
+              "baselines": [0.62],
+              "head": null,
+              "baselineHeight": 14
+            },
+            {
+              "type": "label",
+              "at": [119, 128],
+              "text": "baseline 13",
+              "dy": 32,
+              "anchor": "middle",
+              "dx": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

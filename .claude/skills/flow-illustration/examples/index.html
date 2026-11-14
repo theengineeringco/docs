@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flow illustrations</title>
+<style>
+:root{--bg:#FDFDFB;--card:#FFFFFF;--text:rgba(1,1,1,.81);--muted:rgba(3,3,2,.55);--rule:rgba(0,0,0,.08);--blue:#1F3ACB}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 "Unica77 LL","Helvetica Neue",Helvetica,Arial,sans-serif}
+header{padding:48px 16px 8px;max-width:1240px;margin:0 auto}h1{font-weight:400;font-size:40px;letter-spacing:-.03em;margin:0 0 8px}
+header p{color:var(--muted);max-width:640px;margin:0}
+section{max-width:1240px;margin:0 auto;padding:24px 16px}h2{font-weight:400;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:24px 0 16px;font-family:"Commit Mono",ui-monospace,monospace}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.card{margin:0;background:var(--card);border:1px solid var(--rule)}.card.wide{grid-column:1/-1}
+.frame{width:100%;display:flex;align-items:center;justify-content:center}.frame img{width:100%;height:100%;object-fit:contain;display:block}
+.card.wide .frame{max-height:560px}
+figcaption{padding:12px 14px 14px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+figcaption strong{font-weight:400}figcaption span{color:var(--muted);font-size:13px}
+figcaption code{font:12px "Commit Mono",ui-monospace,monospace;color:var(--muted)}figcaption em{font-style:normal;font-size:12px}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+@media (max-width:600px){h1{font-size:30px}}
+</style></head><body>
+<header><h1>Flow illustrations</h1><p>Every example spec in the flow-illustration skill, animated. Reload to replay the build. Copy a spec, change it, render it with <code>node scripts/render.mjs</code>.</p></header>
+<section><h2>large</h2><div class="grid"><figure class="card wide deep">
+  <div class="frame" style="aspect-ratio:640/400"><img src="large/agents-graph-blue.animated.svg" alt="A fleet of agents on the live graph" loading="lazy"></div>
+  <figcaption><strong>A fleet of agents on the live graph</strong><span>The same figure on a brand-blue field.</span><code>agents-graph-blue</code> <em><a href="large/agents-graph-blue.json">json</a> · <a href="large/agents-graph-blue.svg">svg</a> · <a href="large/agents-graph-blue.png">png</a></em></figcaption>
+</figure>
+<figure class="card wide">
+  <div class="frame" style="aspect-ratio:640/400"><img src="large/agents-graph.animated.svg" alt="A fleet of agents on the live graph" loading="lazy"></div>
+  <figcaption><strong>A fleet of agents on the live graph</strong><span>The live model at the centre, three rings of connected items; agents travel the links and land their work as blue squares.</span><code>agents-graph</code> <em><a href="large/agents-graph.json">json</a> · <a href="large/agents-graph.svg">svg</a> · <a href="large/agents-graph.png">png</a> · <a href="large/agents-graph.mp4">mp4</a></em></figcaption>
+</figure>
+<figure class="card wide">
+  <div class="frame" style="aspect-ratio:760/280"><img src="large/branching-wide.animated.svg" alt="Run workstreams in parallel" loading="lazy"></div>
+  <figcaption><strong>Run workstreams in parallel</strong><span>Branches fork off the live baseline, merge back through review, and leave a baseline at every merge; a what-if stays open on the side.</span><code>branching-wide</code> <em><a href="large/branching-wide.json">json</a> · <a href="large/branching-wide.svg">svg</a> · <a href="large/branching-wide.png">png</a></em></figcaption>
+</figure>
+<figure class="card wide">
+  <div class="frame" style="aspect-ratio:904/236"><img src="large/change-flow.animated.svg" alt="One spec changes. The agents handle the rest." loading="lazy"></div>
+  <figcaption><strong>One spec changes. The agents handle the rest.</strong><span>Four steps: a supplier spec lands, the graph flags what it touches, an agent works the change on a branch, an engineer reviews and merges.</span><code>change-flow</code> <em><a href="large/change-flow.json">json</a> · <a href="large/change-flow.svg">svg</a> · <a href="large/change-flow.png">png</a> · <a href="large/change-flow.mp4">mp4</a></em></figcaption>
+</figure>
+<figure class="card wide">
+  <div class="frame" style="aspect-ratio:720/560"><img src="large/deployment-stack.animated.svg" alt="Deployment options" loading="lazy"></div>
+  <figcaption><strong>Deployment options</strong><span>The same Flow program in three environments: Flow's cloud, GovCloud, or your own servers. Each adds a boundary, and each has a single port in.</span><code>deployment-stack</code> <em><a href="large/deployment-stack.json">json</a> · <a href="large/deployment-stack.svg">svg</a> · <a href="large/deployment-stack.png">png</a> · <a href="large/deployment-stack.mp4">mp4</a></em></figcaption>
+</figure>
+<figure class="card wide">
+  <div class="frame" style="aspect-ratio:904/236"><img src="large/how-reviews-work.animated.svg" alt="How reviews work" loading="lazy"></div>
+  <figcaption><strong>How reviews work</strong><span>Claim: nothing reaches the baseline until checks pass and every required reviewer approves. Four steps: a change request opens on a branch, required reviewers are assigned, checks run and reviewers approve, the branch merges and a baseline is recorded.</span><code>how-reviews-work</code> <em><a href="large/how-reviews-work.json">json</a> · <a href="large/how-reviews-work.svg">svg</a> · <a href="large/how-reviews-work.png">png</a> · <a href="large/how-reviews-work.mp4">mp4</a></em></figcaption>
+</figure>
+<figure class="card wide">
+  <div class="frame" style="aspect-ratio:640/400"><img src="large/lissajous-hero.animated.svg" alt="Engineering, without the drift" loading="lazy"></div>
+  <figcaption><strong>Engineering, without the drift</strong><span>The Flow symbol's 1:3 Lissajous in its rest pose, front arc solid, back arc dotted, dots at the turning points and crossings, with drafting guides.</span><code>lissajous-hero</code> <em><a href="large/lissajous-hero.json">json</a> · <a href="large/lissajous-hero.svg">svg</a> · <a href="large/lissajous-hero.png">png</a> · <a href="large/lissajous-hero.mp4">mp4</a></em></figcaption>
+</figure>
+<figure class="card wide deep">
+  <div class="frame" style="aspect-ratio:720/560"><img src="large/systems-graph-stack-dark.animated.svg" alt="A living systems graph" loading="lazy"></div>
+  <figcaption><strong>A living systems graph</strong><span>The systems graph stack on the site's deep neutral surface: marks keep their meaning, blue lifts to the ramp's light step.</span><code>systems-graph-stack-dark</code> <em><a href="large/systems-graph-stack-dark.json">json</a> · <a href="large/systems-graph-stack-dark.svg">svg</a> · <a href="large/systems-graph-stack-dark.png">png</a></em></figcaption>
+</figure>
+<figure class="card wide">
+  <div class="frame" style="aspect-ratio:720/560"><img src="large/systems-graph-stack.animated.svg" alt="A living systems graph" loading="lazy"></div>
+  <figcaption><strong>A living systems graph</strong><span>Requirements, architecture, CAD and tests as four planes of one model; a trace runs from one requirement through every layer.</span><code>systems-graph-stack</code> <em><a href="large/systems-graph-stack.json">json</a> · <a href="large/systems-graph-stack.svg">svg</a> · <a href="large/systems-graph-stack.png">png</a> · <a href="large/systems-graph-stack.mp4">mp4</a></em></figcaption>
+</figure></div></section>
+<section><h2>small</h2><div class="grid"><figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/agents.animated.svg" alt="A fleet of agents" loading="lazy"></div>
+  <figcaption><strong>A fleet of agents</strong><span>Agents orbit the live graph, working the whole program at once.</span><code>agents</code> <em><a href="small/agents.json">json</a> · <a href="small/agents.svg">svg</a> · <a href="small/agents.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/audit-trail.animated.svg" alt="A permanent record" loading="lazy"></div>
+  <figcaption><strong>A permanent record</strong><span>Every revision is an entry: what changed, who changed it, and why.</span><code>audit-trail</code> <em><a href="small/audit-trail.json">json</a> · <a href="small/audit-trail.svg">svg</a> · <a href="small/audit-trail.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/automations.animated.svg" alt="Automations" loading="lazy"></div>
+  <figcaption><strong>Automations</strong><span>A change fires the agent, which fans the work out to every affected artifact.</span><code>automations</code> <em><a href="small/automations.json">json</a> · <a href="small/automations.svg">svg</a> · <a href="small/automations.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/baselines.animated.svg" alt="Immutable baselines" loading="lazy"></div>
+  <figcaption><strong>Immutable baselines</strong><span>Every merge leaves a timestamped snapshot you can compare and revert to.</span><code>baselines</code> <em><a href="small/baselines.json">json</a> · <a href="small/baselines.svg">svg</a> · <a href="small/baselines.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/branch-permissions.animated.svg" alt="Branch-level permissions" loading="lazy"></div>
+  <figcaption><strong>Branch-level permissions</strong><span>A branch can be scoped to the people and partners allowed to see and edit it.</span><code>branch-permissions</code> <em><a href="small/branch-permissions.json">json</a> · <a href="small/branch-permissions.svg">svg</a> · <a href="small/branch-permissions.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/branching.animated.svg" alt="Work on a branch" loading="lazy"></div>
+  <figcaption><strong>Work on a branch</strong><span>Work forks off the live baseline, moves on its own, and merges back when it's ready.</span><code>branching</code> <em><a href="small/branching.json">json</a> · <a href="small/branching.svg">svg</a> · <a href="small/branching.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/compare-baselines.animated.svg" alt="Compare any two baselines" loading="lazy"></div>
+  <figcaption><strong>Compare any two baselines</strong><span>Two snapshots side by side; the rows that changed between them stand out.</span><code>compare-baselines</code> <em><a href="small/compare-baselines.json">json</a> · <a href="small/compare-baselines.svg">svg</a> · <a href="small/compare-baselines.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/compliance.animated.svg" alt="Every clause checked" loading="lazy"></div>
+  <figcaption><strong>Every clause checked</strong><span>Checks sweep the requirements on every change: done, in progress, and one finding.</span><code>compliance</code> <em><a href="small/compliance.json">json</a> · <a href="small/compliance.svg">svg</a> · <a href="small/compliance.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/conflicts.animated.svg" alt="Contradictions caught on edit" loading="lazy"></div>
+  <figcaption><strong>Contradictions caught on edit</strong><span>Three requirements in flight; the one that contradicts another is flagged before it lands.</span><code>conflicts</code> <em><a href="small/conflicts.json">json</a> · <a href="small/conflicts.svg">svg</a> · <a href="small/conflicts.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/cross-links.animated.svg" alt="Cross-links" loading="lazy"></div>
+  <figcaption><strong>Cross-links</strong><span>Two hierarchies, linked across: peers stay connected wherever they sit in the tree.</span><code>cross-links</code> <em><a href="small/cross-links.json">json</a> · <a href="small/cross-links.svg">svg</a> · <a href="small/cross-links.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/data-model.animated.svg" alt="Your own data model" loading="lazy"></div>
+  <figcaption><strong>Your own data model</strong><span>Define the entity types your program needs; each branch is a type with its own fields.</span><code>data-model</code> <em><a href="small/data-model.json">json</a> · <a href="small/data-model.svg">svg</a> · <a href="small/data-model.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/decomposition.animated.svg" alt="Structured decomposition" loading="lazy"></div>
+  <figcaption><strong>Structured decomposition</strong><span>Top-level intent breaks down into subsystem and component requirements.</span><code>decomposition</code> <em><a href="small/decomposition.json">json</a> · <a href="small/decomposition.svg">svg</a> · <a href="small/decomposition.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/formulas.animated.svg" alt="Live parameters" loading="lazy"></div>
+  <figcaption><strong>Live parameters</strong><span>Values flow from the items they depend on into one computed result that stays current.</span><code>formulas</code> <em><a href="small/formulas.json">json</a> · <a href="small/formulas.svg">svg</a> · <a href="small/formulas.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/impact-analysis.animated.svg" alt="Impact in seconds" loading="lazy"></div>
+  <figcaption><strong>Impact in seconds</strong><span>Change one requirement and the affected items light up, while one conflict is flagged.</span><code>impact-analysis</code> <em><a href="small/impact-analysis.json">json</a> · <a href="small/impact-analysis.svg">svg</a> · <a href="small/impact-analysis.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/ingestion.animated.svg" alt="Bring in existing specs" loading="lazy"></div>
+  <figcaption><strong>Bring in existing specs</strong><span>Documents come in, the agent reads them, structured requirements come out with their source links.</span><code>ingestion</code> <em><a href="small/ingestion.json">json</a> · <a href="small/ingestion.svg">svg</a> · <a href="small/ingestion.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/integrations.animated.svg" alt="Agents run across your tools" loading="lazy"></div>
+  <figcaption><strong>Agents run across your tools</strong><span>Engineers stay in their tools; Flow connects to each through a port at its boundary.</span><code>integrations</code> <em><a href="small/integrations.json">json</a> · <a href="small/integrations.svg">svg</a> · <a href="small/integrations.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/mcp.animated.svg" alt="Flow MCP" loading="lazy"></div>
+  <figcaption><strong>Flow MCP</strong><span>Any AI client connects to the graph through one port each, across the boundary of the program.</span><code>mcp</code> <em><a href="small/mcp.json">json</a> · <a href="small/mcp.svg">svg</a> · <a href="small/mcp.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/merge-conflicts.animated.svg" alt="Merge with confidence" loading="lazy"></div>
+  <figcaption><strong>Merge with confidence</strong><span>Before a branch lands, its changes and conflicts with the baseline are surfaced.</span><code>merge-conflicts</code> <em><a href="small/merge-conflicts.json">json</a> · <a href="small/merge-conflicts.svg">svg</a> · <a href="small/merge-conflicts.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/model-per-session.animated.svg" alt="Choose the model per session" loading="lazy"></div>
+  <figcaption><strong>Choose the model per session</strong><span>Each chat session runs on the model you pick; the others stay available for the next one.</span><code>model-per-session</code> <em><a href="small/model-per-session.json">json</a> · <a href="small/model-per-session.svg">svg</a> · <a href="small/model-per-session.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/notifications.animated.svg" alt="The right people, notified" loading="lazy"></div>
+  <figcaption><strong>The right people, notified</strong><span>When a change lands, the owners of affected items hear about it where they work.</span><code>notifications</code> <em><a href="small/notifications.json">json</a> · <a href="small/notifications.svg">svg</a> · <a href="small/notifications.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/rebase.animated.svg" alt="Rebase onto the latest baseline" loading="lazy"></div>
+  <figcaption><strong>Rebase onto the latest baseline</strong><span>A branch's changes are replayed onto a newer point of the trunk, so it builds on the latest baseline.</span><code>rebase</code> <em><a href="small/rebase.json">json</a> · <a href="small/rebase.svg">svg</a> · <a href="small/rebase.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/revert.animated.svg" alt="Revert to any baseline" loading="lazy"></div>
+  <figcaption><strong>Revert to any baseline</strong><span>Reverting proposes the inverse change on a branch, so going back is reviewed like going forward.</span><code>revert</code> <em><a href="small/revert.json">json</a> · <a href="small/revert.svg">svg</a> · <a href="small/revert.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/reviews.animated.svg" alt="Required reviewers" loading="lazy"></div>
+  <figcaption><strong>Required reviewers</strong><span>A change waits at the gate; two of three required reviewers have approved, so it cannot merge yet.</span><code>reviews</code> <em><a href="small/reviews.json">json</a> · <a href="small/reviews.svg">svg</a> · <a href="small/reviews.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/sandbox.animated.svg" alt="Sandboxed analysis" loading="lazy"></div>
+  <figcaption><strong>Sandboxed analysis</strong><span>Calculations run in an isolated box; only the result comes back into the reasoning.</span><code>sandbox</code> <em><a href="small/sandbox.json">json</a> · <a href="small/sandbox.svg">svg</a> · <a href="small/sandbox.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/scheduled.animated.svg" alt="On a schedule" loading="lazy"></div>
+  <figcaption><strong>On a schedule</strong><span>Automations can run on a clock as well as on events: the agent comes round on time.</span><code>scheduled</code> <em><a href="small/scheduled.json">json</a> · <a href="small/scheduled.svg">svg</a> · <a href="small/scheduled.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/scoped-sharing.animated.svg" alt="Scoped to what you share" loading="lazy"></div>
+  <figcaption><strong>Scoped to what you share</strong><span>Suppliers see the part of the program you share with them, live, and nothing else.</span><code>scoped-sharing</code> <em><a href="small/scoped-sharing.json">json</a> · <a href="small/scoped-sharing.svg">svg</a> · <a href="small/scoped-sharing.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/search.animated.svg" alt="Find anything" loading="lazy"></div>
+  <figcaption><strong>Find anything</strong><span>Search across the whole program: the lens finds the few items that match.</span><code>search</code> <em><a href="small/search.json">json</a> · <a href="small/search.svg">svg</a> · <a href="small/search.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/security.animated.svg" alt="Defense-grade security" loading="lazy"></div>
+  <figcaption><strong>Defense-grade security</strong><span>The program sits inside nested boundaries: cloud, GovCloud, or your own hosting.</span><code>security</code> <em><a href="small/security.json">json</a> · <a href="small/security.svg">svg</a> · <a href="small/security.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/skills.animated.svg" alt="Skills" loading="lazy"></div>
+  <figcaption><strong>Skills</strong><span>Standards encoded once hold every artifact in shape: squares at the corners, held by dashed edges.</span><code>skills</code> <em><a href="small/skills.json">json</a> · <a href="small/skills.svg">svg</a> · <a href="small/skills.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/source-links.animated.svg" alt="Traced to the source" loading="lazy"></div>
+  <figcaption><strong>Traced to the source</strong><span>Each requirement keeps a live link to the document it came from.</span><code>source-links</code> <em><a href="small/source-links.json">json</a> · <a href="small/source-links.svg">svg</a> · <a href="small/source-links.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/stage-gates.animated.svg" alt="Stage gates" loading="lazy"></div>
+  <figcaption><strong>Stage gates</strong><span>An item passes one gate at a time; it can't move on until the gate's checks pass.</span><code>stage-gates</code> <em><a href="small/stage-gates.json">json</a> · <a href="small/stage-gates.svg">svg</a> · <a href="small/stage-gates.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/structured-authoring.animated.svg" alt="Written the same way" loading="lazy"></div>
+  <figcaption><strong>Written the same way</strong><span>Structured templates give every requirement the same shape, so checks can read them.</span><code>structured-authoring</code> <em><a href="small/structured-authoring.json">json</a> · <a href="small/structured-authoring.svg">svg</a> · <a href="small/structured-authoring.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/suspect-links.animated.svg" alt="Suspect links" loading="lazy"></div>
+  <figcaption><strong>Suspect links</strong><span>When an upstream item changes, the links leaving it are suspect until someone reviews them: one reviewed, two to go.</span><code>suspect-links</code> <em><a href="small/suspect-links.json">json</a> · <a href="small/suspect-links.svg">svg</a> · <a href="small/suspect-links.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/systems-graph.animated.svg" alt="One live model" loading="lazy"></div>
+  <figcaption><strong>One live model</strong><span>Every item in the program connected to one live centre.</span><code>systems-graph</code> <em><a href="small/systems-graph.json">json</a> · <a href="small/systems-graph.svg">svg</a> · <a href="small/systems-graph.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/traceability.animated.svg" alt="Traced both ways" loading="lazy"></div>
+  <figcaption><strong>Traced both ways</strong><span>The V: requirements decompose down the left, verification climbs the right, and every level is linked across.</span><code>traceability</code> <em><a href="small/traceability.json">json</a> · <a href="small/traceability.svg">svg</a> · <a href="small/traceability.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/variants.animated.svg" alt="Variants" loading="lazy"></div>
+  <figcaption><strong>Variants</strong><span>Product families grow from one shared platform; each variant keeps what it shares.</span><code>variants</code> <em><a href="small/variants.json">json</a> · <a href="small/variants.svg">svg</a> · <a href="small/variants.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/verification-validation.animated.svg" alt="Verified and validated, tracked apart" loading="lazy"></div>
+  <figcaption><strong>Verified and validated, tracked apart</strong><span>Two separate signals per item: built right (squares) and built the right thing (still pending).</span><code>verification-validation</code> <em><a href="small/verification-validation.json">json</a> · <a href="small/verification-validation.svg">svg</a> · <a href="small/verification-validation.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/views.animated.svg" alt="Every discipline, its own view" loading="lazy"></div>
+  <figcaption><strong>Every discipline, its own view</strong><span>One model seen three ways: each plane is the same items with a different set in focus.</span><code>views</code> <em><a href="small/views.json">json</a> · <a href="small/views.svg">svg</a> · <a href="small/views.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/webhooks.animated.svg" alt="Triggered from anywhere" loading="lazy"></div>
+  <figcaption><strong>Triggered from anywhere</strong><span>An event from outside crosses the boundary through one port and sets the agent to work.</span><code>webhooks</code> <em><a href="small/webhooks.json">json</a> · <a href="small/webhooks.svg">svg</a> · <a href="small/webhooks.png">png</a></em></figcaption>
+</figure>
+<figure class="card">
+  <div class="frame" style="aspect-ratio:240/200"><img src="small/what-if.animated.svg" alt="Ask what if" loading="lazy"></div>
+  <figcaption><strong>Ask what if</strong><span>From the live node, alternatives are explored on the side; one is worked through to a result.</span><code>what-if</code> <em><a href="small/what-if.json">json</a> · <a href="small/what-if.svg">svg</a> · <a href="small/what-if.png">png</a></em></figcaption>
+</figure></div></section>
+</body></html>

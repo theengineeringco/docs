@@ -1,0 +1,40 @@
+{
+  "name": "rebase",
+  "title": "Rebase onto the latest baseline",
+  "description": "A branch's changes are replayed onto a newer point of the trunk, so it builds on the latest baseline.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "br",
+      "at": [40, 124],
+      "length": 112,
+      "commits": [0.45, 0.7],
+      "branches": [
+        {
+          "from": 0.15,
+          "until": 0.62,
+          "lane": -1,
+          "style": "dotted",
+          "commits": [0.5],
+          "commitKind": "g",
+          "tip": "g",
+          "forkKind": "c"
+        }
+      ],
+      "head": 1
+    },
+    {
+      "type": "line",
+      "id": "replay",
+      "from": "br.tip0",
+      "to": [175, 78],
+      "route": "arc",
+      "bulge": -0.6,
+      "style": "dotted"
+    },
+    {"type": "path", "points": ["br.head", [152, 78], [198, 78]]},
+    {"type": "circle", "at": [175, 78]},
+    {"type": "square", "at": [198, 78]}
+  ]
+}

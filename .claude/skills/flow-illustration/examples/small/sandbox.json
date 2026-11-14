@@ -1,0 +1,14 @@
+{
+  "name": "sandbox",
+  "title": "Sandboxed analysis",
+  "description": "Calculations run in an isolated box; only the result comes back into the reasoning.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "frame", "at": [128, 100], "size": [64, 64]},
+    {"motif": "grid", "at": [112, 84], "cols": 3, "rows": 3, "gap": 16, "dotSize": 1.8},
+    {"type": "line", "from": [62, 100], "to": [96, 100]},
+    {"type": "line", "from": [160, 100], "to": [194, 100]},
+    {"type": "node", "at": [62, 100]},
+    {"type": "square", "at": [194, 100]}
+  ]
+}

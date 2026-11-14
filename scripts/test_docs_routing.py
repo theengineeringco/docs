@@ -26,10 +26,10 @@ class DocsRoutingTests(unittest.TestCase):
         slug = path.strip("/") or "index"
         self.assertTrue((ROOT / f"{slug}.mdx").is_file(), f"Missing page: {path}")
 
-    def test_root_and_logo_open_the_api_overview(self):
-        self.assertEqual(self.redirects["/"], "/api")
+    def test_root_and_logo_open_what_is_flow(self):
+        self.assertEqual(self.redirects["/"], "/get-started/what-is-flow")
         self.assert_page_exists("/")
-        self.assertEqual(self.config["logo"]["href"], "/api")
+        self.assertEqual(self.config["logo"]["href"], "/get-started/what-is-flow")
 
     def test_legacy_redirects_resolve_to_existing_pages(self):
         self.assertEqual(len(self.redirects), len(self.config["redirects"]))

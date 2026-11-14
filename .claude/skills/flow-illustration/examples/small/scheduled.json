@@ -1,0 +1,32 @@
+{
+  "name": "scheduled",
+  "title": "On a schedule",
+  "description": "Automations can run on a clock as well as on events: the agent comes round on time.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "orbit",
+      "at": [120, 100],
+      "rings": [56],
+      "center": "n",
+      "satellites": [
+        {"ring": 0, "angle": 0, "kind": "o"},
+        {"ring": 0, "angle": 30, "kind": "o"},
+        {"ring": 0, "angle": 60, "kind": "o"},
+        {"ring": 0, "angle": 90, "kind": "o"},
+        {"ring": 0, "angle": 120, "kind": "o"},
+        {"ring": 0, "angle": 150, "kind": "o"},
+        {"ring": 0, "angle": 180, "kind": "o"},
+        {"ring": 0, "angle": 210, "kind": "o"},
+        {"ring": 0, "angle": 240, "kind": "o"},
+        {"ring": 0, "angle": 300, "kind": "o"},
+        {"ring": 0, "angle": 330, "kind": "o"}
+      ]
+    },
+    {
+      "type": "square",
+      "at": [120, 44],
+      "loop": {"type": "orbit", "center": [120, 100], "period": 10.4}
+    }
+  ]
+}

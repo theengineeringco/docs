@@ -1,0 +1,101 @@
+{
+  "title": "Extracting non-variant changes",
+  "description": "Extracting copies a shared fix from the Truck variant to a new branch from the chosen target, here Base. Truck-only changes stay behind, Truck is unchanged, and the new branch stays open until it is reviewed and merged.",
+  "size": [
+    600,
+    330
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        140
+      ],
+      "length": 504.0,
+      "laneGap": 70,
+      "radius": 10,
+      "startKind": "c",
+      "branches": [
+        {
+          "from": 0.1,
+          "until": 1,
+          "lane": 1,
+          "commits": [
+            0.2,
+            0.42
+          ],
+          "tip": "c",
+          "style": "solid"
+        },
+        {
+          "from": 0.62,
+          "until": 0.95,
+          "lane": -1,
+          "commits": [
+            0.4
+          ],
+          "tip": "c",
+          "beat": 12
+        }
+      ],
+      "head": 1
+    },
+    {
+      "type": "line",
+      "from": "b.b0c1",
+      "to": "b.b1c0",
+      "route": "curve",
+      "style": "dotted",
+      "beat": 13
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.tip0",
+      "text": "Truck",
+      "dx": 0,
+      "dy": -14,
+      "anchor": "end",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.b0c0",
+      "text": "Truck only",
+      "dx": 0,
+      "dy": 22,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.b0c1",
+      "text": "shared fix",
+      "dx": 0,
+      "dy": 22,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane1",
+      "text": "extract",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

@@ -1,0 +1,85 @@
+---
+title: "Users and roles"
+description: "Control what each person can do in Flow and which projects they can open."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+A role sets what a person can do; project access sets where. When you work through the agent, it acts with your permissions, so these controls also bound what it can read and change. Branch protection, editor groups, and item restrictions can narrow both further.
+
+Flow has four roles: **Admin**, **Member**, **Viewer**, and **External**.
+
+## Admin
+
+For the people who configure Flow and decide who can use it.
+
+Admins can do everything a Member can, and also:
+
+- Invite and remove users, change roles, and grant or revoke project access.
+- Configure the data model, shared views, project settings, and review rules.
+- Configure integrations and AI settings.
+- Read the [audit log](/administration/audit-log) and [AI usage](/administration/usage-billing).
+
+An Admin's rights apply only within the projects they can access. Workspace-wide settings, such as [user groups](/administration/user-groups), [SSO and SCIM](/administration/sso-scim), and granting **All projects**, need an Admin with access to all projects.
+
+## Member
+
+For engineers who build and maintain the model day to day.
+
+Members can work on any project they can access:
+
+- Create, edit, and delete items, field values, and links.
+- Create branches, take part in reviews, and merge when branch rules and review conditions allow.
+- Comment, subscribe to items, and save private views.
+- Use the AI features your organization has turned on.
+
+Members cannot change roles, project access, the data model, shared views, or administrative settings. They can share items with people outside the workspace only when **Share view permissions** in **Settings → Administration → Organization** is set to **Admins and editors**.
+
+## Viewer
+
+For stakeholders who follow progress and give feedback without changing the model.
+
+Viewers can read everything in the projects they can access. They can also:
+
+- Comment, reply, and resolve threads.
+- Submit or clear their own review decision on a branch.
+- Subscribe to items, manage their notifications, and save private views.
+
+Viewers cannot edit items, create branches, merge, or run automations. A review decision does not grant editing access.
+
+## External
+
+For suppliers, customers, and partners who need a defined part of a project.
+
+External users see only what is [shared](/collaboration/sharing) with them; the rest of the workspace appears empty. A share is either **Can view** or **Can edit**. On a shared branch, External users can comment and submit their own review decision, but cannot manage the review or merge. These share levels are separate from the Viewer and Member roles.
+
+External users can also create personal API keys on the **API & MCP** settings page and connect MCP clients. Both reach only what is already shared with them.
+
+## Invite people
+
+1. Open **Settings → Administration → Users** and select **Grant Access**.
+2. In **Send to**, enter one or more email addresses.
+3. Under **Permissions**, choose **Admin**, **Member**, or **Viewer**. Choosing **External** switches to the share dialog, where you pick what to share.
+4. Under **Projects**, choose the projects they can open. **All projects** includes projects created later and is offered only to Admins with access to all projects.
+5. Select **Send invites**.
+
+People whose email domain requires SSO sign in through your identity provider.
+
+<VisualPlaceholder kind="Screenshot" title="Grant User Access dialog">
+  The Grant User Access dialog with two email chips in Send to, Permissions set to Member, and the Projects picker open. Synthetic emails.
+</VisualPlaceholder>
+
+## Change or remove access
+
+<VisualPlaceholder kind="Screenshot" title="Managing users">
+  Settings → Users with the role filter set to Viewers, Role and Access columns, three rows selected, and the Actions menu open on Resend invite, Project access, Set role, and Remove user. Synthetic names.
+</VisualPlaceholder>
+
+- Filter the list by role with the role menu above the table: **All**, **Admins**, **Members**, **Viewers**, or **Externals**.
+- To change one person's projects, open the project list in their **Access** column.
+- To act on several people, select their rows and open **Actions**. You can also right-click a row. The menu offers **Resend invite**, **Project access**, **Set role**, and **Remove user**.
+- **Resend invite** applies only to people who have not signed in yet. Removing a user cannot be undone, and Flow asks you to confirm.
+
+Role and project access changes are recorded in the [audit log](/administration/audit-log) under **Workspace users**.
+
+Users provisioned over SCIM are deactivated in your identity provider, not here. A deactivated user shows a **Deactivated** tag and keeps their role and project access, so reactivating them restores what they had. See [SSO and SCIM](/administration/sso-scim).
