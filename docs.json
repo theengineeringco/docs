@@ -241,12 +241,12 @@
   "logo": {
     "light": "/images/flow-brandmark-black.svg",
     "dark": "/images/flow-brandmark-white.svg",
-    "href": "/api"
+    "href": "/get-started/what-is-flow"
   },
   "redirects": [
     {
       "source": "/",
-      "destination": "/api",
+      "destination": "/get-started/what-is-flow",
       "permanent": false
     },
     {
