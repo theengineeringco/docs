@@ -36,8 +36,8 @@ Every merge also adds a `Merge: <branch>` entry to the history, carrying the rev
 
 1. In **Change history**, choose the revert control on the baseline.
 2. Confirm **Create revert branch**.
-3. Flow creates a branch named `Revert: <baseline>` from the branch the baseline belongs to, fills it with the reverse of the baseline's changes, and opens its review.
+3. Flow creates a branch named `Revert: <baseline>` from the branch the baseline belongs to, fills it with the reverse of that baseline's own changes (those made since the previous baseline), and opens its review. Changes made after the baseline are kept.
 
-<Illustration name="baselining-revert" width={600} alt="Reverting a baseline opens a branch holding the opposite changes. Nothing on Base changes until that branch is reviewed and merged, and Base keeps every original change." />
+<Illustration name="baselining-revert" width={600} alt="Reverting the Design review 1 baseline opens a branch from Base's latest state holding the reverse of only that baseline's own changes. Later changes are kept, and nothing on Base changes until the revert branch is merged." />
 
 Nothing changes until that branch is merged. The original changes stay in history beside the revert, so you can always see what was undone and by whom. Before you merge it, check the result: changes to formulas are not reverted, and a reverted field returns to its earlier value even if someone has edited it since.

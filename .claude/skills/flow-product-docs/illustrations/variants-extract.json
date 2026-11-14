@@ -1,6 +1,6 @@
 {
   "title": "Extracting non-variant changes",
-  "description": "A fix made on the Truck variant is copied to a new branch from Base and merged there. The Truck-only change stays on Truck, and Truck is unchanged.",
+  "description": "Extracting copies a shared fix from the Truck variant to a new branch from the chosen target, here Base. Truck-only changes stay behind, Truck is unchanged, and the new branch stays open until it is reviewed and merged.",
   "size": [
     600,
     330
@@ -30,20 +30,16 @@
           "style": "solid"
         },
         {
-          "from": 0.5,
-          "to": 0.8,
+          "from": 0.62,
+          "until": 0.95,
           "lane": -1,
           "commits": [
-            0.5
+            0.4
           ],
+          "tip": "c",
           "beat": 12
         }
       ],
-      "baselines": [
-        0.8
-      ],
-      "baselineSide": "below",
-      "baselineHeight": 14,
       "head": 1
     },
     {
@@ -96,14 +92,6 @@
       "text": "extract",
       "dx": 14,
       "dy": -14,
-      "size": 12
-    },
-    {
-      "type": "label",
-      "at": "b.baseline0",
-      "text": "merge recorded",
-      "dx": 12,
-      "dy": 30,
       "size": 12
     }
   ],

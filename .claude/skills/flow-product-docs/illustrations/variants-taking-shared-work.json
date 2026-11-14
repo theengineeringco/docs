@@ -1,6 +1,6 @@
 {
   "title": "A variant taking in shared work",
-  "description": "The Truck variant runs alongside Base without merging back. It takes in Base's newer changes by updating from its parent, and its own proposals merge into it.",
+  "description": "The Truck variant runs alongside Base without merging back. Updating from its parent brings in every Base change since its last update at once, and its own proposals merge into it.",
   "size": [
     600,
     330
@@ -19,7 +19,7 @@
       "startKind": "c",
       "commits": [
         0.38,
-        0.68
+        0.6
       ],
       "commitKind": "c",
       "branches": [
@@ -39,58 +39,53 @@
     },
     {
       "type": "line",
-      "id": "u1",
+      "id": "u",
       "from": [
-        239.5,
+        441.1,
         80
       ],
       "to": [
-        269.9,
+        477.1,
         160
       ],
       "style": "fine",
       "beat": 12
     },
     {
-      "type": "line",
-      "id": "u2",
-      "from": [
-        390.7,
-        80
-      ],
-      "to": [
-        421.1,
-        160
-      ],
-      "style": "fine",
-      "beat": 14
-    },
-    {
       "type": "circle",
       "at": [
-        269.9,
+        477.1,
         160
       ],
       "beat": 12.5
     },
     {
-      "type": "circle",
-      "at": [
-        421.1,
-        160
-      ],
-      "beat": 14.5
-    },
-    {
       "type": "traveler",
-      "along": "u1",
+      "along": "u",
       "period": 2.6
     },
     {
-      "type": "traveler",
-      "along": "u2",
-      "period": 2.6,
-      "phase": 0.5
+      "type": "path",
+      "points": [
+        [
+          120.5,
+          56
+        ],
+        [
+          120.5,
+          50
+        ],
+        [
+          441.1,
+          50
+        ],
+        [
+          441.1,
+          56
+        ]
+      ],
+      "style": "solid",
+      "beat": 13
     },
     {
       "motif": "branch",
@@ -122,8 +117,8 @@
       "text": "Base",
       "dx": 0,
       "dy": 26,
-      "anchor": "middle",
-      "size": 12
+      "size": 12,
+      "anchor": "middle"
     },
     {
       "type": "label",
@@ -131,19 +126,30 @@
       "text": "Truck",
       "dx": 0,
       "dy": -14,
-      "anchor": "end",
-      "size": 12
+      "size": 12,
+      "anchor": "end"
     },
     {
       "type": "label",
       "at": [
-        239.5,
+        274.8,
+        50
+      ],
+      "text": "all brought in",
+      "dx": 0,
+      "dy": -12,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": [
+        441.1,
         80
       ],
       "text": "update from parent",
-      "dx": 0,
-      "dy": -18,
-      "anchor": "middle",
+      "dx": 14,
+      "dy": 22,
       "size": 12
     },
     {

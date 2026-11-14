@@ -31,7 +31,7 @@ When you review a variant, or a proposal on one, add the **Non-variant changes**
 
 A variant never merges, so it takes in shared work by updating from its parent. Choose **Update from parent...**, or **Sync changes with parent...** in the updated variant view. Inspect the incoming changes, settle each conflict, and confirm. See [Working in a branch](/branching/branching#update-from-the-parent).
 
-<Illustration name="variants-taking-shared-work" width={600} alt="The Truck variant runs alongside Base without merging back. It takes in Base's newer changes by updating from its parent, and its own proposals merge into it." />
+<Illustration name="variants-taking-shared-work" width={600} alt="The Truck variant runs alongside Base without merging back. Updating from its parent brings in every Base change since its last update at once, and its own proposals merge into it." />
 
 Proposals for a variant branch from the variant and merge back into it, like any other branch.
 
@@ -43,7 +43,7 @@ Work on a variant often produces changes every model needs. **Extract non-varian
 2. Flow creates `Extract from <variant>` under the target, holding every change except those to variant-specific items and the relationships that touch them.
 3. Review the new branch before merging it. It follows the target's review and merge rules.
 
-<Illustration name="variants-extract" width={600} alt="A fix made on the Truck variant is copied to a new branch from Base and merged there. The Truck-only change stays on Truck, and Truck is unchanged." />
+<Illustration name="variants-extract" width={600} alt="Extracting copies a shared fix from the Truck variant to a new branch from the chosen target, here Base. Truck-only changes stay behind, Truck is unchanged, and the new branch stays open until it is reviewed and merged." />
 
 The extracted changes keep their original authors and times. The extracted items get new item numbers in the new branch.
 

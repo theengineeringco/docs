@@ -23,13 +23,13 @@ Creating a branch copies nothing. The branch starts from its parent's state at t
 
 A sub-branch starts from another branch and merges back into it, so you can try an idea on top of a proposal without touching the proposal itself:
 
-<Illustration name="branching-sub-branch" width={600} alt="A sub-branch starts from a proposal, not from Base, and merges back into the proposal. The proposal then merges into Base." />
+<Illustration name="branching-sub-branch" width={600} alt="A sub-branch starts from a proposal, not from Base, and merges back into the proposal, which records that merge. The proposal then merges into Base, which records its own." />
 
 Viewers cannot create branches, and editor groups can limit who edits a branch. See [Managing branches](/branching/managing-branches).
 
 ## Update from the parent
 
-The parent keeps moving while you work. Updating brings that newer work into your branch.
+The parent keeps moving while you work, and your branch doesn't see that newer work until you update. Updating brings in every parent change since your last update at once; you can't pick individual changes.
 
 <VisualPlaceholder kind="Screenshot" title="Update from parent with a conflict">
   Update from parent on a proposal branch: incoming changes listed, one conflict on a target value with Keep parent and Keep current, and the Keep parent changes / Keep current changes buttons at the top.

@@ -1,6 +1,6 @@
 {
   "title": "Splitting a branch",
-  "description": "Some of a branch's changes move to a new branch beside it, with the same parent, so each can be reviewed and merged on its own.",
+  "description": "Some of a branch's changes move to a new branch with the same parent and the same starting point. The moved changes keep their authors and times, and each branch can be reviewed and merged on its own.",
   "size": [
     600,
     300
@@ -29,12 +29,12 @@
           "tip": null
         },
         {
-          "from": 0.42,
+          "from": 0.1,
           "until": 0.85,
           "lane": 1,
           "commits": [
-            0.45,
-            0.75
+            0.48,
+            0.64
           ],
           "tip": null,
           "beat": 12
@@ -65,7 +65,7 @@
         86
       ],
       "to": "b.b1c0",
-      "route": "curve",
+      "route": "straight",
       "style": "dotted",
       "beat": 13
     },
@@ -76,7 +76,7 @@
         86
       ],
       "to": "b.b1c1",
-      "route": "curve",
+      "route": "straight",
       "style": "dotted",
       "beat": 13
     },

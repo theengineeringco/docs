@@ -1,6 +1,6 @@
 {
   "title": "A sub-branch on a proposal",
-  "description": "A sub-branch starts from a proposal, not from Base, and merges back into the proposal. The proposal then merges into Base.",
+  "description": "A sub-branch starts from a proposal, not from Base, and merges back into the proposal, which records that merge. The proposal then merges into Base, which records its own.",
   "size": [
     600,
     280
@@ -57,7 +57,11 @@
             0.7
           ]
         }
-      ]
+      ],
+      "baselines": [
+        0.7
+      ],
+      "baselineHeight": 14
     },
     {
       "type": "label",

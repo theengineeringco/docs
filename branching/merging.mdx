@@ -30,7 +30,7 @@ The review panel shows **Ready to merge** or **Not ready**, with what is blockin
   Review side panel on the Battery capacity trade study: two approvals, Ready to merge, and the Merge button. Inset: the Not ready state listing one missing required review.
 </VisualPlaceholder>
 
-<Illustration name="merging-what-a-merge-does" width={600} alt="The proposal merges into Base. The merge is recorded with who merged it, the reviews, the discussion, and the changed items, and the proposal closes." />
+<Illustration name="merging-what-a-merge-does" width={600} alt="The proposal merges into Base and closes. The merge is one record on Base, a Merge baseline, that holds who merged it, the reviews, the discussion, and the changed items." />
 
 A merge writes the branch's net changes onto the parent. For each field, the parent records the final value from the branch and the person who last changed it there.
 
@@ -42,7 +42,7 @@ The merge also:
 - Closes the branch. It can no longer be edited, and links to it open the parent.
 - Appears in the workspace [audit log](/administration/audit-log) under **Merge history**.
 
-If the parent has moved on since the branch was last updated, [update from the parent](/branching/branching#update-from-the-parent) first and settle any conflicts.
+You don't need to update from the parent before merging. If the parent has moved on, Flow checks for conflicts at merge time and blocks the merge until they are settled; [update from the parent](/branching/branching#update-from-the-parent) to settle them.
 
 Variants cannot merge into their parent. See [Variant branches](/branching/variant-branches).
 
@@ -65,10 +65,10 @@ The agent does not merge, delete, or rebase branches on its own. When you ask it
 If a branch has grown to hold two changes, move part of it into its own branch so each can be reviewed and merged separately.
 
 1. On the **Review** page, select the items to move.
-2. Choose **Create branch and move**. Flow creates a new branch beside this one, with the same parent, holding those items' changes.
+2. Choose **Create branch and move**. Flow creates a new branch beside this one, with the same parent and the same starting point, and moves those items' changes into it with their authors and times.
 3. Review each branch on its own.
 
-<Illustration name="merging-split-branch" width={600} alt="Some of a branch's changes move to a new branch beside it, with the same parent, so each can be reviewed and merged on its own." />
+<Illustration name="merging-split-branch" width={600} alt="Some of a branch's changes move to a new branch with the same parent and the same starting point. The moved changes keep their authors and times, and each branch can be reviewed and merged on its own." />
 
 The move is recorded on the review timeline. **Move changes back** undoes it.
 
