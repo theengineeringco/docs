@@ -1,36 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>One live model</title><desc>Every item in the program connected to one live centre.</desc><path d="M120 100L156.9 81.25" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L153.26 123.58" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L101.28 133.1" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L76.91 89.66" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L114.61 60.03" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M101.28 133.1L53.68 156.48" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M76.91 89.66L30.05 109.37" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M76.91 89.66L45.29 58.95" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M114.61 60.03L97.92 20.34" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M156.9 81.25L163.33 32.42" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M156.9 81.25L199.45 60.59" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M153.26 123.58L209.38 113.49" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M153.26 123.58L171.62 161.34" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M101.28 133.1L116.71 173.36" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M153.26 123.58L101.28 133.1" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M101.28 133.1L76.91 89.66" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M114.61 60.03L156.9 81.25" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M30.05 109.37L45.29 58.95" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M97.92 20.34L163.33 32.42" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M171.62 161.34L116.71 173.36" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M116.71 173.36L53.68 156.48" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<circle cx="156.9" cy="81.25" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="153.26" cy="123.58" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="101.28" cy="133.1" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="76.91" cy="89.66" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="114.61" cy="60.03" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>One live model</title><desc>Every item in the program connected to one live centre.</desc><path d="M120 100L156.9 81.25" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L153.26 123.58" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L101.28 133.1" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L76.91 89.66" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L114.61 60.03" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M101.28 133.1L53.68 156.48" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M76.91 89.66L30.05 109.37" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M76.91 89.66L45.29 58.95" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M114.61 60.03L97.92 20.34" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M156.9 81.25L163.33 32.42" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M156.9 81.25L199.45 60.59" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M153.26 123.58L209.38 113.49" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M153.26 123.58L171.62 161.34" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M101.28 133.1L116.71 173.36" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M153.26 123.58L101.28 133.1" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M101.28 133.1L76.91 89.66" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M114.61 60.03L156.9 81.25" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M30.05 109.37L45.29 58.95" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M97.92 20.34L163.33 32.42" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M171.62 161.34L116.71 173.36" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M116.71 173.36L53.68 156.48" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="156.9" cy="81.25" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="153.26" cy="123.58" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="101.28" cy="133.1" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="76.91" cy="89.66" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="114.61" cy="60.03" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="49.18" y="151.98" width="9" height="9" fill="#1F3ACB"/>
-<circle cx="30.05" cy="109.37" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="45.29" cy="58.95" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="97.92" cy="20.34" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="30.05" cy="109.37" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="45.29" cy="58.95" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="97.92" cy="20.34" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="158.83" y="27.92" width="9" height="9" fill="#1F3ACB"/>
-<circle cx="199.45" cy="60.59" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="199.45" cy="60.59" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="204.88" y="108.99" width="9" height="9" fill="#1F3ACB"/>
-<circle cx="171.62" cy="161.34" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="116.71" cy="173.36" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="171.62" cy="161.34" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="116.71" cy="173.36" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></svg>

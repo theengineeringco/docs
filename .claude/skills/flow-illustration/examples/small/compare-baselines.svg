@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Compare any two baselines</title><desc>Two snapshots side by side; the rows that changed between them stand out.</desc><path d="M78 72L162 72" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M78 100L162 100" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M78 128L162 128" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M78 156L162 156" fill="none" stroke="#E2E1DD" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M78 40L78 156" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M162 40L162 156" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="78" cy="40" r="12" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/><circle cx="78" cy="40" r="4" fill="none" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="162" cy="40" r="12" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/><circle cx="162" cy="40" r="4" fill="none" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="78" cy="72" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="78" cy="100" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="78" cy="128" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="78" cy="156" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="162" cy="72" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Compare any two baselines</title><desc>Two snapshots side by side; the rows that changed between them stand out.</desc><path d="M78 72L162 72" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M78 100L162 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M78 128L162 128" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M78 156L162 156" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M78 40L78 156" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M162 40L162 156" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="78" cy="40" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="78" cy="40" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="162" cy="40" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="162" cy="40" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="78" cy="72" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="78" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="78" cy="128" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="78" cy="156" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="162" cy="72" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="157.5" y="95.5" width="9" height="9" fill="#1F3ACB"/>
-<circle cx="162" cy="128" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="162" cy="128" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="157.5" y="151.5" width="9" height="9" fill="#1F3ACB"/></svg>

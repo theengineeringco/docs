@@ -12,8 +12,8 @@
 @keyframes fi1jtha-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes fi1jtha-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
 @keyframes fi1jtha-pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@media (prefers-reduced-motion:reduce){.fi1jtha *{animation:none!important}.fi1jtha .fi1jtha-d{stroke-dashoffset:0}.fi1jtha .fi1jtha-t{display:none}}</style><g class="fi1jtha-p" style="animation-delay:0.05s"><circle cx="120" cy="100" r="30" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
-<g class="fi1jtha-p" style="animation-delay:0.1s"><circle cx="120" cy="100" r="52" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
-<g class="fi1jtha-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="74" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
+@media (prefers-reduced-motion:reduce){.fi1jtha *{animation:none!important}.fi1jtha .fi1jtha-d{stroke-dashoffset:0}.fi1jtha .fi1jtha-t{display:none}}</style><g class="fi1jtha-p" style="animation-delay:0.05s"><circle cx="120" cy="100" r="30" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
+<g class="fi1jtha-p" style="animation-delay:0.1s"><circle cx="120" cy="100" r="52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
+<g class="fi1jtha-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="74" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi1jtha-m"/></g>
 <g class="fi1jtha-p" style="animation-delay:0.35s"><rect x="115.5" y="21.5" width="9" height="9" fill="#1F3ACB"/></g>
 <g class="fi1jtha-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></g></svg>

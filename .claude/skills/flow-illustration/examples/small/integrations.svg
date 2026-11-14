@@ -1,20 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Agents run across your tools</title><desc>Engineers stay in their tools; Flow connects to each through a port at its boundary.</desc><circle cx="120" cy="100" r="34" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5"/>
-<path d="M120 100L120 30" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L180.62 65" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L180.62 135" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L120 170" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L59.38 135" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L59.38 65" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<circle cx="120" cy="30" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="180.62" cy="65" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="180.62" cy="135" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="120" cy="170" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="59.38" cy="135" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="59.38" cy="65" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="120" cy="66" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="149.44" cy="83" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="149.44" cy="117" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="120" cy="134" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="90.56" cy="117" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="90.56" cy="83" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Agents run across your tools</title><desc>Engineers stay in their tools; Flow connects to each through a port at its boundary.</desc><circle cx="120" cy="100" r="34" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5"/>
+<path d="M120 100L120 30" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L180.62 65" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L180.62 135" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L120 170" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L59.38 135" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L59.38 65" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="120" cy="30" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="180.62" cy="65" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="180.62" cy="135" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="120" cy="170" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="59.38" cy="135" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="59.38" cy="65" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="120" cy="66" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="149.44" cy="83" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="149.44" cy="117" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="120" cy="134" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="90.56" cy="117" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="90.56" cy="83" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></svg>

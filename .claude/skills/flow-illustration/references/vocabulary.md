@@ -18,7 +18,7 @@ those five, never a new idiom.
 
 | Mark | Geometry (scale 1) | Fill / stroke | Site source |
 |---|---|---|---|
-| circle | r 5 | fill paper, stroke `#C9C8C4` 1 px | `GreyCircle` |
+| circle | r 5 | fill paper, stroke `#8F8E8A` 1 px | `GreyCircle` |
 | circleSmall | r 4 | same | lane starts in the conflict rows |
 | square | 9 × 9, centred | fill `#1F3ACB` | `BlueSquare` |
 | node | ring r 12 + square 8 × 8 | ring stroke blue 1 px, fill paper | `BlueNode` |
@@ -36,15 +36,15 @@ those five, never a new idiom.
 
 | Style | Stroke | Dash | Marches | Use |
 |---|---|---|---|---|
-| dashed | `#C9C8C4` 1 px | `4 5` | yes | Every relationship by default |
+| dashed | `#8F8E8A` 1 px | `4 5` | yes | Every relationship by default |
 | fine | grey | `3 3` | yes | Secondary links: reviewers, sub-links |
-| faint | `#E2E1DD` | `4 5` | yes | Background links: chords, context |
+| faint | `#C9C8C4` | `4 5` | yes | Background links: chords, context |
 | solid | grey | — | no | Axes, gates, baseline ticks |
-| faintSolid | `#E2E1DD` | — | no | Drafting guides, log lines |
+| faintSolid | `#C9C8C4` | — | no | Drafting guides, log lines |
 | dotted | grey | `1 2.5` | no | Not live: alternatives, what-if, proposals, provenance back to a source document, and moves in time (revert, rebase, restore). Also the back of 3D curves |
 | accentDashed | blue | `4 5` | yes | The single path that matters in a big figure (a trace) |
 | accent | blue | — | no | Rare; a selected route |
-| ink | `#8A8985` | — | no | Line art (Lissajous), box edges |
+| ink | `#6B6A66` | — | no | Line art (Lissajous), box edges |
 
 Lines go source → target. The dash march (offset 0 → −18 over 2.6 s, linear, infinite) moves
 dashes toward the target, so an inbound line must be authored from the outside in. 18 is a
@@ -59,16 +59,19 @@ Draw order is automatic: planes → rings → lines → marks → travellers →
 |---|---|---|---|---|
 | background | transparent | `#F6F6F3` | `#121212` | `#1F3ACB` |
 | paper (mark fill) | `#FFFFFF` | `#F6F6F3` | `#121212` | `#1F3ACB` |
-| line | `#C9C8C4` | `#C2C1BD` | `#575652` | white 38% |
-| faint | `#E2E1DD` | `#DEDDD8` | `#2C2C2A` | white 16% |
-| ink | `#8A8985` | `#7D7C78` | `#8F8E8A` | white 72% |
+| line | `#8F8E8A` | `#888782` | `#85847F` | white 60% |
+| faint | `#C9C8C4` | `#C2C1BD` | `#4A4945` | white 30% |
+| ink | `#6B6A66` | `#62615D` | `#B3B2AD` | white 88% |
 | accent | `#1F3ACB` | `#1F3ACB` | `#8DACF7` | `#FFFFFF` |
 | flag | `#E29B03` | `#E29B03` | `#F8C881` | `#F8C881` |
-| label | `#8F8E8A` | `#8A8985` | `#7A7975` | white 60% |
+| label | `#6B6A66` | `#62615D` | `#B3B2AD` | white 88% |
 
 - `#1F3ACB` is brand blue-600; `#8DACF7` is the ramp's light step for dark grounds; white is
   the brand's mark color on blue. Mustard `#E29B03` is the brand's sanctioned warm secondary
   ("for diagrams and data where blue would carry too much weight").
+- Line, ink, and label greys are darker than the website's (which uses `#C9C8C4` lines and
+  `#8F8E8A` labels on white) so figures stay legible when scaled down: labels and ink are
+  at least 4.5:1 against the surface in every theme, lines at least 3:1.
 - No third hue. Product accents (green, red, teal, violet) stay in product UI.
 - `paper` must equal the surface the figure sits on, or circles show as white discs. On a
   card of a different color, pass `"colors": { "paper": "#…" }`.

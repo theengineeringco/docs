@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Stage gates</title><desc>An item passes one gate at a time; it can't move on until the gate's checks pass.</desc><path d="M48 100L192 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M84 86L84 114" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M156 86L156 114" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Stage gates</title><desc>An item passes one gate at a time; it can't move on until the gate's checks pass.</desc><path d="M48 100L192 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M84 86L84 114" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M156 86L156 114" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="43.5" y="95.5" width="9" height="9" fill="#1F3ACB"/>
 <circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/>
-<circle cx="192" cy="100" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></svg>
+<circle cx="192" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></svg>

@@ -19,7 +19,7 @@ one and change it.
 
 | Mark | Drawn as | Means |
 |---|---|---|
-| **circle** | r5, white fill, 1px grey `#C9C8C4` | A thing in the program: a requirement, part, test, file, person. Present, not yet acted on. |
+| **circle** | r5, white fill, 1px grey `#8F8E8A` | A thing in the program: a requirement, part, test, file, person. Present, not yet acted on. |
 | **square** | 9×9 solid brand blue `#1F3ACB` | An outcome: verified, updated, approved, landed. The *result*. |
 | **node** | r12 blue ring + 8×8 blue square | Flow itself: the live model, the baseline, the agent at work. **One per figure.** |
 | **donut** | r12 dashed ring + r4 ring, grey | Waiting or frozen: a pending change request, a snapshot, a copy under review. |

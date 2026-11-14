@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Every clause checked</title><desc>Checks sweep the requirements on every change: done, in progress, and one finding.</desc><rect x="51.5" y="70.5" width="7" height="7" fill="#1F3ACB"/>
 <rect x="77.5" y="70.5" width="7" height="7" fill="#1F3ACB"/>
 <rect x="103.5" y="70.5" width="7" height="7" fill="#1F3ACB"/>
-<circle cx="133" cy="74" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="159" cy="74" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="185" cy="74" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="133" cy="74" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="159" cy="74" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="185" cy="74" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="51.5" y="96.5" width="7" height="7" fill="#1F3ACB"/>
 <rect x="77.5" y="96.5" width="7" height="7" fill="#1F3ACB"/>
 <path d="M107 94.24L112.76 100L107 105.76L101.24 100Z" fill="#E29B03" stroke-linejoin="round"/>
-<circle cx="133" cy="100" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="159" cy="100" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="185" cy="100" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="133" cy="100" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="159" cy="100" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="185" cy="100" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="51.5" y="122.5" width="7" height="7" fill="#1F3ACB"/>
-<circle cx="81" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="107" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="133" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="159" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="185" cy="126" r="4" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/></svg>
+<circle cx="81" cy="126" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="107" cy="126" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="133" cy="126" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="159" cy="126" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="185" cy="126" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></svg>

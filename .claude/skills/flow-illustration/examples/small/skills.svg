@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Skills</title><desc>Standards encoded once hold every artifact in shape: squares at the corners, held by dashed edges.</desc><path d="M120 46L173.69 139" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M173.69 139L66.31 139" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M66.31 139L120 46" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<circle cx="146.85" cy="92.5" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="120" cy="139" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="93.15" cy="92.5" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Skills</title><desc>Standards encoded once hold every artifact in shape: squares at the corners, held by dashed edges.</desc><path d="M120 46L173.69 139" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M173.69 139L66.31 139" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M66.31 139L120 46" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="146.85" cy="92.5" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="120" cy="139" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="93.15" cy="92.5" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="115.5" y="41.5" width="9" height="9" fill="#1F3ACB"/>
 <rect x="169.19" y="134.5" width="9" height="9" fill="#1F3ACB"/>
 <rect x="61.81" y="134.5" width="9" height="9" fill="#1F3ACB"/></svg>

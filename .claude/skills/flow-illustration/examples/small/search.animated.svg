@@ -12,39 +12,39 @@
 @keyframes fizkjvz-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes fizkjvz-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
 @keyframes fizkjvz-pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@media (prefers-reduced-motion:reduce){.fizkjvz *{animation:none!important}.fizkjvz .fizkjvz-d{stroke-dashoffset:0}.fizkjvz .fizkjvz-t{display:none}}</style><g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="36" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fizkjvz-m"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.05s"><circle cx="48" cy="52" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.07s"><circle cx="72" cy="52" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="96" cy="52" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="120" cy="52" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="144" cy="52" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="168" cy="52" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="192" cy="52" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.07s"><circle cx="48" cy="76" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="72" cy="76" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="96" cy="76" r="1.8" fill="#8A8985"/></g>
+@media (prefers-reduced-motion:reduce){.fizkjvz *{animation:none!important}.fizkjvz .fizkjvz-d{stroke-dashoffset:0}.fizkjvz .fizkjvz-t{display:none}}</style><g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="36" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fizkjvz-m"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.05s"><circle cx="48" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.07s"><circle cx="72" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="96" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="120" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="144" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="168" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="192" cy="52" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.07s"><circle cx="48" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="72" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="96" cy="76" r="1.8" fill="#6B6A66"/></g>
 <g class="fizkjvz-p" style="animation-delay:0.33s"><rect x="115.5" y="71.5" width="9" height="9" fill="#1F3ACB"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="144" cy="76" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="168" cy="76" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="192" cy="76" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="48" cy="100" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="72" cy="100" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="96" cy="100" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="1.8" fill="#8A8985"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="144" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="168" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="192" cy="76" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.09s"><circle cx="48" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="72" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="96" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="1.8" fill="#6B6A66"/></g>
 <g class="fizkjvz-p" style="animation-delay:0.37s"><rect x="139.5" y="95.5" width="9" height="9" fill="#1F3ACB"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="168" cy="100" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="192" cy="100" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="48" cy="124" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="72" cy="124" r="1.8" fill="#8A8985"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="168" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="192" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.11s"><circle cx="48" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="72" cy="124" r="1.8" fill="#6B6A66"/></g>
 <g class="fizkjvz-p" style="animation-delay:0.35s"><rect x="91.5" y="119.5" width="9" height="9" fill="#1F3ACB"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="120" cy="124" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="144" cy="124" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="168" cy="124" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.23s"><circle cx="192" cy="124" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="48" cy="148" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="72" cy="148" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="96" cy="148" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="120" cy="148" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="144" cy="148" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.23s"><circle cx="168" cy="148" r="1.8" fill="#8A8985"/></g>
-<g class="fizkjvz-p" style="animation-delay:0.25s"><circle cx="192" cy="148" r="1.8" fill="#8A8985"/></g></svg>
+<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="120" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="144" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="168" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.23s"><circle cx="192" cy="124" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.13s"><circle cx="48" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.15s"><circle cx="72" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.17s"><circle cx="96" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.19s"><circle cx="120" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.21s"><circle cx="144" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.23s"><circle cx="168" cy="148" r="1.8" fill="#6B6A66"/></g>
+<g class="fizkjvz-p" style="animation-delay:0.25s"><circle cx="192" cy="148" r="1.8" fill="#6B6A66"/></g></svg>

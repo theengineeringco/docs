@@ -1,31 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Your own data model</title><desc>Define the entity types your program needs; each branch is a type with its own fields.</desc><path d="M120 48L120 74" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 74L56 74" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 74L184 74" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M56 74L56 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 74L120 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M184 74L184 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M56 100L56 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M56 126L40 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M56 126L72 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M40 126L40 152" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M72 126L72 152" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 100L120 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 126L104 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M120 126L136 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M104 126L104 152" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M136 126L136 152" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M184 100L184 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M184 126L168 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M184 126L200 126" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M168 126L168 152" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M200 126L200 152" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Your own data model</title><desc>Define the entity types your program needs; each branch is a type with its own fields.</desc><path d="M120 48L120 74" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 74L56 74" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 74L184 74" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M56 74L56 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 74L120 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M184 74L184 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M56 100L56 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M56 126L40 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M56 126L72 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M40 126L40 152" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M72 126L72 152" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L120 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 126L104 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 126L136 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M104 126L104 152" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M136 126L136 152" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M184 100L184 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M184 126L168 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M184 126L200 126" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M168 126L168 152" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M200 126L200 152" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
 <circle cx="120" cy="48" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="44" width="8" height="8" fill="#1F3ACB"/>
-<circle cx="56" cy="100" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="40" cy="152" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="72" cy="152" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/><circle cx="120" cy="100" r="4" fill="none" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="104" cy="152" r="12" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/><circle cx="104" cy="152" r="4" fill="none" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="136" cy="152" r="12" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="3 3"/><circle cx="136" cy="152" r="4" fill="none" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="56" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="40" cy="152" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="72" cy="152" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="120" cy="100" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="104" cy="152" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="104" cy="152" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="136" cy="152" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="136" cy="152" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
 <rect x="179.5" y="95.5" width="9" height="9" fill="#1F3ACB"/>
 <rect x="163.5" y="147.5" width="9" height="9" fill="#1F3ACB"/>
 <rect x="195.5" y="147.5" width="9" height="9" fill="#1F3ACB"/></svg>

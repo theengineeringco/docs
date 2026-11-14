@@ -2,6 +2,9 @@
 // (flowengineering-website: src/components/illustrated-benefits*.ts*) and the Flow
 // Brand Guide line-art slide. Sizes are px at scale 1, the size the website draws
 // its benefit illustrations at. Bigger figures add marks and space, not bigger marks.
+//
+// Line and label greys are darker than the site's for legibility: in every theme, labels
+// and ink are at least 4.5:1 against the surface and lines at least 3:1.
 
 export const BLUE = "#1F3ACB"
 
@@ -10,60 +13,60 @@ export const THEMES = {
   light: {
     background: null,
     paper: "#FFFFFF",
-    line: "#C9C8C4",
-    faint: "#E2E1DD",
-    ink: "#8A8985",
+    line: "#8F8E8A",
+    faint: "#C9C8C4",
+    ink: "#6B6A66",
     accent: BLUE,
     accentSoft: "rgba(31,58,203,0.10)",
     flag: "#E29B03",
-    label: "#8F8E8A",
+    label: "#6B6A66",
     plane: "#FFFFFF",
-    planeStroke: "#D9D8D4",
+    planeStroke: "#B5B4AF",
     tile: "#F6F6F3",
   },
   // Brand-guide specimen tile: gray-100.
   tile: {
     background: "#F6F6F3",
     paper: "#F6F6F3",
-    line: "#C2C1BD",
-    faint: "#DEDDD8",
-    ink: "#7D7C78",
+    line: "#888782",
+    faint: "#C2C1BD",
+    ink: "#62615D",
     accent: BLUE,
     accentSoft: "rgba(31,58,203,0.10)",
     flag: "#E29B03",
-    label: "#8A8985",
+    label: "#62615D",
     plane: "#FBFBF9",
-    planeStroke: "#D2D1CC",
+    planeStroke: "#ADACA7",
     tile: "#EFEFEB",
   },
   // Deep neutral surface (site --surface-deep).
   dark: {
     background: "#121212",
     paper: "#121212",
-    line: "#575652",
-    faint: "#2C2C2A",
-    ink: "#8F8E8A",
+    line: "#85847F",
+    faint: "#4A4945",
+    ink: "#B3B2AD",
     accent: "#8DACF7",
     accentSoft: "rgba(141,172,247,0.14)",
     flag: "#F8C881",
-    label: "#7A7975",
+    label: "#B3B2AD",
     plane: "#1B1B1A",
-    planeStroke: "#3A3936",
+    planeStroke: "#5C5B56",
     tile: "#1A1A19",
   },
   // Full-bleed brand blue field (deck covers, dividers).
   blue: {
     background: BLUE,
     paper: BLUE,
-    line: "rgba(255,255,255,0.38)",
-    faint: "rgba(255,255,255,0.16)",
-    ink: "rgba(255,255,255,0.72)",
+    line: "rgba(255,255,255,0.6)",
+    faint: "rgba(255,255,255,0.3)",
+    ink: "rgba(255,255,255,0.88)",
     accent: "#FFFFFF",
     accentSoft: "rgba(255,255,255,0.14)",
     flag: "#F8C881",
-    label: "rgba(255,255,255,0.6)",
+    label: "rgba(255,255,255,0.88)",
     plane: "#2342D6",
-    planeStroke: "rgba(255,255,255,0.32)",
+    planeStroke: "rgba(255,255,255,0.5)",
     tile: "rgba(255,255,255,0.06)",
   },
 }

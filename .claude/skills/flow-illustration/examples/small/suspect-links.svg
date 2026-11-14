@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Suspect links</title><desc>When an upstream item changes, the links leaving it are suspect until someone reviews them: one reviewed, two to go.</desc><path d="M62 100L176 52" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M62 100L176 100" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
-<path d="M62 100L176 148" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Suspect links</title><desc>When an upstream item changes, the links leaving it are suspect until someone reviews them: one reviewed, two to go.</desc><path d="M62 100L176 52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M62 100L176 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M62 100L176 148" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
 <circle cx="62" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="58" y="96" width="8" height="8" fill="#1F3ACB"/>
 <rect x="171.5" y="47.5" width="9" height="9" fill="#1F3ACB"/>
-<circle cx="176" cy="100" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
-<circle cx="176" cy="148" r="5" fill="#FFFFFF" stroke="#C9C8C4" stroke-width="1"/>
+<circle cx="176" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="176" cy="148" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
 <path d="M119 94.24L124.76 100L119 105.76L113.24 100Z" fill="#E29B03" stroke-linejoin="round"/>
 <path d="M119 118.24L124.76 124L119 129.76L113.24 124Z" fill="#E29B03" stroke-linejoin="round"/></svg>

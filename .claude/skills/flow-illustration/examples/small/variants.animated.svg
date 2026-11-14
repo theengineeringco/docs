@@ -12,9 +12,9 @@
 @keyframes fi4c6qp-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes fi4c6qp-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
 @keyframes fi4c6qp-pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@media (prefers-reduced-motion:reduce){.fi4c6qp *{animation:none!important}.fi4c6qp .fi4c6qp-d{stroke-dashoffset:0}.fi4c6qp .fi4c6qp-t{display:none}}</style><g class="fi4c6qp-p" style="animation-delay:0.05s"><circle cx="120" cy="74" r="38" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
-<g class="fi4c6qp-p" style="animation-delay:0.1s"><circle cx="142.52" cy="113" r="38" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
-<g class="fi4c6qp-p" style="animation-delay:0.15s"><circle cx="97.48" cy="113" r="38" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
+@media (prefers-reduced-motion:reduce){.fi4c6qp *{animation:none!important}.fi4c6qp .fi4c6qp-d{stroke-dashoffset:0}.fi4c6qp .fi4c6qp-t{display:none}}</style><g class="fi4c6qp-p" style="animation-delay:0.05s"><circle cx="120" cy="74" r="38" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
+<g class="fi4c6qp-p" style="animation-delay:0.1s"><circle cx="142.52" cy="113" r="38" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
+<g class="fi4c6qp-p" style="animation-delay:0.15s"><circle cx="97.48" cy="113" r="38" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
 <g class="fi4c6qp-p" style="animation-delay:0.25s"><rect x="115.5" y="31.5" width="9" height="9" fill="#1F3ACB"/></g>
 <g class="fi4c6qp-p" style="animation-delay:0.3s"><rect x="170.93" y="127.5" width="9" height="9" fill="#1F3ACB"/></g>
 <g class="fi4c6qp-p" style="animation-delay:0.35s"><rect x="60.07" y="127.5" width="9" height="9" fill="#1F3ACB"/></g>

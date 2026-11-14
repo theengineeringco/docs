@@ -12,17 +12,17 @@
 @keyframes fi10dhs-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes fi10dhs-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
 @keyframes fi10dhs-pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@media (prefers-reduced-motion:reduce){.fi10dhs *{animation:none!important}.fi10dhs .fi10dhs-d{stroke-dashoffset:0}.fi10dhs .fi10dhs-t{display:none}}</style><g class="fi10dhs-p" style="animation-delay:0.05s"><circle cx="120" cy="100" r="56" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" class="fi10dhs-m"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.25s"><circle cx="176" cy="100" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.3s"><circle cx="168.5" cy="128" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.35s"><circle cx="148" cy="148.5" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.4s"><circle cx="120" cy="156" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.45s"><circle cx="92" cy="148.5" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.5s"><circle cx="71.5" cy="128" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.55s"><circle cx="64" cy="100" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.6s"><circle cx="71.5" cy="72" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.65s"><circle cx="92" cy="51.5" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.7s"><circle cx="148" cy="51.5" r="2.5" fill="#8A8985"/></g>
-<g class="fi10dhs-p" style="animation-delay:0.75s"><circle cx="168.5" cy="72" r="2.5" fill="#8A8985"/></g>
+@media (prefers-reduced-motion:reduce){.fi10dhs *{animation:none!important}.fi10dhs .fi10dhs-d{stroke-dashoffset:0}.fi10dhs .fi10dhs-t{display:none}}</style><g class="fi10dhs-p" style="animation-delay:0.05s"><circle cx="120" cy="100" r="56" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi10dhs-m"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.25s"><circle cx="176" cy="100" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.3s"><circle cx="168.5" cy="128" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.35s"><circle cx="148" cy="148.5" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.4s"><circle cx="120" cy="156" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.45s"><circle cx="92" cy="148.5" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.5s"><circle cx="71.5" cy="128" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.55s"><circle cx="64" cy="100" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.6s"><circle cx="71.5" cy="72" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.65s"><circle cx="92" cy="51.5" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.7s"><circle cx="148" cy="51.5" r="2.5" fill="#6B6A66"/></g>
+<g class="fi10dhs-p" style="animation-delay:0.75s"><circle cx="168.5" cy="72" r="2.5" fill="#6B6A66"/></g>
 <g class="fi10dhs-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></g>
 <g><animateMotion path="M120 44A56 56 0 1 1 120 156A56 56 0 1 1 120 44" dur="10.4s" begin="0s" repeatCount="indefinite"/><g transform="translate(-120 -44)"><g class="fi10dhs-p" style="animation-delay:0.35s"><rect x="115.5" y="39.5" width="9" height="9" fill="#1F3ACB"/></g></g></g></svg>
