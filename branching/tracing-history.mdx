@@ -1,73 +1,74 @@
 ---
 title: "Tracing history"
-description: "Find who changed a value, when, on which branch, and how it reached the branch you are on, and undo a change without erasing the record."
+description: "Find who changed a value, when, on which branch, and how it came to your current branch, and undo a change but keep the record."
 ---
 
 import { Illustration } from "/snippets/illustration.jsx";
 
-Flow keeps every change it records. Each edit is stored with the branch it was made on, the person or agent who made it, and when. Branch actions add to that record instead of rewriting it: a merge adds a merge record, a revert adds changes that undo earlier ones, and a deleted branch can be restored. [Branching](/core-concepts/branching#every-change-is-traceable) explains why.
+Flow keeps all the changes that it records. For each edit, Flow stores the branch, the person or agent that made the edit, and the time. Branch actions add to that record and do not write over it. A merge adds a merge record, and a revert adds changes that undo earlier changes. You can restore a deleted branch. [Branching](/core-concepts/branching#every-change-is-traceable) explains why.
 
-That means you can answer four questions about any value: who set it, when, on which branch, and how it got to the branch you are looking at.
+As a result, you can answer four questions about each value: who set it, when, on which branch, and how it came to this branch.
 
 ## Read an item's history
 
-1. Open the item's details and select **History**.
-2. Read the changes, newest first. Each shows who made it, or which agent, and when.
-3. Changes are grouped by the branch they were made on. Changes that arrived through a merge sit under **Merged from** the branch that carried them, so you can see which proposal brought a value in.
+1. Open the details of the item.
+2. Select **History**.
+3. Read the changes. The newest change is first. Each change shows the person or agent that made it, and the time.
+4. Flow groups the changes by the branch where they were made. Changes from a merge show under **Merged from** and the name of the branch that brought them. Then you can see which proposal added a value.
 
-In this example, the battery systems engineer raised **Battery Usable Capacity** in a trade study branch, in two steps, and the branch then merged into Base:
+In this example, the battery systems engineer increased **Battery Usable Capacity** in two steps on a trade study branch. Then the branch merged into Base:
 
 <Illustration name="history-value-across-merge" width={600} alt="Battery Usable Capacity is raised in two steps on a proposal, then merged. Base records the final value; the intermediate value stays on the branch." />
 
-On Base, the item shows 120 kWh under **Merged from Trade-study**, attributed to the engineer who last changed it on the branch. The merge record names who merged it and holds the branch's reviews and discussion. Intermediate values from the branch, such as 110 kWh, are not repeated on the parent.
+On Base, the item shows 120 kWh under **Merged from Trade-study**. Flow shows the engineer who last changed the value on the branch as the author. The merge record shows who merged the branch. It also holds the reviews and discussion of the branch. The parent does not show intermediate values from the branch, for example 110 kWh.
 
 Each change has a menu:
 
 | Action | What it does |
 | --- | --- |
-| **View this version** | Shows the item as it was at that change |
-| **Compare from this version** | Opens a comparison from that change to now |
-| **Revert this change only** | Undoes that one change |
-| **Revert this item to this point** | Returns every field of the item to its state at that change |
+| **View this version** | Shows the item at the time of that change |
+| **Compare from this version** | Opens a comparison from that change to the current state |
+| **Revert this change only** | Undoes only that change |
+| **Revert this item to this point** | Returns all fields of the item to their state at that change |
 
-A branch section header offers **Revert changes from this branch only**, which undoes what one branch or merge did to the item and keeps the rest.
+Each branch section header has **Revert changes from this branch only**. This action undoes the changes that one branch or merge made to the item. It keeps all other changes.
 
-A link to the item can be pinned to one of these versions, so every view that reaches the item through that link shows it as it was at the pin. See [The data model](/core-concepts/the-data-model#give-relationships-a-meaning).
+You can pin a link to the item to one of these versions. Then each view that gets the item through that link shows the item at the pinned version. Refer to [The data model](/core-concepts/the-data-model#give-relationships-a-meaning).
 
 ## Undo without erasing
 
-A revert never deletes the change it undoes. It adds new changes that set the old values back, and both stay in history.
+A revert never deletes the change that it undoes. It adds new changes that set the old values again. Both changes stay in history.
 
-When you choose a revert from the history menu, choose where the undo goes:
+If you select a revert from the history menu, select the location for the undo:
 
-- **Revert and create a new branch** puts the undo in a branch so it can be reviewed and merged like any other change.
-- **Revert in this branch** makes the undo directly, as your edit. It is not available on protected branches.
+- **Revert and create a new branch** puts the undo in a branch. Then you can review and merge the undo as you do other changes.
+- **Revert in this branch** makes the undo directly, as your edit. You cannot use it on protected branches.
 
 <Illustration name="history-undo-without-erasing" width={600} alt="A revert adds the opposite change on its own branch and merges it. The value reads 100, then 120, then 100 again, and both changes stay in history." />
 
-To undo everything a merge or milestone did, revert its baseline instead. See [Baselining](/branching/baselining#revert-a-baseline).
+To undo all changes from a merge or milestone, revert its baseline instead. Refer to [Baselining](/branching/baselining#revert-a-baseline).
 
 ## Read a branch's timeline
 
-Open **Change history** with the clock control to see a branch's baselines and merges in order. Select one to inspect it, or compare it with **Current**. **Parent update history**, in the same menu, lists each time the branch was updated from its parent and what came in.
+To see the baselines and merges of a branch in sequence, use the clock control to open **Change history**. To examine a baseline or merge, select it. You can also compare it with **Current**. **Parent update history** is in the same menu. It lists each update of the branch from its parent and the changes that each update added.
 
 ## What each action records
 
 | Action | What changes | What history keeps | How to undo |
 | --- | --- | --- | --- |
-| [Create a branch](/branching/branching#create-a-branch) | Nothing is copied; the branch starts from its parent's current state | Who created it, or which agent, and when | Delete the branch |
-| Edit on a branch | Only that branch | Each change, with branch, person or agent, and time | Revert the change |
-| [Update from parent](/branching/branching#update-from-the-parent) | Your branch takes in the parent's newer changes | Your branch's own changes keep their authors and times; the update is listed in **Parent update history** | **Create revert request** on that update |
-| [Rebase onto](/branching/branching#move-work-to-another-parent) | A new branch under the target, holding a copy of your changes | The copies keep their original authors and times; the source branch is unchanged | Delete the copy |
-| [Create branch and move](/branching/merging#split-a-branch) | Selected items move to a new sibling branch | Recorded on the review timeline | **Move changes back** |
-| [Merge](/branching/merging#merge) | The parent takes the branch's net changes | A `Merge: <branch>` record with who merged, reviews, discussion, and changed items; the branch closes | Revert the merge baseline |
-| [Create baseline](/branching/baselining) | Nothing | A named point in the branch's history | None needed |
-| [Revert a baseline](/branching/baselining#revert-a-baseline) | A `Revert: <baseline>` branch with the opposite changes | The original changes and the revert, once merged | Delete the revert branch, or revert the revert |
+| [Create a branch](/branching/branching#create-a-branch) | Flow copies nothing. The branch starts from the current state of its parent | The person or agent that created it, and the time | Delete the branch |
+| Edit on a branch | Only that branch | Each change, with the branch, the person or agent, and the time | Revert the change |
+| [Update from parent](/branching/branching#update-from-the-parent) | Your branch receives the newer changes from the parent | The changes on your branch keep their authors and times. **Parent update history** shows the update | **Create revert request** on that update |
+| [Rebase onto](/branching/branching#move-work-to-another-parent) | A new branch under the target. It holds a copy of your changes | The copies keep their original authors and times. The source branch does not change | Delete the copy |
+| [Create branch and move](/branching/merging#split-a-branch) | The items that you select move to a new branch with the same parent | Flow records the move on the review timeline | **Move changes back** |
+| [Merge](/branching/merging#merge) | The parent receives the net changes of the branch | A `Merge: <branch>` record with who merged, the reviews, the discussion, and the changed items. The branch closes | Revert the merge baseline |
+| [Create baseline](/branching/baselining) | Nothing | A named point in the history of the branch | Not necessary |
+| [Revert a baseline](/branching/baselining#revert-a-baseline) | A `Revert: <baseline>` branch with the opposite changes | The original changes and the revert, after the revert merges | Delete the revert branch, or revert the revert |
 | Revert an item | New changes that restore earlier values | The original changes and the revert | Revert again |
-| [Delete a branch](/branching/managing-branches#delete-and-restore) | The branch closes and leaves the branch list | Its changes are kept | **Restore** |
+| [Delete a branch](/branching/managing-branches#delete-and-restore) | The branch closes, and the branch list does not show it | Flow keeps its changes | **Restore** |
 
 ## Limits
 
-- On the parent, a merge does not record which agent made a change on the branch. Check the branch's review and its merge record.
-- Renaming a branch is not recorded. A merge record keeps the branch's name as it was when it merged.
-- Comparisons and history show only what your access allows. External recipients see the current state of what is shared with them, not its history.
+- On the parent, a merge does not record which agent made a change on the branch. Examine the review of the branch and its merge record.
+- When you rename a branch, Flow does not record the change. A merge record keeps the name that the branch had when it merged.
+- Comparisons and history show only the data that your access permits. External recipients see the current state of the data that is shared with them. They do not see its history.

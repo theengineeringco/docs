@@ -1,52 +1,56 @@
 ---
 title: "Variant branches"
-description: "Maintain a lasting alternative design and share the changes that apply beyond it."
+description: "Keep a long-term alternative design, and share the changes that also apply outside the variant."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 import { Illustration } from "/snippets/illustration.jsx";
 
-A variant holds a lasting difference from its parent, such as one model in a product family. It stays open and cannot merge into its parent. [Branching](/core-concepts/branching) explains how variants differ from proposals.
+A variant contains a long-term difference from its parent. For example, a variant can be one model in a product family. A variant stays open, and it cannot merge into its parent. [Branching](/core-concepts/branching) explains the differences between variants and proposals.
 
 ## Create a variant
 
-1. [Create a branch](/branching/branching) under Base or under an existing variant.
-2. Open its actions menu and choose **Promote to variant**.
+1. [Create a branch](/branching/branching) under Base or under a variant.
+2. Open the actions menu of the branch.
+3. Choose **Promote to variant**.
 
-A branch under an ordinary branch cannot become a variant; promote its parent first. **Demote from variant** turns a variant back into an ordinary branch without deleting its data. Demote its sub-variants first.
+A branch under an ordinary branch cannot become a variant. Promote its parent first. **Demote from variant** changes a variant back into an ordinary branch. It does not delete the data of the branch. Before you demote a variant, demote its sub-variants.
 
-In workspaces that use the updated variant view, choose **New Variant**, or **Create a sub variant** on an existing variant. Work on a proposal in a change request beneath the variant.
+In workspaces that use the updated variant view, choose **New Variant**. To create a sub-variant, choose **Create a sub variant** on a variant. Do the work for a proposal in a change request under the variant.
 
 ## Mark what belongs to the variant
 
-Some items exist only because of the variant. On a variant, select one or more items, open the item menu, and choose **Apply to variant** to mark them variant-specific. **Detach from variant** removes the mark.
+Some items exist only because of the variant. On a variant, select one or more items. Open the item menu. To mark the items as variant-specific, choose **Apply to variant**. **Detach from variant** removes the mark.
 
 <VisualPlaceholder kind="Screenshot" title="Apply to variant">
   On the Truck variant, a selected Towing Load item with its menu open on Apply to variant. Inset: the Extract non-variant changes target picker.
 </VisualPlaceholder>
 
-When you review a variant, or a proposal on one, add the **Non-variant changes** filter to hide variant-specific items and see only what extracting would carry.
+When you review a variant or a proposal on a variant, add the **Non-variant changes** filter. This filter hides variant-specific items. It shows only the changes that an extraction will copy.
 
 ## Bring in parent changes
 
-A variant never merges, so it takes in shared work by updating from its parent. Choose **Update from parent...**, or **Sync changes with parent...** in the updated variant view. Inspect the incoming changes, settle each conflict, and confirm. See [Working in a branch](/branching/branching#update-from-the-parent).
+A variant never merges. To receive shared work, a variant updates from its parent.
+
+Choose **Update from parent...**. In the updated variant view, choose **Sync changes with parent...**. Examine the changes from the parent. Resolve each conflict. Confirm the update. See [Working in a branch](/branching/branching#update-from-the-parent).
 
 <Illustration name="variants-taking-shared-work" width={600} alt="The Truck variant runs alongside Base without merging back. Updating from its parent brings in every Base change since its last update at once, and its own proposals merge into it." />
 
-Proposals for a variant branch from the variant and merge back into it, like any other branch.
+A proposal for a variant branches from the variant and merges back into the variant, the same as all other branches.
 
 ## Share changes beyond the variant
 
-Work on a variant often produces changes every model needs. **Extract non-variant changes** copies them to a new branch so they can merge elsewhere.
+Work on a variant often makes changes that all models need. **Extract non-variant changes** copies these changes to a new branch, so that they can merge into a different branch.
 
-1. On the variant's actions menu, choose **Extract non-variant changes**, then choose the target branch.
-2. Flow creates `Extract from <variant>` under the target, holding every change except those to variant-specific items and the relationships that touch them.
-3. Review the new branch before merging it. It follows the target's review and merge rules.
+1. On the actions menu of the variant, choose **Extract non-variant changes**.
+2. Choose the target branch.
+3. Flow creates `Extract from <variant>` under the target. It contains all changes except changes to variant-specific items and to the relationships that connect to these items.
+4. Review the new branch before you merge it. The new branch follows the review rules and merge rules of the target.
 
 <Illustration name="variants-extract" width={600} alt="Extracting copies a shared fix from the Truck variant to a new branch from the chosen target, here Base. Truck-only changes stay behind, Truck is unchanged, and the new branch stays open until it is reviewed and merged." />
 
 The extracted changes keep their original authors and times. The extracted items get new item numbers in the new branch.
 
-For example, the Truck variant relaxes its drag coefficient target to 0.35 and adds its towing requirements, all marked variant-specific. The same work revises the Coastdown Procedure that every model uses. Extracting to Base carries the procedure change and leaves the Truck's target and towing requirements behind.
+For example, the Truck variant sets a less strict drag coefficient target of 0.35. It also adds its towing requirements. All of these items are marked variant-specific. The same work also changes the Coastdown Procedure that all models use. An extraction to Base copies the change to the procedure. It does not copy the Truck target or the towing requirements.
 
-The variant stays open, and its own changes are untouched.
+The variant stays open, and its own changes stay the same.

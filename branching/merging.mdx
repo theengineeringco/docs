@@ -1,30 +1,30 @@
 ---
 title: "Reviewing and merging"
-description: "Get a branch reviewed, merge it into its parent, and know exactly what the merge records."
+description: "Get a review for a branch, merge it into its parent, and know all the data that the merge records."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 import { Illustration } from "/snippets/illustration.jsx";
 
-Merging is how a proposal becomes part of the agreed design. The parent takes the branch's changes, and Flow records the merge as its own entry in history, with who merged it, the reviews, and the discussion. Nothing on the branch is lost.
+A merge makes a proposal part of the agreed design. The parent receives the changes from the branch. Flow records the merge as a separate entry in history. This entry shows who merged the branch, the reviews, and the discussion. No data on the branch is lost.
 
 ## Ask for review
 
-1. On the branch's **Review** page, check **Changed Items**. It lists every difference from the parent.
-2. When the work is ready, select **Ready for review**. The branch owner or an Admin can do this. To move it back to draft, select the status tag under the title on **Overview** and choose **Draft**.
-3. Add reviewers if the branch needs them. Required reviewers and reviewer groups can be added by an Admin, the branch owner, or an existing required reviewer. For a group, one member's approval counts for the group.
+1. On the **Review** page of the branch, examine **Changed Items**. This list shows each difference from the parent.
+2. When the work is ready, select **Ready for review**. The branch owner or an Admin can do this step. To change the branch back to draft, select the status tag below the title on **Overview**. Then select **Draft**.
+3. If the branch must have reviewers, add them. An Admin, the branch owner, or a current required reviewer can add required reviewers and reviewer groups. For a group, the approval of one member is the approval of the group.
 
-Reviewers open **Submit review** and choose **Approve** or **Request changes**, with a comment. Each reviewer has one current review; submitting again replaces it.
+Reviewers open **Submit review**. Then they select **Approve** or **Request changes** and write a comment. Each reviewer has one current review. A new review from the same reviewer replaces the previous review.
 
-Reviewers can mark each changed item as viewed. If the item changes again, the mark clears for every reviewer and the item shows **Changed since viewed**, so you know what to read again.
+Reviewers can mark each changed item as viewed. If the item changes again, Flow removes the mark for all reviewers. The item then shows **Changed since viewed**. As a result, you know which items to read again.
 
-**Overview** holds the discussion. The comment box sits at the top, and the activity below it lists the newest first.
+**Overview** contains the discussion. The comment box is at the top. Below it, the activity list shows the newest entries first.
 
-An edit made after approval dismisses the existing approvals, so reviewers see the final state. The dismissed approvals stay on the review timeline.
+An edit after approval dismisses the current approvals. As a result, reviewers see the final state. The dismissed approvals stay on the review timeline.
 
 ## Merge
 
-The review panel shows **Ready to merge** or **Not ready**, with what is blocking: reviews, stage gates, checks, conflicts with the parent, or editor groups. When nothing blocks, select **Merge**.
+The review panel shows **Ready to merge** or **Not ready**. The panel also shows what blocks the merge: reviews, stage gates, checks, conflicts with the parent, or editor groups. If nothing blocks the merge, select **Merge**.
 
 <VisualPlaceholder kind="Screenshot" title="A branch ready to merge">
   Review side panel on the Battery capacity trade study: two approvals, Ready to merge, and the Merge button. Inset: the Not ready state listing one missing required review.
@@ -32,48 +32,48 @@ The review panel shows **Ready to merge** or **Not ready**, with what is blockin
 
 <Illustration name="merging-what-a-merge-does" width={600} alt="The proposal merges into Base and closes. The merge is one record on Base, a Merge baseline, that holds who merged it, the reviews, the discussion, and the changed items." />
 
-A merge writes the branch's net changes onto the parent. For each field, the parent records the final value from the branch and the person who last changed it there.
+A merge writes the net changes of the branch to the parent. For each field, the parent records the final value from the branch. It also records the person who last changed that value on the branch.
 
 The merge also:
 
-- Adds a `Merge: <branch>` entry to the parent's **Change history**, recording who merged it and when, the changed items, and the branch's reviews, description, and review timeline.
-- Moves the branch's comments to the parent, labelled with the branch they came from, and carries over item subscriptions.
-- Moves any open sub-branches onto the parent, so their work continues against the merged result.
-- Closes the branch. It can no longer be edited, and links to it open the parent.
+- Adds a `Merge: <branch>` entry to the **Change history** of the parent. This entry records who merged the branch and when, the changed items, and the reviews, description, and review timeline of the branch.
+- Moves the comments of the branch to the parent and transfers item subscriptions. Each moved comment has a label that shows the branch that it came from.
+- Moves all open sub-branches to the parent. Then their work continues on the merged result.
+- Closes the branch. You cannot edit the branch after the merge, and links to the branch open the parent.
 - Appears in the workspace [audit log](/administration/audit-log) under **Merge history**.
 
-You don't need to update from the parent before merging. If the parent has moved on, Flow checks for conflicts at merge time and blocks the merge until they are settled; [update from the parent](/branching/branching#update-from-the-parent) to settle them.
+It is not necessary to update from the parent before you merge. If the parent has new changes, Flow checks for conflicts at the time of the merge. Flow blocks the merge until all conflicts are resolved. To resolve them, [update from the parent](/branching/branching#update-from-the-parent).
 
-Variants cannot merge into their parent. See [Variant branches](/branching/variant-branches).
+Variants cannot merge into their parent. Refer to [Variant branches](/branching/variant-branches).
 
 ### Merge automatically
 
-If your organization's review policy allows automatic merging, choose **Merge When Ready**. Flow merges the branch as you once every requirement passes, re-checking each one at that point. It waits while the branch has open sub-branches. **Cancel Merge** stops it.
+If the review policy of your organization permits automatic merges, select **Merge When Ready**. When all requirements pass, Flow merges the branch as you. At that time, Flow checks each requirement again. Flow waits while the branch has open sub-branches. **Cancel Merge** stops the automatic merge.
 
 ### Force a merge
 
-When a merge is blocked and your organization's review policy lets you bypass it, choose **Force merge…** in **Merge status**, opened from **Merge** at the top of the review. Flow asks **Force bypass review and merge?** and requires a reason. The merge record keeps the reason and what was blocking at the time.
+If a merge is blocked and the review policy of your organization permits a bypass, you can force the merge. Select **Merge** at the top of the review to open **Merge status**. Select **Force merge…**. Flow asks **Force bypass review and merge?** and you must give a reason. The merge record keeps the reason and what blocked the merge at that time.
 
 ### Merge from an AI chat
 
-Ask the agent whether a branch is ready, and the chat shows the same merge status as the review page. A branch that is ready can be merged from there; one whose merge would move sub-branches is merged from its review.
+If you ask the agent if a branch is ready, the chat shows the same merge status as the review page. You can merge a ready branch from the chat. If the merge of a branch moves sub-branches, you must merge that branch from its review.
 
-The agent does not merge, delete, or rebase branches on its own. When you ask it to, the chat lists each branch it would act on and says which it cannot and why. Untick any branch, then select **Merge**, **Delete**, or **Rebase**, or **Cancel**. The action runs with your permissions.
+The agent does not merge, delete, or rebase branches on its own. When you ask the agent to do one of these actions, the chat lists each branch for that action. The chat also shows the branches that the agent cannot act on, and the reason for each. To remove a branch from the action, clear its check box. Then select **Merge**, **Delete**, **Rebase**, or **Cancel**. The action runs with your permissions.
 
 ## Split a branch
 
-If a branch has grown to hold two changes, move part of it into its own branch so each can be reviewed and merged separately.
+If a branch contains two changes, move one part to a new branch. Then you can review and merge each change separately.
 
 1. On the **Review** page, select the items to move.
-2. Choose **Create branch and move**. Flow creates a new branch beside this one, with the same parent and the same starting point, and moves those items' changes into it with their authors and times.
-3. Review each branch on its own.
+2. Select **Create branch and move**. Flow creates a new branch next to this branch, with the same parent and the same start point. Flow moves the changes of those items into the new branch, with their authors and times.
+3. Review each branch separately.
 
 <Illustration name="merging-split-branch" width={600} alt="Some of a branch's changes move to a new branch with the same parent and the same starting point. The moved changes keep their authors and times, and each branch can be reviewed and merged on its own." />
 
-The move is recorded on the review timeline. **Move changes back** undoes it.
+Flow records the move on the review timeline. **Move changes back** undoes the move.
 
 ## Undo a merge
 
-A merge cannot be erased, but it can be reversed. In the parent's **Change history**, revert the `Merge: <branch>` entry. Flow creates a `Revert: Merge: <branch>` branch holding the opposite changes, which you review and merge. See [Baselining](/branching/baselining#revert-a-baseline).
+You cannot erase a merge, but you can reverse it. In the **Change history** of the parent, revert the `Merge: <branch>` entry. Flow creates a `Revert: Merge: <branch>` branch that holds the opposite changes. You review and merge this branch. Refer to [Baselining](/branching/baselining#revert-a-baseline).
 
-[Tracing history](/branching/tracing-history) shows how to follow a merged value back to its branch.
+[Tracing history](/branching/tracing-history) shows how to find the source branch of a merged value.

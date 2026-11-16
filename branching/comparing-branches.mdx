@@ -1,26 +1,30 @@
 ---
 title: "Comparing branches"
-description: "Compare two branches or two points in history without changing either."
+description: "A comparison shows the differences between two branches or two points in history, and it does not change them."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 import { Illustration } from "/snippets/illustration.jsx";
 
-A comparison shows what differs between two states of the project: two branches, a branch and one of its baselines, or two points in one branch's history. Nothing is applied. A comparison between two branches includes differences from both histories; to see only what a branch would merge, open its review instead.
+A comparison shows the differences between two states of the project. These states can be two branches, a branch and one of its baselines, or two points in the history of one branch. A comparison does not apply changes. A comparison between two branches shows the differences from the histories of the two branches. To see only the changes that a branch will merge, open the review of that branch.
 
 ## Choose the two sides
 
-1. Open the branch selector's actions menu, or a branch row's menu, and choose **Compare with...**.
-2. On each side, pick a **Branch** and a **Point**. The **Point** list opens on **Current** and the branch's baselines. To start from a single change instead, choose **Changes up to …** on one of them and pick a change; the changes are listed newest first and you can search them. Put the starting state on the left and the resulting state on the right.
-3. Open **Compare changes** and select an item to see its changed fields and relationships.
+1. Open the actions menu of the branch selector, or the menu of a branch row.
+2. Choose **Compare with...**.
+3. On each side, select a **Branch** and a **Point**. At first, the **Point** list shows **Current** and the baselines of the branch.
+4. To start from one change instead, choose **Changes up to …** on one side. Then select a change. The list shows the newest change first, and you can search the changes.
+5. Put the start state on the left side and the result state on the right side.
+6. Open **Compare changes**.
+7. Select an item to see its changed fields and relationships.
 
 <Illustration name="comparing-what-a-comparison-includes" width={600} alt="A proposal made changes A and B; Base has since made change C. The proposal's review shows only A and B, what would merge. Comparing the two branches now also shows C." />
 
-Comparing **Base** at the change just before the proposal branched (choose **Changes up to …**) with **Proposal** at **Current** shows changes A and B. Comparing **Base** at **Current** with **Proposal** at **Current** also shows change C, from the other side. Open the proposal's review to see only what it would merge: A and B.
+A comparison of **Base** at the last change before the proposal branched with **Proposal** at **Current** shows changes A and B. To select that point on **Base**, choose **Changes up to …**. A comparison of **Base** at **Current** with **Proposal** at **Current** also shows change C, from the other side. To see only the changes that the proposal will merge, open its review. These changes are A and B.
 
-Use the swap control to reverse the two sides. Filters and display options narrow the list; clear them to see the full difference.
+Use the swap control to reverse the two sides. Filters and display options limit the list. To see all the differences, clear the filters and display options.
 
-To compare a single item, open its menu and choose **Compare with branch...**. Its **Point** list offers the same positions, limited to that item's changes.
+To compare one item, open the item menu. Then choose **Compare with branch...**. The **Point** list shows the same types of points, but it shows only the changes to that item.
 
 ## Read the history
 
@@ -28,16 +32,16 @@ To compare a single item, open its menu and choose **Compare with branch...**. I
   Comparison page with Truck on the left and the Battery capacity trade study on the right, both Branch and Point pickers visible, the Compare changes tab showing Battery Usable Capacity before (100 kWh) and after (120 kWh), and the Swap sides icon.
 </VisualPlaceholder>
 
-**Overview** describes the point on the right side: who created a baseline and when, or who merged a branch, along with its discussion.
+**Overview** shows information about the point on the right side. For a baseline, it shows who created the baseline and when. For a merged branch, it shows who merged the branch. It also shows the discussion for that point.
 
-Baselines stay fixed. A side set to **Current** follows the branch as it changes. If Flow reports that a comparison has expired, choose **Reload comparison**. To capture a state you can come back to, see [Baselining](/branching/baselining).
+Baselines do not change. If a side shows **Current**, that side changes when the branch changes. If Flow tells you that the comparison is expired, choose **Reload comparison**. To mark a state that you can open again later, see [Baselining](/branching/baselining).
 
 ## See differences in a view
 
-You can also see a branch's differences without leaving a table.
+You can also see the differences in a branch from a table.
 
-- In **Display options**, turn on **Show changed in branch**. Changed values show above their previous values, and created, updated, and reordered items are tagged. Tree and Reader mark changed items. It is not available on Base.
-- In **Choose columns...**, choose **Add field**, then **Field in another branch…**, and pick a branch and a field. The read-only column shows that field as the other branch has it for each row. An item the other branch does not hold reads "Not in" and the branch's name. The column stays on its branch when you switch branches, and is saved with the view.
+- In **Display options**, set **Show changed in branch** to on. A changed value shows above its previous value. Flow puts a tag on each item that is created, updated, or reordered. Tree and Reader mark changed items. This option is not available on Base.
+- In **Choose columns...**, choose **Add field**. Then choose **Field in another branch…**. Select a branch and a field. For each row, the read-only column shows the value of that field in the other branch. If the other branch does not contain an item, the column shows "Not in" and the name of that branch. When you switch branches, the column continues to show its branch. Flow saves the column with the view.
 
 <VisualPlaceholder kind="Screenshot" title="Another branch's values in a table">
   Table on the Battery capacity trade study branch with Show changed in branch on: the Battery Usable Capacity row shows 120 kWh above a struck-through 100 kWh, tagged Updated. A read-only "Battery Usable Capacity in Truck" column beside it reads 100 kWh. Highlight the struck-through old value and the column header.
@@ -45,6 +49,6 @@ You can also see a branch's differences without leaving a table.
 
 ## Access
 
-Viewers can open comparisons. External recipients can compare only the current state of branches shared with them, limited to the items and fields their share makes visible; points in history and **Overview** are not available to them.
+Viewers can open comparisons. External recipients can compare only the current state of the branches that are shared with them. They can see only the items and fields that their share shows. Points in history and **Overview** are not available to them.
 
-Choosing a side does not switch your working branch. Check the branch selector before you go back to editing.
+When you choose a side, Flow does not switch the branch that you work in. Before you edit again, check the branch selector.

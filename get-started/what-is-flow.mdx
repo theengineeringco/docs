@@ -1,50 +1,52 @@
 ---
 title: "What is Flow"
-description: "A source of truth that lets engineers and agents understand your physical system, and close the gap between what you intend to build and where you are."
+description: "A source of truth where engineers and agents can understand your physical system and decrease the gap between your design intent and your current progress."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 import { Illustration } from "/snippets/illustration.jsx";
 
-Flow is a source of truth that lets humans and agents deeply understand your physical system. It pulls and manages context from the places your team already works, so it is clear what you intend to build and how close you are to achieving it. On that foundation, you can spin up agents that work in the background to close the gap and increase your engineering velocity.
+Flow is a source of truth. With Flow, people and agents can understand your physical system in detail. Flow gets context from the locations where your team does its work, and it manages that context. Thus, you can clearly see what you intend to build and how near you are to that goal. With this source of truth, you can start agents that work in the background. These agents decrease the gap and make your engineering work faster.
 
 ## Model any system and any structure
 
-Hardware programs run on many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, suppliers, risks, and decisions. Flow holds all of them. Your team defines the categories of items and the fields they carry, and Flow keeps them connected.
+A hardware program uses many structures at the same time: the product breakdown, interfaces, requirements, analyses, tests, parts, suppliers, risks, and decisions. Flow contains all of these structures. Your team defines the categories of items and the fields of each category. Flow keeps these items connected.
 
 <VisualPlaceholder kind="Screenshot" title="One model, several structures">
   Tree view of the Vehicle with Battery System expanded to Battery Pack and Battery Management System. Beside each system, its linked items from other categories: an interface (Pack to BMS), a target (Battery Usable Capacity, 100 kWh), and a test result. Owner column visible.
 </VisualPlaceholder>
 
-Those connections are what make the system understandable. Follow a design decision to the systems it affects, an interface to the two teams on either side of it, or a target to the analyses and tests that back it. [The systems graph](/core-concepts/the-systems-graph) explains how the connections work, and [the data model](/core-concepts/the-data-model) how your team shapes them.
+These connections make it possible to understand the system. You can follow a design decision to the systems that it affects. You can follow an interface to the two teams on each side of it. You can follow a target to the analyses and tests that support it. [The systems graph](/core-concepts/the-systems-graph) explains how the connections work. For how your team defines the connections, refer to [the data model](/core-concepts/the-data-model).
 
 ## Pull context from where work happens
 
-Engineering information is spread across spreadsheets, documents, models, code, tickets, and chat. Flow brings it together: import files, extract records from documents with the agent, and connect the tools your team already uses. Each item has an owner, the engineer closest to that part of the design, who keeps it current.
+Engineering information is in many locations: spreadsheets, documents, models, code, tickets, and chat. Flow puts this information in one location. You can import files, use the agent to extract records from documents, and connect the tools that your team uses now. Each item has an owner. The owner is the engineer closest to that part of the design. The owner keeps the item up to date.
 
-[Getting data into Flow](/get-started/getting-data-into-flow) covers the routes in.
+[Getting data into Flow](/get-started/getting-data-into-flow) shows the routes that you can use to add data.
 
 ## See what you intend and how close you are
 
-When intent and evidence sit in the same connected model, the gap between them is visible. A target sits next to its latest measured value. A system with no verification stands out. A change shows which connected items have not caught up with it.
+When intent and evidence are in the same connected model, you can see the gap between them. A target is next to its latest measured value. You can easily see a system that has no verification. A change shows which connected items are not yet updated for it.
 
 <Illustration name="what-is-flow-intent-evidence" width={640} alt="Flow connects each target to the evidence for it: one target is met, one is close but not there, and one has no evidence yet." />
 
-Here, one target is met, one is close but not there yet, and one has no evidence at all.
+In this example, one target is met. One target is near but not yet met. One target has no evidence.
 
-Views show the same items for different jobs: a table to compare and edit, a tree for structure, **Reader** to read and comment like a document, and a diagram to see how parts connect.
+Views show the same items for different tasks. A table is for comparison and edits. A tree shows the structure. In **Reader**, you can read items and comment on them as in a document. A diagram shows how parts connect.
 
 ## Change the design in parallel
 
-Branches let the design change without losing the agreed state. They hold lasting variants built from a shared base, and they hold proposals in progress, so several engineers can develop changes at once and compare each one with its parent before it is accepted. Every change is recorded, so the history behind any item can be [traced](/branching/tracing-history). [Branching](/core-concepts/branching) explains both jobs.
+With branches, you can change the design and keep the agreed state. Branches contain long-term variants that start from a shared base, and also proposals that are in progress. Thus, more than one engineer can develop changes at the same time. Each engineer can compare a change with its parent before it is accepted. Flow records every change, so you can [trace](/branching/tracing-history) the history of each item. [Branching](/core-concepts/branching) explains these two uses of branches.
 
 ## Close the gap with agents
 
-Agents read the same source of truth your engineers do. Chat with the agent to answer a question or make a change, save how your team does a task as a [skill](/ai-automations/skills), and set up automations that work in the background: reviewing a pull request against the system it touches, or flagging what a change affects and who owns it. [How Flow uses AI](/core-concepts/ai-automations) walks through an example.
+Agents read the same source of truth as your engineers. You can ask the agent a question or tell it to make a change. You can save the procedure that your team uses for a task as a [skill](/ai-automations/skills). You can also configure automations that work in the background.
+
+For example, an automation can review a pull request against the system that the pull request affects. Another automation can identify what a change affects and who owns those items. [How Flow uses AI](/core-concepts/ai-automations) shows an example.
 
 ## Start here
 
 1. [Start a project](/get-started/starting-a-project).
 2. [Connect your first items](/get-started/requirements-systems-tests).
-3. [Bring in your existing information](/get-started/getting-data-into-flow).
+3. [Add the information that you have](/get-started/getting-data-into-flow).
 4. [Create a branch](/get-started/creating-a-branch) for your first proposal.
