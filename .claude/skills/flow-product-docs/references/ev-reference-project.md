@@ -77,7 +77,7 @@ Base           shared standards, regulations, common requirements
 └── SUV
 ```
 
-Proposals on Truck, developed in parallel:
+Proposals on Truck, developed in parallel. Outside the variant pages, show them branching from Base:
 
 - **Battery capacity trade study**: Battery Usable Capacity 100 → 120 kWh. Touches
   range, vehicle mass, and DC fast charge time.

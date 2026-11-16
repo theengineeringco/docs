@@ -11,7 +11,7 @@ A branch gives a change its own working state. The parent stays as it is until t
 ## Create a branch
 
 <VisualPlaceholder kind="Screenshot" title="New branch dialog">
-  New branch dialog with a name typed in and the Parent Branch dropdown open, listing Base, Coupe, Truck, and SUV. Inset: a branch's actions menu with Create a sub branch highlighted.
+  New branch dialog with a name typed in and the Parent Branch dropdown open, listing Base, Battery capacity trade study, and BMS improvements. Inset: a branch's actions menu with Create a sub branch highlighted.
 </VisualPlaceholder>
 
 1. Open the branch selector and choose **New Branch**. To start from an existing branch, open its actions menu and choose **Create a sub branch**.
@@ -56,13 +56,13 @@ Only updates recorded since this history was introduced are listed. An update th
 
 ## Move work to another parent
 
-Sometimes a proposal is started from the wrong branch, such as Base instead of Truck. **Rebase onto...** copies your work to the right place.
+Sometimes a proposal is started from the wrong branch, such as Base when it should build on the BMS improvements proposal. **Rebase onto...** copies your work to the right place.
 
 1. Open the branch's actions menu and choose **Rebase onto...**.
 2. Pick the new parent.
 3. Flow creates a new branch under it, holding a copy of every change from your branch with its original author and time.
 
-<Illustration name="branching-rebase" width={600} alt="A proposal started from Base by mistake is copied onto Truck. The copy keeps each change's author and time; the original proposal is left unchanged." />
+<Illustration name="branching-rebase" width={600} alt="A proposal started from Base by mistake is copied onto BMS improvements. The copy keeps each change's author and time; the original proposal is left unchanged." />
 
 Your original branch stays as it was. Changes to items the new parent does not have are left out, and Flow lists them. Comments come with the copy; sub-branches, baselines, and reviews do not. When the copy is right, delete the original.
 

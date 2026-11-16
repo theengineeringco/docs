@@ -1,6 +1,6 @@
 {
   "title": "Rebase onto a new parent",
-  "description": "A proposal started from Base by mistake is copied onto Truck. The copy keeps each change's author and time; the original proposal is left unchanged.",
+  "description": "A proposal started from Base by mistake is copied onto BMS improvements. The copy keeps each change's author and time; the original proposal is left unchanged.",
   "size": [
     600,
     320
@@ -99,7 +99,7 @@
     {
       "type": "label",
       "at": "b.lane1",
-      "text": "Truck",
+      "text": "BMS improvements",
       "dx": 14,
       "dy": -14,
       "size": 12
@@ -107,7 +107,7 @@
     {
       "type": "label",
       "at": "t.lane0",
-      "text": "copy on Truck",
+      "text": "rebased copy",
       "dx": 14,
       "dy": 22,
       "size": 12

@@ -55,6 +55,8 @@ kinds: a system, an interface, an analysis, or a test, not always a requirement.
 2. **Owners are engineers closest to the design**, named by role.
 3. **Describe views by the task they serve.** Same records, no duplication.
 4. **Branches do two jobs**: lasting variants and in-progress proposals. Keep them apart.
+   Name example branches after their work (Battery capacity trade study). Use variant
+   names (Coupe, Truck, SUV) only on pages that explain variants.
 5. **The agent proposes; the owner decides.**
 6. **Close on the outcome**, once per page.
 7. **Plain and short.** Task pages state what the feature is for in one or two
