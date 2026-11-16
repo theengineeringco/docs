@@ -25,7 +25,6 @@
             "pages": [
               "get-started/what-is-flow",
               "get-started/starting-a-project",
-              "get-started/requirements-systems-tests",
               "get-started/getting-data-into-flow",
               "get-started/creating-a-branch"
             ]
