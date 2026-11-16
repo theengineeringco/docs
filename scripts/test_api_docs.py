@@ -34,6 +34,19 @@ class ApiDocsTests(unittest.TestCase):
         self.assertIn("api/examples/batch-writes", quickstart_pages)
         sync.validate_public_spec(json.loads((ROOT / "openapi/customer-api.json").read_text()))
 
+    def test_endpoint_subheaders_are_short_and_bodies_are_mdx_safe(self):
+        spec = json.loads((ROOT / "openapi/customer-api.json").read_text())
+        for path, item in spec["paths"].items():
+            for method in sync.METHODS.intersection(item):
+                op = item[method]
+                mint = op["x-mint"]
+                subheader = mint["metadata"].get("description", op.get("description", ""))
+                with self.subTest(operation=f"{method.upper()} {path}"):
+                    self.assertLessEqual(len(subheader), sync.SUBHEADER_MAX)
+                    self.assertNotIn("\n", subheader)
+                    prose = re.sub(r"```.*?```|`[^`\n]*`", "", mint.get("content", ""), flags=re.DOTALL)
+                    self.assertNotRegex(prose, r"[<{}]", "raw < or braces break Mintlify's MDX parser")
+
     def test_every_curl_block_has_python_and_javascript_options(self):
         for path, content in self.pages.items():
             groups = list(GROUPS.finditer(content))

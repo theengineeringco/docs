@@ -8859,8 +8859,10 @@
           "Automations"
         ],
         "x-mint": {
+          "content": "Every chat the caller created or may see, as summaries without their transcripts. Filter by `projectId`, `branchId` or `visibility`; page with `cursor` and `nextCursor`.",
           "href": "/api/endpoints/get-ai-agents",
           "metadata": {
+            "description": "Lists the agent chats you created or can see, as summaries without transcripts.",
             "sidebarTitle": "List the agent chats visible to the caller, newest first",
             "title": "List the agent chats visible to the caller, newest first"
           }
@@ -8915,8 +8917,10 @@
           "Automations"
         ],
         "x-mint": {
+          "content": "Creates the chat and, when `messages` is given, starts the agent on it. Answers as soon as the chat exists — its `status` is `streaming` while the agent works and `ready` once it has answered — unless `wait: true` holds the request until the opening turn has finished. Poll GET /ai/trigger/runs?agent_ids=&#123;id&#125; (the same poll as for an automation run) or GET /ai/agents/&#123;id&#125; for the transcript.",
           "href": "/api/endpoints/post-ai-agents",
           "metadata": {
+            "description": "Creates an agent chat and, when you include messages, starts the agent on them.",
             "sidebarTitle": "Start an agent chat on a project (and optionally a branch) with an opening message",
             "title": "Start an agent chat on a project (and optionally a branch) with an opening message"
           }
@@ -8971,8 +8975,10 @@
           "Automations"
         ],
         "x-mint": {
+          "content": "`messages` is the whole transcript so far, `status` is `streaming` while a turn runs, `ready` when the agent has answered, or `error` (with `error` set) when the last turn failed.",
           "href": "/api/endpoints/get-ai-agents-id",
           "metadata": {
+            "description": "Returns an agent chat's full transcript with its current status.",
             "sidebarTitle": "Read an agent chat: its transcript, status and outcome",
             "title": "Read an agent chat: its transcript, status and outcome"
           }
@@ -9037,8 +9043,10 @@
           "Automations"
         ],
         "x-mint": {
+          "content": "Queues the message and starts the agent on it as soon as the chat is idle. With `queued: false` the turn has started: poll GET /ai/trigger/runs?agent_ids=&#123;id&#125; until the run is not `running`, then GET /ai/agents/&#123;id&#125;. With `queued: true` an earlier turn is still running and the run status finishes for that turn first, so poll GET /ai/agents/&#123;id&#125; until the reply to this message is in the transcript. With `duplicate: true` this exact send already happened: `job_id` is the original send, nothing changed and there is no new turn to wait for.",
           "href": "/api/endpoints/post-ai-agents-id-messages",
           "metadata": {
+            "description": "Queues a message and starts the agent on it as soon as the chat is idle.",
             "sidebarTitle": "Send a follow-up message to an agent chat",
             "title": "Send a follow-up message to an agent chat"
           }
@@ -9555,8 +9563,10 @@
           "Audit"
         ],
         "x-mint": {
+          "content": "User administration (members joining and leaving, role and project-access changes) and organization review-policy changes, newest first. Requires an admin with access to every project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
           "href": "/api/endpoints/get-audit-log",
           "metadata": {
+            "description": "Lists user administration and review-policy changes across the workspace, newest first.",
             "sidebarTitle": "List workspace-wide admin audit log entries",
             "title": "List workspace-wide admin audit log entries"
           }
@@ -9627,8 +9637,10 @@
           "Convert"
         ],
         "x-mint": {
+          "content": "Accepts **either** format and auto-detects which one was sent:\n\n- **draw.io** — raw `<mxGraphModel>`, inline `<mxfile>`, or compressed `<mxfile>`/.drawio. Mapping is best-effort: shapes without a tldraw equivalent fall back to rectangles, and colors are quantized to the closest of tldraw's 13 default colors. Only the first page is converted. Arrow waypoints and external images are dropped.\n- **Flow's own `<diagram>` XML** — the output of `/convert/tldraw-to-xml`. `<entity>` becomes a data-shape card, `<group>` a frame, `<shape>` a geo shape, and `<connection>` a bound arrow. Connection endpoints resolve by id, falling back to the exported name for files produced before shapes carried ids; connections whose endpoints can't be resolved are dropped.\n\nReturns a tldraw StoreSnapshot JSON that can be loaded directly into the diagram editor via `loadSnapshot(editor.store, snapshot)`.",
           "href": "/api/endpoints/post-convert-drawio-to-tldraw",
           "metadata": {
+            "description": "Converts draw.io or Flow diagram XML into a tldraw snapshot the diagram editor can load.",
             "sidebarTitle": "Convert a diagram XML document to a tldraw snapshot",
             "title": "Convert a diagram XML document to a tldraw snapshot"
           }
@@ -9690,8 +9702,10 @@
           "Convert"
         ],
         "x-mint": {
+          "content": "Converts a markdown string to rich text JSON for use in entity descriptions. Supports standard markdown (headings, bold, italic, lists, code blocks, links, etc.). \n\n**Embedding files:** Use `![alt text](flow-file:{fileId})` to embed uploaded files. The `fileId` is returned by `POST /files/upload`. Example: `\"# Report\\n\\n![diagram](flow-file:abc-123)\"` produces a heading and an embedded image.",
           "href": "/api/endpoints/post-convert-markdown-to-rich-text",
           "metadata": {
+            "description": "Converts a markdown string to rich text JSON for entity descriptions.",
             "sidebarTitle": "Convert markdown to rich text JSON",
             "title": "Convert markdown to rich text JSON"
           }
@@ -9756,8 +9770,10 @@
           "Convert"
         ],
         "x-mint": {
+          "content": "Batch variant of `/markdown-to-rich-text`. Accepts an array of markdown strings and returns their rich text JSON in the same order.",
           "href": "/api/endpoints/post-convert-markdown-to-rich-text-batch",
           "metadata": {
+            "description": "Converts several markdown strings to rich text JSON, returned in the same order.",
             "sidebarTitle": "Convert multiple markdown strings to rich text JSON",
             "title": "Convert multiple markdown strings to rich text JSON"
           }
@@ -9819,8 +9835,10 @@
           "Convert"
         ],
         "x-mint": {
+          "content": "Converts rich text JSON back to a markdown string. Embedded files are serialized using the `flow-file:` scheme: `![alt](flow-file:{fileId})`.",
           "href": "/api/endpoints/post-convert-rich-text-to-markdown",
           "metadata": {
+            "description": "Converts rich text JSON back to a markdown string.",
             "sidebarTitle": "Convert rich text JSON to markdown",
             "title": "Convert rich text JSON to markdown"
           }
@@ -9882,8 +9900,10 @@
           "Convert"
         ],
         "x-mint": {
+          "content": "Converts a tldraw `StoreSnapshot` into an XML document that encodes the diagram hierarchy. Parent-child relationships are derived from tldraw's native `parentId` system: shapes inside a `data-shape` or `frame` container appear as nested child elements in the XML.\n\nEvery non-arrow element also carries its geometry (`x`/`y` parent-local coordinates plus `w`/`h`) so spatially-laid-out diagrams (e.g. flowcharts) keep their positions, not just nested ones.\n\nShape mapping:\n- `data-shape` → `<entity id name type x y w h>` (entity-backed node)\n- `frame` → `<group name x y w h>`\n- geo shapes → `<shape type label x y w h>`\n- arrows → omitted from tree, captured in `<connections>` with their own label (e.g. a flowchart `Yes`/`No` branch)\n\nThe snapshot is the object returned by `editor.store.getStoreSnapshot()` or by the `/convert/drawio-to-tldraw` endpoint.",
           "href": "/api/endpoints/post-convert-tldraw-to-xml",
           "metadata": {
+            "description": "Converts a tldraw snapshot into XML that encodes the diagram's hierarchy and geometry.",
             "sidebarTitle": "Convert a tldraw snapshot to hierarchical XML",
             "title": "Convert a tldraw snapshot to hierarchical XML"
           }
@@ -11021,6 +11041,7 @@
         "x-mint": {
           "href": "/api/endpoints/get-project-projectid-agents",
           "metadata": {
+            "description": "Lists the project's persistent agents along with your own personal agents.",
             "sidebarTitle": "List the persistent agents of a project",
             "title": "List the persistent agents of a project"
           }
@@ -11084,8 +11105,10 @@
         ],
         "x-flow-mcp-tool": false,
         "x-mint": {
+          "content": "Project admins only. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it. An enabled agent opens the creator's main chat with it and speaks first, asking what it is for so it can write its description.",
           "href": "/api/endpoints/post-project-projectid-agents",
           "metadata": {
+            "description": "Creates a project agent that works under its own bot user.",
             "sidebarTitle": "Create a persistent agent",
             "title": "Create a persistent agent"
           }
@@ -11143,8 +11166,10 @@
           "Persistent agents"
         ],
         "x-mint": {
+          "content": "An agent's manual trigger is a hand launch: the branch menu and the context menus of the item types it names offer the agent, and running it starts a side chat with the agent, as the agent, with the trigger's prompt. The prompt stays on the agent.",
           "href": "/api/endpoints/get-project-projectid-agents-hand-triggers",
           "metadata": {
+            "description": "Lists the manual triggers that a project's agents offer in branch and item menus.",
             "sidebarTitle": "List the hand launches the agents of a project offer",
             "title": "List the hand launches the agents of a project offer"
           }
@@ -11201,8 +11226,10 @@
         ],
         "x-flow-mcp-tool": false,
         "x-mint": {
+          "content": "Withdraws the agent from the project and stops future activation. Its identity, conversations and memories are retained.",
           "href": "/api/endpoints/delete-project-projectid-agents-agentid",
           "metadata": {
+            "description": "Archives a persistent agent, stopping future activation while keeping its conversations and memories.",
             "sidebarTitle": "Archive a persistent agent",
             "title": "Archive a persistent agent"
           }
@@ -11417,8 +11444,10 @@
         ],
         "x-flow-mcp-tool": false,
         "x-mint": {
+          "content": "Starts a side chat with the agent, as the agent, with the trigger's prompt, on the branch named and about the items picked. Editors and admins who can see the agent may run it. The bot authors the turn, using the caller's current project permissions.",
           "href": "/api/endpoints/post-project-projectid-agents-agentid-triggers-triggerid-fire",
           "metadata": {
+            "description": "Starts a side chat with the agent, using the trigger's prompt on the chosen branch and items.",
             "sidebarTitle": "Fire one of an agent's manual triggers by hand",
             "title": "Fire one of an agent's manual triggers by hand"
           }
@@ -11545,8 +11574,10 @@
           "Audit"
         ],
         "x-mint": {
+          "content": "Changes to a project's configuration (data model, saved views, templates, automations, skills, Flow.md, change-request merges and merge-history labels, and the default AI model), newest first. Requires an admin of the project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
           "href": "/api/endpoints/get-project-projectid-audit-log",
           "metadata": {
+            "description": "Lists changes to a project's configuration, such as its data model, views, and automations, newest first.",
             "sidebarTitle": "List admin audit log entries for a project",
             "title": "List admin audit log entries for a project"
           }
@@ -11691,8 +11722,10 @@
         ],
         "x-flow-mcp-tool": false,
         "x-mint": {
+          "content": "Creates one automation at the end of the project's list, or of your personal list with `scope=personal`. Creating shared automations requires Admin access. It runs as you: its scheduled and webhook runs use your access to the project for as long as you can edit it, and pause when you no longer can. Check `runsAs` on the response. Script automations need the automation scripts beta, and `allowAdminTools` cannot be turned on with an API key.",
           "href": "/api/endpoints/post-project-projectid-automations",
           "metadata": {
+            "description": "Creates an automation in the project's shared list or in your personal list.",
             "sidebarTitle": "Create an automation",
             "title": "Create an automation"
           }
@@ -11924,8 +11957,10 @@
         ],
         "x-flow-mcp-tool": false,
         "x-mint": {
+          "content": "Updating shared automations requires Admin access. Changes only the fields you send; `triggers` replaces the trigger list, `trigger` alone replaces only the first trigger, and `triggers: []` makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer.",
           "href": "/api/endpoints/patch-project-projectid-automations-automationid",
           "metadata": {
+            "description": "Updates only the fields you send on an existing automation.",
             "sidebarTitle": "Update an automation",
             "title": "Update an automation"
           }
@@ -12142,8 +12177,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "One page of branches created after this update was deployed and then soft-deleted, whether discarded through the delete endpoint (merged_at null) or archived by a merge (merged_at set), newest archive first. A page holds at most 200 rows (pass a smaller limit to take fewer); to continue, pass the cursor of the last row shown as `before`. `search` keeps only names containing the text, ignoring case. Every merge archives its branch, so pass merged=false to list only discarded branches, or merged=true only merged ones. Each row is a candidate for the restore preview and the restore endpoint.",
           "href": "/api/endpoints/get-project-projectid-branch-archived",
           "metadata": {
+            "description": "Lists deleted and merge-archived branches, newest first.",
             "sidebarTitle": "List deleted branches",
             "title": "List deleted branches"
           }
@@ -12276,8 +12313,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Creates a new branch off the baseline's target branch containing diffs that undo the baseline's changes when rolled up, and returns that branch. Review and merge it to apply the revert. Non-destructive: the original history is untouched, so any baseline can be reverted. Pass entity_id to undo only one item's part of the merge.",
           "href": "/api/endpoints/post-project-projectid-branch-baseline-baselineid-revert",
           "metadata": {
+            "description": "Proposes a new branch whose changes undo a baseline, ready to review and merge.",
             "sidebarTitle": "Revert a baseline by proposing an inverse-diff branch",
             "title": "Revert a baseline by proposing an inverse-diff branch"
           }
@@ -13443,8 +13482,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "With the organization review policy's allow_auto_merge on, enabled=true has the branch merge itself, as the caller, as soon as every merge requirement passes (the ordinary merge job is then queued and can be polled through merge-status); enabled=false cancels a waiting request. The merge re-checks every requirement as the caller when it runs.",
           "href": "/api/endpoints/post-project-projectid-branch-id-auto-merge",
           "metadata": {
+            "description": "Turns on, or cancels, a merge that runs automatically once the branch meets every requirement.",
             "sidebarTitle": "Merge a branch automatically once it is ready",
             "title": "Merge a branch automatically once it is ready"
           }
@@ -13511,8 +13552,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Ids of this branch's changed entities that await the current user's review: entities whose firing stage gate lists them as a pending reviewer, PLUS entities whose reviewer fields/groups designate them (the latter works even without stage gates). Users who have already approved the branch are excluded; empty when nothing awaits the caller.",
           "href": "/api/endpoints/get-project-projectid-branch-id-awaiting-my-review-entities",
           "metadata": {
+            "description": "Lists the changed entities on a branch that await your review.",
             "sidebarTitle": "Changed entities on a branch awaiting the current user's review",
             "title": "Changed entities on a branch awaiting the current user's review"
           }
@@ -13653,8 +13696,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Returns each touched entity ID with CREATED when its entity was created on this branch, or UPDATED when an inherited entity was changed on this branch.",
           "href": "/api/endpoints/get-project-projectid-branch-id-changed-entity-ids",
           "metadata": {
+            "description": "Lists the entities changed on a branch, each marked as created or updated.",
             "sidebarTitle": "List changed entities on a branch",
             "title": "List changed entities on a branch"
           }
@@ -13718,8 +13763,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Soft-deletes a branch so it stops appearing in branch lists, letting callers clean up failed or abandoned branches instead of leaving permanent cruft. Refuses with 400 for the synthetic master branch or a malformed id, 404 when the branch does not exist in this project, 403 when the branch is protected, and 400 when it still has sub-branches.",
           "href": "/api/endpoints/post-project-projectid-branch-id-delete",
           "metadata": {
+            "description": "Soft-deletes a branch so it no longer appears in branch lists.",
             "sidebarTitle": "Delete a branch",
             "title": "Delete a branch"
           }
@@ -13809,8 +13856,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Pass \"master\" for Base. Deletions inherited from a parent branch are listed on the branch that made them. Restore a row with the entity restore endpoints.",
           "href": "/api/endpoints/get-project-projectid-branch-id-deleted-entities",
           "metadata": {
+            "description": "Lists the entities deleted on a branch, newest first.",
             "sidebarTitle": "Entities deleted on this branch (its tombstones), newest first",
             "title": "Entities deleted on this branch (its tombstones), newest first"
           }
@@ -13951,8 +14000,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Live sub-branches of the merged branch are rebased onto the merge target in the same merge, keeping their own changes (GET :id/merge-rebase-preview lists them, with the fields where their change and the newly inherited history differ; pass its ids as expected_rebase_ids to refuse the merge with 409 if that set has changed). Depending on the organization review policy, project admins (and optionally the parent branch owner) may set bypass_review with a review_bypass_reason to force past known review-policy, branch-check, stage-policy, editor-group, and merge-conflict blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-scan protections remain enforced. Poll the returned job until it succeeds or fails.",
           "href": "/api/endpoints/post-project-projectid-branch-id-merge",
           "metadata": {
+            "description": "Starts a background merge of the branch into its parent and returns a job to poll.",
             "sidebarTitle": "Merge a branch into its parent",
             "title": "Merge a branch into its parent"
           }
@@ -14146,8 +14197,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Replays this branch's changes onto a different base and returns the result as a NEW branch; the branch named in the path is not modified. The copy keeps this branch's value for every field it changed and resolves every field it did not from the new base. Changes to items the new base does not have cannot appear on the copy: relationships to them are left out, and the items are listed in `missing_items`. The copy carries this branch's own comments, re-keyed to the copy, except a thread on an item the new base does not have and a reply to a thread that is not in the copy's lineage; a comment inherited from the old base stays there. Its sub-branches, baselines, and reviews are not copied. Refuses with 400 for the Base branch, a malformed id, a missing `newParentId`, or a target equal to the branch itself; 404 when either branch is not live in this project.",
           "href": "/api/endpoints/post-project-projectid-branch-id-rebase-onto",
           "metadata": {
+            "description": "Replays a branch's changes onto a different parent as a new branch, leaving the original unchanged.",
             "sidebarTitle": "Rebase a branch onto a different parent branch (as a new branch)",
             "title": "Rebase a branch onto a different parent branch (as a new branch)"
           }
@@ -14549,8 +14602,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Reverses a delete of a branch created after this update was deployed: the branch reappears in branch lists and the branch selector with its changes intact, and a Reopened entry joins its review history. Every eligible deleted ancestor it depends on is restored with it, in one transaction, exactly the chain the restore preview lists (a merged ancestor comes back as an open branch that can be merged again; the reviews and description its merge moved onto the baseline stay there). A member whose parent was rebased after the member was deleted is rebased onto its parent's current history as part of the restore, the migration it missed while deleted; the preview names each such member and the restore performs them root-most first. Send the preview's ids as expected_chain_ids and expected_rebase_ids to be refused with 409 if either changed since. Refuses with 400 for the synthetic master branch or a malformed id, 404 when no eligible deleted branch with this id exists in this project, and 400, naming the branch, when the chain cannot be rebuilt: an ancestor row is gone, an ancestor predates restore support, or a member is the copy an extraction undo archived.",
           "href": "/api/endpoints/post-project-projectid-branch-id-restore",
           "metadata": {
+            "description": "Restores a deleted branch, with any deleted ancestors it depends on, in one transaction.",
             "sidebarTitle": "Restore a deleted branch",
             "title": "Restore a deleted branch"
           }
@@ -14614,8 +14669,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "The deleted branches a restore of this branch would bring back, root-most ancestor first and this branch last: a branch is its own changes on top of its parent as of when it was created, so a branch whose eligible ancestors are deleted comes back together with them, and the preview shows that chain by name, number, parent and deletion time so same-named branches are told apart. Each row carries `rebase` when restoring it will rebase it onto its parent's current history because the parent was rebased after the row was deleted: the parent's id, name, number and rebase time, and a sentence saying so, so the user confirms that step with the chain. Answers the refusal the restore would answer (400 naming the branch and the reason) when the chain cannot be rebuilt: an ancestor row is gone, an ancestor predates restore support, or a member is the copy an extraction undo archived. 404 when no eligible deleted branch with this id exists in this project.",
           "href": "/api/endpoints/get-project-projectid-branch-id-restore-preview",
           "metadata": {
+            "description": "Lists the deleted branches a restore would bring back, root-most ancestor first.",
             "sidebarTitle": "Preview a branch restore",
             "title": "Preview a branch restore"
           }
@@ -14689,8 +14746,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Returns the item to its state right after the given history entry. By default creates a new branch off this branch carrying the revert, to review and merge; with in_place the revert is written straight onto this branch, subject to the same checks as any edit. The original history is untouched either way.",
           "href": "/api/endpoints/post-project-projectid-branch-id-revert-entity-to-point",
           "metadata": {
+            "description": "Returns an item to its state right after a chosen history entry.",
             "sidebarTitle": "Revert one item to an earlier point in its history",
             "title": "Revert one item to an earlier point in its history"
           }
@@ -15028,8 +15087,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Omit user_id to take ownership as the calling user; naming another user requires project admin. Taking ownership is not open either: a branch whose author (its owner, or its creator for rows predating ownership) can still act on it changes hands only by admin assignment, while one whose author has been deactivated or has lost access to the project stays claimable by any editor. A non-admin outside a branch's editor groups cannot become its owner. An admin supersedes both rules. Base/master has no branch row and is rejected.",
           "href": "/api/endpoints/post-project-projectid-branch-id-set-owner",
           "metadata": {
+            "description": "Assigns a branch's owner, or takes ownership yourself when no user is named.",
             "sidebarTitle": "Assign the owner of a branch",
             "title": "Assign the owner of a branch"
           }
@@ -15300,8 +15361,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Returns the per-entity stage-gate violations that would block merging this branch right now (multi-step promotions, missing reviewers, missing approvals). Empty list = stage gates satisfied.",
           "href": "/api/endpoints/get-project-projectid-branch-id-stage-gate-status",
           "metadata": {
+            "description": "Lists the stage-gate violations that would block merging the branch right now.",
             "sidebarTitle": "Evaluate entity stage gates for a branch merge",
             "title": "Evaluate entity stage gates for a branch merge"
           }
@@ -15851,8 +15914,10 @@
           "Data Model"
         ],
         "x-mint": {
+          "content": "Updates category metadata and, when fields is supplied, the category custom fields. By default fields is replacement-style: omitted customer-managed fields are removed. Set addOnly=true to preserve existing fields and append only missing fields or missing plain-tag options.",
           "href": "/api/endpoints/put-project-projectid-data-model-id",
           "metadata": {
+            "description": "Updates a category's metadata and, optionally, its custom fields.",
             "sidebarTitle": "Update a category",
             "title": "Update a category"
           }
@@ -15948,8 +16013,10 @@
           "Data Model"
         ],
         "x-mint": {
+          "content": "Ensures option names exist on an existing plain tag field. Existing options are preserved, repeated names are idempotent, and only genuinely new names are appended. This endpoint does not edit stage fields.",
           "href": "/api/endpoints/post-project-projectid-data-model-id-fields-fieldkey-tag-options",
           "metadata": {
+            "description": "Adds missing options to a plain tag field without changing existing ones.",
             "sidebarTitle": "Add tag options to a category field",
             "title": "Add tag options to a category field"
           }
@@ -16014,8 +16081,10 @@
           "Diagrams"
         ],
         "x-mint": {
+          "content": "Creates a diagram entity from either a raw tldraw snapshot or structured input, and optionally links it to a host entity. Typical draw.io import flow: (1) convert XML via POST /convert/drawio-to-tldraw, (2) call this endpoint with the returned `snapshot` plus a `hostEntityId`, (3) optionally embed the diagram in the host's rich-text field (e.g. `description`) by appending a node of the form `{\"type\": \"tldraw\", \"diagramId\": \"<id>\", \"children\": [{\"text\": \"\"}]}` via PUT /project/&#123;projectId&#125;/entities/&#123;entityId&#125;/values — embeds only resolve diagrams linked to the entity that owns the field. Upsert semantics: re-POSTing with the same `id` replaces that diagram's name and snapshot in place (e.g. re-importing an updated source file); an `id` belonging to a non-diagram entity is rejected with 409.",
           "href": "/api/endpoints/post-project-projectid-diagrams",
           "metadata": {
+            "description": "Creates or updates a diagram from a tldraw snapshot or structured input.",
             "sidebarTitle": "Create or update a diagram",
             "title": "Create or update a diagram"
           }
@@ -16546,8 +16615,10 @@
           "Entities"
         ],
         "x-mint": {
+          "content": "Evaluate typed field conditions and AND/OR groups with a bounded flat scan. Returns IDs, without hierarchy, sorting, or a total count. Each page reads current state; concurrent edits can change later results. Continue until next_cursor is null, including after an empty page. Relationship, subtree, comment, and history filters are not supported.",
           "href": "/api/endpoints/post-project-projectid-entities-filter-query",
           "metadata": {
+            "description": "Returns the IDs of live entities that match typed field conditions, one page at a time.",
             "sidebarTitle": "Filter live entities across a project",
             "title": "Filter live entities across a project"
           }
@@ -16906,8 +16977,10 @@
           "Entities"
         ],
         "x-mint": {
+          "content": "Each entity comes back on the branch with the fields, links and position it had when it was deleted. Restoring an entity does not restore its parent; an entity whose parent is still deleted stays out of hierarchy views until the parent is restored too.",
           "href": "/api/endpoints/post-project-projectid-entities-restore-batch",
           "metadata": {
+            "description": "Restores several deleted entities in one transaction, with their fields, links, and position.",
             "sidebarTitle": "Restore multiple deleted entities in one transaction",
             "title": "Restore multiple deleted entities in one transaction"
           }
@@ -17021,8 +17094,10 @@
           "Entities"
         ],
         "x-mint": {
+          "content": "Search names and supported field values, or resolve exact Flow and Human IDs. Returns compact matches; use the entity-by-ID endpoint for full values and links. Matches reflect branch-visible state and exclude deleted entities. Indexed text results may be unavailable while the search index warms; exact IDs and empty-query listings remain available. Semantic suggestions, when enabled, follow ordinary matches within the total result limit.",
           "href": "/api/endpoints/get-project-projectid-entities-search",
           "metadata": {
+            "description": "Searches entity names and field values, or resolves exact Flow and Human IDs.",
             "sidebarTitle": "Search live entities in a project and branch",
             "title": "Search live entities in a project and branch"
           }
@@ -17120,8 +17195,10 @@
           "Entities"
         ],
         "x-mint": {
+          "content": "Accepts an array of entities. For each: creates it if it does not exist, then writes ValueDiffs only for keys whose values have changed. Optionally links each entity as a downstream child of a parent. New children append in input order, including across successive requests. All diffs are written in a single DB round-trip for efficiency. Concurrent upserts matching the same external identifier (`idField`) are serialized server-side, so they converge on one entity instead of creating duplicates. Parents and children may be created atomically in one batch when `parentIds` contains Flow entity UUIDs, including UUIDs assigned to parent rows in that batch. `parentIds` does not resolve `idField` aliases; resolve or create such a parent first if its Flow UUID is unknown. The operation is atomic and safe to retry with the same stable IDs. If Claude Desktop reports \"No result received ... after waiting 4 minutes\", first read those IDs because the approval/dispatch may have been lost before Flow received the call; never replace the IDs merely because the result was lost. Field definition validation is intentionally skipped — callers may write arbitrary key names without pre-defining them in the schema.",
           "href": "/api/endpoints/post-project-projectid-entities-upsert",
           "metadata": {
+            "description": "Creates or updates many entities in one atomic call, writing only the values that changed.",
             "sidebarTitle": "Bulk upsert entities by ID",
             "title": "Bulk upsert entities by ID"
           }
@@ -17357,8 +17434,10 @@
           "Comments"
         ],
         "x-mint": {
+          "content": "Pass the item or branch ID as entityId to list the comments that start conversations. To read a conversation, keep the original comment and call again with its id as entityId to fetch its direct replies, oldest first. Replies are not embedded in the first list. Use the same branch_id for both calls; omit it for Base. Set include_resolved=true to include resolved comments. Each call returns direct replies only: any existing replies to replies require separate calls using those reply IDs.",
           "href": "/api/endpoints/get-project-projectid-entities-entityid-comments",
           "metadata": {
+            "description": "Lists the comments that start conversations on an item or branch, or the replies in one thread.",
             "sidebarTitle": "List comment threads or replies in a thread",
             "title": "List comment threads or replies in a thread"
           }
@@ -17430,8 +17509,10 @@
           "Comments"
         ],
         "x-mint": {
+          "content": "Comment threads are used in item discussions, branch discussions and reviews. To start a conversation, pass the item or branch ID as entityId. To join an existing conversation, read it first, then pass the ID of the original comment that started it as entityId, with text in the body. Use that same original comment ID for every follow-up, even when answering another reply. For example, if A starts a thread and B replies to A, answer B using entityId=A, not B. Using B creates a deeper nested reply; the API accepts this, but thread cards and internal AI thread reads do not consistently include deeper replies. Pass branch_id for the branch you are posting on; omit it for Base. The branch is not inherited from the original comment. Posting a reply does not resolve or reopen the thread.",
           "href": "/api/endpoints/post-project-projectid-entities-entityid-comments",
           "metadata": {
+            "description": "Starts a conversation on an item or branch, or replies in an existing thread.",
             "sidebarTitle": "Add a comment or reply in an existing thread",
             "title": "Add a comment or reply in an existing thread"
           }
@@ -17496,8 +17577,10 @@
           "Comments"
         ],
         "x-mint": {
+          "content": "Pass the target comment id as commentId and its returned entity_id as entityId. Only the author can delete their comment.",
           "href": "/api/endpoints/delete-project-projectid-entities-entityid-comments-commentid",
           "metadata": {
+            "description": "Deletes a comment or reply. Only its author can delete it.",
             "sidebarTitle": "Delete a comment or reply",
             "title": "Delete a comment or reply"
           }
@@ -17567,8 +17650,10 @@
           "Comments"
         ],
         "x-mint": {
+          "content": "Pass the target comment id as commentId and its returned entity_id as entityId. This reads one comment, not the whole conversation; use the list operation with the original comment ID to read the thread replies.",
           "href": "/api/endpoints/get-project-projectid-entities-entityid-comments-commentid",
           "metadata": {
+            "description": "Returns one comment or reply, without the rest of its conversation.",
             "sidebarTitle": "Get a single comment or reply",
             "title": "Get a single comment or reply"
           }
@@ -17651,8 +17736,10 @@
           "Comments"
         ],
         "x-mint": {
+          "content": "Pass the target comment id as commentId and its returned entity_id as entityId. To resolve or reopen the conversation, update the original comment that started it.",
           "href": "/api/endpoints/patch-project-projectid-entities-entityid-comments-commentid",
           "metadata": {
+            "description": "Edits a comment's text, or resolves and reopens its conversation.",
             "sidebarTitle": "Update a comment (edit text and/or resolve)",
             "title": "Update a comment (edit text and/or resolve)"
           }
@@ -18304,8 +18391,10 @@
           "Entities"
         ],
         "x-mint": {
+          "content": "Each entity comes back on the branch with the fields, links and position it had when it was deleted. Restoring an entity does not restore its parent; an entity whose parent is still deleted stays out of hierarchy views until the parent is restored too.",
           "href": "/api/endpoints/post-project-projectid-entities-entityid-restore",
           "metadata": {
+            "description": "Restores a deleted entity with the fields, links, and position it had when deleted.",
             "sidebarTitle": "Restore a deleted entity",
             "title": "Restore a deleted entity"
           }
@@ -18650,8 +18739,10 @@
           "Events"
         ],
         "x-mint": {
+          "content": "Engineering events for one project in delivery order: branch.changed (item changes on a branch or Base, one event per branch and actor within the page, with the touched entity ids and the origin diff-seq window they cover), branch.rebased (one event per branch per update-from-parent: the branch re-anchored onto new parent state, so re-read it — its already-delivered changes are never re-reported) and the branch review workflow (branch.created, branch.ready_for_review, branch.approved, branch.rejected, branch.merged, …, each naming the branch, its merge target and the people involved). Poll without a cursor to read from the beginning, or with start=now to receive an empty page whose next_cursor is the present (future events only, no history replayed); then store and pass back next_cursor: pages are bounded by the stream’s settled floor, so a stored cursor never skips an event that commits late. Delivery order follows next_cursor; occurred_at can be out of order across pages (historical imports carry past timestamps). Filter by comma-separated type and/or one branch (branch=&lt;id> or branch=master for Base); a cursor minted under a filter admits that filter or a narrower one — widening is a 400 instead of a silent skip of the excluded events, so restart from an earlier cursor to widen. Events carry the project, branch (\"master\" means Base), actor and an app_url back into Flow.",
           "href": "/api/endpoints/get-project-projectid-events",
           "metadata": {
+            "description": "Polls a project's branch changes and review events in delivery order, with a resumable cursor.",
             "sidebarTitle": "Read the project event stream",
             "title": "Read the project event stream"
           }
@@ -18802,8 +18893,10 @@
           "Files"
         ],
         "x-mint": {
+          "content": "Returns a temporary upload URL. PUT the file directly to the returned URL. Use POST /files/upload instead if you prefer to send the file through the API.",
           "href": "/api/endpoints/post-project-projectid-files-request-upload",
           "metadata": {
+            "description": "Returns a temporary URL to upload a file's bytes to directly.",
             "sidebarTitle": "Request a presigned upload URL",
             "title": "Request a presigned upload URL"
           }
@@ -18895,8 +18988,10 @@
           "Files"
         ],
         "x-mint": {
+          "content": "Batch version of POST /files/request-upload. Returns a presigned upload URL for each file in one round-trip; PUT each file directly to its returned URL. Results are in the same order as the request `files`.",
           "href": "/api/endpoints/post-project-projectid-files-request-uploads",
           "metadata": {
+            "description": "Returns a temporary upload URL for each of several files in one call.",
             "sidebarTitle": "Request presigned upload URLs for multiple files",
             "title": "Request presigned upload URLs for multiple files"
           }
@@ -18998,8 +19093,10 @@
           "Files"
         ],
         "x-mint": {
+          "content": "Uploads a file as multipart/form-data, proxying the bytes through the API. Maximum file size: 100 MB — for anything larger use POST /files/request-upload and PUT the bytes to the presigned URL (up to 512 MB). The returned `id` can be used to embed the file in descriptions using the `flow-file:` scheme: `![alt](flow-file:{id})`.",
           "href": "/api/endpoints/post-project-projectid-files-upload",
           "metadata": {
+            "description": "Uploads a file of up to 100 MB through the API as multipart form data.",
             "sidebarTitle": "Upload a file",
             "title": "Upload a file"
           }
@@ -19249,8 +19346,10 @@
           "Files"
         ],
         "x-mint": {
+          "content": "Returns a temporary upload URL that replaces an existing file's content in place, keeping its id. PUT the file directly to the returned URL. Use this when a reference to the file had to be written before its bytes were available. The stored name and mime type are reused; only the size is updated. Only the user who created the file can replace it.",
           "href": "/api/endpoints/post-project-projectid-files-id-request-upload",
           "metadata": {
+            "description": "Returns a temporary URL that replaces an existing file's content while keeping its ID.",
             "sidebarTitle": "Request a presigned upload URL for an existing file",
             "title": "Request a presigned upload URL for an existing file"
           }
@@ -19340,8 +19439,10 @@
           "Files"
         ],
         "x-mint": {
+          "content": "Returns a time-limited URL for downloading or viewing the file. The URL can be used directly in img tags, download links, etc.",
           "href": "/api/endpoints/get-project-projectid-files-id-url",
           "metadata": {
+            "description": "Returns a time-limited URL for downloading or viewing a file.",
             "sidebarTitle": "Get a temporary download URL for a file",
             "title": "Get a temporary download URL for a file"
           }
@@ -19550,8 +19651,10 @@
           "Import"
         ],
         "x-mint": {
+          "content": "No model call. Returns base64 PNG plus the pixel dimensions, so a caller can overlay the normalised boxes an analysis reported.",
           "href": "/api/endpoints/post-project-projectid-import-pdf-page-image",
           "metadata": {
+            "description": "Renders one PDF page as a PNG image with its pixel dimensions.",
             "sidebarTitle": "Render one PDF page as an image",
             "title": "Render one PDF page as an image"
           }
@@ -19669,8 +19772,10 @@
           "Import"
         ],
         "x-mint": {
+          "content": "Returns as soon as the run is persisted. A leased backend worker cuts each file into chunks a model can read on its own — one per PDF page, one per image — and reads them off the request path. Poll the run for progress and read its output when it settles. Nothing here writes entity data.",
           "href": "/api/endpoints/post-project-projectid-import-runs",
           "metadata": {
+            "description": "Starts a background import that reads a set of uploaded files page by page.",
             "sidebarTitle": "Start an import run over a set of uploaded files",
             "title": "Start an import run over a set of uploaded files"
           }
@@ -19733,8 +19838,10 @@
           "Import"
         ],
         "x-mint": {
+          "content": "Chunks read so far out of the total, plus running counts of candidate entities, relationships and notes. `chunksTotal` is null until planning has opened every file and knows how many chunks there are.",
           "href": "/api/endpoints/get-project-projectid-import-runs-runid",
           "metadata": {
+            "description": "Reports how much of an import run has been read and what it has found so far.",
             "sidebarTitle": "Poll an import run",
             "title": "Poll an import run"
           }
@@ -19797,8 +19904,10 @@
           "Import"
         ],
         "x-mint": {
+          "content": "Nothing further is read, and the chunks already read stay readable. A run that settled before the request arrived keeps its outcome; the returned progress says which happened.",
           "href": "/api/endpoints/post-project-projectid-import-runs-runid-cancel",
           "metadata": {
+            "description": "Stops an import run. Chunks already read stay available.",
             "sidebarTitle": "Stop an import run",
             "title": "Stop an import run"
           }
@@ -19861,8 +19970,10 @@
           "Import"
         ],
         "x-mint": {
+          "content": "Every chunk with the analysis it produced, provenance intact. This is the debug view; the rolled-up output is what an agent reads.",
           "href": "/api/endpoints/get-project-projectid-import-runs-runid-chunks",
           "metadata": {
+            "description": "Returns every chunk of an import run with the analysis it produced.",
             "sidebarTitle": "Read an import run chunk by chunk",
             "title": "Read an import run chunk by chunk"
           }
@@ -19925,8 +20036,10 @@
           "Import"
         ],
         "x-mint": {
+          "content": "Candidate entities merged by name, carrying every type they were called and everything the pages said about them, relationships merged by their ends, and the notes each chunk left. Readable before the run settles; it then covers only the chunks read so far.",
           "href": "/api/endpoints/get-project-projectid-import-runs-runid-output",
           "metadata": {
+            "description": "Returns an import run's entities, relationships, and notes merged across its chunks.",
             "sidebarTitle": "Read an import run rolled up across its chunks",
             "title": "Read an import run rolled up across its chunks"
           }
@@ -19991,8 +20104,10 @@
           "ReqIF Import"
         ],
         "x-mint": {
+          "content": "Creates an import job and returns a presigned URL the client PUTs the .reqif/.reqifz bytes to directly. Call the parse endpoint once the PUT completes.",
           "href": "/api/endpoints/post-project-projectid-reqif-import-upload",
           "metadata": {
+            "description": "Creates a ReqIF import job and returns a URL to upload the archive to.",
             "sidebarTitle": "Request a presigned URL to upload a ReqIF archive",
             "title": "Request a presigned URL to upload a ReqIF archive"
           }
@@ -20511,8 +20626,10 @@
           "ReqIF"
         ],
         "x-mint": {
+          "content": "Resolves a ReqIF document against an optional import mapping and returns the entities it describes (identifier, flow type, field values — with XHTML fields converted to rich-text JSON), the hierarchy/relation links, and the file-derived default schema. No entities are created; this is a read-only preview of what an import would produce.",
           "href": "/api/endpoints/post-reqif-parse",
           "metadata": {
+            "description": "Previews the entities and links a ReqIF document would import, without creating anything.",
             "sidebarTitle": "Parse a ReqIF document into a flow-shaped preview",
             "title": "Parse a ReqIF document into a flow-shaped preview"
           }
@@ -20559,8 +20676,10 @@
           "Review policy"
         ],
         "x-mint": {
+          "content": "The conditions a branch in any project must meet to merge (minimum approvals, changed-item review) and who may override them.",
           "href": "/api/endpoints/get-review-policy",
           "metadata": {
+            "description": "Returns the conditions a branch must meet to merge and who may override them.",
             "sidebarTitle": "Read the review policy",
             "title": "Read the review policy"
           }
@@ -21295,8 +21414,10 @@
           "User Groups"
         ],
         "x-mint": {
+          "content": "Stage gates referencing the deleted group lose those eligible reviewers (fail closed); edit the affected gates afterwards.",
           "href": "/api/endpoints/delete-user-groups-id",
           "metadata": {
+            "description": "Deletes a user group. Stage gates that reference it lose those reviewers.",
             "sidebarTitle": "Delete a user group",
             "title": "Delete a user group"
           }
@@ -22058,8 +22179,10 @@
           "Users"
         ],
         "x-mint": {
+          "content": "Requires an all-project admin. Replaces both name fields for the specified user, including users who have not signed in yet. Does not change email, role, or project access.",
           "href": "/api/endpoints/patch-users-id-name",
           "metadata": {
+            "description": "Replaces a user's name fields in this workspace.",
             "sidebarTitle": "Update a user’s name in this workspace",
             "title": "Update a user’s name in this workspace"
           }

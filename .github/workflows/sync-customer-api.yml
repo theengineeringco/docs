@@ -96,6 +96,9 @@ jobs:
           report = json.loads(path.read_text()) if path.exists() else {'status': 'failed', 'changes': ['The sync did not produce a report.']}
           body = ['<!-- customer-api-docs-sync -->', '# Deployed customer API documentation', '', 'Status: **' + report['status'] + '**', '', '[Workflow run](' + os.environ['RUN_URL'] + ')', '', 'Only public customer OpenAPI documents were fetched. No customer application data was accessed.', '']
           body += ['- ' + change for change in report.get('changes', [])]
+          if report.get('subheaders_to_review'):
+              body += ['', '## Endpoint subheaders to review', '', 'These long descriptions published with an automatic first-sentence subheader, or none. Add a short blurb to `PAGE_DESCRIPTIONS` in `scripts/sync-customer-api.py`.', '']
+              body += ['- `' + operation + '`' for operation in report['subheaders_to_review']]
           body += ['', '## Source contract hashes', '']
           body += ['- ' + name + ': `' + value + '`' for name, value in report.get('hashes', {}).items()]
           body += ['', 'All validated reference changes publish automatically, including changes to existing contracts. Authored guides remain separately maintained.']
