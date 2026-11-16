@@ -99,11 +99,12 @@ On top of `AGENTS.md`'s content boundaries:
 - Screenshots are real captures from a branch-demo preview's Electric Vehicle
   project (recipes in branch-demo `docs/media/`), framed with
   `screenshots/render.py` (capture with `screenshots/capture.js`). Pick the
-  frame by what the reader needs: `full` for the whole screen and orientation;
-  `closeup` for one area in context; `component` for a single dialog, menu, or
-  panel shown on its own on the background (Linear-style); `crop` for a tight
-  slice of the UI with no background. Capture all but `full` at 2x, and capture
-  `component` and `crop` by element (`shotEl`) so they keep the UI's own shape.
+  frame by what the reader needs. The default is `crop`: the app on its own, no
+  background, rounded corners, transparent outside, either the whole viewport or
+  a region (`x,y,w,h` in CSS px) or one element captured with `shotEl`. Capture
+  regions and elements at 2x and set the `<img>` `width` to the CSS width so they
+  display at true size. `full`, `closeup`, and `component` add the brand
+  background and are for marketing-style pages.
   Keep real people's names out of frame; the seeded owners are colleagues.
 - Diagrams are drawn with the `flow-illustration` skill and placed with the
   `Illustration` snippet; see `references/diagrams.md`. Placeholders are for screenshots.

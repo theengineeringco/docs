@@ -11,12 +11,13 @@ Follows branch-demo's flow-brand product-media rules:
 - component: one UI element (a dialog, menu, or panel captured on its own) centred
   on the 1920 x 1120 background, keeping its own corner radius. This is a deliberate
   exception to flow-brand's "no floating cards" rule, requested for Linear-style docs.
-- crop: a tight region of the UI on its own, rounded corners, transparent outside.
+- crop: the app (whole viewport, or a region given as CSS-px `x,y,w,h`) on its own,
+  rounded corners, transparent outside. The default for docs screenshots.
 
     python3 render.py <background.png> <raw.png> <out.png> full
     python3 render.py <background.png> <raw.png> <out.png> closeup <width>
     python3 render.py <background.png> <raw.png> <out.png> component
-    python3 render.py <background.png> <raw.png> <out.png> crop
+    python3 render.py <background.png> <raw.png> <out.png> crop [x,y,w,h]
 
 Element captures (component, crop) come from a 2x capture with a sibling
 `<raw>.json` holding the element's CSS corner `radius` and the capture `dsf`.
@@ -45,13 +46,19 @@ def probe(path):
     return tuple(int(v) for v in out.strip().split(","))
 
 
-def element(background, raw, out, mode):
+def element(background, raw, out, mode, clip=None):
     meta_path = Path(raw).with_suffix(".json")
     meta = json.loads(meta_path.read_text()) if meta_path.exists() else {"radius": 0, "dsf": 2}
     w, h = probe(raw)
     if mode == "crop":
-        radius = 24
-        graph = (f"[0:v]format=rgba,setsar=1[ui];" + mask(w, h, radius)
+        # dsf from the sidecar, else from the viewport width (1440 CSS px wide).
+        dsf = meta.get("dsf") if meta_path.exists() else (2 if w >= 2880 else 1)
+        crop = ""
+        if clip:  # x,y,w,h in CSS px of the captured viewport
+            cx, cy, cw, ch = (round(float(v) * dsf) for v in clip.split(","))
+            crop, w, h = f"crop={cw}:{ch}:{cx}:{cy},", cw, ch
+        radius = 12 * dsf
+        graph = (f"[0:v]{crop}format=rgba,setsar=1[ui];" + mask(w, h, radius)
                  + "[ui][mask]alphamerge[out]")
         subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", raw,
                         "-filter_complex", graph, "-map", "[out]", "-frames:v", "1", out], check=True)
@@ -74,7 +81,7 @@ def element(background, raw, out, mode):
 
 def render(background, raw, out, mode, width=None):
     if mode in ("component", "crop"):
-        return element(background, raw, out, mode)
+        return element(background, raw, out, mode, width)
     if mode == "full":
         w, h, x, y, canvas, radius = 1536, 960, 192, 60, (1920, 1080), 24
         bg = "[0:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,setsar=1[bg];"
