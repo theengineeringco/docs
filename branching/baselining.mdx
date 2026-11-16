@@ -1,12 +1,12 @@
 ---
 title: "Baselining"
-description: "Give a name to a fixed point in the history of a branch, and compare later work with it."
+description: "Name a fixed point in a branch's history and compare later work against it."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 import { Illustration } from "/snippets/illustration.jsx";
 
-A baseline marks a state that you want to go back to. For example, a baseline can mark the design that the team presented at a milestone review. Work continues after the baseline. When you create a baseline, Flow does not change data, approve anything, or merge a branch.
+A baseline marks a state worth coming back to, such as the design as presented at a milestone review. Work continues past it. Creating a baseline does not change any data, approve anything, or merge a branch.
 
 ## Create a baseline
 
@@ -14,32 +14,30 @@ A baseline marks a state that you want to go back to. For example, a baseline ca
   Change history opened from the clock control on Truck: a named baseline ("Design review 1") in the timeline, the Create baseline button, and the Revert control on the baseline.
 </VisualPlaceholder>
 
-1. Switch to the branch that contains the state that you want to mark.
+1. Switch to the branch you want to capture.
 2. Open **Change history** with the clock control.
-3. Choose **Create baseline**.
-4. Type a name for the milestone.
-5. Select **Create**.
+3. Choose **Create baseline**, enter a name for the milestone, and select **Create**.
 
-Flow opens a comparison that shows the contents of the new baseline. **Overview** shows who created the baseline and when.
+Flow opens a comparison of what the new baseline contains. **Overview** shows who created it and when.
 
-Viewers and external users cannot create baselines. If the branch or its parent has an editor group, only the members of that group can create a baseline.
+Viewers and external users cannot create baselines. If an editor group restricts the branch or its parent, only members can create one.
 
 <Illustration name="baselining-timeline" width={600} alt="Baselines mark two points in Base's history. Compare them with each other, or a baseline with the current state. A baseline copies nothing." />
 
-A baseline does not copy anything. It only marks a point in the history of the branch. Thus, you can create a baseline at each milestone at no cost.
+A baseline copies nothing. It marks a point in the branch's history, so it costs nothing to create one at every milestone.
 
 ## Compare against a baseline
 
-Select a baseline in **Change history** to open it. To see the changes after the baseline, compare it with **Current**. To examine the changes between two points, compare two baselines. See [Comparing branches](/branching/comparing-branches).
+Select a baseline in **Change history** to open it. To see what happened since, compare it with **Current**; to inspect an interval, compare two baselines. See [Comparing branches](/branching/comparing-branches).
 
-Each merge also adds a `Merge: <branch>` entry to the history. This entry contains information about the review and the merge. Thus, merges work like baselines. Admins can rename entries with **Rename merge**. The [audit log](/administration/audit-log) records each rename.
+Every merge also adds a `Merge: <branch>` entry to the history, carrying the review and merge context, so merges work like baselines. Admins can rename entries with **Rename merge**; renames appear in the [audit log](/administration/audit-log).
 
 ## Revert a baseline
 
 1. In **Change history**, choose the revert control on the baseline.
 2. Confirm **Create revert branch**.
-3. Flow creates a branch with the name `Revert: <baseline>`. Flow creates this branch from the branch that contains the baseline. The new branch contains the reverse of the changes in that baseline only. These are the changes after the previous baseline, up to this baseline. Then Flow opens the review of the new branch. Flow keeps the changes that were made after the baseline.
+3. Flow creates a branch named `Revert: <baseline>` from the branch the baseline belongs to, fills it with the reverse of that baseline's own changes (those made since the previous baseline), and opens its review. Changes made after the baseline are kept.
 
 <Illustration name="baselining-revert" width={600} alt="Reverting the Design review 1 baseline opens a branch from Base's latest state holding the reverse of only that baseline's own changes. Later changes are kept, and nothing on Base changes until the revert branch is merged." />
 
-Nothing changes until someone merges the revert branch. The original changes stay in the history next to the revert. Thus, you can always see which changes were reverted and who reverted them. Before you merge the revert branch, check the result. Flow does not revert changes to formulas. A reverted field goes back to its earlier value, even if someone edited the field at a later time.
+Nothing changes until that branch is merged. The original changes stay in history beside the revert, so you can always see what was undone and by whom. Before you merge it, check the result: changes to formulas are not reverted, and a reverted field returns to its earlier value even if someone has edited it since.

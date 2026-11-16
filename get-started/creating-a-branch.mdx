@@ -1,43 +1,41 @@
 ---
 title: "Creating a branch"
-description: "Develop a proposed change in its own branch at the same time as the rest of the team does its work."
+description: "Develop a proposed change in its own branch, alongside the work of the rest of the team."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-In a branch, you can develop a change and not affect the agreed design. Other engineers continue their work, and more than one proposal can progress at the same time. Flow records every change that you make in the branch. After the branch merges, its history stays [traceable](/branching/tracing-history).
+A branch is where you develop a change without disturbing the agreed design. Other engineers keep working, and several proposals can move forward at once. Every change you make in it is recorded, so its history stays [traceable](/branching/tracing-history) after it merges.
 
-You must have permission to create branches in the project.
+You need permission to create branches in the project.
 
 ## Create the branch
 
-Open the branch selector. Choose **New branch**.
+Open the branch selector and choose **New branch**.
 
 <VisualPlaceholder kind="Screenshot" title="New branch dialog">
   New branch dialog with "Battery capacity trade study" typed in the Name field and Parent Branch set to Truck. Callout on Parent Branch.
 </VisualPlaceholder>
 
-1. Enter a **Name** that tells what the work is, for example *Battery capacity trade study*. `main` and `master` are reserved.
-2. Check **Parent Branch**. This is the state that your branch starts from. For a proposal against an agreed design, choose the branch of that design. If your work depends on another proposal, choose the branch of that proposal. Different entry points can automatically select different parents.
+1. Enter a **Name** that says what the work is, such as *Battery capacity trade study*. `main` and `master` are reserved.
+2. Check **Parent Branch**: the state your branch starts from. For a proposal against an agreed design, choose that design's branch; for work that depends on another proposal, choose that proposal's branch. Different entry points can preselect different parents.
 3. Choose **Create**.
 
 ## Make the change and see its impact
 
-1. Make sure that the sidebar shows your new branch.
-2. Make the change.
-3. Record the rationale in the description of the item that you changed.
-4. Update the items that depend on the change, and the other items that are necessary for the proposal. Do not change historical results. A new target does not change what an earlier test measured.
-5. Open **Review** for your branch. **Changed Items** shows each recorded difference from the parent.
-6. Open the **Impact analysis** tab.
-7. Choose **Run impact analysis**. Flow follows the connections from the items that you changed. It gives a summary of the affected items and systems. It also shows who owns them. To run the analysis, AI must be enabled for your workspace.
+1. Confirm the sidebar shows your new branch.
+2. Make the change, and record the rationale in the description of the item you changed.
+3. Update what depends on it and what the proposal needs. Leave historical results as they are; a new target does not change what an earlier test measured.
+4. Open **Review** for your branch. **Changed Items** lists every recorded difference from the parent.
+5. Open the **Impact analysis** tab and choose **Run impact analysis**. Flow follows the connections from what you changed, summarizes which items and systems are affected, and shows who owns them. Running it requires AI to be enabled for your workspace.
 
 <VisualPlaceholder kind="Screenshot" title="Impact analysis on the trade study">
   Review page of the Battery capacity trade study branch, Impact analysis tab, after Run impact analysis. Battery Usable Capacity changed 100 to 120 kWh at the root; Range, Vehicle Mass, and DC fast charge time listed as affected, each with its owner.
 </VisualPlaceholder>
 
-Use the result to decide who to talk to. For example, an increase in battery capacity from 100 kWh to 120 kWh improves the range of a vehicle. But the increase also adds mass and makes the charge time longer. Thus, the proposal must include the charging engineer and the vehicle lead, and also the battery systems engineer. If you ask the agent for help, tell it the branch and the task. Tell the agent to examine the data before it makes edits.
+Use the result to decide who to talk to. For example, raising a vehicle's battery capacity from 100 kWh to 120 kWh improves range but adds mass and lengthens charge time, so the proposal needs the charging engineer and the vehicle lead as well as the battery systems engineer. If you ask the agent to help, name the branch and the task, and ask it to inspect before it edits.
 
-To see your values next to the parent values during your work, add a column to a Table view. Open **Display options → Choose columns...**. Choose **Add field → Field in another branch…**. Select the branch and the field. The new column is read-only. If the other branch does not contain an item, the column shows **Not in** and the branch name for that item.
+To see your values beside the parent's while you work, add a column to a Table view: open **Display options → Choose columns...**, choose **Add field → Field in another branch…**, then pick the branch and the field. The new column is read-only, and an item the other branch does not hold reads **Not in** followed by the branch name.
 
 <VisualPlaceholder kind="Screenshot" title="A field beside its value in another branch">
   Table view on the Battery capacity trade study branch with a Value column and a read-only "Value in Truck" column beside it. Battery Usable Capacity reads 120 kWh against 100 kWh in Truck; a row added only in this branch reads "Not in Truck". Callout on the column header.
@@ -45,6 +43,6 @@ To see your values next to the parent values during your work, add a column to a
 
 ## Keep the proposal current
 
-Keep all the work for one proposal together: the changed items, their rationale, and the necessary design and verification changes. If the parent changes while you work, use **Update from parent** to add those changes to your branch. Resolve all conflicts carefully.
+Keep one proposal's work together: the changed items, their rationale, and the design and verification changes they need. If the parent changes while you work, use **Update from parent** to bring that work into your branch, and resolve any conflicts deliberately.
 
 [Branching](/core-concepts/branching) explains why Flow manages change this way.

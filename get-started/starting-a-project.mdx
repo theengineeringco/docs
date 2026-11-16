@@ -1,59 +1,57 @@
 ---
 title: "Starting a project"
-description: "Choose a starting point for your program, and make sure that your working context is correct before you add data."
+description: "Choose a starting point for your program and confirm your working context before adding data."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
-A project contains the engineering model, saved views, and work information for one program.
+A project holds one program's engineering model, saved views, and working information.
 
 <VisualPlaceholder kind="Screenshot" title="New project dialog">
   Project switcher → New project, with Name filled in ("Electric Vehicle"), Start from set to an existing project, and What to import showing Data model, Items, Views, Automations, and Skills all checked. Callouts on Start from and on the Items checkbox.
 </VisualPlaceholder>
 
-Before you create a project, check if your team already has a project. Keep related work in the same project, so that its items can connect.
+Before you create a project, check whether your team already has one. Related work belongs in the same project so its items can connect.
 
-You must have administrative access to create a project. If **New project** is not available, ask your Admin.
+Creating a project requires administrative access. If **New project** is unavailable, ask your Admin.
 
 ## Choose a starting point
 
-Open the project switcher. Choose **New project**. Enter a **Name**. In **Start from**, choose one of these options:
+Open the project switcher and choose **New project**. Enter a **Name**, then choose **Start from**:
 
 | Start from | What you get | Use it when |
 | --- | --- | --- |
-| **Default template** | The data model, saved views, and dashboards that your organization configured | Your organization already has a structure that it uses |
-| **Blank project** | An empty model with only the built-in Diagram category | You define a completely new workflow |
-| An existing project | The parts of that project that you select, and its items if you select them | You start a program that is similar to a current program, or you start from a design that you have now |
+| **Default template** | Your organization's configured data model, saved views, and dashboards | Your organization has an established structure |
+| **Blank project** | An empty model with only the built-in Diagram category | You are defining a new workflow from scratch |
+| An existing project | The parts of that project you select, including its items if you choose | You are starting a program like one you already run, or from a design you already have |
 
-When you start from an existing project, **What to import** shows **Data model**, **Items**, **Views**, **Automations**, and **Skills**. At the start, all options except **Items** are checked. Views and items depend on the data model. If you clear **Data model**, Flow also clears the views and items.
+When you start from an existing project, **What to import** lists **Data model**, **Items**, **Views**, **Automations**, and **Skills**. Everything except **Items** starts checked. Views and items depend on the data model, so clearing **Data model** clears them too.
 
-**Items** copies the current items of the source project from Base. Each copy is a new item with its own number. The copy has the same category, field values, and formulas as the source item. The copy also has the links to the other copied items.
+**Items** copies the source project's current items from Base. Each copy is a new item with its own number, carrying the source item's category, field values, formulas, and links to the other copied items. The copy starts its history in the new project: branches, past history, comments, files in file fields, and pins on links stay behind. A source with more than 50,000 items cannot have its items copied, and the dialog says so.
 
-The history of the copy starts in the new project. Flow does not copy branches, past history, comments, files in file fields, or pins on links. If the source has more than 50,000 items, Flow cannot copy its items, and the dialog tells you this.
+**Requires you to act:** Check the name, the starting point, and the selected parts, then choose **Create**.
 
-**Requires you to act:** Check the name, the starting point, and the selected parts. Then choose **Create**.
-
-The project opens immediately. Flow copies the items in the background. While Flow copies the items, it shows the percentage that is complete. After all the items are in the project, Flow adds the copied automations.
+The project opens straight away. Copied items arrive in the background, with the percentage copied shown while they do, and copied automations are added once the items are in.
 
 ## Agree the model before adding data
 
-Open the new project. Look at its categories. Before the team enters many records, agree on these four things:
+Open the new project and look at its categories. Before the team enters many records, agree on four things:
 
-- Which categories contain your structures: for example, systems, interfaces, requirements, analyses, tests, parts, or other structures that your program records.
-- Which fields contain the values that you compare, and where Flow records the owner of each item.
-- Which relationships connect an item to its system and to the evidence that supports it.
-- Where to put results and the files that support them.
+- Which categories hold your structures: systems, interfaces, requirements, analyses, tests, parts, or whatever your program tracks.
+- Which fields hold the values you compare, and where each item's owner is recorded.
+- Which relationships connect an item to the system it belongs to and the evidence behind it.
+- Where results and supporting files belong.
 
-A template gives answers to most of these questions. In a blank project, you must answer them first. An Admin can configure the categories and fields. [The data model](/core-concepts/the-data-model) explains the ideas behind that configuration.
+A template answers most of these for you. A blank project needs them answered first; an Admin can configure the categories and fields. [The data model](/core-concepts/the-data-model) explains the ideas behind that configuration.
 
 ## Open a view for your first task
 
-Choose a saved view that shows the data for your task. A systems view starts from the product breakdown. A table shows names, owners, and values next to each other, and it is the fastest way to check them.
+Choose a saved view that shows what you need. A systems view starts from the product breakdown. A table is the fastest way to check names, owners, and values side by side.
 
-If the project has no saved views, agree on one first view with your Admin. Improve the view as the model becomes larger.
+If the project has no saved views yet, agree one starting view with your Admin. Refine it as the model grows.
 
 ## Check your working context
 
-Before you create or change anything, make sure that the sidebar shows the correct project and branch. Your role and the permissions of the branch control which actions you can do.
+Before you create or change anything, confirm the current project and branch in the sidebar. Your role and the branch's permissions decide which actions you can take.
 
-You are ready when you can name the project, identify the categories that you will use, and open a view of them. Continue with [Connecting your first items](/get-started/requirements-systems-tests).
+You are ready when you can name the project, recognize the categories you need, and open a view of them. Continue with [Connecting your first items](/get-started/requirements-systems-tests).

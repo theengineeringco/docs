@@ -1,12 +1,12 @@
 ---
 title: "Working in a branch"
-description: "Create a branch, keep all parts of one change in it, and update the branch from its parent."
+description: "Create a branch, keep a connected change together, and update it from its parent."
 ---
 
 import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 import { Illustration } from "/snippets/illustration.jsx";
 
-A branch gives a change its own separate state. The parent does not change until the branch merges. Keep all parts of one change in the same branch. These parts are the items that the change edits, the relationships that it adds, and the evidence for them. [Branching](/core-concepts/branching) explains why Flow operates in this way.
+A branch gives a change its own working state. The parent stays as it is until the branch merges. Keep everything one change needs in the same branch: the items it edits, the relationships it adds, and the evidence that goes with them. [Branching](/core-concepts/branching) explains why Flow works this way.
 
 ## Create a branch
 
@@ -14,65 +14,56 @@ A branch gives a change its own separate state. The parent does not change until
   New branch dialog with a name typed in and the Parent Branch dropdown open, listing Base, Coupe, Truck, and SUV. Inset: a branch's actions menu with Create a sub branch highlighted.
 </VisualPlaceholder>
 
-1. Open the branch selector.
-2. Select **New Branch**. To start from a different branch, open the actions menu of that branch. Then select **Create a sub branch**.
-3. In the **New branch** dialog, enter a name that identifies the work.
-4. Make sure that **Parent Branch** shows the correct branch. For the shared project state, select Base. If your work depends on a different branch, select that branch.
-5. Create the branch.
-6. Before you edit, make sure that the branch selector shows the name of the new branch.
+1. Open the branch selector and choose **New Branch**. To start from an existing branch, open its actions menu and choose **Create a sub branch**.
+2. In the **New branch** dialog, enter a name that says what the work is.
+3. Check **Parent Branch**. Choose Base for the shared project state, or another branch when your work depends on it.
+4. Create the branch, then confirm its name in the branch selector before you edit.
 
-Flow does not copy data when you create a branch. The branch starts from the state of its parent at that time. After that, the branch records only its own changes. For each change, it records the person or agent that made the change, and the time. Flow records who created the branch.
+Creating a branch copies nothing. The branch starts from its parent's state at that moment, and from then on records only its own changes, each with who made it, or which agent, and when. Flow records who created the branch.
 
-A sub-branch starts from a different branch and later merges into that same branch. As a result, you can try an idea that starts from a proposal, and the proposal itself does not change:
+A sub-branch starts from another branch and merges back into it, so you can try an idea on top of a proposal without touching the proposal itself:
 
 <Illustration name="branching-sub-branch" width={600} alt="A sub-branch starts from a proposal, not from Base, and merges back into the proposal, which records that merge. The proposal then merges into Base, which records its own." />
 
-Viewers cannot create branches. Editor groups can limit the users who can edit a branch. Refer to [Managing branches](/branching/managing-branches).
+Viewers cannot create branches, and editor groups can limit who edits a branch. See [Managing branches](/branching/managing-branches).
 
 ## Update from the parent
 
-The parent can get new changes while you work. Your branch does not show these new changes until you update it. An update adds all parent changes since your last update to your branch at the same time. You cannot select individual changes.
+The parent keeps moving while you work, and your branch doesn't see that newer work until you update. Updating brings in every parent change since your last update at once; you can't pick individual changes.
 
 <VisualPlaceholder kind="Screenshot" title="Update from parent with a conflict">
   Update from parent on a proposal branch: incoming changes listed, one conflict on a target value with Keep parent and Keep current, and the Keep parent changes / Keep current changes buttons at the top.
 </VisualPlaceholder>
 
-1. Open the actions menu of the branch.
-2. Select **Update from parent...**.
-3. Examine the changes from the parent.
-4. For each conflict, select **Keep parent** or **Keep current**. To resolve all conflicts at the same time, select **Keep parent changes** or **Keep current changes**. If AI is enabled, **Suggest resolutions** gives a suggested choice and a reason for each conflict that is not resolved. You can change each suggested choice.
-5. Select **Update from parent**.
-6. Examine the items that the update changed.
+1. Open the branch's actions menu and choose **Update from parent...**.
+2. Inspect the incoming changes.
+3. For each conflict, choose **Keep parent** or **Keep current**. **Keep parent changes** and **Keep current changes** settle every conflict at once. If AI is enabled, **Suggest resolutions** proposes a choice for each unresolved conflict, with a reason, which you can change.
+4. Select **Update from parent**, then check the affected items.
 
-A conflict occurs when the two sides change the same information in different ways that cannot both apply. For example, the two sides edit a field differently, or one side deletes an item and the other side edits it.
+A conflict is the same information changed in incompatible ways on both sides, such as a field edited differently or an item deleted on one side and edited on the other.
 
 <Illustration name="branching-update-from-parent" width={600} alt="A newer change on Base is taken into an open proposal. A field both changed is a conflict you settle once; Base itself is unchanged." />
 
-An update changes only your branch. Your own changes keep their authors and times. When you select **Keep parent**, Flow writes the parent value to your branch as a change by you. As a result, the record shows your choice. The parent changes when your branch is reviewed and merged.
+Updating changes only your branch. Your own changes keep their authors and times. Where you choose **Keep parent**, the parent's value is written to your branch as a change by you, so the choice is in the record. The parent changes when your branch is reviewed and merged.
 
-You can also ask the agent to update a branch. The agent does not run the update itself. If there are no conflicts, the chat shows the changes that the update adds. Then select **Update** or **Cancel**.
-
-If there are conflicts, the chat shows each conflict with a suggested version and the reason. You can change each choice. Then select **Apply**.
-
-For two or more branches at the same time, **Update all** updates the branches that have no conflicts. You must apply the update to each branch that has conflicts separately. The update runs with your permissions.
+You can also ask the agent to update a branch. It does not run the update itself. Without conflicts, the chat shows what the update brings in, and you select **Update** or **Cancel**. With conflicts, it shows each one with a suggested version and the reason; change any choice, then select **Apply**. For several branches at once, **Update all** updates the ones without conflicts, and you apply each branch with conflicts on its own. The update runs with your permissions.
 
 ### Undo an update
 
-**Parent update history** shows each update. You can open it from the actions menu of the branch and from **Change history**. For each update, it shows the person who ran it, the time, and the items that it changed. To compare the branch before and after an update, select that update. To undo an update, select **Create revert request**. Flow puts the undo in a branch for review, and your branch changes only when that branch merges.
+Each update is listed in **Parent update history**, in the branch's actions menu and in **Change history**, with who ran it, when, and the items it changed. Select an update to compare the branch before and after it. To undo one, choose **Create revert request**. Flow puts the undo in a branch for review, and your branch changes only when that merges.
 
-The list shows only the updates that Flow recorded after the introduction of this history. If an update changed too many items for Flow to record, the list shows that update without details. You cannot revert that update.
+Only updates recorded since this history was introduced are listed. An update that changed too many items to record is listed without details and cannot be reverted.
 
 ## Move work to another parent
 
-Sometimes a person starts a proposal from the incorrect branch, for example Base instead of Truck. **Rebase onto...** copies your work to the correct parent.
+Sometimes a proposal is started from the wrong branch, such as Base instead of Truck. **Rebase onto...** copies your work to the right place.
 
-1. Open the actions menu of the branch.
-2. Select **Rebase onto...**.
-3. Select the new parent.
-4. Flow creates a new branch under the new parent. This branch holds a copy of each change from your branch, with its original author and time.
+1. Open the branch's actions menu and choose **Rebase onto...**.
+2. Pick the new parent.
+3. Flow creates a new branch under it, holding a copy of every change from your branch with its original author and time.
 
 <Illustration name="branching-rebase" width={600} alt="A proposal started from Base by mistake is copied onto Truck. The copy keeps each change's author and time; the original proposal is left unchanged." />
 
-Your original branch does not change. Flow does not copy changes to items that the new parent does not have. Flow shows a list of these changes. Flow copies the comments, but it does not copy sub-branches, baselines, or reviews. After you make sure that the copy is correct, delete the original branch.
+Your original branch stays as it was. Changes to items the new parent does not have are left out, and Flow lists them. Comments come with the copy; sub-branches, baselines, and reviews do not. When the copy is right, delete the original.
 
-When the work is ready, [review and merge it](/branching/merging). To examine the differences between any two states, use [Comparing branches](/branching/comparing-branches). To find where a change was made, use [Tracing history](/branching/tracing-history). In workspaces that use the updated variant view, branches show as variants and change requests. Refer to [Variant branches](/branching/variant-branches).
+When the work is ready, [review and merge it](/branching/merging). Use [Comparing branches](/branching/comparing-branches) to inspect differences between any two states, and [Tracing history](/branching/tracing-history) to follow any change back to where it was made. In workspaces that use the updated variant view, branches appear as variants and change requests; see [Variant branches](/branching/variant-branches).
