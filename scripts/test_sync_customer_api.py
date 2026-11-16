@@ -177,6 +177,47 @@ class SyncTests(unittest.TestCase):
         self.assertIn("RVT vs Production: Added operation POST /entities", changes)
         self.assertIn("Rivian vs Production: Removed operation GET /entities", changes)
 
+    def test_long_descriptions_get_a_short_subheader_and_a_body(self):
+        doc = fixture()
+        op = doc["paths"]["/entities"]["get"]
+        op["description"] = "Lists entities on a branch. " + "Pages follow `next_cursor` until it is null; pass branch=<id> or {all}. " * 3
+        prepared = sync.prepare(doc)["paths"]["/entities"]["get"]
+        mint = prepared["x-mint"]
+        self.assertEqual(mint["metadata"]["description"], "Lists entities on a branch.")
+        self.assertTrue(mint["content"].startswith("Pages follow `next_cursor`"))
+        self.assertIn("branch=&lt;id> or &#123;all&#125;", mint["content"])
+        # The source description stays intact for API clients and agents.
+        self.assertEqual(prepared["description"], op["description"])
+
+    def test_short_descriptions_stay_the_subheader(self):
+        doc = fixture()
+        doc["paths"]["/entities"]["get"]["description"] = "Lists entities on a branch."
+        mint = sync.prepare(doc)["paths"]["/entities"]["get"]["x-mint"]
+        self.assertNotIn("description", mint["metadata"])
+        self.assertNotIn("content", mint)
+
+    def test_unusable_first_sentence_publishes_no_subheader(self):
+        colon_lead = "Lists: " + "x" * 200 + ". More."
+        self.assertEqual(sync.page_copy("get /entities", colon_lead), ("", colon_lead))
+        self.assertEqual(sync.page_copy("get /entities", "Lists `entities`. Then " + "y" * 200)[0], "")
+
+    def test_first_sentence_split_skips_abbreviations_and_allows_code_starts(self):
+        self.assertEqual(sync.page_copy("get /entities", "Lists items, e.g. Requirements and Tests, on a branch. More " + "z" * 200)[0], "Lists items, e.g. Requirements and Tests, on a branch.")
+        self.assertEqual(sync.page_copy("get /entities", "Reads a chat. `messages` is the transcript. " + "z" * 200), ("Reads a chat.", "`messages` is the transcript. " + "z" * 200))
+
+    def test_curated_subheader_keeps_the_full_description_in_the_body(self):
+        key, description = next(iter(sync.PAGE_DESCRIPTIONS.items()))
+        source = "Detail with `code {kept}` and a <tag>. " * 5
+        self.assertEqual(sync.page_copy(key, source), (description, source.strip().replace("<", "&lt;")))
+
+    def test_curated_subheaders_are_short_plain_sentences(self):
+        for key, description in sync.PAGE_DESCRIPTIONS.items():
+            self.assertEqual(sync.plain_blurb(description), description, key)
+            self.assertIsNone(sync.PRIVATE_TERMS.search(description), key)
+
+    def test_mdx_body_escapes_prose_but_not_code(self):
+        self.assertEqual(sync.mdx_body("a <b> {c} `<d> {e}`\n```\n<f>{g}\n```"), "a &lt;b> &#123;c&#125; `<d> {e}`\n```\n<f>{g}\n```")
+
     def test_initialized_snapshot_is_idempotent(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "api.json"
