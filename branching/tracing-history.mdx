@@ -53,18 +53,18 @@ Open **Change history** with the clock control to see a branch's baselines and m
 
 ## What each action records
 
-| Action | What changes | What history keeps | How to undo |
-| --- | --- | --- | --- |
-| [Create a branch](/branching/branching#create-a-branch) | Nothing is copied; the branch starts from its parent's current state | Who created it, or which agent, and when | Delete the branch |
-| Edit on a branch | Only that branch | Each change, with branch, person or agent, and time | Revert the change |
-| [Update from parent](/branching/branching#update-from-the-parent) | Your branch takes in the parent's newer changes | Your branch's own changes keep their authors and times; the update is listed in **Parent update history** | **Create revert request** on that update |
-| [Rebase onto](/branching/branching#move-work-to-another-parent) | A new branch under the target, holding a copy of your changes | The copies keep their original authors and times; the source branch is unchanged | Delete the copy |
-| [Create branch and move](/branching/merging#split-a-branch) | Selected items move to a new sibling branch | Recorded on the review timeline | **Move changes back** |
-| [Merge](/branching/merging#merge) | The parent takes the branch's net changes | A `Merge: <branch>` record with who merged, reviews, discussion, and changed items; the branch closes | Revert the merge baseline |
-| [Create baseline](/branching/baselining) | Nothing | A named point in the branch's history | None needed |
-| [Revert a baseline](/branching/baselining#revert-a-baseline) | A `Revert: <baseline>` branch with the opposite changes | The original changes and the revert, once merged | Delete the revert branch, or revert the revert |
-| Revert an item | New changes that restore earlier values | The original changes and the revert | Revert again |
-| [Delete a branch](/branching/managing-branches#delete-and-restore) | The branch closes and leaves the branch list | Its changes are kept | **Restore** |
+| Action | What changes | How to undo |
+| --- | --- | --- |
+| [Create a branch](/branching/branching#create-a-branch) | Nothing is copied; the branch starts from its parent's current state | Delete the branch |
+| Edit on a branch | Only that branch | Revert the change |
+| [Update from parent](/branching/branching#update-from-the-parent) | Your branch takes in the parent's newer changes | **Create revert request** on that update |
+| [Rebase onto](/branching/branching#move-work-to-another-parent) | A new branch under the target, holding a copy of your changes | Delete the copy |
+| [Create branch and move](/branching/merging#split-a-branch) | Selected items move to a new sibling branch | **Move changes back** |
+| [Merge](/branching/merging#merge) | The parent takes the branch's net changes, and the branch closes | Revert the merge baseline |
+| [Create baseline](/branching/baselining) | Nothing | None needed |
+| [Revert a baseline](/branching/baselining#revert-a-baseline) | A `Revert: <baseline>` branch with the opposite changes | Delete the revert branch, or revert the revert |
+| Revert an item | New changes that restore earlier values | Revert again |
+| [Delete a branch](/branching/managing-branches#delete-and-restore) | The branch closes and leaves the branch list | **Restore** |
 
 ## Limits
 
