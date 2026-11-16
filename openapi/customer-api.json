@@ -9412,21 +9412,6 @@
         ],
         "type": "object"
       },
-      "SymbolLibrariesResponseDto": {
-        "properties": {
-          "enabled": {
-            "description": "Ids of the diagram symbol libraries the shape picker offers, for example \"iso1219\".",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "enabled"
-        ],
-        "type": "object"
-      },
       "TldrawSnapshotToXmlDto": {
         "properties": {
           "name": {
@@ -10774,20 +10759,6 @@
             "type": "array"
           }
         },
-        "type": "object"
-      },
-      "UpdateSymbolLibrariesDto": {
-        "properties": {
-          "enabled": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "enabled"
-        ],
         "type": "object"
       },
       "UpdateUpstreamContextDto": {
@@ -18730,7 +18701,7 @@
     },
     "/project/{projectId}/diagram-symbols": {
       "get": {
-        "description": "Lists the enabled ISO 1219, IEC 60617 and ISA-5.1 symbols, authored sizes and terminal IDs. Use symbol IDs as nodes.shape or entities.geo and terminal IDs as connections.fromPort/toPort in POST /project/{projectId}/diagrams. Symbols are leaves and cannot contain children.",
+        "description": "Lists the ISO 1219, IEC 60617 and ISA-5.1 symbols, authored sizes and terminal IDs. Use symbol IDs as nodes.shape or entities.geo and terminal IDs as connections.fromPort/toPort in POST /project/{projectId}/diagrams. Symbols are leaves and cannot contain children.",
         "operationId": "ProjectController_getDiagramSymbols",
         "parameters": [
           {
@@ -18771,15 +18742,15 @@
             "bearer": []
           }
         ],
-        "summary": "Discover enabled diagram symbols and named terminals",
+        "summary": "Discover diagram symbols and named terminals",
         "tags": [
           "Projects"
         ],
         "x-mint": {
           "href": "/api/endpoints/get-project-projectid-diagram-symbols",
           "metadata": {
-            "sidebarTitle": "Discover enabled diagram symbols and named terminals",
-            "title": "Discover enabled diagram symbols and named terminals"
+            "sidebarTitle": "Discover diagram symbols and named terminals",
+            "title": "Discover diagram symbols and named terminals"
           }
         }
       }
@@ -23162,126 +23133,6 @@
           "metadata": {
             "sidebarTitle": "Get the project's sidebar notifications toggle",
             "title": "Get the project's sidebar notifications toggle"
-          }
-        }
-      }
-    },
-    "/project/{projectId}/symbol-libraries": {
-      "get": {
-        "description": "The symbol libraries (for example ISO 1219-1 fluid power) the diagram shape picker offers in this project. External grant recipients receive an empty list because project configuration is not exposed to them; this does not describe the stored setting.",
-        "operationId": "ProjectController_getSymbolLibraries",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Workspace identifier",
-            "in": "header",
-            "name": "customer",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SymbolLibrariesResponseDto"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "api-key": []
-          },
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Get the project's diagram symbol libraries",
-        "tags": [
-          "Projects"
-        ],
-        "x-mint": {
-          "href": "/api/endpoints/get-project-projectid-symbol-libraries",
-          "metadata": {
-            "sidebarTitle": "Get the project's diagram symbol libraries",
-            "title": "Get the project's diagram symbol libraries"
-          }
-        }
-      },
-      "put": {
-        "description": "Admins only. Replaces the list of enabled symbol libraries.",
-        "operationId": "ProjectController_updateSymbolLibraries",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Workspace identifier",
-            "in": "header",
-            "name": "customer",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSymbolLibrariesDto"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SymbolLibrariesResponseDto"
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "api-key": []
-          },
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Set the project's diagram symbol libraries",
-        "tags": [
-          "Projects"
-        ],
-        "x-mint": {
-          "href": "/api/endpoints/put-project-projectid-symbol-libraries",
-          "metadata": {
-            "sidebarTitle": "Set the project's diagram symbol libraries",
-            "title": "Set the project's diagram symbol libraries"
           }
         }
       }

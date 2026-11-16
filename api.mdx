@@ -70,11 +70,11 @@ Send the preview the clauses in the order you will commit them. `base_branch_id`
 
 ## Draw diagrams with engineering symbols
 
-[`GET /project/{projectId}/diagram-symbols`](/api/endpoints/get-project-projectid-diagram-symbols) lists the project's enabled ISO 1219 fluid-power, IEC 60617 electrical, and ISA-5.1 instrumentation symbols. The response is `libraries`, each with an `id`, a `label`, and `symbols`. Each symbol has an `id`, a `label`, a `size` (`w`, `h`), a `labelSlot` of `below` or `inside`, and its `ports`. Each port has an `id`, a normalized `at` position as `[x, y]`, and a `side` of `n`, `e`, `s`, or `w`.
+[`GET /project/{projectId}/diagram-symbols`](/api/endpoints/get-project-projectid-diagram-symbols) lists every ISO 1219 fluid-power, IEC 60617 electrical, and ISA-5.1 instrumentation symbol. The response is `libraries`, each with an `id`, a `label`, and `symbols`. Each symbol has an `id`, a `label`, a `size` (`w`, `h`), a `labelSlot` of `below` or `inside`, and its `ports`. Each port has an `id`, a normalized `at` position as `[x, y]`, and a `side` of `n`, `e`, `s`, or `w`.
 
 In the structured input of `POST /project/{projectId}/diagrams`, use a symbol `id`, such as `iso1219:pump`, as a node's `shape` or an entity's `geo`. Set a connection's `fromPort` or `toPort` to a terminal `id` from that symbol's `ports`, or omit them for automatic routing. A port that is not a terminal of the symbol at that end returns `400`. Symbols cannot contain children, so an item whose `parentId` is a symbol returns `400`. Use a card or rectangle as the container instead.
 
-[`GET`](/api/endpoints/get-project-projectid-symbol-libraries) and [`PUT /project/{projectId}/symbol-libraries`](/api/endpoints/put-project-projectid-symbol-libraries) read and replace the libraries the shape picker offers, as `enabled` IDs: `iso1219`, `iec60617`, and `isa51`. Every library is enabled until the project sets the list. `PUT` requires Admin access and replaces the whole list. An unknown library ID returns `400`. External grant recipients get an empty list from `GET`, which does not reflect the stored setting.
+`GET` and `PUT /project/{projectId}/symbol-libraries` were removed, so remove calls to them from your clients. `GET /project/{projectId}/diagram-symbols` returns symbols from every library, and `POST /project/{projectId}/diagrams` accepts them all.
 
 ## Run automations
 
