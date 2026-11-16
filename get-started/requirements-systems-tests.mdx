@@ -3,7 +3,6 @@ title: "Connecting your first items"
 description: "Build one connected thread: an owned system, what it must achieve, and the evidence that shows how close it is."
 ---
 
-import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
 
 Flow becomes useful once items are connected. This guide builds one short thread: a system, what it must achieve, and the evidence that shows how close it is. The same pattern works for any structure your team models, such as interfaces, parts, analyses, or risks.
 
@@ -15,9 +14,7 @@ In a Table view, focus the parent system, type a name in the bottom row (it read
 
 If the view is filtered by a tag or person field, such as Status or Owner, the new item starts with those filter values, so it stays in the view you created it from.
 
-<VisualPlaceholder kind="Screenshot" title="Adding an item from the Table">
-  Table view focused on Battery System, with Battery Management System as the existing child row. The bottom creation row reads "New System..." with "Battery Pack" typed in, and an active "Owner is Battery systems engineer" filter whose value shows muted under the Owner column of the creation row. Callouts on the creation row and the previewed owner.
-</VisualPlaceholder>
+<img src="/images/screenshots/get-started/table-creation-row.png" alt="A table filtered to items within Battery and Stage is Draft, with a new name typed into the creation row at the bottom." />
 
 Open the new item and describe its boundary: what is inside it and what it connects to.
 
@@ -43,9 +40,7 @@ Record each result as its own item with the measured value, date, and conditions
 
 Start at the system and follow it to what it must achieve, who owns it, and the latest evidence. Then start from a result and follow it back up.
 
-<VisualPlaceholder kind="Screenshot" title="One connected thread">
-  Details panel for the Body & Aerodynamics system: owner (aerodynamics engineer), the Aerodynamic Drag Coefficient target of 0.28 linked to it, the Coastdown Test linked to the target, and three results (0.296, 0.287, 0.279) with only the last marked as meeting the target.
-</VisualPlaceholder>
+<img src="/images/screenshots/get-started/connected-thread.png" alt="The details panel for the Battery Capacity requirement on its Relationships tab: Range and Charge Time upstream, Battery Size, Battery Mass, and Energy Density downstream, and the impact analysis document." />
 
 To choose which fields the details panel shows for a category, open the panel's **Options** menu and choose **Configure Fields Visibility...**. Hidden fields stay one click away under **Show more**.
 
