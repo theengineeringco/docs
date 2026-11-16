@@ -98,9 +98,12 @@ On top of `AGENTS.md`'s content boundaries:
   logo-free backgrounds. Never AI-generated UI.
 - Screenshots are real captures from a branch-demo preview's Electric Vehicle
   project (recipes in branch-demo `docs/media/`), framed with
-  `screenshots/render.py`. Use a full-window frame when the reader needs the
-  whole screen for orientation, and a closeup when the point is one dialog,
-  panel, or set of columns. Capture closeups at 2x so enlarged text stays crisp.
+  `screenshots/render.py` (capture with `screenshots/capture.js`). Pick the
+  frame by what the reader needs: `full` for the whole screen and orientation;
+  `closeup` for one area in context; `component` for a single dialog, menu, or
+  panel shown on its own on the background (Linear-style); `crop` for a tight
+  slice of the UI with no background. Capture all but `full` at 2x, and capture
+  `component` and `crop` by element (`shotEl`) so they keep the UI's own shape.
   Keep real people's names out of frame; the seeded owners are colleagues.
 - Diagrams are drawn with the `flow-illustration` skill and placed with the
   `Illustration` snippet; see `references/diagrams.md`. Placeholders are for screenshots.
