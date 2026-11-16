@@ -94,6 +94,12 @@ On top of `AGENTS.md`'s content boundaries:
   (`references/product-media.md` and `references/backgrounds.md`): real product pixels
   from a disposable preview with the seeded Electric Vehicle demo, on the supplied
   logo-free backgrounds. Never AI-generated UI.
+- Screenshots are real captures from a branch-demo preview's Electric Vehicle
+  project (recipes in branch-demo `docs/media/`), framed with
+  `screenshots/render.py`. Use a full-window frame when the reader needs the
+  whole screen for orientation, and a closeup when the point is one dialog,
+  panel, or set of columns. Capture closeups at 2x so enlarged text stays crisp.
+  Keep real people's names out of frame; the seeded owners are colleagues.
 - Diagrams are drawn with the `flow-illustration` skill and placed with the
   `Illustration` snippet; see `references/diagrams.md`. Placeholders are for screenshots.
 - No links to pages that are not in this repository.
