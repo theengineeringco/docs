@@ -44,7 +44,7 @@ class ApiDocsTests(unittest.TestCase):
                 with self.subTest(operation=f"{method.upper()} {path}"):
                     self.assertLessEqual(len(subheader), sync.SUBHEADER_MAX)
                     self.assertNotIn("\n", subheader)
-                    prose = re.sub(r"```.*?```|`[^`\n]*`", "", mint.get("content", ""), flags=re.DOTALL)
+                    prose = sync.CODE_SPANS.sub("", mint.get("content", ""))
                     self.assertNotRegex(prose, r"[<{}]", "raw < or braces break Mintlify's MDX parser")
 
     def test_every_curl_block_has_python_and_javascript_options(self):

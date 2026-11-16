@@ -46,6 +46,8 @@ PAGE_TITLES = {
 # descriptions are written for agents and can run to a paragraph, so the page
 # leads with a short plain-text blurb and the detail moves into the page body.
 SUBHEADER_MAX = 120
+# Inline code and fences are literal in MDX; only the prose around them needs escaping.
+CODE_SPANS = re.compile(r"(```.*?```|`[^`\n]*`)", re.DOTALL)
 # Hand-written subheaders for operations whose first sentence is not a usable
 # blurb (too long, a fragment, or a precondition rather than what it does).
 PAGE_DESCRIPTIONS = {
@@ -262,27 +264,24 @@ def plain_blurb(text):
 
 def mdx_body(text):
     """Escape prose for MDX while leaving code spans and fences literal."""
-    parts = re.split(r"(```.*?```|`[^`\n]*`)", text, flags=re.DOTALL)
+    parts = CODE_SPANS.split(text)
     for index in range(0, len(parts), 2):
         parts[index] = parts[index].replace("<", "&lt;").replace("{", "&#123;").replace("}", "&#125;")
     return "".join(parts)
 
 
 def page_copy(key, description):
-    """Split a source description into (subheader, body markdown or None)."""
+    """Return (subheader override or None, page body markdown) for an operation."""
     description = (description or "").strip()
     if key in PAGE_DESCRIPTIONS:
-        return PAGE_DESCRIPTIONS[key], mdx_body(description) if description else None
+        return PAGE_DESCRIPTIONS[key], mdx_body(description)
     if len(description) <= SUBHEADER_MAX and "\n" not in description:
-        return description, None
-    paragraphs = description.split("\n\n", 1)
-    sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z(\"])", paragraphs[0], maxsplit=1)
-    lead = plain_blurb(sentences[0])
-    if lead is None:
+        return None, ""
+    head, *rest = re.split(r"(?<=[.!?])\s+(?=[A-Z(\"])", description, maxsplit=1)
+    if plain_blurb(head) is None:
         # No usable blurb: publish no subheader rather than a wall of text.
         return "", mdx_body(description)
-    remainder = "\n\n".join(part for part in (sentences[1] if len(sentences) > 1 else "", paragraphs[1] if len(paragraphs) > 1 else "") if part.strip())
-    return lead, mdx_body(remainder) if remainder else None
+    return head, mdx_body(rest[0] if rest else "")
 
 
 def subheaders_to_review(spec):
@@ -313,7 +312,7 @@ def prepare(spec):
             title = PAGE_TITLES.get(f"{method} {path}", op.get("summary", f"{method.upper()} {path}"))
             subheader, body = page_copy(f"{method} {path}", op.get("description"))
             op["x-mint"] = {"href": f"/api/endpoints/{slug}", "metadata": {"title": title, "sidebarTitle": title}}
-            if subheader != (op.get("description") or "").strip():
+            if subheader is not None:
                 op["x-mint"]["metadata"]["description"] = subheader
             if body:
                 op["x-mint"]["content"] = body

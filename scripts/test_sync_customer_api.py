@@ -197,8 +197,8 @@ class SyncTests(unittest.TestCase):
         self.assertNotIn("content", mint)
 
     def test_unusable_first_sentence_publishes_no_subheader(self):
-        text = "Admins only. " + "x" * 200
-        self.assertEqual(sync.page_copy("get /entities", "Lists: " + text), ("", "Lists: " + text))
+        colon_lead = "Lists: " + "x" * 200 + ". More."
+        self.assertEqual(sync.page_copy("get /entities", colon_lead), ("", colon_lead))
         self.assertEqual(sync.page_copy("get /entities", "Lists `entities`. Then " + "y" * 200)[0], "")
 
     def test_curated_subheader_keeps_the_full_description_in_the_body(self):
