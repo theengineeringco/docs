@@ -277,7 +277,7 @@ def page_copy(key, description):
         return PAGE_DESCRIPTIONS[key], mdx_body(description)
     if len(description) <= SUBHEADER_MAX and "\n" not in description:
         return None, ""
-    head, *rest = re.split(r"(?<=[.!?])\s+(?=[A-Z(\"])", description, maxsplit=1)
+    head, *rest = re.split(r"(?<=[.!?])(?<!e\.g\.)(?<!i\.e\.)(?<!vs\.)\s+(?=[A-Z(\"`])", description, maxsplit=1)
     if plain_blurb(head) is None:
         # No usable blurb: publish no subheader rather than a wall of text.
         return "", mdx_body(description)

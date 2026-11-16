@@ -201,6 +201,10 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(sync.page_copy("get /entities", colon_lead), ("", colon_lead))
         self.assertEqual(sync.page_copy("get /entities", "Lists `entities`. Then " + "y" * 200)[0], "")
 
+    def test_first_sentence_split_skips_abbreviations_and_allows_code_starts(self):
+        self.assertEqual(sync.page_copy("get /entities", "Lists items, e.g. Requirements and Tests, on a branch. More " + "z" * 200)[0], "Lists items, e.g. Requirements and Tests, on a branch.")
+        self.assertEqual(sync.page_copy("get /entities", "Reads a chat. `messages` is the transcript. " + "z" * 200), ("Reads a chat.", "`messages` is the transcript. " + "z" * 200))
+
     def test_curated_subheader_keeps_the_full_description_in_the_body(self):
         key, description = next(iter(sync.PAGE_DESCRIPTIONS.items()))
         source = "Detail with `code {kept}` and a <tag>. " * 5
