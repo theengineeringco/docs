@@ -14,6 +14,7 @@
         !url.username && !url.password && !url.port &&
         url.pathname === "/" && !url.search && !url.hash &&
         (url.hostname === "backend.branch.flowengineering.com" ||
+          url.hostname === "backend.eu1.flowengineering.com" ||
           backendHost.test(url.hostname))
       ) {
         return url.origin;
