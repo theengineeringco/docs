@@ -9,7 +9,7 @@ import { Illustration } from "/snippets/illustration.jsx";
 A physical system is described by many structures at once: the product breakdown, interfaces, requirements, analyses, tests, parts, risks, and decisions. Each is useful alone. The understanding comes from how they connect. Change one, and the others can move.
 
 <VisualPlaceholder kind="Screenshot" title="The same items in four views">
-  Four panels of the same Battery System items: a table with owner and value columns, a tree showing pack and BMS under the system, Reader showing them as a document with one margin comment, and a diagram with the three as connected cards. Same item highlighted in all four.
+  Four panels of the same Energy Storage System items: a table with owner and value columns, a tree showing Battery Pack and Battery Management System under the system, Reader showing them as a document with one margin comment, and a diagram with the three as connected cards. Same item highlighted in all four.
 </VisualPlaceholder>
 
 Flow keeps all of them connected in a systems graph. The graph answers the questions engineers ask every day: what is this part of, why is it this way, what backs it up, and what else changes if it changes.
@@ -26,11 +26,11 @@ Ownership only helps when the owner can see their dependencies. The graph makes 
 
 Flow represents information as **items** connected by **relationships**. A system, an interface, a requirement, an analysis, a test, or a part are all items, in categories your team defines.
 
-<Illustration name="systems-graph-cross-links" width={640} alt="The vehicle breaks down into systems and parts. Cross-links add what the tree cannot: an interface between the pack and the BMS, and a range target that depends on both the pack and the drag coefficient." />
+<Illustration name="systems-graph-cross-links" width={640} alt="The electric bike breaks down into systems and parts. Cross-links add what the tree cannot: an interface between the battery pack and the BMS, and a range target that depends on both the pack and the mid-drive motor." />
 
 Some relationships express decomposition: a product contains systems, which contain subsystems and parts.
 
-Other relationships cross that hierarchy. A vehicle's range depends on both battery capacity and aerodynamic drag, which belong to different systems and different owners. An interface ties two systems together. A folder tree cannot hold both kinds of connection. A graph can.
+Other relationships cross that hierarchy. The bike's range depends on both battery capacity and drive efficiency, which belong to different systems and different owners. An interface ties two systems together. A folder tree cannot hold both kinds of connection. A graph can.
 
 Evidence completes the picture. Analyses, tests, and their results connect to what they support. The structure says what the team intends to build. The evidence says how close it is.
 

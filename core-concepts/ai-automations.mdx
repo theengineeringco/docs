@@ -25,12 +25,12 @@ Give the task its context: the project, the branch, the items involved, the outc
 The agent connects to the tools teams already use, such as Slack, Jira, SharePoint, and code repositories. When information changes in one of them, the people it affects can find out without going looking.
 
 <VisualPlaceholder kind="Screenshot" title="Flow's review on a GitHub pull request">
-  A firmware pull request in GitHub with Flow's review comment: the new thermal limits (−5 °C to 30 °C) conflict with Cell Temperature During DC Fast Charging (15 °C to 45 °C). The comment links the requirement, suggests the missing traceability link, and names the BMS software engineer and the requirement's owner.
+  A firmware pull request in GitHub with Flow's review comment: the new charging temperature limits conflict with Battery Thermal Limits. The comment links the requirement, suggests the missing traceability link, and names the BMS firmware engineer and the battery systems engineer, who owns the requirement.
 </VisualPlaceholder>
 
-It also works inside those tools. The BMS software engineer changes the battery thermal limits in firmware and opens a pull request in GitHub. Flow reviews the pull request against the requirements. It finds that the new limits, −5 °C to 30 °C, conflict with **Cell Temperature During DC Fast Charging** at 15 °C to 45 °C. It suggests the traceability links the change is missing and names the two people who resolve it: the engineer who owns the code and the engineer who owns the requirement.
+It also works inside those tools. The BMS firmware engineer changes the battery's charging temperature limits in firmware and opens a pull request in GitHub. Flow reviews the pull request against the requirements. It finds that the new limits conflict with **Battery Thermal Limits**, the requirement that sets the battery's charge and discharge temperature window. It suggests the traceability links the change is missing and names the two people who resolve it: the BMS firmware engineer, who owns the code, and the battery systems engineer, who owns the requirement.
 
-The software engineer never has to leave GitHub to know the change needs a conversation.
+The firmware engineer never has to leave GitHub to know the change needs a conversation.
 
 ## Assistance, skills, and automations
 

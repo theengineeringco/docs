@@ -26,11 +26,11 @@ So for any value, the team can answer: who set it, when, on which branch, and ho
 
 ## Hold lasting variation
 
-A product family shares a lot across its models: architecture, standards, regulations, common parts. That shared information lives in a base branch, and each model branches from it to hold only what is different. In an electric vehicle family, a **Truck** branch might relax the drag target and add towing loads, while a **Coupe** inherits the base values. A change in the base can flow to every model without being re-entered.
+A product family shares a lot across its models: architecture, standards, regulations, common parts. That shared information lives in a base branch, and each model branches from it to hold only what is different. For the electric bike, an **EU Config** branch holds what the EU market needs, such as assist up to 25 km/h and 250 W rated power, and inherits everything else from Base. A change in the base can flow to every model without being re-entered.
 
-<Illustration name="branching-variants" width={600} alt="Three variants branch from Base and run alongside it without merging back. Proposals branch from a variant and merge back into it when accepted." />
+<Illustration name="branching-variants" width={600} alt="Variants such as EU Config branch from Base and run alongside it without merging back. Proposals branch from a variant and merge back into it when accepted." />
 
-Coupe, Truck, and SUV are long-lived variants of the shared design. Battery-study and BMS-update are proposals on Truck: each starts from Truck, and each merges back into it when it is accepted.
+Variants, such as EU Config, are long-lived branches of the shared design. Proposals such as Battery capacity trade study and BMS improvements can start from a variant, and each merges back into that variant when it is accepted.
 
 These long-lived branches are **variants**. They are not meant to merge back. Some workspaces label them explicitly as variants.
 

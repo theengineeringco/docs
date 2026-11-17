@@ -1,6 +1,6 @@
 {
   "title": "Hierarchy plus cross-links",
-  "description": "The vehicle breaks down into systems and parts. Cross-links add what the tree cannot: an interface between the pack and the BMS, and a range target that depends on both the pack and the drag coefficient.",
+  "description": "The electric bike breaks down into systems and parts. Cross-links add what the tree cannot: an interface between the battery pack and the BMS, and a range target that depends on both the pack and the mid-drive motor.",
   "size": [
     640,
     310
@@ -166,7 +166,7 @@
         320,
         50
       ],
-      "text": "vehicle",
+      "text": "electric bike",
       "dx": 18,
       "dy": 4,
       "size": 12
@@ -200,7 +200,7 @@
         440,
         190
       ],
-      "text": "drag coefficient",
+      "text": "mid-drive motor",
       "dx": 14,
       "dy": 4,
       "size": 12

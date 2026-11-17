@@ -92,7 +92,7 @@ A short Release Notes edition is acceptable when little shipped. Significance ma
 ## Docs (product documentation)
 
 - The site has three tabs: **API** (customer API, automations, Flow MCP), **Docs** (product documentation), and **Release Notes**.
-- Docs pages use the `flow-product-docs` skill in `.claude/skills/` for voice, the electric vehicle example project, and placement. `docs.json` sets page order.
+- Docs pages use the `flow-product-docs` skill in `.claude/skills/` for voice, the Example: Electric Bike reference project, and placement. `docs.json` sets page order.
 - Before publishing a UI label, click path, or capability, confirm it on `theengineeringco/branch-demo` `master`. Demo and sales material is evidence of intent, not of shipped behavior.
 
 ## Customer API documentation

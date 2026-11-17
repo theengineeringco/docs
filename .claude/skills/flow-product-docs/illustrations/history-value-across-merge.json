@@ -1,6 +1,6 @@
 {
   "title": "One value's history across a merge",
-  "description": "Battery Usable Capacity is raised in two steps on a proposal, then merged. Base records the final value; the intermediate value stays on the branch.",
+  "description": "Battery Usable Capacity is raised from 720 Wh in two steps on a proposal, then merged at 840 Wh. Base records the final value; the intermediate value stays on the branch.",
   "size": [
     600,
     280
@@ -54,7 +54,7 @@
         98.4,
         170
       ],
-      "text": "100 kWh",
+      "text": "720 Wh",
       "dx": 0,
       "dy": -18,
       "anchor": "middle",
@@ -63,7 +63,7 @@
     {
       "type": "label",
       "at": "b.b0c0",
-      "text": "110 kWh",
+      "text": "780 Wh",
       "dx": 0,
       "dy": -18,
       "anchor": "middle",
@@ -72,7 +72,7 @@
     {
       "type": "label",
       "at": "b.b0c1",
-      "text": "120 kWh",
+      "text": "840 Wh",
       "dx": 0,
       "dy": -18,
       "anchor": "middle",
@@ -81,7 +81,7 @@
     {
       "type": "label",
       "at": "b.baseline0",
-      "text": "merged: 120 kWh",
+      "text": "merged: 840 Wh",
       "dx": 0,
       "dy": 40,
       "anchor": "middle",

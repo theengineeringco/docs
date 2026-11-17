@@ -37,9 +37,9 @@ Demo: "I've navigated to my requirements and I can see very easily how the top s
 decomposes into things like the coefficient of drag, the torque requirement from the
 powertrain."
 
-Docs: "Open the requirements and follow Top Speed down. It decomposes into the
-aerodynamic drag coefficient and powertrain peak torque, and drag decomposes again
-into frontal area. Each requirement now has a visible reason to exist."
+Docs, with the example moved to the electric bike: "Open the requirements and follow
+Range in Eco, Ideal Conditions down. It decomposes into Battery Usable Capacity and
+drive efficiency in Eco mode. Each requirement now has a visible reason to exist."
 
 Demo: "This is not meant to be a systems engineer, it's actually meant to be the
 mechanical engineer, the electrical engineer, maybe even the software engineer."

@@ -17,9 +17,9 @@ That means you can answer four questions about any value: who set it, when, on w
 
 In this example, the battery systems engineer raised **Battery Usable Capacity** in a trade study branch, in two steps, and the branch then merged into Base:
 
-<Illustration name="history-value-across-merge" width={600} alt="Battery Usable Capacity is raised in two steps on a proposal, then merged. Base records the final value; the intermediate value stays on the branch." />
+<Illustration name="history-value-across-merge" width={600} alt="Battery Usable Capacity is raised from 720 Wh in two steps on a proposal, then merged at 840 Wh. Base records the final value; the intermediate value stays on the branch." />
 
-On Base, the item shows 120 kWh under **Merged from Trade-study**, attributed to the engineer who last changed it on the branch. The merge record names who merged it and holds the branch's reviews and discussion. Intermediate values from the branch, such as 110 kWh, are not repeated on the parent.
+On Base, the item shows 840 Wh under **Merged from Trade-study**, attributed to the engineer who last changed it on the branch. The merge record names who merged it and holds the branch's reviews and discussion. Intermediate values from the branch are not repeated on the parent.
 
 Each change has a menu:
 
@@ -43,7 +43,7 @@ When you choose a revert from the history menu, choose where the undo goes:
 - **Revert and create a new branch** puts the undo in a branch so it can be reviewed and merged like any other change.
 - **Revert in this branch** makes the undo directly, as your edit. It is not available on protected branches.
 
-<Illustration name="history-undo-without-erasing" width={600} alt="A revert adds the opposite change on its own branch and merges it. The value reads 100, then 120, then 100 again, and both changes stay in history." />
+<Illustration name="history-undo-without-erasing" width={600} alt="A revert adds the opposite change on its own branch and merges it. The value reads 720, then 840, then 720 Wh again, and both changes stay in history." />
 
 To undo everything a merge or milestone did, revert its baseline instead. See [Baselining](/branching/baselining#revert-a-baseline).
 

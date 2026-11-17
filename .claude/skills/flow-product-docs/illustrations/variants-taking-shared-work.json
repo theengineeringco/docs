@@ -1,6 +1,6 @@
 {
   "title": "A variant taking in shared work",
-  "description": "The Truck variant runs alongside Base without merging back. Updating from its parent brings in every Base change since its last update at once, and its own proposals merge into it.",
+  "description": "The EU Config variant runs alongside Base without merging back. Updating from its parent brings in every Base change since its last update at once, and its own proposals merge into it.",
   "size": [
     600,
     330
@@ -123,7 +123,7 @@
     {
       "type": "label",
       "at": "b.tip0",
-      "text": "Truck",
+      "text": "EU Config",
       "dx": 0,
       "dy": -14,
       "size": 12,

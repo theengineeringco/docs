@@ -14,7 +14,7 @@ Press `=` in a field to start a formula, or, when AI is on for your workspace, `
 A formula is one Python expression. Lists, comprehensions, generators, lambdas, and conditional expressions work; imports, assignments, and function definitions do not. The result must fit the destination field's type.
 
 <VisualPlaceholder kind="Screenshot" title="A formula that picks the latest result">
-  The formula editor on the drag target's Latest result field, with latest(...) keyed on Test Date over the three coastdown results, and the calculated value 0.279 shown below. Callout on the selected result.
+  The formula editor on the Hill-Climb Capability requirement's Latest result field, with latest(...) keyed on Test Date over the three hill-climb results, and the calculated value 10.3 mph shown below. Callout on the selected result.
 </VisualPlaceholder>
 
 - Use `self` for the current item and `get(...)` for another item in the same project and branch.
@@ -154,7 +154,7 @@ Returns the first argument that is not `None`, keeping `0`, `False`, and empty t
 
 Returns the most recently **created** item, not the most recently edited. With `key`, it returns the item with the largest key instead. Items without a rank are skipped; no candidates returns `None`; ties keep the first item. Plain values need a `key`.
 
-Creation order can mislead. Three coastdown results recorded for one test case read Cd 0.296, 0.287, and 0.279, but if the Build 1 result was entered last, `latest` returns 0.296. Rank by the test date instead:
+Creation order can mislead. Three results recorded for one test case, Hill-Climb at 6% Grade, GVW, Turbo, read 8.6, 9.4, and 10.3 mph for Prototype Builds 1, 2, and 3, but if the Build 1 result was entered last, `latest` returns 8.6. Rank by the test date instead:
 
 ```python
 latest(linked("Test Result"), key=lambda t: parse_date(t.Test_Date)).Measured_Value

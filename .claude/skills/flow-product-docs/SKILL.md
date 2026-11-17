@@ -34,7 +34,7 @@ what is specific to product pages.
 
 | Read | When |
 | --- | --- |
-| `references/ev-reference-project.md` | You need a concrete example. The only source for example names, values, and owners |
+| `references/ebike-reference-project.md` | You need a concrete example. The only source for example names, values, and owners |
 | `references/demo-voice.md` | Converting demo or sales narration into docs |
 | `references/verified-ui.md` | Writing steps that name UI labels or click paths |
 | `references/placement.md` | Adding a page or choosing its group |
@@ -42,11 +42,12 @@ what is specific to product pages.
 
 ## Examples: use sparingly
 
-The electric vehicle is the shared example, not the subject. Use it only where a
+The electric bike (the **Example: Electric Bike** template every workspace starts
+with) is the shared example, not the subject. Use it only where a
 concrete case teaches something a plain description cannot, usually once per page, and
 never as the frame of a feature page. Most task pages need no example at all. When
 you do use one, take names and values from the reference project, never invent a
-second product, and do not reuse the electric bike from earlier drafts. Vary the item
+second product, and do not use the older electric vehicle example. Vary the item
 kinds: a system, an interface, an analysis, or a test, not always a requirement.
 
 ## The voice
@@ -56,7 +57,7 @@ kinds: a system, an interface, an analysis, or a test, not always a requirement.
 3. **Describe views by the task they serve.** Same records, no duplication.
 4. **Branches do two jobs**: lasting variants and in-progress proposals. Keep them apart.
    Name example branches after their work (Battery capacity trade study). Use variant
-   names (Coupe, Truck, SUV) only on pages that explain variants.
+   names (EU Config) only on pages that explain variants.
 5. **The agent proposes; the owner decides.**
 6. **Close on the outcome**, once per page.
 7. **Plain and short.** Task pages state what the feature is for in one or two
@@ -94,10 +95,10 @@ On top of `AGENTS.md`'s content boundaries:
   replace the component and remove its row.
 - Visuals follow the `flow-brand` skill in `theengineeringco/branch-demo`
   (`references/product-media.md` and `references/backgrounds.md`): real product pixels
-  from a disposable preview with the seeded Electric Vehicle demo, on the supplied
+  from a disposable preview, on the supplied
   logo-free backgrounds. Never AI-generated UI.
-- Screenshots are real captures from a branch-demo preview's Electric Vehicle
-  project (recipes in branch-demo `docs/media/`), framed with
+- Screenshots are real captures of the Example: Electric Bike template in a
+  branch-demo preview (recipes in branch-demo `docs/media/`), framed with
   `screenshots/render.py` (capture with `screenshots/capture.js`). Pick the
   frame by what the reader needs. The default is `crop`: the app on its own, no
   background, rounded corners, transparent outside, either the whole viewport or

@@ -19,7 +19,7 @@ generated diagrams.
    `/snippets/illustration.jsx`.
 6. Follow it with a sentence that says what it shows when the surrounding text doesn't.
 
-Labels are lowercase mono, three words or fewer; proper names (Base, Truck, GitHub) keep
+Labels are lowercase mono, three words or fewer; proper names (Base, EU Config, GitHub) keep
 their case. Explanation belongs in the page, not in the figure.
 
 ## Branching and history diagrams

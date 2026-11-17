@@ -1,6 +1,6 @@
 {
   "title": "Variants and proposals",
-  "description": "Three variants branch from Base and run alongside it without merging back. Proposals branch from a variant and merge back into it when accepted.",
+  "description": "Variants such as EU Config branch from Base and run alongside it without merging back. Proposals branch from a variant and merge back into it when accepted.",
   "size": [
     600,
     320
@@ -105,7 +105,7 @@
     {
       "type": "label",
       "at": "b.tip0",
-      "text": "Coupe",
+      "text": "variant",
       "dx": 0,
       "dy": -14,
       "anchor": "end",
@@ -114,7 +114,7 @@
     {
       "type": "label",
       "at": "b.tip1",
-      "text": "SUV",
+      "text": "variant",
       "dx": 0,
       "dy": -14,
       "anchor": "end",
@@ -123,7 +123,7 @@
     {
       "type": "label",
       "at": "b.tip2",
-      "text": "Truck",
+      "text": "EU Config",
       "dx": 0,
       "dy": -14,
       "anchor": "end",
