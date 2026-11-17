@@ -12,7 +12,7 @@ description: >-
 
 ## The guiding principle
 
-> Flow is a source of truth that lets humans and agents deeply understand your
+> Flow is the source of truth that lets humans and agents deeply understand your
 > physical system. It pulls and manages context from multiple places to make it clear
 > what you are intending to build and how close you are to achieving that. Based on
 > this, it lets you spin up bots which work in the background to help close the gap
