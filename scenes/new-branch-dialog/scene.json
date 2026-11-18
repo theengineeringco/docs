@@ -1,0 +1,17 @@
+{
+  "name": "new-branch-dialog",
+  "title": "New branch dialog",
+  "width": 412,
+  "height": 309,
+  "states": [
+    "default",
+    "parent-open"
+  ],
+  "source": "https://pr-7591.preview.theeng.co/demo/example-electric-bike/master/table",
+  "product_commit": "dd77c0bff84914cbfaec512fbae8452b7cc6a5e3",
+  "captured_at": "2026-11-18T18:16:59.307Z",
+  "css": "app-2c98dab38c3dc700.css",
+  "files": [
+    "7321f8015d08e9c9.woff2"
+  ]
+}
