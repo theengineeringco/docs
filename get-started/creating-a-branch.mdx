@@ -4,6 +4,7 @@ description: "Develop a proposed change in its own branch, alongside the work of
 ---
 
 import { Scene } from "/snippets/scene.jsx";
+import { scene as newBranchDialog } from "/snippets/scenes/new-branch-dialog.jsx";
 
 A branch is where you develop a change without disturbing the agreed design. Other engineers keep working, and several proposals can move forward at once. Every change you make in it is recorded, so its history stays [traceable](/branching/tracing-history) after it merges.
 
@@ -13,7 +14,7 @@ You need permission to create branches in the project.
 
 Open the branch selector and choose **New branch**.
 
-<Scene name="new-branch-dialog" width={412} height={309} alt="The New branch dialog with Battery capacity trade study as the name and Base as the parent branch. Select the parent branch to open the branch picker." />
+<Scene scene={newBranchDialog} alt="The New branch dialog with Battery capacity trade study as the name and Base as the parent branch. Select the parent branch to open the branch picker." />
 
 1. Enter a **Name** that says what the work is, such as *Battery capacity trade study*. `main` and `master` are reserved.
 2. Check **Parent Branch**: the state your branch starts from. For a proposal against an agreed design, choose that design's branch; for work that depends on another proposal, choose that proposal's branch. Different entry points can preselect different parents.

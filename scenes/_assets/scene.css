@@ -1,8 +1,0 @@
-/* Frame for a captured scene: transparent page, the scene at its captured size. */
-html, body { margin: 0; background: transparent !important; overflow: hidden; }
-:root { color-scheme: light; }
-[data-scene] { position: relative; overflow: hidden; }
-[data-scene] [data-scene-state][hidden] { display: none !important; }
-[data-scene] [data-scene-state] { position: absolute; inset: 0; }
-[data-scene-go] { cursor: pointer; }
-@media (prefers-reduced-motion: reduce) { [data-scene] * { transition: none !important; animation: none !important; } }

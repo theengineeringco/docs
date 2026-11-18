@@ -5,12 +5,12 @@
 //
 // A spec exports { name, title, url, viewport, states: [{ id, setup(page), targets,
 // hotspots }] }. Each state's setup runs in order in one browser session, then the
-// state is frozen with serialize.js. Output, under <out>:
-//   scenes/<name>/index.html      the interactive scene
+// state is frozen with serialize.js. Hosted Mintlify serves only images from the repo,
+// so each scene is one self-contained document (pruned CSS, inlined fonts and runtime)
+// shipped as a generated snippet and shown through an iframe srcdoc. Output, under <out>:
+//   snippets/scenes/<name>.jsx    export const scene = { name, title, width, height, html }
 //   scenes/<name>/fallback.png    a 2x render of the first state
-//   scenes/_assets/               shared app CSS, fonts and images, content-hashed,
-//                                 plus the scene runtime
-//   scenes/<name>/scene.json      size and provenance for the <Scene> snippet
+//   scenes/<name>/scene.json      size and provenance
 const { chromium } = require("playwright");
 const crypto = require("crypto");
 const fs = require("fs");
@@ -51,9 +51,9 @@ const serializeSrc = fs.readFileSync(path.join(HERE, "serialize.js"), "utf8");
   const w = Math.ceil(Math.max(...all.map((r) => r.x + r.w)) + pad) - x0;
   const h = Math.ceil(Math.max(...all.map((r) => r.y + r.h)) + pad) - y0;
 
-  // Shared assets: download fonts and images, rewrite them to hashed local files.
-  const assets = path.join(outRoot, "scenes", "_assets");
-  fs.mkdirSync(path.join(assets, "files"), { recursive: true });
+  // Download fonts and images into a scratch folder; the full scene is rendered from
+  // there once to find the CSS rules and fonts it actually uses.
+  const work = fs.mkdtempSync(path.join(require("os").tmpdir(), `scene-${spec.name}-`));
   let css = captured[0].css;
   for (const u of captured[0].urls) {
     try {
@@ -61,14 +61,13 @@ const serializeSrc = fs.readFileSync(path.join(HERE, "serialize.js"), "utf8");
       if (!res.ok) continue;
       const buf = Buffer.from(await res.arrayBuffer());
       const ext = path.extname(new URL(u).pathname).slice(0, 8) || ".bin";
-      const name = `${sha(buf)}${ext}`;
-      fs.writeFileSync(path.join(assets, "files", name), buf);
-      css = css.split(`url("${u}")`).join(`url("files/${name}")`);
+      const file = path.join(work, `${sha(buf)}${ext}`);
+      fs.writeFileSync(file, buf);
+      css = css.split(`url("${u}")`).join(`url("file://${file}")`);
     } catch { /* leave the absolute URL; the offline check reports it */ }
   }
-  const cssName = `app-${sha(css)}.css`;
-  fs.writeFileSync(path.join(assets, cssName), css);
-  for (const f of ["scene.js", "scene.css"]) fs.copyFileSync(path.join(HERE, "runtime", f), path.join(assets, f));
+  const runtimeCss = fs.readFileSync(path.join(HERE, "runtime", "scene.css"), "utf8");
+  const runtimeJs = fs.readFileSync(path.join(HERE, "runtime", "scene.js"), "utf8");
 
   // Place each captured element in the frame inside a positioned box.
   const place = (c) => c.html.map((html, k) => {
@@ -78,70 +77,110 @@ const serializeSrc = fs.readFileSync(path.join(HERE, "serialize.js"), "utf8");
   const states = captured.map((c, i) =>
     `<div data-scene-state="${c.id}"${i ? " hidden" : ""}>\n${place(c)}\n</div>`).join("\n");
   const r = captured[0].root;
-  const doc = `<!doctype html>
+  const renderDoc = (styles, script) => `<!doctype html>
 <html class="${r.htmlClass}" style="${r.htmlStyle}" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>${spec.title}</title>
-<link rel="stylesheet" href="../_assets/${cssName}">
-<link rel="stylesheet" href="../_assets/scene.css">
-<script src="../_assets/scene.js" defer></script>
+<style>${styles}</style>
 </head>
 <body class="${r.bodyClass}">
 <div data-scene style="width:${w}px;height:${h}px" role="img" aria-label="${spec.title}">
 ${states}
 </div>
+${script ? `<script>${script}</script>` : ""}
 </body>
 </html>
 `;
+
+  // Render the full scene, then keep only rules that match something in some state.
+  const b2 = await chromium.launch();
+  const ctx2 = await b2.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
+  const p2 = await ctx2.newPage();
+  const fullPath = path.join(work, "full.html");
+  fs.writeFileSync(fullPath, renderDoc(css + "\n" + runtimeCss, ""));
+  await p2.goto("file://" + fullPath);
+  await p2.waitForTimeout(800);
+  const pruned = await p2.evaluate(pruneCss);
+  await p2.close();
+
+  // Inline the fonts and images the kept rules reference.
+  let finalCss = pruned + "\n" + runtimeCss;
+  for (const m of new Set(finalCss.match(/url\("file:\/\/[^"]+"\)/g) || [])) {
+    const file = m.slice(12, -2);
+    const ext = path.extname(file).slice(1);
+    const mime = { woff2: "font/woff2", woff: "font/woff", ttf: "font/ttf", otf: "font/otf", svg: "image/svg+xml", png: "image/png" }[ext] || "application/octet-stream";
+    finalCss = finalCss.split(m).join(`url("data:${mime};base64,${fs.readFileSync(file).toString("base64")}")`);
+  }
+  const doc = renderDoc(finalCss, runtimeJs);
+
+  // Outputs: a generated snippet for the <Scene> iframe, a fallback PNG, provenance.
   const dir = path.join(outRoot, "scenes", spec.name);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, "index.html"), doc);
+  const snippetDir = path.join(outRoot, "snippets", "scenes");
+  fs.mkdirSync(snippetDir, { recursive: true });
+  fs.writeFileSync(path.join(snippetDir, `${spec.name}.jsx`),
+    `// Generated by .claude/skills/flow-product-docs/scenes/build.js from specs/${spec.name}.js. Do not edit.\n` +
+    `export const scene = ${JSON.stringify({ name: spec.name, title: spec.title, width: w, height: h, html: doc })};\n`);
+
+  // Render the final, self-contained document: fallback PNG and an offline check.
+  const p3 = await ctx2.newPage();
+  const escaped = [];
+  p3.on("request", (req) => { const u = req.url(); if (!u.startsWith("data:") && !u.startsWith("about:")) escaped.push(u); });
+  await p3.setContent(doc, { waitUntil: "load" });
+  await p3.waitForTimeout(800);
+  await p3.locator("[data-scene]").screenshot({ path: path.join(dir, "fallback.png"), omitBackground: true });
+  await b2.close();
+  fs.rmSync(work, { recursive: true, force: true });
+
   fs.writeFileSync(path.join(dir, "scene.json"), JSON.stringify({
     name: spec.name, title: spec.title, width: w, height: h,
     states: captured.map((c) => c.id), source: spec.url.replace(/\?.*$/, ""), product_commit: productCommit.trim(),
-    captured_at: new Date().toISOString(),
+    captured_at: new Date().toISOString(), bytes: Buffer.byteLength(doc),
   }, null, 2) + "\n");
-
-  // Fallback PNG rendered from the static scene itself, and an offline check.
-  const b2 = await chromium.launch();
-  const p2 = await (await b2.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2 })).newPage();
-  const escaped = [];
-  const used = new Set();
-  p2.on("request", (req) => {
-    const u = req.url();
-    if (!u.startsWith("file:")) escaped.push(u);
-    else if (u.includes("/_assets/files/")) used.add(path.basename(new URL(u).pathname));
-  });
-  await p2.goto("file://" + path.join(dir, "index.html"));
-  await p2.waitForTimeout(800);
-  await p2.locator("[data-scene]").screenshot({ path: path.join(dir, "fallback.png"), omitBackground: true });
-  // Render every state so lazily loaded fonts in any state are recorded.
-  for (const st of captured.slice(1)) {
-    await p2.evaluate((id) => {
-      document.querySelectorAll("[data-scene-state]").forEach((e) => { e.hidden = e.dataset.sceneState !== id; });
-    }, st.id);
-    await p2.waitForTimeout(300);
-  }
-  await b2.close();
-  const metaPath = path.join(dir, "scene.json");
-  const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
-  meta.css = cssName; meta.files = [...used].sort();
-  fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2) + "\n");
-
-  // Keep only shared assets some scene still uses.
-  const keepFiles = new Set(), keepCss = new Set();
-  for (const d of fs.readdirSync(path.join(outRoot, "scenes"))) {
-    const m = path.join(outRoot, "scenes", d, "scene.json");
-    if (!fs.existsSync(m)) continue;
-    const j = JSON.parse(fs.readFileSync(m, "utf8"));
-    (j.files || []).forEach((f) => keepFiles.add(f));
-    if (j.css) keepCss.add(j.css);
-  }
-  for (const f of fs.readdirSync(path.join(assets, "files"))) if (!keepFiles.has(f)) fs.rmSync(path.join(assets, "files", f));
-  for (const f of fs.readdirSync(assets)) if (/^app-.*\.css$/.test(f) && !keepCss.has(f)) fs.rmSync(path.join(assets, f));
-  console.log(`scene ${spec.name}: ${w}x${h}, css ${(css.length / 1024).toFixed(0)} KB, html ${(doc.length / 1024).toFixed(0)} KB`);
+  console.log(`scene ${spec.name}: ${w}x${h}, css ${(css.length / 1024).toFixed(0)} KB -> ${(pruned.length / 1024).toFixed(0)} KB, document ${(Buffer.byteLength(doc) / 1024).toFixed(0)} KB`);
   if (escaped.length) { console.log("NETWORK REQUESTS ESCAPED:", [...new Set(escaped)].slice(0, 10)); process.exitCode = 1; }
 })();
+
+// Runs in the rendered scene. Keeps a style rule when its selector, with interaction
+// pseudo-classes and pseudo-elements removed, matches an element in any state; keeps
+// at-rules the kept rules depend on (@keyframes, @property, layers), and only the
+// @font-face rules the scene actually loads, each trimmed to its woff2 source.
+async function pruneCss() {
+  // Show every state at once so each state's fonts load, then record them.
+  for (const s of document.querySelectorAll("[data-scene-state]")) s.hidden = false;
+  await new Promise((r) => setTimeout(r, 300));
+  await document.fonts.ready;
+  const norm = (v) => String(v || "").replace(/["']/g, "").replace(/\s+/g, " ").trim().toLowerCase();
+  const key = (fam, weight, style, range) => [fam, weight || "normal", style || "normal", range || "u+0-10ffff"].map(norm).join("|");
+  const loaded = new Set([...document.fonts].filter((f) => f.status === "loaded").map((f) => key(f.family, f.weight, f.style, f.unicodeRange)));
+
+  const DYNAMIC = /::?(hover|focus-visible|focus-within|focus|active|visited|placeholder|placeholder-shown|before|after|selection|marker|backdrop|file-selector-button|-webkit-[\w-]+|-moz-[\w-]+)(?![\w-])/g;
+  const matches = (sel) => {
+    for (const part of sel.split(/,(?![^(]*\))/)) {
+      const bare = part.replace(DYNAMIC, "").replace(/:(is|where|not|has)\(\s*\)/g, "").trim() || "*";
+      try { if (document.querySelector(bare)) return true; } catch { return true; }
+    }
+    return false;
+  };
+  const fontFace = (rule) => {
+    const st = rule.style;
+    const k = key(st.getPropertyValue("font-family"), st.getPropertyValue("font-weight"), st.getPropertyValue("font-style"), st.getPropertyValue("unicode-range"));
+    if (!loaded.has(k)) return "";
+    const srcs = st.getPropertyValue("src").split(/,(?=\s*url\()/);
+    const src = srcs.find((x) => /woff2/.test(x)) || srcs[0];
+    const rest = [...st].filter((p) => p !== "src").map((p) => `${p}: ${st.getPropertyValue(p)};`).join(" ");
+    return `@font-face { ${rest} src: ${src.trim()}; }`;
+  };
+  const walk = (rules) => [...rules].map((rule) => {
+    if (rule instanceof CSSStyleRule) return matches(rule.selectorText) ? rule.cssText : "";
+    if (rule instanceof CSSFontFaceRule) return fontFace(rule);
+    if (rule instanceof CSSMediaRule) { const k = walk(rule.cssRules); return k.trim() ? `@media ${rule.media.mediaText} {\n${k}\n}` : ""; }
+    if (rule instanceof CSSSupportsRule) { const k = walk(rule.cssRules); return k.trim() ? `@supports ${rule.conditionText} {\n${k}\n}` : ""; }
+    if (typeof CSSLayerBlockRule !== "undefined" && rule instanceof CSSLayerBlockRule) { const k = walk(rule.cssRules); return k.trim() ? `@layer ${rule.name} {\n${k}\n}` : ""; }
+    return rule.cssText; // @keyframes, @property, @layer statements
+  }).filter((t) => t.trim()).join("\n");
+  return [...document.styleSheets].map((s) => walk(s.cssRules)).join("\n");
+}

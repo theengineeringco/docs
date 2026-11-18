@@ -1,12 +1,15 @@
-export const Scene = ({ name, width, height, alt }) => (
-  <div style={{ maxWidth: `${width}px`, margin: "24px auto" }}>
+// An interactive static scene of the app. `scene` comes from a generated snippet in
+// snippets/scenes/ (built by .claude/skills/flow-product-docs/scenes/build.js); the
+// document is self-contained, so it renders through srcdoc with no other requests.
+export const Scene = ({ scene, alt }) => (
+  <div style={{ maxWidth: `${scene.width}px`, margin: "24px auto" }}>
     <iframe
-      src={`/scenes/${name}/index.html`}
-      title={alt}
-      width={width}
-      height={height}
+      srcDoc={scene.html}
+      title={alt || scene.title}
+      width={scene.width}
+      height={scene.height}
       loading="lazy"
-      style={{ border: 0, width: "100%", height: `${height}px`, display: "block", background: "transparent", colorScheme: "light" }}
+      style={{ border: 0, width: "100%", height: `${scene.height}px`, display: "block", background: "transparent", colorScheme: "light" }}
     />
   </div>
 );
