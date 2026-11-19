@@ -1,0 +1,78 @@
+---
+title: "November 18, 2026"
+sidebarTitle: "November 18, 2026"
+description: "Several GitHub organizations per workspace, JSON fields, agent uploads to SharePoint folders, shares that show the path above by default, and fixes for merging and opening large branches."
+---
+
+## In this release
+
+- [Connect several GitHub organizations](#connect-several-github-organizations)
+- [JSON fields](#json-fields)
+- [Upload files to SharePoint](#upload-files-to-sharepoint)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Connect several GitHub organizations
+
+**Settings → Integrations → GitHub** has **Add organization**. Connect more organizations through the Flow GitHub App, through your dedicated GitHub App, or through additional dedicated Apps, including on another GitHub Enterprise server.
+
+Repositories from every connected organization are available across projects, and you can disconnect each organization by itself. An organization can be connected once per workspace. Existing connections, dedicated Apps, and project review settings are kept.
+
+## JSON fields
+
+Data types can have a **JSON** field, edited as monospace text and stored as a JSON value. Invalid JSON and numbers outside the supported range show a warning and are not saved. Spreadsheet imports and CSV, ReqIF, and SysML exports preserve JSON values, and branch comparisons show removed empty arrays and strings.
+
+## Upload files to SharePoint
+
+The agent and scripts can upload a Flow file, such as a generated Word, PDF, or Excel report, into a chosen SharePoint folder. An admin turns this on in **Settings → Integrations → SharePoint**, and people connected before then reconnect to grant upload access. Uploads stay inside the mounted folder and never replace an existing file.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Live AI chat responses.** Responses appear live when the organization name in the page URL contains uppercase letters.
+- **Keep All.** Keep All in the agent window also clears the AI changes banner on items the agent changed only by linking them, so you no longer keep those items one by one.
+- **AI view cards.** When the assistant creates, edits, or changes the display of a view, its chat card names columns and sort keys by their field names, such as "Type" and "Priority", instead of internal keys.
+
+### Automations
+
+- **GitHub merge runs in the Activity Log.** Runs started by a merged pull request appear under GitHub, beside the delivery that started them, instead of under Flow.
+
+### Branching
+
+- **Large branch views.** Opening the table, tree, or review of a branch with thousands of changed items is far less likely to fail after half a minute, such as just after the branch was merged or updated from its parent.
+- **Merging many links on one item.** A branch that adds or removes tens of thousands of links on a single item, such as the revert of a large link merge, merges instead of failing.
+
+### Data Model
+
+- **Verification fields.** Verification fields can show Pass, Fail, and Inconclusive inline while unset, as tag fields can, so you set a result with one click. Turn it on with **Show inline options when unset** in the field's menu.
+- **Merging orphaned tag values.** Long values left behind when a Text field becomes a Tag field can be merged into a tag option instead of failing with "Failed to merge".
+
+### Diagrams
+
+- **draw.io import.** Imported diagrams look closer to the original. Labels and lines keep draw.io's default sizes instead of coming in smaller and heavier, and strongly colored shapes keep their full color instead of a pale tint.
+
+### Integrations
+
+- **GitHub repository renames.** A project's pull request review setting follows its repository when the repository or its organization is renamed or transferred in GitHub, instead of silently stopping. A new repository created under the old name no longer inherits the setting. Workflows Flow AI may start still need enabling again under the new name.
+
+### Permissions and Sharing
+
+- **Shares show the path above by default.** New shares show the path above the shared item. Turn off **Show path above** in the share's Link options to share the item and what sits under it alone.
+- **The path above follows the item.** When a shared item or one of its parents moves, recipients see the new parents and no longer see the old ones, without anyone updating the share.
+
+<Warning>
+  Existing shares of a view now also show recipients the items above the shared item, each on its own with nothing beside it. To keep a share to the item alone, use **Remove path above** on it in **Settings → Shares**.
+</Warning>
+
+### Table
+
+- **Bulk actions on protected branches.** The Actions button in the table's selection bar no longer disappears on a protected branch. It shows disabled, with a tooltip that explains how to make changes.
+
+### Views
+
+- **Orphaned items in default filters.** A saved view's default filters in **Settings → Views** can include **Orphaned items**, so the view opens on the items left behind by a deleted parent.
+
+## API Changes
+
+- **Shares include the path above by default.** Creating a share through the API now includes the path above the shared item unless you send `share_path_above: false`. Send it to share the item alone.
