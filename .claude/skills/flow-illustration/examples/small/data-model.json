@@ -1,0 +1,22 @@
+{
+  "name": "data-model",
+  "title": "Your own data model",
+  "description": "Define the entity types your program needs; each branch is a type with its own fields.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "tree",
+      "at": [120, 48],
+      "direction": "down",
+      "spacing": [52, 32],
+      "root": {
+        "kind": "n",
+        "children": [
+          {"kind": "c", "children": [{"kind": "c"}, {"kind": "c"}]},
+          {"kind": "d", "children": [{"kind": "d"}, {"kind": "d"}]},
+          {"kind": "s", "children": [{"kind": "s"}, {"kind": "s"}]}
+        ]
+      }
+    }
+  ]
+}

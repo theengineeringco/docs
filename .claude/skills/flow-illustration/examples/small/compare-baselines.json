@@ -1,0 +1,24 @@
+{
+  "name": "compare-baselines",
+  "title": "Compare any two baselines",
+  "description": "Two snapshots side by side; the rows that changed between them stand out.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [78, 72], "to": [162, 72], "style": "faint"},
+    {"type": "line", "from": [78, 100], "to": [162, 100], "style": "faint"},
+    {"type": "line", "from": [78, 128], "to": [162, 128], "style": "faint"},
+    {"type": "line", "from": [78, 156], "to": [162, 156], "style": "faint"},
+    {"type": "line", "from": [78, 40], "to": [78, 156], "style": "solid", "loop": "none"},
+    {"type": "line", "from": [162, 40], "to": [162, 156], "style": "solid", "loop": "none"},
+    {"type": "donut", "at": [78, 40]},
+    {"type": "donut", "at": [162, 40]},
+    {"type": "circle", "at": [78, 72]},
+    {"type": "circle", "at": [78, 100]},
+    {"type": "circle", "at": [78, 128]},
+    {"type": "circle", "at": [78, 156]},
+    {"type": "circle", "at": [162, 72]},
+    {"type": "square", "at": [162, 100]},
+    {"type": "circle", "at": [162, 128]},
+    {"type": "square", "at": [162, 156]}
+  ]
+}

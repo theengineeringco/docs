@@ -1,0 +1,15 @@
+{
+  "name": "decomposition",
+  "title": "Structured decomposition",
+  "description": "Top-level intent breaks down into subsystem and component requirements.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "tree",
+      "at": [120, 44],
+      "branching": [3, 2],
+      "levels": ["n", "c", "s"],
+      "spacing": [54, 30]
+    }
+  ]
+}

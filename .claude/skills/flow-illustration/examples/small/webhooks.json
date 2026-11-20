@@ -1,0 +1,15 @@
+{
+  "name": "webhooks",
+  "title": "Triggered from anywhere",
+  "description": "An event from outside crosses the boundary through one port and sets the agent to work.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [96, 40], "to": [96, 160], "style": "solid", "loop": "none"},
+    {"type": "line", "from": [46, 100], "to": [96, 100], "style": "dotted"},
+    {"type": "line", "from": [96, 100], "to": [138, 100]},
+    {"motif": "fan", "at": [138, 100], "via": false, "reach": 56, "spread": 76, "source": null},
+    {"type": "ghost", "at": [46, 100]},
+    {"type": "circleSmall", "at": [96, 100]},
+    {"type": "node", "at": [138, 100]}
+  ]
+}

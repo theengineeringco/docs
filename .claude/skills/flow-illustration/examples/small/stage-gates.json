@@ -1,0 +1,20 @@
+{
+  "name": "stage-gates",
+  "title": "Stage gates",
+  "description": "An item passes one gate at a time; it can't move on until the gate's checks pass.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "timeline",
+      "at": [48, 100],
+      "length": 144,
+      "gates": [0.25, 0.75],
+      "gateHeight": 14,
+      "events": [
+        {"at": 0, "kind": "s"},
+        {"at": 0.5, "kind": "n"},
+        {"at": 1, "kind": "c"}
+      ]
+    }
+  ]
+}

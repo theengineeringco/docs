@@ -1,0 +1,17 @@
+{
+  "name": "suspect-links",
+  "title": "Suspect links",
+  "description": "When an upstream item changes, the links leaving it are suspect until someone reviews them: one reviewed, two to go.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [62, 100], "to": [176, 52]},
+    {"type": "line", "from": [62, 100], "to": [176, 100]},
+    {"type": "line", "from": [62, 100], "to": [176, 148]},
+    {"type": "node", "at": [62, 100]},
+    {"type": "square", "at": [176, 52]},
+    {"type": "circle", "at": [176, 100]},
+    {"type": "circle", "at": [176, 148]},
+    {"type": "flag", "at": [119, 100]},
+    {"type": "flag", "at": [119, 124], "loop": "pulse"}
+  ]
+}

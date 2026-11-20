@@ -1,0 +1,127 @@
+{
+  "title": "Deleting and restoring a branch",
+  "description": "A deleted branch closes but keeps its changes. Restoring it reopens the same branch, and work continues where it stopped.",
+  "size": [
+    600,
+    260
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        180
+      ],
+      "length": 504.0,
+      "laneGap": 64,
+      "radius": 10,
+      "startKind": "c",
+      "branches": [
+        {
+          "from": 0.12,
+          "until": 0.4,
+          "lane": -1,
+          "commits": [
+            0.35,
+            0.75
+          ],
+          "tip": null
+        }
+      ],
+      "head": 1
+    },
+    {
+      "type": "line",
+      "from": [
+        249.6,
+        116
+      ],
+      "to": [
+        325.2,
+        116
+      ],
+      "style": "dotted",
+      "beat": 12
+    },
+    {
+      "type": "donut",
+      "at": [
+        249.6,
+        116
+      ],
+      "beat": 11
+    },
+    {
+      "type": "line",
+      "from": [
+        325.2,
+        116
+      ],
+      "to": [
+        491.5,
+        116
+      ],
+      "beat": 14
+    },
+    {
+      "type": "circle",
+      "at": [
+        408.4,
+        116
+      ],
+      "beat": 15
+    },
+    {
+      "type": "circle",
+      "at": [
+        491.5,
+        116
+      ],
+      "beat": 16
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane0",
+      "text": "idea",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        249.6,
+        116
+      ],
+      "text": "deleted",
+      "dx": 0,
+      "dy": 30,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        325.2,
+        116
+      ],
+      "text": "restored",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

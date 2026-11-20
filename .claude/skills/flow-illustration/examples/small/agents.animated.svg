@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi185ir"><title>A fleet of agents</title><desc>Agents orbit the live graph, working the whole program at once.</desc><style>.fi185ir-p,.fi185ir-f,.fi185ir-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi185ir-p{animation-name:fi185ir-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi185ir-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi185ir-f{animation-name:fi185ir-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi185ir-r{animation-name:fi185ir-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi185ir-d{animation-name:fi185ir-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi185ir-m{animation:fi185ir-march 2.6s linear infinite}
+.fi185ir-pulse{animation:fi185ir-pulse 2.4s ease-in-out infinite}
+@keyframes fi185ir-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi185ir-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi185ir-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi185ir-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi185ir-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi185ir-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi185ir *{animation:none!important}.fi185ir .fi185ir-d{stroke-dashoffset:0}.fi185ir .fi185ir-t{display:none}}</style><g class="fi185ir-p" style="animation-delay:0.05s"><circle cx="120" cy="100" r="34" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi185ir-m"/></g>
+<g class="fi185ir-p" style="animation-delay:0.1s"><circle cx="120" cy="100" r="60" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi185ir-m"/></g>
+<g><animateMotion path="M114.1 66.52A34 34 0 1 1 125.9 133.48A34 34 0 1 1 114.1 66.52" dur="40s" begin="0s" repeatCount="indefinite"/><g transform="translate(-114.1 -66.52)"><g class="fi185ir-p" style="animation-delay:0.25s"><circle cx="114.1" cy="66.52" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g></g></g>
+<g><animateMotion path="M146.05 121.85A34 34 0 1 1 93.95 78.15A34 34 0 1 1 146.05 121.85" dur="40s" begin="0s" repeatCount="indefinite"/><g transform="translate(-146.05 -121.85)"><g class="fi185ir-p" style="animation-delay:0.3s"><circle cx="146.05" cy="121.85" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g></g></g>
+<g><animateMotion path="M88.05 111.63A34 34 0 1 1 151.95 88.37A34 34 0 1 1 88.05 111.63" dur="40s" begin="0s" repeatCount="indefinite"/><g transform="translate(-88.05 -111.63)"><g class="fi185ir-p" style="animation-delay:0.35s"><circle cx="88.05" cy="111.63" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g></g></g>
+<g><animateMotion path="M77.57 57.57A60 60 0 1 0 162.43 142.43A60 60 0 1 0 77.57 57.57" dur="64s" begin="0s" repeatCount="indefinite"/><g transform="translate(-77.57 -57.57)"><g class="fi185ir-p" style="animation-delay:0.3s"><rect x="73.07" y="53.07" width="9" height="9" fill="#1F3ACB"/></g></g></g>
+<g><animateMotion path="M162.43 57.57A60 60 0 1 0 77.57 142.43A60 60 0 1 0 162.43 57.57" dur="64s" begin="0s" repeatCount="indefinite"/><g transform="translate(-162.43 -57.57)"><g class="fi185ir-p" style="animation-delay:0.35s"><rect x="157.93" y="53.07" width="9" height="9" fill="#1F3ACB"/></g></g></g>
+<g><animateMotion path="M140.52 156.38A60 60 0 1 0 99.48 43.62A60 60 0 1 0 140.52 156.38" dur="64s" begin="0s" repeatCount="indefinite"/><g transform="translate(-140.52 -156.38)"><g class="fi185ir-p" style="animation-delay:0.4s"><rect x="136.02" y="151.88" width="9" height="9" fill="#1F3ACB"/></g></g></g>
+<g><animateMotion path="M68.04 130A60 60 0 1 0 171.96 70A60 60 0 1 0 68.04 130" dur="64s" begin="0s" repeatCount="indefinite"/><g transform="translate(-68.04 -130)"><g class="fi185ir-p" style="animation-delay:0.45s"><rect x="63.54" y="125.5" width="9" height="9" fill="#1F3ACB"/></g></g></g>
+<g class="fi185ir-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></g></svg>

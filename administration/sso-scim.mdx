@@ -1,0 +1,55 @@
+---
+title: "SSO and SCIM"
+description: "Sign people in through your identity provider and provision their accounts and groups automatically."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+SSO signs people in through your identity provider. SCIM lets that provider create and deactivate users and manage groups in Flow.
+
+Both live in **Settings → Administration → SSO and Provisioning**, which has three tabs: **SSO Setup**, **SSO Roles**, and **SCIM Provisioning**. Configuring SSO and SCIM needs an Admin with access to all projects. Self-serve **SSO Setup** connects an OIDC provider and appears only where your deployment enables it. Otherwise, or if your identity provider supports only SAML, contact Flow. You also need access to your identity provider and your DNS.
+
+## Set up SSO
+
+<VisualPlaceholder kind="Screenshot" title="SSO setup">
+  SSO Setup with a connection card showing the DNS TXT record, Check DNS verification, and Activate SSO. Secret hidden; example.com domains.
+</VisualPlaceholder>
+
+1. In **SSO Setup**, copy the redirect URI and register it in your provider's OIDC application.
+2. Enter a **Button label**, the **OIDC issuer URL**, **Client ID**, **Client secret**, and **Allowed email domains**. Use the provider's issuer value, not its authorization or token endpoint.
+3. Choose whether to **Require SSO (hide password sign-in for these domains)** and whether to **Show only the SSO button (skip email routing)**. Select **Create connection**.
+4. Publish each TXT record Flow shows at your DNS provider, then select **Check DNS verification**. DNS can take a few minutes to propagate.
+5. When the domains verify, select **Activate SSO**. Sign in through the new button to confirm it works.
+
+**Disable SSO** takes the button down without losing verification; **Re-enable SSO** puts it back. Changing the allowed domains on a live connection returns it to draft until you verify DNS and activate again. Other edits keep it live.
+
+## Map identity-provider roles
+
+On **SSO Roles**, map a role from your provider, or every user from a provider, to a [user group](/administration/user-groups). At each sign-in, Flow adds the user to groups whose mapping they match and removes them from the rest. If sign-ins do not land in the groups you expect, expand **What your IdP is sending** to see the claims Flow received.
+
+<VisualPlaceholder kind="Screenshot" title="SSO role mapping">
+  SSO Roles with one role mapped to a user group and What your IdP is sending expanded to show synthetic claims.
+</VisualPlaceholder>
+
+Under **Automatic user provisioning**, choose the role and projects a person gets the first time they sign in through a provider. When it is off, people need an invitation first. Email and password sign-ins always need an invitation.
+
+## Set up SCIM
+
+<VisualPlaceholder kind="Screenshot" title="SCIM provisioning">
+  SCIM Provisioning with the SCIM URL, Role and Projects for provisioned users, Groups that grant Member, and SCIM Tokens with Generate Token. No real token.
+</VisualPlaceholder>
+
+1. On **SCIM Provisioning**, copy the **SCIM URL** into your provider.
+2. Set **Role for provisioned users** and **Projects for provisioned users**. Admin is not available as a provisioned role.
+3. Optionally, choose **Groups that grant Member**: Viewers in these SCIM groups become Members.
+4. Select **Generate Token**, name it, and copy the token. Flow shows it only once. Enter it in your provider.
+5. Provision a test user and group. Check the user's role and access, and that the group shows the **SCIM** tag in **Settings → Administration → User Groups**.
+
+Treat a SCIM token as an administrative credential. To stop a connection, revoke its token; set up a replacement first if provisioning must continue.
+
+## What SCIM changes
+
+- Removing or deactivating a user in your provider deactivates them in Flow. They keep their record, role, and project access, and reactivating them restores access.
+- Deleting a group in your provider deletes it in Flow.
+- SCIM groups have read-only membership in Flow and cannot also use an SSO role mapping.
+- Passwords stay in your identity provider; SCIM does not change them.

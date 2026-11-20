@@ -1,0 +1,171 @@
+{
+  "title": "Reverting a baseline",
+  "description": "Reverting the Design review 1 baseline opens a branch from Base's latest state holding the reverse of only that baseline's own changes. Later changes are kept, and nothing on Base changes until the revert branch is merged.",
+  "size": [
+    600,
+    300
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        140
+      ],
+      "length": 504.0,
+      "laneGap": 64,
+      "radius": 10,
+      "startKind": "c",
+      "commits": [
+        0.1,
+        0.2,
+        0.45,
+        0.56
+      ],
+      "commitKind": "c",
+      "branches": [
+        {
+          "from": 0.62,
+          "to": 0.88,
+          "lane": 1,
+          "commits": [
+            0.35,
+            0.65
+          ],
+          "style": "dotted",
+          "commitKind": "g"
+        }
+      ],
+      "baselines": [
+        0.3,
+        0.88
+      ],
+      "baselineHeight": 14,
+      "head": 1
+    },
+    {
+      "type": "donut",
+      "at": [
+        199.2,
+        84
+      ],
+      "beat": 10
+    },
+    {
+      "type": "line",
+      "from": [
+        199.2,
+        122
+      ],
+      "to": [
+        199.2,
+        96
+      ],
+      "style": "faintSolid",
+      "beat": 10
+    },
+    {
+      "type": "path",
+      "points": [
+        [
+          88.4,
+          162
+        ],
+        [
+          88.4,
+          168
+        ],
+        [
+          209.2,
+          168
+        ],
+        [
+          209.2,
+          162
+        ]
+      ],
+      "style": "solid",
+      "beat": 12
+    },
+    {
+      "type": "path",
+      "points": [
+        [
+          264.8,
+          162
+        ],
+        [
+          264.8,
+          168
+        ],
+        [
+          340.2,
+          168
+        ],
+        [
+          340.2,
+          162
+        ]
+      ],
+      "style": "solid",
+      "beat": 12
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": -18,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": [
+        199.2,
+        84
+      ],
+      "text": "design review 1",
+      "dx": 0,
+      "dy": -22,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": [
+        148.8,
+        168
+      ],
+      "text": "reversed",
+      "dx": 0,
+      "dy": 20,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": [
+        302.5,
+        168
+      ],
+      "text": "kept",
+      "dx": 0,
+      "dy": 20,
+      "size": 12,
+      "anchor": "middle"
+    },
+    {
+      "type": "label",
+      "at": "b.lane0",
+      "text": "revert branch",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

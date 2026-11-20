@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Branch-level permissions</title><desc>A branch can be scoped to the people and partners allowed to see and edit it.</desc><path d="M50 40L190 40L190 100L50 100Z" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M48 128L198 128" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M75 128L75 74L165 74L165 128" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="75" cy="128" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="106.5" cy="74" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="138" cy="74" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="160.5" y="123.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="198" cy="128" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="194" y="124" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="48" cy="128" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></svg>

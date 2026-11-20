@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="904" height="236" viewBox="0 0 904 236" fill="none" role="img"><title>How reviews work</title><desc>Claim: nothing reaches the baseline until checks pass and every required reviewer approves. Four steps: a change request opens on a branch, required reviewers are assigned, checks run and reviewers approve, the branch merges and a baseline is recorded.</desc><path d="M20 16L220 16L220 186L20 186Z" fill="#F6F6F3" stroke-linejoin="round"/>
+<path d="M242 16L442 16L442 186L242 186Z" fill="#F6F6F3" stroke-linejoin="round"/>
+<path d="M464 16L664 16L664 186L464 186Z" fill="#F6F6F3" stroke-linejoin="round"/>
+<path d="M686 16L886 16L886 186L686 186Z" fill="#F6F6F3" stroke-linejoin="round"/>
+<path d="M46 144L196 144" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M64 144L64 98L163 98" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M268 144L418 144" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M286 144L286 98L385 98" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M385 98L417 52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M385 98L385 52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M385 98L353 52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M490 144L640 144" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M508 144L508 98L607 98" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M639 52L607 98" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M607 52L607 98" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M575 52L607 98" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M712 144L862 144" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M730 144L730 98L805 98L805 144" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M805 148L805 158" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="196" cy="144" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="192" y="140" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="64" cy="144" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="98.65" cy="98" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="131.32" cy="98" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="163" cy="98" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="163" cy="98" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="418" cy="144" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="414" y="140" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="286" cy="144" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="320.65" cy="98" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="353.32" cy="98" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="385" cy="98" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="385" cy="98" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="417" cy="52" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="385" cy="52" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="353" cy="52" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="640" cy="144" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="636" y="140" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="508" cy="144" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="538.15" y="93.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="570.82" y="93.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="607" cy="98" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="607" cy="98" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="634.5" y="47.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="602.5" y="47.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="570.5" y="47.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="862" cy="144" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="858" y="140" width="8" height="8" fill="#1F3ACB"/>
+<circle cx="730" cy="144" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="751.75" y="93.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="776.5" y="93.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="800.5" y="139.5" width="9" height="9" fill="#1F3ACB"/>
+<text x="34" y="38" fill="#1F3ACB" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">01</text>
+<text x="20" y="206" fill="#6B6A66" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">A change request opens</text>
+<text x="256" y="38" fill="#1F3ACB" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">02</text>
+<text x="242" y="206" fill="#6B6A66" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">Required reviewers are assigned</text>
+<text x="478" y="38" fill="#1F3ACB" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">03</text>
+<text x="464" y="206" fill="#6B6A66" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">Checks run, reviewers approve</text>
+<text x="700" y="38" fill="#1F3ACB" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">04</text>
+<text x="686" y="206" fill="#6B6A66" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="start" letter-spacing="0.2">It merges as a new baseline</text>
+<text x="805" y="176" fill="#6B6A66" font-family="'Commit Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" text-anchor="middle" letter-spacing="0.2">baseline 13</text></svg>

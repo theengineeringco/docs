@@ -1,0 +1,122 @@
+{
+  "title": "Every change stays on the record",
+  "description": "A proposal branches from Base, takes in a newer change from Base, and merges back as a recorded merge. A revert later undoes part of it on its own branch, and every change stays visible.",
+  "size": [
+    600,
+    280
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        150
+      ],
+      "length": 504.0,
+      "laneGap": 64,
+      "radius": 10,
+      "startKind": "c",
+      "commits": [
+        0.36
+      ],
+      "commitKind": "c",
+      "branches": [
+        {
+          "from": 0.12,
+          "to": 0.62,
+          "lane": -1,
+          "commits": [
+            0.2,
+            0.62,
+            0.85
+          ]
+        },
+        {
+          "from": 0.72,
+          "to": 0.92,
+          "lane": 1,
+          "commits": [
+            0.5
+          ],
+          "style": "dotted",
+          "commitKind": "g"
+        }
+      ],
+      "baselines": [
+        0.62,
+        0.92
+      ],
+      "baselineHeight": 14,
+      "head": 1
+    },
+    {
+      "type": "line",
+      "id": "upd",
+      "from": [
+        229.4,
+        150
+      ],
+      "to": [
+        264.7,
+        86
+      ],
+      "style": "fine",
+      "beat": 9
+    },
+    {
+      "type": "traveler",
+      "along": "upd",
+      "period": 2.6
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane0",
+      "text": "proposal",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        229.4,
+        150
+      ],
+      "text": "update from parent",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.baseline0",
+      "text": "merge recorded",
+      "dx": 0,
+      "dy": 40,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane1",
+      "text": "revert",
+      "dx": 14,
+      "dy": 22,
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

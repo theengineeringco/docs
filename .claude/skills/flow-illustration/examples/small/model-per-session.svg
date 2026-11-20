@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Choose the model per session</title><desc>Each chat session runs on the model you pick; the others stay available for the next one.</desc><circle cx="120" cy="100" r="58" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5"/>
+<path d="M120 100L120 42" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L154.09 146.92" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L85.91 146.92" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L64.84 82.08" fill="none" stroke="#C9C8C4" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M120 100L175.16 82.08" fill="none" stroke="#1F3ACB" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="120" cy="42" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="154.09" cy="146.92" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="85.91" cy="146.92" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="64.84" cy="82.08" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="120" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/>
+<rect x="170.66" y="77.58" width="9" height="9" fill="#1F3ACB"/></svg>

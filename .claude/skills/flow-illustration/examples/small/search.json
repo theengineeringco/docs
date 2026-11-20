@@ -1,0 +1,18 @@
+{
+  "name": "search",
+  "title": "Find anything",
+  "description": "Search across the whole program: the lens finds the few items that match.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "grid",
+      "at": [48, 52],
+      "cols": 7,
+      "rows": 5,
+      "gap": 24,
+      "dotSize": 1.8,
+      "selected": [[3, 1], [4, 2], [2, 3]],
+      "lens": {"at": [3, 2], "r": 36}
+    }
+  ]
+}

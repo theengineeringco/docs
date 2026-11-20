@@ -1,0 +1,20 @@
+{
+  "name": "cross-links",
+  "title": "Cross-links",
+  "description": "Two hierarchies, linked across: peers stay connected wherever they sit in the tree.",
+  "size": [240, 200],
+  "layers": [
+    {"motif": "tree", "at": [78, 48], "branching": [2], "levels": ["n", "c"], "spacing": [76, 40]},
+    {"motif": "tree", "at": [162, 48], "branching": [2], "levels": ["c", "c"], "spacing": [76, 40]},
+    {"type": "line", "from": [98, 124], "to": [142, 124], "style": "fine", "beat": 6},
+    {
+      "type": "line",
+      "from": [58, 124],
+      "to": [182, 124],
+      "style": "fine",
+      "route": "arc",
+      "bulge": 0.26,
+      "beat": 6
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi4c6qp"><title>Variants</title><desc>Product families grow from one shared platform; each variant keeps what it shares.</desc><style>.fi4c6qp-p,.fi4c6qp-f,.fi4c6qp-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi4c6qp-p{animation-name:fi4c6qp-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi4c6qp-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi4c6qp-f{animation-name:fi4c6qp-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi4c6qp-r{animation-name:fi4c6qp-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi4c6qp-d{animation-name:fi4c6qp-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi4c6qp-m{animation:fi4c6qp-march 2.6s linear infinite}
+.fi4c6qp-pulse{animation:fi4c6qp-pulse 2.4s ease-in-out infinite}
+@keyframes fi4c6qp-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi4c6qp-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi4c6qp-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi4c6qp-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi4c6qp-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi4c6qp-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi4c6qp *{animation:none!important}.fi4c6qp .fi4c6qp-d{stroke-dashoffset:0}.fi4c6qp .fi4c6qp-t{display:none}}</style><g class="fi4c6qp-p" style="animation-delay:0.05s"><circle cx="120" cy="74" r="38" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
+<g class="fi4c6qp-p" style="animation-delay:0.1s"><circle cx="142.52" cy="113" r="38" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
+<g class="fi4c6qp-p" style="animation-delay:0.15s"><circle cx="97.48" cy="113" r="38" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" class="fi4c6qp-m"/></g>
+<g class="fi4c6qp-p" style="animation-delay:0.25s"><rect x="115.5" y="31.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fi4c6qp-p" style="animation-delay:0.3s"><rect x="170.93" y="127.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fi4c6qp-p" style="animation-delay:0.35s"><rect x="60.07" y="127.5" width="9" height="9" fill="#1F3ACB"/></g>
+<g class="fi4c6qp-p" style="animation-delay:0.15s"><circle cx="120" cy="100" r="15" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1" stroke-dasharray="1 1" pathLength="1" stroke-dashoffset="1" class="fi4c6qp-d" style="animation-duration:0.7s;animation-delay:0.15s"/><rect x="116" y="96" width="8" height="8" fill="#1F3ACB"/></g></svg>

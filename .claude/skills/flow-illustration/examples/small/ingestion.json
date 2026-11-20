@@ -1,0 +1,23 @@
+{
+  "name": "ingestion",
+  "title": "Bring in existing specs",
+  "description": "Documents come in, the agent reads them, structured requirements come out with their source links.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [54, 56], "to": [112, 100]},
+    {"type": "line", "from": [54, 100], "to": [112, 100]},
+    {"type": "line", "from": [54, 144], "to": [112, 100]},
+    {"type": "line", "from": [112, 100], "to": [186, 64]},
+    {"type": "line", "from": [112, 100], "to": [186, 88]},
+    {"type": "line", "from": [112, 100], "to": [186, 112]},
+    {"type": "line", "from": [112, 100], "to": [186, 136]},
+    {"type": "ghost", "at": [54, 56]},
+    {"type": "ghost", "at": [54, 100]},
+    {"type": "ghost", "at": [54, 144]},
+    {"type": "node", "at": [112, 100]},
+    {"type": "square", "at": [186, 64]},
+    {"type": "square", "at": [186, 88]},
+    {"type": "square", "at": [186, 112]},
+    {"type": "square", "at": [186, 136]}
+  ]
+}

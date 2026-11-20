@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Ask what if</title><desc>From the live node, alternatives are explored on the side; one is worked through to a result.</desc><path d="M60 100L116 52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M60 100L116 148" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M60 100L116 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M116 52L176 52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M116 148L176 148" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M116 100L180 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="116" cy="52" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="116" cy="148" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="176" cy="52" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="176" cy="148" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="116" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="175.5" y="95.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="60" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="56" y="96" width="8" height="8" fill="#1F3ACB"/></svg>

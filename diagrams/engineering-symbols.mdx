@@ -1,0 +1,45 @@
+---
+title: "Engineering symbols"
+description: "Draw fluid power, electrical, and instrumentation schematics with standard symbols that can stand for real items."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+Symbols let a diagram read like the schematic your team already shares: a cooling loop, a hydraulic circuit, a wiring sheet, or an instrument layout. A symbol can also stand for an item, so the pump on the drawing is the pump in the model.
+
+## Libraries
+
+Flow ships three symbol libraries. All three are on in a new project.
+
+| Library | Covers |
+| --- | --- |
+| **ISO 1219-1 fluid power** | Pump, 2/2 and 3/2 valves, check valve, heat exchanger, fan, expansion tank, orifice, temperature, pressure, level, and flow sensors, T and cross junctions |
+| **IEC 60617 electrical** | Resistor, capacitor, inductor, diode, battery, DC and AC voltage sources, earth ground, electric motor, generator, normally open and normally closed switches, relay coil, three-pole contactor, fuse, circuit breaker, transformer |
+| **ISA-5.1 instrumentation** | Field-mounted, panel-mounted, and auxiliary panel instruments |
+
+To choose which libraries the shape picker offers, a project admin opens **Settings → Diagrams** and turns each one on or off under **Symbol libraries**. The choice applies to every diagram in the project.
+
+## Draw a schematic
+
+<VisualPlaceholder kind="Screenshot" title="Symbols in the shape picker">
+  A diagram with the shape picker open from the bottom toolbar, scrolled to the ISO 1219-1 fluid power section with the Pump tooltip showing. Behind it, a partly drawn coolant loop: a pump, a heat exchanger, and an expansion tank joined by wires, with the ports on the heat exchanger visible while a wire end is dragged over it.
+</VisualPlaceholder>
+
+1. Open a diagram you can edit and select the shape picker on the bottom toolbar.
+2. Pick a symbol from its library's section, below the shapes and containers, and click or drag on the canvas to place it. A symbol keeps its proportions when you resize it.
+3. Draw a wire with **Arrow**. Drag an end over a symbol to show its ports, such as a pump's inlet and outlet or a valve's A, P, and T, and drop it near one to snap the wire there.
+4. Where a line forks, place a T or cross junction rather than joining the branch to the nearest component.
+5. Select **Auto arrange** to lay the schematic out. Wires keep their ports and leave each symbol on the side its glyph draws them.
+
+## Make a symbol stand for an item
+
+1. Right-click a placed symbol and choose **Convert to Entity**.
+2. Pick the item it represents.
+
+The symbol becomes that item's card: the glyph stays, with the item's name under it and any shown fields as rows below the name. It behaves like any other card, including the deleted marker if the item is removed. Expanding the card's children or inserting an item inside it turns it back into a regular card, because a symbol cannot contain other shapes.
+
+## Imports and the agent
+
+Importing a draw.io file maps common fluid power (ISO 1219) and P&ID stencils, such as pumps, valves, check valves, heat exchangers, vessels, fans, coolers, orifices, gauges, and flow meters, onto these symbols instead of rectangles. See [Importing and exporting diagrams](/diagrams/importing-exporting-diagrams).
+
+The agent can draw with the project's enabled libraries too: ask it to redraw an attached schematic, and it connects wires at named terminals and draws forks as junctions. Check its result against the source sheet before you rely on it.

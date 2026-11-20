@@ -1,0 +1,22 @@
+{
+  "name": "impact-analysis",
+  "title": "Impact in seconds",
+  "description": "Change one requirement and the affected items light up, while one conflict is flagged.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "graph",
+      "layout": "radial",
+      "at": [120, 100],
+      "size": [172, 156],
+      "rings": [4, 8],
+      "seed": 9,
+      "offsets": [-45, -20],
+      "squares": [[0, 0], [0, 1], [0, 2], [0, 3], [1, 2], [1, 5]],
+      "marks": {"1,3": "f"},
+      "chords": 0,
+      "center": null
+    },
+    {"type": "node", "at": [120, 100], "loop": "ping", "beat": 0}
+  ]
+}

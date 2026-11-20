@@ -1,0 +1,21 @@
+{
+  "name": "what-if",
+  "title": "Ask what if",
+  "description": "From the live node, alternatives are explored on the side; one is worked through to a result.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [60, 100], "to": [116, 52], "style": "dotted"},
+    {"type": "line", "from": [60, 100], "to": [116, 148], "style": "dotted"},
+    {"type": "line", "from": [60, 100], "to": [116, 100]},
+    {"type": "line", "from": [116, 52], "to": [176, 52], "style": "dotted"},
+    {"type": "line", "from": [116, 148], "to": [176, 148], "style": "dotted"},
+    {"type": "line", "from": [116, 100], "to": [180, 100]},
+    {"type": "ghost", "at": [116, 52]},
+    {"type": "ghost", "at": [116, 148]},
+    {"type": "ghost", "at": [176, 52]},
+    {"type": "ghost", "at": [176, 148]},
+    {"type": "circle", "at": [116, 100]},
+    {"type": "square", "at": [180, 100]},
+    {"type": "node", "at": [60, 100]}
+  ]
+}

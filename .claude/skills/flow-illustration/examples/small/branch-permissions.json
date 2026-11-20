@@ -1,0 +1,19 @@
+{
+  "name": "branch-permissions",
+  "title": "Branch-level permissions",
+  "description": "A branch can be scoped to the people and partners allowed to see and edit it.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "frame", "at": [120, 70], "size": [140, 60]},
+    {
+      "motif": "branch",
+      "at": [48, 128],
+      "length": 150,
+      "branches": [
+        {"from": 0.18, "to": 0.78, "lane": -1, "laneGap": 54, "commits": [0.35, 0.7]}
+      ],
+      "laneGap": 54,
+      "head": 1
+    }
+  ]
+}

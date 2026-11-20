@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Contradictions caught on edit</title><desc>Three requirements in flight; the one that contradicts another is flagged before it lands.</desc><path d="M44 60L192 60" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M44 100L192 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M44 140L192 140" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="44" cy="60" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="118" cy="60" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="118" cy="60" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="187.5" y="55.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="44" cy="100" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<path d="M118 94.24L123.76 100L118 105.76L112.24 100Z" fill="#E29B03" stroke-linejoin="round"/>
+<circle cx="192" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="44" cy="140" r="4" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="118" cy="140" r="12" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/><circle cx="118" cy="140" r="4" fill="none" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="187.5" y="135.5" width="9" height="9" fill="#1F3ACB"/></svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Automations</title><desc>A change fires the agent, which fans the work out to every affected artifact.</desc><path d="M54 100L108 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M108 100L176 52" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M108 100L176 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M108 100L176 148" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="54" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<rect x="171.5" y="47.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="171.5" y="95.5" width="9" height="9" fill="#1F3ACB"/>
+<rect x="171.5" y="143.5" width="9" height="9" fill="#1F3ACB"/>
+<circle cx="108" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="104" y="96" width="8" height="8" fill="#1F3ACB"/></svg>

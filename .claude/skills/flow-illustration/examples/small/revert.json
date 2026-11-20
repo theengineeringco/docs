@@ -1,0 +1,25 @@
+{
+  "name": "revert",
+  "title": "Revert to any baseline",
+  "description": "Reverting proposes the inverse change on a branch, so going back is reviewed like going forward.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "timeline",
+      "at": [48, 84],
+      "length": 144,
+      "gates": [0.25, 0.65],
+      "gateHeight": 10,
+      "events": [{"at": 1, "kind": "n"}]
+    },
+    {
+      "type": "line",
+      "from": [192, 84],
+      "to": [84, 84],
+      "route": "arc",
+      "bulge": -0.42,
+      "style": "dotted"
+    },
+    {"type": "square", "at": [84, 84]}
+  ]
+}
