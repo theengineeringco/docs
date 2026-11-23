@@ -84,12 +84,10 @@ jobs:
       - name: Fetch and compare all deployed Swagger documents
         id: snapshot
         run: python3 scripts/sync-customer-api.py --report "$REPORT_PATH"
-      - name: Validate candidate reference with Mintlify
-        if: steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'structural'
-        run: npx --yes mint@4.2.939 validate
-      - name: Test candidate reference
+      - name: Validate and test candidate reference
         if: steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'structural'
         run: |
+          npx --yes mint@4.2.939 validate
           python3 -m unittest discover -s scripts -p 'test_*.py' -v
           node --test scripts/test_api_deployment.mjs
       - name: Summarize deployed changes
