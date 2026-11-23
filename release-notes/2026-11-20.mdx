@@ -1,0 +1,185 @@
+---
+title: "November 20, 2026"
+sidebarTitle: "November 20, 2026"
+description: "Weekly release: Inbox notifications in a split view, filters and table columns from linked items' fields, text triggers that run Python from rich text, Slack threads that pick their own project and branch, several GitHub organizations per workspace, and a searchable diagram shapes panel."
+---
+
+## In this release
+
+- [Inbox notifications in a split view](#inbox-notifications-in-a-split-view)
+- [Filter and show fields of linked items](#filter-and-show-fields-of-linked-items)
+- [Text triggers](#text-triggers)
+- [Choose the project and branch in a Slack thread](#choose-the-project-and-branch-in-a-slack-thread)
+- [Connect several GitHub organizations](#connect-several-github-organizations)
+- [A searchable shapes panel for diagrams](#a-searchable-shapes-panel-for-diagrams)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Inbox notifications in a split view
+
+Notifications open in a split view, as in a mail client. A resizable, full-height list of compact cards is grouped under **Needs you**, **Today**, and **Earlier**, and the selected notification fills the rest of the page.
+
+An item change shows the value before and after. A comment shows its thread so you can reply in place. An agent chat or run shows its conversation, and a review event shows the change request's Overview and Changed Items so you can review and merge in place. Questions from agents, failed runs, requested changes, and pending review requests stay at the top until you act on them. The Unread tab shows how many are unread, and the link keeps the open notification, page, and filters.
+
+Selecting several notifications to mark them read or unread together is no longer available. Change a notification's read state from its card or the menu above it, or use **Mark all as read**.
+
+## Filter and show fields of linked items
+
+A **Linked to** filter that targets a type can add conditions on the linked item, such as Requirements linked to a System whose Status is Approved. A view can then narrow its rows by properties of items it does not show. Set the conditions in the filter bar or in a saved view's default filters. Flow AI and scripts can filter and count with them too.
+
+A table can also add a read-only column that shows a field of each row's linked items of another type, such as the Status of linked System elements, even when the view does not contain that type. Exports include these columns, with the linked values in the order the table shows them.
+
+## Text triggers
+
+Admins can give a data type phrases, such as "equal to", that run Python when typed in an item's rich text. Press Enter after the phrase to run it on the current branch with the text typed after it. Its result replaces the phrase: text, a mention of an item, or a live reference to a field's value.
+
+Set up triggers on the type's Data Model page or ask the AI agent. They work in the details panel, table cells, and the Reader.
+
+## Choose the project and branch in a Slack thread
+
+Mentioning Flow in Slack no longer requires choosing a project with `/flow` first. Flow works in the project and branch you name in the message (Base if you name no branch), or starts in your only Slack-connected project. Otherwise, it asks in the thread which project and branch to use.
+
+Everyone in the thread sees where Flow is working, and the person who started it can move it to another project or branch with **Change**. Teammates can reply in an existing thread without setting up `/flow`. A person who hasn't linked their account gets a private **Link my Flow account** prompt in the thread, with **Continue** to pick up their question once linked.
+
+## Connect several GitHub organizations
+
+**Settings → Integrations → GitHub** has **Add organization**. Connect more organizations through the Flow GitHub App, through your dedicated GitHub App, or through additional dedicated Apps, including on another GitHub Enterprise server.
+
+Repositories from every connected organization are available across projects, and you can disconnect each organization by itself. An organization can be connected once per workspace. Existing connections, dedicated Apps, and project review settings are kept.
+
+## A searchable shapes panel for diagrams
+
+The toolbar's **Shape** button opens a shapes panel beside the canvas, with search and larger previews in scrollable sections, every symbol library included. Click a shape and a translucent preview follows the pointer, then click or drag on the canvas. You can also drag a shape straight from the panel onto the canvas, where it lands exactly as previewed.
+
+A click places the shape with its top-left corner at the pointer. Shapes placed without dragging out a size keep their icon's proportions, so circles and squares start round and square, and new shapes start with a light fill.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Ask AI from the item menu.** Viewers can right-click an item and ask the assistant about it, as members can. The entry, previously **Edit with AI**, is now **Ask AI**.
+- **Live values in AI rich-text edits.** When the assistant writes a value an item holds into a description, such as a requirement's target, it can insert a live reference to that field instead of typing the number. The text updates when the value changes.
+- **Branches the AI assistant creates.** A branch the assistant opens belongs to the person it acts for, so they can mark it ready for review without an admin.
+- **Agent file names.** The agent can give the files it creates a name you choose, and rename a file it created or you attached in the chat. A file always keeps its extension, so a Word document cannot be renamed as a PDF.
+- **Unreadable characters.** A Flow AI chat no longer loses its answer, or keeps re-running a request in the background, when a script or file it reads produces unreadable characters. Binary files read from GitHub, GitLab, or Bitbucket get a clear "binary file" answer.
+- **Live AI chat responses.** Responses appear live when the organization name in the page URL contains uppercase letters.
+- **Keep All.** Keep All in the agent window also clears the AI changes banner on items the agent changed only by linking them, so you no longer keep those items one by one.
+- **Subagent results.** A subagent's result renders as formatted text in the chat, with bold, lists, tables, and item links, instead of raw markdown.
+- **AI view cards.** When the assistant creates, edits, or changes the display of a view, its chat card names columns and sort keys by their field names, such as "Type" and "Priority", instead of internal keys.
+
+### Architecture
+
+- **Show full names.** A new switch in the Preferences menu on the Architecture tab shows every system block title on as many lines as it needs and widens every signal tag to its whole label. It is off by default and remembered per project in your browser.
+- **Left-drag to pan.** Drag empty canvas with the left mouse button to pan. Shift-drag still selects with a marquee, and right-click only opens the context menu.
+- **Auto arrange.** Manually resized system blocks keep their size when arranged, while still growing when their contents need more room.
+
+### Automations
+
+- **Branch automations start when a branch is ready for review.** Branch checks and branch-review automations run when the author marks the branch ready for review, not when someone first opens a draft's review page. The trigger is now named **When a branch is ready for review in Flow**.
+- **GitHub merge runs in the Activity Log.** Runs started by a merged pull request appear under GitHub, beside the delivery that started them, instead of under Flow.
+
+### Branching
+
+- **Parent changes to fields you took from the parent.** Update from parent now brings a parent change into a field your branch took from the parent, or edited and then set back. Before, the update skipped it without asking and a later merge wrote the branch's older value back over it. A branch edit kept in an earlier update is listed as a conflict again when the parent changes that field.
+- **Conflicts after keeping your own value.** After an update that kept a branch's own value, the next Update from parent preview and the merge conflict check show that value and flag a later parent edit of the same field as a conflict.
+- **Repeated updates with conflict choices.** A branch updated with conflict choices many times no longer fails with an error on its next update with choices.
+- **Updating large branches.** Updating a large branch from its parent after a small parent change no longer takes time proportional to the branch's entire change history.
+- **Large branch views.** Opening the table, tree, or review of a branch with thousands of changed items is far less likely to fail after half a minute, such as just after the branch was merged or updated from its parent.
+- **Merging many links on one item.** A branch that adds or removes tens of thousands of links on a single item, such as the revert of a large link merge, merges instead of failing.
+
+### Data Model
+
+- **JSON fields.** Data types can have a **JSON** field, edited as monospace text and stored as a JSON value. Invalid JSON and numbers outside the supported range show a warning and are not saved. Spreadsheet imports and CSV, ReqIF, and SysML exports preserve JSON values, and branch comparisons show removed empty arrays and strings.
+- **Verification fields.** Verification fields can show Pass, Fail, and Inconclusive inline while unset, as tag fields can, so you set a result with one click. Turn it on with **Show inline options when unset** in the field's menu.
+- **Merging orphaned tag values.** Long values left behind when a Text field becomes a Tag field can be merged into a tag option instead of failing with "Failed to merge".
+- **Rich text typing.** Typing no longer turns characters into symbols you did not ask for: `//`, `--`, `>=`, `<=`, `!=`, `~=`, `+-`, `%%`, `>>`, `<<`, `(c)`, `(r)`, `~5`, and straight quotes stay as typed. Arrows (`->`) and superscripts (`^2`, `^o`) still convert.
+- **Images and files in rich text.** Adding an image or file on an empty line leaves the cursor on the line below it, so you can keep typing.
+
+### Diagrams
+
+- **Rewiring connections.** Dragging a connection's end redraws the connection along its real path as you move, through any bends you placed, instead of a dashed straight line. Those bends are kept when you drop the end on its new shape. A connection whose bends cannot reach its shape takes its automatic route instead of stopping short of it.
+- **Handles when zoomed out.** Selection, connection, and resize handles stop growing past 50% zoom, so they no longer cover small shapes.
+- **Symbols take a fill.** The fill style colors the closed parts of engineering symbols, such as a pump's circle or a valve's body, while their connecting lines stay lines.
+- **Ovals.** The oval shape draws as a rounded capsule with straight sides, as its icon shows, instead of as a second ellipse, and wires meet its outline.
+- **Field-mounted instrument symbol.** The ISA-5.1 field-mounted instrument, a plain circle, is no longer offered. Use the ellipse instead. Diagrams that already contain it still show it.
+- **draw.io import.** Imported diagrams look closer to the original. Labels and lines keep draw.io's default sizes instead of coming in smaller and heavier, and strongly colored shapes keep their full color instead of a pale tint.
+- **Connect via.** Changing the type of a new entity in the picker no longer closes the picker before the entity can be created.
+- **Dragging selected frames.** A selected frame can be dragged from anywhere inside it again. Pressing its empty middle no longer clears the selection.
+- **Shapes locked by accident.** Typing right after drawing a shape or frame writes its label, so a capitalized name no longer locks it through the Shift+L shortcut. Locked shapes show a lock badge, and clicking it unlocks the shape.
+- **Zoom steps.** Zoom in and zoom out on diagrams and the Architecture tab move in small steps, such as 100% to 110%, instead of jumping from 100% to 200%.
+
+### Formulas
+
+- **Who last edited an item.** `most_recent_editor(items, fields)` returns the user who most recently set a value on one or more items, optionally only for the named fields. A user field can then follow whoever last touched related work, for example `most_recent_editor(self.children("Test Run"), "Status")`.
+- **Formulas on rich text fields.** Rich text fields can carry formulas like other formula-capable types, from the details-panel badge or the table's formula cell. A computed result renders as rich text instead of a raw string.
+- **`min` and `max`.** In scripts and formulas, `min` and `max` accept several values, as in Python, for example `max(a, b)`.
+
+### Import and Export
+
+- **ReqIF import.** A ReqIF file whose specification has no attribute values opens in the import's Review step instead of failing with an error.
+- **Rich-text references in exports.** References to rich-text fields, including formula results, include the text shown in Flow instead of a blank in export previews and downloaded files.
+- **V2 migration.** Saved views with custom tag filters carry over when their selected tags are available in the destination.
+
+### Integrations
+
+- **Read-only tools for custom MCP connections.** In **Settings → Integrations → Custom MCP**, an administrator can mark an allowed tool as read-only when it changes nothing outside Flow, such as a calculation or a lookup. Read-only users, read-only scripts, and branch checks can then use the marked tools, so a branch check can call your own simulation or validation service. Tools that are not marked stay limited to editors and automations.
+- **Upload files to SharePoint.** The agent and scripts can upload a Flow file, such as a generated Word, PDF, or Excel report, into a chosen SharePoint folder. An admin turns this on in **Settings → Integrations → SharePoint**, and people connected before then reconnect to grant upload access. Uploads stay inside the mounted folder and never replace an existing file.
+- **GitHub repository renames.** A project's pull request review setting follows its repository when the repository or its organization is renamed or transferred in GitHub, instead of silently stopping. A new repository created under the old name no longer inherits the setting. Workflows Flow AI may start still need enabling again under the new name.
+
+### Login
+
+- **Invalid sign-in tokens.** Invalid sign-in tokens return an authentication error instead of a server error.
+
+### Notifications
+
+- **Agent chats awaiting approval.** A chat that stops to ask for super user approval shows in your Inbox as waiting on you, not as finished.
+
+### Permissions and Sharing
+
+- **Search who has access.** The share dialog's **Who has access** list has a search field that finds shared people and groups by name or email, and lists the workspace members who have access through the workspace.
+- **Shares show the path above by default.** New shares show the path above the shared item. Turn off **Show path above** in the share's Link options to share the item and what sits under it alone.
+- **The path above follows the item.** When a shared item or one of its parents moves, recipients see the new parents and no longer see the old ones, without anyone updating the share.
+- **External shares of views that show subsystems.** A share whose view shows subsystems no longer gets stuck preparing when an item is linked both to the shared items and to a subsystem it reaches.
+
+<Warning>
+  Existing shares of a view now also show recipients the items above the shared item, each on its own with nothing beside it. To keep a share to the item alone, use **Remove path above** on it in **Settings → Shares**.
+</Warning>
+
+### Projects
+
+- **New projects from a project or the default template.** The new project keeps each item type's rule checks, name template, and extra details tabs, and each field's display and external-sharing settings.
+- **Project switcher.** Switching projects while the table is focused on an item shows the new project's items. The focus stays with the project it was made in and is there again when you return.
+- **Leaving Settings.** Leaving Settings from a direct Settings link always lands on Base instead of sometimes looping back into Settings. A new project that reuses a deleted project's name no longer reopens that project's last page.
+
+### Review
+
+- **Collapse all and Expand all on Changed items.** A single control in the review's Changed items folds or opens every card at once, so a large change request is quicker to scan and scroll. Each branch remembers your choice.
+- **Merge status popover.** Review requirements show the outstanding reviewers and reviewer groups for branch, organization, and target-branch rules, without counting groups those reviewers already cover twice.
+- **Deleted items in Changed Items.** Deleting an item on a branch, or updating a branch from a parent that deleted it, no longer lists the items linked to it as changed with an "added" link to the deleted item. Restoring the item lists those changes for review again.
+- **Review in the sidebar.** Clicking Review opens the branch's review after you follow a link to a view inside a review, instead of doing nothing.
+
+### Search
+
+- **Rich text that holds only a mention.** A rich-text field whose only content is an item or user mention counts as filled in, so "is populated" and "is empty" filters and required item checks no longer treat it as empty. A field that holds only an image or attachment still counts as empty.
+- **Find in the details panel.** Ctrl+F (Cmd+F on Mac) inside an open details panel opens your browser's find, so you can search the panel's text, instead of jumping to the table's Find box.
+
+### Table
+
+- **Large projects.** Items in a change request's review and in the Table load in projects with many top-level items, instead of failing after a long wait.
+- **Select all.** Select all in the Table view completes on views with tens of thousands of items, including items under more than one parent, instead of spinning without end.
+- **File previews in description cells.** Clicking a PDF or other file attachment in a description cell opens the preview, as it does in item details.
+- **Bulk actions on protected branches.** The Actions button in the table's selection bar no longer disappears on a protected branch. It shows disabled, with a tooltip that explains how to make changes.
+
+### Tree
+
+- **Verification results on nodes.** A verification result field can be added as a node field.
+
+### Views
+
+- **Item details show filled-in fields.** Without a personal field selection, the details panel shows only fields that hold a value or are featured. A type with no featured fields still shows every field. A bar under the fields says how many are hidden, with **Show** to reveal them and **Configure** to choose your own fields, which then always show.
+- **Within items in default filters.** A saved view's default filters in **Settings → Views** can include **Within items**, so the view opens scoped to the systems you pick.
+- **Orphaned items in default filters.** A saved view's default filters in **Settings → Views** can include **Orphaned items**, so the view opens on the items left behind by a deleted parent.
+
+## API Changes
+
+- **Shares include the path above by default.** Creating a share through the API now includes the path above the shared item unless you send `share_path_above: false`. Send it to share the item alone.
