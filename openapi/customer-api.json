@@ -11406,7 +11406,7 @@
           "Automations"
         ],
         "x-mint": {
-          "content": "`messages` is the whole transcript so far, `status` is `streaming` while a turn runs, `ready` when the agent has answered, or `error` (with `error` set) when the last turn failed.",
+          "content": "`messages` is the whole transcript unless messageLimit requests a latest-first page. `status` is `streaming` while a turn runs, `ready` when the agent has answered, or `error` (with `error` set) when the last turn failed.",
           "href": "/api/endpoints/get-ai-agents-id",
           "metadata": {
             "description": "Returns an agent chat's full transcript with its current status.",
@@ -11474,7 +11474,7 @@
           "Automations"
         ],
         "x-mint": {
-          "content": "Queues the message and starts the agent on it as soon as the chat is idle. With `queued: false` the turn has started: poll GET /ai/trigger/runs?agent_ids=&#123;id&#125; until the run is not `running`, then GET /ai/agents/&#123;id&#125;. With `queued: true` an earlier turn is still running and the run status finishes for that turn first, so poll GET /ai/agents/&#123;id&#125; until the reply to this message is in the transcript. With `duplicate: true` this exact send already happened: `job_id` is the original send, nothing changed and there is no new turn to wait for.",
+          "content": "Queues the message and starts the agent on it as soon as the chat is idle. With `queued: false` the turn has started: poll GET /ai/trigger/runs?agent_ids=&#123;id&#125; until the run is not `running`, then GET /ai/agents/&#123;id&#125;. With `queued: true` an earlier turn is still running and the run status finishes for that turn first, so poll GET /ai/agents/&#123;id&#125; until the reply to this message is in the transcript (or PATCH /ai/agents/&#123;id&#125;/messages/&#123;job_id&#125; with `delivery: \"live\"` so the running turn reads it at its next step). With `duplicate: true` this exact send already happened: `job_id` is the original send, nothing changed and there is no new turn to wait for.",
           "href": "/api/endpoints/post-ai-agents-id-messages",
           "metadata": {
             "description": "Queues a message and starts the agent on it as soon as the chat is idle.",
@@ -11543,8 +11543,10 @@
           "Automations"
         ],
         "x-mint": {
+          "content": "Changes the delivery of a message still waiting in the queue. `live`: the running turn reads it at its next step, before finishing its current work, when that turn is yours (same person and role); otherwise it waits like the default. `eventually` (the default of every send): it waits for the running turn to end and runs as the next turn. A message set to move the chat to another branch cannot be `live`, because a live message never moves the chat (400). A message that has already started into a turn is left as it is.",
           "href": "/api/endpoints/patch-ai-agents-id-messages-jobid",
           "metadata": {
+            "description": "Chooses whether a queued message joins the running turn or waits for the next one.",
             "sidebarTitle": "Set how a queued message reaches the running turn",
             "title": "Set how a queued message reaches the running turn"
           }
@@ -12061,7 +12063,7 @@
           "Audit"
         ],
         "x-mint": {
-          "content": "User administration (members joining and leaving, role and project-access changes) and organization review-policy changes, newest first. Requires an admin with access to every project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
+          "content": "User administration, organization review-policy changes, and Google integration acknowledgments and project revocations, newest first. Requires an admin with access to every project. Page with `cursor` from `0`, passing back `nextCursor` until `moreAvailable` is false. To poll for new entries, pass `since` and deduplicate by `id`.",
           "href": "/api/endpoints/get-audit-log",
           "metadata": {
             "description": "Lists user administration and review-policy changes across the workspace, newest first.",
@@ -13538,6 +13540,7 @@
           "Persistent agents"
         ],
         "x-mint": {
+          "content": "The project's agents and the caller's own personal ones (`ownerUserId` set). Nobody else's personal agent is listed: it exists for its owner alone.",
           "href": "/api/endpoints/get-project-projectid-agents",
           "metadata": {
             "description": "Lists the project's persistent agents along with your own personal agents.",
@@ -13604,7 +13607,7 @@
         ],
         "x-flow-mcp-tool": false,
         "x-mint": {
-          "content": "Project admins only. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it. An enabled agent opens the creator's main chat with it and speaks first, asking what it is for so it can write its description.",
+          "content": "A project agent (the default `scope`) takes a project admin and is every member's; a personal agent (`scope: personal`) is the caller's own, which any member who can write may create and which exists for nobody else in the project. Whose it is never changes. The agent becomes a member of the project under its own bot user, which authors everything its runs do. A turn is bounded by the permissions of the person chatting, or of the creator when nobody is behind it (the owner, for a personal agent). An enabled agent opens the creator's main chat with it and speaks first, introducing itself and what the creator can ask it for.",
           "href": "/api/endpoints/post-project-projectid-agents",
           "metadata": {
             "description": "Creates a project agent that works under its own bot user.",
@@ -13725,7 +13728,7 @@
         ],
         "x-flow-mcp-tool": false,
         "x-mint": {
-          "content": "Withdraws the agent from the project and stops future activation. Its identity, conversations and memories are retained.",
+          "content": "Withdraws the agent from the project and stops future activation. Its identity, conversations and memories are retained. A project admin for the project's agent, its owner for a personal one while the owner can write to the project.",
           "href": "/api/endpoints/delete-project-projectid-agents-agentid",
           "metadata": {
             "description": "Archives a persistent agent, stopping future activation while keeping its conversations and memories.",
@@ -14222,7 +14225,7 @@
           "Automations"
         ],
         "x-mint": {
-          "content": "Creates one automation at the end of the project's list, or of your personal list with `scope=personal`. Creating shared automations requires Admin access. It runs as you: its scheduled and webhook runs use your access to the project for as long as you can edit it, and pause when you no longer can. Check `runsAs` on the response. Script automations need the automation scripts beta, and `allowAdminTools` cannot be turned on with an API key.",
+          "content": "Creates one automation at the end of the project's list, or of your personal list with `scope=personal`. Creating shared automations requires Admin access. It runs as you: its scheduled and webhook runs use your access to the project for as long as you can edit it, and pause when you no longer can. Check `runsAs` on the response. Script automations need the automation scripts beta, and `allowAdminTools` cannot be turned on with an API key. Through Flow's hosted MCP server, a new automation is saved turned off (`enabled: false`) and runs only once a person turns it on in Flow: give them the `url` in the response. `enabled: true` is refused there.",
           "href": "/api/endpoints/post-project-projectid-automations",
           "metadata": {
             "description": "Creates an automation in the project's shared list or in your personal list.",
@@ -14455,7 +14458,7 @@
           "Automations"
         ],
         "x-mint": {
-          "content": "Updating shared automations requires Admin access. Changes only the fields you send; `triggers` replaces the trigger list, `trigger` alone replaces only the first trigger, and `triggers: []` makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer.",
+          "content": "Updating shared automations requires Admin access. Changes only the fields you send; `triggers` replaces the trigger list, `trigger` alone replaces only the first trigger, and `triggers: []` makes the automation manual. An automation runs as whoever last saved what it runs. If that is someone else and your edit changes what it runs or how and when it runs, the request is refused with 409 unless it sends `\"runAsMe\": true`. Renaming, disabling or turning off admin tools keeps the current writer. Through Flow's hosted MCP server, an edit that changes what an enabled automation runs, or how or when it runs, is refused with 409: turn it off first (`enabled: false`), edit it, and give the person the `url` in the response to turn it back on in Flow. Renaming it, turning it off or changing who is notified works on an enabled automation and leaves it on. `enabled: true` is refused there.",
           "href": "/api/endpoints/patch-project-projectid-automations-automationid",
           "metadata": {
             "description": "Updates only the fields you send on an existing automation.",
@@ -16678,7 +16681,7 @@
           "Branches"
         ],
         "x-mint": {
-          "content": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Live sub-branches of the merged branch are rebased onto the merge target in the same merge, keeping their own changes (GET :id/merge-rebase-preview lists them, with the fields where their change and the newly inherited history differ; pass its ids as expected_rebase_ids to refuse the merge with 409 if that set has changed). Depending on the organization review policy, project admins (and optionally the parent branch owner) may set bypass_review with a review_bypass_reason to force past known review-policy, branch-check, stage-policy, editor-group, and merge-conflict blockers; the reason and blocker snapshot are preserved in merge history while structural and incomplete-scan protections remain enforced. Poll the returned job until it succeeds or fails.",
+          "content": "Enqueues a background merge that replays the branch onto its parent, creates a merge baseline, and deletes the branch. Live sub-branches of the merged branch are rebased onto the merge target in the same merge, keeping their own changes (GET :id/merge-rebase-preview lists them, with the fields where their change and the newly inherited history differ; pass its ids as expected_rebase_ids to refuse the merge with 409 if that set has changed). Depending on the organization review policy, project admins (and optionally the parent branch owner, except for merges into Base) may set bypass_review with a review_bypass_reason to force past known review-policy, branch-check, stage-policy, and merge-conflict blockers; only project admins can also force past editor-group blockers. The reason and blocker snapshot are preserved in merge history while structural and incomplete-scan protections remain enforced. Poll the returned job until it succeeds or fails.",
           "href": "/api/endpoints/post-project-projectid-branch-id-merge",
           "metadata": {
             "description": "Starts a background merge of the branch into its parent and returns a job to poll.",
@@ -16745,8 +16748,10 @@
           "Branches"
         ],
         "x-mint": {
+          "content": "Lists every blocker, not only the first. The merge gates an ordinary merge by the caller checks: variant, editor groups, branch checks, designated and required reviewers, review policy approvals, blocking item checks and stage gates. The review page holds that the merge itself does not enforce: draft state, a merge already queued or running, and no changes. The advisory merge conflict preview; the merge runs its own exact conflict check. A gate that cannot be judged yet (a scan still running or too large) is listed under `unknown`, and `ready` is true only when both lists are empty. This read enforces nothing; the merge re-checks its own gates.",
           "href": "/api/endpoints/get-project-projectid-branch-id-merge-readiness",
           "metadata": {
+            "description": "Lists every blocker that would stop the branch from merging right now.",
             "sidebarTitle": "Check whether a branch is ready to merge",
             "title": "Check whether a branch is ready to merge"
           }
@@ -18814,8 +18819,10 @@
           "Projects"
         ],
         "x-mint": {
+          "content": "Lists the ISO 1219, IEC 60617 and ISA-5.1 symbols, authored sizes and terminal IDs. Use symbol IDs as nodes.shape or entities.geo and terminal IDs as connections.fromPort/toPort in POST /project/&#123;projectId&#125;/diagrams. Symbols are leaves and cannot contain children.",
           "href": "/api/endpoints/get-project-projectid-diagram-symbols",
           "metadata": {
+            "description": "Lists the enabled diagram symbols with their authored sizes and terminal IDs.",
             "sidebarTitle": "Discover diagram symbols and named terminals",
             "title": "Discover diagram symbols and named terminals"
           }
@@ -23189,8 +23196,10 @@
           "ReqIF Import"
         ],
         "x-mint": {
+          "content": "Streams the parsed document with the given mapping and returns one page of a clause's rows, each marked as creating or updating an item on the starting branch, plus optional per-clause counts. Writes nothing.",
           "href": "/api/endpoints/post-project-projectid-reqif-import-jobid-preview",
           "metadata": {
+            "description": "Previews one page of the items a ReqIF import commit would create or update, without writing.",
             "sidebarTitle": "Preview what a commit with this mapping would write",
             "title": "Preview what a commit with this mapping would write"
           }
@@ -23475,8 +23484,10 @@
           "Views"
         ],
         "x-mint": {
+          "content": "Every shared view, in display order, each shaped like the single-view responses. A view's `id` is what sharing a view takes as `view_id`.",
           "href": "/api/endpoints/get-project-projectid-views-saved",
           "metadata": {
+            "description": "Lists the project's shared saved views in display order.",
             "sidebarTitle": "List the project's shared saved views",
             "title": "List the project's shared saved views"
           }
@@ -23542,8 +23553,10 @@
           "Views"
         ],
         "x-mint": {
+          "content": "Requires Admin access. Adds one view after the existing shared views, visible to every project member. Sets its structure (start type and nesting rules, by data type id) and optionally its table columns, filters and sort, each checked against the data model; display options are edited in Flow. An id that is already a shared view answers 409.",
           "href": "/api/endpoints/post-project-projectid-views-saved",
           "metadata": {
+            "description": "Creates a shared saved view visible to every project member.",
             "sidebarTitle": "Create a shared saved view",
             "title": "Create a shared saved view"
           }
@@ -23732,8 +23745,10 @@
           "Views"
         ],
         "x-mint": {
+          "content": "Requires Admin access. Changes only the fields you send and keeps the rest of the view, including its display options. `relationships`, `columns`, `filters` and `sort` each replace that whole part of the view; null clears columns, filters or sort.",
           "href": "/api/endpoints/patch-project-projectid-views-saved-viewid",
           "metadata": {
+            "description": "Updates only the fields you send on a shared saved view.",
             "sidebarTitle": "Update a shared saved view",
             "title": "Update a shared saved view"
           }
@@ -23814,8 +23829,10 @@
           "Views"
         ],
         "x-mint": {
+          "content": "Requires Admin access. Removes the rule for `parentType` and `childType` and keeps the view's other rules. A view without that rule answers 404. Returns the view.",
           "href": "/api/endpoints/delete-project-projectid-views-saved-viewid-relationships",
           "metadata": {
+            "description": "Removes one nesting rule from a shared saved view and keeps its other rules.",
             "sidebarTitle": "Remove a nesting rule from a shared saved view",
             "title": "Remove a nesting rule from a shared saved view"
           }
@@ -23889,8 +23906,10 @@
           "Views"
         ],
         "x-mint": {
+          "content": "Requires Admin access. Appends one rule (\"under `parentType`, show items of `childType`\") after the view's other rules, which are kept. A rule is identified by its `parentType` and `childType`: sending a rule the view already has, with the same direction, changes nothing, so a retry is safe; the same pair with another direction answers 409. Returns the view.",
           "href": "/api/endpoints/post-project-projectid-views-saved-viewid-relationships",
           "metadata": {
+            "description": "Adds a nesting rule to a shared saved view and keeps its existing rules.",
             "sidebarTitle": "Add a nesting rule to a shared saved view",
             "title": "Add a nesting rule to a shared saved view"
           }
