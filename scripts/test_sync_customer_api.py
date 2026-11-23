@@ -227,6 +227,12 @@ class SyncTests(unittest.TestCase):
             self.assertEqual(sync.sync(documents, path)["status"], "unchanged")
             self.assertEqual(initial, path.read_bytes())
 
+    def test_committed_snapshot_matches_current_editorial_maps(self):
+        # Editing PAGE_DESCRIPTIONS or the page copy rules without regenerating the
+        # snapshot would otherwise merge green and fail every nightly run.
+        committed = json.loads((Path(__file__).parents[1] / "openapi/customer-api.json").read_text())
+        self.assertEqual(sync.prepare(copy.deepcopy(committed)), committed)
+
 
 if __name__ == "__main__":
     unittest.main()
