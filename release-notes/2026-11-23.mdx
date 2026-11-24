@@ -1,0 +1,55 @@
+---
+title: "November 23, 2026"
+sidebarTitle: "November 23, 2026"
+description: "Automations that wait for GitHub Actions runs, audit history in Flow AI, diagram frames that stay behind their shapes, and inline comments that no longer count as edits."
+---
+
+## In this release
+
+- [Automations wait for GitHub Actions runs](#automations-wait-for-github-actions-runs)
+- [Improvements & Fixes](#improvements-&-fixes)
+
+## Automations wait for GitHub Actions runs
+
+An automation can start a GitHub Actions workflow, wait for the run to finish, and carry on with its result.
+
+While it waits, the run shows as running, with a link to the GitHub run and a **Stop waiting** button. **Stop waiting** also cancels a GitHub run the automation started. A GitHub run that fails, is cancelled, or is still going after the time limit (an hour by default) fails the automation run.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Audit history in Flow AI.** Project admins can ask who changed project settings and when. Admins with access to every project can also ask about workspace role and access changes.
+- **Removed fields.** Item reads in AI chat leave out fields removed from the data model by default. You can still ask the assistant to read their saved values.
+
+### Collaboration
+
+- **Inline comments.** Commenting on text in a description or rich-text field no longer counts as editing it. The item stays out of a change request's changed items, its history shows no update, and merging raises no conflict for it.
+
+### Diagrams
+
+- **Frames and swimlanes.** A frame always stays behind the shapes inside it, so reordering can no longer hide a shape under its frame. Frames and swimlanes are renamed in place, and a selected swimlane's label area can be resized by dragging its inner edge.
+- **Drag and drop.** Dragging an entity over a diagram shows the card it will place, at its real size and style, instead of a generic label.
+- **Shape tool.** The toolbar's **Shape** button shows the last shape you picked, even after you switch tools, and pressing it picks that shape again.
+- **Keep proportions.** Hold Shift while dragging out a new shape to keep its proportions, so rectangles draw as squares and ellipses as circles.
+- **Stretch.** **Stretch horizontally** and **Stretch vertically** are available again in the Arrange menu when two or more shapes are selected.
+
+### Integrations
+
+- **Confluence Cloud.** Connected accounts can read, create, and update pages, and expired sign-ins show reconnect guidance.
+
+<Warning>
+  Confluence Cloud administrators must enable page read/write and space read permissions in their Atlassian app. Users must then reconnect to update their access before using pages.
+</Warning>
+
+### Search
+
+- **Diagram previews.** Previewing a diagram in search shows the diagram itself, so you can recognize it before opening it.
+
+### Settings
+
+- **Context windows for your own AI endpoint.** Organization admins can set a context window for each chat model, so Flow fits each chat to the model their endpoint serves.
+
+### Views
+
+- **Switching views after expanding many rows.** A view with hundreds of expanded rows switches between Table, Tree, Reader, and Architecture, and opens saved views, instead of refusing. Its filters and columns carry over, and its rows reopen at the view's default depth.
