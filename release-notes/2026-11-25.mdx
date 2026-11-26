@@ -1,0 +1,58 @@
+---
+title: "November 25, 2026"
+sidebarTitle: "November 25, 2026"
+description: "Views that start from several types, dashboards copied into new projects, share access you can change from settings, and branch checks that read external sharing."
+---
+
+## In this release
+
+- [Start a view from several types](#start-a-view-from-several-types)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Start a view from several types
+
+A view can start from more than one data type. Under **Start type**, choose **Add start type**, and each type's top-level items appear at the top of the view.
+
+## Improvements & Fixes
+
+### Agent
+
+- **AI document imports.** Flow AI again embeds figures, diagrams, and tables from a PDF or image in the items it creates, and recognizes requests to import a whole document.
+
+### Automations
+
+- **Scripts and branch checks can read external sharing.** `shared_with(items)` returns the external shares that contain each item, with the recipient, access level, and where the share starts. A branch check can use it to flag new content placed in a space another party can see.
+
+### Import and Export
+
+- **V2 migration.** Aggregate design values keep their formula, with their source values linked as children. Interfaces keep their links to requirements and gain links to their design values. Files in a file field on a system, interface, or risk move with the item, and range values keep their unit.
+
+### Integrations
+
+- **Boltline inventory and BOMs.** Flow AI can list Boltline inventory and read as-built and engineering BOMs again after Boltline's latest API update.
+
+### Permissions and Sharing
+
+- **Share access.** Switch an existing share between **Can view** and **Can edit** from **Settings → Shares**.
+- **Shares search.** Searching for a person's email also finds the shares that reach them through a user group, alongside the ones made to them directly.
+
+### Projects
+
+- **Copy dashboards into a new project.** When you start a new project from an existing one, **What to import** includes **Dashboards**, so the new project opens with the source project's dashboards and their layout.
+
+### Reader
+
+- **Value mentions of ranges.** A value mention of a range whose bounds have a unit shows the range instead of a dash.
+
+### Review
+
+- **Review after a baseline comparison.** On a branch, the sidebar's **Review** item no longer keeps returning to a baseline comparison after you leave it. It opens the branch's review again, including from the comparison itself.
+
+### Search
+
+- **Folders first in global search.** Among results that match equally well, matching folders appear above other items. Exact name and ID matches still come first.
+
+## API Changes
+
+- **Project copies include dashboards.** Copying a project through the API now copies its dashboards too. Send `copyDashboards: false` or `copyViews: false` to leave them out.
