@@ -1,0 +1,102 @@
+---
+title: AoDocs
+description: Connect AoDocs to search libraries, read document content, and link documents to Flow items.
+icon: /images/integrations/aodocs.svg
+---
+
+Connect the Google account you use with AoDocs to search libraries and read documents from Flow AI. Each user connects their own account. A Flow admin can choose a default library for workspace searches.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Search libraries | Find documents in the AoDocs libraries your account can access. |
+| Read documents | Bring document metadata and text into an agent conversation. |
+| Link documents | Reference documents through an AoDocs document field and preview their content. |
+| Focus searches | Mount a library to use it as the default search scope. |
+
+The integration reads AoDocs content. It does not edit documents or write back to AoDocs.
+
+## Before you start
+
+- AoDocs requires configuration before it can be connected in Flow. Contact your Flow administrator if authorization is unavailable.
+- Use a Google account that already has access to the intended AoDocs libraries.
+- A Flow admin with access to all projects manages the shared library selection.
+- Flow AI must be enabled to use the connection from an agent.
+
+AoDocs authorization requests your Google identity and email. It does not request Drive permissions. Flow reads document metadata and content through AoDocs.
+
+<Note>
+  Connecting Google Drive and connecting AoDocs are separate actions. A Google Drive connection does not establish your AoDocs connection.
+</Note>
+
+## Connect AoDocs
+
+<Steps>
+  <Step title="Start the connection">
+    **Requires you to act:** Open **Settings → Integrations → AoDocs** and select **Connect AoDocs**.
+
+    {/* ![Connect AoDocs in Flow](images/aodocs-connect.png "human-intervention: connect AoDocs") */}
+  </Step>
+  <Step title="Authorize your account">
+    **Requires you to act:** Sign in with the Google account you use for AoDocs and complete authorization. Confirm that Flow shows **Connected to AoDocs** and the intended account email.
+
+    Each teammate completes this step with their own account. Read-only members can also connect their personal account.
+
+    {/* ![Authorize an AoDocs connection](images/aodocs-authorize.png "human-intervention: authorize your AoDocs account") */}
+  </Step>
+  <Step title="Choose a default library">
+    **Requires you to act:** As a Flow admin, review **Library scope**. Select **Choose library to mount**, search for the intended library, and select it.
+
+    Without a mounted library, default searches use the libraries visible to the connected user. With one mounted, default searches use that library.
+
+    {/* ![Choose an AoDocs library in Flow](images/aodocs-library.png "human-intervention: choose the default AoDocs library") */}
+  </Step>
+</Steps>
+
+<Note>
+  The mounted library is a default search scope. Access to individual documents remains governed by AoDocs permissions. Do not use the library choice as a substitute for access controls in AoDocs.
+</Note>
+
+## Verify the connection
+
+Ask Flow AI to find a known document in the intended library, then read its contents. Confirm that the title, library, and text match the source document.
+
+If your Flow model includes an AoDocs document field, find the same document in its picker and check the preview. Search results contain document metadata; reading or previewing a document retrieves its text.
+
+## Change the default library
+
+**Requires you to act:** As a Flow admin, select **Change library** to choose another default. Use the remove control beside the mounted library to clear it.
+
+{/* ![Change or clear the default AoDocs library](images/aodocs-change-library.png "human-intervention: change the default AoDocs library") */}
+
+Clearing the mounted library restores searches across visible libraries. It does not disconnect personal accounts.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The library picker is disabled">
+    Connect your own AoDocs account first. Managing the shared library selection requires a Flow admin.
+  </Accordion>
+  <Accordion title="A library or document is missing">
+    Confirm that the connected Google account can access it in AoDocs. Check the mounted library and narrow your search to the intended library or document. Broad searches return a bounded set of results.
+  </Accordion>
+  <Accordion title="Google Drive is connected, but AoDocs asks me to connect">
+    Open the AoDocs integration and complete its authorization. The two integrations keep separate personal connections and request different permissions.
+  </Accordion>
+  <Accordion title="Authorization is unavailable">
+    Ask your Flow administrator to confirm that AoDocs is configured. Retry the connection after the required configuration is available.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect AoDocs
+
+**Requires you to act:** Select **Disconnect** on your account card to remove your personal AoDocs connection. Other connected users and the default library remain in place.
+
+{/* ![Disconnect a personal AoDocs account](images/aodocs-disconnect.png "human-intervention: disconnect your AoDocs account") */}
+
+**Requires you to act:** A Flow admin can select **Remove workspace integration** to remove the shared setup. Personal connections remain stored separately; each user can disconnect their own account.
+
+{/* ![Remove the AoDocs workspace integration](images/aodocs-remove-workspace.png "human-intervention: remove the AoDocs workspace integration") */}
+
+Disconnecting Flow does not delete documents or libraries in AoDocs.

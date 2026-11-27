@@ -1,0 +1,99 @@
+---
+title: Cursor
+description: Let Flow AI launch a Cursor coding agent against a configured GitHub repository.
+icon: /images/integrations/cursor.svg
+---
+
+Connect Cursor so Flow AI can launch a coding agent to implement a requested change in a GitHub repository. Cursor works on the code and can open a pull request for review.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Delegate a coding task | Give Flow AI a concrete implementation request to pass to Cursor. |
+| Choose the source repository | Configure a default GitHub repository for the shared connection. |
+| Choose the starting revision | Configure an optional branch name or commit SHA. |
+| Follow the run | Open the Cursor agent link returned after launch. |
+| Review code changes | Review the resulting pull request in GitHub. |
+
+This integration launches Cursor from Flow. To use Flow tools inside Cursor instead, follow the [Flow MCP setup](/api/mcp/overview).
+
+## Before you start
+
+- A Flow admin with access to all projects must configure the shared connection.
+- You need a Cursor API key authorized to use the Cursor agent API.
+- Cursor must have access to the target GitHub repository.
+- Flow AI must be enabled to launch an agent from Flow.
+- The Cursor integration must be available in your Flow workspace.
+
+The saved API key is shared through the workspace connection. A successful connection test checks the key; it does not launch an agent or verify access to a particular repository.
+
+## Connect Cursor
+
+<Steps>
+  <Step title="Prepare a Cursor API key">
+    **Requires you to act:** Obtain a Cursor API key for the account that should run coding tasks. Confirm that this account can use the target GitHub repository through Cursor.
+
+    {/* ![Create a Cursor agent API key](images/cursor-api-key.png "human-intervention: prepare a Cursor API key") */}
+  </Step>
+  <Step title="Set the repository and starting revision">
+    **Requires you to act:** Open **Settings → Integrations → Cursor**. Enter the key in **API Key** and the GitHub repository in **Default Repository**, using `owner/repo` format.
+
+    Enter an optional branch name or commit SHA in **Default Branch / Ref**. Do not include a URL or trailing slash in the repository field.
+
+    {/* ![Configure Cursor credentials and repository in Flow](images/cursor-configure.png "human-intervention: configure the Cursor connection") */}
+  </Step>
+  <Step title="Test and save">
+    **Requires you to act:** Select **Test Connection** and confirm the success message. Then select **Save** to store the connection.
+
+    The saved card shows **Connected** and the configured repository and revision. Testing alone does not save the configuration.
+
+    {/* ![Test and save the Cursor connection](images/cursor-test-save.png "human-intervention: test and save Cursor") */}
+  </Step>
+</Steps>
+
+<Note>
+  Set **Default Repository** before launching a task, even if the form labels it optional. Agent launches use the configured repository and starting revision.
+</Note>
+
+## Verify the connection
+
+Ask Flow AI to launch a small, explicit coding task in the configured repository. Include the desired behavior, acceptance criteria, and any files or constraints the agent should follow.
+
+Flow returns a Cursor agent link when launch succeeds. Open that run to follow progress, then inspect the resulting GitHub pull request. A successful launch does not mean the code change has finished or passed review.
+
+## Manage the connection
+
+The connected card displays the saved repository and starting revision. Check these values before delegating work, especially when several projects share the Flow workspace.
+
+**Requires you to act:** To replace credentials or change the saved defaults through this settings page, disconnect the existing integration and configure it again with the new values.
+
+{/* ![Replace the Cursor integration configuration](images/cursor-reconfigure.png "human-intervention: replace the Cursor configuration") */}
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The connection test reports an invalid API key">
+    Check that you supplied a Cursor API key for the agent API. Replace an expired or revoked key, then test and save again.
+  </Accordion>
+  <Accordion title="The agent reports that no default repository is configured">
+    Configure **Default Repository** using `owner/repo` format. The launch requires this value even though the settings form allows it to be empty.
+  </Accordion>
+  <Accordion title="The connection test succeeds, but launching a task fails">
+    Check that Cursor can access the saved GitHub repository and starting revision. The connection test validates authentication without starting a repository task.
+  </Accordion>
+  <Accordion title="Cursor reports a rate limit">
+    Wait before retrying. Repeated launches can create separate runs, so check whether the earlier task started before submitting it again.
+  </Accordion>
+  <Accordion title="The setup controls are unavailable">
+    Ask a Flow admin to configure the shared connection. If Cursor itself is unavailable, ask your Flow administrator to confirm integration availability.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Cursor
+
+**Requires you to act:** A Flow admin selects **Disconnect** on the connection card to remove the shared configuration.
+
+{/* ![Disconnect Cursor from Flow](images/cursor-disconnect.png "human-intervention: disconnect Cursor") */}
+
+Disconnecting removes Flow's saved connection. Manage existing agent runs in Cursor and existing pull requests in GitHub. Revoke the key in Cursor when it is no longer needed.

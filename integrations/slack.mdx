@@ -1,0 +1,122 @@
+---
+title: Slack
+description: Connect the Flow bot, link your account, and configure project and channel access.
+icon: /images/integrations/slack.svg
+---
+
+Use Flow from Slack by mentioning the bot and continuing conversations in threads. Each user links their Slack account and chooses the Flow project and branch their requests use.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Work with Flow from a thread | Mention the bot, ask about the selected Flow project and branch, and continue the conversation in replies. The linked user's Flow permissions apply. |
+| Read approved channel history | Read recent top-level messages from channels explicitly approved for the current project. Use a time window to prepare a digest or identify decisions to review. |
+| Use a mentioned thread as context | An explicit `@Flow` mention supplies that thread's context. A channel-history read does not include all thread replies. |
+| Send messages and thread replies | With **Slack Write-Back**, post to allowed channels or reply to a specified thread. Mention a selected teammate by resolving their Slack account. |
+| Receive Flow notifications | Choose Slack delivery in your Flow notification preferences for supported events such as review assignments and comment mentions. |
+
+Posting permission, channel-history permission, and project connections are separate. An explicit `@Flow` mention lets the agent use that specific thread as context; broader channel history requires an explicit project grant.
+
+## Try it with Flow AI
+
+- In Slack: “@Flow, compare the decision in this thread with the interface requirements in our selected project. Which items need review?”
+- In Flow: “Read yesterday's top-level messages in the approved #design-review channel. Summarize decisions and open questions, and state any gaps in the available context.”
+- With write-back: “Send this review summary to the allowed #engineering channel, include the Flow item links, and mention the review owner.”
+
+## Before you start
+
+A Flow admin configures the shared app, project connections, and channel permissions. You also need permission to create and install a Slack app in the intended Slack workspace.
+
+Every user who wants to make agent requests from Slack must link their own account. Matching email addresses do not establish that link. Flow applies the linked user's current project permissions to requests.
+
+## Connect the Slack app
+
+<Steps>
+  <Step title="Create the app from Flow's manifest">
+    **Requires you to act:** Open **Settings → Integrations → Slack → Connect Slack app**. In **App manifest**, copy or download the manifest. Follow the Slack app link, choose **From an app manifest**, select your workspace, and use the generated manifest.
+
+    The manifest includes the scopes, `/flow` command, event subscriptions, and interactivity URLs for your Flow workspace. Use the values generated in your own settings.
+
+    {/* ![Create a Slack app from Flow's manifest](images/slack-manifest.png "human-intervention: create the Slack app") */}
+  </Step>
+  <Step title="Install the app and save the bot token">
+    **Requires you to act:** In the Slack app's **OAuth & Permissions** page, install the app to your workspace. Copy the **Bot User OAuth Token**, which starts with `xoxb-`.
+
+    In Flow's **Bot token** step, paste the token and select **Test**. Confirm the intended workspace, then select **Save**. Saving is available after a successful test of the current token.
+
+    {/* ![Test and save the Slack bot token](images/slack-bot-token.png "human-intervention: save the Slack bot token") */}
+  </Step>
+  <Step title="Save the signing secret">
+    **Requires you to act:** In Slack, open **Basic Information → App Credentials → Signing Secret**. Copy it into Flow's **Signing secret** step and save it.
+
+    Confirm that **@mention responses** shows **Enabled**. The signing secret lets Flow verify requests sent by Slack.
+
+    {/* ![Save the Slack signing secret](images/slack-signing-secret.png "human-intervention: save the Slack signing secret") */}
+  </Step>
+  <Step title="Connect the current project">
+    **Requires you to act:** Under **This project** in Flow's Slack settings, enable the project you want users to target from the bot. Repeat in other projects as needed. Invite the Flow bot to each Slack channel where you want to use it.
+
+    {/* ![Connect a Flow project to Slack](images/slack-project.png "human-intervention: enable a Flow project for Slack") */}
+  </Step>
+</Steps>
+
+## Link your Slack account
+
+<Steps>
+  <Step title="Request your account link">
+    **Requires you to act:** Run `/flow` in Slack and open the private account-link URL. Sign in to the Flow account you want to use.
+
+    {/* ![Request a private Flow account link in Slack](images/slack-link-request.png "human-intervention: request a Slack account link") */}
+  </Step>
+  <Step title="Confirm the account">
+    **Requires you to act:** Check the signed-in Flow account shown on the page, then select **Confirm account link**. Only confirm a link you requested. Return to Slack and run `/flow` to choose your project and branch.
+
+    The link expires after ten minutes. Linking does not rerun a request you made before linking; send that request again.
+
+    {/* ![Confirm the Slack and Flow account link](images/slack-link-confirm.png "human-intervention: confirm your Slack account link") */}
+  </Step>
+</Steps>
+
+## Configure channel access
+
+**Requires you to act:** To let agents send messages, enable **Slack Write-Back** under **Agent messages** and add the allowed destination channels.
+
+{/* ![Choose allowed Slack posting channels](images/slack-posting.png "human-intervention: configure Slack posting access") */}
+
+**Requires you to act:** To let agents and automations browse history, add channel IDs under **Channel history access** in each Flow project that needs them. Find a channel's ID in Slack's channel details. No broader channel-history access is granted by default.
+
+{/* ![Grant Slack channel history access to a project](images/slack-history.png "human-intervention: grant Slack channel history access") */}
+
+Private-channel thread context requires the bot's `groups:history` scope and membership in the channel. For an existing Slack app missing this scope, add it in **OAuth & Permissions** and reinstall the app.
+
+## Verify the connection
+
+Check that the app is **Connected**, **@mention responses** is **Enabled**, your account is **Linked**, and the intended project is connected. Run `/flow`, select the project and branch, then mention the Flow bot in a test thread. Confirm its response uses the intended project.
+
+If you configured channel-history access, ask Flow to read recent messages from an approved channel. Test posting separately with an explicit request to send a test message to an allowed destination.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The bot asks me to link an account">
+    Run `/flow` and confirm a new link. Account linking is required even when Slack and Flow use the same email address. Replacing the bot token or disconnecting the shared app clears account links.
+  </Accordion>
+  <Accordion title="The project is missing from /flow">
+    Ask an admin to enable **This project** in that project's Slack settings. Confirm your linked Flow account has access to it.
+  </Accordion>
+  <Accordion title="The token test passes, but mentions receive no response">
+    Check the signing secret, Slack event and interactivity URLs from Flow's manifest, the project's connection, and your personal account link. Invite the bot to the channel and check any missing Slack scopes.
+  </Accordion>
+  <Accordion title="Posting works, but reading channel history fails">
+    Add a separate channel-history grant for the current Flow project. Posting grants do not grant read access. The bot must also have the required Slack scopes and channel access.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect or replace credentials
+
+**Requires you to act:** Use **Disconnect** on the shared app to remove its Flow connection, or **Reconfigure** to change credentials. Replacing the bot token clears account links and posting/history grants; restore those explicitly after replacement. Changing the shared app affects every project that uses it.
+
+{/* ![Manage the shared Slack app connection](images/slack-disconnect.png "human-intervention: disconnect or reconfigure Slack") */}
+
+To remove only your personal account link, use the unlink control under **Your Slack account**. To stop targeting one Flow project from Slack, turn off that project's connection.

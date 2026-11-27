@@ -6,7 +6,8 @@ img[alt="Pulsar Orbiting Earth 2 1 2"] {
   border-radius: 8px;
 }
 
-img[alt="Abstract sunset in blue, orange, and purple"] {
+img[alt="Abstract sunset in blue, orange, and purple"],
+img[alt="Abstract amber peaks against a blue background"] {
   border-radius: 8px;
 }
 
@@ -20,8 +21,14 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
 /* Dock the native section tabs below Maple's desktop sidebar.
    Mobile keeps Mintlify's built-in tab/menu navigation. */
 @media (min-width: 1024px) {
+  :root {
+    --section-tab-height: 2rem;
+    /* Three rows, two 4px gaps, 24px padding, and the top divider. */
+    --section-dock-height: calc(3 * var(--section-tab-height) + 2rem + 1px);
+  }
+
   #sidebar {
-    bottom: 7.5rem;
+    bottom: var(--section-dock-height);
   }
 
   /* Remove Maple's empty footer above the section links. */
@@ -32,9 +39,9 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
   #navbar-transition-maple {
     inset: auto auto 0 0 !important;
     width: 19rem;
-    height: 7.5rem;
+    height: var(--section-dock-height);
     margin-top: 0 !important;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     border-top: 1px solid #e5e5e3;
     border-right: 1px solid #e5e5e3;
     border-bottom: 0;
@@ -49,8 +56,11 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
   }
 
   #navbar-transition-maple .nav-tabs-item {
-    min-height: 2.5rem;
+    flex: 0 0 var(--section-tab-height);
+    height: var(--section-tab-height);
+    min-height: var(--section-tab-height);
     padding: 0 0.75rem;
+    font-size: 0.8125rem;
     color: #737373;
     background: transparent;
     text-shadow: none;
@@ -144,4 +154,19 @@ img[alt="Abstract sunset in blue, orange, and purple"] {
     bottom: 0;
     background: linear-gradient(to top, var(--sidebar-surface), transparent);
   }
+}
+
+/* Match the product catalog's monochrome icons and white Boltline wordmark. */
+.dark img[src*="/images/integrations/cursor.svg"],
+.dark img[src*="/images/integrations/github.svg"],
+.dark img[src*="/images/integrations/linear.svg"],
+.dark img[src*="/images/integrations/relyence.svg"] {
+  filter: invert(1);
+}
+
+img[src*="/images/integrations/boltline.png"] {
+  background: #000;
+  border-radius: 4px;
+  padding: 2px;
+  object-fit: contain;
 }

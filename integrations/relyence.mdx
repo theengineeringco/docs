@@ -1,0 +1,108 @@
+---
+title: Relyence
+description: Connect one Relyence analysis to read FMEA subsystems and functions, with optional write-back.
+icon: /images/integrations/relyence.svg
+---
+
+Connect Relyence to bring FMEA subsystems and functions into Flow AI. Link one analysis, then enable write-back if the agent should create or update its subsystems and functions.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Read subsystems | List subsystems in the linked analysis. |
+| Read FMEA functions | Find functions in the linked analysis, with subsystem and FMEA-type filters. |
+| Create or update records | Enable **Relyence Write-Back** to insert and update subsystems and FMEA functions. |
+
+The connection is shared across your Flow workspace. It supports one linked analysis at a time, and requests use that analysis.
+
+## Before you start
+
+The integration must be available in your Flow installation. If it is missing from **Settings → Integrations**, ask your Flow administrator to check availability.
+
+- A Flow admin with access to all projects must configure the connection.
+- You need a Relyence API key, username, and password.
+- The Relyence account must have access to the intended analysis and permission for any requested changes.
+- You need the numeric analysis ID.
+- Flow AI must be enabled to use the connection from an agent.
+
+Saving credentials and linking an analysis are separate steps. Both are required before Flow AI can use the integration.
+
+## Connect Relyence
+
+<Steps>
+  <Step title="Prepare Relyence credentials">
+    **Requires you to act:** In Relyence, open **About** and generate an API key. Identify the analysis you want Flow to use and obtain its numeric ID using the analyses link in Flow's setup instructions.
+
+    {/* ![Generate a Relyence API key](images/relyence-api-key.png "human-intervention: generate a Relyence API key") */}
+  </Step>
+  <Step title="Enter and test credentials">
+    **Requires you to act:** Open **Settings → Integrations → Relyence** in Flow. Enter **API Key**, **Username**, and **Password**. Optionally enter **Analysis ID (optional for test)**, then select **Test Connection**.
+
+    Flow obtains access tokens using these credentials. You do not need to paste a separate bearer token. When an analysis ID is provided, the test also checks access to that analysis.
+
+    {/* ![Enter and test Relyence credentials in Flow](images/relyence-test.png "human-intervention: test Relyence credentials") */}
+  </Step>
+  <Step title="Save credentials">
+    **Requires you to act:** Select **Save**. Confirm that the card shows **Connected** and the intended Relyence username.
+
+    The analysis ID used for testing is not saved as a linked analysis.
+
+    {/* ![Save the Relyence credentials](images/relyence-save.png "human-intervention: save Relyence credentials") */}
+  </Step>
+  <Step title="Link the analysis">
+    **Requires you to act:** Under **Linked Analysis**, enter the numeric analysis ID and select **Link analysis**. Confirm that the ID appears on the connected card.
+
+    Only one analysis can be linked at a time.
+
+    {/* ![Link a Relyence analysis in Flow](images/relyence-link-analysis.png "human-intervention: link a Relyence analysis") */}
+  </Step>
+</Steps>
+
+## Enable write-back
+
+**Requires you to act:** Turn on **Relyence Write-Back** to allow the agent to insert and update subsystems and FMEA functions in the linked analysis.
+
+{/* ![Enable Relyence write-back in Flow](images/relyence-write-back.png "human-intervention: enable Relyence write-back") */}
+
+The Relyence account must also have the required write permissions. Changes take effect in Relyence; reverting a Flow branch does not undo them.
+
+## Verify the connection
+
+Ask Flow AI to list the linked analysis's subsystems, then read functions from a known subsystem. Confirm that the result belongs to the expected analysis.
+
+For a write-back check, use a disposable record in an analysis intended for testing. Ask for the exact change and verify it in Relyence before using write-back on active FMEA records.
+
+## Change the linked analysis
+
+**Requires you to act:** Remove the current analysis using the remove control next to its ID, then enter the replacement ID and select **Link analysis**.
+
+{/* ![Replace the linked Relyence analysis](images/relyence-change-analysis.png "human-intervention: change the linked Relyence analysis") */}
+
+Flow AI cannot use the integration while no analysis is linked. Removing a link does not delete the analysis in Relyence.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The card says Connected, but the agent cannot use Relyence">
+    Check **Linked Analysis**. Saving credentials alone does not enable the agent's Relyence tools. Link an analysis and confirm Flow AI is enabled.
+  </Accordion>
+  <Accordion title="The tested analysis was not saved">
+    **Analysis ID (optional for test)** verifies access only. Use **Link analysis** on the saved connection to select the working analysis.
+  </Accordion>
+  <Accordion title="A second analysis cannot be linked">
+    The integration supports one linked analysis at a time. Remove the current link before linking another analysis.
+  </Accordion>
+  <Accordion title="No FMEA functions are returned">
+    Confirm the linked analysis, subsystem, and FMEA-type filters. An empty result can mean the selected scope has no matching functions.
+  </Accordion>
+  <Accordion title="Reads succeed, but updates fail">
+    Check **Relyence Write-Back**, your Flow permissions, and the connected Relyence account's edit permissions. Successful authentication does not establish permission for every operation.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Relyence
+
+**Requires you to act:** Select **Disconnect** on the connection card. This removes the shared credentials and analysis link from Flow without deleting the analysis in Relyence.
+
+{/* ![Disconnect Relyence in Flow](images/relyence-disconnect.png "human-intervention: disconnect Relyence") */}

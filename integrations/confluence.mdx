@@ -1,0 +1,111 @@
+---
+title: Confluence
+description: Connect Confluence Cloud or Data Center to search and read documentation, with optional page write-back.
+icon: /images/integrations/confluence.svg
+---
+
+Connect Confluence so Flow AI can find and read documentation as context for engineering work. Enable write-back when the agent should create pages or update existing content.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Search documentation | Find pages by their content, optionally within a configured space. |
+| Read pages | Read page contents and metadata from the connected account's accessible content. |
+| List a space's pages | Use the configured space key or name another space in your request. |
+| Create and update pages | Enable **Confluence Write-Back** and give the connected account the required page permissions. |
+
+Flow uses a shared connection. Confluence Cloud uses an Atlassian account email and API token; Data Center uses a personal access token.
+
+## Before you start
+
+The integration must be available in your Flow installation. If it is missing from **Settings → Integrations**, ask your Flow administrator to check availability.
+
+- A Flow admin with access to all projects must configure the connection.
+- The connected account must be able to read the required pages and spaces.
+- For Cloud, have your site hostname, account email, and API token ready.
+- For Data Center, have the full HTTPS base URL and a personal access token ready. Your Flow administrator must approve the server address for your workspace before setup.
+- Flow AI must be enabled to use the connection from an agent.
+
+Data Center support requires configuration. If Flow rejects the server address, ask your Flow administrator to approve it before continuing.
+
+## Connect Confluence
+
+<Steps>
+  <Step title="Prepare a token">
+    **Requires you to act:** For Cloud, use the Atlassian API-token page linked in Flow's setup instructions to create an API token. For Data Center, obtain a personal access token for the account that will provide access.
+
+    {/* ![Prepare a Confluence API token or personal access token](images/confluence-token.png "human-intervention: prepare Confluence credentials") */}
+  </Step>
+  <Step title="Select the instance type">
+    **Requires you to act:** Open **Settings → Integrations → Confluence** in Flow and choose **Cloud** or **Data Center / Server** under **Instance type**.
+
+    For Cloud, enter **Atlassian Site** as a hostname without `https://` or a path, then enter the account's **Email** and **API Token**.
+
+    For Data Center, enter **Base URL** as the full HTTPS root, including any required port and product path, then enter **Personal Access Token**.
+
+    {/* ![Choose the Confluence instance type and enter credentials](images/confluence-settings.png "human-intervention: configure the Confluence instance") */}
+  </Step>
+  <Step title="Choose a search space">
+    **Requires you to act:** Optionally enter **Space Key** to restrict searches to one space. Leave it blank to search all spaces available to the connected account.
+
+    Use the key, such as `ENG`, rather than the space's display name.
+
+    {/* ![Set the optional Confluence space key](images/confluence-space.png "human-intervention: set the Confluence search space") */}
+  </Step>
+  <Step title="Test and save">
+    **Requires you to act:** Select **Test Connection**. If you entered a space key, confirm the returned space name, then select **Save**.
+
+    The connected card shows the site, account information, and configured space. Testing does not save the connection.
+
+    {/* ![Test and save the Confluence connection](images/confluence-test-save.png "human-intervention: test and save Confluence") */}
+  </Step>
+</Steps>
+
+<Note>
+  **Space Key** limits searches and supplies a default space for listing and creation. It is not an access boundary for direct page reads or updates. Use the connected account's Confluence permissions to control access.
+</Note>
+
+## Enable write-back
+
+**Requires you to act:** Turn on **Confluence Write-Back** on the saved connection to allow the agent to create and update pages.
+
+{/* ![Enable Confluence write-back in Flow](images/confluence-write-back.png "human-intervention: enable Confluence write-back") */}
+
+The connected account must also have permission to create or edit the target page. Ask the agent to read the current page before changing it, and name the target space when creating a page without a configured default.
+
+Changes take effect in Confluence directly. Reverting a Flow branch does not undo them.
+
+## Verify the connection
+
+Ask Flow AI to search for a known page, then read it. Confirm the page title, space, and content match Confluence.
+
+For write-back, ask the agent to create a disposable page in a named test space or make a specific change to a test page. Open the resulting page in Confluence and review the change.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The site or base URL is rejected">
+    For Cloud, enter a hostname only. For Data Center, enter the full HTTPS base URL and confirm that your Flow administrator has approved that address for your workspace.
+  </Accordion>
+  <Accordion title="The token works, but the space is not found">
+    Check the space key and confirm the connected account can access it in Confluence. A space display name is not its key.
+  </Accordion>
+  <Accordion title="A page outside the configured space can still be read">
+    The space key scopes searches and default space operations. Direct page reads use the connected account's permissions. Restrict access in Confluence when required.
+  </Accordion>
+  <Accordion title="Reading succeeds, but page creation or updates fail">
+    Check **Confluence Write-Back**, the connected account's permissions, and your Flow permissions. Page creation also needs a target space, either in the request or in **Space Key**.
+  </Accordion>
+  <Accordion title="An update conflicts with a newer page version">
+    Ask the agent to read the page again before retrying the intended change. Review any intervening edits rather than replacing them with an older copy.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Confluence
+
+**Requires you to act:** Select **Disconnect** on the connected card. This removes the shared connection from Flow and leaves the Confluence pages intact.
+
+{/* ![Disconnect Confluence in Flow](images/confluence-disconnect.png "human-intervention: disconnect Confluence") */}
+
+Revoke the source token in Atlassian or Confluence if it is no longer needed elsewhere.

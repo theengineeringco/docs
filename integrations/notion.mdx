@@ -1,0 +1,101 @@
+---
+title: Notion
+description: Give Flow AI read access to the Notion pages you share with an internal integration.
+icon: /images/integrations/notion.svg
+---
+
+Connect Notion so Flow AI can find and read pages you share with a Notion internal integration. The connection provides read access to reference material for your engineering work.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Find documentation | Search accessible Notion pages by title. |
+| Read pages | Retrieve page contents, including table blocks, as context for Flow AI. |
+| Control source access | Share the required pages with the Notion integration. |
+
+This integration is read-only. Flow does not create or update Notion pages through this connection.
+
+## Before you start
+
+The integration must be available in your Flow installation. If it is missing from **Settings → Integrations**, ask your Flow administrator to check availability.
+
+- A Flow admin with access to all projects must configure the shared connection.
+- You need a Notion internal integration and its integration secret.
+- The integration needs permission to read the pages you want Flow to use.
+- Flow AI must be enabled to use the connection from an agent.
+
+Saving a token does not grant access to every page in Notion. Share the required pages with the integration in Notion as part of setup.
+
+## Connect Notion
+
+<Steps>
+  <Step title="Create a Notion integration">
+    **Requires you to act:** Open the Notion integrations page linked in Flow's setup instructions and select **+ New integration**. Give it a name, select your workspace, and save it.
+
+    Copy the **Internal Integration Secret** for the integration.
+
+    {/* ![Create a Notion internal integration](images/notion-create-integration.png "human-intervention: create a Notion integration") */}
+  </Step>
+  <Step title="Share the required pages">
+    **Requires you to act:** Open each page you want Flow to read in Notion. Open the **...** menu, choose **Connections**, and add your integration.
+
+    Grant access only to the documentation intended for this shared Flow connection.
+
+    {/* ![Share a Notion page with the integration](images/notion-share-page.png "human-intervention: grant Notion page access") */}
+  </Step>
+  <Step title="Enter the token in Flow">
+    **Requires you to act:** Open **Settings → Integrations → Notion** in Flow and paste the secret into **Integration Token**.
+
+    {/* ![Enter the Notion integration token in Flow](images/notion-token.png "human-intervention: enter the Notion integration token") */}
+  </Step>
+  <Step title="Test and save">
+    **Requires you to act:** Select **Test Connection**, check the result, and then select **Save**. The saved connection shows **Connected**.
+
+    The test checks a small sample of accessible pages. Its page count is not an inventory of all pages the integration can read. Testing alone does not save the token.
+
+    {/* ![Test and save the Notion connection](images/notion-test-save.png "human-intervention: test and save Notion") */}
+  </Step>
+</Steps>
+
+## Verify the connection
+
+Ask Flow AI to find a page you explicitly shared, then read it. Confirm that the result contains the expected page title and content.
+
+Use a known page for this check. A successful token test with no accessible pages does not prove that the intended documentation has been shared.
+
+## Change page access
+
+**Requires you to act:** Manage the integration's page connections in Notion when documentation enters or leaves the scope of the connection. Share newly required pages before asking Flow AI to read them.
+
+{/* ![Manage page access for the Notion integration](images/notion-page-access.png "human-intervention: manage Notion page access") */}
+
+Flow uses the shared integration token, so each Flow user's personal Notion account does not determine the connection's access.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The connection succeeds, but a page is missing">
+    Open the page in Notion and check that it is shared with the same integration whose token is saved in Flow. Search by its title, then ask the agent to read the matching page.
+  </Accordion>
+  <Accordion title="The test reports zero or one accessible page">
+    The test requests only a small sample. Zero means the sample contains no accessible pages; one is not a total page count. Verify the specific page you need through Flow AI.
+  </Accordion>
+  <Accordion title="Notion reports a rate limit">
+    Flow waits and retries rate-limited requests a bounded number of times. If the request still fails, wait before trying again and reduce simultaneous Notion lookups.
+  </Accordion>
+  <Accordion title="The integration token is rejected">
+    Check that you copied the internal integration secret and that it has not been revoked. Confirm the integration belongs to the Notion workspace containing the required pages.
+  </Accordion>
+  <Accordion title="Connection management is unavailable">
+    Setup and disconnection require a Flow admin with access to all projects. If the integration itself is unavailable, contact your Flow administrator to check your installation's configuration.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Notion
+
+**Requires you to act:** Select **Disconnect** on the Notion connection card. This removes the shared connection from Flow and leaves the original Notion pages intact.
+
+{/* ![Disconnect Notion in Flow](images/notion-disconnect.png "human-intervention: disconnect Notion") */}
+
+If the integration is no longer needed elsewhere, remove its access or revoke its token in Notion as well.

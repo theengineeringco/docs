@@ -1,0 +1,99 @@
+---
+title: Onshape
+description: Connect Onshape CAD data, respond to model changes, and enable controlled write-back.
+icon: /images/integrations/onshape.svg
+---
+
+Connect an Onshape document so Flow can read CAD data and use model changes to trigger automations. A Flow admin configures one shared connection for the workspace.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Read CAD data | Use the connected Onshape account to inspect document data, parts, assemblies, and variables. |
+| Preview CAD | Open supported Onshape CAD previews from Flow. |
+| Respond to changes | Register a webhook and configure an automation for Onshape model changes. |
+| Edit variables | Enable **Write-back** to let Flow AI change variables in Onshape Variable Studios. |
+
+The **Document ID** identifies the document used by the model-change webhook. It does not restrict the underlying API key's access in Onshape. Choose credentials with the access your team intends to share.
+
+## Before you start
+
+- A Flow admin with access to all projects must configure the connection.
+- You need an Onshape account that can create API keys and access the document.
+- Have your Onshape server URL and document ID ready. Standard Onshape and supported Onshape Enterprise hosts are supported.
+- The key must permit the operations you intend to use. Reading a document does not verify permission to edit it or create a webhook.
+- Flow AI must be enabled for agent access; automations require their own configuration.
+
+## Connect Onshape
+
+<Steps>
+  <Step title="Create an Onshape API key">
+    **Requires you to act:** Open the developer portal linked from Flow's Onshape setup instructions and select **Create new API key**. Copy the **Access Key** and **Secret Key**. The secret appears only once.
+
+    {/* ![Create an Onshape API key](images/onshape-api-key.png "human-intervention: create an Onshape API key") */}
+  </Step>
+  <Step title="Enter the connection details">
+    **Requires you to act:** Open **Settings → Integrations → Onshape**. Enter **Onshape URL**, **Access Key**, **Secret Key**, and **Document ID**.
+
+    Use your Onshape server address for **Onshape URL**. The document ID is the segment immediately after `/documents/` in the document's URL, not the full URL.
+
+    {/* ![Enter the Onshape connection details](images/onshape-connection.png "human-intervention: enter Onshape credentials") */}
+  </Step>
+  <Step title="Test and save">
+    **Requires you to act:** Select **Test Connection** and confirm the document name. Select **Save** to store the connection.
+
+    A successful test alone does not save the credentials. The saved card shows **Connected**, the server, and the document ID.
+
+    {/* ![Test and save Onshape](images/onshape-test-save.png "human-intervention: test and save Onshape") */}
+  </Step>
+</Steps>
+
+## Enable model-change automations
+
+**Requires you to act:** Select **Register Webhook** on the saved connection. Confirm that **Webhook** shows **Active** and **Auth: enabled**.
+
+{/* ![Register the Onshape webhook](images/onshape-webhook.png "human-intervention: register the Onshape webhook") */}
+
+The webhook receives model-change events for the configured document. It does not create an automation by itself. Use an Onshape model-change trigger in the automation that should handle those events.
+
+A connected document without an active webhook remains available for reads. It cannot deliver model-change events to Flow through this connection.
+
+## Enable write-back
+
+**Requires you to act:** Turn on **Write-back** to allow supported Onshape edits. Leave it off when the connection should only read CAD data.
+
+{/* ![Enable Onshape write-back](images/onshape-write-back.png "human-intervention: enable Onshape write-back") */}
+
+Write-back also requires the appropriate Flow permissions and Onshape access. Edits take effect in Onshape directly; discarding a Flow branch does not undo them.
+
+## Verify the connection
+
+Ask Flow AI to inspect the configured document and identify a known part or assembly. Check the result against Onshape.
+
+For automation verification, use a test document and a configured Onshape automation. Make an intentional model change and check the integration's activity for the resulting event and run.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Test Connection fails">
+    Check the server URL, both keys, and the document ID. Confirm that the account behind the keys can open the document on that server.
+  </Accordion>
+  <Accordion title="Reads work, but edits fail">
+    Check **Write-back**, your Flow permissions, and the API key's Onshape permissions. A successful read test does not establish write access.
+  </Accordion>
+  <Accordion title="Model changes do not run an automation">
+    Confirm that the webhook is active, the changed document matches **Document ID**, and an automation uses the relevant Onshape trigger. Check integration activity for an ignored event or a failed run.
+  </Accordion>
+  <Accordion title="Disconnect asks you to unregister the webhook">
+    Select **Unregister Webhook** first. Flow requires the webhook to be removed before it deletes the saved connection.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Onshape
+
+**Requires you to act:** If a webhook is active, select **Unregister Webhook**. Once it is removed, select **Disconnect**.
+
+{/* ![Remove the Onshape webhook and disconnect](images/onshape-disconnect.png "human-intervention: disconnect Onshape") */}
+
+The connection is shared, so disconnecting affects the workspace. Existing Onshape documents remain in Onshape. Revoke an unused API key in Onshape when it is no longer needed.

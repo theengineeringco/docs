@@ -16,6 +16,8 @@ on:
       - 'openapi/customer-api.json'
       - 'api/**'
       - 'api.mdx'
+      - 'integrations/**'
+      - 'integrations.mdx'
       - 'docs.json'
 
 permissions:

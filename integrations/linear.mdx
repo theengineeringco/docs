@@ -1,0 +1,115 @@
+---
+title: Linear
+description: Connect Linear teams so Flow can read issues and, when enabled, create and update them.
+icon: /images/integrations/linear.svg
+---
+
+Connect one or more Linear teams to give Flow AI access to their issues, cycles, labels, and workflow states. Enable write-back when you want the agent to create and update issues.
+
+## What you can do
+
+| Capability | How it works |
+| --- | --- |
+| Search and inspect issues | Find issues by keyword or read recently updated issues. Inspect their title, description, state, priority, assignee, team, and Linear project. |
+| Read issue discussions | Read an issue's comments and replies to understand decisions and feedback, including comments posted by other integrations. |
+| Review team and cycle progress | List connected teams, workflow states, cycles, and cycle issues. Use these to summarize work against Flow requirements or milestones. |
+| Link work to Flow items | Use a Linear issue field to reference an issue from a Flow item. |
+| Create and organize issues | With **Linear Write-Back**, create an issue in a connected team and place it in an accessible Linear project. Set its priority, labels, cycle, and assignee where supported. |
+| Update issues and status | With write-back, edit issue details or move an issue to an available workflow state. Name the team when creating an issue; otherwise Flow uses the first connected team. |
+
+Flow uses a personal API key. The connection is shared across your Flow workspace, with access limited to the Linear teams you select.
+
+## Try it with Flow AI
+
+- “Read ENG-142 and its comments. Summarize the decision, remaining questions, and any mismatch with its linked requirement in Flow.”
+- “Summarize unfinished work in the current cycle for the connected ENG team, grouped by state and assignee.”
+- With write-back: “Create an issue in the connected ENG team and its Verification project for this test failure. Include the Flow test-case reference, set the priority, and assign it to the named team member.”
+
+## Before you start
+
+- A Flow admin with access to all projects must configure the shared connection and write-back setting.
+- Your Linear account must be allowed to create personal API keys and access the teams you want to connect.
+- Give the key **Read** access. For write-back, also select **Create issues** and **Create comments**, as described in Flow's setup instructions.
+- Flow AI must be enabled to use the connection from an agent.
+
+Linear administrators can control whether members create API keys. See [Linear's API and webhook documentation](https://linear.app/docs/api-and-webhooks).
+
+## Connect Linear
+
+<Steps>
+  <Step title="Create a Linear API key">
+    **Requires you to act:** In Linear, open **Settings → Account → Security & access → Personal API keys** and create a key. Choose the permissions above and limit **Team access** to the teams you want Flow to use.
+
+    Copy the generated key, which starts with `lin_api_`.
+
+    {/* ![Create a scoped Linear API key](images/linear-api-key.png "human-intervention: create a Linear API key") */}
+  </Step>
+  <Step title="Choose your teams in Flow">
+    **Requires you to act:** Open **Settings → Integrations → Linear** in Flow and paste the key into **API Key**. Select **Find teams**, then select each team to connect.
+
+    If you already know the team UUIDs, enter them in **Team ID**, separated by commas. A team name or issue prefix is not a team UUID. The manual field is disabled when teams are selected in the picker.
+
+    {/* ![Select connected Linear teams in Flow](images/linear-teams.png "human-intervention: select Linear teams") */}
+  </Step>
+  <Step title="Test and save the connection">
+    **Requires you to act:** Select **Test Connection**. Confirm that the result lists the intended teams, then select **Save**. Testing alone does not save the connection.
+
+    The saved connection shows **Connected** and lists its teams.
+
+    {/* ![Test and save the Linear connection](images/linear-test-save.png "human-intervention: test and save the Linear connection") */}
+  </Step>
+</Steps>
+
+<Note>
+  If Flow displays an additional project approval requirement, saving the shared credentials does not enable project access. A project admin must enable **This project** and complete the approval shown in Flow for each project that needs access. Changing the API key or the connected team set clears those approvals.
+</Note>
+
+## Enable write-back
+
+**Requires you to act:** Turn on **Linear Write-Back** on the saved connection to let the agent create and edit issues. This is a workspace setting, subject to each user's permissions. Leave it off for read access only.
+
+{/* ![Enable Linear write-back in Flow](images/linear-write-back.png "human-intervention: enable Linear write-back") */}
+
+The API key must also permit the requested operation. A successful read test does not verify write permission. Changes made in Linear take effect there directly; reverting a Flow branch does not undo them.
+
+## Verify the connection
+
+Ask Flow AI to list recent issues in a connected team, then read one issue and its comments. Confirm that the results come from the team you selected.
+
+For a write-back check, explicitly ask the agent to create a disposable issue in a named connected team. Open the resulting issue in Linear and confirm its team and contents. Delete the test issue when you finish.
+
+## Manage connected teams
+
+**Requires you to act:** Use **Add a team** to select another team visible to the saved API key. Use the remove control beside a team to remove its access. Read the confirmation before applying either change.
+
+{/* ![Manage the connected Linear team list](images/linear-manage-teams.png "human-intervention: change the connected Linear teams") */}
+
+Where project approvals are required, adding or removing a team clears them and each project must be approved again. The last team cannot be removed individually; disconnect the integration instead.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Find teams returns no teams">
+    Check that the key belongs to the intended Linear workspace and includes access to at least one team. If you changed the key, run **Find teams** again before selecting teams.
+  </Accordion>
+  <Accordion title="Test Connection or Save is disabled">
+    Enter an API key and select at least one team, or enter a team UUID in **Team ID**. Configuration controls also require a Flow admin with access to all projects.
+  </Accordion>
+  <Accordion title="Reading works, but creating or updating issues fails">
+    Check **Linear Write-Back**, the API key's permissions, your Flow permissions, and the target team. The target must be one of the connected teams. If Flow requires project approval, confirm that the current project is approved.
+  </Accordion>
+  <Accordion title="A project loses access after a configuration change">
+    Where project approvals are required, rotating the key or changing the connected teams clears existing approvals. A project admin must approve the updated connection for each affected project.
+  </Accordion>
+  <Accordion title="An issue is created in the wrong team">
+    Name the intended connected team in your request. Without a team selection, Flow uses the first configured team.
+  </Accordion>
+</AccordionGroup>
+
+## Disconnect Linear
+
+**Requires you to act:** Select **Disconnect** on the connection card to remove the shared connection. This stops Flow from using it across the workspace. Existing issues remain in Linear.
+
+{/* ![Disconnect the Linear integration](images/linear-disconnect.png "human-intervention: disconnect Linear") */}
+
+If the key is no longer needed by any integration, revoke it in Linear as well. Removing the Flow connection does not revoke the key in Linear.
