@@ -1,0 +1,177 @@
+---
+title: "Poll project events"
+description: "Follow item changes, branch updates, and review decisions in a project with a resumable cursor."
+---
+
+Use `GET /project/{projectId}/events` to feed Flow activity into your own tools. The stream returns one ordered feed per project. It covers item changes on a branch or Base, updates from a parent branch, and the branch review workflow.
+
+Use the `FLOW_API_URL`, `FLOW_CUSTOMER`, and `FLOW_API_KEY` variables from the [quickstart](/api/quickstart), and set `PROJECT_ID` to the project you want to follow. cURL examples use Bash and `jq`. Python uses `requests`; JavaScript uses Node.js 22 or later with `.mjs` files.
+
+## Choose a starting point
+
+Omit `cursor` to read the project's history from the beginning. Send `start=now` to skip history: the response contains no events, and its `next_cursor` marks the present. The examples below start at the present and save the cursor to `events-cursor.txt`.
+
+<CodeGroup>
+
+```bash cURL
+set -euo pipefail
+
+curl --fail-with-body --silent --show-error --get \
+  "$FLOW_API_URL/project/$PROJECT_ID/events" \
+  -H "X-API-Key: $FLOW_API_KEY" \
+  -H "customer: $FLOW_CUSTOMER" \
+  --data-urlencode "start=now" \
+  | jq -er '.next_cursor' > events-cursor.txt
+```
+
+```python Python
+import os
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+response = requests.get(
+    f"{base_url}/project/{os.environ['PROJECT_ID']}/events",
+    headers=headers, timeout=30,
+    params={"start": "now"}
+)
+response.raise_for_status()
+with open("events-cursor.txt", "w") as output:
+    output.write(response.json()["next_cursor"])
+```
+
+```javascript JavaScript
+import { writeFile } from "node:fs/promises";
+
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/events`);
+url.search = new URLSearchParams({ start: "now" }).toString();
+const response = await fetch(url, { headers, signal: AbortSignal.timeout(30_000) });
+if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+const page = await response.json();
+await writeFile("events-cursor.txt", page.next_cursor);
+```
+
+</CodeGroup>
+
+`start=now` does not accept a `cursor`. Sending both returns `400`.
+
+## Read new events
+
+Each poll sends the stored cursor and reads pages until `more_available` is `false`. The examples request branch review decisions and merges, with up to 200 events per page. Remove `type` to read every event type.
+
+<CodeGroup>
+
+```bash cURL
+set -euo pipefail
+cursor=$(cat events-cursor.txt)
+
+while true; do
+  page=$(curl --fail-with-body --silent --show-error --get \
+    "$FLOW_API_URL/project/$PROJECT_ID/events" \
+    -H "X-API-Key: $FLOW_API_KEY" \
+    -H "customer: $FLOW_CUSTOMER" \
+    --data-urlencode "cursor=$cursor" \
+    --data-urlencode "type=branch.approved,branch.rejected,branch.merged" \
+    --data-urlencode "limit=200")
+
+  jq -c '.events[] | {event_type, branch_id, actor, app_url}' <<< "$page"
+  cursor=$(jq -er '.next_cursor' <<< "$page")
+  printf '%s' "$cursor" > events-cursor.txt
+  [[ "$(jq -r '.more_available' <<< "$page")" == "true" ]] || break
+done
+```
+
+```python Python
+import os
+import json
+import requests
+
+base_url = os.environ["FLOW_API_URL"].rstrip("/")
+headers = {"X-API-Key": os.environ["FLOW_API_KEY"], "customer": os.environ["FLOW_CUSTOMER"]}
+
+with open("events-cursor.txt") as source:
+    cursor = source.read().strip()
+
+while True:
+    response = requests.get(
+        f"{base_url}/project/{os.environ['PROJECT_ID']}/events",
+        headers=headers, timeout=30,
+        params={
+            "cursor": cursor,
+            "type": "branch.approved,branch.rejected,branch.merged",
+            "limit": 200,
+        }
+    )
+    response.raise_for_status()
+    page = response.json()
+    for event in page["events"]:
+        print(json.dumps({key: event[key] for key in ("event_type", "branch_id", "actor", "app_url")}))
+    cursor = page["next_cursor"]
+    with open("events-cursor.txt", "w") as output:
+        output.write(cursor)
+    if not page["more_available"]:
+        break
+```
+
+```javascript JavaScript
+import { readFile, writeFile } from "node:fs/promises";
+
+const baseUrl = process.env.FLOW_API_URL.replace(/\/$/, "");
+const headers = {
+  "X-API-Key": process.env.FLOW_API_KEY,
+  customer: process.env.FLOW_CUSTOMER,
+};
+
+let cursor = (await readFile("events-cursor.txt", "utf8")).trim();
+while (true) {
+  const url = new URL(`${baseUrl}/project/${process.env.PROJECT_ID}/events`);
+  url.search = new URLSearchParams({
+    cursor,
+    type: "branch.approved,branch.rejected,branch.merged",
+    limit: "200",
+  }).toString();
+  const response = await fetch(url, { headers, signal: AbortSignal.timeout(30_000) });
+  if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+  const page = await response.json();
+  for (const { event_type, branch_id, actor, app_url } of page.events) {
+    console.log(JSON.stringify({ event_type, branch_id, actor, app_url }));
+  }
+  cursor = page.next_cursor;
+  await writeFile("events-cursor.txt", cursor);
+  if (!page.more_available) break;
+}
+```
+
+</CodeGroup>
+
+Store `next_cursor` after every page, including an empty page. It is a checkpoint, not the ID of the last event. Flow returns only settled events, so a stored cursor never skips an event that commits late and never returns the same event twice. Process events in delivery order. `occurred_at` is informational and can be out of order across pages.
+
+The response contains `events`, `next_cursor`, and `more_available`. `limit` defaults to 50 and accepts up to 200.
+
+## Filter the stream
+
+- `type`: a comma-separated list of event types. Omit it to read every type.
+- `branch`: one branch ID, or `master` for Base. Omit it to read every branch.
+
+A cursor keeps the filter it was created under. You can continue with the same filter or a narrower one. A wider filter returns `400` rather than silently skipping the events the earlier filter excluded. To widen a filter, restart from an earlier cursor. A cursor from `start=now` has no filter, so it accepts any later filter.
+
+## Handle each event type
+
+Every event includes `event_type`, `occurred_at`, `project_id`, `branch_id`, `actor`, `app_url`, and `payload`. A `branch_id` of `master` means Base. `actor.type` is `user`, `agent`, or `system`; system actors have no `id`.
+
+| Event type | When it occurs | Payload |
+| --- | --- | --- |
+| `branch.changed` | Items change on a branch or Base. Flow returns one event per branch and actor within a page. | `entity_ids` (up to 100, with `truncated` when there are more), `entity_count`, `diff_count`, `first_seq_id`, and `last_seq_id`. |
+| `branch.rebased` | A branch updates from its parent. | `branch_name`, `parent_branch_id`, `parent_seq_id`, and `rebase_event_id`. Re-read the branch; Flow does not report its earlier changes again. |
+| Review workflow events | A branch is created, marked ready for review, approved, rejected, merged, closed, reopened, or changes another review state. | `branch_name`, `target_branch_id`, `review_event_id`, and, when relevant, the subject user or group, the review comment, or the merge `baseline_id`. |
+
+To read the current values of changed items, fetch them by ID with the [entity endpoints](/api/examples/read-entities) on the event's branch. Open `app_url` to view the branch table or review in Flow.
+
+The stream is also available as a [hosted MCP tool](/api/mcp/tools). See [Read the project event stream](/api/endpoints/get-project-projectid-events) for the full list of event types and the response schema.

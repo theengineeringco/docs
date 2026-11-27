@@ -1,0 +1,202 @@
+---
+title: "November 6, 2026"
+sidebarTitle: "November 6, 2026"
+description: "Weekly release: branch actions you confirm in AI chat, a new diagram editor, GitHub Actions workflows from Flow AI, Slack setup from settings or the assistant, Flow Smart Links in Confluence, and side-by-side review of AI Word edits."
+---
+
+## In this release
+
+- [Branch actions you confirm in AI chat](#branch-actions-you-confirm-in-ai-chat)
+- [New diagram editor](#new-diagram-editor)
+- [Start GitHub Actions workflows from Flow AI](#start-github-actions-workflows-from-flow-ai)
+- [Set up Slack from settings or the AI assistant](#set-up-slack-from-settings-or-the-ai-assistant)
+- [Flow Smart Links for Confluence](#flow-smart-links-for-confluence)
+- [Side-by-side review of AI Word edits](#side-by-side-review-of-ai-word-edits)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Branch actions you confirm in AI chat
+
+Ask Flow AI whether a branch is ready to merge. The chat shows the same status card as the review page, listing every blocking review, check, stage gate, editor group, and conflict, and you can merge a ready branch from the chat.
+
+Ask Flow AI to delete branches, merge a branch, or rebase a branch onto another parent. The chat lists each branch and says which ones it cannot act on and why. Untick any branch, then press **Delete**, **Merge**, or **Rebase**, or **Cancel**. When you ask it to update a branch from its parent, the chat shows what the update brings in, or each conflict with a suggested version and the reason, before you press **Update** or **Apply**. Updating several branches shows one card with a row per branch and an **Update all** button. Every action runs with your own permissions, and the agent does not run it for you.
+
+## New diagram editor
+
+Diagrams, the Architecture tab, embedded diagram previews, diagram exports, and AI diagram previews now use Flow's own diagram editor. Existing diagrams open as before, with no watermark on any domain. Every shape, including frames and horizontal and vertical swimlanes, comes from the canvas toolbar's shape picker, which adds a chevron for process-step flows. Shapes also gain a solid fill in the full shape color, and draw.io Step shapes import as chevrons.
+
+The toolbar's Entity picker adds several items at once. Tick each item, then press **Add** to place a card for every one without overlap, and undo them together in one step. A selected wire shows only its end handles until you point at a run or bend, and you can drag a run from anywhere along it. Dragged runs and bends snap to ports, connected shapes, and the wire's other runs, and hand-routed wires follow the shapes they connect when those shapes move. Turn off the moving highlight on selected wires with **Animate wires** in the diagram menu.
+
+## Start GitHub Actions workflows from Flow AI
+
+With GitHub write-back on, GitHub settings list each repository's workflows, and an admin turns on the ones the agent may start. Every workflow starts off.
+
+The agent can start an enabled workflow on any branch with its inputs. It then reads the run's status, each job's annotations and the end of its log, and the names of its artifacts.
+
+<Note>
+  Starting and reading workflow runs needs the GitHub App's **Actions** permission (read and write). Apps created from Flow now request it. For an existing App, an organization owner adds it under the App's permissions and accepts the change on the installation. The settings page explains how. Other GitHub features work without it.
+</Note>
+
+## Set up Slack from settings or the AI assistant
+
+**Settings → Integrations → Slack** asks you to choose between Flow's Slack app (Add to Slack) and your own Slack app, with a shorter, three-step setup for your own app. Your own app's bot token and signing secret are entered together. You pick the channels the agent may post to or read from a list of your workspace's public channels, several at a time, instead of typing channel IDs. Once connected, the page flags anything the connection needs and asks before you disconnect.
+
+Organization admins can also ask the AI assistant to connect Slack. It offers Add to Slack or creating your own Slack app from a manifest, then proposes the projects and channels to enable on a card where you untick anything you don't want before applying. The assistant can also summarize the current setup or disconnect Slack.
+
+## Flow Smart Links for Confluence
+
+Flow item links can show their current titles in Confluence Cloud. After an Atlassian administrator installs the optional app, each viewer connects their Flow organizations by signing in and giving consent.
+
+## Side-by-side review of AI Word edits
+
+When Flow AI edits a Word document, the edit card shows the original and edited documents as thumbnails, with removed text in red and added text in green. Click the card to open both documents side by side as pages.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Mode menu.** The composer's Mode menu holds Ask first, Auto-accept, and, for project admins, Super user, replacing the separate Standard / Super user chip. Super user lets the agent make every change in that chat without asking, admin changes included.
+- **Super user approval.** The request to turn on super user mode shows what the agent will do and a short list of the admin changes at a glance. The reason is one click away.
+- **GitHub code search.** Flow AI can search file contents on a connected GitHub repository's default branch, read exact line ranges, and cite the matching file, commit, and lines.
+- **Saved views from chat.** Asking Flow AI to create or change a view can set its table columns, filters, and sort in the same step, checked against the project's data model.
+- **Unanswered questions.** When Flow AI asks you something and you do not answer within two minutes, it continues with the work that does not need your answer. The question stays open on its card, and items that depend on it wait until you answer.
+- **Long chats.** Decisions made early in a long chat stay in Flow AI's view, and Flow AI can re-read an earlier part of the conversation word for word when a message refers to it. Long conversations open at their latest messages, and scrolling up loads older ones without losing your place.
+- **Archive from the agent panel.** Archive and unarchive chats from Past Conversations in the right-hand agent panel, and show archived chats with a toggle, as in the full agent page.
+- **Folded lookups.** Runs of background lookups, such as reading items and searching, fold into one summary line between the agent's replies. Open the line to see each lookup.
+- **Integration items in chat.** Jira and Linear issues, Confluence, Notion, Google, SharePoint, and AoDocs documents, Asana tasks, Teamcenter items, and GitHub pull requests appear as clickable references. Hover for details, or open them in their tool.
+- **Agent changes appear live.** Branches, reviews, branch checks, files, findings, memories, and item history that the agent changes show while the chat runs, without a page reload.
+- **Chats after a merge.** When a chat's branch is merged, closed, or deleted, the chat moves to the same branch as the page. Your next message runs there instead of failing with "Something went wrong", and the agent is told where the branch went.
+- **Links to merged and deleted work.** A branch named in a chat shows its name marked Merged after the merge and opens the merge record. A link to a deleted branch, review, item, or agent shows its name marked Deleted and opens the page where you can restore it.
+- **Item links on other branches.** An item that is not on the chat's current branch shows its name and branch, and opens on that branch, instead of "this item doesn't exist".
+- **AI chat confirmations.** When you click **Confirm** on an action, the action runs first, and a message you queued meanwhile is sent after it. A confirmed action no longer fails with an error in a chat with an open to-do list or after you send a message before it runs.
+- **Number fields with units.** Flow AI writes number fields with units directly instead of treating units as unsupported or asking to convert the field to text.
+- **File reads.** On a later turn of the same chat, Flow AI reads an image or document again when it needs it, instead of answering without the file's contents.
+- **Forked chats.** A chat started from a message is now called a forked chat, and its title starts with "Forked chat:".
+- **Filtered responses.** Responses blocked by the AI provider's content filter show a clear warning, naming the filter category when the provider reports one. Earlier messages and completed changes remain available.
+- **Pending AI changes.** Pending AI changes no longer block comparing branch changes or choosing a version for an added cross-link.
+
+### Architecture
+
+- **Interface color filter.** A filter beside the diagram menu on the Architecture tab shows or hides interfaces by their Interface color option, so you can read a dense breakdown one kind of connection at a time. Flow remembers the choice per project, and exports draw only what is shown.
+- **Dependency view.** Opening the view on an item with many cross-links frames that item instead of the middle of its linked items.
+
+### Audit
+
+- **Item history.** Existing top-level placements no longer appear as new edits in item history, comparisons, project-activity automations, or the project event feed. Reverting an item to an earlier point keeps it at the top level.
+
+### Automations
+
+- **Script automations.** Manually started scripts show a running indicator until they finish or fail. Loops that create or update items run faster, completion counts include changes made through bulk script tools, and a branch check over thousands of changed items finishes in seconds.
+- **Project change triggers.** Changes made immediately after you enable a trigger are included in its first scheduled check.
+
+### Branching
+
+- **Update from parent on long-lived branches.** Resolving conflicts and updating from the parent take time proportional to the smaller of the two change sets, so a small branch under a busy parent, or a small parent update into a busy branch, no longer slows down with the larger side. The banner shows an approximate count of the items the parent touched, and the review dialog lists them page by page.
+- **Incoming changes.** Fields and child orders the branch already shares with its parent, such as the same Jira issue link or the same formula and result, are no longer listed as incoming changes.
+- **Merge conflicts on older branches.** A branch no longer shows conflicts for items deleted on Base that nobody changed on the branch, in the review's Resolve conflicts list and in Update from parent.
+- **Branch wording.** Activity, agent chats, the Inbox, sharing, and automation settings show branch wording and icons again, and you can filter the Inbox by branch.
+
+### Collaboration
+
+- **Opening a comment.** Reply and **Open thread** in the Inbox and pop-ups, and comment links in AI chat, land on the item's Discussions tab or the review's Activity feed with the comment highlighted.
+- **Live discussions.** Comments added while an item is closed or your connection is interrupted appear when you reopen the item or reconnect.
+- **@ mention search.** Typing `@` and a search term lists people and agents whose name matches before people whose email domain matches.
+
+### Dashboards
+
+- **Widget names.** Give any dashboard widget its own title from the name field in the widget dialog. Unnamed widgets, including existing ones, keep their description, such as "Owner in System", as the title.
+
+### Data Model
+
+- **Saving during data model edits.** When a save is refused because the data model is being changed, the message names the person, agent chat, or automation making the change and since when.
+- **Tag options.** Merging an orphaned tag or stage value into a live option works when both have the same name.
+
+### Diagrams
+
+- **New diagrams.** You can create a diagram from the **+ New** menu in a Diagram view.
+- **Wire and shape editing.** A wire end dropped on a shape attaches where it was dropped. Alt-drag drags a copy, Shift while resizing keeps proportions, the style panel switches a selected wire between elbow and straight, and you can widen an entity pill on a wire from its ends.
+- **Curves and dotted lines.** Curved connectors run between the shapes they join instead of looping back when the shapes are close, and dragging the middle of a straight line bends it into a curve again. Curved lines drawn with the Line tool draw as smooth curves, and dotted wires, outlines, and lines draw as visible dots.
+- **Entity card names.** A long item name wraps onto the lines the card has room for instead of being cut off, and any fields on the card move below it.
+
+### Formulas
+
+- **Create referenced items.** Typing `=` in a new item's Description can create the item it references, such as a design value for a requirement. The new item opens in a dialog over the first one and keeps your unfinished draft.
+- **Formulas after data model edits.** Rollups and other formulas that read linked items calculate immediately on the first view after a data model edit instead of showing a blank value.
+- **Hierarchy formulas.** A formula that walks the hierarchy around its own item, such as summing values in its parent's other children, no longer gets stuck showing an error instead of its result.
+- **Bulk edits.** Creating or updating several items at once spends less time updating dependent formulas.
+
+### Import and Export
+
+- **Excel export links.** In an Excel export, the selected identity, Entity Numeric ID, `id`, URL, and linked-item cells open that item in Flow. A linked-item cell naming several items stays plain text. The table's **Item link** column is now called **URL**.
+- **ReqIF rich text.** Imports keep bold text in more formats, including in table cells, and no longer add an empty line where a block ends in a line break. Exports keep Shift+Enter line breaks instead of turning them into spaces.
+- **V2 migration.** Filtered aggregates migrate as live formulas instead of fixed numbers, so their totals keep updating and include matching values added later.
+
+### Integrations
+
+- **GitHub integration settings.** GitHub setup ends with AI access, where you choose repository browsing, writeback, pull request review, and auto-review for the current project's repositories. Open an organization's connection details from its name, find its actions in one menu, and choose a project under **Settings for** to configure its pull request review without leaving the page.
+- **One GitHub organization.** Each workspace now connects one GitHub organization. Disconnect the current organization before connecting another. Repository review settings stay separate for each project and are kept when GitHub is disconnected.
+- **Connecting GitHub.** **Continue to GitHub** and **Create GitHub App** open GitHub in a new tab, and your original Flow tab moves on to the next step when GitHub sends you back. A newly created App appears without refreshing, with clear steps for installing it on repositories or entering an existing installation ID.
+- **Repositories shared across workspaces.** When a repository is enabled in more than one workspace on the same GitHub installation, project Integrations activity shows the skipped delivery instead of automations stopping silently. Enabling a repository that another workspace already uses on that installation is refused with an explanation.
+- **GitHub @flow comments.** Flow's own pull request comments no longer start another automation run when they mention @flow.
+- **Refused post-backs.** A review comment, check run, merge request note, or commit status that GitHub or GitLab refuses shows as failed in project activity instead of sent.
+- **Slack threads.** Flow follows the threads it was mentioned in or started, so replies reach the conversation without mentioning @Flow again. Flow answers only when a reply is meant for it, and reacts 👀 once your reply reaches its agent. _(requires configuration)_ Existing Slack apps need the `message.channels` and `message.groups` bot events added under Event Subscriptions. Until then, replies still need to mention @Flow.
+- **Flow replies in Slack.** Items, branches, and reviews Flow mentions in Slack thread replies appear as links that open them in Flow, and bold, lists, and other formatting render in Slack.
+- **Unlinked Slack accounts.** Replying in a thread an agent posted to no longer fails silently when your Slack account isn't linked or `/flow` isn't set up. Flow privately asks you to link your account or pick a project, once per thread.
+- **Slack `/flow` settings.** Picking a project no longer fails with "We had some trouble connecting" when the project has a branch with a long or blank name, or more than 99 live branches. The branch list shows the 99 most recently updated branches, and your saved branch always stays listed.
+- **Slack attachments.** Project admins can let agents and automations inspect selected images, PDFs, text files, and CSVs attached to messages in an approved Slack channel. Existing channel grants stay text-only until attachment access is enabled.
+- **Cursor integration.** Testing a valid Cursor API key in **Settings → Integrations → Cursor** no longer fails with "Cursor API error 400".
+- **Declined consent.** Declining access on a provider's consent screen returns you to that integration's settings page with a clear notice.
+
+### Notifications
+
+- **Inbox previews.** Comment previews show their formatting, with people and items as pills. Agent replies, questions, and findings in the Inbox show their formatting and item pills.
+
+### Permissions and Sharing
+
+- **Shares for editors.** When editors may share views, they can open **Settings → Shares** to see and revoke the shares they created. Admins still see every share in the project.
+- **Bulk revoke.** Select shares in **Settings → Shares** to revoke them all at once from a bar at the bottom of the table. A share on a merged or closed branch shows the branch by name, marked Merged or Closed.
+
+### Review
+
+- **Stage gates.** Fully reverted field and relationship edits no longer block merges through stage gates. Released items no longer appear changed or require fresh approval solely because an automatic update recorded their existing placement on Home. Review checks are faster on branches with many items that do not require stage approval.
+- **Reviewer lists.** Groups appear before people, with optional reviewers last. Group members start folded, and clicking a name shows why that person or group is reviewing.
+- **Merged review links.** A link to a merged review in AI chat or comments shows and opens the baseline its merge created, instead of "review unavailable".
+- **Faster verification.** Changed-item verification is faster in projects with many branches.
+
+### Search
+
+- **Deleted branches and items.** Filter deleted branches by who deleted them, owner, parent, tag, and when they were deleted or created. Filter deleted items by type, who archived them, owner, and when they were archived.
+- **Item search on large projects.** Searching on a branch of a very large project answers in well under a second. An identifier such as `REQ-1234` returns its exact match alone.
+- **Filtering in a focused view.** Filter rows and match counts no longer pause for up to two seconds per page.
+- **Filtering with ancestors shown.** Searches in views with shared hierarchies respond faster and keep every matching path visible.
+- **Relationships search.** On items with many relationships, the search box opens by default and matches linked items' names, human IDs, and legacy IDs.
+- **Shares table.** Filter the shares table by any column, including whether a share's branch was merged or closed. Search also matches the sharer, branch, view, and starting item.
+- **Descending sort.** Rows with an empty value in the sorted column stay at the bottom when sorting in descending order.
+- **Semantic search (beta).** Suggestions load faster on projects with many branches and use the current branch's edited text. Indexing no longer stalls on projects with many branches, so recent edits become searchable.
+
+### Table
+
+- **Add items from the bottom row.** Type a name in the main Table's bottom row and press Enter to add an item, as in linked-item tabs such as Test Cases. Choose an available type and keep adding without reopening the create dialog. A failed create keeps your name ready to retry.
+- **Select all.** The header checkbox selects every item matching the current view, focus, and filters, including items inside collapsed folders. The **Edit field** menu states how many items a bulk edit will change.
+- **Bulk edit after select all.** Edits apply to everything the filter matches when you apply them, and unticked rows are left alone. Large selections apply in the background with a running count. Use the branch history to revert these edits.
+- **Large projects.** Open tables no longer reload their top-level items over and over while Flow records item placement in the background, which had slowed the app for everyone in large projects.
+
+### Tree
+
+- **Moving children up.** Deleting items can move their children to the project root and to surviving parents together. Moving an item to the project root keeps its other parent relationships.
+
+### Views
+
+- **Links select the item.** Following a link to an item, such as Copy link, **Open in Flow**, exported item links, notification emails, and Slack replies, focuses the item in the main pane and reveals it in the navigator as well as opening its details.
+- **Top level of views.** A view's top level shows only its start type. An item of a type the view nests, such as a requirement in a systems view, appears under its parents and no longer also at the top level. Creating an item the view won't show now works instead of being refused, and the create form notes which upstream item it needs to appear there.
+- **Details panel fields.** **Configure Fields Visibility...** now lives in the details panel's Options menu. Name and Description always show, and **Show more** reveals hidden fields without changing your field selection.
+- **Details panel linked items.** Drag rows in a linked-item tab to reorder them, as in the main Table. A tab with no items, such as Verification, shows its header and **Open in main view** to read-only viewers instead of a blank panel.
+- **Narrow details panel.** The failing-checks badge and branch status collapse to icons and long item IDs shorten, so the panel's controls, including Close, stay reachable.
+- **Field and column pickers.** **Add field** stays open so you can pick several fields at once. Empty lists show **No fields** or **No fields match your search**.
+
+## API Changes
+
+- **Merge readiness.** Call `GET /project/{projectId}/branch/{id}/merge-readiness` to see whether a branch is ready to merge, with every blocking review, check, stage gate, editor group, and conflict listed. See the [API reference](/api/reference).
+- **Saved views over the API and MCP.** Admins can list, create, edit, and delete one shared saved view at a time through the Customer API and the [MCP server](/api/mcp/tools). Add or remove a single nesting rule without resending the view's other rules. Creating or updating a view can set its table columns, filters, and sort in the same call. Flow checks them against the project's data model and refuses a filter that names an unknown field, option, or type, saving nothing.
+- **Automations over MCP.** MCP clients can create, edit, and delete automations. A new automation is saved turned off until someone turns it on in Flow, and the client receives a link to it. Turn off a running automation before changing its instructions, script, or triggers over MCP. See [MCP tools](/api/mcp/tools).
+- **Personal API keys for external collaborators.** External collaborators can create and revoke personal API keys in **Settings → API & MCP**. Keys keep their existing shared access and supported-operation permissions.

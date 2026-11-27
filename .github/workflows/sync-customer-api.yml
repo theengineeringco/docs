@@ -54,8 +54,9 @@ jobs:
           PY
 
   sync:
+    # Not gated on the test job: those checks read the committed snapshot, and
+    # only this job can repair a stale one. The candidate is tested below instead.
     if: github.event_name != 'pull_request'
-    needs: test
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -83,9 +84,12 @@ jobs:
       - name: Fetch and compare all deployed Swagger documents
         id: snapshot
         run: python3 scripts/sync-customer-api.py --report "$REPORT_PATH"
-      - name: Validate candidate reference with Mintlify
+      - name: Validate and test candidate reference
         if: steps.snapshot.outputs.status == 'compatible' || steps.snapshot.outputs.status == 'structural'
-        run: npx --yes mint@4.2.939 validate
+        run: |
+          npx --yes mint@4.2.939 validate
+          python3 -m unittest discover -s scripts -p 'test_*.py' -v
+          node --test scripts/test_api_deployment.mjs
       - name: Summarize deployed changes
         if: always()
         run: |
@@ -96,6 +100,9 @@ jobs:
           report = json.loads(path.read_text()) if path.exists() else {'status': 'failed', 'changes': ['The sync did not produce a report.']}
           body = ['<!-- customer-api-docs-sync -->', '# Deployed customer API documentation', '', 'Status: **' + report['status'] + '**', '', '[Workflow run](' + os.environ['RUN_URL'] + ')', '', 'Only public customer OpenAPI documents were fetched. No customer application data was accessed.', '']
           body += ['- ' + change for change in report.get('changes', [])]
+          if report.get('subheaders_to_review'):
+              body += ['', '## Endpoint subheaders to review', '', 'These long descriptions published with an automatic first-sentence subheader, or none. Add a short blurb to `PAGE_DESCRIPTIONS` in `scripts/sync-customer-api.py`.', '']
+              body += ['- `' + operation + '`' for operation in report['subheaders_to_review']]
           body += ['', '## Source contract hashes', '']
           body += ['- ' + name + ': `' + value + '`' for name, value in report.get('hashes', {}).items()]
           body += ['', 'All validated reference changes publish automatically, including changes to existing contracts. Authored guides remain separately maintained.']

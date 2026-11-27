@@ -149,7 +149,8 @@
               "api/reference",
               "api/examples/read-entities",
               "api/examples/batch-writes",
-              "api/examples/comment-threads"
+              "api/examples/comment-threads",
+              "api/examples/project-events"
             ]
           },
           {
@@ -192,6 +193,11 @@
             "group": "Release Notes",
             "pages": [
               "release-notes",
+              "release-notes/2026-11-24",
+              "release-notes/2026-11-23",
+              "release-notes/2026-11-20",
+              "release-notes/2026-11-13",
+              "release-notes/2026-11-06",
               "release-notes/2026-10-30",
               "release-notes/2026-10-23",
               "release-notes/2026-10-16",
@@ -491,6 +497,61 @@
     {
       "source": "/release-notes/2026-10-29",
       "destination": "/release-notes/2026-10-30",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-02",
+      "destination": "/release-notes/2026-11-06",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-03",
+      "destination": "/release-notes/2026-11-06",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-04",
+      "destination": "/release-notes/2026-11-06",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-05",
+      "destination": "/release-notes/2026-11-06",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-10",
+      "destination": "/release-notes/2026-11-13",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-11",
+      "destination": "/release-notes/2026-11-13",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-12",
+      "destination": "/release-notes/2026-11-13",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-16",
+      "destination": "/release-notes/2026-11-20",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-17",
+      "destination": "/release-notes/2026-11-20",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-18",
+      "destination": "/release-notes/2026-11-20",
+      "permanent": true
+    },
+    {
+      "source": "/release-notes/2026-11-19",
+      "destination": "/release-notes/2026-11-20",
       "permanent": true
     }
   ],

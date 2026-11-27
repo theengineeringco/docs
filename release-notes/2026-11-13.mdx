@@ -1,0 +1,182 @@
+---
+title: "November 13, 2026"
+sidebarTitle: "November 13, 2026"
+description: "Weekly release: integration setup from the AI assistant, engineering symbol libraries for diagrams, version-pinned upstream and downstream links, a redesigned review overview, new projects that copy their source's items, and comparisons from any point in a branch's history."
+---
+
+## In this release
+
+- [Set up any integration from the AI assistant](#set-up-any-integration-from-the-ai-assistant)
+- [Engineering symbol libraries for diagrams](#engineering-symbol-libraries-for-diagrams)
+- [Pinned links everywhere](#pinned-links-everywhere)
+- [Redesigned review overview](#redesigned-review-overview)
+- [New projects with copied items](#new-projects-with-copied-items)
+- [Compare from any point in branch history](#compare-from-any-point-in-branch-history)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Set up any integration from the AI assistant
+
+Ask the AI assistant to connect, change, or disconnect an integration, such as Slack, Google Drive, GitHub, Jira, Linear, Confluence, Notion, or an MCP connection. It offers the settings page's own connection form or sign-in on a card, then proposes changes such as write-back or allowlisted projects as rows you confirm with your own permissions. When a request needs a setting that is off, such as write-back, the assistant offers to turn it on and then carries on. Credentials are typed into the card and never pass through the conversation.
+
+For Google Drive, the assistant offers a card to sign in with your Google account in a popup, which also sets up the workspace the first time. Admins can then have it limit Flow AI to a Drive folder or turn Google Sheets write-back on or off. The Google Drive integration page has separate Google Docs and Google Sheets sections. Choose the agent's Drive folder from an expandable folder tree that marks shared and private folders, clear it to give the agent all folders again, and set Google Sheets to **Read only** or **Read and write**.
+
+## Engineering symbol libraries for diagrams
+
+The diagram shape picker offers engineering symbols: ISO 1219-1 fluid-power symbols, including pumps, 2/2 and 3/2 valves, check valves, heat exchangers, fans, expansion tanks, orifices, sensors, and junctions, plus IEC 60617 electrical and ISA-5.1 instrumentation starter libraries with components, instrument tags, and connection terminals. Each symbol draws as a line drawing in its stroke color with its name under the glyph, so a cooling or hydraulic schematic reads the way the one you share with partners does. Tick the libraries you want under **More shapes** at the bottom of the shape picker. Your choice does not affect anyone else's picker, and symbols already on diagrams are unchanged.
+
+A wire end dropped near a symbol's port, such as a pump's outlet or a valve's A, P, or T, snaps to it, and Auto-arrange routes the wire to that port on the side the symbol draws it. **Convert to Entity** on an ISO 1219 symbol keeps the glyph, with the item's name and any shown fields below it, so the pump on the schematic is the pump component. Importing a draw.io file maps its P&ID and Fluid Power (ISO 1219) pumps, valves, heat exchangers, vessels, gauges, and similar shapes onto these symbols instead of rectangles. Flow AI can create fluid-power, electrical, and instrumentation diagrams with connections at named terminals, and edit and arrange existing symbol diagrams.
+
+## Pinned links everywhere
+
+Upstream and downstream links can now be pinned to a version of their target, as cross-links already could. Hover a link's pill in the Relationships section and pick the version.
+
+Wherever a view reaches an item through a pinned link, it shows and exports that item as it was at the pin. This covers table rows, tree nodes, Reader sections, linked-item tabs, table link columns, the Relationships section, review relationship changes, the dependency graph, and CSV, JSON, and Reader exports. A row shown as of a pin is read-only, its name carries the pin cue, and it opens as a version panel. Filters and searches match live items only, and a pin that can no longer be read falls back to the live item.
+
+## Redesigned review overview
+
+The review Overview puts merge status above Reviewers. Merge conflicts appear first as a folded card with the conflict count and a **Resolve** action that opens every conflicting item in one dialog, including deletion conflicts. **Merge** opens a status card with the readiness requirements before merging, merge status stays visible before you submit a review, and eligible users force merge from the header's **Merge status** popover.
+
+Switch between Draft and In review from the metadata, copy a direct review link from the title, and open changed items from the change counts. Clear a submitted review to change your decision. The Activity timeline lists the newest activity first, with the comment box above it.
+
+## New projects with copied items
+
+The **New project** dialog can copy the source project's items along with its data model. Each item keeps its type, field values, formulas, and links to the other copied items, and its history starts in the new project. The project opens at once while the items arrive in the background, with the percentage copied shown. Copied automations are added once the items are in. A source with more than 50,000 items cannot have its items copied, and the dialog says so.
+
+## Compare from any point in branch history
+
+The Point control on the branch menu's **Compare with...** page and in an item's **Compare with branch...** dialog lists Current and the branch's baselines by name. Each offers **Changes up to …**, the changes recorded between it and the baseline before it, newest first and searchable, so you can compare from any one of them. The item dialog shows the same changes for that item, and a History row's menu offers **Compare from this version**.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Model choice for everyone.** The chat model picker offers every user the speed tiers (Auto, Fast, Fastest) and an **All models** row that lists every model available to your organization. The project default picker in **Settings → AI** lists the same tiers and models for every admin.
+- **Send now.** A message queued while Flow AI is still working has a **Send now** button. The running turn reads it at its next step instead of after it ends.
+- **Diagrams from Flow AI.** Flow AI can draw every shape the diagram editor offers, including swimlanes, frames, and engineering silhouettes, and show chosen fields on an item's card. When it draws from a schematic, P&ID, or wiring sheet, a line that forks becomes a junction, so each branch reaches its component.
+- **Long-running chats and automations.** A conversation condensed many times, such as an automation that runs every few minutes in one chat, no longer stops with "This conversation is too large for the AI". Its earlier messages stay available to the assistant, and the context meter shows "Compacting…" while a long conversation is condensed.
+- **Large inputs.** Large pasted text no longer makes a chat message or automation fail. Flow AI keeps it as a file it reads in sections, with the same access as the conversation.
+- **Collapsed steps.** Steps where the agent changed settings, branch details, views, memory, or connected tools, or ran a script, start collapsed so the agent's replies stay easy to follow. Filtering calls fold into the collapsed line with the agent's other lookups.
+- **Comment mentions in side chats.** When someone mentions an agent in a comment or replies in its thread, the side chat shows a card naming who wrote and quoting their words, with a link to the thread.
+- **New parents and project home.** When giving an item a new parent takes it off the project home, Flow AI tells you so you can place it there again.
+- **Review stages.** Flow AI reads an item's current Review stage with its ID and name, including the default stage when no value has been set.
+- **Questions card.** Pressing Enter in the agent's questions card moves to the next question, or submits on the last one.
+- **Agent chat breadcrumb.** Clicking the agent's name in a trigger or automation run chat opens your own main chat with that agent instead of a blank chat.
+- **Agent panel.** The right panel starts collapsed and opens Live preview with one click. Switch views from the panel header menu.
+
+### Architecture
+
+- **Explore dependencies in the main pane.** Click a card to explore from there, and the graph rearranges in place. Each card's Details control opens its details. **Back to Table** (or Tree or Reader) in the title row, and a return icon in the graph controls, bring you back to the view you came from as you left it.
+- **Interfaces on wires.** Clicking an interface on a wire shows the card toolbar again, with **See Details** to open the interface and a grip to slide it along the wire. Entities placed on a wire get the same toolbar.
+- **Undo after re-routing.** After you re-route a wire on the Architecture view, the wire stays selected and ⌘Z undoes the change.
+
+### Automations
+
+- **Re-run one check.** Re-run a single automation or script check from its row on the review Overview without re-running every automation.
+- **Run outcome in the Inbox.** A triggered automation's Inbox row shows how the run ended instead of staying on "running".
+- **Long instructions.** Pasting a long prompt into an automation's Instructions no longer pushes the page header off-screen, so **Save** stays reachable.
+
+### Branching
+
+- **Branch switching.** Picking a branch returns you to where you left it, with your view's columns, filters, and sorting as you last set them. A branch you have never opened opens on its review overview. Creating a branch keeps your current view, filters, focused item, and open Details.
+- **Tag from the branch menu.** Tag a branch from the sidebar menu or the Branch view row menu without opening the Branch view first.
+- **Reverting a large merge.** Reverting a merge of tens of thousands of items completes instead of failing after a couple of minutes. Flow opens the revert branch once it is ready, and clicking **Revert** again picks up the same revert instead of starting a second one.
+- **Reverting an update from parent.** Reverting an update that archived items under an already-archived parent, or moved items under new parents, no longer fails with "A related item … is archived" or "Move or archive the downstream items".
+- **Baselines made right after branching.** A baseline recorded before the branch's first change sits at the fork in the History tab and the Point control. Current's list shows only the branch's own changes, and the baseline's list shows what the branch inherited.
+- **Reordered badges.** Unchanged top-level items no longer show a false Reordered badge in tables or **Compare with branch**. Actual reorders stay visible.
+
+### Collaboration
+
+- **Comment links.** Item discussions and review threads offer **Copy link**, so a pasted URL opens that comment on the item, in review Changed Items or Overview, in a comparison discussion, or in its saved impact-analysis run.
+- **Comments on replaced text.** A comment whose highlighted text was removed or replaced, for example by keeping the parent's version during Update from parent, shows a "Referenced text changed" label above its quote.
+- **Long mentions.** Long mentions of items, people, agents, branches, reviews, and other references in descriptions, comments, and AI chat wrap onto the next line instead of being cut off.
+
+### Dashboards
+
+- **AI summary.** The dashboard summary knows each widget's filter, so it no longer reports different counts from differently filtered widgets as a contradiction.
+
+### Data Model
+
+- **Review stages.** Data types that do not already have review stages can no longer add them. Types that already use review stages keep them and stay editable.
+
+### Diagrams
+
+- **Card fields.** A shown field's value on a card wraps instead of cutting off after one line. The card toolbar's **Fields** control picks several fields at once and sets their order.
+- **Older diagrams.** Diagrams that once had a link pasted into them open again instead of failing to load. Cards in older diagrams, including ones drawn by Flow AI, show their item's type and offer **Show fields** again. Cropped or flipped images show the part and orientation they were given.
+- **Import to diagram.** With a diagram open, right-clicking an item in the sidebar offers **Import to diagram** again. It adds the item and its descendants nested inside each other's cards or as connected cards, laid out as Auto-arrange would place them.
+- **Connectors.** Dropping a connector's end in the middle of a shape connects it to the shape's center again. An end dropped near the middle of a side snaps to it, and a connector can start and end on the same shape.
+- **Elbow connectors.** Right-angle connectors in existing diagrams, including ones with hand-placed bends or a loose end, attach, turn, and route as they did before the diagram editor update. They stop at a container card's wall instead of running through the cards inside it.
+- **Re-routing wires.** On diagrams and the Architecture view, you can drag the part of a wire that carries an interface, and drag a wire round to the far side of a card. A run you drag stays where you drop it.
+- **Arrowheads.** Dot, triangle, square, diamond, inverted, and bar arrowheads draw as set again in the editor, Reader embeds, and exports. The style panel's Arrows row offers each of them for either end of a line.
+- **Labels.** Shape labels keep their margin and wrap points from before the new editor. Lists align left, Shift+Enter line breaks show, and long labels no longer spill outside their shape.
+- **Large diagrams.** Very large diagrams show their preview in the Diagram field and the Reader instead of "Failed to render diagram". They export and copy as PNG at a reduced resolution instead of failing.
+- **Controls beside AI chat.** Drawing and zoom controls stay usable when AI chat narrows the canvas, including with the minimap open.
+
+### Files
+
+- **Protocol Buffers attachments.** `.textproto`, `.pbtxt`, `.prototxt`, and `.proto` files attach as text that Flow AI can read.
+
+### Formulas
+
+- **Item references.** After typing `=`, you can keep typing straight into the item search without losing characters. Pressing Backspace in the empty search removes the `=` and closes the picker.
+- **Default formula references.** The Default formula and formula preset dialogs no longer list referenced values from a sample item's own saved formula.
+
+### Import and Export
+
+- **Step-by-step ReqIF import.** The ReqIF import page works like spreadsheet import. Choose an item type for each ReqIF type, map each type's attributes on its own step, then pick the destination and branch. Review previews the items the import will create and update, with counts per type.
+- **ReqIF import presets.** Save or update a preset from the attribute mapping and Destination steps, so field mappings and link directions chosen after the preset was created are kept.
+- **V2 migration views.** Saved filter views carry over. A private V2 view becomes a personal view for the person who saved it, and a public one becomes a shared view. A view whose filters can't be reproduced exactly is left out and listed with its page, owner, and reason.
+- **V2 migration content.** Units from V2, including a project's own custom units, appear beside migrated values and in their history. Images in V2 comments and earlier revisions appear instead of showing as unavailable, mentions set to "Display Reference" stay reference pills, and a renamed V2 stage keeps its history under the new name.
+
+### Integrations
+
+- **Slack threads return to their chat.** Every message Flow AI posts in Slack ends with a link to the chat that wrote it. Replies in a thread that a Flow AI chat or automation run started go back to that chat or run, under the name of the person who wrote them. Asking `@Flow` a question in Slack gets the answer in the thread, not only a follow-up offer.
+- **Slack direct messages.** Flow AI can send direct messages in Slack to people on the posting allowlist. Ask the assistant to message you and confirm the card it shows, and an admin can also add other people. _(requires configuration)_ Direct messages need the `im:write` bot scope: workspaces that use Flow's Slack app reinstall it once, and your own Slack app needs `im:write` added and a reinstall. Posts to channels keep working until then.
+- **Jira attachments.** Flow AI and automation scripts can list a Jira issue's attachments, read one like any uploaded file, and attach a Flow file to an issue when Jira write-back is on. They act with the connected user's own Jira access.
+- **Jira connection prompts.** When the assistant can't reach Jira because your own Atlassian account isn't connected, the failed step offers **Connect Jira**, returns you to the same conversation, and continues your request.
+- **GitHub pull request reviews.** In the Repositories table under **Settings → Integrations → GitHub**, each repository has one PR review choice (Off, On request, or Automatic), replacing the separate Review PR and Auto-review switches.
+- **Automated pull request reviews.** A pull request whose diff is too large for GitHub to return still gets its automated review, which reads the changes file by file. When a pull request under review gets new commits, the agent reads only the new changes, so long-running reviews stay fast.
+- **GitHub pull request comments.** Automation review comments on GitHub pull requests end with "Sent by" and a link to the run that wrote them.
+- **Custom MCP connection errors.** When Flow refuses an MCP server, **Settings → Integrations → Custom MCP** shows the reason instead of the raw server response.
+
+### Permissions and Sharing
+
+- **Share to several destinations.** The Share dialog's item, branch, and view pickers take several picks each, and one invitation shares every combination. Items missing from a picked branch are skipped and called out.
+- **Merging sub-branches.** A member of the parent branch's editor groups can merge a sub-branch into it, even when they are not in the sub-branch's editor groups. They can also create baselines on that sub-branch, and revert or reopen it after it merges.
+
+### Projects
+
+- **Switching projects.** Items no longer show another project's values after you switch between two projects that hold the same items. Stage and tag cells no longer show a raw ID with an orphaned-value warning until the page is reloaded.
+
+### Reader
+
+- **Linked items.** Linked items such as test steps show their own fields in Reader and Reader exports when the view's table columns don't include any of them, with long text wrapped in full.
+
+### Review
+
+- **Requirement owners.** Requirement owners are no longer added as reviewers automatically unless **Settings → Reviews** names Owner or a stage gate uses that field.
+- **Stage skips.** A configured stage transition that skips intermediate stages can be merged without visiting those stages. Sequential gates still apply when no skip is configured.
+- **Reverting many changes.** **Revert filtered** and **Revert selected** show progress as each change is reverted, cannot be started again while a revert is running, and no longer freeze the page when a large revert finishes.
+- **Impact analysis.** Leaving the Impact analysis tab mid-run no longer leaves the canvas stuck on Analyzing after the Summary has finished. Failed runs stay marked as failed.
+- **Activity loading.** Review activity summaries and change details no longer wait for other people's edits to finish saving.
+
+### Table
+
+- **Creating items in a filtered view.** New items from the Table's bottom row or the **New** dialog start with the values of active tag and user filters, so they appear in the view you created them from.
+- **Bottom row.** The row for adding items indents under the item new rows will nest in and stays on screen as you keep adding. It is available while **Show changed in branch** is on, and in an empty or fully filtered Table.
+- **Returning to a large Table.** Returning to a large, paginated Table brings back the visible rows and active cell without loading every preceding page.
+- **Rich-text cells.** With **Wrap columns** on, a long rich-text editor or read-only expansion stays inside the visible table area and scrolls inside itself, so its toolbar and content stay reachable.
+
+### Views
+
+- **Back and Forward across the workspace.** Back and Forward sit at the top of the sidebar. They step across engineering views, Review, Agents, and Settings on every branch of a project, name the branch they return to, and restore your open Details stack. Table, Tree, and Reader carry your current filters when you switch between them.
+- **Linked items in the main pane.** Open a linked-items list in the main pane from the Details drawer, or from the header of a linked-items table embedded in the Reader, while the Navigator stays in place. **Open in main view** from a linked-items tab adds that type to the current view instead of replacing the navigator's view.
+- **Default expand depth of 0.** Items such as Verifications appear in an item's linked-item tab and in Reader linked tables when the organization's default expand depth is 0.
+- **Heavily linked items.** The app no longer freezes for many seconds when the view refreshes while the sidebar shows an item with tens of thousands of links. Items with many linked children open faster.
+
+## API Changes
+
+- **MCP for external collaborators.** External share recipients can connect MCP clients with a personal API key or sign-in. Their access is limited to the items already shared with them and their existing permissions. See [Connect a client](/api/mcp/connect).
+- **Symbol diagrams over MCP.** Connected MCP agents can discover diagram symbol libraries and create ISO 1219 fluid-power, IEC 60617 electrical, and ISA-5.1 instrumentation diagrams with connections at named terminals. See [MCP tools](/api/mcp/tools).
+- **Symbol library endpoints removed.** `GET` and `PUT /project/{projectId}/symbol-libraries` no longer exist, and a project's previous library selection is no longer read. `GET /project/{projectId}/diagram-symbols` and the diagram creation API accept every library. Remove calls to the removed endpoints from your clients.
+- **API key search.** Search API keys by name or creator email in **Settings → API & MCP**.
