@@ -105,7 +105,8 @@ On top of `AGENTS.md`'s content boundaries:
   a region (`x,y,w,h` in CSS px) or one element captured with `shotEl`. Capture
   regions and elements at 2x and set the `<img>` `width` to the CSS width so they
   display at true size. `full`, `closeup`, and `component` add the brand
-  background and are for marketing-style pages.
+  background and are for marketing-style pages. Wrap every screenshot, scene,
+  and video in `<Frame>` so they share one outline.
   Keep real people's names out of frame; the seeded owners are colleagues.
 - Diagrams are drawn with the `flow-illustration` skill and placed with the
   `Illustration` snippet; see `references/diagrams.md`. Placeholders are for screenshots.
