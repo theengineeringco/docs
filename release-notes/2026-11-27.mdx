@@ -1,0 +1,148 @@
+---
+title: "November 27, 2026"
+sidebarTitle: "November 27, 2026"
+description: "Weekly release: automations that edit the branch that changed, filtered external shares, tag merges that keep item history, automations that wait for GitHub Actions runs, and Jira servers connected by URL."
+---
+
+## In this release
+
+- [Choose where an automation makes changes](#choose-where-an-automation-makes-changes)
+- [Filtered external shares](#filtered-external-shares)
+- [Merge tag options and stages without losing history](#merge-tag-options-and-stages-without-losing-history)
+- [Automations wait for GitHub Actions runs](#automations-wait-for-github-actions-runs)
+- [Connect Jira on your own server](#connect-jira-on-your-own-server)
+- [Improvements & Fixes](#improvements-&-fixes)
+- [API Changes](#api-changes)
+
+## Choose where an automation makes changes
+
+The automation editor has a new **Edits** section with four options: **Read only**, **Specific branch**, **In the branch of origin**, and **In a new branch**. With **In the branch of origin**, a **When the project changes** automation applies its changes directly to the branch that changed, so there is no `Automation: …` branch to merge. A change request review automation edits the change request under review. A read-only branch of origin gets a new branch instead.
+
+Change request review automations can also make their changes in a new branch or on a branch you pick. Runs you start by hand follow the same setting, starting from the branch you are on. The assistant can set this option when it creates or edits an automation. Existing automations keep working as before.
+
+## Filtered external shares
+
+A share's **Link options** can limit which items under the shared item a recipient sees, using the same filters as a view. A filter matches a field by name across every type, and each type can have its own filter or be shared whole. Sharing stops at an item that does not match, along with everything beneath it.
+
+Edit a share's filter from **Settings → Shares**. Recipients see the share's filters as read-only pills. When an external writer creates an item in a filtered share, the item starts with the tag and people values the share requires, and a recipient who can edit is told when a new item falls outside the share's filter.
+
+## Merge tag options and stages without losing history
+
+Merging a tag option or stage into another one, or repairing an orphaned value, takes effect at once. Every table, filter, formula, and export shows the target, while item history and branch comparisons keep what each item held. **Undo** in the toast, or a revert from the audit log, brings the merged option back together with its items.
+
+Merge a live option from the tag field inspector by hovering its row, and a live stage from the merge button on its card in the Review stages dialog. Hover the target's name to see what was merged into it. A new option that takes the name of a merged option starts empty, and the merged items stay with the target.
+
+## Automations wait for GitHub Actions runs
+
+An automation can start a GitHub Actions workflow, wait for the run to finish, and carry on with its result.
+
+While it waits, the run shows as running, with a link to the GitHub run and a **Stop waiting** button. **Stop waiting** also cancels a GitHub run the automation started. A GitHub run that fails, is cancelled, or is still going after the time limit (an hour by default) fails the automation run.
+
+## Connect Jira on your own server
+
+Workspace admins can connect a Jira Data Center or Server instance by its URL from **Settings → Integrations → Jira**, even where Jira otherwise connects with Atlassian sign-in. Each person then adds their own Jira token. A Jira server on a public address no longer needs Flow to approve its host first.
+
+## Improvements & Fixes
+
+### Agent
+
+- **Audit history in Flow AI.** Project admins can ask who changed project settings and when. Admins with access to every project can also ask about workspace role and access changes.
+- **Removed fields.** Item reads in AI chat leave out fields removed from the data model by default. You can still ask the assistant to read their saved values.
+- **File links in AI chat.** Links to stored files show as file pills that open the file preview.
+- **AI document imports.** Flow AI again embeds figures, diagrams, and tables from a PDF or image in the items it creates, and recognizes requests to import a whole document.
+
+### Automations
+
+- **Script runs in the Activity Log.** Script automation runs show in the Activity Log beside agent runs. Each run opens on its own page with what it printed, item and file links as pills, its error, and its tool calls.
+- **Runs started from an item's menu.** A script automation run started from an item's menu counts in the Activity Log totals, and its row links to each file the run stored. With an automation filter on, the heading total matches the list.
+- **Manual script runs.** The toast after a manual run renders the printed markdown, with item and file pills, and links to the run's output page.
+- **Scripts and branch checks can read external sharing.** `shared_with(items)` returns the external shares that contain each item, with the recipient, access level, and where the share starts. A branch check can use it to flag new content placed in a space another party can see.
+
+### Branching
+
+- **Assign a branch owner.** A branch's owner can give the branch to another project member from the branch menu's **Assign owner...**, without an admin. The new owner must be an active project member and, on a branch limited to editor groups, a member of one of those groups.
+- **Resolving archived-item conflicts.** Update from parent and the review page's **Resolve conflicts** dialog no longer offer archive or restore choices that then fail. Items deleted on both branches, items whose edits were set back on the branch, and items the parent left unchanged apart from deleting a linked item are no longer listed as conflicts.
+
+### Collaboration
+
+- **Inline comments.** Commenting on text in a description or rich-text field no longer counts as editing it. The item stays out of a change request's changed items, its history shows no update, and merging raises no conflict for it.
+
+### Data Model
+
+- **Orphaned tag value repair.** **Fix in settings** on an orphaned value's warning opens the repair form when clicked from inside an open tag editor, where it previously did nothing.
+
+### Diagrams
+
+- **Frames and swimlanes.** A frame always stays behind the shapes inside it, so reordering can no longer hide a shape under its frame. Frames and swimlanes are renamed in place, and a selected swimlane's label area can be resized by dragging its inner edge.
+- **Entities on wires.** The `+` on a selected wire and **Allocate entity…** open the same entity search used across Flow, with browsing, recents, and favorites. A wire that stands for a link between its two items no longer offers **Allocate entity**, though an entity already on it can still be removed.
+- **Drag and drop.** Dragging an entity over a diagram shows the card it will place, at its real size and style, instead of a generic label.
+- **Shapes panel.** Shapes show larger and evenly sized. The search is ready to type into when the panel opens, finds shapes by common names such as "circle" or "database", and Enter picks the first match.
+- **Shape tool.** The toolbar's **Shape** button shows the last shape you picked, even after you switch tools, and pressing it picks that shape again.
+- **Keep proportions.** Hold Shift while dragging out a new shape to keep its proportions, so rectangles draw as squares and ellipses as circles.
+- **Stretch.** **Stretch horizontally** and **Stretch vertically** are available again in the Arrange menu when two or more shapes are selected.
+- **Card fields.** The card toolbar's **Fields** control has a search box, and you reorder a card's fields by dragging them.
+- **Keyboard shortcuts.** The shortcuts list on diagrams and the Architecture view stays pinned to the canvas's top-right corner, grouped into Tools, Selection, Edit, Arrange, View, and Preferences. Open or close it from the diagram menu or with ⌘⌥/ (Ctrl+Alt+/).
+- **Diagram header.** Rename a diagram by clicking its name in the header. The former **Share** button is now **Copy link** and reports when the link could not be copied.
+
+### Formulas
+
+- **Tag and verification fields set by a formula.** In tables, these fields list their options under the formula. Pick one to replace the formula with that value.
+
+### Import and Export
+
+- **CSV, JSON, and ReqIF export.** Exports include the whole hierarchy below each chosen item. Before, items more than ten levels deep were left out.
+- **V2 migration.** Aggregate design values keep their formula, with their source values linked as children. Interfaces keep their links to requirements and gain links to their design values. Files in a file field on a system, interface, or risk move with the item, and range values keep their unit.
+
+### Integrations
+
+- **Confluence Cloud.** Connected accounts can read, create, and update pages, and expired sign-ins show reconnect guidance.
+- **Boltline inventory and BOMs.** Flow AI can list Boltline inventory and read as-built and engineering BOMs again after Boltline's latest API update.
+
+<Warning>
+  Confluence Cloud administrators must enable page read/write and space read permissions in their Atlassian app. Users must then reconnect to update their access before using pages.
+</Warning>
+
+### Permissions and Sharing
+
+- **Share access.** Switch an existing share between **Can view** and **Can edit** from **Settings → Shares**.
+- **Shares search.** Searching for a person's email also finds the shares that reach them through a user group, alongside the ones made to them directly.
+
+### Projects
+
+- **Copy dashboards into a new project.** When you start a new project from an existing one, **What to import** includes **Dashboards**, so the new project opens with the source project's dashboards and their layout.
+
+### Reader
+
+- **Value mentions of ranges.** A value mention of a range whose bounds have a unit shows the range instead of a dash.
+
+### Review
+
+- **Review after a baseline comparison.** On a branch, the sidebar's **Review** item no longer keeps returning to a baseline comparison after you leave it. It opens the branch's review again, including from the comparison itself.
+
+### Search
+
+- **Folders first in global search.** Among results that match equally well, matching folders appear above other items. Exact name and ID matches still come first.
+- **Diagram previews.** Previewing a diagram in search shows the diagram itself, so you can recognize it before opening it.
+
+### Settings
+
+- **Context windows for your own AI endpoint.** Organization admins can set a context window for each chat model, so Flow fits each chat to the model their endpoint serves.
+- **Settings navigation.** Switching pages in Settings is faster, and General, Organization, and Profile no longer flash a loading placeholder each time you open them.
+
+### Tree
+
+- **Switching views.** A view that takes a while to load shows a loading state instead of the previous view's items under the new view's name, and large views load faster.
+
+### Views
+
+- **Start a view from several types.** Under **Start type**, choose **Add start type**, and each type's top-level items appear at the top of the view.
+- **Empty navigator.** When no items are linked to the project root in the selected view, the navigator says so and offers **Add**, which opens the item picker for the view's starting type. Another button links every item of that type with no parent of its own type to the project root in one step.
+- **Reveal in navigator.** The revealed item is highlighted in the navigator even when the table is focused on an item the chosen view doesn't show, and the menu lists only views where the item can appear in the navigator.
+- **Switching views after expanding many rows.** A view with hundreds of expanded rows switches between Table, Tree, Reader, and Architecture, and opens saved views, instead of refusing. Its filters and columns carry over, and its rows reopen at the view's default depth.
+
+## API Changes
+
+- **Merged tag options and stages.** After a tag option or stage is merged, API reads return the target it was merged into.
+- **Project copies include dashboards.** Copying a project through the API now copies its dashboards too. Send `copyDashboards: false` or `copyViews: false` to leave them out.
+- **Comment feedback in the Customer API.** Read who reacted to a comment with each emoji, and follow reaction additions and removals in the project event stream.
+- **MATLAB client.** Download a MATLAB client from **Settings → Integrations → MATLAB**. It reads and writes Flow items through the Customer API with your personal API key, and comes with setup steps for your organization.
