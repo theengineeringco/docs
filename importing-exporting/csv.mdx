@@ -1,0 +1,46 @@
+---
+title: "CSV"
+description: "Import, update, and export any kind of item as CSV, using a stable identity so a round trip updates items instead of duplicating them."
+---
+
+import { VisualPlaceholder } from "/snippets/visual-placeholder.jsx";
+
+CSV brings structured data from other tools into Flow: systems, interfaces, parts, tests, requirements, or any type in your data model. Rows become items, columns become fields, and link columns become relationships. Choose a stable identity and later imports update the items they match instead of creating copies.
+
+## Import or update items
+
+<VisualPlaceholder kind="Screenshot" title="CSV import mapping">
+  The full-page spreadsheet import on the mapping step for a parts file: columns mapped to Name, Description, Mass, and Owner, a Parent column mapped as an Upstream Link, Identity column set to the Name column, Match items by set to Name, and Resolve links by. Callouts on all three, with the stepper (Upload, Item type, Part, Destination, Review) along the top.
+</VisualPlaceholder>
+
+1. Prepare a UTF-8 file with a header row. For several item types in one file, include a type column.
+2. Choose **More actions → Import from → CSV/Excel**, or **Import here** on a sidebar item, and upload the file.
+3. Import every row as a **Single item type**, or choose **Mixed item types** and split rows by the type column. When AI is on for your workspace, **Suggest settings** proposes the import: the agent reads the first rows and fills in item types, identity, field mappings, and link columns as an editable draft.
+4. Map each column to a field, or leave it on **Ignore column**.
+5. Set **Identity column** to the file column that names each row, and **Match items by** to the Flow identity it matches: **Source ID**, **Entity ID**, **Entity Numeric ID**, or an eligible field such as Name. Leave the identity column on **Skip — autogenerate** to create new items for every row.
+6. Map link columns as **Upstream Link** or **Downstream Link**. Use **Resolve links by** to choose the identity their values name.
+7. Under **Destination**, choose where items without a parent in the file go: **Project root**, **Link to an item**, or **File links only**.
+8. In **Review**, fix anything that blocks the import, such as an identity repeated across rows or one that matches more than one existing item. Warnings list values that will be skipped, such as people who are not workspace members or link values that match no item.
+9. Select **Import to new branch**, then **View imported items** to check the result.
+
+The import writes to a new branch named after the file, such as `Import: parts`, so you can inspect it before it reaches shared work. Every imported value is traceable to that branch; see [Branching](/core-concepts/branching). The import runs on the server, so closing the tab does not stop it; reopening the import shows its state.
+
+## Export
+
+<VisualPlaceholder kind="Screenshot" title="CSV export">
+  The export dialog with CSV selected, Identity set to Entity ID, Write links by, Include collapsed rows turned on, the item count, and the preview of the first rows beside the settings.
+</VisualPlaceholder>
+
+1. Open the branch and view you want, and choose **More actions → Export as → CSV**.
+2. Choose the **Identity** written for each row. **None** writes no row identity.
+3. If the export includes link columns, choose **Write links by**, or a key for each link column.
+4. Turn on **Include collapsed rows** to include items hidden under collapsed parents. Filters still limit what is exported.
+5. Check the columns in the preview, dragging a header to reorder them, then select **Export**.
+
+The export starts with the view's columns. Changing them in the dialog does not change the view.
+
+## Round trip safely
+
+Before a large update, export a small scope, edit one value, and import it again with the same identity under **Match items by** and the same keys under **Resolve links by**. Confirm the item updated and no duplicate appeared.
+
+CSV carries field values and links. It does not carry branch history or project configuration.

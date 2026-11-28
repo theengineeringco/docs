@@ -1,0 +1,14 @@
+{
+  "name": "security",
+  "title": "Defense-grade security",
+  "description": "The program sits inside nested boundaries: cloud, GovCloud, or your own hosting.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "orbit",
+      "at": [120, 100],
+      "rings": [30, 52, 74],
+      "satellites": [{"ring": 2, "angle": -90, "kind": "s"}]
+    }
+  ]
+}

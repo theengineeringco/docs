@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi1i9qb"><title>Merge with confidence</title><desc>Before a branch lands, its changes and conflicts with the baseline are surfaced.</desc><style>.fi1i9qb-p,.fi1i9qb-f,.fi1i9qb-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi1i9qb-p{animation-name:fi1i9qb-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi1i9qb-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi1i9qb-f{animation-name:fi1i9qb-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi1i9qb-r{animation-name:fi1i9qb-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi1i9qb-d{animation-name:fi1i9qb-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi1i9qb-m{animation:fi1i9qb-march 2.6s linear infinite}
+.fi1i9qb-pulse{animation:fi1i9qb-pulse 2.4s ease-in-out infinite}
+@keyframes fi1i9qb-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi1i9qb-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi1i9qb-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi1i9qb-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi1i9qb-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi1i9qb-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi1i9qb *{animation:none!important}.fi1i9qb .fi1i9qb-d{stroke-dashoffset:0}.fi1i9qb .fi1i9qb-t{display:none}}</style><defs><mask id="fi1i9qb-k0" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M48 124L198 124" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1i9qb-d" style="animation-duration:0.58s;animation-delay:0.05s"/></mask><mask id="fi1i9qb-k1" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M66 124L66 78L147 78L147 124" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1i9qb-d" style="animation-duration:0.67s;animation-delay:0.22s"/></mask></defs><path d="M48 124L198 124" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1i9qb-k0)" class="fi1i9qb-m"/>
+<path d="M66 124L66 78L147 78L147 124" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1i9qb-k1)" class="fi1i9qb-m"/>
+<g class="fi1i9qb-p" style="animation-delay:0.16s"><circle cx="66" cy="124" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g>
+<g class="fi1i9qb-p" style="animation-delay:0.54s"><circle cx="94.35" cy="78" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g>
+<g class="fi1i9qb-p" style="animation-delay:0.64s"><circle cx="122.7" cy="78" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/></g>
+<g class="fi1i9qb-p" style="animation-delay:0.92s"><path d="M147 118.24L152.76 124L147 129.76L141.24 124Z" fill="#E29B03" stroke-linejoin="round"/></g>
+<g class="fi1i9qb-p" style="animation-delay:0.63s"><circle cx="198" cy="124" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="194" y="120" width="8" height="8" fill="#1F3ACB"/></g></svg>

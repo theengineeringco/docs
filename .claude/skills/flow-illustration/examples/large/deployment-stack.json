@@ -1,0 +1,104 @@
+{
+  "name": "deployment-stack",
+  "title": "Deployment options",
+  "description": "The same Flow program in three environments: Flow's cloud, GovCloud, or your own servers. Each adds a boundary, and each has a single port in.",
+  "size": [720, 560],
+  "camera": {"view": "shelf"},
+  "padding": 36,
+  "layers": [
+    {
+      "motif": "stack",
+      "id": "dep",
+      "size": [320, 220],
+      "gap": 150,
+      "labelCorner": "left",
+      "alternatives": true,
+      "planes": [
+        {
+          "label": "self-hosted",
+          "layers": [
+            {
+              "motif": "boundary",
+              "at": [160, 110],
+              "rings": [62, 78, 94],
+              "ports": [{"angle": 200}],
+              "center": null
+            },
+            {
+              "motif": "hub",
+              "at": [160, 110],
+              "count": 4,
+              "radius": 50,
+              "angles": [-90, -10, 90, 170],
+              "kinds": "c"
+            },
+            {
+              "type": "line",
+              "from": [18, 92],
+              "to": [71.6688936461246, 77.85010652738714],
+              "style": "dotted",
+              "beat": 3
+            },
+            {"type": "ghost", "at": [18, 92], "beat": 2.5}
+          ]
+        },
+        {
+          "label": "GovCloud",
+          "layers": [
+            {
+              "motif": "boundary",
+              "at": [160, 110],
+              "rings": [70, 86],
+              "ports": [{"angle": 200}],
+              "center": null
+            },
+            {
+              "motif": "hub",
+              "at": [160, 110],
+              "count": 4,
+              "radius": 50,
+              "angles": [-90, -10, 90, 170],
+              "kinds": "c"
+            },
+            {
+              "type": "line",
+              "from": [18, 92],
+              "to": [79.18643461241187, 80.5862676739925],
+              "style": "dotted",
+              "beat": 3
+            },
+            {"type": "ghost", "at": [18, 92], "beat": 2.5}
+          ]
+        },
+        {
+          "label": "cloud",
+          "layers": [
+            {
+              "motif": "boundary",
+              "at": [160, 110],
+              "rings": [78],
+              "ports": [{"angle": 200}],
+              "center": null
+            },
+            {
+              "motif": "hub",
+              "at": [160, 110],
+              "count": 4,
+              "radius": 50,
+              "angles": [-90, -10, 90, 170],
+              "kinds": "c"
+            },
+            {
+              "type": "line",
+              "from": [18, 92],
+              "to": [86.70397557869914, 83.32242882059785],
+              "style": "dotted",
+              "beat": 3
+            },
+            {"type": "ghost", "at": [18, 92], "beat": 2.5}
+          ]
+        }
+      ]
+    }
+  ]
+}

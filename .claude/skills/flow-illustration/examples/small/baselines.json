@@ -1,0 +1,22 @@
+{
+  "name": "baselines",
+  "title": "Immutable baselines",
+  "description": "Every merge leaves a timestamped snapshot you can compare and revert to.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "timeline",
+      "at": [48, 122],
+      "length": 144,
+      "axisStyle": "dashed",
+      "gates": [0.2, 0.5, 0.8],
+      "gateHeight": 9,
+      "events": [
+        {"at": 0.2, "kind": "d", "offset": -50},
+        {"at": 0.5, "kind": "d", "offset": -50},
+        {"at": 0.8, "kind": "d", "offset": -50},
+        {"at": 1, "kind": "n"}
+      ]
+    }
+  ]
+}

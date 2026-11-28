@@ -1,0 +1,130 @@
+{
+  "title": "Updating from the parent",
+  "description": "A newer change on Base is taken into an open proposal. A field both changed is a conflict you settle once; Base itself is unchanged.",
+  "size": [
+    600,
+    260
+  ],
+  "layers": [
+    {
+      "motif": "branch",
+      "id": "b",
+      "at": [
+        48.0,
+        170
+      ],
+      "length": 504.0,
+      "laneGap": 70,
+      "radius": 10,
+      "startKind": "c",
+      "commits": [
+        0.46
+      ],
+      "commitKind": "c",
+      "branches": [
+        {
+          "from": 0.1,
+          "until": 0.94,
+          "lane": -1,
+          "commits": [
+            0.18,
+            0.82
+          ],
+          "tip": "c"
+        }
+      ],
+      "head": 1
+    },
+    {
+      "type": "line",
+      "id": "upd",
+      "from": [
+        279.8,
+        170
+      ],
+      "to": [
+        301.6,
+        100
+      ],
+      "style": "fine",
+      "beat": 9
+    },
+    {
+      "type": "flag",
+      "at": [
+        301.6,
+        100
+      ],
+      "beat": 10
+    },
+    {
+      "type": "square",
+      "at": [
+        360.9,
+        100
+      ],
+      "beat": 11
+    },
+    {
+      "type": "traveler",
+      "along": "upd",
+      "period": 2.6
+    },
+    {
+      "type": "label",
+      "at": "b.start",
+      "text": "Base",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": "b.lane0",
+      "text": "proposal",
+      "dx": 14,
+      "dy": -14,
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        279.8,
+        170
+      ],
+      "text": "update from parent",
+      "dx": 0,
+      "dy": 26,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        301.6,
+        100
+      ],
+      "text": "conflict",
+      "dx": 0,
+      "dy": -18,
+      "anchor": "middle",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        360.9,
+        100
+      ],
+      "text": "settled",
+      "dx": 0,
+      "dy": 28,
+      "anchor": "middle",
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

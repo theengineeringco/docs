@@ -1,0 +1,9 @@
+{
+  "name": "skills",
+  "title": "Skills",
+  "description": "Standards encoded once hold every artifact in shape: squares at the corners, held by dashed edges.",
+  "size": [240, 200],
+  "layers": [
+    {"motif": "polygon", "at": [120, 108], "radius": 62, "sides": 3}
+  ]
+}

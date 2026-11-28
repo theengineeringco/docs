@@ -1,0 +1,17 @@
+{
+  "name": "merge-conflicts",
+  "title": "Merge with confidence",
+  "description": "Before a branch lands, its changes and conflicts with the baseline are surfaced.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "branch",
+      "at": [48, 124],
+      "length": 150,
+      "branches": [
+        {"from": 0.12, "to": 0.66, "lane": -1, "commits": [0.35, 0.7], "mergeKind": "f"}
+      ],
+      "head": 1
+    }
+  ]
+}

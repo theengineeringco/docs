@@ -1,0 +1,225 @@
+{
+  "title": "Routes into Flow",
+  "description": "Documents and tools feed one Flow project: imports and agent extraction bring documents in, integrations and the API keep tools connected, and structured items come out.",
+  "size": [
+    640,
+    300
+  ],
+  "layers": [
+    {
+      "type": "line",
+      "from": [
+        150,
+        70
+      ],
+      "to": [
+        340,
+        150
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        150,
+        110
+      ],
+      "to": [
+        340,
+        150
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        150,
+        150
+      ],
+      "to": [
+        340,
+        150
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        150,
+        190
+      ],
+      "to": [
+        340,
+        150
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        150,
+        230
+      ],
+      "to": [
+        340,
+        150
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        340,
+        150
+      ],
+      "to": [
+        500,
+        110
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        340,
+        150
+      ],
+      "to": [
+        500,
+        150
+      ]
+    },
+    {
+      "type": "line",
+      "from": [
+        340,
+        150
+      ],
+      "to": [
+        500,
+        190
+      ]
+    },
+    {
+      "type": "ghost",
+      "at": [
+        150,
+        70
+      ]
+    },
+    {
+      "type": "ghost",
+      "at": [
+        150,
+        110
+      ]
+    },
+    {
+      "type": "ghost",
+      "at": [
+        150,
+        150
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        150,
+        190
+      ]
+    },
+    {
+      "type": "circle",
+      "at": [
+        150,
+        230
+      ]
+    },
+    {
+      "type": "node",
+      "at": [
+        340,
+        150
+      ],
+      "loop": "ping"
+    },
+    {
+      "type": "square",
+      "at": [
+        500,
+        110
+      ]
+    },
+    {
+      "type": "square",
+      "at": [
+        500,
+        150
+      ]
+    },
+    {
+      "type": "square",
+      "at": [
+        500,
+        190
+      ]
+    },
+    {
+      "type": "label",
+      "at": [
+        150,
+        70
+      ],
+      "text": "spreadsheet",
+      "dx": -16,
+      "dy": 4,
+      "anchor": "end",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        150,
+        110
+      ],
+      "text": "PDF spec",
+      "dx": -16,
+      "dy": 4,
+      "anchor": "end",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        150,
+        150
+      ],
+      "text": "slide deck",
+      "dx": -16,
+      "dy": 4,
+      "anchor": "end",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        150,
+        190
+      ],
+      "text": "Jira, GitHub",
+      "dx": -16,
+      "dy": 4,
+      "anchor": "end",
+      "size": 12
+    },
+    {
+      "type": "label",
+      "at": [
+        150,
+        230
+      ],
+      "text": "API and MCP",
+      "dx": -16,
+      "dy": 4,
+      "anchor": "end",
+      "size": 12
+    }
+  ],
+  "motion": {
+    "stagger": 0.07
+  }
+}

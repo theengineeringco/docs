@@ -1,0 +1,29 @@
+---
+title: "Deployments"
+description: "What changes when Flow runs as a hosted service or in your own infrastructure."
+---
+
+import { Illustration } from "/snippets/illustration.jsx";
+
+Flow runs as a hosted service or in infrastructure you manage. The deployment decides which capabilities exist: sign-in options, the integrations Flow can pull context from, AI models, and billing controls. Workspace settings turn those capabilities on or off, but cannot add one the deployment does not provide.
+
+Two roles share the work. Workspace Admins manage settings inside Flow. Deployment operators run the infrastructure and the services Flow depends on.
+
+## Check what your deployment provides
+
+1. Ask your identity administrator how people sign in. Self-serve SSO setup is available only where the deployment enables it; otherwise, contact Flow to set up SSO.
+2. Open **Settings → Administration → Integrations** to see which connections are available. The list shows only what your deployment offers.
+3. Open **Settings → AI → General** to see the models you can choose. Deployments that keep AI within a region limit the model choices and turn off the agent's **Internet Access**.
+4. Find out who handles provisioning, email delivery, upgrades, and recovery.
+
+Take settings questions to a workspace Admin. Take missing capabilities or infrastructure problems to your deployment operator or your Flow contact.
+
+## Customer-managed Flow
+
+Flow installs into any Kubernetes cluster from a Helm chart, including AWS EKS, Azure AKS, and bare-metal clusters. Operators supply PostgreSQL, object storage, an OIDC identity provider, ingress and TLS, and the AI services the deployment uses. Follow the installation and operations guide for your deployment when making changes.
+
+<Illustration name="deployments-hosted-and-managed" width={720} alt="The same Flow in two places: hosted by Flow, or run by your team in your own Kubernetes cluster with one more boundary around it." />
+
+A customer-managed deployment can require a Flow license key. When it does, Flow blocks access while the key is missing, invalid, or expired, until the operator installs a valid one.
+
+Confirm data location, retention, backup, and recovery commitments for your specific deployment with your operator.

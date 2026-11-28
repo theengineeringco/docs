@@ -1,0 +1,17 @@
+{
+  "name": "conflicts",
+  "title": "Contradictions caught on edit",
+  "description": "Three requirements in flight; the one that contradicts another is flagged before it lands.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "rows",
+      "at": [44, 60],
+      "count": 3,
+      "gap": 40,
+      "width": 148,
+      "mids": "dfd",
+      "ends": "scs"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "audit-trail",
+  "title": "A permanent record",
+  "description": "Every revision is an entry: what changed, who changed it, and why.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [72, 40], "to": [72, 160]},
+    {"type": "line", "from": [92, 48], "to": [168, 48], "style": "faintSolid", "beat": 1},
+    {"type": "line", "from": [92, 76], "to": [148, 76], "style": "faintSolid", "beat": 1},
+    {"type": "line", "from": [92, 104], "to": [176, 104], "style": "faintSolid", "beat": 1},
+    {"type": "line", "from": [92, 132], "to": [136, 132], "style": "faintSolid", "beat": 1},
+    {"type": "circle", "at": [72, 160]},
+    {"type": "circle", "at": [72, 132]},
+    {"type": "circle", "at": [72, 104]},
+    {"type": "circle", "at": [72, 76]},
+    {"type": "node", "at": [72, 48]}
+  ]
+}

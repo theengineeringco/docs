@@ -1,0 +1,19 @@
+{
+  "name": "traceability",
+  "title": "Traced both ways",
+  "description": "The V: requirements decompose down the left, verification climbs the right, and every level is linked across.",
+  "size": [240, 200],
+  "layers": [
+    {"type": "line", "from": [64, 44], "to": [92, 100]},
+    {"type": "line", "from": [92, 100], "to": [120, 156]},
+    {"type": "line", "from": [120, 156], "to": [148, 100]},
+    {"type": "line", "from": [148, 100], "to": [176, 44]},
+    {"type": "line", "from": [64, 44], "to": [176, 44], "style": "faint"},
+    {"type": "line", "from": [92, 100], "to": [148, 100], "style": "faint"},
+    {"type": "node", "at": [64, 44]},
+    {"type": "circle", "at": [92, 100]},
+    {"type": "circle", "at": [120, 156]},
+    {"type": "square", "at": [148, 100]},
+    {"type": "square", "at": [176, 44]}
+  ]
+}

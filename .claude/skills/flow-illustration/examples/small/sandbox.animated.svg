@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img" class="fi1ois7"><title>Sandboxed analysis</title><desc>Calculations run in an isolated box; only the result comes back into the reasoning.</desc><style>.fi1ois7-p,.fi1ois7-f,.fi1ois7-r{transform-box:fill-box;transform-origin:center;animation-fill-mode:both}
+.fi1ois7-p{animation-name:fi1ois7-pop;animation-duration:0.6s;animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+@supports (animation-timing-function:linear(0,1)){.fi1ois7-p{animation-timing-function:linear(0, 0.083, 0.269, 0.487, 0.691, 0.855, 0.972, 1.043, 1.078, 1.086, 1.078, 1.061, 1.043, 1.025, 1.011, 1.002, 0.996, 0.993, 0.993, 0.993, 0.995, 0.996, 0.998, 0.999, 1)}}
+.fi1ois7-f{animation-name:fi1ois7-fade;animation-duration:0.5s;animation-timing-function:ease-out}
+.fi1ois7-r{animation-name:fi1ois7-rise;animation-duration:.7s;animation-timing-function:cubic-bezier(0.22,1,0.36,1)}
+.fi1ois7-d{animation-name:fi1ois7-draw;animation-timing-function:cubic-bezier(0.65,0,0.35,1);animation-fill-mode:both}
+.fi1ois7-m{animation:fi1ois7-march 2.6s linear infinite}
+.fi1ois7-pulse{animation:fi1ois7-pulse 2.4s ease-in-out infinite}
+@keyframes fi1ois7-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fi1ois7-fade{from{opacity:0}to{opacity:1}}
+@keyframes fi1ois7-rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fi1ois7-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fi1ois7-march{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
+@keyframes fi1ois7-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.fi1ois7 *{animation:none!important}.fi1ois7 .fi1ois7-d{stroke-dashoffset:0}.fi1ois7 .fi1ois7-t{display:none}}</style><defs><mask id="fi1ois7-k0" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M96 68L160 68L160 132L96 132Z" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1ois7-d" style="animation-duration:0.7s;animation-delay:0.05s"/></mask><mask id="fi1ois7-k1" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M62 100L96 100" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1ois7-d" style="animation-duration:0.35s;animation-delay:0.25s"/></mask><mask id="fi1ois7-k2" maskUnits="userSpaceOnUse" x="-240" y="-200" width="720" height="600"><path d="M160 100L194 100" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" class="fi1ois7-d" style="animation-duration:0.35s;animation-delay:0.35s"/></mask></defs><path d="M96 68L160 68L160 132L96 132Z" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1ois7-k0)" class="fi1ois7-m"/>
+<path d="M62 100L96 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1ois7-k1)" class="fi1ois7-m"/>
+<path d="M160 100L194 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round" mask="url(#fi1ois7-k2)" class="fi1ois7-m"/>
+<g class="fi1ois7-p" style="animation-delay:0.15s"><circle cx="112" cy="84" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.17s"><circle cx="128" cy="84" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.19s"><circle cx="144" cy="84" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.17s"><circle cx="112" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.19s"><circle cx="128" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.21s"><circle cx="144" cy="100" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.19s"><circle cx="112" cy="116" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.21s"><circle cx="128" cy="116" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.23s"><circle cx="144" cy="116" r="1.8" fill="#6B6A66"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.45s"><circle cx="62" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="58" y="96" width="8" height="8" fill="#1F3ACB"/></g>
+<g class="fi1ois7-p" style="animation-delay:0.55s"><rect x="189.5" y="95.5" width="9" height="9" fill="#1F3ACB"/></g></svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200" fill="none" role="img"><title>Traced to the source</title><desc>Each requirement keeps a live link to the document it came from.</desc><path d="M60 56L124 56" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M60 100L124 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M60 144L124 144" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="1 2.5" stroke-linejoin="round"/>
+<path d="M124 56L143 56L144.88 56.13L146.5 56.5L147.88 57.13L149 58L149.88 59.13L150.5 60.5L150.88 62.13L151 64L151 92L151.13 93.88L151.5 95.5L152.13 96.88L153 98L154.13 98.88L155.5 99.5L157.13 99.88L159 100L184 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M124 100L184 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<path d="M124 144L143 144L144.88 143.88L146.5 143.5L147.88 142.88L149 142L149.88 140.88L150.5 139.5L150.88 137.88L151 136L151 108L151.13 106.13L151.5 104.5L152.13 103.13L153 102L154.13 101.13L155.5 100.5L157.13 100.13L159 100L184 100" fill="none" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="4 5" stroke-linejoin="round"/>
+<circle cx="60" cy="56" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="60" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="60" cy="144" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="124" cy="56" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="124" cy="100" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="124" cy="144" r="5" fill="#FFFFFF" stroke="#8F8E8A" stroke-width="1"/>
+<circle cx="184" cy="100" r="12" fill="#FFFFFF" stroke="#1F3ACB" stroke-width="1"/><rect x="180" y="96" width="8" height="8" fill="#1F3ACB"/></svg>

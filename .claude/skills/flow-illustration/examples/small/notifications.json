@@ -1,0 +1,21 @@
+{
+  "name": "notifications",
+  "title": "The right people, notified",
+  "description": "When a change lands, the owners of affected items hear about it where they work.",
+  "size": [240, 200],
+  "layers": [
+    {
+      "motif": "fan",
+      "at": [62, 100],
+      "via": false,
+      "reach": 116,
+      "spread": 100,
+      "targets": "c",
+      "source": "n",
+      "id": "fan"
+    },
+    {"type": "traveler", "from": "fan.source", "to": "fan.0", "period": 2.6, "offset": 0},
+    {"type": "traveler", "from": "fan.source", "to": "fan.1", "period": 2.6, "offset": 0.15},
+    {"type": "traveler", "from": "fan.source", "to": "fan.2", "period": 2.6, "offset": 0.3}
+  ]
+}
